@@ -60,19 +60,13 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <AdSlot code={cityAdCode(city.name)} />
           </div>
 
-          <div className="city-summary city-portal-summary">
-            <div><small>PROFISSIONAIS</small><strong>{localProfessionals.length || "Base"}</strong><span>{localProfessionals.length ? "perfis no guia" : "em formação"}</span></div>
-            <div><small>EMPRESAS</small><strong>{localOrganizations.length || "Diretório"}</strong><span>{localOrganizations.length ? "cadastros no guia" : "em validação"}</span></div>
-            <div><small>CONTEÚDO</small><strong>{localArticles.length}</strong><span>pautas disponíveis</span></div>
-          </div>
-
           <div className="local-content city-editorial-panel city-editorial-panel-main" id="materias">
             <div>
               <p className="eyebrow">Matérias da cidade</p>
-              <h2><Newspaper size={30} /> Informação conectada à realidade de {city.name}.</h2>
-              <p>Conteúdos de saúde, prevenção, entrevistas, campanhas públicas, pautas da revista e temas úteis para a população local.</p>
+              <h2><Newspaper size={30} /> Saúde, prevenção e informação local.</h2>
+              <p>Conteúdos úteis para quem vive em {city.name}: prevenção, entrevistas, campanhas públicas, pautas da revista e orientação para buscar atendimento.</p>
               <div className="city-article-row">
-                {localArticles.slice(0, 3).map((article) => (
+                {localArticles.slice(0, 2).map((article) => (
                   <article key={article.slug}>
                     <span>{article.category}</span>
                     <strong>{article.title}</strong>
@@ -89,15 +83,15 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             </aside>
           </div>
 
-          <div className="content-title city-content-title">
+          <div className="content-title city-content-title city-compact-title">
             <div>
               <p className="eyebrow">Encontre cuidado</p>
               <h2>Áreas mais procuradas em {city.name}</h2>
             </div>
             <Link href={`/buscar?cidade=${cityQuery}`}>Ver guia completo →</Link>
           </div>
-          <div className="city-professions city-profession-pills">
-            {professions.map((item) => (
+          <div className="city-professions city-profession-pills city-profession-pills-short">
+            {professions.slice(0, 6).map((item) => (
               <Link key={item} href={`/buscar?cidade=${cityQuery}&profissao=${encodeURIComponent(item)}`}>
                 <strong>{item}</strong>
                 <span>Ver na cidade →</span>
@@ -113,7 +107,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               </div>
               {localProfessionals.length ? (
                 <div className="city-mini-list">
-                  {localProfessionals.map((item) => (
+                  {localProfessionals.slice(0, 4).map((item) => (
                     <Link href={`/profissionais/${item.slug}`} key={item.slug}>
                       <span><BadgeCheck size={13} /> {item.profession}</span>
                       <strong>{item.specialty}</strong>
@@ -137,7 +131,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               </div>
               {localOrganizations.length ? (
                 <div className="city-mini-list">
-                  {localOrganizations.map((item) => (
+                  {localOrganizations.slice(0, 4).map((item) => (
                     <Link href={`/empresas?cidade=${cityQuery}`} key={item.slug}>
                       <span><Building2 size={13} /> {item.category}</span>
                       <strong>{item.name}</strong>
@@ -155,7 +149,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             </section>
           </div>
 
-          <div className="city-media-strip">
+          <div className="city-media-strip city-media-strip-compact">
             <article>
               <BookOpen size={22} />
               <span>Revista física</span>
