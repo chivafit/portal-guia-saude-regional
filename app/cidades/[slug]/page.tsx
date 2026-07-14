@@ -95,22 +95,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             </aside>
           </div>
 
-          <div className="content-title city-content-title city-compact-title">
-            <div>
-              <p className="eyebrow">Encontre cuidado</p>
-              <h2>Áreas mais procuradas em {city.name}</h2>
-            </div>
-            <Link href={`/buscar?cidade=${cityQuery}`}>Ver guia completo →</Link>
-          </div>
-          <div className="city-professions city-profession-pills city-profession-pills-short">
-            {professions.slice(0, 6).map((item) => (
-              <Link key={item} href={`/buscar?cidade=${cityQuery}&profissao=${encodeURIComponent(item)}`}>
-                <strong>{item}</strong>
-                <span>Ver na cidade →</span>
-              </Link>
-            ))}
-          </div>
-
           <div className="city-local-grid">
             <section>
               <div className="city-block-head">
