@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, BadgeCheck, Building2, Megaphone, Newspaper, Stethoscope } from "lucide-react";
+import { ArrowRight, BadgeCheck, BookOpen, Building2, Mic, Megaphone, Newspaper, Stethoscope } from "lucide-react";
 import { AdSlot } from "@/components/AdSlot";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -32,10 +32,10 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
   const localArticles = articles.filter((item) => item.city === city.name || item.city === "Regional");
   const cityQuery = encodeURIComponent(city.name);
   const commercialSlots = [
-    ["Banner topo", "Presença principal no miniportal da cidade"],
-    ["Especialista em destaque", "Card premium dentro da busca local"],
+    ["Banner cidade", "Presença principal no miniportal local"],
+    ["Profissional em destaque", "Card premium na busca da cidade"],
     ["Empresa apoiadora", "Clínicas, farmácias, laboratórios e serviços"],
-    ["Matéria patrocinada", "Conteúdo editorial conectado à cidade"],
+    ["Conteúdo patrocinado", "Matéria, entrevista ou campanha local"],
   ];
 
   return (
@@ -46,8 +46,8 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           <div className="shell city-portal-grid">
             <div>
               <p className="eyebrow">{city.region}</p>
-              <h1>Saúde em {city.name}.</h1>
-              <p>{city.intro}</p>
+              <h1>O portal de saúde de {city.name}.</h1>
+              <p>{city.intro} Encontre profissionais, empresas, matérias, podcast, revista e espaços de mídia da cidade.</p>
               <div className="city-hero-actions">
                 <Link href={`/buscar?cidade=${cityQuery}`}><Stethoscope size={16} /> Buscar profissionais</Link>
                 <Link href={`/empresas?cidade=${cityQuery}`}><Building2 size={16} /> Ver empresas</Link>
@@ -57,7 +57,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <aside className="city-local-card">
               <span>Portal local</span>
               <strong>{city.name}</strong>
-              <p>Profissionais, empresas, matérias e oportunidades comerciais em uma página da cidade.</p>
+              <p>Profissionais, empresas, matérias, revista, podcast e mídia local em uma experiência objetiva.</p>
             </aside>
           </div>
         </section>
@@ -69,7 +69,15 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <div><small>CONTEÚDO</small><strong>{localArticles.length}</strong><span>pautas disponíveis</span></div>
           </div>
 
-          <AdSlot code={cityAdCode(city.name)} />
+          <div className="city-ad-feature">
+            <AdSlot code={cityAdCode(city.name)} />
+            <aside>
+              <span>ESPAÇO VENDÁVEL</span>
+              <strong>Banner principal de {city.name}</strong>
+              <p>Área reservada para clínica, laboratório, farmácia, profissional ou marca apoiadora aparecer no contexto local.</p>
+              <Link href="/anuncie">Consultar mídia local <ArrowRight size={14} /></Link>
+            </aside>
+          </div>
 
           <div className="city-market-strip">
             <div>
@@ -152,11 +160,35 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             </section>
           </div>
 
+          <div className="city-media-strip">
+            <article>
+              <BookOpen size={22} />
+              <span>Revista física</span>
+              <strong>Presença impressa com extensão para {city.name}</strong>
+              <p>Matérias, entrevistas e anúncios da revista podem ganhar continuação no portal da cidade.</p>
+              <Link href="/revista">Ver revista <ArrowRight size={14} /></Link>
+            </article>
+            <article>
+              <Mic size={22} />
+              <span>Podcast</span>
+              <strong>Conexão Saúde com pauta local</strong>
+              <p>Episódios e cortes podem destacar especialistas, campanhas e temas relevantes para a população.</p>
+              <Link href="/podcast">Ver podcast <ArrowRight size={14} /></Link>
+            </article>
+            <article>
+              <Megaphone size={22} />
+              <span>Destaque comercial</span>
+              <strong>Cotas para aparecer na cidade</strong>
+              <p>Banner, perfil em destaque, empresa apoiadora e conteúdo patrocinado com segmentação local.</p>
+              <Link href="/anuncie">Anunciar <ArrowRight size={14} /></Link>
+            </article>
+          </div>
+
           <div className="local-content city-editorial-panel">
             <div>
               <p className="eyebrow">Conteúdo local</p>
               <h2><Newspaper size={30} /> Informação conectada à realidade de {city.name}.</h2>
-              <p>Esta área reunirá notícias, campanhas, eventos, entrevistas e orientações relacionadas à saúde no município.</p>
+              <p>Matérias de saúde, campanhas preventivas, entrevistas, eventos e temas da revista física podem aparecer aqui com recorte local.</p>
               <div className="city-article-row">
                 {localArticles.slice(0, 3).map((article) => (
                   <article key={article.slug}>
@@ -168,10 +200,10 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               </div>
             </div>
             <aside>
-              <small>QUER PARTICIPAR?</small>
+              <small>PARA VENDER NA CIDADE</small>
               <strong>Profissionais e empresas de {city.name}</strong>
-              <p>Solicite inclusão no guia, envie uma pauta ou consulte formatos de banner local.</p>
-              <Link href="/inclusao">Falar com o Guia Saúde <ArrowRight size={14} /></Link>
+              <p>Entre no guia, compre destaque, anuncie na revista ou apoie uma pauta/podcast com presença no portal.</p>
+              <Link href="/anuncie">Ver formatos comerciais <ArrowRight size={14} /></Link>
             </aside>
           </div>
         </section>
