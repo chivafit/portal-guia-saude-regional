@@ -20,7 +20,7 @@ test.after(() => server?.kill());
 test("renders the regional portal home", async () => {
   const html = await (await fetch(origin)).text();
   assert.match(html, /Portal Guia Saúde/);
-  assert.match(html, /Cuidado que/);
+  assert.match(html, /Saúde, reputação/);
   assert.match(html, /Conexão Saúde/);
   assert.match(html, /PUBLICIDADE/);
 });

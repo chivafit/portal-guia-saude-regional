@@ -54,17 +54,17 @@ export default async function Home() {
           <div className="hero-photo" aria-hidden="true" />
           <div className="hero-shade" aria-hidden="true" />
           <div className="shell hero-content">
-            <p className="edition-tag">O portal de saúde do Centro-Oeste de Minas</p>
-            <h1>Cuidado que<br />mora <em>perto.</em></h1>
-            <p className="hero-intro">Encontre profissionais, clínicas e informação confiável nas cidades da nossa região.</p>
+            <p className="edition-tag">Guia Saúde Regional</p>
+            <h1>Saúde, reputação<br />e cuidado <em>local.</em></h1>
+            <p className="hero-intro">Uma plataforma editorial para encontrar especialistas, clínicas, serviços e informação de saúde com curadoria regional.</p>
             <SearchForm />
-            <div className="hero-footnote"><MapPin size={14} /> Piumhi, Capitólio, Pimenta, Arcos, Campo Belo, Bambuí e São Roque de Minas</div>
+            <div className="hero-footnote"><MapPin size={14} /> Miniportais por cidade · perfis revisados · publicidade identificada</div>
           </div>
         </section>
 
         <section className="announcement">
           <div className="shell announcement-inner">
-            <span>PUBLICIDADE</span><strong>Sua marca falando com quem cuida da saúde na região.</strong>
+            <span>PUBLICIDADE</span><strong>Presença qualificada para marcas, clínicas e profissionais da saúde.</strong>
             <Link href="/anuncie">Conheça os formatos <ArrowRight size={15} /></Link>
           </div>
         </section>
@@ -93,9 +93,9 @@ export default async function Home() {
 
         <section className="section shell portal-overview" aria-labelledby="portal-overview-title">
           <div className="section-kicker"><span>01</span><p>Plataforma regional</p></div>
-          <div className="portal-overview-head">
-            <h2 id="portal-overview-title">Um portal, não apenas uma lista.</h2>
-            <p>O Guia Saúde organiza descoberta, conteúdo e presença comercial em uma experiência única para pacientes, profissionais e marcas da saúde.</p>
+            <div className="portal-overview-head">
+            <h2 id="portal-overview-title">Um portal regional com padrão editorial.</h2>
+            <p>O Guia Saúde combina busca local, conteúdo, revista, podcast e mídia paga em uma experiência feita para pacientes exigentes e profissionais que valorizam reputação.</p>
           </div>
           <div className="pillar-grid">
             {portalPillars.map((pillar) => {
