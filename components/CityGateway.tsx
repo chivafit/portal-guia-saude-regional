@@ -7,6 +7,7 @@ import { cities, organizations, professionals } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
 
 const storageKey = "guia-saude:selected-city";
+const modalSeenKey = "guia-saude:city-entry-seen";
 
 export function CityGateway() {
   const [selectedCity, setSelectedCity] = useState("");
@@ -22,6 +23,7 @@ export function CityGateway() {
   function selectCity(city: string) {
     setSelectedCity(city);
     window.localStorage.setItem(storageKey, city);
+    window.localStorage.setItem(modalSeenKey, "1");
     window.dispatchEvent(new CustomEvent("guia-saude:city-change", { detail: city }));
   }
 

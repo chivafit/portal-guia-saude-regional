@@ -7,6 +7,7 @@ import { cities } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
 
 const storageKey = "guia-saude:selected-city";
+const modalSeenKey = "guia-saude:city-entry-seen";
 
 function currentCityFromUrl() {
   if (typeof window === "undefined") return "";
@@ -30,7 +31,9 @@ export function CitySelector() {
     setSelectedCity(city);
     if (city) window.localStorage.setItem(storageKey, city);
     else window.localStorage.removeItem(storageKey);
+    window.localStorage.setItem(modalSeenKey, "1");
     window.dispatchEvent(new CustomEvent("guia-saude:city-change", { detail: city }));
+    if (city) window.location.assign(`/cidades/${citySlug(city)}`);
   }
 
   const selectedSlug = selectedCity ? citySlug(selectedCity) : "";

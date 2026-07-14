@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CityEntryModal } from "@/components/CityEntryModal";
 import { defaultDescription, siteName, siteUrl } from "@/lib/seo";
 import "./globals.css";
 
@@ -15,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="pt-BR"><body>{children}</body></html>;
+  return <html lang="pt-BR"><body>{children}<CityEntryModal /></body></html>;
 }
