@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowUpRight, BadgeCheck, Building2, Crown, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { AdSlot } from "@/components/AdSlot";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -104,29 +105,30 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
 
             {results.length ? (
               <div className="business-card-list">
-                {results.map((item) => (
-                  <article className="business-card" key={item.slug}>
-                    <div className="business-icon">GS</div>
+                {results.map((item, index) => (
+                  <article className={`business-card ${index===0 ? "business-card-featured" : ""}`} key={item.slug}>
+                    {index===0&&<span className="sponsored-ribbon">Empresa apoiadora</span>}
+                    <div className="business-icon"><Building2 size={26} /></div>
                     <div className="business-main">
                       <div className="business-head">
                         <div>
                           <p>{item.category}</p>
                           <h2>{item.name}</h2>
                         </div>
-                        <span className="status-pill pending">Validação pendente</span>
+                        <span className="status-pill pending"><ShieldCheck size={14} /> Validação pendente</span>
                       </div>
                       <div className="doctor-pills">
-                        <span>{item.city}</span>
+                        <span><MapPin size={13} /> {item.city}</span>
                         <span>{item.address}</span>
                       </div>
                       <p className="doctor-summary">{item.summary}</p>
-                      <div className="service-pills">{item.services.map((service) => <span key={service}>{service}</span>)}</div>
+                      <div className="service-pills">{item.services.slice(0, 4).map((service) => <span key={service}>{service}</span>)}</div>
                     </div>
                     <aside className="business-side">
-                      <small>Contato</small>
+                      <small><Phone size={14} /> Contato</small>
                       <strong>{item.phone}</strong>
-                      <Link href="/inclusao">Atualizar cadastro</Link>
-                      <p>Perfil demonstrativo sem venda direta ou agendamento.</p>
+                      <Link href="/inclusao">Ver detalhes <ArrowUpRight size={14} /></Link>
+                      <p>{index===0 ? "Espaço de empresa apoiadora do guia local." : "Perfil informativo, sem venda direta pelo portal."}</p>
                     </aside>
                   </article>
                 ))}
@@ -148,7 +150,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
             <p>Além de médicos e dentistas, o portal precisa mapear empresas e serviços que influenciam a jornada de cuidado da população regional.</p>
           </div>
           <div className="ecosystem-grid">
-            {ecosystemTags.map((tag) => <span key={tag}>{tag}</span>)}
+            {ecosystemTags.map((tag, index) => <span key={tag}>{index === 0 ? <Crown size={14} /> : <BadgeCheck size={14} />}{tag}</span>)}
           </div>
         </section>
       </main>
