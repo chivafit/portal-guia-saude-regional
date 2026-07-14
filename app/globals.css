@@ -487,14 +487,7 @@ h1,h2,h3,.brand span,.commercial-highlight-grid strong,.profession-card strong,.
 .city-business-panel{
   position:relative;
   overflow:hidden;
-  background:#fbfaf7!important;
-}
-.city-business-panel::before{
-  content:"";
-  position:absolute;
-  inset:0 auto 0 0;
-  width:6px;
-  background:#d97842;
+  background:linear-gradient(180deg,#ffffff,#fbfaf7)!important;
 }
 .city-business-list{
   grid-template-columns:1fr 1fr;
