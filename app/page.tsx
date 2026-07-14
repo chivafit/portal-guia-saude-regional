@@ -77,9 +77,6 @@ export default function Home() {
         </section>
 
         <section className="media-section" id="podcast">
-          <div className="shell">
-            <img className="media-showcase" src="/guia-saude-media-ecosystem.png" alt="Ecossistema Guia Saúde com revista, podcast Conexão Saúde e mídia digital" />
-          </div>
           <div className="shell media-grid">
             <div className="podcast-card"><p>CONEXÃO SAÚDE <span>●</span> PODCAST</p><div className="sound-bars">▁▃▆▂▇▄▅▂▆▃▇▅▂▆▁</div><small>PRÓXIMO AO VIVO · 14/07 ÀS 19H</small><h2>Radiologia odontológica: como a tecnologia transforma tratamentos.</h2><p>Com Rodrigo Soares Costa, tecnólogo em radiologia.</p><button aria-label="Conhecer o episódio do Conexão Saúde">▶</button></div>
             <div className="magazine-card" id="revista"><div className="mag-cover"><span>Guia</span><strong>Saúde</strong><small>REVISTA REGIONAL</small><b>O FUTURO<br />DO CUIDADO<br /><em>É PERTO.</em></b><p>14ª EDIÇÃO</p></div><div><p className="eyebrow">Revista Guia Saúde</p><h2>Histórias, especialistas e ideias que transformam a saúde regional.</h2><span>Conhecer a revista →</span></div></div>
