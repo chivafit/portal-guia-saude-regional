@@ -121,3 +121,19 @@ export const inclusionRequests = sqliteTable("inclusion_requests", {
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
+
+export const contactLeads = sqliteTable("contact_leads", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  entityType: text("entity_type").notNull(),
+  entitySlug: text("entity_slug").notNull(),
+  entityName: text("entity_name").notNull(),
+  category: text("category"),
+  cityName: text("city_name"),
+  visitorName: text("visitor_name").notNull(),
+  visitorWhatsapp: text("visitor_whatsapp").notNull(),
+  visitorCity: text("visitor_city"),
+  interest: text("interest"),
+  sourcePath: text("source_path"),
+  consent: integer("consent", { mode: "boolean" }).notNull().default(false),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});

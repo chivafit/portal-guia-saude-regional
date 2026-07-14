@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { AdSlot } from "@/components/AdSlot";
+import { ContactReveal } from "@/components/ContactReveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { cities, organizations } from "@/lib/data";
@@ -124,7 +125,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
                     </div>
                     <aside className="business-side">
                       <small><Phone size={14} /> Contato</small>
-                      <strong>{item.phone}</strong>
+                      <ContactReveal entityType="organization" entitySlug={item.slug} entityName={item.name} category={item.category} cityName={item.city} phone={item.phone} />
                       <Link href="/inclusao">Ver detalhes <ArrowUpRight size={14} /></Link>
                     </aside>
                   </article>
