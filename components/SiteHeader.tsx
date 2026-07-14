@@ -11,9 +11,9 @@ export function SiteHeader() {
         <nav className="main-nav" aria-label="Navegação principal">
           <Link href="/buscar">Profissionais</Link>
           <Link href="/empresas">Empresas</Link>
-          <Link href="/#materias">Matérias</Link>
-          <Link href="/#podcast">Podcast</Link>
-          <Link href="/#revista">Revista</Link>
+          <Link href="/materias">Matérias</Link>
+          <Link href="/podcast">Podcast</Link>
+          <Link href="/revista">Revista</Link>
         </nav>
         <Link href="/anuncie" className="admin-link">Anuncie <span>↗</span></Link>
       </div>

@@ -64,7 +64,7 @@ export default function Home() {
         <section className="section shell city-section">
           <div className="section-kicker"><span>03</span><p>Saúde feita de proximidade</p></div>
           <div className="city-intro"><h2>Sete cidades.<br /><em>Uma região conectada.</em></h2><p>Conheça o ecossistema de saúde de cada município: profissionais, serviços, notícias e oportunidades.</p></div>
-          <div className="city-grid">{cities.map((city, i) => <Link key={city} href={`/buscar?cidade=${encodeURIComponent(city)}`}><span>0{i+1}</span><strong>{city}</strong><small>Explorar a cidade →</small></Link>)}</div>
+          <div className="city-grid">{cities.map((city, i) => <Link key={city} href={`/cidades/${city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replaceAll(" ", "-")}`}><span>0{i+1}</span><strong>{city}</strong><small>Explorar a cidade →</small></Link>)}</div>
         </section>
 
         <section className="directory-section">

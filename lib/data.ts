@@ -129,3 +129,25 @@ export const articles = [
   { slug: "saude-e-longevidade", category: "Longevidade", title: "Saúde e longevidade: cuidados em cada fase", excerpt: "Uma pauta editorial conectada a especialistas e serviços da região.", city: "Regional" },
   { slug: "conexao-saude", category: "Podcast", title: "Conexão Saúde: conhecimento que aproxima", excerpt: "Episódios, convidados, transcrições e conteúdos complementares.", city: "Regional" },
 ];
+
+export const podcasts = [
+  { slug: "radiologia-odontologica", guest: "Rodrigo Soares Costa", role: "Tecnólogo em radiologia", topic: "Radiologia odontológica: como a tecnologia transforma os tratamentos", date: "14 de julho", duration: "Ao vivo às 19h", status: "Próximo episódio" },
+  { slug: "implantodontia-reabilitacao", guest: "Lívia Pereira", role: "Dentista", topic: "Do cuidado à transformação: implantodontia, reabilitação oral e prevenção", date: "30 de junho", duration: "Episódio completo", status: "Disponível" },
+  { slug: "blefaroplastia", guest: "Mírian L. Sansoni", role: "Oftalmologista", topic: "Blefaroplastia: saúde, estética e qualidade de vida", date: "9 de junho", duration: "Episódio completo", status: "Disponível" },
+];
+
+export const magazineEditions = [
+  { number: "14ª", year: "2026", title: "Saúde, bem-estar e qualidade de vida", description: "A nova fase editorial da Guia Saúde: informação que conecta profissionais, marcas e a comunidade regional.", featured: true },
+  { number: "13ª", year: "2025", title: "Cuidado que transforma", description: "Entrevistas, histórias e orientações para escolhas mais conscientes em saúde.", featured: false },
+  { number: "12ª", year: "2025", title: "Conexões para viver melhor", description: "Uma edição dedicada aos especialistas e iniciativas que movimentam a região.", featured: false },
+];
+
+export const cityDetails: Record<string, { name: string; intro: string; region: string }> = {
+  piumhi: { name: "Piumhi", intro: "Profissionais, clínicas, serviços e informação em saúde para quem vive em Piumhi e região.", region: "Centro-Oeste de Minas" },
+  capitolio: { name: "Capitólio", intro: "Um guia local para encontrar cuidado e acompanhar os assuntos de saúde de Capitólio.", region: "Região da Serra da Canastra" },
+  pimenta: { name: "Pimenta", intro: "Serviços, especialistas e conteúdo de saúde reunidos em uma página dedicada a Pimenta.", region: "Centro-Oeste de Minas" },
+  arcos: { name: "Arcos", intro: "Encontre profissionais e empresas da saúde e acompanhe conteúdos relevantes para Arcos.", region: "Centro-Oeste de Minas" },
+  "campo-belo": { name: "Campo Belo", intro: "O ecossistema de saúde de Campo Belo organizado para facilitar escolhas e conexões.", region: "Oeste de Minas" },
+  bambui: { name: "Bambuí", intro: "Informação, prevenção e serviços de saúde próximos da comunidade de Bambuí.", region: "Região da Serra da Canastra" },
+  "sao-roque-de-minas": { name: "São Roque de Minas", intro: "Um ponto de encontro para profissionais, serviços e informação em saúde na Serra da Canastra.", region: "Serra da Canastra" },
+};
