@@ -1431,3 +1431,63 @@ h1,h2,h3,
 .profile-preview a{
   color:#fff!important;
 }
+
+/* Contrast guardrails: never use black text on blue surfaces */
+.topline,
+.topline *,
+.site-footer,
+.site-footer *,
+.directory-section,
+.directory-section *,
+.editorial-feature,
+.editorial-feature *,
+.podcast-card,
+.podcast-card *,
+.city-entry-top,
+.city-entry-top *,
+.city-head-banner .ad-slot,
+.city-head-banner .ad-slot *,
+.city-media-strip-compact article:nth-child(2),
+.city-media-strip-compact article:nth-child(2) *,
+.city-portal-hero,
+.city-portal-hero *,
+.magazine-card,
+.magazine-card *,
+.profile-preview,
+.profile-preview *{
+  color:#fff!important;
+}
+.city-entry-top p,
+.site-footer p,
+.site-footer a,
+.directory-section p,
+.editorial-feature p,
+.podcast-card p{
+  color:#d4ecff!important;
+}
+.city-entry-close,
+.city-entry-close svg{
+  color:#fff!important;
+  stroke:#fff!important;
+}
+.city-entry-grid button,
+.city-entry-grid button *,
+.city-entry-grid button small,
+.city-entry-grid button svg{
+  color:#fff!important;
+  stroke:#fff!important;
+}
+.city-entry-grid button small{
+  background:rgba(0,0,0,.46)!important;
+}
+.portal-search button,
+.filters button,
+.primary-action,
+.home-top-banner-copy a,
+.city-search-panel button,
+.doctor-side .contact-reveal>button,
+.contact-reveal>button,
+.revealed-contact a,
+.lead-modal-card form button{
+  color:#fff!important;
+}
