@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Activity, Apple, ArrowRight, ArrowUpRight, BookOpen, Brain, Building2, Dumbbell, Ear, HeartPulse, MapPin, Megaphone, Mic, Newspaper, Play, Smile, Stethoscope, Syringe } from "lucide-react";
 import { SearchForm } from "@/components/SearchForm";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -65,7 +64,7 @@ export default async function Home() {
           <div className="section-kicker"><span>00</span><p>Em destaque</p></div>
           <div className="featured-board">
             <article className="featured-main">
-              <Image src="/guia-saude-hero-light.png" alt="Imagem editorial de saúde regional" width={720} height={520} />
+              <div className="featured-main-media" aria-label="Imagem editorial de saúde regional" />
               <div>
                 <span><BookOpen size={15} /> Especial regional</span>
                 <h2>Informação, profissionais e serviços reunidos em uma experiência só.</h2>
@@ -119,7 +118,7 @@ export default async function Home() {
           <div className="profession-grid">
             {professions.map((item, index) => (
               <Link key={item} href={`/buscar?profissao=${encodeURIComponent(item)}`} className="profession-card">
-                {(() => { const Icon = professionIcons[index] ?? HeartPulse; return <Icon className="lucide-card-icon" size={28} strokeWidth={1.7} />; })()}<strong>{item}</strong><small>Ver profissionais <ArrowUpRight size={14} /></small>
+                {(() => { const Icon = professionIcons[index] ?? HeartPulse; return <span className="profession-icon"><Icon className="lucide-card-icon" size={24} strokeWidth={1.7} /></span>; })()}<strong>{item}</strong><small>Ver profissionais <ArrowUpRight size={14} /></small>
               </Link>
             ))}
           </div>
@@ -144,7 +143,7 @@ export default async function Home() {
         <section className="section shell city-section">
           <div className="section-kicker"><span>04</span><p>Saúde feita de proximidade</p></div>
           <div className="city-intro"><h2>Sete cidades.<br /><em>Uma região conectada.</em></h2><p>Conheça o ecossistema de saúde de cada município: profissionais, serviços, notícias e oportunidades.</p></div>
-          <div className="city-grid">{cities.map((city, i) => <Link key={city} href={`/cidades/${city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replaceAll(" ", "-")}`}><span>0{i+1}</span><strong>{city}</strong><small>Explorar a cidade <ArrowUpRight size={13} /></small></Link>)}</div>
+          <div className="city-grid">{cities.map((city, i) => <Link key={city} href={`/cidades/${city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replaceAll(" ", "-")}`}><span>0{i+1}</span><strong>{city}</strong><p>Guia local em construção</p><small>Explorar a cidade <ArrowUpRight size={13} /></small></Link>)}</div>
           <div className="city-guide-panel">
             <div>
               <p className="eyebrow">Próxima etapa da base</p>
