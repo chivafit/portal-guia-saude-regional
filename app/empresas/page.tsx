@@ -107,7 +107,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
               <div className="business-card-list">
                 {results.map((item) => (
                   <article className="business-card" key={item.slug}>
-                    <div className="business-icon"><Building2 size={26} /></div>
+                    <div className="business-icon business-logo" style={{backgroundImage:`url(${item.logoUrl || "/placeholders/company-logo.svg"})`}} aria-label={`Logo de ${item.name}`}><Building2 size={0} /></div>
                     <div className="business-main">
                       <div className="business-head">
                         <div>

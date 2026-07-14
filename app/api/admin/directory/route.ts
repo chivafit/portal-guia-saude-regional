@@ -45,6 +45,9 @@ export async function POST(request: Request) {
         registrationNumber: data.registrationNumber,
         summary: data.summary,
         services: data.services,
+        imageUrl: data.imageUrl,
+        coverImageUrl: data.coverImageUrl,
+        logoUrl: data.logoUrl,
         status: (data.status || "draft") as DirectoryStatus,
       });
       return Response.json({ id }, { status: 201 });
@@ -59,6 +62,8 @@ export async function POST(request: Request) {
       cnesCode: data.cnesCode,
       summary: data.summary,
       services: data.services,
+      logoUrl: data.logoUrl,
+      coverImageUrl: data.coverImageUrl,
       status: (data.status || "draft") as DirectoryStatus,
     });
     return Response.json({ id }, { status: 201 });
@@ -98,6 +103,9 @@ export async function PUT(request: Request) {
         registrationNumber: data.registrationNumber,
         summary: data.summary,
         services: data.services,
+        imageUrl: data.imageUrl,
+        coverImageUrl: data.coverImageUrl,
+        logoUrl: data.logoUrl,
         status: (data.status || "draft") as DirectoryStatus,
       }, user.email);
       return Response.json({ ok: true });
@@ -112,6 +120,8 @@ export async function PUT(request: Request) {
       cnesCode: data.cnesCode,
       summary: data.summary,
       services: data.services,
+      logoUrl: data.logoUrl,
+      coverImageUrl: data.coverImageUrl,
       status: (data.status || "draft") as DirectoryStatus,
     }, user.email);
     return Response.json({ ok: true });

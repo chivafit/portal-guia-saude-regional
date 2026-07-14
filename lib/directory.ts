@@ -6,24 +6,24 @@ export type AdminProfessional = {
   cityName: string | null; organizationName: string | null; publicPhone: string | null;
   whatsapp: string | null; councilAcronym: string | null; councilState: string | null;
   registrationNumber: string | null; summary: string | null; services: string | null;
-  status: DirectoryStatus; updatedAt: string;
+  imageUrl: string | null; coverImageUrl: string | null; logoUrl: string | null; status: DirectoryStatus; updatedAt: string;
 };
 
 export type AdminOrganization = {
   id: number; publicName: string; slug: string; category: string; cityName: string | null;
   publicPhone: string | null; address: string | null; cnesCode: string | null;
-  summary: string | null; services: string | null; status: DirectoryStatus; updatedAt: string;
+  summary: string | null; services: string | null; logoUrl: string | null; coverImageUrl: string | null; status: DirectoryStatus; updatedAt: string;
 };
 
 export type PublicProfessional = {
   slug: string; name: string; profession: string; specialty: string; city: string;
   organization: string; registration: string; verified: boolean; summary: string;
-  phone: string; whatsapp: string; services: string[];
+  phone: string; whatsapp: string; services: string[]; imageUrl?: string; coverImageUrl?: string; logoUrl?: string;
 };
 
 export type PublicOrganization = {
   slug: string; name: string; category: string; city: string; address: string;
-  phone: string; summary: string; services: string[];
+  phone: string; summary: string; services: string[]; logoUrl?: string; coverImageUrl?: string;
 };
 
 async function getD1() { const { env } = await import("cloudflare:workers"); return env.DB; }
@@ -40,10 +40,10 @@ function uniqueSlug(base: string) {
 const professionalColumns = `id, public_name as publicName, slug, profession, specialty,
   city_name as cityName, organization_name as organizationName, public_phone as publicPhone,
   whatsapp, council_acronym as councilAcronym, council_state as councilState,
-  registration_number as registrationNumber, summary, services, status, updated_at as updatedAt`;
+  registration_number as registrationNumber, summary, services, image_url as imageUrl, cover_image_url as coverImageUrl, logo_url as logoUrl, status, updated_at as updatedAt`;
 
 const organizationColumns = `id, public_name as publicName, slug, category, city_name as cityName,
-  public_phone as publicPhone, address, cnes_code as cnesCode, summary, services, status,
+  public_phone as publicPhone, address, cnes_code as cnesCode, summary, services, logo_url as logoUrl, cover_image_url as coverImageUrl, status,
   updated_at as updatedAt`;
 
 export async function listDirectory(entity: DirectoryEntity, filters?: { status?: string }) {
@@ -61,34 +61,34 @@ export async function listDirectory(entity: DirectoryEntity, filters?: { status?
 export async function createProfessional(input: {
   publicName: string; profession: string; specialty?: string; cityName?: string;
   organizationName?: string; publicPhone?: string; whatsapp?: string; councilAcronym?: string;
-  councilState?: string; registrationNumber?: string; summary?: string; services?: string; status?: DirectoryStatus;
+  councilState?: string; registrationNumber?: string; summary?: string; services?: string; imageUrl?: string; coverImageUrl?: string; logoUrl?: string; status?: DirectoryStatus;
 }) {
   const db = await getD1();
   const slug = uniqueSlug(`${input.publicName}-${input.specialty ?? input.profession}-${input.cityName ?? "regional"}`);
   const result = await db.prepare(`INSERT INTO professionals
     (public_name, slug, profession, specialty, city_name, organization_name, public_phone, whatsapp,
-     council_acronym, council_state, registration_number, summary, services, status)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`)
+     council_acronym, council_state, registration_number, summary, services, image_url, cover_image_url, logo_url, status)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`)
     .bind(input.publicName, slug, input.profession, input.specialty ?? null, input.cityName ?? null,
       input.organizationName ?? null, input.publicPhone ?? null, input.whatsapp ?? null,
       input.councilAcronym ?? null, input.councilState ?? null, input.registrationNumber ?? null,
-      input.summary ?? null, input.services ?? null, input.status ?? "draft")
+      input.summary ?? null, input.services ?? null, input.imageUrl ?? null, input.coverImageUrl ?? null, input.logoUrl ?? null, input.status ?? "draft")
     .first<{ id: number }>();
   return result?.id;
 }
 
 export async function createOrganization(input: {
   publicName: string; category: string; cityName?: string; publicPhone?: string; address?: string;
-  cnesCode?: string; summary?: string; services?: string; status?: DirectoryStatus;
+  cnesCode?: string; summary?: string; services?: string; logoUrl?: string; coverImageUrl?: string; status?: DirectoryStatus;
 }) {
   const db = await getD1();
   const slug = uniqueSlug(`${input.publicName}-${input.category}-${input.cityName ?? "regional"}`);
   const result = await db.prepare(`INSERT INTO organizations
-    (public_name, slug, category, city_name, public_phone, address, cnes_code, summary, services, status)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`)
+    (public_name, slug, category, city_name, public_phone, address, cnes_code, summary, services, logo_url, cover_image_url, status)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`)
     .bind(input.publicName, slug, input.category, input.cityName ?? null, input.publicPhone ?? null,
       input.address ?? null, input.cnesCode ?? null, input.summary ?? null, input.services ?? null,
-      input.status ?? "draft")
+      input.logoUrl ?? null, input.coverImageUrl ?? null, input.status ?? "draft")
     .first<{ id: number }>();
   return result?.id;
 }
@@ -96,19 +96,19 @@ export async function createOrganization(input: {
 export async function updateProfessional(id: number, input: {
   publicName: string; profession: string; specialty?: string; cityName?: string;
   organizationName?: string; publicPhone?: string; whatsapp?: string; councilAcronym?: string;
-  councilState?: string; registrationNumber?: string; summary?: string; services?: string; status?: DirectoryStatus;
+  councilState?: string; registrationNumber?: string; summary?: string; services?: string; imageUrl?: string; coverImageUrl?: string; logoUrl?: string; status?: DirectoryStatus;
 }, actorEmail?: string) {
   const db = await getD1();
   await db.batch([
     db.prepare(`UPDATE professionals SET
       public_name = ?, profession = ?, specialty = ?, city_name = ?, organization_name = ?,
       public_phone = ?, whatsapp = ?, council_acronym = ?, council_state = ?,
-      registration_number = ?, summary = ?, services = ?, status = ?, updated_at = CURRENT_TIMESTAMP
+      registration_number = ?, summary = ?, services = ?, image_url = ?, cover_image_url = ?, logo_url = ?, status = ?, updated_at = CURRENT_TIMESTAMP
       WHERE id = ?`)
       .bind(input.publicName, input.profession, input.specialty ?? null, input.cityName ?? null,
         input.organizationName ?? null, input.publicPhone ?? null, input.whatsapp ?? null,
         input.councilAcronym ?? null, input.councilState ?? null, input.registrationNumber ?? null,
-        input.summary ?? null, input.services ?? null, input.status ?? "draft", id),
+        input.summary ?? null, input.services ?? null, input.imageUrl ?? null, input.coverImageUrl ?? null, input.logoUrl ?? null, input.status ?? "draft", id),
     db.prepare("INSERT INTO audit_log (entity_type, entity_id, action, actor_email, detail) VALUES (?, ?, ?, ?, ?)")
       .bind("professional", id, "updated", actorEmail ?? null, null),
   ]);
@@ -116,17 +116,17 @@ export async function updateProfessional(id: number, input: {
 
 export async function updateOrganization(id: number, input: {
   publicName: string; category: string; cityName?: string; publicPhone?: string; address?: string;
-  cnesCode?: string; summary?: string; services?: string; status?: DirectoryStatus;
+  cnesCode?: string; summary?: string; services?: string; logoUrl?: string; coverImageUrl?: string; status?: DirectoryStatus;
 }, actorEmail?: string) {
   const db = await getD1();
   await db.batch([
     db.prepare(`UPDATE organizations SET
       public_name = ?, category = ?, city_name = ?, public_phone = ?, address = ?,
-      cnes_code = ?, summary = ?, services = ?, status = ?, updated_at = CURRENT_TIMESTAMP
+      cnes_code = ?, summary = ?, services = ?, logo_url = ?, cover_image_url = ?, status = ?, updated_at = CURRENT_TIMESTAMP
       WHERE id = ?`)
       .bind(input.publicName, input.category, input.cityName ?? null, input.publicPhone ?? null,
         input.address ?? null, input.cnesCode ?? null, input.summary ?? null,
-        input.services ?? null, input.status ?? "draft", id),
+        input.services ?? null, input.logoUrl ?? null, input.coverImageUrl ?? null, input.status ?? "draft", id),
     db.prepare("INSERT INTO audit_log (entity_type, entity_id, action, actor_email, detail) VALUES (?, ?, ?, ?, ?)")
       .bind("organization", id, "updated", actorEmail ?? null, null),
   ]);
@@ -178,6 +178,9 @@ export async function publishedProfessionals(fallback: PublicProfessional[] = []
       phone: item.publicPhone ?? "Contato não informado",
       whatsapp: item.whatsapp ?? "#",
       services: splitServices(item.services),
+      imageUrl: item.imageUrl ?? undefined,
+      coverImageUrl: item.coverImageUrl ?? undefined,
+      logoUrl: item.logoUrl ?? undefined,
     }));
   } catch {
     return fallback;
@@ -197,6 +200,8 @@ export async function publishedOrganizations(fallback: PublicOrganization[] = []
       phone: item.publicPhone ?? "Contato não informado",
       summary: item.summary ?? "Cadastro publicado pela equipe Guia Saúde após revisão editorial.",
       services: splitServices(item.services),
+      logoUrl: item.logoUrl ?? undefined,
+      coverImageUrl: item.coverImageUrl ?? undefined,
     }));
   } catch {
     return fallback;

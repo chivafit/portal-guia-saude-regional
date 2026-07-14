@@ -11,6 +11,9 @@ export type Professional = {
   phone: string;
   whatsapp: string;
   services: string[];
+  imageUrl?: string;
+  coverImageUrl?: string;
+  logoUrl?: string;
 };
 
 export type Organization = {
@@ -22,6 +25,8 @@ export type Organization = {
   phone: string;
   summary: string;
   services: string[];
+  logoUrl?: string;
+  coverImageUrl?: string;
 };
 
 // Dados exclusivamente demonstrativos. Não representam pessoas reais.
