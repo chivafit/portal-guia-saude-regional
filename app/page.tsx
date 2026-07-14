@@ -5,6 +5,30 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { articles, cities, professions, professionals } from "@/lib/data";
 
 const icons = ["✚", "◉", "◇", "⌁", "○"];
+const portalPillars = [
+  {
+    label: "Diretório",
+    title: "Profissionais, clínicas e empresas por cidade",
+    text: "Busca regional com filtros por área, cidade e serviço. O portal informa e direciona o contato, sem intermediar agendamento.",
+  },
+  {
+    label: "Conteúdo",
+    title: "Matérias, guias e pautas locais",
+    text: "Uma frente editorial para prevenção, bem-estar, tecnologia, especialidades e histórias da saúde regional.",
+  },
+  {
+    label: "Mídia",
+    title: "Revista, podcast, banners e campanhas",
+    text: "Inventário comercial organizado para marcas que querem presença qualificada no ecossistema de saúde.",
+  },
+];
+const cityMetrics = [
+  ["7", "cidades prioritárias"],
+  ["5+", "categorias profissionais"],
+  ["4", "frentes de mídia"],
+  ["100%", "portal informativo"],
+];
+const adFormats = ["Banner topo", "Banner por cidade", "Perfil em destaque", "Matéria patrocinada", "Podcast apoiado", "Revista digital"];
 
 export default function Home() {
   return (
@@ -27,6 +51,31 @@ export default function Home() {
           <div className="shell announcement-inner">
             <span>PUBLICIDADE</span><strong>Sua marca falando com quem cuida da saúde na região.</strong>
             <Link href="/anuncie">Conheça os formatos <b>→</b></Link>
+          </div>
+        </section>
+
+        <section className="section shell portal-overview" aria-labelledby="portal-overview-title">
+          <div className="section-kicker"><span>00</span><p>Plataforma regional</p></div>
+          <div className="portal-overview-head">
+            <h2 id="portal-overview-title">Um portal, não apenas uma lista.</h2>
+            <p>O Guia Saúde organiza descoberta, conteúdo e presença comercial em uma experiência única para pacientes, profissionais e marcas da saúde.</p>
+          </div>
+          <div className="pillar-grid">
+            {portalPillars.map((pillar) => (
+              <article key={pillar.label}>
+                <span>{pillar.label}</span>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.text}</p>
+              </article>
+            ))}
+          </div>
+          <div className="metric-strip">
+            {cityMetrics.map(([value, label]) => (
+              <div key={label}>
+                <strong>{value}</strong>
+                <span>{label}</span>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -65,6 +114,14 @@ export default function Home() {
           <div className="section-kicker"><span>03</span><p>Saúde feita de proximidade</p></div>
           <div className="city-intro"><h2>Sete cidades.<br /><em>Uma região conectada.</em></h2><p>Conheça o ecossistema de saúde de cada município: profissionais, serviços, notícias e oportunidades.</p></div>
           <div className="city-grid">{cities.map((city, i) => <Link key={city} href={`/cidades/${city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replaceAll(" ", "-")}`}><span>0{i+1}</span><strong>{city}</strong><small>Explorar a cidade →</small></Link>)}</div>
+          <div className="city-guide-panel">
+            <div>
+              <p className="eyebrow">Próxima etapa da base</p>
+              <h3>Cadastro regional conferido antes de publicar.</h3>
+            </div>
+            <p>Os perfis oficiais devem nascer com fonte, categoria, cidade, contato, conselho profissional quando aplicável e status de validação. Isso evita um guia inflado, duplicado ou sem confiança.</p>
+            <Link href="/buscar">Ver modelo de busca →</Link>
+          </div>
         </section>
 
         <section className="directory-section">
@@ -80,6 +137,17 @@ export default function Home() {
           <div className="shell media-grid">
             <div className="podcast-card"><p>CONEXÃO SAÚDE <span>●</span> PODCAST</p><div className="sound-bars">▁▃▆▂▇▄▅▂▆▃▇▅▂▆▁</div><small>PRÓXIMO AO VIVO · 14/07 ÀS 19H</small><h2>Radiologia odontológica: como a tecnologia transforma tratamentos.</h2><p>Com Rodrigo Soares Costa, tecnólogo em radiologia.</p><button aria-label="Conhecer o episódio do Conexão Saúde">▶</button></div>
             <div className="magazine-card" id="revista"><div className="mag-cover"><span>Guia</span><strong>Saúde</strong><small>REVISTA REGIONAL</small><b>O FUTURO<br />DO CUIDADO<br /><em>É PERTO.</em></b><p>14ª EDIÇÃO</p></div><div><p className="eyebrow">Revista Guia Saúde</p><h2>Histórias, especialistas e ideias que transformam a saúde regional.</h2><span>Conhecer a revista →</span></div></div>
+          </div>
+        </section>
+
+        <section className="section shell media-marketplace">
+          <div className="marketplace-copy">
+            <p className="eyebrow">Banners pagos e mídia regional</p>
+            <h2>Inventário comercial simples de vender e fácil de entender.</h2>
+            <p>Formatos separados por objetivo: visibilidade regional, presença por cidade, autoridade editorial e campanhas integradas com revista, podcast e Instagram.</p>
+          </div>
+          <div className="ad-format-grid">
+            {adFormats.map((format) => <span key={format}>{format}</span>)}
           </div>
         </section>
 
