@@ -3,6 +3,7 @@ import { SearchForm } from "@/components/SearchForm";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { articles, cities, professions, professionals } from "@/lib/data";
+import { publishedProfessionals } from "@/lib/directory";
 
 const icons = ["✚", "◉", "◇", "⌁", "○", "◌", "＋", "◎", "△"];
 const portalPillars = [
@@ -30,7 +31,8 @@ const cityMetrics = [
 ];
 const adFormats = ["Banner topo", "Banner por cidade", "Perfil em destaque", "Matéria patrocinada", "Podcast apoiado", "Revista digital"];
 
-export default function Home() {
+export default async function Home() {
+  const featuredProfessionals = await publishedProfessionals(professionals);
   return (
     <>
       <SiteHeader />
@@ -128,7 +130,7 @@ export default function Home() {
           <div className="shell">
             <div className="section-kicker light"><span>04</span><p>Profissionais perto de você</p></div>
             <div className="directory-title"><h2>Quem cuida<br /><em>da nossa região.</em></h2><Link href="/buscar">Ver guia completo →</Link></div>
-            <div className="profile-preview-grid">{professionals.slice(0,3).map((item, index) => <article className="profile-preview" key={item.slug}><div className={`portrait portrait-${index+1}`}>GS</div><div><span>{item.profession} · {item.city}</span><h3>{item.name}</h3><p>{item.specialty}</p><Link href={`/profissionais/${item.slug}`}>Ver perfil <b>↗</b></Link></div></article>)}</div>
+            <div className="profile-preview-grid">{featuredProfessionals.slice(0,3).map((item, index) => <article className="profile-preview" key={item.slug}><div className={`portrait portrait-${index+1}`}>GS</div><div><span>{item.profession} · {item.city}</span><h3>{item.name}</h3><p>{item.specialty}</p><Link href={`/profissionais/${item.slug}`}>Ver perfil <b>↗</b></Link></div></article>)}</div>
             <p className="demo-disclaimer">Perfis demonstrativos. A base oficial será publicada após conferência das fontes e validação dos profissionais.</p>
           </div>
         </section>

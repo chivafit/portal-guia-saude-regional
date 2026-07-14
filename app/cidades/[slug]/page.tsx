@@ -4,14 +4,17 @@ import { AdSlot } from "@/components/AdSlot";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { articles, cityDetails, organizations, professions, professionals } from "@/lib/data";
+import { publishedOrganizations, publishedProfessionals } from "@/lib/directory";
 
 export default async function CityPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const city = cityDetails[slug];
   if (!city) notFound();
 
-  const localProfessionals = professionals.filter((item) => item.city === city.name);
-  const localOrganizations = organizations.filter((item) => item.city === city.name);
+  const professionalSource = await publishedProfessionals(professionals);
+  const organizationSource = await publishedOrganizations(organizations);
+  const localProfessionals = professionalSource.filter((item) => item.city === city.name);
+  const localOrganizations = organizationSource.filter((item) => item.city === city.name);
   const localArticles = articles.filter((item) => item.city === city.name || item.city === "Regional");
   const cityQuery = encodeURIComponent(city.name);
 
@@ -40,8 +43,8 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
 
         <section className="shell content-section city-portal-section">
           <div className="city-summary city-portal-summary">
-            <div><small>PROFISSIONAIS</small><strong>{localProfessionals.length || "Base"}</strong><span>{localProfessionals.length ? "perfis demonstrativos" : "em formação"}</span></div>
-            <div><small>EMPRESAS</small><strong>{localOrganizations.length || "Diretório"}</strong><span>{localOrganizations.length ? "cadastros demonstrativos" : "em validação"}</span></div>
+            <div><small>PROFISSIONAIS</small><strong>{localProfessionals.length || "Base"}</strong><span>{localProfessionals.length ? "perfis no guia" : "em formação"}</span></div>
+            <div><small>EMPRESAS</small><strong>{localOrganizations.length || "Diretório"}</strong><span>{localOrganizations.length ? "cadastros no guia" : "em validação"}</span></div>
             <div><small>CONTEÚDO</small><strong>{localArticles.length}</strong><span>pautas disponíveis</span></div>
           </div>
 

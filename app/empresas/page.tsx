@@ -3,6 +3,7 @@ import { AdSlot } from "@/components/AdSlot";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { cities, organizations } from "@/lib/data";
+import { publishedOrganizations } from "@/lib/directory";
 
 const categoryOptions = [
   "Clínica multiprofissional",
@@ -27,7 +28,8 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
   const category = params.categoria ?? "";
   const q = (params.q ?? "").trim().toLowerCase();
   const activeFilters = [city, category, q ? `Busca: ${q}` : ""].filter(Boolean);
-  const results = organizations.filter((item) => {
+  const source = await publishedOrganizations(organizations);
+  const results = source.filter((item) => {
     const haystack = [item.name, item.category, item.city, item.summary, item.services.join(" ")].join(" ").toLowerCase();
     return (!city || item.city === city) && (!category || item.category === category) && (!q || haystack.includes(q));
   });
@@ -86,7 +88,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
             <AdSlot code="COMPANY_DIRECTORY_TOP" compact />
             <div className="result-toolbar">
               <div>
-                <strong>{results.length} empresas demonstrativas</strong>
+                <strong>{results.length} empresas no guia</strong>
                 <span>{activeFilters.length ? activeFilters.join(" · ") : "Toda a região"}</span>
               </div>
               <Link href="/anuncie">Solicitar inclusão</Link>

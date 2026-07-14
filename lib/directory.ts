@@ -15,6 +15,17 @@ export type AdminOrganization = {
   summary: string | null; services: string | null; status: DirectoryStatus; updatedAt: string;
 };
 
+export type PublicProfessional = {
+  slug: string; name: string; profession: string; specialty: string; city: string;
+  organization: string; registration: string; verified: boolean; summary: string;
+  phone: string; whatsapp: string; services: string[];
+};
+
+export type PublicOrganization = {
+  slug: string; name: string; category: string; city: string; address: string;
+  phone: string; summary: string; services: string[];
+};
+
 async function getD1() { const { env } = await import("cloudflare:workers"); return env.DB; }
 
 function slugify(value: string) {
@@ -100,4 +111,60 @@ export async function removeDirectory(entity: DirectoryEntity, id: number, actor
     db.prepare("INSERT INTO audit_log (entity_type, entity_id, action, actor_email, detail) VALUES (?, ?, ?, ?, ?)")
       .bind(entity, id, "deleted", actorEmail ?? null, null),
   ]);
+}
+
+function splitServices(value: string | null) {
+  return (value ?? "").split(",").map((item) => item.trim()).filter(Boolean);
+}
+
+function registration(item: AdminProfessional) {
+  const council = [item.councilAcronym, item.councilState].filter(Boolean).join("-");
+  return [council, item.registrationNumber].filter(Boolean).join(" · ") || "Registro aguardando validação";
+}
+
+export async function publishedProfessionals(fallback: PublicProfessional[] = []) {
+  try {
+    const items = await listDirectory("professional", { status: "published" }) as AdminProfessional[];
+    if (!items.length) return fallback;
+    return items.map((item): PublicProfessional => ({
+      slug: item.slug,
+      name: item.publicName,
+      profession: item.profession,
+      specialty: item.specialty ?? item.profession,
+      city: item.cityName ?? "Regional",
+      organization: item.organizationName ?? "Local de atendimento informado no perfil",
+      registration: registration(item),
+      verified: true,
+      summary: item.summary ?? "Perfil publicado pela equipe Guia Saúde após revisão editorial.",
+      phone: item.publicPhone ?? "Contato não informado",
+      whatsapp: item.whatsapp ?? "#",
+      services: splitServices(item.services),
+    }));
+  } catch {
+    return fallback;
+  }
+}
+
+export async function publishedOrganizations(fallback: PublicOrganization[] = []) {
+  try {
+    const items = await listDirectory("organization", { status: "published" }) as AdminOrganization[];
+    if (!items.length) return fallback;
+    return items.map((item): PublicOrganization => ({
+      slug: item.slug,
+      name: item.publicName,
+      category: item.category,
+      city: item.cityName ?? "Regional",
+      address: item.address ?? "Endereço aguardando validação",
+      phone: item.publicPhone ?? "Contato não informado",
+      summary: item.summary ?? "Cadastro publicado pela equipe Guia Saúde após revisão editorial.",
+      services: splitServices(item.services),
+    }));
+  } catch {
+    return fallback;
+  }
+}
+
+export async function findPublishedProfessional(slug: string, fallback: PublicProfessional[] = []) {
+  const items = await publishedProfessionals(fallback);
+  return items.find((item) => item.slug === slug) ?? null;
 }
