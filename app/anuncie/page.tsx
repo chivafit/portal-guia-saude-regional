@@ -1,7 +1,10 @@
 import Link from "next/link";
+import { ArrowRight, Building2, MapPin, Megaphone, Newspaper, Podcast, Search, Star } from "lucide-react";
 import { AdSlot } from "@/components/AdSlot";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { cities } from "@/lib/data";
+import { citySlug } from "@/lib/city-utils";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -28,20 +31,27 @@ const formats = [
 
 const packages = [
   {
-    name: "Presença",
-    bestFor: "Profissionais e empresas que querem aparecer no guia.",
-    items: ["Perfil revisado", "Contato e cidade", "Categoria profissional", "Possibilidade de destaque"],
+    name: "Cidade",
+    bestFor: "Marcas que querem dominar presença em um município.",
+    items: ["Banner topo local", "Página da cidade", "Empresas e profissionais locais", "CTA comercial por cidade"],
   },
   {
-    name: "Campanha local",
-    bestFor: "Marcas que querem visibilidade em uma cidade ou especialidade.",
-    items: ["Banner segmentado", "Página de cidade", "Relatório simples", "Período definido"],
+    name: "Destaque",
+    bestFor: "Profissionais, clínicas e empresas que precisam aparecer mais.",
+    items: ["Card premium", "Busca segmentada", "Imagem do anúncio", "Período definido"],
   },
   {
     name: "Autoridade",
     bestFor: "Campanhas com conteúdo, reputação e distribuição multiplataforma.",
     items: ["Matéria identificada", "Podcast ou entrevista", "Revista digital", "Distribuição social"],
   },
+];
+
+const localProducts = [
+  { icon: MapPin, title: "Miniportal da cidade", text: "Presença em páginas locais como Piumhi, Capitólio, Arcos, Campo Belo, Bambuí, Pimenta e São Roque de Minas." },
+  { icon: Search, title: "Busca segmentada", text: "Apareça onde o usuário já está procurando especialistas, clínicas, farmácias ou serviços de saúde." },
+  { icon: Star, title: "Destaques premium", text: "Cards e posições de evidência para profissionais, empresas e marcas apoiadoras." },
+  { icon: Newspaper, title: "Conteúdo patrocinado", text: "Matérias e pautas identificadas para campanhas educativas, institucionais ou comerciais." },
 ];
 
 const steps = [
@@ -63,8 +73,8 @@ export default function AdvertisePage() {
               <h1>Sua marca dentro do ecossistema Guia Saúde.</h1>
               <p>Portal, revista digital, podcast e Instagram conectados para campanhas de saúde, bem-estar, serviços e negócios regionais.</p>
               <div className="media-kit-actions">
-                <a href="https://wa.me/5537999474443" target="_blank" rel="noreferrer">Solicitar proposta</a>
-                <Link href="/buscar">Ver diretório</Link>
+                <a href="https://wa.me/5537999474443" target="_blank" rel="noreferrer">Solicitar proposta <ArrowRight size={14} /></a>
+                <Link href="/buscar">Ver diretório <Search size={14} /></Link>
               </div>
             </div>
             <aside className="media-kit-card">
@@ -73,6 +83,25 @@ export default function AdvertisePage() {
               <p>Formatos comerciais para profissionais, clínicas, laboratórios, escolas, marcas e empresas da saúde.</p>
               <small>Centro-Oeste de Minas · Serra da Canastra</small>
             </aside>
+          </div>
+        </section>
+
+        <section className="section shell local-media-section">
+          <div className="media-kit-heading compact">
+            <div>
+              <p className="eyebrow">Venda por cidade</p>
+              <h2>O anunciante compra presença onde o público está.</h2>
+            </div>
+            <p>O portal trabalha com recortes locais. Isso permite vender campanhas por cidade, por categoria e por objetivo comercial.</p>
+          </div>
+          <div className="local-product-grid">
+            {localProducts.map((item) => {
+              const Icon = item.icon;
+              return <article key={item.title}><Icon size={22} /><h3>{item.title}</h3><p>{item.text}</p></article>;
+            })}
+          </div>
+          <div className="city-sales-grid">
+            {cities.map((city) => <Link key={city} href={`/cidades/${citySlug(city)}`}><MapPin size={15} /> Anunciar em {city}</Link>)}
           </div>
         </section>
 
@@ -111,6 +140,18 @@ export default function AdvertisePage() {
             ))}
           </div>
           <AdSlot code="DEMONSTRACAO_COMERCIAL" />
+        </section>
+
+        <section className="section shell commercial-examples">
+          <div>
+            <p className="eyebrow">Exemplos de venda</p>
+            <h2>Como apresentar para o anunciante.</h2>
+          </div>
+          <div className="commercial-example-grid">
+            <article><Megaphone size={22} /><strong>Farmácia local</strong><p>Banner topo na cidade + destaque em empresas + chamada em matéria de prevenção.</p></article>
+            <article><Building2 size={22} /><strong>Clínica ou laboratório</strong><p>Campanha por cidade + card premium + publieditorial educativo.</p></article>
+            <article><Podcast size={22} /><strong>Marca regional</strong><p>Portal + podcast + revista digital + distribuição social integrada.</p></article>
+          </div>
         </section>
 
         <section className="media-kit-band">
