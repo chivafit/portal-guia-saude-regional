@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { cities, organizations } from "@/lib/data";
 import { publishedOrganizations } from "@/lib/directory";
 import { pageMetadata } from "@/lib/seo";
+import { cityAdCode } from "@/lib/city-utils";
 
 export const metadata = pageMetadata(
   "Empresas e serviços",
@@ -92,7 +93,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
           </aside>
 
           <div className="company-results">
-            <AdSlot code="COMPANY_DIRECTORY_TOP" compact />
+            <AdSlot code={city ? cityAdCode(city) : "COMPANY_DIRECTORY_TOP"} compact />
             <div className="result-toolbar">
               <div>
                 <strong>{results.length} empresas no guia</strong>

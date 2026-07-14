@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { Activity, Apple, ArrowRight, ArrowUpRight, BookOpen, Brain, Building2, Dumbbell, Ear, HeartPulse, MapPin, Megaphone, Mic, Newspaper, Play, Smile, Stethoscope, Syringe } from "lucide-react";
 import { SearchForm } from "@/components/SearchForm";
+import { CityGateway } from "@/components/CityGateway";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { articles, cities, professions, professionals } from "@/lib/data";
 import { publishedProfessionals } from "@/lib/directory";
+import { citySlug } from "@/lib/city-utils";
 
 const professionIcons = [Stethoscope, Smile, Brain, Activity, Apple, Ear, Syringe, HeartPulse, Dumbbell];
 const portalPillars = [
@@ -66,6 +68,8 @@ export default async function Home() {
             <Link href="/anuncie">Conheça os formatos <ArrowRight size={15} /></Link>
           </div>
         </section>
+
+        <CityGateway />
 
         <section className="section shell home-featured">
           <div className="section-kicker"><span>00</span><p>Em destaque</p></div>
@@ -150,7 +154,7 @@ export default async function Home() {
         <section className="section shell city-section">
           <div className="section-kicker"><span>04</span><p>Saúde feita de proximidade</p></div>
           <div className="city-intro"><h2>Sete cidades.<br /><em>Uma região conectada.</em></h2><p>Conheça o ecossistema de saúde de cada município: profissionais, serviços, notícias e oportunidades.</p></div>
-          <div className="city-grid">{cities.map((city, i) => <Link key={city} href={`/cidades/${city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replaceAll(" ", "-")}`}><span>0{i+1}</span><strong>{city}</strong><p>Guia local em construção</p><small>Explorar a cidade <ArrowUpRight size={13} /></small></Link>)}</div>
+          <div className="city-grid">{cities.map((city, i) => <Link key={city} href={`/cidades/${citySlug(city)}`}><span>0{i+1}</span><strong>{city}</strong><p>Guia local em construção</p><small>Explorar a cidade <ArrowUpRight size={13} /></small></Link>)}</div>
         </section>
 
         <section className="directory-section">

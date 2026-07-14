@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { CitySelector } from "@/components/CitySelector";
 
 export function SiteHeader() {
   return (
@@ -18,7 +19,10 @@ export function SiteHeader() {
           <Link href="/sobre">Sobre</Link>
           <Link href="/inclusao">Inclusão</Link>
         </nav>
-        <Link href="/anuncie" className="admin-link">Anuncie <ArrowUpRight size={14} /></Link>
+        <div className="header-actions">
+          <CitySelector />
+          <Link href="/anuncie" className="admin-link">Anuncie <ArrowUpRight size={14} /></Link>
+        </div>
       </div>
     </header></>
   );

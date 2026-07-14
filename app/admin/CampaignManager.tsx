@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 type Campaign = { id:number; advertiserName:string; name:string; positionCode:string; citySlug:string|null; startsAt:string; endsAt:string; destinationUrl:string; imageUrl:string|null; status:string };
-const positions = ["DIRECTORY_TOP", "COMPANY_DIRECTORY_TOP", "PROFILE_CONTENT_END", "DEMONSTRACAO_COMERCIAL", "CITY_PIUMHI_TOP", "CITY_CAPITOLIO_TOP", "CITY_ARCOS_TOP", "CITY_CAMPO-BELO_TOP"];
+const positions = ["DIRECTORY_TOP", "COMPANY_DIRECTORY_TOP", "PROFILE_CONTENT_END", "DEMONSTRACAO_COMERCIAL", "CITY_PIUMHI_TOP", "CITY_CAPITOLIO_TOP", "CITY_PIMENTA_TOP", "CITY_ARCOS_TOP", "CITY_CAMPO-BELO_TOP", "CITY_BAMBUI_TOP", "CITY_SAO-ROQUE-DE-MINAS_TOP"];
 const initial = {advertiserName:"", name:"", positionCode:"DIRECTORY_TOP", citySlug:"", startsAt:"", endsAt:"", destinationUrl:"https://", imageUrl:"", status:"draft"};
 
 export function CampaignManager(){

@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { articles, cityDetails, organizations, professions, professionals } from "@/lib/data";
 import { publishedOrganizations, publishedProfessionals } from "@/lib/directory";
 import { pageMetadata } from "@/lib/seo";
+import { cityAdCode } from "@/lib/city-utils";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -60,7 +61,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <div><small>CONTEÚDO</small><strong>{localArticles.length}</strong><span>pautas disponíveis</span></div>
           </div>
 
-          <AdSlot code={`CITY_${slug.toUpperCase()}_TOP`} />
+          <AdSlot code={cityAdCode(city.name)} />
 
           <div className="content-title city-content-title">
             <div>
