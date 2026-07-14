@@ -27,7 +27,7 @@ test("renders the regional portal home", async () => {
 
 test("renders search, profile, companies and admin routes", async () => {
   const routes = [
-    ["/buscar?cidade=Piumhi", /resultados demonstrativos/],
+    ["/buscar?cidade=Piumhi", /Sem agendamento online/],
     ["/profissionais/perfil-demonstrativo-cardiologia-piumhi", /Validação documental pendente/],
     ["/empresas", /Empresas e serviços/],
     ["/admin", /Conteúdo, revista, podcast e mídia/],
