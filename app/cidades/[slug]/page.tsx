@@ -83,6 +83,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                     <span>{article.category}</span>
                     <strong>{article.title}</strong>
                     <p>{article.excerpt}</p>
+                    <Link href="/materias">Ler matéria <ArrowRight size={13} /></Link>
                   </article>
                 ))}
               </div>
@@ -108,6 +109,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                       <span><BadgeCheck size={13} /> {item.profession}</span>
                       <strong>{item.specialty}</strong>
                       <small>{item.registration}</small>
+                      <em>Ver perfil</em>
                     </Link>
                   ))}
                 </div>
@@ -132,6 +134,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                       <span><Building2 size={13} /> {item.category}</span>
                       <strong>{item.name}</strong>
                       <small>{item.services.slice(0, 2).join(" · ")}</small>
+                      <em>Ver detalhes</em>
                     </Link>
                   ))}
                 </div>
