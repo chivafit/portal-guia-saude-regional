@@ -30,7 +30,7 @@ export type Organization = {
 };
 
 // Dados exclusivamente demonstrativos. Não representam pessoas reais.
-export const professionals: Professional[] = [
+const baseProfessionals: Professional[] = [
   {
     slug: "perfil-demonstrativo-cardiologia-piumhi",
     name: "Perfil demonstrativo",
@@ -337,7 +337,38 @@ export const professionals: Professional[] = [
   },
 ];
 
-export const organizations: Organization[] = [
+const supplementalProfessionals: Professional[] = [
+  ...["Capitólio", "Pimenta", "Arcos", "Campo Belo", "Bambuí", "São Roque de Minas"].flatMap((city) => {
+    const slugCity = city.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-");
+    return [
+      ["Médico", "Clínica médica", "CRM-MG", "Consulta clínica", "Prevenção", "Acompanhamento"],
+      ["Dentista", "Odontologia geral", "CRO-MG", "Avaliação odontológica", "Prevenção", "Saúde bucal"],
+      ["Psicólogo", "Psicologia clínica", "CRP-MG", "Atendimento individual", "Saúde mental", "Orientação"],
+      ["Fisioterapeuta", "Fisioterapia", "CREFITO", "Reabilitação", "Pilates", "Avaliação funcional"],
+      ["Nutricionista", "Nutrição clínica", "CRN", "Avaliação nutricional", "Educação alimentar", "Acompanhamento"],
+      ["Médico", "Pediatria", "CRM-MG", "Consulta pediátrica", "Puericultura", "Orientação preventiva"],
+    ].map(([profession, specialty, council, ...services]) => ({
+      slug: `perfil-demonstrativo-${specialty.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-")}-${slugCity}`,
+      name: "Perfil demonstrativo",
+      profession,
+      specialty,
+      city,
+      organization: `Serviço demonstrativo de ${city}`,
+      registration: `${council} · aguardando validação`,
+      verified: false,
+      summary: `Modelo visual para futuros cadastros de ${specialty.toLowerCase()} em ${city}, com foto, registro, serviços e contato substituíveis após validação.`,
+      phone: "Contato será validado",
+      whatsapp: "#",
+      services,
+      imageUrl: "/placeholders/professional-photo.svg",
+      coverImageUrl: "/placeholders/clinic-cover.svg",
+    }));
+  }),
+];
+
+export const professionals: Professional[] = [...baseProfessionals, ...supplementalProfessionals];
+
+const baseOrganizations: Organization[] = [
   {
     slug: "clinica-demonstrativa-piumhi",
     name: "Clínica demonstrativa",
@@ -462,6 +493,79 @@ export const organizations: Organization[] = [
   {"slug": "hospital-nossa-senhora-do-brasil-bambui", "name": "Hospital Nossa Senhora do Brasil", "category": "Hospital", "city": "Bambuí", "address": "Endereço aguardando validação", "phone": "Contato aguardando validação", "summary": "Cadastro importado de fonte pública para validação editorial antes da publicação definitiva.", "services": ["Atendimento hospitalar", "Serviços de saúde"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
 
 ];
+
+const supplementalOrganizations: Organization[] = [
+  ...[
+    ["Capitólio", "capitolio"],
+    ["Pimenta", "pimenta"],
+    ["Arcos", "arcos"],
+    ["Campo Belo", "campo-belo"],
+    ["São Roque de Minas", "sao-roque-de-minas"],
+  ].flatMap(([city, slugCity]) => [
+    {
+      slug: `secretaria-municipal-de-saude-${slugCity}`,
+      name: `Secretaria Municipal de Saúde de ${city}`,
+      category: "Gestão pública de saúde",
+      city,
+      address: "Endereço aguardando validação",
+      phone: "Contato aguardando validação",
+      summary: "Cadastro institucional criado para organizar serviços e informações públicas de saúde do município antes da validação completa.",
+      services: ["Saúde pública", "Atenção básica", "Informação ao cidadão"],
+      logoUrl: "/placeholders/company-logo.svg",
+      coverImageUrl: "/placeholders/clinic-cover.svg",
+    },
+    {
+      slug: `unidade-basica-de-saude-${slugCity}`,
+      name: `Unidade Básica de Saúde — ${city}`,
+      category: "Clínica / atenção básica",
+      city,
+      address: "Unidade e endereço aguardando validação",
+      phone: "Contato aguardando validação",
+      summary: "Registro provisório para organizar a rede de atenção básica da cidade. Necessita confirmação de nome oficial, endereço e telefone.",
+      services: ["Atenção básica", "Prevenção", "Saúde da família"],
+      logoUrl: "/placeholders/company-logo.svg",
+      coverImageUrl: "/placeholders/clinic-cover.svg",
+    },
+    {
+      slug: `clinica-multiprofissional-demonstrativa-${slugCity}`,
+      name: `Clínica multiprofissional demonstrativa — ${city}`,
+      category: "Clínica multiprofissional",
+      city,
+      address: "Endereço profissional aguardando validação",
+      phone: "Contato aguardando validação",
+      summary: "Modelo comercial para clínicas, consultórios integrados e centros de especialidades da cidade.",
+      services: ["Consultas", "Atendimento multiprofissional", "Prevenção"],
+      logoUrl: "/placeholders/company-logo.svg",
+      coverImageUrl: "/placeholders/clinic-cover.svg",
+    },
+    {
+      slug: `laboratorio-demonstrativo-${slugCity}`,
+      name: `Laboratório demonstrativo — ${city}`,
+      category: "Laboratório",
+      city,
+      address: "Endereço comercial aguardando validação",
+      phone: "Contato aguardando validação",
+      summary: "Modelo comercial para laboratórios, coleta, exames e serviços de apoio diagnóstico.",
+      services: ["Exames laboratoriais", "Coleta", "Apoio diagnóstico"],
+      logoUrl: "/placeholders/company-logo.svg",
+      coverImageUrl: "/placeholders/clinic-cover.svg",
+    },
+    {
+      slug: `farmacia-demonstrativa-${slugCity}`,
+      name: `Farmácia demonstrativa — ${city}`,
+      category: "Farmácia",
+      city,
+      address: "Endereço comercial aguardando validação",
+      phone: "Contato aguardando validação",
+      summary: "Modelo comercial para farmácias, drogarias e serviços de orientação em saúde.",
+      services: ["Medicamentos", "Produtos de saúde", "Atenção farmacêutica"],
+      logoUrl: "/placeholders/pharmacy-logo.svg",
+      coverImageUrl: "/placeholders/clinic-cover.svg",
+    },
+  ]),
+];
+
+export const organizations: Organization[] = [...baseOrganizations, ...supplementalOrganizations];
 
 export const cities = ["Piumhi", "Capitólio", "Pimenta", "Arcos", "Campo Belo", "Bambuí", "São Roque de Minas"];
 export const professions = ["Médico", "Dentista", "Psicólogo", "Fisioterapeuta", "Nutricionista", "Fonoaudiólogo", "Enfermeiro", "Farmacêutico", "Educador físico"];
