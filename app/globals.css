@@ -1491,3 +1491,76 @@ h1,h2,h3,
 .lead-modal-card form button{
   color:#fff!important;
 }
+
+/* Remove orange/terracotta remnants from the entire interface */
+.eyebrow,
+.edition-tag,
+.section-kicker p,
+.section-kicker span,
+.brand small,
+.main-nav a:hover,
+.hero-footnote span,
+.doctor-card-head p,
+.business-head p,
+.directory-note span,
+.featured-directory-strip>div:first-child span,
+.sponsored-ribbon,
+.city-ad-feature>aside span,
+.city-media-strip span,
+.city-article-row span,
+.city-media-strip-compact span,
+.home-top-banner-copy span,
+.profile-clean-title p,
+.profile-clean-contact small,
+.city-professional-list span,
+.city-business-list span,
+.story-copy>span,
+.story-list small,
+.episode-list small,
+.profile-preview span,
+.magazine-card>div:last-child>span{
+  color:#0032dc!important;
+}
+.section-kicker span,
+.commercial-products article,
+.doctor-card-featured,
+.business-card-featured{
+  border-color:#d4ecff!important;
+}
+.announcement,
+.commercial-cta,
+.podcast-card,
+.lead-art,
+.portrait-2,
+.featured-directory-strip a:nth-child(3),
+.city-entry-grid button:hover,
+.city-entry-grid button.active{
+  background:#0032dc!important;
+}
+.lead-art,
+.mag-cover{
+  background:linear-gradient(155deg,#d4ecff 0 42%,#0096f2 42%)!important;
+}
+.doctor-card::before,
+.doctor-card-featured::before,
+.business-card-featured::before,
+.city-article-row article::before{
+  background:#0096f2!important;
+}
+.sponsored-ribbon,
+.status-pill.pending,
+.city-article-row span,
+.home-top-banner-copy span,
+.city-business-list span,
+.announcement-inner>span{
+  background:#d4ecff!important;
+  color:#0032dc!important;
+}
+.sound-bars,
+.podcast-card small,
+.podcast-card>p span{
+  color:#d4ecff!important;
+}
+.mag-cover>b em{
+  color:#0032dc!important;
+}
