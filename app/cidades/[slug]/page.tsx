@@ -107,13 +107,13 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           </div>
 
           <div className="city-local-grid">
-            <section>
+            <section className="city-professional-panel">
               <div className="city-block-head">
                 <p className="eyebrow">Profissionais</p>
                 <h2>Perfis locais</h2>
               </div>
               {localProfessionals.length ? (
-                <div className="city-mini-list">
+                <div className="city-mini-list city-professional-list">
                   {localProfessionals.slice(0, 4).map((item) => (
                     <Link href={`/profissionais/${item.slug}`} key={item.slug}>
                       <span><BadgeCheck size={13} /> {item.profession}</span>
@@ -132,13 +132,13 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               )}
             </section>
 
-            <section>
+            <section className="city-business-panel">
               <div className="city-block-head">
                 <p className="eyebrow">Empresas e serviços</p>
                 <h2>Estruturas locais</h2>
               </div>
               {localOrganizations.length ? (
-                <div className="city-mini-list">
+                <div className="city-mini-list city-business-list">
                   {localOrganizations.slice(0, 4).map((item) => (
                     <Link href={`/empresas?cidade=${cityQuery}`} key={item.slug}>
                       <span><Building2 size={13} /> {item.category}</span>
