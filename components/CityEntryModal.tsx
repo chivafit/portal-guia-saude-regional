@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BookOpen, Building2, MapPin, Search, Stethoscope, X } from "lucide-react";
+import { MapPin, Search, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cities } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
@@ -22,6 +22,7 @@ function cityFromCurrentUrl() {
 export function CityEntryModal() {
   const [open, setOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState("");
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const cityFromUrl = cityFromCurrentUrl();
@@ -72,41 +73,39 @@ export function CityEntryModal() {
 
   const selectedSlug = selectedCity ? citySlug(selectedCity) : "";
   const destination = selectedSlug ? `/cidades/${selectedSlug}` : "/buscar";
+  const visibleCities = cities.filter((city) => city.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")));
 
   return (
     <div className="city-entry-overlay" role="dialog" aria-modal="true" aria-labelledby="city-entry-title">
       <div className="city-entry-backdrop" onClick={dismiss} />
       <section className="city-entry-modal">
-        <button className="city-entry-close" type="button" onClick={dismiss} aria-label="Fechar seleção de cidade">
-          <X size={17} />
-        </button>
-        <div className="city-entry-copy">
-          <p className="eyebrow">Portal regional por cidade</p>
-          <h2 id="city-entry-title">Escolha sua cidade para abrir o portal local.</h2>
-          <p>Matérias, especialistas, empresas, podcast e revista passam a aparecer com recorte da cidade selecionada.</p>
-          <div className="city-entry-benefits" aria-label="O que muda ao escolher a cidade">
-            <span><Stethoscope size={15} /> Profissionais</span>
-            <span><Building2 size={15} /> Empresas</span>
-            <span><BookOpen size={15} /> Matérias locais</span>
+        <header className="city-entry-top">
+          <div>
+            <h2 id="city-entry-title">Onde você quer cuidar da sua saúde?</h2>
+            <p>Escolha sua cidade para começar</p>
           </div>
-        </div>
+          <button className="city-entry-close" type="button" onClick={dismiss} aria-label="Fechar seleção de cidade">
+            <X size={18} />
+          </button>
+        </header>
         <div className="city-entry-panel">
+          <label className="city-entry-search">
+            <Search size={18} />
+            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar cidade..." autoFocus />
+          </label>
           <div className="city-entry-grid">
-            {cities.map((city) => (
+            {visibleCities.map((city, index) => (
               <button type="button" key={city} onClick={() => chooseCity(city)} className={selectedCity === city ? "active" : ""}>
-                <MapPin size={15} />
+                <span className={`city-entry-image city-entry-image-${index % 7}`} />
                 <span>{city}</span>
+                <small><MapPin size={13} /> Abrir guia local</small>
               </button>
             ))}
+            {!visibleCities.length ? <p className="city-entry-empty">Nenhuma cidade encontrada.</p> : null}
           </div>
-          <div className="city-entry-actions">
-            <Link href={destination} onClick={openLocalPortal}>
-              {selectedCity ? `Abrir portal de ${selectedCity}` : "Ver portal geral"} <ArrowRight size={14} />
-            </Link>
-            <button type="button" onClick={dismiss}>
-              Entrar sem escolher <Search size={14} />
-            </button>
-          </div>
+          <Link className="city-entry-region-link" href={destination} onClick={openLocalPortal}>
+            {selectedCity ? `Abrir portal de ${selectedCity}` : "Continuar vendo toda a região"}
+          </Link>
         </div>
       </section>
     </div>
