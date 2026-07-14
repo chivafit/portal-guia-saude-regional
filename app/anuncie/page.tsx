@@ -1,0 +1,8 @@
+import Link from "next/link";
+import { AdSlot } from "@/components/AdSlot";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
+
+export default function AdvertisePage() {
+  return <><SiteHeader /><main><section className="advertise-hero"><div className="shell"><p className="eyebrow">Mídia regional integrada</p><h1>Sua marca presente onde a região busca saúde.</h1><p>Portal, revista, podcast e Instagram conectados em campanhas segmentadas e identificadas.</p><a href="https://wa.me/5537999474443" target="_blank" rel="noreferrer">Solicitar proposta</a></div></section><section className="section shell"><div className="section-heading"><div><p className="eyebrow">Inventário digital</p><h2>Formatos comerciais do portal</h2></div></div><div className="commercial-products"><article><span>01</span><h3>Perfil em destaque</h3><p>Presença completa, métricas e conteúdos relacionados, sempre identificada.</p></article><article><span>02</span><h3>Banner segmentado</h3><p>Campanhas por cidade, especialidade, categoria e período.</p></article><article><span>03</span><h3>Autoridade regional</h3><p>Perfil, matéria, podcast, Instagram e revista em uma campanha integrada.</p></article></div><AdSlot code="DEMONSTRACAO_COMERCIAL" /></section><section className="commercial-cta"><div className="shell commercial-grid"><div><p className="eyebrow">Fale com a RM</p><h2>Vamos desenhar a presença da sua marca.</h2></div><p>Formatos, períodos e segmentações definidos conforme os objetivos da campanha.</p><Link href="https://wa.me/5537999474443">Conversar pelo WhatsApp</Link></div></section></main><SiteFooter /></>;
+}
