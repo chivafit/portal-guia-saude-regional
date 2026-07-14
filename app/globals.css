@@ -565,3 +565,214 @@ h1,h2,h3,.brand span,.commercial-highlight-grid strong,.profession-card strong,.
     width:max-content;
   }
 }
+
+/* Professional profile: compact directory ficha, not a landing page */
+.profile-page-clean{
+  background:#f7fafb;
+}
+.profile-clean-wrap{
+  padding-top:34px;
+  padding-bottom:72px;
+}
+.profile-clean-back{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  margin-bottom:16px;
+  color:#647986;
+  font-size:.74rem;
+  font-weight:800;
+}
+.profile-clean-card{
+  display:grid;
+  grid-template-columns:116px minmax(0,1fr) 310px;
+  gap:22px;
+  align-items:stretch;
+  padding:22px;
+  border:1px solid #dfe8ed;
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 18px 48px rgba(31,51,66,.055);
+}
+.profile-clean-photo{
+  min-height:116px;
+  border:1px solid #dfe8ed;
+  border-radius:20px;
+  background-color:#eef5f7;
+  background-position:center;
+  background-size:cover;
+  overflow:hidden;
+}
+.profile-clean-photo span{
+  display:inline-flex;
+  margin:12px;
+  padding:5px 8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.82);
+  color:#315f7c;
+  font-size:.72rem;
+  font-weight:850;
+}
+.profile-clean-main{
+  min-width:0;
+}
+.profile-clean-title{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px 14px;
+  align-items:start;
+}
+.profile-clean-title p{
+  grid-column:1;
+  margin:0;
+  color:#d97842;
+  font-size:.68rem;
+  font-weight:850;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.profile-clean-title h1{
+  grid-column:1;
+  margin:0;
+  color:#24465b;
+  font-family:var(--font-editorial);
+  font-size:clamp(2rem,3.8vw,3.3rem);
+  font-weight:700;
+  line-height:.98;
+  letter-spacing:-.045em;
+}
+.profile-clean-title .status-pill{
+  grid-column:2;
+  grid-row:1/3;
+  align-self:start;
+  white-space:nowrap;
+}
+.profile-clean-summary{
+  max-width:780px;
+  margin:14px 0 0;
+  color:#657782;
+  font-size:.92rem;
+  line-height:1.58;
+}
+.profile-clean-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:16px;
+}
+.profile-clean-tags span{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:8px 10px;
+  border:1px solid #e2e9ed;
+  border-radius:999px;
+  background:#fbfdfe;
+  color:#49687a;
+  font-size:.72rem;
+  font-weight:750;
+}
+.profile-clean-contact{
+  padding:18px;
+  border:1px solid #e2e9ed;
+  border-radius:20px;
+  background:#fbfaf7;
+}
+.profile-clean-contact small{
+  color:#d97842;
+  font-size:.62rem;
+  font-weight:850;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+.profile-clean-contact strong{
+  display:block;
+  margin:8px 0 12px;
+  color:#24465b;
+  font-size:1rem;
+}
+.profile-clean-details{
+  display:grid;
+  grid-template-columns:1.15fr .95fr .9fr;
+  gap:14px;
+  margin-top:18px;
+}
+.profile-clean-details>article{
+  padding:20px;
+  border:1px solid #dfe8ed;
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 12px 34px rgba(31,51,66,.04);
+}
+.profile-clean-details h2{
+  margin:0 0 14px;
+  color:#24465b;
+  font-family:var(--font-sans)!important;
+  font-size:.95rem;
+  font-weight:850;
+  letter-spacing:-.02em;
+}
+.profile-clean-services{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.profile-clean-services span{
+  padding:8px 10px;
+  border-radius:999px;
+  background:#eef5f7;
+  color:#315f7c;
+  font-size:.72rem;
+  font-weight:800;
+}
+.profile-clean-location{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  color:#315f7c;
+}
+.profile-clean-location strong{
+  display:block;
+  color:#24465b;
+}
+.profile-clean-location span,
+.profile-clean-note p{
+  display:block;
+  margin:6px 0 0;
+  color:#71818b;
+  font-size:.78rem;
+  line-height:1.5;
+}
+@media(max-width:980px){
+  .profile-clean-card{
+    grid-template-columns:96px minmax(0,1fr);
+  }
+  .profile-clean-contact{
+    grid-column:1/-1;
+  }
+  .profile-clean-details{
+    grid-template-columns:1fr;
+  }
+}
+@media(max-width:640px){
+  .profile-clean-wrap{
+    padding-top:22px;
+    padding-bottom:54px;
+  }
+  .profile-clean-card{
+    grid-template-columns:1fr;
+    padding:16px;
+    border-radius:20px;
+  }
+  .profile-clean-photo{
+    min-height:180px;
+  }
+  .profile-clean-title{
+    grid-template-columns:1fr;
+  }
+  .profile-clean-title .status-pill{
+    grid-column:1;
+    grid-row:auto;
+    width:max-content;
+  }
+}
