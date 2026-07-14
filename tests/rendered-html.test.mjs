@@ -30,7 +30,7 @@ test("renders search, profile, companies and admin routes", async () => {
     ["/buscar?cidade=Piumhi", /Sem agendamento online/],
     ["/profissionais/perfil-demonstrativo-cardiologia-piumhi", /sem agendamento online/],
     ["/empresas", /Empresas e serviços/],
-    ["/admin", /Conteúdo, revista, podcast e mídia/],
+    ["/admin", /Conteúdo, diretório, revista, podcast e mídia/],
     ["/anuncie", /Mídia regional integrada/],
     ["/materias", /Informação para cuidar melhor/],
     ["/podcast", /Conversas que informam e aproximam/],

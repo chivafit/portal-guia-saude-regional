@@ -15,6 +15,13 @@
       "when": 1783991204364,
       "tag": "0001_lonely_red_shift",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1784031064776,
+      "tag": "0002_old_archangel",
+      "breakpoints": true
     }
   ]
 }
