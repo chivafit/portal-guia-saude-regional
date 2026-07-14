@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, Building2, MapPin, Megaphone, Stethoscope } from "lucide-react";
 import { useEffect, useState } from "react";
-import { cities } from "@/lib/data";
+import { cities, organizations, professionals } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
 
 const storageKey = "guia-saude:selected-city";
@@ -27,6 +27,8 @@ export function CityGateway() {
 
   const cityQuery = selectedCity ? `?cidade=${encodeURIComponent(selectedCity)}` : "";
   const selectedSlug = selectedCity ? citySlug(selectedCity) : "";
+  const localProfessionals = selectedCity ? professionals.filter((item) => item.city === selectedCity).length : professionals.length;
+  const localOrganizations = selectedCity ? organizations.filter((item) => item.city === selectedCity).length : organizations.length;
 
   return (
     <section className="shell city-gateway" aria-label="Selecionar cidade do portal">
@@ -48,6 +50,11 @@ export function CityGateway() {
           <Link href={`/buscar${cityQuery}`}><Stethoscope size={16} /> Especialistas <ArrowRight size={14} /></Link>
           <Link href={`/empresas${cityQuery}`}><Building2 size={16} /> Empresas <ArrowRight size={14} /></Link>
           <Link href={selectedSlug ? `/cidades/${selectedSlug}` : "/anuncie"}><Megaphone size={16} /> Marketing local <ArrowRight size={14} /></Link>
+        </div>
+        <div className="city-live-preview">
+          <div><strong>{localProfessionals}</strong><span>{selectedCity ? "especialistas no recorte local" : "especialistas na região"}</span></div>
+          <div><strong>{localOrganizations}</strong><span>{selectedCity ? "empresas e serviços locais" : "empresas e serviços"}</span></div>
+          <div><strong>{selectedCity ? "Local" : "Regional"}</strong><span>mídia segmentada para anunciantes</span></div>
         </div>
       </div>
     </section>

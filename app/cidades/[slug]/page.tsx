@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowRight, BadgeCheck, Building2, Megaphone, Newspaper, Stethoscope } from "lucide-react";
 import { AdSlot } from "@/components/AdSlot";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -30,6 +31,12 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
   const localOrganizations = organizationSource.filter((item) => item.city === city.name);
   const localArticles = articles.filter((item) => item.city === city.name || item.city === "Regional");
   const cityQuery = encodeURIComponent(city.name);
+  const commercialSlots = [
+    ["Banner topo", "Presença principal no miniportal da cidade"],
+    ["Especialista em destaque", "Card premium dentro da busca local"],
+    ["Empresa apoiadora", "Clínicas, farmácias, laboratórios e serviços"],
+    ["Matéria patrocinada", "Conteúdo editorial conectado à cidade"],
+  ];
 
   return (
     <>
@@ -42,8 +49,9 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               <h1>Saúde em {city.name}.</h1>
               <p>{city.intro}</p>
               <div className="city-hero-actions">
-                <Link href={`/buscar?cidade=${cityQuery}`}>Buscar profissionais</Link>
-                <Link href={`/empresas?cidade=${cityQuery}`}>Ver empresas</Link>
+                <Link href={`/buscar?cidade=${cityQuery}`}><Stethoscope size={16} /> Buscar profissionais</Link>
+                <Link href={`/empresas?cidade=${cityQuery}`}><Building2 size={16} /> Ver empresas</Link>
+                <Link href="/anuncie"><Megaphone size={16} /> Anunciar em {city.name}</Link>
               </div>
             </div>
             <aside className="city-local-card">
@@ -62,6 +70,21 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           </div>
 
           <AdSlot code={cityAdCode(city.name)} />
+
+          <div className="city-market-strip">
+            <div>
+              <p className="eyebrow">Marketing local</p>
+              <h2>Espaços comerciais para marcas de {city.name}.</h2>
+            </div>
+            <div className="city-market-products">
+              {commercialSlots.map(([title, text]) => (
+                <Link href="/anuncie" key={title}>
+                  <span>{title}</span>
+                  <small>{text}</small>
+                </Link>
+              ))}
+            </div>
+          </div>
 
           <div className="content-title city-content-title">
             <div>
@@ -89,7 +112,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 <div className="city-mini-list">
                   {localProfessionals.map((item) => (
                     <Link href={`/profissionais/${item.slug}`} key={item.slug}>
-                      <span>{item.profession}</span>
+                      <span><BadgeCheck size={13} /> {item.profession}</span>
                       <strong>{item.specialty}</strong>
                       <small>{item.registration}</small>
                     </Link>
@@ -113,7 +136,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 <div className="city-mini-list">
                   {localOrganizations.map((item) => (
                     <Link href={`/empresas?cidade=${cityQuery}`} key={item.slug}>
-                      <span>{item.category}</span>
+                      <span><Building2 size={13} /> {item.category}</span>
                       <strong>{item.name}</strong>
                       <small>{item.services.slice(0, 2).join(" · ")}</small>
                     </Link>
@@ -132,7 +155,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           <div className="local-content city-editorial-panel">
             <div>
               <p className="eyebrow">Conteúdo local</p>
-              <h2>Informação conectada à realidade de {city.name}.</h2>
+              <h2><Newspaper size={30} /> Informação conectada à realidade de {city.name}.</h2>
               <p>Esta área reunirá notícias, campanhas, eventos, entrevistas e orientações relacionadas à saúde no município.</p>
               <div className="city-article-row">
                 {localArticles.slice(0, 3).map((article) => (
@@ -148,7 +171,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               <small>QUER PARTICIPAR?</small>
               <strong>Profissionais e empresas de {city.name}</strong>
               <p>Solicite inclusão no guia, envie uma pauta ou consulte formatos de banner local.</p>
-              <Link href="/inclusao">Falar com o Guia Saúde →</Link>
+              <Link href="/inclusao">Falar com o Guia Saúde <ArrowRight size={14} /></Link>
             </aside>
           </div>
         </section>
