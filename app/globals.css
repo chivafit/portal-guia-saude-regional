@@ -974,3 +974,56 @@ h1,h2,h3,.brand span,.commercial-highlight-grid strong,.profession-card strong,.
     min-height:180px;
   }
 }
+
+/* City entry modal: image-first cards like a destination selector */
+.city-entry-modal{
+  width:min(560px,calc(100vw - 28px))!important;
+}
+.city-entry-panel{
+  padding:18px!important;
+}
+.city-entry-search,
+.city-entry-region-link,
+.city-entry-empty{
+  display:none!important;
+}
+.city-entry-grid{
+  gap:16px!important;
+}
+.city-entry-grid button{
+  min-height:158px!important;
+  border-radius:20px!important;
+}
+.city-entry-grid button>span:last-of-type{
+  max-width:90%;
+  text-align:center;
+  color:#fff!important;
+  font-size:clamp(1.55rem,5vw,2.35rem)!important;
+  letter-spacing:.2em!important;
+}
+.city-entry-grid button small{
+  left:18px!important;
+  bottom:15px!important;
+  background:rgba(8,24,33,.42)!important;
+  backdrop-filter:blur(8px);
+}
+.city-entry-image{
+  filter:saturate(1.08) contrast(1.08)!important;
+}
+.city-entry-image::after{
+  background:linear-gradient(90deg,rgba(8,24,33,.42),rgba(8,24,33,.08),rgba(8,24,33,.45)),linear-gradient(180deg,rgba(8,24,33,.08),rgba(8,24,33,.38))!important;
+}
+@media(max-width:560px){
+  .city-entry-panel{
+    padding:14px!important;
+  }
+  .city-entry-grid{
+    gap:12px!important;
+  }
+  .city-entry-grid button{
+    min-height:128px!important;
+  }
+  .city-entry-grid button>span:last-of-type{
+    font-size:1.42rem!important;
+  }
+}

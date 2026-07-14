@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { MapPin, Search, X } from "lucide-react";
+import { MapPin, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cities } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
@@ -24,7 +23,6 @@ function cityFromCurrentUrl() {
 export function CityEntryModal() {
   const [open, setOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState("");
-  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const cityFromUrl = cityFromCurrentUrl();
@@ -75,16 +73,7 @@ export function CityEntryModal() {
     setOpen(false);
   }
 
-  function openLocalPortal() {
-    if (selectedCity) chooseCity(selectedCity);
-    dismiss();
-  }
-
   if (!open) return null;
-
-  const selectedSlug = selectedCity ? citySlug(selectedCity) : "";
-  const destination = selectedSlug ? `/cidades/${selectedSlug}` : "/buscar";
-  const visibleCities = cities.filter((city) => city.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")));
 
   return (
     <div className="city-entry-overlay" role="dialog" aria-modal="true" aria-labelledby="city-entry-title">
@@ -100,23 +89,15 @@ export function CityEntryModal() {
           </button>
         </header>
         <div className="city-entry-panel">
-          <label className="city-entry-search">
-            <Search size={18} />
-            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar cidade..." autoFocus />
-          </label>
           <div className="city-entry-grid">
-            {visibleCities.map((city, index) => (
+            {cities.map((city) => (
               <button type="button" key={city} onClick={() => chooseCity(city)} className={selectedCity === city ? "active" : ""}>
-                <span className={`city-entry-image city-entry-image-${index % 7}`} />
+                <span className="city-entry-image" style={{ backgroundImage: `linear-gradient(rgba(16,42,58,.08),rgba(16,42,58,.36)),url('/ads/cidade-${citySlug(city)}.svg')` }} />
                 <span>{city}</span>
                 <small><MapPin size={13} /> Abrir guia local</small>
               </button>
             ))}
-            {!visibleCities.length ? <p className="city-entry-empty">Nenhuma cidade encontrada.</p> : null}
           </div>
-          <Link className="city-entry-region-link" href={destination} onClick={openLocalPortal}>
-            {selectedCity ? `Abrir portal de ${selectedCity}` : "Continuar vendo toda a região"}
-          </Link>
         </div>
       </section>
     </div>
