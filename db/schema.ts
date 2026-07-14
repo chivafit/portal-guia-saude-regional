@@ -77,3 +77,19 @@ export const auditLog = sqliteTable("audit_log", {
   detail: text("detail"),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
+
+export const contentItems = sqliteTable("content_items", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  type: text("type").notNull(),
+  slug: text("slug").notNull().unique(),
+  title: text("title").notNull(),
+  summary: text("summary"),
+  body: text("body"),
+  status: text("status").notNull().default("draft"),
+  citySlug: text("city_slug"),
+  metadata: text("metadata"),
+  authorEmail: text("author_email"),
+  publishedAt: text("published_at"),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});

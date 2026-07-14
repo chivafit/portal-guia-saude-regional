@@ -8,6 +8,13 @@
       "when": 1783988122226,
       "tag": "0000_regular_maddog",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1783991204364,
+      "tag": "0001_lonely_red_shift",
+      "breakpoints": true
     }
   ]
 }
