@@ -1170,3 +1170,264 @@ h1,h2,h3,.brand span,.commercial-highlight-grid strong,.profession-card strong,.
 .city-entry-image{
   background-image:linear-gradient(rgba(16,42,58,.08),rgba(16,42,58,.36)),url('/generated/regional-city-landscape.png')!important;
 }
+
+/* Lamab-inspired palette rollout */
+:root{
+  --persian-blue:#0032dc;
+  --sky-blue:#0096f2;
+  --breeze-blue:#d4ecff;
+  --black:#000000;
+  --white:#ffffff;
+  --brand:#0032dc;
+  --brand-dark:#0026a8;
+  --accent:#0096f2;
+  --paper:#ffffff;
+  --surface:#ffffff;
+  --surface-soft:#f4faff;
+  --text:#000000;
+  --muted:#4b5d70;
+  --stroke:#d4ecff;
+  --forest:#0032dc;
+  --forest2:#000000;
+  --sage:#0096f2;
+  --lime:#0096f2;
+  --cream:#d4ecff;
+  --terracotta:#0096f2;
+  --ink:#000000;
+  --line:rgba(0,50,220,.16);
+  --portal-navy:#0032dc;
+  --portal-line:#d4ecff;
+  --portal-paper:#ffffff;
+  --portal-muted:#4b5d70;
+  --portal-ink:#000000;
+  --shadow-soft:0 16px 44px rgba(0,50,220,.06);
+  --shadow-card:0 24px 70px rgba(0,50,220,.09);
+}
+body{
+  background:#fff!important;
+  color:#000!important;
+}
+.topline,
+.site-footer,
+.directory-section,
+.editorial-feature,
+.podcast-card,
+.city-entry-top,
+.city-head-banner .ad-slot,
+.city-media-strip-compact article:nth-child(2),
+.city-portal-hero{
+  background:#0032dc!important;
+  color:#fff!important;
+}
+.site-header{
+  background:rgba(255,255,255,.94)!important;
+  border-color:#d4ecff!important;
+}
+.brand,
+.brand span,
+.main-nav a,
+.city-selector>button,
+.admin-link,
+h1,h2,h3,
+.hero h1,
+.directory-hero-refined h1,
+.commercial-highlights-head h2,
+.featured-main h2,
+.section-heading h2,
+.city-block-head h2,
+.doctor-card h2,
+.business-head h2,
+.profile-clean-title h1,
+.profile-clean-details h2{
+  color:#000!important;
+}
+.brand small,
+.eyebrow,
+.edition-tag,
+.section-kicker p,
+.section-kicker span,
+.doctor-card-head p,
+.business-head p,
+.city-article-row span,
+.city-media-strip-compact span,
+.home-top-banner-copy span,
+.profile-clean-title p,
+.profile-clean-contact small,
+.directory-hero-refined-head>div span,
+.city-professional-list span,
+.city-business-list span{
+  color:#0032dc!important;
+}
+.hero h1 em,
+.directory-title h2 em,
+.city-intro h2 em{
+  color:#0096f2!important;
+}
+.main-nav a:hover,
+.profile-preview a,
+.directory-title a,
+.featured-main a,
+.featured-side a,
+.city-article-row article a,
+.city-mini-list em,
+.city-media-strip-compact a,
+.result-toolbar a,
+.profile-clean-back,
+.profile-clean-location,
+.outline-link{
+  color:#0032dc!important;
+}
+.portal-search button,
+.filters button,
+.primary-action,
+.admin-link:hover,
+.city-gateway-primary,
+.doctor-side .contact-reveal>button,
+.contact-reveal>button,
+.revealed-contact a,
+.doctor-side>a:hover,
+.business-side a,
+.home-top-banner-copy a,
+.city-search-panel button,
+.profile-clean-services span,
+.lead-modal-card form button{
+  background:#0032dc!important;
+  color:#fff!important;
+  border-color:#0032dc!important;
+}
+.home-top-banner-copy a:nth-child(2),
+.doctor-side>a,
+.result-toolbar a,
+.outline-link,
+.admin-link,
+.city-selector>button,
+.filter-pills span,
+.doctor-pills span,
+.profile-clean-tags span,
+.status-pill,
+.city-hero-actions a,
+.profile-clean-services span{
+  border-color:#d4ecff!important;
+}
+.portal-search,
+.directory-search-card,
+.city-search-panel,
+.doctor-card,
+.business-card,
+.directory-filters,
+.premium-result-toolbar,
+.profile-clean-card,
+.profile-clean-details>article,
+.home-top-banner,
+.featured-main,
+.featured-side a,
+.commercial-highlight-grid,
+.commercial-highlight-grid a,
+.profession-grid,
+.profession-card,
+.city-local-grid>section,
+.city-article-row article,
+.city-media-strip-compact article,
+.profile-clean-contact,
+.lead-modal-card{
+  border-color:#d4ecff!important;
+  background:#fff!important;
+}
+.surface,
+.directory-hero,
+.directory-hero-refined,
+.company-directory-hero,
+.content-hero,
+.page-intro,
+.media-section,
+.city-business-panel,
+.city-professional-panel,
+.doctor-side,
+.business-side,
+.profile-clean-contact,
+.city-media-strip-compact article:nth-child(1),
+.city-media-strip-compact article:nth-child(3){
+  background:#f4faff!important;
+}
+.status-pill.verified{
+  background:#d4ecff!important;
+  color:#0032dc!important;
+}
+.status-pill.pending,
+.sponsored-ribbon{
+  background:#d4ecff!important;
+  color:#0032dc!important;
+}
+.doctor-pills span,
+.filter-pills span,
+.city-mini-list span,
+.profile-clean-tags span,
+.profile-clean-services span,
+.city-media-strip-compact article svg,
+.profession-icon{
+  background:#d4ecff!important;
+  color:#0032dc!important;
+}
+.city-entry-backdrop{
+  background:rgba(0,0,0,.58)!important;
+}
+.city-entry-grid button,
+.city-entry-grid button.active,
+.city-entry-grid button:hover{
+  background:#0032dc!important;
+}
+.city-entry-close{
+  background:rgba(255,255,255,.18)!important;
+  color:#fff!important;
+}
+.hero-shade{
+  background:linear-gradient(90deg,#fff 0%,#fff 39%,rgba(255,255,255,.82) 55%,rgba(255,255,255,.08) 84%)!important;
+}
+.city-portal-hero-shade{
+  background:linear-gradient(180deg,rgba(0,50,220,.38),rgba(0,0,0,.42)),linear-gradient(90deg,rgba(0,50,220,.62),rgba(0,50,220,.12),rgba(0,0,0,.5))!important;
+}
+.city-landing-copy h1,
+.city-landing-copy p,
+.city-landing-copy .eyebrow,
+.directory-section h2,
+.directory-section .section-kicker p,
+.directory-section .section-kicker span,
+.editorial-feature h2,
+.editorial-feature h3,
+.editorial-feature .section-kicker p,
+.editorial-feature .section-kicker span,
+.podcast-card h2,
+.podcast-card p,
+.podcast-card small,
+.site-footer,
+.site-footer a,
+.site-footer p,
+.site-footer span,
+.city-head-banner .ad-slot strong,
+.city-head-banner .ad-slot span,
+.city-head-banner .ad-slot small,
+.city-media-strip-compact article:nth-child(2) span,
+.city-media-strip-compact article:nth-child(2) strong,
+.city-media-strip-compact article:nth-child(2) p,
+.city-media-strip-compact article:nth-child(2) a{
+  color:#fff!important;
+}
+.lead-art,
+.mag-cover{
+  background:linear-gradient(155deg,#d4ecff 0 42%,#0096f2 42%)!important;
+  color:#000!important;
+}
+.magazine-card,
+.profile-preview{
+  background:#0032dc!important;
+  color:#fff!important;
+}
+.magazine-card h2,
+.magazine-card p,
+.magazine-card span,
+.profile-preview h3,
+.profile-preview p,
+.profile-preview span,
+.profile-preview a{
+  color:#fff!important;
+}
