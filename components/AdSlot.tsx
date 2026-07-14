@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { activeCampaign } from "@/lib/campaigns";
 
 export async function AdSlot({ code, compact = false }: { code: string; compact?: boolean }) {
@@ -8,7 +9,7 @@ export async function AdSlot({ code, compact = false }: { code: string; compact?
         <span>PUBLICIDADE</span>
         <strong>{campaign.name}</strong>
         <small>{campaign.advertiserName} · {code}</small>
-        <a href={campaign.destinationUrl} target="_blank" rel="noreferrer">Conhecer campanha →</a>
+        <a href={campaign.destinationUrl} target="_blank" rel="noreferrer">Conhecer campanha <ArrowRight size={14} /></a>
       </aside>
     );
   }
