@@ -8,6 +8,8 @@ import { citySlug } from "@/lib/city-utils";
 
 const storageKey = "guia-saude:selected-city";
 const modalSeenKey = "guia-saude:city-entry-seen";
+const sessionSeenKey = "guia-saude:city-entry-session-seen";
+const openEventName = "guia-saude:open-city-entry";
 
 function cityFromCurrentUrl() {
   if (typeof window === "undefined") return "";
@@ -27,19 +29,26 @@ export function CityEntryModal() {
   useEffect(() => {
     const cityFromUrl = cityFromCurrentUrl();
     const savedCity = window.localStorage.getItem(storageKey) || "";
-    const hasSeen = window.localStorage.getItem(modalSeenKey) === "1";
+    const hasSeenThisSession = window.sessionStorage.getItem(sessionSeenKey) === "1";
     const initialCity = cityFromUrl || savedCity;
     queueMicrotask(() => setSelectedCity(initialCity));
     if (cityFromUrl) {
       window.localStorage.setItem(storageKey, cityFromUrl);
       window.localStorage.setItem(modalSeenKey, "1");
+      window.sessionStorage.setItem(sessionSeenKey, "1");
       window.dispatchEvent(new CustomEvent("guia-saude:city-change", { detail: cityFromUrl }));
       return;
     }
-    if (!hasSeen && !savedCity) {
+    if (!hasSeenThisSession) {
       const timer = window.setTimeout(() => setOpen(true), 450);
       return () => window.clearTimeout(timer);
     }
+  }, []);
+
+  useEffect(() => {
+    const handleOpen = () => setOpen(true);
+    window.addEventListener(openEventName, handleOpen);
+    return () => window.removeEventListener(openEventName, handleOpen);
   }, []);
 
   useEffect(() => {
@@ -55,12 +64,14 @@ export function CityEntryModal() {
     setSelectedCity(city);
     window.localStorage.setItem(storageKey, city);
     window.localStorage.setItem(modalSeenKey, "1");
+    window.sessionStorage.setItem(sessionSeenKey, "1");
     window.dispatchEvent(new CustomEvent("guia-saude:city-change", { detail: city }));
     window.location.assign(`/cidades/${citySlug(city)}`);
   }
 
   function dismiss() {
     window.localStorage.setItem(modalSeenKey, "1");
+    window.sessionStorage.setItem(sessionSeenKey, "1");
     setOpen(false);
   }
 

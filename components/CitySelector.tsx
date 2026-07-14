@@ -8,6 +8,7 @@ import { citySlug } from "@/lib/city-utils";
 
 const storageKey = "guia-saude:selected-city";
 const modalSeenKey = "guia-saude:city-entry-seen";
+const openEventName = "guia-saude:open-city-entry";
 
 function currentCityFromUrl() {
   if (typeof window === "undefined") return "";
@@ -40,7 +41,7 @@ export function CitySelector() {
 
   return (
     <div className="city-selector">
-      <button type="button" aria-label="Selecionar cidade">
+      <button type="button" aria-label="Selecionar cidade" onClick={() => window.dispatchEvent(new CustomEvent(openEventName))}>
         <MapPin size={15} />
         <span>{selectedCity || "Toda a região"}</span>
         <ChevronDown size={14} />
