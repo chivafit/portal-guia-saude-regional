@@ -32,6 +32,23 @@ export type Organization = {
 // Dados exclusivamente demonstrativos. Não representam pessoas reais.
 const baseProfessionals: Professional[] = [
   {
+    slug: "dra-helena-martins-cardiologia-piumhi",
+    name: "Dra. Helena Martins",
+    profession: "Médico",
+    specialty: "Cardiologia",
+    city: "Piumhi",
+    organization: "Clínica Coração da Serra",
+    registration: "CRM-MG 000000 · RQE 00000",
+    verified: true,
+    summary: "Cardiologista fictícia cadastrada para demonstração do portal. Perfil completo com apresentação profissional, áreas de atuação, local de atendimento, contato e imagens substituíveis.",
+    phone: "(37) 99999-0000",
+    whatsapp: "https://wa.me/5537999990000",
+    services: ["Consulta cardiológica", "Check-up preventivo", "Hipertensão", "Risco cardiovascular", "Acompanhamento clínico"],
+    imageUrl: "/placeholders/professional-photo.svg",
+    coverImageUrl: "/placeholders/clinic-cover.svg",
+    logoUrl: "/placeholders/company-logo.svg",
+  },
+  {
     slug: "perfil-demonstrativo-cardiologia-piumhi",
     name: "Perfil demonstrativo",
     profession: "Médico",
