@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const siteUrl = "https://guia-saude-regional.iararodriguesimih.chatgpt.site";
 export const siteName = "Guia Saúde";
-export const defaultDescription = "Portal regional de saúde com profissionais, empresas, matérias, podcast, revista digital e mídia paga no Centro-Oeste de Minas.";
+export const defaultDescription = "Portal regional de saúde com guias por cidade, profissionais, empresas, matérias, podcast e revista no Centro-Oeste de Minas.";
 
 export function pageMetadata(title: string, description: string, path = "/"): Metadata {
   const url = `${siteUrl}${path}`;

@@ -1,28 +1,19 @@
 import Link from "next/link";
-import { Activity, Apple, ArrowRight, ArrowUpRight, BookOpen, Brain, Building2, Dumbbell, Ear, HeartPulse, MapPin, Megaphone, Mic, Play, Smile, Stethoscope, Syringe } from "lucide-react";
+import { Activity, Apple, ArrowRight, ArrowUpRight, BookOpen, Brain, Building2, Dumbbell, Ear, HeartPulse, MapPin, Mic, Newspaper, Play, Smile, Stethoscope, Syringe } from "lucide-react";
 import { SearchForm } from "@/components/SearchForm";
 import { CityGateway } from "@/components/CityGateway";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { articles, cities, professions, professionals } from "@/lib/data";
+import { articles, professions, professionals } from "@/lib/data";
 import { publishedProfessionals } from "@/lib/directory";
-import { citySlug } from "@/lib/city-utils";
 
 const professionIcons = [Stethoscope, Smile, Brain, Activity, Apple, Ear, Syringe, HeartPulse, Dumbbell];
-const adFormats = [
-  { title: "Banner topo", place: "Home + páginas principais", code: "970 × 250", image: "/ads/banner-topo.svg" },
-  { title: "Banner por cidade", place: "Páginas locais", code: "Cidade patrocinada", image: "/ads/banner-cidade.svg" },
-  { title: "Perfil em destaque", place: "Busca e diretório", code: "Card premium", image: "/ads/perfil-destaque.svg" },
-  { title: "Matéria patrocinada", place: "Conteúdo editorial", code: "Publieditorial", image: "/ads/materia-patrocinada.svg" },
-  { title: "Podcast apoiado", place: "Conexão Saúde", code: "Cota de apoio", image: "/ads/podcast-apoiado.svg" },
-  { title: "Revista impressa", place: "Edição física + portal", code: "Página de marca", image: "/ads/revista-digital.svg" },
-];
-const commercialHighlights = [
-  { icon: Megaphone, title: "Banner local", text: "Cotas por cidade para marcas que querem presença direta no portal.", href: "/anuncie" },
-  { icon: Stethoscope, title: "Profissional em destaque", text: "Mais visibilidade na busca e nos recortes editoriais do guia.", href: "/buscar" },
-  { icon: Building2, title: "Empresa em destaque", text: "Clínicas, farmácias, laboratórios e serviços com presença premium.", href: "/empresas" },
-  { icon: BookOpen, title: "Revista impressa", text: "Presença em edição física com extensão para o portal.", href: "/revista" },
-  { icon: Mic, title: "Podcast apoiado", text: "Cota de apoio para episódios, cortes e distribuição social.", href: "/podcast" },
+const localGuideHighlights = [
+  { icon: Newspaper, title: "Matérias da cidade", text: "Conteúdos de saúde, prevenção, campanhas e entrevistas com recorte local.", href: "/materias" },
+  { icon: Stethoscope, title: "Profissionais", text: "Busca objetiva por especialidade, cidade e área de atendimento.", href: "/buscar" },
+  { icon: Building2, title: "Empresas e serviços", text: "Clínicas, farmácias, laboratórios, óticas e estruturas da rede local.", href: "/empresas" },
+  { icon: Mic, title: "Podcast", text: "Conversas e episódios ligados aos temas de saúde da região.", href: "/podcast" },
+  { icon: BookOpen, title: "Revista", text: "Conteúdo impresso com continuidade no portal digital.", href: "/revista" },
 ];
 
 export default async function Home() {
@@ -37,7 +28,7 @@ export default async function Home() {
           <div className="shell hero-content">
             <p className="edition-tag">Portal Guia Saúde Regional</p>
             <h1>Encontre saúde<br />pela sua <em>cidade.</em></h1>
-            <p className="hero-intro">Um portal editorial para consultar especialistas, clínicas, farmácias, serviços, matérias, podcast e revista em uma experiência regional objetiva.</p>
+            <p className="hero-intro">Selecione sua cidade e acesse um guia local com matérias, profissionais, empresas de saúde, podcast, revista e serviços próximos.</p>
             <SearchForm />
             <div className="hero-footnote"><MapPin size={14} /> Selecione a cidade e veja o portal local com profissionais, empresas e mídia regional.</div>
           </div>
@@ -46,15 +37,15 @@ export default async function Home() {
         <CityGateway />
 
         <section className="section shell commercial-highlights compact-home-section">
-          <div className="section-kicker"><span>01</span><p>Destaques da região</p></div>
+          <div className="section-kicker"><span>01</span><p>Guia local</p></div>
           <div className="commercial-highlights-head">
-            <h2>Publicidade com função clara dentro do portal.</h2>
-            <p>Espaços pensados para gerar presença, reputação e descoberta — sem atrapalhar a navegação de quem procura saúde.</p>
+            <h2>Depois da cidade, o portal vira um guia de saúde local.</h2>
+            <p>Matérias, busca, profissionais, empresas, podcast e revista aparecem organizados para a realidade de cada município.</p>
           </div>
           <div className="commercial-highlight-grid">
-            {commercialHighlights.map((item) => {
+            {localGuideHighlights.map((item) => {
               const Icon = item.icon;
-              return <Link href={item.href} key={item.title}><Icon size={21} /><strong>{item.title}</strong><p>{item.text}</p><span>Conhecer formato <ArrowRight size={13} /></span></Link>;
+              return <Link href={item.href} key={item.title}><Icon size={21} /><strong>{item.title}</strong><p>{item.text}</p><span>Acessar <ArrowRight size={13} /></span></Link>;
             })}
           </div>
         </section>
@@ -74,7 +65,7 @@ export default async function Home() {
             <div className="featured-side">
               <Link href="/podcast"><Mic size={18} /><span>Podcast</span><strong>Conversas com profissionais da região.</strong></Link>
               <Link href="/revista"><BookOpen size={18} /><span>Revista impressa</span><strong>Edições, entrevistas e histórias locais.</strong></Link>
-              <Link href="/anuncie"><Megaphone size={18} /><span>Mídia regional</span><strong>Banners e campanhas com segmentação.</strong></Link>
+              <Link href="/buscar"><Stethoscope size={18} /><span>Guia local</span><strong>Profissionais e serviços por cidade.</strong></Link>
             </div>
           </div>
         </section>
@@ -110,12 +101,6 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="section shell city-section compact-home-section">
-          <div className="section-kicker"><span>05</span><p>Saúde feita de proximidade</p></div>
-          <div className="city-intro"><h2>Sete cidades.<br /><em>Uma região conectada.</em></h2><p>Conheça o ecossistema de saúde de cada município: profissionais, serviços, notícias e oportunidades.</p></div>
-          <div className="city-grid">{cities.map((city, i) => <Link key={city} href={`/cidades/${citySlug(city)}`}><span>0{i+1}</span><strong>{city}</strong><p>Guia local em construção</p><small>Explorar a cidade <ArrowUpRight size={13} /></small></Link>)}</div>
-        </section>
-
         <section className="directory-section compact-home-section">
           <div className="shell">
             <div className="section-kicker light"><span>06</span><p>Profissionais perto de você</p></div>
@@ -131,23 +116,6 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="section shell media-marketplace compact-home-section">
-          <div className="marketplace-copy">
-            <p className="eyebrow">Espaços para anunciantes</p>
-            <h2>Vitrine comercial pronta para apresentar e vender.</h2>
-            <p>Modelos visuais de mídia para demonstrar formatos, posições e possibilidades de presença dentro do portal.</p>
-          </div>
-          <div className="ad-showcase-grid">
-            {adFormats.map((format, index) => (
-              <article className={`ad-showcase-card ad-showcase-${index + 1}`} style={{ backgroundImage: `url(${format.image})` }} key={format.title}>
-                <span>PUBLICIDADE</span>
-                <strong>{format.title}</strong>
-                <p>{format.place}</p>
-                <small>{format.code}</small>
-              </article>
-            ))}
-          </div>
-        </section>
       </main>
       <SiteFooter />
     </>

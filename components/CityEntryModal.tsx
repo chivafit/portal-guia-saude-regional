@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Building2, MapPin, Megaphone, Search, Stethoscope, X } from "lucide-react";
+import { ArrowRight, BookOpen, Building2, MapPin, Search, Stethoscope, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cities } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
@@ -83,11 +83,11 @@ export function CityEntryModal() {
         <div className="city-entry-copy">
           <p className="eyebrow">Portal regional por cidade</p>
           <h2 id="city-entry-title">Escolha sua cidade para abrir o portal local.</h2>
-          <p>Especialistas, empresas, matérias e publicidade passam a aparecer com recorte da cidade selecionada.</p>
+          <p>Matérias, especialistas, empresas, podcast e revista passam a aparecer com recorte da cidade selecionada.</p>
           <div className="city-entry-benefits" aria-label="O que muda ao escolher a cidade">
             <span><Stethoscope size={15} /> Profissionais</span>
             <span><Building2 size={15} /> Empresas</span>
-            <span><Megaphone size={15} /> Banners locais</span>
+            <span><BookOpen size={15} /> Matérias locais</span>
           </div>
         </div>
         <div className="city-entry-panel">

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Building2, MapPin, Megaphone, Search, Stethoscope } from "lucide-react";
+import { ArrowRight, BookOpen, Building2, MapPin, Search, Stethoscope } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cities, organizations, professionals } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
@@ -37,7 +37,7 @@ export function CityGateway() {
       <div className="city-gateway-copy">
         <p className="eyebrow">Portal por cidade</p>
         <h2>{selectedCity ? `Portal de saúde em ${selectedCity}` : "Comece pela sua cidade."}</h2>
-        <p>Selecione o município para ver especialistas, empresas, conteúdo e publicidade com recorte local.</p>
+        <p>Selecione o município para ver matérias, especialistas, empresas, podcast, revista e serviços locais.</p>
         <Link className="city-gateway-primary" href={`/buscar${cityQuery}`}><Search size={16} /> Buscar agora <ArrowRight size={14} /></Link>
       </div>
       <div className="city-gateway-panel">
@@ -52,12 +52,12 @@ export function CityGateway() {
         <div className="city-gateway-actions">
           <Link href={`/buscar${cityQuery}`}><Stethoscope size={16} /> Especialistas <ArrowRight size={14} /></Link>
           <Link href={`/empresas${cityQuery}`}><Building2 size={16} /> Empresas <ArrowRight size={14} /></Link>
-          <Link href={selectedSlug ? `/cidades/${selectedSlug}` : "/anuncie"}><Megaphone size={16} /> Marketing local <ArrowRight size={14} /></Link>
+          <Link href={selectedSlug ? `/cidades/${selectedSlug}` : "/materias"}><BookOpen size={16} /> Guia local <ArrowRight size={14} /></Link>
         </div>
         <div className="city-live-preview">
           <div><strong>{localProfessionals}</strong><span>{selectedCity ? "especialistas no recorte local" : "especialistas na região"}</span></div>
           <div><strong>{localOrganizations}</strong><span>{selectedCity ? "empresas e serviços locais" : "empresas e serviços"}</span></div>
-          <div><strong>{selectedCity ? "Local" : "Regional"}</strong><span>mídia segmentada para anunciantes</span></div>
+          <div><strong>{selectedCity ? "Local" : "Regional"}</strong><span>matérias, podcast e revista</span></div>
         </div>
       </div>
     </section>

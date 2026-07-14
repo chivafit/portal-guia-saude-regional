@@ -23,7 +23,7 @@ test("renders the regional portal home", async () => {
   assert.match(html, /Encontre saúde/);
   assert.match(html, /Portal por cidade/);
   assert.match(html, /Conexão Saúde/);
-  assert.match(html, /PUBLICIDADE/);
+  assert.match(html, /guia local/i);
 });
 
 test("renders search, profile, companies and admin routes", async () => {
@@ -36,7 +36,7 @@ test("renders search, profile, companies and admin routes", async () => {
     ["/materias", /Informação para cuidar melhor/],
     ["/podcast", /Conversas que informam e aproximam/],
     ["/revista", /Histórias que circulam/],
-    ["/cidades/piumhi", /Profissionais, clínicas, serviços/],
+    ["/cidades/piumhi", /Matérias da cidade/],
     ["/sobre", /Sobre o Guia Saúde/],
     ["/inclusao", /Solicitar inclusão/],
   ];

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, BadgeCheck, BookOpen, Building2, Mic, Megaphone, Newspaper, Stethoscope } from "lucide-react";
+import { ArrowRight, BadgeCheck, BookOpen, Building2, Mic, Newspaper, Search, Stethoscope } from "lucide-react";
 import { AdSlot } from "@/components/AdSlot";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!city) return pageMetadata("Cidade não encontrada", "Página de cidade não encontrada no Guia Saúde.", `/cidades/${slug}`);
   return pageMetadata(
     `Saúde em ${city.name}`,
-    `${city.intro} Encontre profissionais, empresas, matérias e oportunidades comerciais em ${city.name}.`,
+    `${city.intro} Encontre profissionais, empresas, matérias, podcast e revista em ${city.name}.`,
     `/cidades/${slug}`,
   );
 }
@@ -31,13 +31,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
   const localOrganizations = organizationSource.filter((item) => item.city === city.name);
   const localArticles = articles.filter((item) => item.city === city.name || item.city === "Regional");
   const cityQuery = encodeURIComponent(city.name);
-  const commercialSlots = [
-    ["Banner cidade", "Presença principal no miniportal local"],
-    ["Profissional em destaque", "Card premium na busca da cidade"],
-    ["Empresa apoiadora", "Clínicas, farmácias, laboratórios e serviços"],
-    ["Conteúdo patrocinado", "Matéria, entrevista ou campanha local"],
-  ];
-
   return (
     <>
       <SiteHeader />
@@ -47,51 +40,53 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <div>
               <p className="eyebrow">{city.region}</p>
               <h1>O portal de saúde de {city.name}.</h1>
-              <p>{city.intro} Encontre profissionais, empresas, matérias, podcast, revista e espaços de mídia da cidade.</p>
+              <p>{city.intro} Encontre matérias, profissionais, empresas, podcast, revista e serviços de saúde organizados para a cidade.</p>
               <div className="city-hero-actions">
+                <Link href="#materias"><Newspaper size={16} /> Ver matérias</Link>
                 <Link href={`/buscar?cidade=${cityQuery}`}><Stethoscope size={16} /> Buscar profissionais</Link>
                 <Link href={`/empresas?cidade=${cityQuery}`}><Building2 size={16} /> Ver empresas</Link>
-                <Link href="/anuncie"><Megaphone size={16} /> Anunciar em {city.name}</Link>
               </div>
             </div>
             <aside className="city-local-card">
               <span>Portal local</span>
               <strong>{city.name}</strong>
-              <p>Profissionais, empresas, matérias, revista, podcast e mídia local em uma experiência objetiva.</p>
+              <p>Um guia objetivo com informação, serviços e canais úteis para quem procura saúde na cidade.</p>
             </aside>
           </div>
         </section>
 
         <section className="shell content-section city-portal-section">
+          <div className="city-head-banner">
+            <AdSlot code={cityAdCode(city.name)} />
+          </div>
+
           <div className="city-summary city-portal-summary">
             <div><small>PROFISSIONAIS</small><strong>{localProfessionals.length || "Base"}</strong><span>{localProfessionals.length ? "perfis no guia" : "em formação"}</span></div>
             <div><small>EMPRESAS</small><strong>{localOrganizations.length || "Diretório"}</strong><span>{localOrganizations.length ? "cadastros no guia" : "em validação"}</span></div>
             <div><small>CONTEÚDO</small><strong>{localArticles.length}</strong><span>pautas disponíveis</span></div>
           </div>
 
-          <div className="city-ad-feature">
-            <AdSlot code={cityAdCode(city.name)} />
-            <aside>
-              <span>ESPAÇO VENDÁVEL</span>
-              <strong>Banner principal de {city.name}</strong>
-              <p>Área reservada para clínica, laboratório, farmácia, profissional ou marca apoiadora aparecer no contexto local.</p>
-              <Link href="/anuncie">Consultar mídia local <ArrowRight size={14} /></Link>
-            </aside>
-          </div>
-
-          <div className="city-market-strip">
+          <div className="local-content city-editorial-panel city-editorial-panel-main" id="materias">
             <div>
-              <p className="eyebrow">Marketing local</p>
-              <h2>Espaços comerciais para marcas de {city.name}.</h2>
+              <p className="eyebrow">Matérias da cidade</p>
+              <h2><Newspaper size={30} /> Informação conectada à realidade de {city.name}.</h2>
+              <p>Conteúdos de saúde, prevenção, entrevistas, campanhas públicas, pautas da revista e temas úteis para a população local.</p>
+              <div className="city-article-row">
+                {localArticles.slice(0, 3).map((article) => (
+                  <article key={article.slug}>
+                    <span>{article.category}</span>
+                    <strong>{article.title}</strong>
+                    <p>{article.excerpt}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-            <div className="city-market-products">
-              {commercialSlots.map(([title, text]) => (
-                <Link href="/anuncie" key={title}>
-                  <span>{title}</span>
-                  <small>{text}</small>
-                </Link>
-              ))}
-            </div>
+            <aside>
+              <small>GUIA DE {city.name.toUpperCase()}</small>
+              <strong>Comece pelo que você precisa agora</strong>
+              <p>Busque profissionais, encontre empresas de saúde ou acompanhe conteúdos locais do Guia Saúde.</p>
+              <Link href={`/buscar?cidade=${cityQuery}`}>Buscar no guia <Search size={14} /></Link>
+            </aside>
           </div>
 
           <div className="content-title city-content-title">
@@ -176,35 +171,12 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               <Link href="/podcast">Ver podcast <ArrowRight size={14} /></Link>
             </article>
             <article>
-              <Megaphone size={22} />
-              <span>Destaque comercial</span>
-              <strong>Cotas para aparecer na cidade</strong>
-              <p>Banner, perfil em destaque, empresa apoiadora e conteúdo patrocinado com segmentação local.</p>
-              <Link href="/anuncie">Anunciar <ArrowRight size={14} /></Link>
+              <Stethoscope size={22} />
+              <span>Guia local</span>
+              <strong>Profissionais e empresas em um só lugar</strong>
+              <p>Acesso rápido à busca por especialidade, clínicas, farmácias, laboratórios e serviços da cidade.</p>
+              <Link href={`/buscar?cidade=${cityQuery}`}>Abrir busca <ArrowRight size={14} /></Link>
             </article>
-          </div>
-
-          <div className="local-content city-editorial-panel">
-            <div>
-              <p className="eyebrow">Conteúdo local</p>
-              <h2><Newspaper size={30} /> Informação conectada à realidade de {city.name}.</h2>
-              <p>Matérias de saúde, campanhas preventivas, entrevistas, eventos e temas da revista física podem aparecer aqui com recorte local.</p>
-              <div className="city-article-row">
-                {localArticles.slice(0, 3).map((article) => (
-                  <article key={article.slug}>
-                    <span>{article.category}</span>
-                    <strong>{article.title}</strong>
-                    <p>{article.excerpt}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-            <aside>
-              <small>PARA VENDER NA CIDADE</small>
-              <strong>Profissionais e empresas de {city.name}</strong>
-              <p>Entre no guia, compre destaque, anuncie na revista ou apoie uma pauta/podcast com presença no portal.</p>
-              <Link href="/anuncie">Ver formatos comerciais <ArrowRight size={14} /></Link>
-            </aside>
           </div>
         </section>
       </main>
