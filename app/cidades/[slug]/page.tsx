@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, BadgeCheck, BookOpen, Building2, Mic, Newspaper, Search, Stethoscope } from "lucide-react";
+import { ArrowRight, BadgeCheck, BookOpen, Building2, ListFilter, MapPin, Mic, Newspaper, Search, Stethoscope } from "lucide-react";
 import { AdSlot } from "@/components/AdSlot";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -36,26 +36,38 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
       <SiteHeader />
       <main>
         <section className="city-hero city-portal-hero">
-          <div className="shell city-portal-grid">
-            <div>
+          <div className="city-portal-hero-bg" aria-hidden="true" />
+          <div className="city-portal-hero-shade" aria-hidden="true" />
+          <div className="shell city-portal-grid city-portal-landing-grid">
+            <div className="city-landing-copy">
               <p className="eyebrow">{city.region}</p>
-              <h1>O portal de saúde de {city.name}.</h1>
-              <p>{city.intro} Encontre matérias, profissionais, empresas, podcast, revista e serviços de saúde organizados para a cidade.</p>
+              <h1>{city.name}</h1>
+              <p>Guia local de saúde com matérias, profissionais, empresas, podcast, revista e serviços próximos.</p>
               <div className="city-hero-actions">
+                <Link href="/"><MapPin size={16} /> Alterar cidade</Link>
                 <Link href="#materias"><Newspaper size={16} /> Ver matérias</Link>
-                <Link href={`/buscar?cidade=${cityQuery}`}><Stethoscope size={16} /> Buscar profissionais</Link>
-                <Link href={`/empresas?cidade=${cityQuery}`}><Building2 size={16} /> Ver empresas</Link>
               </div>
             </div>
-            <aside className="city-local-card">
-              <span>Portal local</span>
-              <strong>{city.name}</strong>
-              <p>Um guia objetivo com informação, serviços e canais úteis para quem procura saúde na cidade.</p>
-            </aside>
           </div>
         </section>
 
         <section className="shell content-section city-portal-section">
+          <form className="city-search-panel" action="/buscar">
+            <input type="hidden" name="cidade" value={city.name} />
+            <label>
+              <span><ListFilter size={16} /> Selecione uma especialidade</span>
+              <select name="profissao" defaultValue="">
+                <option value="">Todas as áreas</option>
+                {professions.map((item) => <option key={item}>{item}</option>)}
+              </select>
+            </label>
+            <label>
+              <span><Search size={16} /> Digite o que procura</span>
+              <input name="q" placeholder="Ex.: cardiologia, clínica, farmácia..." />
+            </label>
+            <button type="submit">buscar</button>
+          </form>
+
           <div className="city-head-banner">
             <AdSlot code={cityAdCode(city.name)} />
           </div>
