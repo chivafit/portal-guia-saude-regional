@@ -71,6 +71,7 @@ export const campaigns = sqliteTable("campaigns", {
   startsAt: text("starts_at").notNull(),
   endsAt: text("ends_at").notNull(),
   destinationUrl: text("destination_url").notNull(),
+  imageUrl: text("image_url"),
   status: text("status").notNull().default("draft"),
 });
 

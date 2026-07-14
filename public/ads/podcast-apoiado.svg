@@ -1,0 +1,11 @@
+<svg width="900" height="620" viewBox="0 0 900 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="620" rx="42" fill="#20384C"/>
+  <circle cx="450" cy="284" r="150" fill="#315F7C"/>
+  <circle cx="450" cy="284" r="92" fill="#DDE8ED"/>
+  <rect x="426" y="163" width="48" height="190" rx="24" fill="#D97A45"/>
+  <path d="M340 284C340 345 389 394 450 394C511 394 560 345 560 284" stroke="white" stroke-opacity=".8" stroke-width="24" stroke-linecap="round"/>
+  <rect x="438" y="394" width="24" height="68" rx="12" fill="white" fill-opacity=".8"/>
+  <rect x="372" y="462" width="156" height="22" rx="11" fill="white" fill-opacity=".8"/>
+  <text x="92" y="102" fill="#F7FAFB" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="7">PODCAST APOIADO</text>
+  <text x="92" y="546" fill="#DDE8ED" font-family="Arial, Helvetica, sans-serif" font-size="31">Cota de marca em episódios e cortes</text>
+</svg>

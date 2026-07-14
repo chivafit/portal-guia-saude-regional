@@ -1,12 +1,13 @@
 export type Campaign = {
   id: number; advertiserName: string; name: string; positionCode: string;
-  citySlug: string | null; startsAt: string; endsAt: string; destinationUrl: string; status: string;
+  citySlug: string | null; startsAt: string; endsAt: string; destinationUrl: string; imageUrl: string | null; status: string;
 };
 
 async function getD1() { const { env } = await import("cloudflare:workers"); return env.DB; }
 
 const columns = `id, advertiser_name as advertiserName, name, position_code as positionCode,
-  city_slug as citySlug, starts_at as startsAt, ends_at as endsAt, destination_url as destinationUrl, status`;
+  city_slug as citySlug, starts_at as startsAt, ends_at as endsAt, destination_url as destinationUrl,
+  image_url as imageUrl, status`;
 
 export async function activeCampaign(positionCode: string) {
   try {
@@ -31,16 +32,16 @@ export async function listCampaigns() {
 
 export async function createCampaign(input: {
   advertiserName: string; name: string; positionCode: string; citySlug?: string;
-  startsAt?: string; endsAt?: string; destinationUrl: string; status?: string;
+  startsAt?: string; endsAt?: string; destinationUrl: string; imageUrl?: string; status?: string;
 }) {
   const db = await getD1();
   const startsAt = input.startsAt || new Date().toISOString();
   const endsAt = input.endsAt || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
   const result = await db.prepare(`INSERT INTO campaigns
-    (advertiser_name, name, position_code, city_slug, starts_at, ends_at, destination_url, status)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`)
+    (advertiser_name, name, position_code, city_slug, starts_at, ends_at, destination_url, image_url, status)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`)
     .bind(input.advertiserName, input.name, input.positionCode, input.citySlug || null,
-      startsAt, endsAt, input.destinationUrl, input.status || "draft")
+      startsAt, endsAt, input.destinationUrl, input.imageUrl || null, input.status || "draft")
     .first<{ id: number }>();
   return result?.id;
 }

@@ -6,10 +6,13 @@ export async function AdSlot({ code, compact = false }: { code: string; compact?
   if (campaign) {
     return (
       <aside className={`ad-slot ad-slot-live ${compact ? "ad-slot-compact" : ""}`} aria-label="Publicidade">
-        <span>PUBLICIDADE</span>
-        <strong>{campaign.name}</strong>
-        <small>{campaign.advertiserName} · {code}</small>
-        <a href={campaign.destinationUrl} target="_blank" rel="noreferrer">Conhecer campanha <ArrowRight size={14} /></a>
+        {campaign.imageUrl ? <div className="ad-slot-image" style={{ backgroundImage: `url(${campaign.imageUrl})` }} aria-label={campaign.name} /> : null}
+        <div>
+          <span>PUBLICIDADE</span>
+          <strong>{campaign.name}</strong>
+          <small>{campaign.advertiserName} · {code}</small>
+          <a href={campaign.destinationUrl} target="_blank" rel="noreferrer">Conhecer campanha <ArrowRight size={14} /></a>
+        </div>
       </aside>
     );
   }

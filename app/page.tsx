@@ -33,7 +33,14 @@ const cityMetrics = [
   ["4", "frentes de mídia"],
   ["100%", "portal informativo"],
 ];
-const adFormats = ["Banner topo", "Banner por cidade", "Perfil em destaque", "Matéria patrocinada", "Podcast apoiado", "Revista digital"];
+const adFormats = [
+  { title: "Banner topo", place: "Home + páginas principais", code: "970 × 250", image: "/ads/banner-topo.svg" },
+  { title: "Banner por cidade", place: "Páginas locais", code: "Cidade patrocinada", image: "/ads/banner-cidade.svg" },
+  { title: "Perfil em destaque", place: "Busca e diretório", code: "Card premium", image: "/ads/perfil-destaque.svg" },
+  { title: "Matéria patrocinada", place: "Conteúdo editorial", code: "Publieditorial", image: "/ads/materia-patrocinada.svg" },
+  { title: "Podcast apoiado", place: "Conexão Saúde", code: "Cota de apoio", image: "/ads/podcast-apoiado.svg" },
+  { title: "Revista digital", place: "Edição e acervo", code: "Página de marca", image: "/ads/revista-digital.svg" },
+];
 
 export default async function Home() {
   const featuredProfessionals = await publishedProfessionals(professionals);
@@ -163,12 +170,19 @@ export default async function Home() {
 
         <section className="section shell media-marketplace">
           <div className="marketplace-copy">
-            <p className="eyebrow">Banners pagos e mídia regional</p>
-            <h2>Inventário comercial simples de vender e fácil de entender.</h2>
-            <p>Formatos separados por objetivo: visibilidade regional, presença por cidade, autoridade editorial e campanhas integradas com revista, podcast e Instagram.</p>
+            <p className="eyebrow">Espaços para anunciantes</p>
+            <h2>Vitrine comercial pronta para apresentar e vender.</h2>
+            <p>Modelos visuais de mídia para demonstrar formatos, posições e possibilidades de presença dentro do portal.</p>
           </div>
-          <div className="ad-format-grid">
-            {adFormats.map((format) => <span key={format}>{format}</span>)}
+          <div className="ad-showcase-grid">
+            {adFormats.map((format, index) => (
+              <article className={`ad-showcase-card ad-showcase-${index + 1}`} style={{ backgroundImage: `url(${format.image})` }} key={format.title}>
+                <span>PUBLICIDADE</span>
+                <strong>{format.title}</strong>
+                <p>{format.place}</p>
+                <small>{format.code}</small>
+              </article>
+            ))}
           </div>
         </section>
 

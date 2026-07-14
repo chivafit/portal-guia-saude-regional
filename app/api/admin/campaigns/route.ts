@@ -22,6 +22,7 @@ export async function POST(request: Request) {
     startsAt: data.startsAt,
     endsAt: data.endsAt,
     destinationUrl: data.destinationUrl,
+    imageUrl: data.imageUrl,
     status: data.status,
   });
   return Response.json({ id }, { status: 201 });

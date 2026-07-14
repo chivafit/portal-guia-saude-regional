@@ -1,0 +1,11 @@
+<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="420" rx="42" fill="#24465B"/>
+  <circle cx="1020" cy="92" r="164" fill="#D97A45" opacity=".88"/>
+  <circle cx="990" cy="335" r="210" fill="#6FA2B8" opacity=".32"/>
+  <path d="M106 306C176 210 251 165 331 172C417 179 464 257 548 250C629 243 660 164 742 133C821 103 904 125 990 198" stroke="white" stroke-opacity=".18" stroke-width="22" stroke-linecap="round"/>
+  <text x="86" y="104" fill="#F3F7F8" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="8">PUBLICIDADE REGIONAL</text>
+  <text x="86" y="192" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700">Banner topo</text>
+  <text x="86" y="250" fill="#DDE8ED" font-family="Arial, Helvetica, sans-serif" font-size="31">Espaço premium na abertura do portal</text>
+  <rect x="86" y="308" width="210" height="50" rx="25" fill="white" fill-opacity=".14"/>
+  <text x="116" y="342" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">970 × 250</text>
+</svg>

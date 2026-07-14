@@ -1,0 +1,13 @@
+<svg width="900" height="620" viewBox="0 0 900 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="620" rx="42" fill="#F7FAFB"/>
+  <rect x="70" y="76" width="760" height="468" rx="36" fill="white" stroke="#DDE8ED" stroke-width="3"/>
+  <circle cx="178" cy="196" r="58" fill="#DDE8ED"/>
+  <rect x="270" y="152" width="314" height="30" rx="15" fill="#24465B"/>
+  <rect x="270" y="207" width="444" height="22" rx="11" fill="#9AAAB3"/>
+  <rect x="270" y="251" width="246" height="22" rx="11" fill="#C8D6DC"/>
+  <rect x="106" y="350" width="214" height="74" rx="37" fill="#315F7C"/>
+  <rect x="344" y="350" width="214" height="74" rx="37" fill="#EDF4F6"/>
+  <rect x="582" y="350" width="214" height="74" rx="37" fill="#EDF4F6"/>
+  <circle cx="736" cy="142" r="58" fill="#D97A45"/>
+  <text x="120" y="477" fill="#D97A45" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="6">PERFIL PREMIUM</text>
+</svg>
