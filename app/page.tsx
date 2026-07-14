@@ -144,14 +144,6 @@ export default async function Home() {
           <div className="section-kicker"><span>04</span><p>Saúde feita de proximidade</p></div>
           <div className="city-intro"><h2>Sete cidades.<br /><em>Uma região conectada.</em></h2><p>Conheça o ecossistema de saúde de cada município: profissionais, serviços, notícias e oportunidades.</p></div>
           <div className="city-grid">{cities.map((city, i) => <Link key={city} href={`/cidades/${city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replaceAll(" ", "-")}`}><span>0{i+1}</span><strong>{city}</strong><p>Guia local em construção</p><small>Explorar a cidade <ArrowUpRight size={13} /></small></Link>)}</div>
-          <div className="city-guide-panel">
-            <div>
-              <p className="eyebrow">Próxima etapa da base</p>
-              <h3>Cadastro regional conferido antes de publicar.</h3>
-            </div>
-            <p>Os perfis oficiais devem nascer com fonte, categoria, cidade, contato, conselho profissional quando aplicável e status de validação. Isso evita um guia inflado, duplicado ou sem confiança.</p>
-            <Link href="/buscar">Ver modelo de busca <ArrowRight size={14} /></Link>
-          </div>
         </section>
 
         <section className="directory-section">
@@ -159,7 +151,6 @@ export default async function Home() {
             <div className="section-kicker light"><span>05</span><p>Profissionais perto de você</p></div>
             <div className="directory-title"><h2>Quem cuida<br /><em>da nossa região.</em></h2><Link href="/buscar">Ver guia completo <ArrowRight size={14} /></Link></div>
             <div className="profile-preview-grid">{featuredProfessionals.slice(0,3).map((item, index) => <article className="profile-preview" key={item.slug}><div className={`portrait portrait-${index+1}`}><Stethoscope size={42} /></div><div><span>{item.profession} · {item.city}</span><h3>{item.name}</h3><p>{item.specialty}</p><Link href={`/profissionais/${item.slug}`}>Ver perfil <ArrowUpRight size={14} /></Link></div></article>)}</div>
-            <p className="demo-disclaimer">Perfis demonstrativos. A base oficial será publicada após conferência das fontes e validação dos profissionais.</p>
           </div>
         </section>
 
