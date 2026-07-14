@@ -1,10 +1,1 @@
-<svg width="900" height="620" viewBox="0 0 900 620" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="900" height="620" rx="42" fill="#F5EFE9"/>
-  <rect x="185" y="74" width="530" height="472" rx="30" fill="#24465B"/>
-  <rect x="225" y="116" width="450" height="170" rx="22" fill="#D97A45"/>
-  <rect x="225" y="326" width="304" height="34" rx="17" fill="white"/>
-  <rect x="225" y="390" width="390" height="24" rx="12" fill="white" fill-opacity=".55"/>
-  <rect x="225" y="438" width="284" height="24" rx="12" fill="white" fill-opacity=".35"/>
-  <text x="252" y="221" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="50" font-weight="700">Revista</text>
-  <text x="252" y="494" fill="#DDE8ED" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="6">EDIÇÃO DIGITAL</text>
-</svg>
+<svg width="900" height="620" viewBox="0 0 900 620" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#17384E"/><stop offset="1" stop-color="#24465B"/></linearGradient><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#D97842"/><stop offset="1" stop-color="#A85831"/></linearGradient></defs><rect width="900" height="620" fill="#FBFAF7"/><rect x="24" y="24" width="852" height="572" fill="url(#g)"/><circle cx="780" cy="92" r="150" fill="#D97842" opacity=".22"/><path d="M70 534C190 455 310 575 430 492C560 400 700 535 828 450" stroke="#FFFFFF" stroke-opacity=".13" stroke-width="18" stroke-linecap="round"/><text x="64" y="86" fill="#D97842" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="5">GUIA SAÚDE REVISTA</text><text x="64" y="266" fill="#FFFFFF" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-weight="400">Revista impressa</text><text x="64" y="314" fill="#DDE8ED" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="500">Anúncio físico com extensão digital</text><rect x="64" y="526" width="210" height="42" fill="rgba(255,255,255,.10)"/><text x="84" y="554" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">GUIA SAÚDE</text></svg>

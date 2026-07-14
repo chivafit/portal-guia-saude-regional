@@ -21,12 +21,12 @@ const channels = [
 ];
 
 const formats = [
-  { title: "Banner topo", tag: "Alta visibilidade", text: "Presença nas páginas principais do portal, ideal para campanhas institucionais." },
-  { title: "Banner por cidade", tag: "Segmentação local", text: "Exibição em páginas de Piumhi, Capitólio, Arcos, Campo Belo, Bambuí e região." },
-  { title: "Perfil em destaque", tag: "Diretório", text: "Mais destaque para profissionais, clínicas, consultórios, laboratórios e empresas." },
-  { title: "Conteúdo de marca", tag: "Autoridade", text: "Matérias identificadas, entrevistas e pautas educativas com revisão editorial." },
-  { title: "Podcast apoiado", tag: "Conexão Saúde", text: "Cotas de apoio, chamada do apresentador e distribuição integrada do episódio." },
-  { title: "Revista impressa + portal", tag: "Campanha integrada", text: "Presença combinada na edição física, portal e redes sociais da Guia Saúde." },
+  { title: "Banner topo", tag: "1200 x 420 px", image: "/ads/banner-topo.svg", text: "Presença nas páginas principais do portal, ideal para campanhas institucionais." },
+  { title: "Banner por cidade", tag: "900 x 620 px", image: "/ads/banner-cidade.svg", text: "Exibição em páginas de Piumhi, Capitólio, Arcos, Campo Belo, Bambuí e região." },
+  { title: "Perfil em destaque", tag: "900 x 620 px", image: "/ads/perfil-destaque.svg", text: "Mais destaque para profissionais, clínicas, consultórios, laboratórios e empresas." },
+  { title: "Conteúdo de marca", tag: "900 x 620 px", image: "/ads/materia-patrocinada.svg", text: "Matérias identificadas, entrevistas e pautas educativas com revisão editorial." },
+  { title: "Podcast apoiado", tag: "900 x 620 px", image: "/ads/podcast-apoiado.svg", text: "Cotas de apoio, chamada do apresentador e distribuição integrada do episódio." },
+  { title: "Revista impressa + portal", tag: "900 x 620 px", image: "/ads/revista-digital.svg", text: "Presença combinada na edição física, portal e redes sociais da Guia Saúde." },
 ];
 
 const packages = [
@@ -61,6 +61,16 @@ const steps = [
   "Publicação identificada e acompanhamento",
 ];
 
+const cityAds = [
+  ["Piumhi", "/ads/cidade-piumhi.svg"],
+  ["Capitólio", "/ads/cidade-capitolio.svg"],
+  ["Pimenta", "/ads/cidade-pimenta.svg"],
+  ["Arcos", "/ads/cidade-arcos.svg"],
+  ["Campo Belo", "/ads/cidade-campo-belo.svg"],
+  ["Bambuí", "/ads/cidade-bambui.svg"],
+  ["São Roque de Minas", "/ads/cidade-sao-roque-de-minas.svg"],
+];
+
 export default function AdvertisePage() {
   return (
     <>
@@ -75,6 +85,7 @@ export default function AdvertisePage() {
               <div className="media-kit-actions">
                 <a href="https://wa.me/5537999474443" target="_blank" rel="noreferrer">Solicitar proposta <ArrowRight size={14} /></a>
                 <Link href="/buscar">Ver diretório <Search size={14} /></Link>
+                <a href="/media-kit-guia-saude.pdf" target="_blank" rel="noreferrer">Baixar mídia kit <ArrowRight size={14} /></a>
               </div>
             </div>
             <aside className="media-kit-card">
@@ -133,6 +144,7 @@ export default function AdvertisePage() {
           <div className="format-grid">
             {formats.map((format) => (
               <article key={format.title}>
+                <div className="format-preview" style={{backgroundImage:`url(${format.image})`}} />
                 <small>{format.tag}</small>
                 <h3>{format.title}</h3>
                 <p>{format.text}</p>
@@ -140,6 +152,19 @@ export default function AdvertisePage() {
             ))}
           </div>
           <AdSlot code="DEMONSTRACAO_COMERCIAL" />
+        </section>
+
+        <section className="section shell city-ad-mockups">
+          <div className="media-kit-heading compact">
+            <div>
+              <p className="eyebrow">Mockups por cidade</p>
+              <h2>Banners locais prontos para apresentar ao anunciante.</h2>
+            </div>
+            <p>Use estes modelos para vender cotas locais. Depois basta substituir a arte no cadastro da campanha.</p>
+          </div>
+          <div className="city-ad-grid">
+            {cityAds.map(([city, image]) => <article key={city}><div style={{backgroundImage:`url(${image})`}} /><strong>{city}</strong><span>Formato cidade · 900 x 620 px</span></article>)}
+          </div>
         </section>
 
         <section className="section shell commercial-examples">
