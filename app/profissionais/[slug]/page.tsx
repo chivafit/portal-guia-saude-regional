@@ -5,6 +5,18 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { professionals } from "@/lib/data";
 import { findPublishedProfessional } from "@/lib/directory";
+import { pageMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const item = await findPublishedProfessional(slug, professionals);
+  if (!item) return pageMetadata("Profissional não encontrado", "Perfil profissional não encontrado no Guia Saúde.", `/profissionais/${slug}`);
+  return pageMetadata(
+    `${item.name} — ${item.specialty}`,
+    `${item.profession} em ${item.city}. Perfil informativo no Guia Saúde, sem agendamento online.`,
+    `/profissionais/${slug}`,
+  );
+}
 
 export default async function ProfessionalPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

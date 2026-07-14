@@ -2,6 +2,13 @@ import Link from "next/link";
 import { AdSlot } from "@/components/AdSlot";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata(
+  "Anuncie",
+  "Mídia kit do Guia Saúde com banners, revista digital, podcast, Instagram e campanhas regionais de saúde.",
+  "/anuncie",
+);
 
 const channels = [
   ["Portal", "Banners, perfis em destaque e presença segmentada por cidade ou categoria."],

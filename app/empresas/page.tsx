@@ -4,6 +4,13 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { cities, organizations } from "@/lib/data";
 import { publishedOrganizations } from "@/lib/directory";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata(
+  "Empresas e serviços",
+  "Diretório regional de clínicas, laboratórios, farmácias, óticas, estética, academias e serviços de saúde.",
+  "/empresas",
+);
 
 const categoryOptions = [
   "Clínica multiprofissional",

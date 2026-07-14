@@ -5,6 +5,13 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { cities, professions, professionals } from "@/lib/data";
 import { publishedProfessionals } from "@/lib/directory";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata(
+  "Buscar profissionais",
+  "Encontre profissionais da saúde por cidade, categoria e especialidade no Guia Saúde Regional.",
+  "/buscar",
+);
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const params = await searchParams;

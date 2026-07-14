@@ -5,6 +5,18 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { articles, cityDetails, organizations, professions, professionals } from "@/lib/data";
 import { publishedOrganizations, publishedProfessionals } from "@/lib/directory";
+import { pageMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const city = cityDetails[slug];
+  if (!city) return pageMetadata("Cidade não encontrada", "Página de cidade não encontrada no Guia Saúde.", `/cidades/${slug}`);
+  return pageMetadata(
+    `Saúde em ${city.name}`,
+    `${city.intro} Encontre profissionais, empresas, matérias e oportunidades comerciais em ${city.name}.`,
+    `/cidades/${slug}`,
+  );
+}
 
 export default async function CityPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

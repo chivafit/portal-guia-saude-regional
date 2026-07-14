@@ -2,6 +2,13 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { articles } from "@/lib/data";
 import { publishedContent } from "@/lib/content";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata(
+  "Matérias",
+  "Matérias, entrevistas e orientações de saúde, prevenção, bem-estar e especialistas da região.",
+  "/materias",
+);
 
 const extra = [
   { category: "Saúde bucal", title: "Prevenção e acompanhamento: o que muda o cuidado com o sorriso", excerpt: "Orientações e conversas com especialistas para decisões mais informadas." },
