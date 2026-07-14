@@ -7,6 +7,8 @@ import { cities, organizations } from "@/lib/data";
 const categoryOptions = [
   "Clínica multiprofissional",
   "Laboratório",
+  "Diagnóstico por imagem",
+  "Clínica odontológica",
   "Hospital",
   "Farmácia",
   "Ótica",

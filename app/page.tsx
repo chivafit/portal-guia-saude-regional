@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { articles, cities, professions, professionals } from "@/lib/data";
 
-const icons = ["✚", "◉", "◇", "⌁", "○"];
+const icons = ["✚", "◉", "◇", "⌁", "○", "◌", "＋", "◎", "△"];
 const portalPillars = [
   {
     label: "Diretório",
