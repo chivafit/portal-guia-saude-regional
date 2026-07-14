@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Activity, Apple, ArrowRight, ArrowUpRight, BookOpen, Brain, Building2, Dumbbell, Ear, HeartPulse, MapPin, Megaphone, Mic, Newspaper, Play, Smile, Stethoscope, Syringe } from "lucide-react";
+import { Activity, Apple, ArrowRight, ArrowUpRight, BookOpen, Brain, Dumbbell, Ear, HeartPulse, MapPin, Megaphone, Mic, Play, Smile, Stethoscope, Syringe } from "lucide-react";
 import { SearchForm } from "@/components/SearchForm";
 import { CityGateway } from "@/components/CityGateway";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -9,32 +9,6 @@ import { publishedProfessionals } from "@/lib/directory";
 import { citySlug } from "@/lib/city-utils";
 
 const professionIcons = [Stethoscope, Smile, Brain, Activity, Apple, Ear, Syringe, HeartPulse, Dumbbell];
-const portalPillars = [
-  {
-    icon: Building2,
-    label: "Diretório",
-    title: "Profissionais, clínicas e empresas por cidade",
-    text: "Busca regional com filtros por área, cidade e serviço. O portal informa e direciona o contato, sem intermediar agendamento.",
-  },
-  {
-    icon: Newspaper,
-    label: "Conteúdo",
-    title: "Matérias, guias e pautas locais",
-    text: "Uma frente editorial para prevenção, bem-estar, tecnologia, especialidades e histórias da saúde regional.",
-  },
-  {
-    icon: Megaphone,
-    label: "Mídia",
-    title: "Revista, podcast, banners e campanhas",
-    text: "Inventário comercial organizado para marcas que querem presença qualificada no ecossistema de saúde.",
-  },
-];
-const cityMetrics = [
-  ["7", "cidades prioritárias"],
-  ["5+", "categorias profissionais"],
-  ["4", "frentes de mídia"],
-  ["100%", "portal informativo"],
-];
 const adFormats = [
   { title: "Banner topo", place: "Home + páginas principais", code: "970 × 250", image: "/ads/banner-topo.svg" },
   { title: "Banner por cidade", place: "Páginas locais", code: "Cidade patrocinada", image: "/ads/banner-cidade.svg" },
@@ -62,17 +36,10 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="announcement">
-          <div className="shell announcement-inner">
-            <span>PUBLICIDADE</span><strong>Presença qualificada para marcas, clínicas e profissionais da saúde.</strong>
-            <Link href="/anuncie">Conheça os formatos <ArrowRight size={15} /></Link>
-          </div>
-        </section>
-
         <CityGateway />
 
-        <section className="section shell home-featured">
-          <div className="section-kicker"><span>00</span><p>Em destaque</p></div>
+        <section className="section shell home-featured compact-home-section">
+          <div className="section-kicker"><span>01</span><p>Conteúdo e presença</p></div>
           <div className="featured-board">
             <article className="featured-main">
               <div className="featured-main-media" aria-label="Imagem editorial de saúde regional" />
@@ -91,36 +58,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="section shell portal-overview" aria-labelledby="portal-overview-title">
-          <div className="section-kicker"><span>01</span><p>Plataforma regional</p></div>
-            <div className="portal-overview-head">
-            <h2 id="portal-overview-title">Um portal regional com padrão editorial.</h2>
-            <p>O Guia Saúde combina busca local, conteúdo, revista, podcast e mídia paga em uma experiência feita para pacientes exigentes e profissionais que valorizam reputação.</p>
-          </div>
-          <div className="pillar-grid">
-            {portalPillars.map((pillar) => {
-              const Icon = pillar.icon;
-              return (
-                <article key={pillar.label}>
-                  <Icon size={22} />
-                  <span>{pillar.label}</span>
-                  <h3>{pillar.title}</h3>
-                  <p>{pillar.text}</p>
-                </article>
-              );
-            })}
-          </div>
-          <div className="metric-strip">
-            {cityMetrics.map(([value, label]) => (
-              <div key={label}>
-                <strong>{value}</strong>
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="section shell quick-access">
+        <section className="section shell quick-access compact-home-section">
           <div className="section-kicker"><span>02</span><p>Encontre o cuidado certo</p></div>
           <div className="section-heading editorial-heading">
             <h2>Por onde você<br />quer começar?</h2>
@@ -136,7 +74,7 @@ export default async function Home() {
           <Link className="outline-link" href="/buscar">Explorar todas as especialidades</Link>
         </section>
 
-        <section className="editorial-feature" id="materias">
+        <section className="editorial-feature compact-home-section" id="materias">
           <div className="shell">
             <div className="section-kicker light"><span>03</span><p>Informação para viver melhor</p></div>
             <div className="feature-grid">
@@ -151,13 +89,13 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="section shell city-section">
+        <section className="section shell city-section compact-home-section">
           <div className="section-kicker"><span>04</span><p>Saúde feita de proximidade</p></div>
           <div className="city-intro"><h2>Sete cidades.<br /><em>Uma região conectada.</em></h2><p>Conheça o ecossistema de saúde de cada município: profissionais, serviços, notícias e oportunidades.</p></div>
           <div className="city-grid">{cities.map((city, i) => <Link key={city} href={`/cidades/${citySlug(city)}`}><span>0{i+1}</span><strong>{city}</strong><p>Guia local em construção</p><small>Explorar a cidade <ArrowUpRight size={13} /></small></Link>)}</div>
         </section>
 
-        <section className="directory-section">
+        <section className="directory-section compact-home-section">
           <div className="shell">
             <div className="section-kicker light"><span>05</span><p>Profissionais perto de você</p></div>
             <div className="directory-title"><h2>Quem cuida<br /><em>da nossa região.</em></h2><Link href="/buscar">Ver guia completo <ArrowRight size={14} /></Link></div>
@@ -165,14 +103,14 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="media-section" id="podcast">
+        <section className="media-section compact-home-section" id="podcast">
           <div className="shell media-grid">
             <div className="podcast-card"><p>CONEXÃO SAÚDE <Mic size={14} /> PODCAST</p><div className="sound-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div><small>PRÓXIMO AO VIVO · 14/07 ÀS 19H</small><h2>Radiologia odontológica: como a tecnologia transforma tratamentos.</h2><p>Com Rodrigo Soares Costa, tecnólogo em radiologia.</p><button aria-label="Conhecer o episódio do Conexão Saúde"><Play size={20} fill="currentColor" /></button></div>
             <div className="magazine-card" id="revista"><div className="mag-cover"><span>Guia</span><strong>Saúde</strong><small>REVISTA REGIONAL</small><b>O FUTURO<br />DO CUIDADO<br /><em>É PERTO.</em></b><p>14ª EDIÇÃO</p></div><div><p className="eyebrow">Revista Guia Saúde</p><h2>Histórias, especialistas e ideias que transformam a saúde regional.</h2><span>Conhecer a revista <ArrowRight size={14} /></span></div></div>
           </div>
         </section>
 
-        <section className="section shell media-marketplace">
+        <section className="section shell media-marketplace compact-home-section">
           <div className="marketplace-copy">
             <p className="eyebrow">Espaços para anunciantes</p>
             <h2>Vitrine comercial pronta para apresentar e vender.</h2>
@@ -189,8 +127,6 @@ export default async function Home() {
             ))}
           </div>
         </section>
-
-        <section className="commercial-cta"><div className="shell commercial-grid"><div><p className="eyebrow">Presença regional</p><h2>Sua marca no centro da conversa sobre saúde.</h2></div><p>Banners, conteúdo de marca, revista, podcast e perfis em uma plataforma feita para a região.</p><Link href="/anuncie">Quero anunciar <ArrowRight size={14} /></Link></div></section>
       </main>
       <SiteFooter />
     </>
