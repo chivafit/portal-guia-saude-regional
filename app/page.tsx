@@ -35,11 +35,11 @@ export default async function Home() {
           <div className="hero-photo" aria-hidden="true" />
           <div className="hero-shade" aria-hidden="true" />
           <div className="shell hero-content">
-            <p className="edition-tag">Guia Saúde Regional</p>
-            <h1>Saúde, reputação<br />e cuidado <em>local.</em></h1>
-            <p className="hero-intro">Uma plataforma editorial para encontrar especialistas, clínicas, serviços e informação de saúde com curadoria regional.</p>
+            <p className="edition-tag">Portal Guia Saúde Regional</p>
+            <h1>Encontre saúde<br />pela sua <em>cidade.</em></h1>
+            <p className="hero-intro">Um portal editorial para consultar especialistas, clínicas, farmácias, serviços, matérias, podcast e revista em uma experiência regional objetiva.</p>
             <SearchForm />
-            <div className="hero-footnote"><MapPin size={14} /> Miniportais por cidade · perfis revisados · publicidade identificada</div>
+            <div className="hero-footnote"><MapPin size={14} /> Selecione a cidade e veja o portal local com profissionais, empresas e mídia regional.</div>
           </div>
         </section>
 

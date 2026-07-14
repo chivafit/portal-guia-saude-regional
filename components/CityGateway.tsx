@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Building2, MapPin, Megaphone, Stethoscope } from "lucide-react";
+import { ArrowRight, Building2, MapPin, Megaphone, Search, Stethoscope } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cities, organizations, professionals } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
@@ -33,9 +33,10 @@ export function CityGateway() {
   return (
     <section className="shell city-gateway" aria-label="Selecionar cidade do portal">
       <div className="city-gateway-copy">
-        <p className="eyebrow">Escolha sua cidade</p>
+        <p className="eyebrow">Portal por cidade</p>
         <h2>{selectedCity ? `Portal de saúde em ${selectedCity}` : "Comece pela sua cidade."}</h2>
-        <p>Ao selecionar uma cidade, a busca, os profissionais, empresas e espaços comerciais passam a trabalhar com contexto local.</p>
+        <p>Selecione o município para ver especialistas, empresas, conteúdo e publicidade com recorte local.</p>
+        <Link className="city-gateway-primary" href={`/buscar${cityQuery}`}><Search size={16} /> Buscar agora <ArrowRight size={14} /></Link>
       </div>
       <div className="city-gateway-panel">
         <div className="city-choice-grid">

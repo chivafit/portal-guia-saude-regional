@@ -20,14 +20,15 @@ test.after(() => server?.kill());
 test("renders the regional portal home", async () => {
   const html = await (await fetch(origin)).text();
   assert.match(html, /Portal Guia Saúde/);
-  assert.match(html, /Saúde, reputação/);
+  assert.match(html, /Encontre saúde/);
+  assert.match(html, /Portal por cidade/);
   assert.match(html, /Conexão Saúde/);
   assert.match(html, /PUBLICIDADE/);
 });
 
 test("renders search, profile, companies and admin routes", async () => {
   const routes = [
-    ["/buscar?cidade=Piumhi", /Sem agendamento online/],
+    ["/buscar?cidade=Piumhi", /Guia de especialistas/],
     ["/profissionais/perfil-demonstrativo-cardiologia-piumhi", /sem agendamento online/],
     ["/empresas", /Empresas e serviços/],
     ["/admin", /Conteúdo, diretório, revista, podcast e mídia/],
