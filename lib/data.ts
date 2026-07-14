@@ -44,8 +44,8 @@ const baseProfessionals: Professional[] = [
     phone: "(37) 99999-0000",
     whatsapp: "https://wa.me/5537999990000",
     services: ["Consulta cardiológica", "Check-up preventivo", "Hipertensão", "Risco cardiovascular", "Acompanhamento clínico"],
-    imageUrl: "/placeholders/professional-photo.svg",
-    coverImageUrl: "/placeholders/clinic-cover.svg",
+    imageUrl: "/generated/dra-helena-martins.png",
+    coverImageUrl: "/generated/health-portal-hero-clinic.png",
     logoUrl: "/placeholders/company-logo.svg",
   },
   {

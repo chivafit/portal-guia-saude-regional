@@ -1156,3 +1156,17 @@ h1,h2,h3,.brand span,.commercial-highlight-grid strong,.profession-card strong,.
     grid-template-columns:1fr;
   }
 }
+
+/* Generated image assets */
+.hero-photo{
+  background-image:url('/generated/health-portal-hero-clinic.png')!important;
+}
+.city-portal-hero-bg{
+  background-image:url('/generated/regional-city-landscape.png')!important;
+}
+.home-top-banner-media{
+  background-image:linear-gradient(90deg,rgba(23,56,78,.08),rgba(23,56,78,.18)),url('/generated/health-portal-hero-clinic.png')!important;
+}
+.city-entry-image{
+  background-image:linear-gradient(rgba(16,42,58,.08),rgba(16,42,58,.36)),url('/generated/regional-city-landscape.png')!important;
+}
