@@ -21,7 +21,7 @@ test("renders the regional portal home", async () => {
   const html = await (await fetch(origin)).text();
   assert.match(html, /Portal Guia Saúde/);
   assert.match(html, /Encontre saúde/);
-  assert.match(html, /Portal por cidade/);
+  assert.match(html, /Especial Guia Saúde/);
   assert.match(html, /Conexão Saúde/);
   assert.match(html, /guia local/i);
 });

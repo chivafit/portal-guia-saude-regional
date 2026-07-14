@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Activity, Apple, ArrowRight, ArrowUpRight, BookOpen, Brain, Building2, Dumbbell, Ear, HeartPulse, MapPin, Mic, Newspaper, Play, Smile, Stethoscope, Syringe } from "lucide-react";
 import { SearchForm } from "@/components/SearchForm";
-import { CityGateway } from "@/components/CityGateway";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { articles, professions, professionals } from "@/lib/data";
@@ -34,7 +33,18 @@ export default async function Home() {
           </div>
         </section>
 
-        <CityGateway />
+        <section className="shell home-top-banner">
+          <div className="home-top-banner-media" aria-hidden="true" />
+          <div className="home-top-banner-copy">
+            <span>Especial Guia Saúde</span>
+            <h2>Conteúdo local, especialistas e serviços de saúde em um só portal.</h2>
+            <p>Matérias, podcast, revista e guia profissional organizados por cidade para quem busca informação e referência regional.</p>
+            <div>
+              <Link href="/materias">Ver matérias <ArrowRight size={14} /></Link>
+              <Link href="/buscar">Buscar especialistas <ArrowUpRight size={14} /></Link>
+            </div>
+          </div>
+        </section>
 
         <section className="section shell commercial-highlights compact-home-section">
           <div className="section-kicker"><span>01</span><p>Guia local</p></div>
