@@ -98,7 +98,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
                 <strong>{results.length} empresas no guia</strong>
                 <span>{activeFilters.length ? activeFilters.join(" · ") : "Toda a região"}</span>
               </div>
-              <Link href="/anuncie">Solicitar inclusão</Link>
+              <Link href="/inclusao">Solicitar inclusão</Link>
             </div>
 
             {results.length ? (
@@ -124,7 +124,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
                     <aside className="business-side">
                       <small>Contato</small>
                       <strong>{item.phone}</strong>
-                      <Link href="/anuncie">Atualizar cadastro</Link>
+                      <Link href="/inclusao">Atualizar cadastro</Link>
                       <p>Perfil demonstrativo sem venda direta ou agendamento.</p>
                     </aside>
                   </article>

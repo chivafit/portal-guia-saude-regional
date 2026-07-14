@@ -99,3 +99,19 @@ export const contentItems = sqliteTable("content_items", {
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
+
+export const inclusionRequests = sqliteTable("inclusion_requests", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  entityType: text("entity_type").notNull(),
+  name: text("name").notNull(),
+  category: text("category"),
+  cityName: text("city_name"),
+  contactName: text("contact_name").notNull(),
+  contactEmail: text("contact_email"),
+  contactPhone: text("contact_phone").notNull(),
+  message: text("message"),
+  status: text("status").notNull().default("new"),
+  source: text("source").notNull().default("portal"),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});

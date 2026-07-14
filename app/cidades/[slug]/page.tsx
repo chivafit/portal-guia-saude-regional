@@ -98,7 +98,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 <div className="city-empty-card">
                   <strong>Base local em formação</strong>
                   <p>Esta cidade ainda não tem perfis demonstrativos suficientes. A coleta será priorizada na etapa de base regional.</p>
-                  <Link href="/anuncie">Solicitar inclusão →</Link>
+                  <Link href="/inclusao">Solicitar inclusão →</Link>
                 </div>
               )}
             </section>
@@ -147,7 +147,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               <small>QUER PARTICIPAR?</small>
               <strong>Profissionais e empresas de {city.name}</strong>
               <p>Solicite inclusão no guia, envie uma pauta ou consulte formatos de banner local.</p>
-              <Link href="/anuncie">Falar com o Guia Saúde →</Link>
+              <Link href="/inclusao">Falar com o Guia Saúde →</Link>
             </aside>
           </div>
         </section>

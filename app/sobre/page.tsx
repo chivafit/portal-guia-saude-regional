@@ -95,7 +95,7 @@ export default function AboutPage() {
               <h2>Profissionais, empresas e marcas podem fazer parte do portal.</h2>
             </div>
             <p>Solicite inclusão, envie uma pauta ou consulte formatos comerciais para presença regional.</p>
-            <Link href="/anuncie">Conhecer oportunidades</Link>
+            <Link href="/inclusao">Solicitar inclusão</Link>
           </div>
         </section>
       </main>
