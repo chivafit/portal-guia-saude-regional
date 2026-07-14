@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Activity, Apple, ArrowRight, ArrowUpRight, BookOpen, Brain, Dumbbell, Ear, HeartPulse, MapPin, Megaphone, Mic, Play, Smile, Stethoscope, Syringe } from "lucide-react";
+import { Activity, Apple, ArrowRight, ArrowUpRight, BookOpen, Brain, Building2, Dumbbell, Ear, HeartPulse, MapPin, Megaphone, Mic, Play, Smile, Stethoscope, Syringe } from "lucide-react";
 import { SearchForm } from "@/components/SearchForm";
 import { CityGateway } from "@/components/CityGateway";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -15,7 +15,14 @@ const adFormats = [
   { title: "Perfil em destaque", place: "Busca e diretório", code: "Card premium", image: "/ads/perfil-destaque.svg" },
   { title: "Matéria patrocinada", place: "Conteúdo editorial", code: "Publieditorial", image: "/ads/materia-patrocinada.svg" },
   { title: "Podcast apoiado", place: "Conexão Saúde", code: "Cota de apoio", image: "/ads/podcast-apoiado.svg" },
-  { title: "Revista digital", place: "Edição e acervo", code: "Página de marca", image: "/ads/revista-digital.svg" },
+  { title: "Revista impressa", place: "Edição física + portal", code: "Página de marca", image: "/ads/revista-digital.svg" },
+];
+const commercialHighlights = [
+  { icon: Megaphone, title: "Banner local", text: "Cotas por cidade para marcas que querem presença direta no portal.", href: "/anuncie" },
+  { icon: Stethoscope, title: "Profissional em destaque", text: "Mais visibilidade na busca e nos recortes editoriais do guia.", href: "/buscar" },
+  { icon: Building2, title: "Empresa em destaque", text: "Clínicas, farmácias, laboratórios e serviços com presença premium.", href: "/empresas" },
+  { icon: BookOpen, title: "Revista impressa", text: "Presença em edição física com extensão para o portal.", href: "/revista" },
+  { icon: Mic, title: "Podcast apoiado", text: "Cota de apoio para episódios, cortes e distribuição social.", href: "/podcast" },
 ];
 
 export default async function Home() {
@@ -38,8 +45,22 @@ export default async function Home() {
 
         <CityGateway />
 
+        <section className="section shell commercial-highlights compact-home-section">
+          <div className="section-kicker"><span>01</span><p>Destaques da região</p></div>
+          <div className="commercial-highlights-head">
+            <h2>Publicidade com função clara dentro do portal.</h2>
+            <p>Espaços pensados para gerar presença, reputação e descoberta — sem atrapalhar a navegação de quem procura saúde.</p>
+          </div>
+          <div className="commercial-highlight-grid">
+            {commercialHighlights.map((item) => {
+              const Icon = item.icon;
+              return <Link href={item.href} key={item.title}><Icon size={21} /><strong>{item.title}</strong><p>{item.text}</p><span>Conhecer formato <ArrowRight size={13} /></span></Link>;
+            })}
+          </div>
+        </section>
+
         <section className="section shell home-featured compact-home-section">
-          <div className="section-kicker"><span>01</span><p>Conteúdo e presença</p></div>
+          <div className="section-kicker"><span>02</span><p>Conteúdo e presença</p></div>
           <div className="featured-board">
             <article className="featured-main">
               <div className="featured-main-media" aria-label="Imagem editorial de saúde regional" />
@@ -52,14 +73,14 @@ export default async function Home() {
             </article>
             <div className="featured-side">
               <Link href="/podcast"><Mic size={18} /><span>Podcast</span><strong>Conversas com profissionais da região.</strong></Link>
-              <Link href="/revista"><BookOpen size={18} /><span>Revista digital</span><strong>Edições, entrevistas e histórias locais.</strong></Link>
+              <Link href="/revista"><BookOpen size={18} /><span>Revista impressa</span><strong>Edições, entrevistas e histórias locais.</strong></Link>
               <Link href="/anuncie"><Megaphone size={18} /><span>Mídia regional</span><strong>Banners e campanhas com segmentação.</strong></Link>
             </div>
           </div>
         </section>
 
         <section className="section shell quick-access compact-home-section">
-          <div className="section-kicker"><span>02</span><p>Encontre o cuidado certo</p></div>
+          <div className="section-kicker"><span>03</span><p>Encontre o cuidado certo</p></div>
           <div className="section-heading editorial-heading">
             <h2>Por onde você<br />quer começar?</h2>
             <p>Uma busca simples para descobrir profissionais e serviços próximos, organizados por área e cidade.</p>
@@ -76,7 +97,7 @@ export default async function Home() {
 
         <section className="editorial-feature compact-home-section" id="materias">
           <div className="shell">
-            <div className="section-kicker light"><span>03</span><p>Informação para viver melhor</p></div>
+            <div className="section-kicker light"><span>04</span><p>Informação para viver melhor</p></div>
             <div className="feature-grid">
               <article className="lead-story">
                 <div className="lead-art"><span>EDIÇÃO ESPECIAL</span><b>Saúde<br />em cada<br /><em>fase.</em></b></div>
@@ -90,14 +111,14 @@ export default async function Home() {
         </section>
 
         <section className="section shell city-section compact-home-section">
-          <div className="section-kicker"><span>04</span><p>Saúde feita de proximidade</p></div>
+          <div className="section-kicker"><span>05</span><p>Saúde feita de proximidade</p></div>
           <div className="city-intro"><h2>Sete cidades.<br /><em>Uma região conectada.</em></h2><p>Conheça o ecossistema de saúde de cada município: profissionais, serviços, notícias e oportunidades.</p></div>
           <div className="city-grid">{cities.map((city, i) => <Link key={city} href={`/cidades/${citySlug(city)}`}><span>0{i+1}</span><strong>{city}</strong><p>Guia local em construção</p><small>Explorar a cidade <ArrowUpRight size={13} /></small></Link>)}</div>
         </section>
 
         <section className="directory-section compact-home-section">
           <div className="shell">
-            <div className="section-kicker light"><span>05</span><p>Profissionais perto de você</p></div>
+            <div className="section-kicker light"><span>06</span><p>Profissionais perto de você</p></div>
             <div className="directory-title"><h2>Quem cuida<br /><em>da nossa região.</em></h2><Link href="/buscar">Ver guia completo <ArrowRight size={14} /></Link></div>
             <div className="profile-preview-grid">{featuredProfessionals.slice(0,3).map((item, index) => <article className="profile-preview" key={item.slug}><div className={`portrait portrait-${index+1}`}><Stethoscope size={42} /></div><div><span>{item.profession} · {item.city}</span><h3>{item.name}</h3><p>{item.specialty}</p><Link href={`/profissionais/${item.slug}`}>Ver perfil <ArrowUpRight size={14} /></Link></div></article>)}</div>
           </div>
@@ -106,7 +127,7 @@ export default async function Home() {
         <section className="media-section compact-home-section" id="podcast">
           <div className="shell media-grid">
             <div className="podcast-card"><p>CONEXÃO SAÚDE <Mic size={14} /> PODCAST</p><div className="sound-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div><small>PRÓXIMO AO VIVO · 14/07 ÀS 19H</small><h2>Radiologia odontológica: como a tecnologia transforma tratamentos.</h2><p>Com Rodrigo Soares Costa, tecnólogo em radiologia.</p><button aria-label="Conhecer o episódio do Conexão Saúde"><Play size={20} fill="currentColor" /></button></div>
-            <div className="magazine-card" id="revista"><div className="mag-cover"><span>Guia</span><strong>Saúde</strong><small>REVISTA REGIONAL</small><b>O FUTURO<br />DO CUIDADO<br /><em>É PERTO.</em></b><p>14ª EDIÇÃO</p></div><div><p className="eyebrow">Revista Guia Saúde</p><h2>Histórias, especialistas e ideias que transformam a saúde regional.</h2><span>Conhecer a revista <ArrowRight size={14} /></span></div></div>
+            <div className="magazine-card" id="revista"><div className="mag-cover"><span>Guia</span><strong>Saúde</strong><small>REVISTA IMPRESSA</small><b>O FUTURO<br />DO CUIDADO<br /><em>É PERTO.</em></b><p>14ª EDIÇÃO</p></div><div><p className="eyebrow">Revista Guia Saúde</p><h2>Histórias, especialistas e marcas em uma edição impressa regional.</h2><span>Conhecer a revista <ArrowRight size={14} /></span></div></div>
           </div>
         </section>
 

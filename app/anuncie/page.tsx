@@ -9,13 +9,13 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
   "Anuncie",
-  "Mídia kit do Guia Saúde com banners, revista digital, podcast, Instagram e campanhas regionais de saúde.",
+  "Mídia kit do Guia Saúde com banners, revista impressa, podcast, Instagram e campanhas regionais de saúde.",
   "/anuncie",
 );
 
 const channels = [
   ["Portal", "Banners, perfis em destaque e presença segmentada por cidade ou categoria."],
-  ["Revista digital", "Edições, publieditoriais e cotas comerciais para marcas da saúde."],
+  ["Revista impressa", "Edições físicas, publieditoriais e cotas comerciais para marcas da saúde."],
   ["Podcast", "Apoio de episódios, chamadas comerciais e conteúdo com autoridade regional."],
   ["Instagram", "Distribuição social conectada às pautas, profissionais e campanhas."],
 ];
@@ -26,7 +26,7 @@ const formats = [
   { title: "Perfil em destaque", tag: "Diretório", text: "Mais destaque para profissionais, clínicas, consultórios, laboratórios e empresas." },
   { title: "Conteúdo de marca", tag: "Autoridade", text: "Matérias identificadas, entrevistas e pautas educativas com revisão editorial." },
   { title: "Podcast apoiado", tag: "Conexão Saúde", text: "Cotas de apoio, chamada do apresentador e distribuição integrada do episódio." },
-  { title: "Revista + portal", tag: "Campanha integrada", text: "Presença combinada na revista digital, portal e redes sociais da Guia Saúde." },
+  { title: "Revista impressa + portal", tag: "Campanha integrada", text: "Presença combinada na edição física, portal e redes sociais da Guia Saúde." },
 ];
 
 const packages = [
@@ -43,7 +43,7 @@ const packages = [
   {
     name: "Autoridade",
     bestFor: "Campanhas com conteúdo, reputação e distribuição multiplataforma.",
-    items: ["Matéria identificada", "Podcast ou entrevista", "Revista digital", "Distribuição social"],
+    items: ["Matéria identificada", "Podcast ou entrevista", "Revista impressa", "Distribuição social"],
   },
 ];
 
@@ -71,7 +71,7 @@ export default function AdvertisePage() {
             <div>
               <p className="eyebrow">Mídia regional integrada</p>
               <h1>Sua marca dentro do ecossistema Guia Saúde.</h1>
-              <p>Portal, revista digital, podcast e Instagram conectados para campanhas de saúde, bem-estar, serviços e negócios regionais.</p>
+              <p>Portal, revista impressa, podcast e Instagram conectados para campanhas de saúde, bem-estar, serviços e negócios regionais.</p>
               <div className="media-kit-actions">
                 <a href="https://wa.me/5537999474443" target="_blank" rel="noreferrer">Solicitar proposta <ArrowRight size={14} /></a>
                 <Link href="/buscar">Ver diretório <Search size={14} /></Link>
@@ -150,7 +150,7 @@ export default function AdvertisePage() {
           <div className="commercial-example-grid">
             <article><Megaphone size={22} /><strong>Farmácia local</strong><p>Banner topo na cidade + destaque em empresas + chamada em matéria de prevenção.</p></article>
             <article><Building2 size={22} /><strong>Clínica ou laboratório</strong><p>Campanha por cidade + card premium + publieditorial educativo.</p></article>
-            <article><Podcast size={22} /><strong>Marca regional</strong><p>Portal + podcast + revista digital + distribuição social integrada.</p></article>
+            <article><Podcast size={22} /><strong>Marca regional</strong><p>Portal + podcast + revista impressa + distribuição social integrada.</p></article>
           </div>
         </section>
 
@@ -159,7 +159,7 @@ export default function AdvertisePage() {
             <div>
               <p className="eyebrow">Pacotes sugeridos</p>
               <h2>Três caminhos para vender sem complicar.</h2>
-              <p>Os pacotes funcionam como ponto de partida. A proposta final pode combinar banners, perfil, conteúdo, podcast, revista e redes sociais.</p>
+              <p>Os pacotes funcionam como ponto de partida. A proposta final pode combinar banners, perfil, conteúdo, podcast, revista impressa e redes sociais.</p>
             </div>
             <div className="package-grid">
               {packages.map((item) => (
