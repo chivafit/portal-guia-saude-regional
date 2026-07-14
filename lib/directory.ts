@@ -93,6 +93,45 @@ export async function createOrganization(input: {
   return result?.id;
 }
 
+export async function updateProfessional(id: number, input: {
+  publicName: string; profession: string; specialty?: string; cityName?: string;
+  organizationName?: string; publicPhone?: string; whatsapp?: string; councilAcronym?: string;
+  councilState?: string; registrationNumber?: string; summary?: string; services?: string; status?: DirectoryStatus;
+}, actorEmail?: string) {
+  const db = await getD1();
+  await db.batch([
+    db.prepare(`UPDATE professionals SET
+      public_name = ?, profession = ?, specialty = ?, city_name = ?, organization_name = ?,
+      public_phone = ?, whatsapp = ?, council_acronym = ?, council_state = ?,
+      registration_number = ?, summary = ?, services = ?, status = ?, updated_at = CURRENT_TIMESTAMP
+      WHERE id = ?`)
+      .bind(input.publicName, input.profession, input.specialty ?? null, input.cityName ?? null,
+        input.organizationName ?? null, input.publicPhone ?? null, input.whatsapp ?? null,
+        input.councilAcronym ?? null, input.councilState ?? null, input.registrationNumber ?? null,
+        input.summary ?? null, input.services ?? null, input.status ?? "draft", id),
+    db.prepare("INSERT INTO audit_log (entity_type, entity_id, action, actor_email, detail) VALUES (?, ?, ?, ?, ?)")
+      .bind("professional", id, "updated", actorEmail ?? null, null),
+  ]);
+}
+
+export async function updateOrganization(id: number, input: {
+  publicName: string; category: string; cityName?: string; publicPhone?: string; address?: string;
+  cnesCode?: string; summary?: string; services?: string; status?: DirectoryStatus;
+}, actorEmail?: string) {
+  const db = await getD1();
+  await db.batch([
+    db.prepare(`UPDATE organizations SET
+      public_name = ?, category = ?, city_name = ?, public_phone = ?, address = ?,
+      cnes_code = ?, summary = ?, services = ?, status = ?, updated_at = CURRENT_TIMESTAMP
+      WHERE id = ?`)
+      .bind(input.publicName, input.category, input.cityName ?? null, input.publicPhone ?? null,
+        input.address ?? null, input.cnesCode ?? null, input.summary ?? null,
+        input.services ?? null, input.status ?? "draft", id),
+    db.prepare("INSERT INTO audit_log (entity_type, entity_id, action, actor_email, detail) VALUES (?, ?, ?, ?, ?)")
+      .bind("organization", id, "updated", actorEmail ?? null, null),
+  ]);
+}
+
 export async function setDirectoryStatus(entity: DirectoryEntity, id: number, status: DirectoryStatus, actorEmail?: string) {
   const db = await getD1();
   const table = entity === "professional" ? "professionals" : "organizations";
