@@ -7,7 +7,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { articles, cityDetails, organizations, professions, professionals } from "@/lib/data";
 import { publishedOrganizations, publishedProfessionals } from "@/lib/directory";
 import { pageMetadata } from "@/lib/seo";
-import { cityAdCode } from "@/lib/city-utils";
+import { cityAdCode, citySlug } from "@/lib/city-utils";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -31,6 +31,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
   const localOrganizations = organizationSource.filter((item) => item.city === city.name);
   const localArticles = articles.filter((item) => item.city === city.name || item.city === "Regional");
   const cityQuery = encodeURIComponent(city.name);
+  const cityVisual = `/ads/cidade-${citySlug(city.name)}.svg`;
   return (
     <>
       <SiteHeader />
@@ -72,14 +73,23 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <AdSlot code={cityAdCode(city.name)} />
           </div>
 
+          <section className="city-visual-banner" style={{ backgroundImage: `url(${cityVisual})` }}>
+            <div>
+              <span>Guia Saúde em {city.name}</span>
+              <strong>Conteúdo local, busca de confiança e presença regional.</strong>
+              <p>Um ponto de entrada para matérias, profissionais, empresas de saúde, revista e podcast da cidade.</p>
+            </div>
+          </section>
+
           <div className="local-content city-editorial-panel city-editorial-panel-main" id="materias">
             <div>
               <p className="eyebrow">Matérias da cidade</p>
               <h2><Newspaper size={30} /> Saúde, prevenção e informação local.</h2>
               <p>Conteúdos úteis para quem vive em {city.name}: prevenção, entrevistas, campanhas públicas, pautas da revista e orientação para buscar atendimento.</p>
               <div className="city-article-row">
-                {localArticles.slice(0, 2).map((article) => (
+                {localArticles.slice(0, 2).map((article, index) => (
                   <article key={article.slug}>
+                    <div className={`city-article-image city-article-image-${index + 1}`} aria-hidden="true" />
                     <span>{article.category}</span>
                     <strong>{article.title}</strong>
                     <p>{article.excerpt}</p>
@@ -150,6 +160,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
 
           <div className="city-media-strip city-media-strip-compact">
             <article>
+              <div className="city-media-image city-media-image-revista" aria-hidden="true" />
               <BookOpen size={22} />
               <span>Revista física</span>
               <strong>Presença impressa com extensão para {city.name}</strong>
@@ -157,6 +168,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               <Link href="/revista">Ver revista <ArrowRight size={14} /></Link>
             </article>
             <article>
+              <div className="city-media-image city-media-image-podcast" aria-hidden="true" />
               <Mic size={22} />
               <span>Podcast</span>
               <strong>Conexão Saúde com pauta local</strong>
@@ -164,6 +176,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               <Link href="/podcast">Ver podcast <ArrowRight size={14} /></Link>
             </article>
             <article>
+              <div className="city-media-image city-media-image-guia" aria-hidden="true" />
               <Stethoscope size={22} />
               <span>Guia local</span>
               <strong>Profissionais e empresas em um só lugar</strong>

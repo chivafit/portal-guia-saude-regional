@@ -303,3 +303,123 @@ body{font-family:var(--font-sans);background:var(--paper);color:var(--text)}h1,h
 
 /* Editorial font tuning */
 h1,h2,h3,.brand span,.commercial-highlight-grid strong,.profession-card strong,.city-grid strong,.profile-preview h3,.doctor-card h2,.business-head h2,.city-block-head h2,.city-article-row strong,.city-media-strip-compact strong{font-family:var(--font-editorial)!important;letter-spacing:-.035em}.hero h1,.city-landing-copy h1{letter-spacing:-.055em!important}.brand span{font-weight:700!important}.city-article-row strong,.city-media-strip-compact strong,.city-block-head h2{font-weight:700!important}.doctor-card h2,.business-head h2{font-weight:700!important}
+
+/* City pages: filled visual inventory without exposing empty ad slots */
+.city-visual-banner{
+  position:relative;
+  min-height:238px;
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
+  margin:0 0 30px;
+  padding:30px;
+  border-radius:26px;
+  background-size:cover;
+  background-position:center;
+  box-shadow:0 22px 60px rgba(31,51,66,.1);
+  isolation:isolate;
+}
+.city-visual-banner::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(90deg,rgba(8,24,33,.76),rgba(8,24,33,.34),rgba(8,24,33,.08)),linear-gradient(180deg,rgba(8,24,33,.05),rgba(8,24,33,.42));
+}
+.city-visual-banner div{
+  max-width:620px;
+  color:#fff;
+}
+.city-visual-banner span{
+  display:inline-flex;
+  margin-bottom:12px;
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
+  color:rgba(255,255,255,.86);
+  font-size:.68rem;
+  font-weight:850;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  backdrop-filter:blur(8px);
+}
+.city-visual-banner strong{
+  display:block;
+  max-width:560px;
+  font-family:var(--font-editorial);
+  font-size:clamp(1.8rem,3.4vw,3.35rem);
+  font-weight:700;
+  line-height:.98;
+  letter-spacing:-.045em;
+}
+.city-visual-banner p{
+  max-width:540px;
+  margin:12px 0 0;
+  color:rgba(255,255,255,.78);
+  font-size:.92rem;
+  line-height:1.55;
+}
+.city-article-row article{
+  padding-top:0!important;
+}
+.city-article-row article::before{
+  display:none;
+}
+.city-article-image{
+  height:118px;
+  margin:0 -14px 14px;
+  border-radius:22px 22px 0 0;
+  background-size:cover;
+  background-position:center;
+  border-bottom:1px solid #e2e9ed;
+}
+.city-article-image-1{
+  background-image:linear-gradient(135deg,rgba(23,56,78,.08),rgba(23,56,78,.18)),url('/guia-saude-hero-light.png');
+}
+.city-article-image-2{
+  background-image:linear-gradient(135deg,rgba(23,56,78,.1),rgba(225,120,64,.16)),url('/hero-regional.png');
+}
+.city-media-strip-compact article{
+  overflow:hidden;
+  padding-top:0!important;
+}
+.city-media-image{
+  height:126px;
+  margin:0 -18px 16px;
+  border-radius:22px 22px 0 0;
+  background-color:#edf4f7;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
+  border-bottom:1px solid #e2e9ed;
+}
+.city-media-image-revista{
+  background-image:linear-gradient(135deg,rgba(251,250,247,.22),rgba(23,56,78,.05)),url('/placeholders/revista-capa.svg');
+  background-size:cover,contain;
+}
+.city-media-image-podcast{
+  background-image:linear-gradient(135deg,rgba(23,56,78,.08),rgba(225,120,64,.14)),url('/placeholders/podcast-cover.svg');
+  background-size:cover,cover;
+}
+.city-media-image-guia{
+  background-image:linear-gradient(135deg,rgba(23,56,78,.08),rgba(23,56,78,.18)),url('/placeholders/clinic-cover.svg');
+}
+.city-media-strip-compact article svg{
+  margin-bottom:10px!important;
+}
+@media(max-width:640px){
+  .city-visual-banner{
+    min-height:210px;
+    padding:22px;
+    border-radius:22px;
+  }
+  .city-visual-banner p{
+    font-size:.82rem;
+  }
+  .city-article-image{
+    height:108px;
+  }
+  .city-media-image{
+    height:116px;
+  }
+}
