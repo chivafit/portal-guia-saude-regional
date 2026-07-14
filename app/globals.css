@@ -776,3 +776,103 @@ h1,h2,h3,.brand span,.commercial-highlight-grid strong,.profession-card strong,.
     width:max-content;
   }
 }
+
+/* Search page hero: compact, premium directory header */
+.directory-hero-refined{
+  padding:42px 0 32px!important;
+  border-bottom:1px solid #dfe8ed;
+  background:linear-gradient(180deg,#fbfaf7,#f4f8fa)!important;
+}
+.directory-hero-refined .shell{
+  max-width:1180px;
+}
+.directory-hero-refined-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:14px;
+}
+.directory-hero-refined-head .eyebrow{
+  margin:0;
+}
+.directory-hero-refined-head>div{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.directory-hero-refined-head>div span{
+  display:inline-flex;
+  padding:7px 10px;
+  border:1px solid #dfe8ed;
+  border-radius:999px;
+  background:#fff;
+  color:#49687a;
+  font-size:.68rem;
+  font-weight:800;
+}
+.directory-hero-refined h1{
+  max-width:760px!important;
+  margin:0!important;
+  color:#24465b!important;
+  font-family:var(--font-editorial)!important;
+  font-size:clamp(2.35rem,4.7vw,4.6rem)!important;
+  font-weight:700!important;
+  line-height:.96!important;
+  letter-spacing:-.055em!important;
+}
+.directory-hero-refined p:not(.eyebrow){
+  max-width:640px;
+  margin:14px 0 0;
+  color:#657782;
+  font-size:.96rem;
+  line-height:1.58;
+}
+.directory-search-card{
+  max-width:960px;
+  margin-top:22px;
+  padding:8px;
+  border:1px solid #dfe8ed;
+  border-radius:24px;
+  background:rgba(255,255,255,.78);
+  box-shadow:0 18px 46px rgba(31,51,66,.06);
+}
+.directory-search-card .portal-search{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:18px!important;
+  box-shadow:none!important;
+  background:#fff!important;
+}
+.directory-search-card .portal-search label{
+  padding:14px 16px!important;
+}
+.directory-search-card .portal-search button{
+  border-radius:0 18px 18px 0!important;
+}
+@media(max-width:760px){
+  .directory-hero-refined{
+    padding:30px 0 24px!important;
+  }
+  .directory-hero-refined-head{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .directory-search-card{
+    border-radius:20px;
+    padding:6px;
+  }
+  .directory-search-card .portal-search{
+    grid-template-columns:1fr!important;
+  }
+  .directory-search-card .portal-search label{
+    border-right:0!important;
+    border-bottom:1px solid #dfe8ed!important;
+  }
+  .directory-search-card .portal-search button{
+    min-height:52px;
+    border-radius:0 0 18px 18px!important;
+  }
+}
