@@ -4,7 +4,7 @@ import { siteUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const staticRoutes = ["", "/buscar", "/empresas", "/materias", "/podcast", "/revista", "/anuncie"].map((path) => ({
+  const staticRoutes = ["", "/buscar", "/empresas", "/materias", "/podcast", "/revista", "/anuncie", "/sobre"].map((path) => ({
     url: `${siteUrl}${path}`,
     lastModified: now,
     changeFrequency: path === "" ? "daily" as const : "weekly" as const,

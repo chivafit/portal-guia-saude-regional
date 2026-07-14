@@ -36,6 +36,7 @@ test("renders search, profile, companies and admin routes", async () => {
     ["/podcast", /Conversas que informam e aproximam/],
     ["/revista", /Histórias que circulam/],
     ["/cidades/piumhi", /Profissionais, clínicas, serviços/],
+    ["/sobre", /Sobre o Guia Saúde/],
   ];
   for (const [path, expected] of routes) {
     const response = await fetch(`${origin}${path}`);

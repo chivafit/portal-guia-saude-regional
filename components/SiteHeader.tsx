@@ -14,6 +14,7 @@ export function SiteHeader() {
           <Link href="/materias">Matérias</Link>
           <Link href="/podcast">Podcast</Link>
           <Link href="/revista">Revista</Link>
+          <Link href="/sobre">Sobre</Link>
         </nav>
         <Link href="/anuncie" className="admin-link">Anuncie <span>↗</span></Link>
       </div>
