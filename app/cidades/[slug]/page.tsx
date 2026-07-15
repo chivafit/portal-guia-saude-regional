@@ -83,9 +83,11 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
 
           <div className="local-content city-editorial-panel city-editorial-panel-main" id="materias">
             <div>
-              <p className="eyebrow">Matérias da cidade</p>
-              <h2><Newspaper size={30} /> Saúde, prevenção e informação local.</h2>
-              <p>Conteúdos úteis para quem vive em {city.name}: prevenção, entrevistas, campanhas públicas, pautas da revista e orientação para buscar atendimento.</p>
+              <div className="city-editorial-head">
+                <p className="eyebrow">Matérias da cidade</p>
+                <h2>Conteúdo local de saúde</h2>
+                <p>Prevenção, entrevistas, campanhas públicas e pautas da revista para quem vive em {city.name}.</p>
+              </div>
               <div className="city-article-row">
                 {localArticles.slice(0, 2).map((article, index) => (
                   <article key={article.slug}>
