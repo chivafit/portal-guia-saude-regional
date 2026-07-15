@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { CitySelector } from "@/components/CitySelector";
+import { GuiaSaudeLogo } from "@/components/GuiaSaudeLogo";
 
 export function SiteHeader() {
   return (
     <><div className="topline"><div className="shell">O portal de saúde do Centro-Oeste de Minas <span>Conteúdo, profissionais e serviços perto de você</span></div></div><header className="site-header">
       <div className="shell header-inner">
         <Link href="/" className="brand" aria-label="Portal Guia Saúde — início">
-          <span><b>saúde</b> GUIA</span>
-          <small>Portal regional</small>
+          <GuiaSaudeLogo />
         </Link>
         <nav className="main-nav" aria-label="Navegação principal">
           <Link href="/buscar">Profissionais</Link>

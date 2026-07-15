@@ -1564,3 +1564,66 @@ h1,h2,h3,
 .mag-cover>b em{
   color:#0032dc!important;
 }
+
+/* Refined Guia Saúde wordmark */
+.brand{
+  min-width:max-content;
+}
+.brand>span:not(.guia-logo){
+  display:none;
+}
+.guia-logo{
+  display:inline-grid;
+  gap:0;
+  line-height:1;
+}
+.guia-logo-kicker{
+  display:block;
+  color:#000!important;
+  font-family:var(--font-sans)!important;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+}
+.guia-logo-main{
+  display:block;
+  margin-top:1px;
+  color:#0032dc!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:2.05rem;
+  font-weight:700;
+  line-height:.82;
+  letter-spacing:-.075em;
+}
+.guia-logo-tagline{
+  display:block;
+  margin-top:8px;
+  color:#000!important;
+  font-family:var(--font-sans)!important;
+  font-size:.48rem;
+  font-weight:700;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+.guia-logo-compact .guia-logo-main{
+  font-size:1.8rem;
+}
+.admin-header .guia-logo-kicker,
+.admin-header .guia-logo-tagline{
+  color:#fff!important;
+}
+.admin-header .guia-logo-main{
+  color:#d4ecff!important;
+}
+@media(max-width:640px){
+  .guia-logo-main{
+    font-size:1.72rem;
+  }
+  .guia-logo-kicker{
+    font-size:.6rem;
+  }
+  .guia-logo-tagline{
+    font-size:.42rem;
+  }
+}
