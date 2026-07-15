@@ -1823,3 +1823,44 @@ h1,h2,h3,
   color:#fff!important;
   border-color:#000!important;
 }
+
+/* Advertise page contrast guard */
+.advertise-hero.media-kit-hero,
+.commercial-cta{
+  background:#0032dc!important;
+  color:#fff!important;
+}
+.advertise-hero.media-kit-hero *,
+.commercial-cta *{
+  color:#fff!important;
+}
+.advertise-hero.media-kit-hero p:not(.eyebrow),
+.commercial-cta p,
+.commercial-cta .footer-grid p,
+.commercial-cta .footer-grid a{
+  color:#d4ecff!important;
+}
+.advertise-hero.media-kit-hero .eyebrow,
+.commercial-cta .eyebrow{
+  color:#d4ecff!important;
+}
+.advertise-hero.media-kit-hero .media-kit-actions a,
+.commercial-cta a{
+  background:#fff!important;
+  color:#0032dc!important;
+  border-color:#fff!important;
+}
+.advertise-hero.media-kit-hero .media-kit-actions a *,
+.commercial-cta a *{
+  color:#0032dc!important;
+  stroke:#0032dc!important;
+}
+.advertise-hero.media-kit-hero .media-kit-card{
+  background:rgba(255,255,255,.12)!important;
+  border-color:rgba(255,255,255,.28)!important;
+  color:#fff!important;
+}
+.advertise-hero.media-kit-hero .media-kit-card p,
+.advertise-hero.media-kit-hero .media-kit-card small{
+  color:#d4ecff!important;
+}
