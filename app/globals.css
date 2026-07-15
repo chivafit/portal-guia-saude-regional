@@ -1787,3 +1787,33 @@ h1,h2,h3,
     grid-template-columns:1fr!important;
   }
 }
+
+/* Final contrast guard for dark CTAs */
+.doctor-side a,
+.business-side a,
+.contact-reveal>button,
+.revealed-contact a,
+.city-hero-actions a:first-child,
+.portal-search button,
+.directory-search-card button,
+.city-search-panel button{
+  background:#000!important;
+  color:#fff!important;
+  border-color:#000!important;
+}
+.doctor-side a *,
+.business-side a *,
+.contact-reveal>button *,
+.revealed-contact a *,
+.city-hero-actions a:first-child *,
+.portal-search button *,
+.directory-search-card button *,
+.city-search-panel button *{
+  color:#fff!important;
+  stroke:#fff!important;
+}
+.doctor-side a:visited,
+.business-side a:visited,
+.revealed-contact a:visited{
+  color:#fff!important;
+}
