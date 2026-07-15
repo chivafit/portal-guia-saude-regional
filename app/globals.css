@@ -1269,7 +1269,6 @@ h1,h2,h3,
 .featured-main a,
 .featured-side a,
 .city-article-row article a,
-.city-mini-list em,
 .city-media-strip-compact a,
 .result-toolbar a,
 .profile-clean-back,
@@ -1816,4 +1815,11 @@ h1,h2,h3,
 .business-side a:visited,
 .revealed-contact a:visited{
   color:#fff!important;
+}
+.city-mini-list em,
+.city-professional-list em,
+.city-business-list em{
+  background:#000!important;
+  color:#fff!important;
+  border-color:#000!important;
 }
