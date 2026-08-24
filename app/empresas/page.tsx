@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { cities, organizations } from "@/lib/data";
 import { publishedOrganizations } from "@/lib/directory";
 import { pageMetadata } from "@/lib/seo";
+import { isCityAvailable } from "@/lib/cities";
 import { cityAdCode } from "@/lib/city-utils";
 
 export const metadata = pageMetadata(
@@ -76,8 +77,8 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
               <label>
                 Cidade
                 <select name="cidade" defaultValue={city}>
-                  <option value="">Todas as cidades</option>
-                  {cities.map((item) => <option key={item}>{item}</option>)}
+                  <option value="">Selecione</option>
+                  {cities.map((item) => <option key={item} disabled={!isCityAvailable(item)}>{item}{!isCityAvailable(item) ? " — EM BREVE" : ""}</option>)}
                 </select>
               </label>
               <label>

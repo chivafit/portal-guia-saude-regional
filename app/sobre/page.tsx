@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { BookOpen, Building2, MapPin } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { cities } from "@/lib/data";
+import { isCityAvailable } from "@/lib/cities";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -31,11 +33,20 @@ export default function AboutPage() {
     <>
       <SiteHeader />
       <main>
-        <section className="content-hero about-hero">
-          <div className="shell">
-            <p className="eyebrow">Sobre o Guia Saúde</p>
-            <h1>Um portal regional para aproximar cuidado, informação e presença profissional.</h1>
-            <p>O Guia Saúde reúne profissionais, empresas, conteúdo editorial, revista, podcast e mídia paga em uma plataforma feita para o ecossistema de saúde da região.</p>
+        <section className="content-hero about-hero portal-section-hero">
+          <div className="shell portal-section-hero-grid">
+            <div>
+              <p className="eyebrow">Sobre o Guia Saúde</p>
+              <h1>Um portal regional para aproximar cuidado, informação e presença profissional.</h1>
+              <p>O Guia Saúde reúne profissionais, empresas, conteúdo editorial, revista, podcast e mídia paga em uma plataforma feita para o ecossistema de saúde da região.</p>
+            </div>
+            <aside className="portal-section-summary">
+              <strong>O portal reúne:</strong>
+              <span><MapPin size={17} /> Busca organizada por cidade</span>
+              <span><Building2 size={17} /> Profissionais e empresas locais</span>
+              <span><BookOpen size={17} /> Revista, matérias e podcast</span>
+              <small>Informação regional em uma navegação direta e simples.</small>
+            </aside>
           </div>
         </section>
 
@@ -80,10 +91,10 @@ export default function AboutPage() {
           </div>
           <div className="about-city-grid">
             {cities.map((city) => (
-              <Link key={city} href={`/cidades/${city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replaceAll(" ", "-")}`}>
+              isCityAvailable(city) ? <Link key={city} href={`/cidades/${city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replaceAll(" ", "-")}`}>
                 {city}
                 <span>Ver cidade →</span>
-              </Link>
+              </Link> : <div key={city} className="city-coming-soon" aria-disabled="true">{city}<span>EM BREVE</span></div>
             ))}
           </div>
         </section>

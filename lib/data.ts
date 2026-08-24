@@ -1,3 +1,5 @@
+import { resolveProfessionalImage } from "./avatars";
+
 export type Professional = {
   slug: string;
   name: string;
@@ -14,6 +16,7 @@ export type Professional = {
   imageUrl?: string;
   coverImageUrl?: string;
   logoUrl?: string;
+  source?: string;
 };
 
 export type Organization = {
@@ -27,6 +30,7 @@ export type Organization = {
   services: string[];
   logoUrl?: string;
   coverImageUrl?: string;
+  source?: string;
 };
 
 // Dados exclusivamente demonstrativos. Não representam pessoas reais.
@@ -355,7 +359,7 @@ const baseProfessionals: Professional[] = [
 ];
 
 const supplementalProfessionals: Professional[] = [
-  ...["Capitólio", "Pimenta", "Arcos", "Campo Belo", "Bambuí", "São Roque de Minas"].flatMap((city) => {
+  ...["Capitólio", "Pimenta", "Arcos", "Formiga", "Campo Belo", "Bambuí", "São Roque de Minas"].flatMap((city) => {
     const slugCity = city.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-");
     return [
       ["Médico", "Clínica médica", "CRM-MG", "Consulta clínica", "Prevenção", "Acompanhamento"],
@@ -383,7 +387,74 @@ const supplementalProfessionals: Professional[] = [
   }),
 ];
 
-export const professionals: Professional[] = [...baseProfessionals, ...supplementalProfessionals];
+// Profissionais REAIS de Piumhi importados de diretórios públicos (25/07/2026).
+// Status "Em validação" (verified:false): nome e área vêm da fonte; registro no
+// conselho (CRM/CRO) e contato NÃO foram confirmados — ficam "aguardando validação".
+// Não publicar como definitivo sem validar contato/registro e consentimento.
+const piumhiImportedProfessionals: Professional[] = [
+  { slug: "dr-wallace-costa-mota-clinica-medica-piumhi", name: "Dr. Wallace Costa Mota", profession: "Médico", specialty: "Clínica Médica", city: "Piumhi", organization: "Consultório Dr. Wallace Costa Mota — Rua Armando Viotti, 7, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (CatalogoMed), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Clínica médica", "Cirurgia geral"], source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "dr-gabriel-wobeto-clinica-medica-piumhi", name: "Dr. Gabriel Wobeto", profession: "Médico", specialty: "Clínica Médica", city: "Piumhi", organization: "Clínica São Rafael (Unimed) — Praça Guia Lopes, 248, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (CatalogoMed), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Clínica médica", "Medicina de família e comunidade"], source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "dr-paulo-henrique-faria-silva-oftalmologia-piumhi", name: "Dr. Paulo Henrique Faria Silva", profession: "Médico", specialty: "Oftalmologia", city: "Piumhi", organization: "Clínica Ophtalmocenter — Praça Tuiuti, 160, 2º andar, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (CatalogoMed), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Consulta oftalmológica", "Saúde ocular"], source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "dr-diego-mota-fernandes-ortopedia-piumhi", name: "Dr. Diego Mota Fernandes", profession: "Médico", specialty: "Ortopedia e Traumatologia", city: "Piumhi", organization: "PHD Piumhi Hospital Dia — Praça Guia Lopes, 278, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (CatalogoMed), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Ortopedia", "Traumatologia", "Cirurgia do ombro"], source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "dr-wenner-terra-freitas-otorrino-piumhi", name: "Dr. Wenner Terra Freitas", profession: "Médico", specialty: "Otorrinolaringologia", city: "Piumhi", organization: "Vitalcentro Especialidades Médicas — Praça Tuiuti, 160, 2º andar, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (CatalogoMed), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Otorrinolaringologia", "Ouvido, nariz e garganta"], source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "dr-elton-henrique-alves-cardiologia-piumhi", name: "Dr. Elton Henrique Alves", profession: "Médico", specialty: "Cardiologia", city: "Piumhi", organization: "Consultório — Praça Guia Lopes, 114, sala 102, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (CatalogoMed), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Cardiologia", "Medicina intensiva"], source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "dr-everton-arantes-melo-cardiologia-piumhi", name: "Dr. Éverton Arantes Melo", profession: "Médico", specialty: "Cardiologia", city: "Piumhi", organization: "Clínica do Coração — Rua Armando Viotti, 190, salas 103 e 104, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (CatalogoMed), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Cardiologia", "Cirurgia cardiovascular"], source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "dra-wanessa-dornela-de-oliveira-otorrino-piumhi", name: "Dra. Wanessa Dornela de Oliveira", profession: "Médico", specialty: "Otorrinolaringologia", city: "Piumhi", organization: "Clínica Salutare — Rua Padre Abel, 126, 2º andar, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (CatalogoMed), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Otorrinolaringologia"], source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "dr-wagner-de-oliveira-dornela-pediatria-piumhi", name: "Dr. Wagner de Oliveira Dornela", profession: "Médico", specialty: "Pediatria", city: "Piumhi", organization: "Consultório Dr. Wagner Dornela — Rua Vigário José Florêncio, 98, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (CatalogoMed), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Pediatria", "Ultrassonografia geral"], source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "dr-jose-antonio-dias-dermatologia-piumhi", name: "Dr. José Antônio Dias", profession: "Médico", specialty: "Dermatologia", city: "Piumhi", organization: "Núcleo Dermatológico Cirúrgico — Praça Tuiuti, 114, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (CatalogoMed), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Dermatologia", "Cirurgia geral"], source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "dra-gabriela-rezende-odontologia-piumhi", name: "Dra. Gabriela Rezende", profession: "Dentista", specialty: "Odontologia", city: "Piumhi", organization: "Consultório — Rua Nossa Senhora do Livramento, 161, Centro", registration: "CRO-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (site profissional), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Odontologia geral", "Saúde bucal"], source: "https://dragabrielarezende.codental.site/" },
+  { slug: "dr-gilson-oliveira-implantodontia-piumhi", name: "Dr. Gilson Oliveira", profession: "Dentista", specialty: "Implantodontia", city: "Piumhi", organization: "Consultório de odontologia — Piumhi/MG", registration: "CRO-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (site profissional), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Implante dentário", "Ortodontia"], source: "https://sites.google.com/view/drgilsonoliveirapiumhi/" },
+  // Dentistas (Doctoralia)
+  { slug: "dr-goncalo-da-rocha-rolla-odontologia-piumhi", name: "Dr. Gonçalo da Rocha Rolla", profession: "Dentista", specialty: "Odontologia geral", city: "Piumhi", organization: "Consultório particular — Piumhi/MG", registration: "CRO-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato, endereço e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Odontologia geral", "Saúde bucal"], source: "https://www.doctoralia.com.br/dentista/piumhi" },
+  { slug: "adenilson-leandro-ortodontia-piumhi", name: "Adenilson Leandro", profession: "Dentista", specialty: "Ortodontia", city: "Piumhi", organization: "Consultório — Rua Padre Abel, 173, sala 102, Centro", registration: "CRO-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Ortodontia", "Ortopedia facial"], source: "https://www.doctoralia.com.br/dentista/piumhi" },
+  { slug: "dra-franceliz-moleta-odontologia-piumhi", name: "Dra. Franceliz Moleta", profession: "Dentista", specialty: "Odontologia geral", city: "Piumhi", organization: "Consultório — Av. 7 de Setembro, 152, Centro", registration: "CRO-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Odontologia geral", "Prevenção"], source: "https://www.doctoralia.com.br/dentista/piumhi" },
+  // Fisioterapeutas (Doctoralia)
+  { slug: "giuliano-souza-fisioterapia-piumhi", name: "Giuliano Carlos de Souza", profession: "Fisioterapeuta", specialty: "Fisioterapia", city: "Piumhi", organization: "Consultório Dr. Giuliano Souza — Praça Guia Lopes, 8, Centro", registration: "CREFITO MG-91680 · a validar", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia). Registro informado na fonte, pendente de confirmação no conselho e validação de contato.", phone: "Contato a validar", whatsapp: "#", services: ["Fisioterapia", "Reabilitação"], source: "https://www.doctoralia.com.br/fisioterapeuta/piumhi" },
+  { slug: "giovanna-oliveira-beraldo-fisioterapia-piumhi", name: "Giovanna Oliveira Beraldo", profession: "Fisioterapeuta", specialty: "Fisioterapia", city: "Piumhi", organization: "Borboletando Clínica Multidisciplinar de Reabilitação — Rua Armando Viotti, 373", registration: "CREFITO-4 271949-F · a validar", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia). Registro informado na fonte, pendente de confirmação no conselho e validação de contato.", phone: "Contato a validar", whatsapp: "#", services: ["Fisioterapia", "Reabilitação"], source: "https://www.doctoralia.com.br/fisioterapeuta/piumhi" },
+  { slug: "marisa-de-fatima-ferreira-fisioterapia-piumhi", name: "Marisa de Fátima Ferreira", profession: "Fisioterapeuta", specialty: "Fisioterapia", city: "Piumhi", organization: "Borboletando Clínica Multidisciplinar de Reabilitação — Rua Armando Viotti, 373", registration: "CREFITO-4 28260-F · a validar", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia). Registro informado na fonte, pendente de confirmação no conselho e validação de contato.", phone: "Contato a validar", whatsapp: "#", services: ["Fisioterapia", "Reabilitação"], source: "https://www.doctoralia.com.br/fisioterapeuta/piumhi" },
+  // Psicólogos (Doctoralia)
+  { slug: "jaqueline-viana-modesto-psicologia-piumhi", name: "Jaqueline Viana Modesto", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Atendimento remoto — Piumhi/MG", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Terapia cognitivo-comportamental", "Orientação vocacional"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "cristina-sansoni-psicologia-piumhi", name: "Cristina Sansoni", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Consultório de Psicologia — Rua Santo Antônio, 18, sala 05, Centro", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Atendimento individual", "Saúde mental"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "amanda-morais-psicologia-piumhi", name: "Amanda Morais", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Consultório — Rua Santo Antônio, 18, Centro", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Atendimento individual", "Saúde mental"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "kelly-cristina-do-prado-psicologia-piumhi", name: "Kelly Cristina do Prado", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Clínica Mais Saúde GMS — Rua Padre Abel, 191 e 194, Centro", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Atendimento individual", "Saúde mental"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "erika-costa-psicologia-piumhi", name: "Erika Costa", profession: "Psicólogo", specialty: "Psicologia infantil", city: "Piumhi", organization: "Clínica Mais Saúde GMS — Rua Padre Abel, 191 e 194, Centro", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Psicologia infantil", "Psicopedagogia"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "sandra-siris-faria-psicologia-piumhi", name: "Sandra Siris de O. Faria", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Clínica Mais Saúde GMS — Rua Padre Abel, 191 e 194, Centro", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Atendimento individual", "Saúde mental"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "joao-paulo-soares-psicologia-piumhi", name: "João Paulo Soares", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Consultório — Rua Padre Abel, 126, sala 4, Centro", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Terapia de casal", "Terapia familiar", "Terapia cognitivo-comportamental"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "karina-honorio-psicologia-piumhi", name: "Karina Honório", profession: "Psicólogo", specialty: "Psicanálise", city: "Piumhi", organization: "Consultório particular / on-line — Piumhi/MG", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Psicanálise", "Atendimento individual"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "debora-araujo-sulzbacher-psicologia-piumhi", name: "Débora Araújo Sulzbacher", profession: "Psicólogo", specialty: "Psicanálise", city: "Piumhi", organization: "Clínica de Psicologia Débora Sulzbacher — Rua Santo Antônio, 18, sala 04", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Psicanálise", "Atendimento individual"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "maria-isabel-de-melo-psicologia-piumhi", name: "Maria Isabel de Melo", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Consultório — Rua Santo Antônio, 18, sala 8, Centro", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Atendimento individual", "Saúde mental"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "jaqueline-dias-silva-psicologia-piumhi", name: "Jaqueline Dias Silva", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Consultório de Psicologia — Rua Santo Antônio, 18, sala 05, Centro", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Atendimento individual", "Saúde mental"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "elisangela-lima-psicologia-piumhi", name: "Elisângela Lima", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Clinapsi Clínica de Psicologia — Rua Conselheiro Lafaiete, 237", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Atendimento individual", "Saúde mental"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "clarissa-freitas-psicologia-piumhi", name: "Clarissa Freitas", profession: "Psicólogo", specialty: "Psicologia infantil", city: "Piumhi", organization: "Clarissa Freitas Psicóloga Infantil — Rua Vigário José Florêncio, 98", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Psicoterapia infantil", "Psicologia da gestante", "Aconselhamento aos pais"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "aldo-jose-costa-psicologia-piumhi", name: "Aldo José Costa", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Consultório de Psicologia Clínica e Psicanálise — Rua Santo Antônio, 747, sala 102", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Psicologia clínica", "Psicologia junguiana", "Psicanálise"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "jose-ferreira-leite-psicologia-piumhi", name: "José Ferreira Leite", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Consultório — Rua Armando Viotti, 232, Centro", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Atendimento individual", "Saúde mental"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "sandra-cristina-goncalves-psicologia-piumhi", name: "Sandra Cristina Gonçalves", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Consultório — Rua Conselheiro Lafaiete, 237, Centro", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Atendimento individual", "Saúde mental"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "jaine-reis-psicologia-piumhi", name: "Jaíne Reis", profession: "Psicólogo", specialty: "Psicologia clínica", city: "Piumhi", organization: "Consultório — Rua Raul Soares, Centro", registration: "CRP-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Atendimento individual", "Saúde mental"], source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  // Nutrição / Fonoaudiologia (Doctoralia)
+  { slug: "dra-wanessa-terra-nutricao-piumhi", name: "Dra. Wanessa Terra", profession: "Nutricionista", specialty: "Nutrição clínica", city: "Piumhi", organization: "Clínica Mais Saúde GMS — Rua Padre Abel, 191 e 194, Centro", registration: "CRN9 26985 · a validar", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia). Registro informado na fonte, pendente de confirmação no conselho e validação de contato.", phone: "Contato a validar", whatsapp: "#", services: ["Nutrição clínica", "Nutrição funcional", "Educação alimentar"], source: "https://www.doctoralia.com.br/nutricionista/piumhi" },
+  { slug: "dra-graziele-paiz-clinica-medica-piumhi", name: "Dra. Graziele Paiz", profession: "Médico", specialty: "Clínica Médica", city: "Piumhi", organization: "Clínica Mais Saúde GMS — Rua Padre Abel, 191 e 194, Centro", registration: "CRM-MG 71531 · a validar", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia). Registro informado na fonte, pendente de confirmação no conselho e validação de contato e especialidade.", phone: "Contato a validar", whatsapp: "#", services: ["Consulta clínica", "Acompanhamento"], source: "https://www.doctoralia.com.br/nutricionista/piumhi" },
+  { slug: "julia-augusta-oliveira-lopes-fonoaudiologia-piumhi", name: "Júlia Augusta de Oliveira Lopes", profession: "Fonoaudiólogo", specialty: "Fonoaudiologia", city: "Piumhi", organization: "Borboletando Clínica Multidisciplinar de Reabilitação — Rua Armando Viotti, 373", registration: "CRFa6 10713 · a validar", verified: false, summary: "Cadastro baseado em listagem pública (Doctoralia). Registro informado na fonte, pendente de confirmação no conselho e validação de contato.", phone: "Contato a validar", whatsapp: "#", services: ["Avaliação fonoaudiológica", "Linguagem", "Reabilitação"], source: "https://www.doctoralia.com.br/fonoaudiologo/piumhi" },
+  // Reclassificados de "empresa" para profissional (eram consultórios de uma pessoa)
+  { slug: "dr-gabriel-tavares-pediatria-piumhi", name: "Dr. Gabriel Tavares", profession: "Médico", specialty: "Pediatria", city: "Piumhi", organization: "Consultório Dr. Gabriel Tavares — Praça Tuiuti, 114, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro importado de fonte pública (OpenStreetMap), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Consulta pediátrica", "Puericultura"], source: "https://www.openstreetmap.org/" },
+  { slug: "bruna-lopes-fisioterapia-piumhi", name: "Bruna Lopes", profession: "Fisioterapeuta", specialty: "Fisioterapia", city: "Piumhi", organization: "Bruna Lopes — Fisioterapia e Pilates — Rua Crispim Elias da Cunha, 102", registration: "CREFITO · aguardando validação", verified: false, summary: "Cadastro importado de fonte pública (OpenStreetMap), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Fisioterapia", "Pilates", "Reabilitação"], source: "https://www.openstreetmap.org/" },
+];
+
+// Perfis/empresas demonstrativos (fictícios) NÃO aparecem no site público nem na
+// busca, em nenhuma cidade. Onde não há dado real, mostramos "anuncie aqui" —
+// nunca um "Perfil demonstrativo", que polui a busca.
+function isDemoRecord(record: { slug: string; name: string; summary: string }) {
+  return /demonstrat|fict[íi]ci|demonstra[çc][ãa]o/i.test(`${record.slug} ${record.name} ${record.summary}`);
+}
+function notDemo(record: { slug: string; name: string; summary: string }) {
+  return !isDemoRecord(record);
+}
+
+export const professionals: Professional[] = [...baseProfessionals, ...supplementalProfessionals, ...piumhiImportedProfessionals]
+  .filter(notDemo)
+  .map((professional) => ({
+    ...professional,
+    imageUrl: resolveProfessionalImage(professional.slug, professional.imageUrl),
+  }));
 
 const baseOrganizations: Organization[] = [
   {
@@ -478,8 +549,6 @@ const baseOrganizations: Organization[] = [
   },
   // Base pública importada do OpenStreetMap para revisão editorial.
   {"slug": "hospital-santa-casa-pimenta", "name": "Hospital Santa Casa", "category": "Hospital", "city": "Pimenta", "address": "Endereço aguardando validação", "phone": "Contato aguardando validação", "summary": "Cadastro importado de fonte pública para validação editorial antes da publicação definitiva.", "services": ["Atendimento hospitalar", "Serviços de saúde"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
-  {"slug": "consultorio-dr-gabriel-tavares-pediatra-pimenta", "name": "Consultório Dr Gabriel Tavares Pediatra", "category": "Médico / clínica", "city": "Pimenta", "address": "Praça Tuiuti 114", "phone": "Contato aguardando validação", "summary": "Cadastro importado de fonte pública para validação editorial antes da publicação definitiva.", "services": ["Atendimento clínico", "Saúde regional"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
-  {"slug": "bruna-lopes-fisioterapia-e-pilates-pimenta", "name": "Bruna Lopes - Fisioterapia e Pilates", "category": "Fisioterapia", "city": "Pimenta", "address": "Rua Crispim Elias da Cunha 102", "phone": "Contato aguardando validação", "summary": "Cadastro importado de fonte pública para validação editorial antes da publicação definitiva.", "services": ["Fisioterapia", "Reabilitação"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
   {"slug": "drogaria-nossa-senhora-do-carmo-arcos", "name": "Drogaria Nossa Senhora do Carmo", "category": "Farmácia", "city": "Arcos", "address": "Endereço aguardando validação", "phone": "Contato aguardando validação", "summary": "Cadastro importado de fonte pública para validação editorial antes da publicação definitiva.", "services": ["Medicamentos", "Produtos de saúde"], "logoUrl": "/placeholders/pharmacy-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
   {"slug": "hospital-municipal-arcos", "name": "Hospital Municipal", "category": "Hospital", "city": "Arcos", "address": "Endereço aguardando validação", "phone": "Contato aguardando validação", "summary": "Cadastro importado de fonte pública para validação editorial antes da publicação definitiva.", "services": ["Atendimento hospitalar", "Serviços de saúde"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
   {"slug": "fundacao-municipal-de-saude-e-assistencia-de-arcos-fumusa-arcos", "name": "Fundação Municipal de Saúde e Assistência de Arcos - FUMUSA", "category": "Clínica", "city": "Arcos", "address": "Rua Vinte e Cinco de Dezembro 20'", "phone": "+55 37 3351 1875", "summary": "Cadastro importado de fonte pública para validação editorial antes da publicação definitiva.", "services": ["Atendimento clínico", "Saúde regional"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
@@ -493,8 +562,6 @@ const baseOrganizations: Organization[] = [
   {"slug": "hospital-municipal-sao-roque-de-minas", "name": "Hospital Municipal", "category": "Hospital", "city": "São Roque de Minas", "address": "Endereço aguardando validação", "phone": "Contato aguardando validação", "summary": "Cadastro importado de fonte pública para validação editorial antes da publicação definitiva.", "services": ["Atendimento hospitalar", "Serviços de saúde"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
   {"slug": "hospital-municiapl-sao-roque-de-minas", "name": "Hospital Municiapl", "category": "Hospital", "city": "São Roque de Minas", "address": "Endereço aguardando validação", "phone": "Contato aguardando validação", "summary": "Cadastro importado de fonte pública para validação editorial antes da publicação definitiva.", "services": ["Atendimento hospitalar", "Serviços de saúde"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
   {"slug": "santa-casa-de-misericordia-de-piumhi", "name": "Santa Casa de Misericórdia de Piumhi", "category": "Hospital", "city": "Piumhi", "address": "Praça Guia Lopes / região da Santa Casa", "phone": "Contato aguardando validação", "summary": "Hospital geral filantrópico de referência regional. Cadastro baseado em fonte pública e pendente de validação editorial antes da publicação comercial.", "services": ["Atendimento hospitalar", "Pronto atendimento", "Referência regional"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
-  {"slug": "consultorio-dr-gabriel-tavares-pediatra-piumhi", "name": "Consultório Dr Gabriel Tavares Pediatra", "category": "Médico / clínica", "city": "Piumhi", "address": "Praça Tuiuti 114", "phone": "Contato aguardando validação", "summary": "Cadastro importado de fonte pública para validação editorial antes da publicação definitiva.", "services": ["Atendimento clínico", "Saúde regional"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
-  {"slug": "bruna-lopes-fisioterapia-e-pilates-piumhi", "name": "Bruna Lopes - Fisioterapia e Pilates", "category": "Fisioterapia", "city": "Piumhi", "address": "Rua Crispim Elias da Cunha 102", "phone": "Contato aguardando validação", "summary": "Cadastro importado de fonte pública para validação editorial antes da publicação definitiva.", "services": ["Fisioterapia", "Reabilitação"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
   {"slug": "samu-piumhi", "name": "SAMU Piumhi", "category": "Urgência e emergência", "city": "Piumhi", "address": "Atendimento regional / endereço operacional aguardando validação", "phone": "192", "summary": "Serviço de Atendimento Móvel de Urgência citado em fonte pública como operação iniciada em Piumhi. Cadastro institucional pendente de revisão editorial.", "services": ["Urgência", "Atendimento pré-hospitalar", "Serviço público"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
   {"slug": "secretaria-municipal-de-saude-piumhi", "name": "Secretaria Municipal de Saúde de Piumhi", "category": "Gestão pública de saúde", "city": "Piumhi", "address": "Endereço aguardando validação", "phone": "Contato aguardando validação", "summary": "Cadastro institucional criado para organizar serviços e informações públicas de saúde do município antes da validação completa.", "services": ["Saúde pública", "Atenção básica", "Informação ao cidadão"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
   {"slug": "unidade-basica-de-saude-piumhi", "name": "Unidade Básica de Saúde — Piumhi", "category": "Clínica / atenção básica", "city": "Piumhi", "address": "Unidade e endereço aguardando validação", "phone": "Contato aguardando validação", "summary": "Registro provisório para organizar a rede de atenção básica da cidade. Necessita confirmação de nome oficial, endereço e telefone.", "services": ["Atenção básica", "Prevenção", "Saúde da família"], "logoUrl": "/placeholders/company-logo.svg", "coverImageUrl": "/placeholders/clinic-cover.svg"},
@@ -516,6 +583,7 @@ const supplementalOrganizations: Organization[] = [
     ["Capitólio", "capitolio"],
     ["Pimenta", "pimenta"],
     ["Arcos", "arcos"],
+    ["Formiga", "formiga"],
     ["Campo Belo", "campo-belo"],
     ["São Roque de Minas", "sao-roque-de-minas"],
   ].flatMap(([city, slugCity]) => [
@@ -582,35 +650,464 @@ const supplementalOrganizations: Organization[] = [
   ]),
 ];
 
-export const organizations: Organization[] = [...baseOrganizations, ...supplementalOrganizations];
+// Estabelecimentos REAIS de Piumhi importados de fontes públicas (25/07/2026).
+// Dado de empresa; contato só quando público. Pendente de validação editorial.
+const piumhiImportedOrganizations: Organization[] = [
+  { slug: "oraldents-piumhi", name: "OralDents Piumhi", category: "Clínica odontológica", city: "Piumhi", address: "Rua Armando Viotti, 404, Centro", phone: "(37) 3412-0480", summary: "Cadastro importado de fonte pública (site da clínica), pendente de validação editorial antes da publicação definitiva.", services: ["Odontologia geral", "Prevenção", "Saúde bucal"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.oraldentspiumhi.com.br/" },
+  { slug: "odontologia-menezes-e-novaes-piumhi", name: "Odontologia Menezes e Novaes", category: "Clínica odontológica", city: "Piumhi", address: "Praça Guia Lopes, 324, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (Econodata, CNPJ 08.209.129/0001-16), pendente de validação editorial antes da publicação definitiva.", services: ["Odontologia especializada", "Prevenção"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.econodata.com.br/consulta-empresa/08209129000116-clinica-odontologica-menezes-e-novaes-ltda" },
+  { slug: "centro-medico-odontologico-de-piumhi", name: "Centro Médico Odontológico de Piumhi", category: "Clínica odontológica", city: "Piumhi", address: "Endereço aguardando validação", phone: "(37) 3371-1089", summary: "Cadastro importado de fonte pública (ClickDisk), pendente de validação editorial antes da publicação definitiva.", services: ["Atendimento odontológico", "Atendimento médico"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.clickdisk.com.br/telefone/piumhi/centro-medico-odontologico-de-piumhi" },
+  { slug: "clinica-sao-rafael-unimed-piumhi", name: "Clínica São Rafael (Unimed)", category: "Clínica multiprofissional", city: "Piumhi", address: "Praça Guia Lopes, 248, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (CatalogoMed), pendente de validação editorial antes da publicação definitiva.", services: ["Consultas", "Atendimento multiprofissional", "Convênio Unimed"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "phd-piumhi-hospital-dia", name: "PHD Piumhi Hospital Dia", category: "Hospital", city: "Piumhi", address: "Praça Guia Lopes, 278, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (site do hospital), pendente de validação editorial antes da publicação definitiva.", services: ["Centro cirúrgico", "Exames de imagem", "Especialidades"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://phdhospitaldia.com.br/" },
+  { slug: "vitalcentro-especialidades-medicas-piumhi", name: "Vitalcentro Especialidades Médicas", category: "Clínica multiprofissional", city: "Piumhi", address: "Praça Tuiuti, 160, 2º andar, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (CatalogoMed), pendente de validação editorial antes da publicação definitiva.", services: ["Especialidades médicas", "Consultas"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "clinica-ophtalmocenter-piumhi", name: "Clínica Ophtalmocenter", category: "Clínica multiprofissional", city: "Piumhi", address: "Praça Tuiuti, 160, 2º andar, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (CatalogoMed), pendente de validação editorial antes da publicação definitiva.", services: ["Oftalmologia", "Saúde ocular"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "clinica-do-coracao-piumhi", name: "Clínica do Coração", category: "Clínica multiprofissional", city: "Piumhi", address: "Rua Armando Viotti, 190, salas 103 e 104, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (CatalogoMed), pendente de validação editorial antes da publicação definitiva.", services: ["Cardiologia", "Cirurgia cardiovascular"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "clinica-salutare-piumhi", name: "Clínica Salutare", category: "Clínica multiprofissional", city: "Piumhi", address: "Rua Padre Abel, 126, 2º andar, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (CatalogoMed), pendente de validação editorial antes da publicação definitiva.", services: ["Especialidades médicas", "Otorrinolaringologia"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "nucleo-dermatologico-cirurgico-piumhi", name: "Núcleo Dermatológico Cirúrgico", category: "Clínica multiprofissional", city: "Piumhi", address: "Praça Tuiuti, 114, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (CatalogoMed), pendente de validação editorial antes da publicação definitiva.", services: ["Dermatologia", "Pequenas cirurgias"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
+  { slug: "borboletando-clinica-reabilitacao-piumhi", name: "Borboletando Clínica Multidisciplinar de Reabilitação", category: "Clínica multiprofissional", city: "Piumhi", address: "Rua Armando Viotti, 373, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (Doctoralia), pendente de validação editorial antes da publicação definitiva.", services: ["Fisioterapia", "Reabilitação", "Psicologia"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.doctoralia.com.br/fisioterapeuta/piumhi" },
+  { slug: "recovery-fisioterapia-piumhi", name: "Recovery Fisioterapia Ortopédica e Esportiva", category: "Clínica multiprofissional", city: "Piumhi", address: "Rua Conselheiro Lafaiete, 569, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (Econodata, CNPJ 42.768.260/0001-51), pendente de validação editorial antes da publicação definitiva.", services: ["Fisioterapia ortopédica", "Fisioterapia esportiva"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.econodata.com.br/consulta-empresa/42768260000151-recovery-fisioterapia-ltda" },
+  { slug: "recuperarte-fisioterapia-estetica-piumhi", name: "Recuperarte Fisioterapia e Estética", category: "Estética e bem-estar", city: "Piumhi", address: "Rua Dom Pedro II, 52, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública, pendente de validação editorial antes da publicação definitiva.", services: ["Fisioterapia", "Estética"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://painelwebservice.cfa.org.br/?c=pesquisa&a=show&id=935" },
+  { slug: "fisiocenter-piumhi", name: "Fisiocenter — Fisioterapia e Quiropraxia", category: "Clínica multiprofissional", city: "Piumhi", address: "Endereço aguardando validação", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (Cliquei Achei), pendente de validação editorial antes da publicação definitiva.", services: ["Fisioterapia", "Quiropraxia"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.cliqueiachei.com.br/telefone/piumhi/mg/fisiocenter" },
+  { slug: "clinica-moviment-piumhi", name: "Clínica Moviment (Pilates Studio)", category: "Academia e atividade física", city: "Piumhi", address: "Rua Luiz Ferreira Belo, 28, São Francisco", phone: "(37) 3412-1265", summary: "Cadastro importado de fonte pública, pendente de validação editorial antes da publicação definitiva.", services: ["Pilates", "Fisioterapia", "Condicionamento"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.facebook.com/clinicaamoviment/" },
+  { slug: "clinica-mais-saude-gms-piumhi", name: "Clínica Mais Saúde GMS", category: "Clínica multiprofissional", city: "Piumhi", address: "Rua Padre Abel, 191 e 194, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (Doctoralia), pendente de validação editorial antes da publicação definitiva.", services: ["Psicologia", "Nutrição", "Especialidades"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "clinapsi-clinica-de-psicologia-piumhi", name: "Clinapsi Clínica de Psicologia", category: "Clínica multiprofissional", city: "Piumhi", address: "Rua Conselheiro Lafaiete, 237, Centro", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (Doctoralia), pendente de validação editorial antes da publicação definitiva.", services: ["Psicologia", "Atendimento individual"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://www.doctoralia.com.br/psicologo/piumhi" },
+  { slug: "clinica-psicologica-goncalves-piumhi", name: "Clínica Psicológica Gonçalves", category: "Clínica multiprofissional", city: "Piumhi", address: "Centro — endereço a validar", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (CNES 4475100), pendente de validação editorial antes da publicação definitiva.", services: ["Psicologia", "Atenção básica"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://consultacnes.com/estabelecimento/4475100-clinica-psicologica-goncalves-ltda-piumhi-mg" },
+];
 
-export const cities = ["Piumhi", "Capitólio", "Pimenta", "Arcos", "Campo Belo", "Bambuí", "São Roque de Minas"];
+export const organizations: Organization[] = [...baseOrganizations, ...supplementalOrganizations, ...piumhiImportedOrganizations]
+  .filter((org) => notDemo(org));
+
+export { cityNames as cities, cityDetails } from "./cities";
 export const professions = ["Médico", "Dentista", "Psicólogo", "Fisioterapeuta", "Nutricionista", "Fonoaudiólogo", "Enfermeiro", "Farmacêutico", "Educador físico"];
 
-export const articles = [
-  { slug: "prevencao-na-rotina", category: "Prevenção", title: "Como transformar prevenção em parte da rotina", excerpt: "Informação regional, fontes claras e orientação para buscar atendimento profissional.", city: "Regional" },
-  { slug: "saude-e-longevidade", category: "Longevidade", title: "Saúde e longevidade: cuidados em cada fase", excerpt: "Uma pauta editorial conectada a especialistas e serviços da região.", city: "Regional" },
-  { slug: "conexao-saude", category: "Podcast", title: "Conexão Saúde: conhecimento que aproxima", excerpt: "Episódios, convidados, transcrições e conteúdos complementares.", city: "Regional" },
+// Logos das empresas apoiadoras exibidas nas páginas.
+// EXEMPLOS (public/supporters/*.png, fundo transparente). Troque pelos PNGs
+// reais das empresas — basta adicionar o arquivo e a entrada aqui.
+export const supporters = [
+  { name: "Farmácia (exemplo)", logo: "/supporters/empresa-farmacia.png" },
+  { name: "Clínica (exemplo)", logo: "/supporters/empresa-clinica.png" },
+  { name: "Laboratório (exemplo)", logo: "/supporters/empresa-laboratorio.png" },
 ];
 
-export const podcasts = [
-  { slug: "radiologia-odontologica", guest: "Rodrigo Soares Costa", role: "Tecnólogo em radiologia", topic: "Radiologia odontológica: como a tecnologia transforma os tratamentos", date: "14 de julho", duration: "Ao vivo às 19h", status: "Próximo episódio" },
-  { slug: "implantodontia-reabilitacao", guest: "Lívia Pereira", role: "Dentista", topic: "Do cuidado à transformação: implantodontia, reabilitação oral e prevenção", date: "30 de junho", duration: "Episódio completo", status: "Disponível" },
-  { slug: "blefaroplastia", guest: "Mírian L. Sansoni", role: "Oftalmologista", topic: "Blefaroplastia: saúde, estética e qualidade de vida", date: "9 de junho", duration: "Episódio completo", status: "Disponível" },
-];
-
-export const magazineEditions = [
-  { number: "14ª", year: "2026", title: "Saúde, bem-estar e qualidade de vida", description: "A nova fase editorial da Guia Saúde: informação que conecta profissionais, marcas e a comunidade regional.", featured: true },
-  { number: "13ª", year: "2025", title: "Cuidado que transforma", description: "Entrevistas, histórias e orientações para escolhas mais conscientes em saúde.", featured: false },
-  { number: "12ª", year: "2025", title: "Conexões para viver melhor", description: "Uma edição dedicada aos especialistas e iniciativas que movimentam a região.", featured: false },
-];
-
-export const cityDetails: Record<string, { name: string; intro: string; region: string }> = {
-  piumhi: { name: "Piumhi", intro: "Profissionais, clínicas, serviços e informação em saúde para quem vive em Piumhi e região.", region: "Centro-Oeste de Minas" },
-  capitolio: { name: "Capitólio", intro: "Um guia local para encontrar cuidado e acompanhar os assuntos de saúde de Capitólio.", region: "Região da Serra da Canastra" },
-  pimenta: { name: "Pimenta", intro: "Serviços, especialistas e conteúdo de saúde reunidos em uma página dedicada a Pimenta.", region: "Centro-Oeste de Minas" },
-  arcos: { name: "Arcos", intro: "Encontre profissionais e empresas da saúde e acompanhe conteúdos relevantes para Arcos.", region: "Centro-Oeste de Minas" },
-  "campo-belo": { name: "Campo Belo", intro: "O ecossistema de saúde de Campo Belo organizado para facilitar escolhas e conexões.", region: "Oeste de Minas" },
-  bambui: { name: "Bambuí", intro: "Informação, prevenção e serviços de saúde próximos da comunidade de Bambuí.", region: "Região da Serra da Canastra" },
-  "sao-roque-de-minas": { name: "São Roque de Minas", intro: "Um ponto de encontro para profissionais, serviços e informação em saúde na Serra da Canastra.", region: "Serra da Canastra" },
+export type Article = {
+  slug: string;
+  category: string;
+  title: string;
+  excerpt: string;
+  city: string;
+  author?: string;
+  authorRole?: string;
+  date?: string;
+  readingTime?: string;
+  episodeSlug?: string;
+  professionalSlug?: string;
+  imageUrl?: string;
+  body?: string[];
 };
+
+// Matérias editoriais do Guia Saúde. Boa parte nasce das conversas do podcast
+// Conexão Saúde (Rede Megga / Revista Guia Saúde), com os mesmos especialistas
+// da região — conteúdo informativo, sem substituir avaliação profissional.
+export const articles: Article[] = [
+  {
+    slug: "radiologia-odontologica-diagnostico",
+    category: "Saúde bucal",
+    title: "Radiologia odontológica: como a imagem orienta o tratamento",
+    excerpt: "Radiografias e tomografias ajudam o dentista a enxergar o que o olho não alcança — e a planejar com segurança.",
+    city: "Regional",
+    author: "Rodrigo Soares Costa",
+    authorRole: "Tecnólogo em radiologia",
+    date: "13 de julho de 2026",
+    readingTime: "5 min de leitura",
+    episodeSlug: "radiologia-odontologica",
+    body: [
+      "Boa parte das decisões em odontologia começa antes da primeira intervenção: na imagem. Radiografias panorâmicas, periapicais e tomografias mostram raízes, ossos, seios da face e estruturas que não aparecem no exame clínico, permitindo diagnósticos mais precisos e planejamentos mais seguros.",
+      "A tecnologia digital tornou esses exames mais rápidos e com menor dose de radiação do que as versões analógicas. Ainda assim, o pedido deve ser individualizado: cada exame tem indicação específica, e repetir imagens sem necessidade não traz benefício. Cabe ao profissional definir o que realmente contribui para o caso.",
+      "Do implante ao tratamento de canal, passando por ortodontia e cirurgias, a imagem funciona como um mapa. Entender esse papel ajuda o paciente a compreender por que o exame é solicitado e como ele encurta o caminho até o tratamento certo.",
+    ],
+  },
+  {
+    slug: "fisioterapia-respiratoria-quando-buscar",
+    category: "Reabilitação",
+    title: "Fisioterapia respiratória: para quem é e quando procurar",
+    excerpt: "Da UTI ao acompanhamento em casa, ela ajuda a respirar melhor em diferentes fases da vida.",
+    city: "Regional",
+    author: "Ivana Oliveira Rezende",
+    authorRole: "Fisioterapeuta",
+    date: "7 de abril de 2026",
+    readingTime: "5 min de leitura",
+    episodeSlug: "fisioterapia-respiratoria-ivana-rezende",
+    body: [
+      "A fisioterapia respiratória vai muito além do ambiente hospitalar. Ela é indicada no pós-operatório, no acompanhamento de doenças crônicas como asma e DPOC, na recuperação de quadros respiratórios e também em bebês e idosos, cada um com técnicas e objetivos próprios.",
+      "O trabalho combina exercícios de expansão pulmonar, higiene brônquica e reeducação da respiração. O objetivo é melhorar a oxigenação, reduzir secreções e devolver autonomia — sempre a partir de uma avaliação que considera o histórico e o momento da pessoa.",
+      "Procurar avaliação faz sentido diante de falta de ar recorrente, recuperação de internações ou orientação médica após cirurgias. Quanto mais cedo o acompanhamento começa, mais confortável costuma ser a recuperação.",
+    ],
+  },
+  {
+    slug: "cuidados-com-a-pele-dermatologia",
+    category: "Pele",
+    title: "Cuidado com a pele sem filtro: o básico que faz diferença",
+    excerpt: "Proteção solar, constância e avaliação profissional valem mais do que qualquer tendência.",
+    city: "Regional",
+    author: "Gabriela Oliveira",
+    authorRole: "Dermatologista",
+    date: "28 de abril de 2026",
+    readingTime: "4 min de leitura",
+    episodeSlug: "dermatologia-sem-filtro-gabriela-oliveira",
+    body: [
+      "A pele é o maior órgão do corpo e o primeiro a sinalizar mudanças na saúde. Uma rotina simples — limpeza adequada, hidratação e, principalmente, proteção solar diária — sustenta a maior parte dos bons resultados, independentemente da idade.",
+      "Tendências de skincare mudam o tempo todo, mas nem todo produto serve para todo tipo de pele. O que funciona para uma pessoa pode irritar outra. Por isso a avaliação individual evita gastos desnecessários e reações indesejadas.",
+      "Manchas que mudam de cor ou formato, feridas que não cicatrizam e pintas novas merecem atenção. A consulta dermatológica não é apenas estética: é também prevenção, inclusive do câncer de pele.",
+    ],
+  },
+  {
+    slug: "vida-saudavel-pequenas-mudancas",
+    category: "Alimentação",
+    title: "Vida saudável na prática: pequenas mudanças que se sustentam",
+    excerpt: "Menos dietas radicais, mais hábitos possíveis de manter no dia a dia.",
+    city: "Regional",
+    author: "Daisy Faria",
+    authorRole: "Nutricionista",
+    date: "10 de março de 2026",
+    readingTime: "4 min de leitura",
+    episodeSlug: "vida-saudavel-na-pratica-daisy-faria",
+    body: [
+      "Mudar a alimentação raramente funciona quando começa por proibições. O que costuma durar são ajustes pequenos: mais comida de verdade, mais água, mais constância. Passos que cabem na rotina têm muito mais chance de virar hábito.",
+      "Dietas muito restritivas prometem resultado rápido, mas costumam cobrar caro depois. A orientação individual leva em conta rotina, preferências, condições de saúde e objetivos — e é isso que torna a mudança sustentável.",
+      "Sono, movimento e relação com a comida também fazem parte do cuidado. Saúde não é um cardápio perfeito, e sim um conjunto de escolhas viáveis repetidas ao longo do tempo.",
+    ],
+  },
+  {
+    slug: "respiracao-na-infancia-sinais",
+    category: "Saúde infantil",
+    title: "Respiração na infância: quando se preocupar",
+    excerpt: "Roncos, boca aberta e sono agitado podem ser mais do que um resfriado passageiro.",
+    city: "Regional",
+    author: "Nayara Garcia",
+    authorRole: "Pediatra e pneumologista infantil",
+    date: "24 de março de 2026",
+    readingTime: "5 min de leitura",
+    episodeSlug: "respiracao-na-infancia-nayara-garcia",
+    body: [
+      "Respirar pela boca com frequência, roncar, dormir agitado e acordar cansado não são detalhes sem importância na infância. Esses sinais podem indicar obstruções ou alergias que interferem no sono, no crescimento e até no rendimento escolar.",
+      "A chamada respiração bucal crônica pode afetar o desenvolvimento da face e da arcada dentária. Identificar a causa cedo — seja alergia, adenoide ou outro fator — amplia as opções de tratamento e evita complicações.",
+      "Diante de sintomas persistentes, a avaliação pediátrica é o ponto de partida. A partir dela, o acompanhamento pode envolver diferentes especialidades, sempre com foco no bem-estar da criança.",
+    ],
+  },
+  {
+    slug: "implantodontia-reabilitacao-oral",
+    category: "Saúde bucal",
+    title: "Implantodontia e reabilitação oral: recuperar função e confiança",
+    excerpt: "Repor dentes vai além da estética — envolve mastigação, fala e saúde bucal a longo prazo.",
+    city: "Regional",
+    author: "Lívia Pereira",
+    authorRole: "Dentista e implantodontista",
+    date: "29 de junho de 2026",
+    readingTime: "4 min de leitura",
+    episodeSlug: "implantodontia-livia-pereira",
+    body: [
+      "A perda de dentes afeta muito mais do que o sorriso: compromete a mastigação, a fala e, com o tempo, a estrutura óssea da região. A reabilitação oral busca devolver essas funções com planejamento individualizado.",
+      "Os implantes são uma das soluções mais estáveis, mas dependem de avaliação da saúde bucal e óssea de cada pessoa. Nem todo caso é igual, e o plano de tratamento considera histórico, expectativas e condições clínicas.",
+      "O cuidado não termina na colocação. Higiene adequada e acompanhamento periódico são o que garantem durabilidade e saúde ao longo dos anos.",
+    ],
+  },
+  {
+    slug: "uso-consciente-de-medicamentos",
+    category: "Uso de medicamentos",
+    title: "Quando o remédio vira solução para tudo",
+    excerpt: "A automedicação parece prática, mas pode mascarar problemas e criar novos.",
+    city: "Regional",
+    author: "Daniela Melo",
+    authorRole: "Farmacêutica",
+    date: "26 de maio de 2026",
+    readingTime: "5 min de leitura",
+    episodeSlug: "medicalizacao-da-vida-daniela-melo",
+    body: [
+      "Ter um remédio para cada desconforto tornou-se quase automático. Mas usar medicamentos sem indicação pode aliviar o sintoma e esconder a causa — além de trazer riscos de interação, dependência e efeitos colaterais.",
+      "O uso racional passa por entender que nem todo mal-estar precisa de comprimido, e que cada medicamento tem dose, tempo e finalidade. O farmacêutico é um apoio importante nessa orientação, junto do acompanhamento médico.",
+      "Guardar bulas, respeitar prazos de validade e não compartilhar receitas são cuidados simples que fazem diferença. Informação responsável é o que separa o alívio seguro do risco desnecessário.",
+    ],
+  },
+  {
+    slug: "vinculos-afetivos-saude-mental",
+    category: "Saúde mental",
+    title: "Vínculos afetivos: por que eles cuidam da saúde",
+    excerpt: "Em uma rotina cada vez mais acelerada, manter laços é também uma forma de prevenção.",
+    city: "Regional",
+    author: "Cintia Bonisson",
+    authorRole: "Psicanalista",
+    date: "12 de maio de 2026",
+    readingTime: "5 min de leitura",
+    episodeSlug: "vinculos-afetivos-cintia-bonisson",
+    body: [
+      "A vida contemporânea aproxima telas e afasta pessoas. A ausência de vínculos afetivos consistentes tem efeitos reais sobre o bem-estar, e aparece com frequência em quadros de ansiedade, solidão e sofrimento emocional.",
+      "Relações de confiança funcionam como rede de apoio: ajudam a atravessar perdas, decisões e momentos difíceis. Cultivá-las exige presença e tempo, algo que a rotina costuma disputar.",
+      "Reconhecer quando o sofrimento passa do limite do cotidiano e buscar apoio profissional é um gesto de cuidado, não de fraqueza. Saúde mental também se constrói nas conexões que sustentamos.",
+    ],
+  },
+  {
+    slug: "terapia-regenerativa-lesoes",
+    category: "Ortopedia",
+    title: "Terapia regenerativa no tratamento de lesões",
+    excerpt: "Recursos que estimulam a recuperação dos tecidos ganham espaço na ortopedia.",
+    city: "Piumhi",
+    author: "Dr. Diego Mota Fernandes",
+    authorRole: "Médico ortopedista",
+    date: "20 de agosto de 2025",
+    readingTime: "5 min de leitura",
+    episodeSlug: "terapia-regenerativa-diego-mota-fernandes",
+    professionalSlug: "dr-diego-mota-fernandes-ortopedia-piumhi",
+    body: [
+      "Lesões articulares e de tecidos moles são comuns e nem sempre respondem apenas ao repouso. A terapia regenerativa reúne abordagens que buscam estimular a recuperação natural dos tecidos, com foco em reduzir dor e melhorar a função.",
+      "Essas técnicas fazem parte de um plano maior, que costuma incluir avaliação criteriosa, fisioterapia e mudanças de hábito. Não são soluções mágicas: a indicação depende do tipo de lesão, do estágio e das características de cada paciente.",
+      "O acompanhamento ortopédico é o que define se e quando esses recursos fazem sentido. Entender as opções ajuda o paciente a participar das decisões sobre o próprio tratamento.",
+    ],
+  },
+  {
+    slug: "cirurgia-refrativa-enxergar-sem-oculos",
+    category: "Oftalmologia",
+    title: "Cirurgia refrativa: enxergar sem óculos, com critério",
+    excerpt: "Corrigir grau é possível para muitos casos — mas depende de avaliação individual.",
+    city: "Piumhi",
+    author: "Dr. Paulo Henrique Faria",
+    authorRole: "Oftalmologista",
+    date: "5 de agosto de 2025",
+    readingTime: "5 min de leitura",
+    episodeSlug: "cirurgia-refrativa-paulo-henrique-faria",
+    professionalSlug: "dr-paulo-henrique-faria-silva-oftalmologia-piumhi",
+    body: [
+      "A cirurgia refrativa corrige graus de miopia, hipermetropia e astigmatismo, e para muitas pessoas representa a possibilidade de reduzir ou dispensar os óculos. Mas não é indicada para todos, e a decisão começa por uma avaliação detalhada.",
+      "Estabilidade do grau, saúde da córnea e histórico ocular entram na conta. Exames pré-operatórios definem se o procedimento é seguro e qual técnica é mais adequada para cada olho.",
+      "Como todo procedimento, tem indicações, cuidados e limites. Conversar com o oftalmologista sobre expectativas e riscos é o que torna a escolha consciente.",
+    ],
+  },
+  {
+    slug: "prevencao-na-rotina",
+    category: "Prevenção",
+    title: "Como transformar prevenção em parte da rotina",
+    excerpt: "Consultas em dia, exames de acompanhamento e atenção aos sinais do corpo evitam problemas maiores.",
+    city: "Regional",
+    author: "Redação Guia Saúde",
+    date: "2026",
+    readingTime: "3 min de leitura",
+    body: [
+      "Prevenção raramente é urgente — e talvez por isso seja tão adiada. Consultas de rotina, exames periódicos e vacinação em dia formam a base de um cuidado que evita que problemas simples se tornem graves.",
+      "Cada fase da vida tem suas prioridades, da infância à terceira idade. Manter um profissional de referência ajuda a organizar esse acompanhamento de forma contínua, e não apenas quando algo dói.",
+      "O Guia Saúde reúne profissionais e serviços da região para tornar esse primeiro passo mais fácil. Informação de qualidade é o começo de qualquer decisão de saúde.",
+    ],
+  },
+];
+
+// Episódios reais do podcast Conexão Saúde (Revista Guia Saúde / Rede Megga),
+// coletados do Instagram @saudeguia (25/07/2026). Terças, 19h, ao vivo na Rede
+// Megga (YouTube) com recortes em Spotify, TikTok, Facebook e Instagram.
+export type PodcastEpisode = {
+  slug: string;
+  guest: string;
+  role: string;
+  topic: string;
+  date: string;
+  duration: string;
+  status: string;
+  episodeUrl?: string;
+  imageUrl?: string;
+  professionalSlugs?: string[];
+};
+
+export const podcasts: PodcastEpisode[] = [
+  { slug: "fisioterapia-pelvica-gabriela-araujo", imageUrl: "/podcast/gabriela-araujo-fisioterapia-pelvica-horizontal.png", guest: "Gabriela Araújo", role: "Fisioterapeuta pélvica", topic: "Fisioterapia pélvica: cuidado, saúde e qualidade de vida", date: "25 de agosto de 2026", duration: "Ao vivo às 19h", status: "Próximo episódio" },
+  { slug: "estetica-regenerativa-patricia-terra", imageUrl: "/podcast/patricia-terra-estetica-regenerativa-horizontal.png", guest: "Patrícia Terra", role: "Especialista em Dentística e Harmonização Orofacial", topic: "Estética regenerativa: a nova era da harmonização facial e da estética do sorriso", date: "11 de agosto de 2026", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=uz1cICn0iks" },
+  { slug: "endocrinologia-simone-mota-bonisson", imageUrl: "/podcast/simone-bonisson-endocrinologia-horizontal.png", guest: "Simone Mota Bonisson", role: "Endocrinologista", topic: "Endocrinologia em foco: hormônios, metabolismo e qualidade de vida", date: "28 de julho de 2026", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=-LaH9x_sgl8" },
+  { slug: "radiologia-odontologica", imageUrl: "/podcast/radiologia-odontologica.jpg", guest: "Rodrigo Soares Costa", role: "Tecnólogo em radiologia", topic: "Radiologia odontológica: como a tecnologia transforma os tratamentos dentários", date: "13 de julho", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=w1tyFA2uzMA" },
+  { slug: "implantodontia-livia-pereira", imageUrl: "/podcast/implantodontia-livia-pereira.jpg", guest: "Lívia Pereira", role: "Dentista e implantodontista", topic: "Implantodontia, reabilitação oral e saúde bucal", date: "29 de junho", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=VGX9Udr2xFE" },
+  { slug: "blefaroplastia-mirian-sansoni", imageUrl: "/podcast/blefaroplastia-mirian-sansoni.jpg", guest: "Mírian L. Sansoni", role: "Oftalmologista", topic: "Blefaroplastia: saúde, estética e qualidade de vida", date: "9 de junho", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=CRBDdkVOm8k" },
+  { slug: "medicalizacao-da-vida-daniela-melo", imageUrl: "/podcast/medicalizacao-da-vida-daniela-melo.jpg", guest: "Daniela Melo", role: "Farmacêutica", topic: "A medicalização da vida: quando o remédio vira solução para tudo", date: "26 de maio", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=zZxHOHky9us" },
+  { slug: "vinculos-afetivos-cintia-bonisson", imageUrl: "/podcast/vinculos-afetivos-cintia-bonisson.jpg", guest: "Cintia Bonisson", role: "Psicanalista", topic: "Ausência de vínculos afetivos na sociedade atual", date: "12 de maio", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=ybViS7X_Okw" },
+  { slug: "dermatologia-sem-filtro-gabriela-oliveira", imageUrl: "/podcast/dermatologia-sem-filtro-gabriela-oliveira.jpg", guest: "Gabriela Oliveira", role: "Dermatologista", topic: "Dermatologia sem filtro", date: "28 de abril", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=qvo-1igFbvI" },
+  { slug: "fisioterapia-respiratoria-ivana-rezende", imageUrl: "/podcast/fisioterapia-respiratoria-ivana-rezende.jpg", guest: "Ivana Oliveira Rezende", role: "Fisioterapeuta", topic: "A importância da fisioterapia respiratória nos diferentes contextos de saúde", date: "7 de abril", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=ouNSkD6F_c8" },
+  { slug: "respiracao-na-infancia-nayara-garcia", imageUrl: "/podcast/respiracao-na-infancia-nayara-garcia.jpg", guest: "Nayara Garcia", role: "Pediatra e pneumologista infantil", topic: "Respiração na infância: quando se preocupar?", date: "24 de março", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=yDN7ox1vVTU" },
+  { slug: "vida-saudavel-na-pratica-daisy-faria", imageUrl: "/podcast/vida-saudavel-na-pratica-daisy-faria.jpg", guest: "Daisy Faria", role: "Nutricionista", topic: "Vida saudável na prática: pequenas mudanças que transformam sua saúde", date: "10 de março", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=xxV4UudRoAU" },
+  { slug: "ortodontia-atraves-das-geracoes-lopes-soares", imageUrl: "/podcast/ortodontia-atraves-das-geracoes-lopes-soares.jpg", guest: "Reinaldo e Víctor Lopes Soares", role: "Ortodontistas", topic: "Ortodontia através das gerações: tradição, evolução e sorrisos que transformam", date: "24 de fevereiro", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=ugzEwowoSwI" },
+  { slug: "ortodontia-idade-certa-karla-soares", imageUrl: "/podcast/karla-soares-ortodontia.jpg", guest: "Karla Soares", role: "Dentista ortodontista", topic: "Ortodontia: aparelho na idade certa", date: "30 de setembro de 2025", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=yPiZVLHvJLA" },
+  { slug: "terapia-regenerativa-diego-mota-fernandes", imageUrl: "/podcast/diego-mota-fernandes-terapia-regenerativa.jpg", guest: "Dr. Diego Mota Fernandes", role: "Médico ortopedista", topic: "Terapia regenerativa no tratamento de lesões", date: "20 de agosto de 2025", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=noazEavj3vY", professionalSlugs: ["dr-diego-mota-fernandes-ortopedia-piumhi"] },
+  { slug: "cirurgia-refrativa-paulo-henrique-faria", imageUrl: "/podcast/paulo-henrique-faria-cirurgia-refrativa.jpg", guest: "Dr. Paulo Henrique Faria", role: "Oftalmologista", topic: "Cirurgia refrativa: enxergar sem óculos", date: "5 de agosto de 2025", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=B7e35CaX-V0", professionalSlugs: ["dr-paulo-henrique-faria-silva-oftalmologia-piumhi"] },
+];
+
+
+export type MagazineEdition = {
+  slug: string;
+  number: string;
+  year: string;
+  title: string;
+  description: string;
+  editorial?: string;
+  featured: boolean;
+  articleSlugs?: string[];
+  coverUrl?: string;
+  pdfUrl?: string;
+  flipbook?: { dir: string; pages: number };
+};
+
+// Matérias que compõem o sumário de uma edição (cruzamento revista → matérias).
+export function editionArticles(edition: MagazineEdition): Article[] {
+  return (edition.articleSlugs ?? [])
+    .map((slug) => articles.find((article) => article.slug === slug))
+    .filter((article): article is Article => Boolean(article));
+}
+
+// Foto da matéria: imagem de banco livre (CC0/domínio público), por tema,
+// em public/materias/{slug}.jpg. Créditos em public/materias/_credits.json.
+const ARTICLE_IMAGE_SLUGS = new Set<string>([
+  "radiologia-odontologica-diagnostico",
+  "fisioterapia-respiratoria-quando-buscar",
+  "cuidados-com-a-pele-dermatologia",
+  "vida-saudavel-pequenas-mudancas",
+  "respiracao-na-infancia-sinais",
+  "implantodontia-reabilitacao-oral",
+  "uso-consciente-de-medicamentos",
+  "vinculos-afetivos-saude-mental",
+  "terapia-regenerativa-lesoes",
+  "cirurgia-refrativa-enxergar-sem-oculos",
+  "prevencao-na-rotina",
+]);
+
+export function articleImage(article: Article): string | undefined {
+  if (article.imageUrl) return article.imageUrl;
+  return ARTICLE_IMAGE_SLUGS.has(article.slug) ? `/materias/${article.slug}.jpg` : undefined;
+}
+
+export const magazineEditions: MagazineEdition[] = [
+  {
+    slug: "14a-edicao",
+    number: "14ª",
+    year: "2026",
+    title: "A 14ª edição está chegando",
+    description: "Uma nova edição da Guia Saúde está em produção. O lançamento será em 7 de novembro de 2026, na Festa dos Destaques Piumhienses.",
+    editorial: "A 14ª edição da Guia Saúde está em produção e será apresentada ao público em 7 de novembro de 2026, durante a Festa dos Destaques Piumhienses. Em breve, a capa oficial e a edição digital estarão disponíveis no portal.",
+    featured: true,
+  },
+  {
+    slug: "13a-edicao",
+    number: "13ª",
+    year: "2025",
+    title: "Um novo olhar para o cuidado com os olhos",
+    description: "Dra. Fernanda Mota compartilha sua visão sobre saúde ocular e bem-estar na edição Piumhi, Ano 13.",
+    editorial: "A edição de 2025 apresenta histórias e profissionais da saúde regional, com destaque para a Dra. Fernanda Mota e um novo olhar sobre o cuidado com os olhos.",
+    featured: false,
+    articleSlugs: [
+      "terapia-regenerativa-lesoes",
+      "cirurgia-refrativa-enxergar-sem-oculos",
+      "uso-consciente-de-medicamentos",
+    ],
+    coverUrl: "/revista/capas/2025.jpg",
+    pdfUrl: "/revista/guia-saude-piumhi-2025.pdf",
+    flipbook: { dir: "/revista/flip-2025", pages: 74 },
+  },
+  {
+    slug: "12a-edicao",
+    number: "12ª",
+    year: "2024",
+    title: "20 anos de inovação no tratamento da ATM e saúde bucal",
+    description: "Dra. Fernanda Oliveira é destaque da edição Piumhi, Ano 12, com conteúdos regionais sobre saúde, prevenção e qualidade de vida.",
+    editorial: "A edição de 2024 reúne profissionais e temas de saúde da região, com destaque para a trajetória da Dra. Fernanda Oliveira e sua atuação no tratamento da ATM e na saúde bucal.",
+    featured: false,
+    articleSlugs: [
+      "vinculos-afetivos-saude-mental",
+      "respiracao-na-infancia-sinais",
+      "implantodontia-reabilitacao-oral",
+    ],
+    coverUrl: "/revista/destaque-piumhi/page-001.jpg",
+    pdfUrl: "/revista/destaque-piumhi-saude.pdf",
+    flipbook: { dir: "/revista/destaque-piumhi", pages: 70 },
+  },
+  {
+    slug: "11a-edicao",
+    number: "11ª",
+    year: "2023",
+    title: "Clínica São Judas Tadeu",
+    description: "Dra. Mírian Sansoni apresenta a Clínica São Judas Tadeu na edição Piumhi, Ano 11.",
+    editorial: "A edição de 2023 destaca a atuação da Dra. Mírian Sansoni e apresenta profissionais, clínicas e serviços de saúde da região.",
+    featured: false,
+    coverUrl: "/revista/capas/2023.jpg",
+    pdfUrl: "/revista/guia-saude-piumhi-2023.pdf",
+    flipbook: { dir: "/revista/flip-2023", pages: 70 },
+  },
+  {
+    slug: "10a-edicao",
+    number: "10ª",
+    year: "2022",
+    title: "Edição especial: 10 anos de história",
+    description: "Dr. Diego Mota aborda ortopedia e bloqueio da dor ortopédica na edição comemorativa de 10 anos.",
+    editorial: "Uma edição especial que celebra 10 anos de história da Guia Saúde e reúne conteúdos sobre ortopedia, tratamentos e bem-estar regional.",
+    featured: false,
+    coverUrl: "/revista/capas/2022.jpg",
+    pdfUrl: "/revista/guia-saude-piumhi-2022.pdf",
+    flipbook: { dir: "/revista/flip-2022", pages: 70 },
+  },
+  {
+    slug: "9a-edicao",
+    number: "9ª",
+    year: "2021",
+    title: "PHD Hospital Dia",
+    description: "A equipe e o complexo de saúde que colocaram Piumhi entre os destaques do estado de Minas Gerais.",
+    editorial: "A edição de 2021 apresenta o PHD Hospital Dia e profissionais que contribuíram para ampliar o cuidado especializado em Piumhi e região.",
+    featured: false,
+    coverUrl: "/revista/capas/2021.jpg",
+    pdfUrl: "/revista/guia-saude-piumhi-2021.pdf",
+    flipbook: { dir: "/revista/flip-2021", pages: 70 },
+  },
+  {
+    slug: "8a-edicao",
+    number: "8ª",
+    year: "2020",
+    title: "Inovação e qualidade",
+    description: "Os irmãos médicos Dr. Gessé e Dr. Gilson apresentam a Clínica de Diagnóstico O'Dant na edição Piumhi, Ano 8.",
+    editorial: "A edição de 2020 destaca a Clínica de Diagnóstico O'Dant e reúne profissionais, serviços e conteúdos de saúde de Piumhi e região.",
+    featured: false,
+    coverUrl: "/revista/capas/2020.jpg",
+    flipbook: { dir: "/revista/flip-2020", pages: 70 },
+  },
+  {
+    slug: "6a-edicao",
+    number: "6ª",
+    year: "2018",
+    title: "Um novo projeto para a saúde regional",
+    description: "Dr. William e Dr. Paulo Henrique apresentam o projeto do primeiro Day Hospital de Piumhi e região.",
+    editorial: "A edição de 2018 apresenta o projeto do primeiro Day Hospital de Piumhi e região e reúne profissionais e serviços de saúde locais.",
+    featured: false,
+    coverUrl: "/revista/capas/2018.jpg",
+    flipbook: { dir: "/revista/flip-2018", pages: 66 },
+  },
+  {
+    slug: "4a-edicao",
+    number: "4ª",
+    year: "2016",
+    title: "Piumhi é a minha segunda casa",
+    description: "Dr. Willian José da Costa Filho, cirurgião vascular, é o destaque da edição Piumhi, Ano 4.",
+    editorial: "A edição de 2016 apresenta o cirurgião vascular Dr. Willian José da Costa Filho e reúne profissionais, serviços e conteúdos de saúde de Piumhi e região.",
+    featured: false,
+    coverUrl: "/revista/flip-2016/page-001.jpg",
+    flipbook: { dir: "/revista/flip-2016", pages: 64 },
+  },
+  {
+    slug: "2a-edicao",
+    number: "2ª",
+    year: "2014",
+    title: "Para você viver melhor",
+    description: "A 2ª edição da Guia Saúde reúne informações, dicas e profissionais de saúde de Piumhi e região.",
+    editorial: "Publicada em outubro de 2014, a 2ª edição apresenta conteúdos sobre saúde, bem-estar e qualidade de vida, além de profissionais da região.",
+    featured: false,
+    coverUrl: "/revista/capas/2014.jpg",
+    flipbook: { dir: "/revista/flip-2014", pages: 64 },
+  },
+  {
+    slug: "1a-edicao",
+    number: "1ª",
+    year: "2013",
+    title: "A primeira edição da Guia Saúde",
+    description: "A edição inaugural da Guia Saúde marcou o início do projeto editorial de saúde e informação regional em Piumhi.",
+    editorial: "Publicada em outubro de 2013, a primeira edição reuniu informações, serviços e profissionais de saúde para aproximar conteúdo e comunidade.",
+    featured: false,
+    coverUrl: "/revista/capas/2013.jpg",
+    flipbook: { dir: "/revista/flip-2013", pages: 62 },
+  },
+];

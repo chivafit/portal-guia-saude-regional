@@ -39,7 +39,7 @@ export default function InclusionPage() {
             </ol>
             <div className="inclusion-note">
               <strong>Quer anunciar?</strong>
-              <p>Se a intenção é contratar banner, perfil em destaque, revista ou podcast, acesse o mídia kit.</p>
+              <p>Se a intenção é contratar banner, perfil em destaque, revista ou podcast, veja como anunciar.</p>
               <Link href="/anuncie">Ver oportunidades comerciais →</Link>
             </div>
           </div>

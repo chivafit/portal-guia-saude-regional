@@ -1,1 +1,23 @@
-<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#17384E"/><stop offset="1" stop-color="#24465B"/></linearGradient><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#D97842"/><stop offset="1" stop-color="#A85831"/></linearGradient></defs><rect width="1200" height="420" fill="#FBFAF7"/><rect x="24" y="24" width="1152" height="372" fill="url(#g)"/><circle cx="1080" cy="92" r="150" fill="#D97842" opacity=".22"/><path d="M70 334C190 255 310 375 430 292C560 200 700 335 1128 250" stroke="#FFFFFF" stroke-opacity=".13" stroke-width="18" stroke-linecap="round"/><text x="64" y="86" fill="#D97842" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="5">PUBLICIDADE REGIONAL</text><text x="64" y="180" fill="#FFFFFF" font-family="Georgia, 'Times New Roman', serif" font-size="56" font-weight="400">Banner topo</text><text x="64" y="228" fill="#DDE8ED" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="500">Espaço premium na abertura do portal</text><rect x="64" y="326" width="210" height="42" fill="rgba(255,255,255,.10)"/><text x="84" y="354" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">GUIA SAÚDE</text></svg>
+<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#17384e"/><stop offset="1" stop-color="#0f2a3d"/></linearGradient>
+  <linearGradient id="cta" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0096f2"/><stop offset="1" stop-color="#0072c6"/></linearGradient>
+</defs>
+<rect width="1200" height="420" rx="24" fill="url(#bg)"/>
+<path d="M40 120 H384 l24 -46 l30 96 l24 -60 l18 34 H1160" stroke="#ffffff" stroke-opacity=".10" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<g transform="translate(1000 210) scale(1.05)" fill="none">
+    <circle cx="0" cy="0" r="96" fill="#0096f2" opacity=".16"/>
+    <circle cx="0" cy="0" r="66" fill="#ffffff" opacity=".08"/>
+    <path d="M-120 6 h44 l14 -34 l22 68 l16 -42 h48" stroke="#ffffff" stroke-opacity=".85" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(0 0)">
+      <rect x="-26" y="-26" width="52" height="52" rx="16" fill="#0096f2"/>
+      <path d="M0 -14 v28 M-14 0 h28" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+    </g>
+  </g>
+<text x="64" y="96" fill="#0096f2" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="5">PUBLICIDADE REGIONAL</text>
+<text x="62" y="210" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="400">Sua marca na abertura</text>
+<text x="64" y="262" fill="#d7e5ec" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="500">Espaço premium visto por toda a região de saúde</text>
+<rect x="64" y="312" width="270" height="60" rx="30" fill="url(#cta)"/>
+<text x="199" y="350" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="800" text-anchor="middle" letter-spacing="1">Anuncie aqui</text>
+<text x="1136" y="352" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800" text-anchor="end" letter-spacing="2">GUIA SAÚDE · BANNER TOPO · 1200×420</text>
+</svg>

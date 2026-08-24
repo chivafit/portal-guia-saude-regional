@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, BadgeCheck, Building2, ClipboardCheck, MapPin, ShieldCheck, Stethoscope } from "lucide-react";
-import { ContactReveal } from "@/components/ContactReveal";
+import { ArrowLeft, BadgeCheck, Building2, ClipboardCheck, MapPin, Play, ShieldCheck, Stethoscope } from "lucide-react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { professionals } from "@/lib/data";
 import { findPublishedProfessional } from "@/lib/directory";
+import { podcastForProfessional } from "@/lib/podcasts";
 import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -23,24 +24,40 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
   const { slug } = await params;
   const item = await findPublishedProfessional(slug, professionals);
   if (!item) notFound();
+  const podcastEpisode = podcastForProfessional(item.slug, item.name);
+  const whatsappDigits = (item.whatsapp ?? "").replace(/\D/g, "");
+  const phoneDigits = (item.phone ?? "").replace(/\D/g, "");
+  const contactHref = whatsappDigits.length >= 10
+    ? `https://wa.me/${whatsappDigits.startsWith("55") ? whatsappDigits : `55${whatsappDigits}`}`
+    : phoneDigits.length >= 10 ? `tel:+55${phoneDigits}` : "";
 
-  const initials = item.name.split(" ").slice(0, 2).map((part) => part[0]).join("");
+  const nameSkip = new Set(["da", "de", "do", "dos", "das", "e"]);
+  const initials = item.name
+    .replace(/^(dr|dra|sr|sra)\.?\s+/i, "")
+    .split(/\s+/)
+    .filter((part) => part && !nameSkip.has(part.toLowerCase()))
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
 
   return (
     <>
       <SiteHeader />
       <main className="profile-page-clean">
         <section className="shell profile-clean-wrap">
+          <Breadcrumbs items={[
+            { label: "Início", href: "/" },
+            { label: item.city, href: `/cidades/${item.city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}` },
+            { label: "Profissionais", href: `/buscar?cidade=${encodeURIComponent(item.city)}&tipo=profissionais` },
+            { label: item.name },
+          ]} />
           <Link href={`/buscar?cidade=${encodeURIComponent(item.city)}`} className="profile-clean-back">
             <ArrowLeft size={14} /> Voltar para busca
           </Link>
 
           <article className="profile-clean-card">
-            <div
-              className="profile-clean-photo"
-              style={{ backgroundImage: `url(${item.imageUrl || "/placeholders/professional-photo.svg"})` }}
-              aria-label={`Foto de ${item.name}`}
-            >
+            <div className="profile-clean-photo profile-clean-initials" aria-hidden="true">
               <span>{initials}</span>
             </div>
 
@@ -50,8 +67,15 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
                 <h1>{item.name}</h1>
                 <span className={item.verified ? "status-pill verified" : "status-pill pending"}>
                   {item.verified ? <BadgeCheck size={14} /> : <ShieldCheck size={14} />}
-                  {item.verified ? "Perfil verificado" : "Em validação"}
+                  {item.verified ? "Perfil verificado" : "Cadastro em revisão"}
                 </span>
+                <div className="profile-clean-verification">
+                  {item.verified ? <BadgeCheck size={15} /> : <ShieldCheck size={15} />}
+                  <span>
+                    {item.verified ? "Informações verificadas pela equipe" : "Informações em revisão pela equipe"}
+                    {item.source ? <> · fonte: <a href={item.source} target="_blank" rel="noreferrer">{new URL(item.source).hostname.replace(/^www\./, "")}</a></> : null}
+                  </span>
+                </div>
               </div>
 
               <p className="profile-clean-summary">{item.summary}</p>
@@ -66,15 +90,7 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
             <aside className="profile-clean-contact">
               <small>Contato</small>
               <strong>{item.organization}</strong>
-              <ContactReveal
-                entityType="professional"
-                entitySlug={item.slug}
-                entityName={item.name}
-                category={item.specialty}
-                cityName={item.city}
-                phone={item.phone}
-                whatsapp={item.whatsapp}
-              />
+              {contactHref ? <a className="profile-direct-contact" href={contactHref} target={contactHref.startsWith("http") ? "_blank" : undefined} rel={contactHref.startsWith("http") ? "noreferrer" : undefined}>{contactHref.startsWith("http") ? "Falar pelo WhatsApp" : "Ligar para o consultório"}</a> : <span className="contact-pending">Contato em validação</span>}
             </aside>
           </article>
 
@@ -97,10 +113,19 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
               </div>
             </article>
 
-            <article className="profile-clean-note">
-              <h2>Nota editorial</h2>
-              <p>O Guia Saúde é um portal informativo. Não realiza diagnóstico, prescrição, triagem ou agendamento de consultas.</p>
-            </article>
+            {podcastEpisode ? (
+              <article className="profile-podcast">
+                <div className="profile-podcast-icon"><Play size={20} fill="currentColor" /></div>
+                <div>
+                  <span>Participação no Conexão Saúde</span>
+                  <h2>{podcastEpisode.topic}</h2>
+                  <p>{podcastEpisode.guest} · {podcastEpisode.role}</p>
+                </div>
+                <a href={podcastEpisode.episodeUrl || "/podcast"} target={podcastEpisode.episodeUrl ? "_blank" : undefined} rel={podcastEpisode.episodeUrl ? "noreferrer" : undefined}>
+                  Assistir ao podcast
+                </a>
+              </article>
+            ) : null}
           </section>
         </section>
       </main>

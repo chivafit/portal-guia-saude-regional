@@ -5,6 +5,7 @@ import { ArrowRight, BookOpen, Building2, MapPin, Search, Stethoscope } from "lu
 import { useEffect, useState } from "react";
 import { cities, organizations, professionals } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
+import { isCityAvailable } from "@/lib/cities";
 
 const storageKey = "guia-saude:selected-city";
 const modalSeenKey = "guia-saude:city-entry-seen";
@@ -14,7 +15,7 @@ export function CityGateway() {
 
   useEffect(() => {
     const saved = window.localStorage.getItem(storageKey) || "";
-    queueMicrotask(() => setSelectedCity(saved));
+    queueMicrotask(() => setSelectedCity(isCityAvailable(saved) ? saved : ""));
     const listener = (event: Event) => setSelectedCity((event as CustomEvent<string>).detail || "");
     window.addEventListener("guia-saude:city-change", listener);
     return () => window.removeEventListener("guia-saude:city-change", listener);
@@ -37,27 +38,28 @@ export function CityGateway() {
       <div className="city-gateway-copy">
         <p className="eyebrow">Portal por cidade</p>
         <h2>{selectedCity ? `Portal de saúde em ${selectedCity}` : "Comece pela sua cidade."}</h2>
-        <p>Selecione o município para ver matérias, especialistas, empresas, podcast, revista e serviços locais.</p>
+        <p>Selecione o município para ver matérias, especialistas, empresas, podcast, revista e serviços próximos.</p>
         <Link className="city-gateway-primary" href={`/buscar${cityQuery}`}><Search size={16} /> Buscar agora <ArrowRight size={14} /></Link>
       </div>
       <div className="city-gateway-panel">
         <div className="city-choice-grid">
           {cities.map((city) => (
-            <button type="button" key={city} onClick={() => selectCity(city)} className={selectedCity === city ? "active" : ""}>
+            <button type="button" key={city} disabled={!isCityAvailable(city)} onClick={() => selectCity(city)} className={selectedCity === city ? "active" : ""}>
               <MapPin size={15} />
-              {city}
+              <span>{city}</span>
+              {!isCityAvailable(city) ? <small>EM BREVE</small> : null}
             </button>
           ))}
         </div>
         <div className="city-gateway-actions">
           <Link href={`/buscar${cityQuery}`}><Stethoscope size={16} /> Especialistas <ArrowRight size={14} /></Link>
           <Link href={`/empresas${cityQuery}`}><Building2 size={16} /> Empresas <ArrowRight size={14} /></Link>
-          <Link href={selectedSlug ? `/cidades/${selectedSlug}` : "/materias"}><BookOpen size={16} /> Guia local <ArrowRight size={14} /></Link>
+          <Link href={selectedSlug ? `/cidades/${selectedSlug}` : "/materias"}><BookOpen size={16} /> Guia da cidade <ArrowRight size={14} /></Link>
         </div>
         <div className="city-live-preview">
-          <div><strong>{localProfessionals}</strong><span>{selectedCity ? "especialistas no recorte local" : "especialistas na região"}</span></div>
-          <div><strong>{localOrganizations}</strong><span>{selectedCity ? "empresas e serviços locais" : "empresas e serviços"}</span></div>
-          <div><strong>{selectedCity ? "Local" : "Regional"}</strong><span>matérias, podcast e revista</span></div>
+          <div><strong>{localProfessionals}</strong><span>{selectedCity ? "especialistas na cidade" : "especialistas na região"}</span></div>
+          <div><strong>{localOrganizations}</strong><span>{selectedCity ? "empresas e serviços na cidade" : "empresas e serviços"}</span></div>
+          <div><strong>{selectedCity ? "Cidade" : "Regional"}</strong><span>matérias, podcast e revista</span></div>
         </div>
       </div>
     </section>

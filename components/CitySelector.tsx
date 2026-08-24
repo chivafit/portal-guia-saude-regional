@@ -5,6 +5,7 @@ import { ChevronDown, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cities } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
+import { isCityAvailable } from "@/lib/cities";
 
 const storageKey = "guia-saude:selected-city";
 const modalSeenKey = "guia-saude:city-entry-seen";
@@ -25,7 +26,7 @@ export function CitySelector() {
 
   useEffect(() => {
     const city = currentCityFromUrl() || window.localStorage.getItem(storageKey) || "";
-    queueMicrotask(() => setSelectedCity(city));
+    queueMicrotask(() => setSelectedCity(isCityAvailable(city) ? city : ""));
   }, []);
 
   function applyCity(city: string) {
@@ -43,17 +44,17 @@ export function CitySelector() {
     <div className="city-selector">
       <button type="button" aria-label="Selecionar cidade" onClick={() => window.dispatchEvent(new CustomEvent(openEventName))}>
         <MapPin size={15} />
-        <span>{selectedCity || "Toda a região"}</span>
+        <span>{selectedCity || "Todas as cidades"}</span>
         <ChevronDown size={14} />
       </button>
       <div className="city-selector-menu">
-        <button type="button" onClick={() => applyCity("")}>Toda a região</button>
+        <button type="button" onClick={() => applyCity("Piumhi")}>Buscar em Piumhi</button>
         {cities.map((city) => (
-          <button type="button" key={city} onClick={() => applyCity(city)} className={selectedCity === city ? "active" : ""}>
-            {city}
+          <button type="button" key={city} disabled={!isCityAvailable(city)} onClick={() => applyCity(city)} className={selectedCity === city ? "active" : ""}>
+            <span>{city}</span>{!isCityAvailable(city) ? <small>EM BREVE</small> : null}
           </button>
         ))}
-        <Link href={selectedSlug ? `/cidades/${selectedSlug}` : "/buscar"}>Abrir portal local</Link>
+        <Link href={selectedSlug ? `/cidades/${selectedSlug}` : "/buscar"}>{selectedSlug ? "Ver saúde na cidade" : "Abrir busca regional"}</Link>
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
 "use client";
 
-import { MapPin, X } from "lucide-react";
+import { ArrowRight, MapPin, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cities } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
+import { isCityAvailable } from "@/lib/cities";
 
 const storageKey = "guia-saude:selected-city";
 const modalSeenKey = "guia-saude:city-entry-seen";
@@ -27,20 +28,18 @@ export function CityEntryModal() {
   useEffect(() => {
     const cityFromUrl = cityFromCurrentUrl();
     const savedCity = window.localStorage.getItem(storageKey) || "";
-    const hasSeenThisSession = window.sessionStorage.getItem(sessionSeenKey) === "1";
-    const initialCity = cityFromUrl || savedCity;
+    const candidateCity = cityFromUrl || savedCity;
+    const initialCity = isCityAvailable(candidateCity) ? candidateCity : "";
     queueMicrotask(() => setSelectedCity(initialCity));
-    if (cityFromUrl) {
-      window.localStorage.setItem(storageKey, cityFromUrl);
+    if (initialCity) {
+      window.localStorage.setItem(storageKey, initialCity);
       window.localStorage.setItem(modalSeenKey, "1");
       window.sessionStorage.setItem(sessionSeenKey, "1");
-      window.dispatchEvent(new CustomEvent("guia-saude:city-change", { detail: cityFromUrl }));
+      window.dispatchEvent(new CustomEvent("guia-saude:city-change", { detail: initialCity }));
       return;
     }
-    if (!hasSeenThisSession) {
-      const timer = window.setTimeout(() => setOpen(true), 450);
-      return () => window.clearTimeout(timer);
-    }
+    // A escolha de cidade continua disponível no cabeçalho, sem interromper
+    // automaticamente quem entrou no portal para fazer uma busca direta.
   }, []);
 
   useEffect(() => {
@@ -91,10 +90,10 @@ export function CityEntryModal() {
         <div className="city-entry-panel">
           <div className="city-entry-grid">
             {cities.map((city) => (
-              <button type="button" key={city} onClick={() => chooseCity(city)} className={selectedCity === city ? "active" : ""}>
-                <span className="city-entry-image" style={{ backgroundImage: `linear-gradient(rgba(16,42,58,.08),rgba(16,42,58,.36)),url('/ads/cidade-${citySlug(city)}.svg')` }} />
-                <span>{city}</span>
-                <small><MapPin size={13} /> Abrir guia local</small>
+              <button type="button" key={city} disabled={!isCityAvailable(city)} onClick={() => chooseCity(city)} className={selectedCity === city ? "active" : ""}>
+                <span className="city-entry-pin"><MapPin size={18} /></span>
+                <span className="city-entry-name">{city}</span>
+                <small>{isCityAvailable(city) ? <>Abrir guia <ArrowRight size={14} /></> : "EM BREVE"}</small>
               </button>
             ))}
           </div>

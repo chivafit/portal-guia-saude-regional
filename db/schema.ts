@@ -6,6 +6,15 @@ export const cities = sqliteTable("cities", {
   ibgeCode: text("ibge_code").notNull().unique(),
   name: text("name").notNull(),
   slug: text("slug").notNull().unique(),
+  state: text("state").notNull().default("MG"),
+  gentilic: text("gentilic"),
+  microregion: text("microregion"),
+  healthRegion: text("health_region"),
+  region: text("region"),
+  population: integer("population"),
+  intro: text("intro"),
+  seoDescription: text("seo_description"),
+  highlights: text("highlights"),
   active: integer("active", { mode: "boolean" }).notNull().default(true),
 });
 

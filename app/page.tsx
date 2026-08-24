@@ -1,131 +1,116 @@
 import Link from "next/link";
-import { Activity, Apple, ArrowRight, ArrowUpRight, BookOpen, Brain, Building2, Dumbbell, Ear, HeartPulse, MapPin, Mic, Newspaper, Play, Smile, Stethoscope, Syringe } from "lucide-react";
-import { SearchForm } from "@/components/SearchForm";
+import { Activity, ArrowRight, BookOpen, Building2, FlaskConical, HeartPulse, MapPin, Newspaper, Pill, Podcast, Search, Stethoscope } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { articles, professions, professionals } from "@/lib/data";
-import { publishedProfessionals } from "@/lib/directory";
+import { activeCities, isCityAvailable } from "@/lib/cities";
+import { articles, magazineEditions, podcasts } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-const professionIcons = [Stethoscope, Smile, Brain, Activity, Apple, Ear, Syringe, HeartPulse, Dumbbell];
-const localGuideHighlights = [
-  { icon: Newspaper, title: "Matérias da cidade", text: "Conteúdos de saúde, prevenção, campanhas e entrevistas com recorte local.", href: "/materias" },
-  { icon: Stethoscope, title: "Profissionais", text: "Busca objetiva por especialidade, cidade e área de atendimento.", href: "/buscar" },
-  { icon: Building2, title: "Empresas e serviços", text: "Clínicas, farmácias, laboratórios, óticas e estruturas da rede local.", href: "/empresas" },
-  { icon: Mic, title: "Podcast", text: "Conversas e episódios ligados aos temas de saúde da região.", href: "/podcast" },
-  { icon: BookOpen, title: "Revista", text: "Conteúdo impresso com continuidade no portal digital.", href: "/revista" },
-];
+export const metadata = pageMetadata(
+  "Encontre atendimento de saúde perto de você",
+  "Busque profissionais, empresas, especialidades e serviços de saúde no Centro-Oeste de Minas.",
+  "/",
+);
 
-export default async function Home() {
-  const featuredProfessionals = await publishedProfessionals(professionals);
+export default function Home() {
+  const shortcuts = [
+    { label: "Médicos", href: "/buscar?profissao=M%C3%A9dico&tipo=profissionais", icon: Stethoscope },
+    { label: "Dentistas", href: "/buscar?profissao=Dentista&tipo=profissionais", icon: Activity },
+    { label: "Psicólogos", href: "/buscar?profissao=Psic%C3%B3logo&tipo=profissionais", icon: HeartPulse },
+    { label: "Clínicas", href: "/buscar?q=cl%C3%ADnica&tipo=empresas", icon: Building2 },
+    { label: "Farmácias", href: "/buscar?q=farm%C3%A1cia&tipo=empresas", icon: Pill },
+    { label: "Laboratórios", href: "/buscar?q=laborat%C3%B3rio&tipo=empresas", icon: FlaskConical },
+  ];
+  const latestEpisode = podcasts[0];
+  const featuredEdition = magazineEditions.find((edition) => edition.featured) ?? magazineEditions[0];
+  const latestArticle = articles[0];
   return (
     <>
       <SiteHeader />
       <main>
-        <section className="hero hero-editorial">
-          <div className="hero-photo" aria-hidden="true" />
-          <div className="hero-shade" aria-hidden="true" />
-          <div className="shell hero-content">
-            <p className="edition-tag">Portal Guia Saúde Regional</p>
-            <h1>Encontre saúde<br />pela sua <em>cidade.</em></h1>
-            <p className="hero-intro">Selecione sua cidade e acesse um guia local com matérias, profissionais, empresas de saúde, podcast, revista e serviços próximos.</p>
-            <SearchForm />
-            <div className="hero-footnote"><MapPin size={14} /> Selecione a cidade e veja o portal local com profissionais, empresas e mídia regional.</div>
+        <section className="city-choose">
+          <div className="shell">
+            <p className="eyebrow">Portal Guia Saúde · Centro-Oeste de Minas</p>
+            <h1>Encontre atendimento de saúde perto de você</h1>
+            <p className="city-choose-lead">
+              Procure diretamente por especialidade, profissional, clínica, exame ou serviço.
+            </p>
+            <form action="/buscar" className="home-quick-search">
+              <label>
+                <Search size={18} />
+                <input name="q" aria-label="O que você procura?" placeholder="Especialidade, profissional, clínica ou exame" />
+              </label>
+              <button type="submit">Buscar</button>
+            </form>
+            <div className="home-shortcuts" aria-label="Buscas rápidas">
+              {shortcuts.map(({ label, href, icon: Icon }) => (
+                <Link key={label} href={href}><Icon size={17} /> {label}</Link>
+              ))}
+            </div>
+
+            <div className="home-city-heading">
+              <strong>Ou escolha uma cidade</strong>
+              <span>Veja somente os atendimentos e conteúdos daquele município.</span>
+            </div>
+            <div className="city-choose-grid">
+              {activeCities.map((city) => (
+                isCityAvailable(city) ? <Link key={city.slug} href={`/cidades/${city.slug}`} className="city-choose-card">
+                  <span className="city-choose-pin"><MapPin size={18} /></span>
+                  <span className="city-choose-name">{city.name}</span>
+                  <small className="city-choose-region">{city.region}</small>
+                  <em className="city-choose-cta">Ver saúde na cidade <ArrowRight size={14} /></em>
+                </Link> : <div key={city.slug} className="city-choose-card city-coming-soon" aria-disabled="true">
+                  <span className="city-choose-pin"><MapPin size={18} /></span>
+                  <span className="city-choose-name">{city.name}</span>
+                  <small className="city-choose-region">{city.region}</small>
+                  <em className="city-choose-cta">EM BREVE</em>
+                </div>
+              ))}
+            </div>
+
+            <Link className="city-choose-search" href="/buscar?cidade=Piumhi">
+              <Activity size={16} /> Buscar em Piumhi
+            </Link>
           </div>
         </section>
 
-        <section className="shell home-top-banner">
-          <div className="home-top-banner-media" aria-hidden="true" />
-          <div className="home-top-banner-copy">
-            <span>Especial Guia Saúde</span>
-            <h2>Conteúdo local, especialistas e serviços de saúde em um só portal.</h2>
-            <p>Matérias, podcast, revista e guia profissional organizados por cidade para quem busca informação e referência regional.</p>
+        <section className="section shell home-pillars">
+          <div className="home-section-head">
+            <p className="eyebrow">Além do diretório</p>
+            <h2>Conteúdo de saúde da região</h2>
+          </div>
+          <div className="home-pillars-grid">
+            <Link href="/podcast" className="home-pillar">
+              <span className="home-pillar-tag"><Podcast size={15} /> Podcast</span>
+              <strong>Conexão Saúde</strong>
+              <p>{latestEpisode.topic}</p>
+              <em>Ver episódios <ArrowRight size={14} /></em>
+            </Link>
+            <Link href="/revista" className="home-pillar">
+              <span className="home-pillar-tag"><BookOpen size={15} /> Revista</span>
+              <strong>{featuredEdition.number} edição</strong>
+              <p>{featuredEdition.title}</p>
+              <em>Folhear a revista <ArrowRight size={14} /></em>
+            </Link>
+            <Link href="/materias" className="home-pillar">
+              <span className="home-pillar-tag"><Newspaper size={15} /> Matérias</span>
+              <strong>{latestArticle.title}</strong>
+              <p>{latestArticle.excerpt}</p>
+              <em>Ler matérias <ArrowRight size={14} /></em>
+            </Link>
+          </div>
+        </section>
+
+        <section className="home-commercial">
+          <div className="shell home-commercial-inner">
             <div>
-              <Link href="/materias">Ver matérias <ArrowRight size={14} /></Link>
-              <Link href="/buscar">Buscar especialistas <ArrowUpRight size={14} /></Link>
+              <p className="eyebrow">Para marcas e profissionais</p>
+              <h2>Sua marca perto de quem busca saúde.</h2>
+              <p>Anuncie no portal, nas páginas das cidades, no podcast e na revista.</p>
             </div>
+            <Link href="/anuncie">Anunciar no Guia <ArrowRight size={15} /></Link>
           </div>
         </section>
-
-        <section className="section shell commercial-highlights compact-home-section">
-          <div className="section-kicker"><span>01</span><p>Guia local</p></div>
-          <div className="commercial-highlights-head">
-            <h2>Depois da cidade, o portal vira um guia de saúde local.</h2>
-            <p>Matérias, busca, profissionais, empresas, podcast e revista aparecem organizados para a realidade de cada município.</p>
-          </div>
-          <div className="commercial-highlight-grid">
-            {localGuideHighlights.map((item) => {
-              const Icon = item.icon;
-              return <Link href={item.href} key={item.title}><Icon size={21} /><strong>{item.title}</strong><p>{item.text}</p><span>Acessar <ArrowRight size={13} /></span></Link>;
-            })}
-          </div>
-        </section>
-
-        <section className="section shell home-featured compact-home-section">
-          <div className="section-kicker"><span>02</span><p>Conteúdo e presença</p></div>
-          <div className="featured-board">
-            <article className="featured-main">
-              <div className="featured-main-media" aria-label="Imagem editorial de saúde regional" />
-              <div>
-                <span><BookOpen size={15} /> Especial regional</span>
-                <h2>Informação, profissionais e serviços reunidos em uma experiência só.</h2>
-                <p>Uma vitrine editorial para orientar a população e fortalecer a presença de quem atua na saúde regional.</p>
-                <Link href="/materias">Ver matérias <ArrowUpRight size={15} /></Link>
-              </div>
-            </article>
-            <div className="featured-side">
-              <Link href="/podcast"><Mic size={18} /><span>Podcast</span><strong>Conversas com profissionais da região.</strong></Link>
-              <Link href="/revista"><BookOpen size={18} /><span>Revista impressa</span><strong>Edições, entrevistas e histórias locais.</strong></Link>
-              <Link href="/buscar"><Stethoscope size={18} /><span>Guia local</span><strong>Profissionais e serviços por cidade.</strong></Link>
-            </div>
-          </div>
-        </section>
-
-        <section className="section shell quick-access compact-home-section">
-          <div className="section-kicker"><span>03</span><p>Encontre o cuidado certo</p></div>
-          <div className="section-heading editorial-heading">
-            <h2>Por onde você<br />quer começar?</h2>
-            <p>Uma busca simples para descobrir profissionais e serviços próximos, organizados por área e cidade.</p>
-          </div>
-          <div className="profession-grid">
-            {professions.map((item, index) => (
-              <Link key={item} href={`/buscar?profissao=${encodeURIComponent(item)}`} className="profession-card">
-                {(() => { const Icon = professionIcons[index] ?? HeartPulse; return <span className="profession-icon"><Icon className="lucide-card-icon" size={24} strokeWidth={1.7} /></span>; })()}<strong>{item}</strong><small>Ver profissionais <ArrowUpRight size={14} /></small>
-              </Link>
-            ))}
-          </div>
-          <Link className="outline-link" href="/buscar">Explorar todas as especialidades</Link>
-        </section>
-
-        <section className="editorial-feature compact-home-section" id="materias">
-          <div className="shell">
-            <div className="section-kicker light"><span>04</span><p>Informação para viver melhor</p></div>
-            <div className="feature-grid">
-              <article className="lead-story">
-                <div className="lead-art"><span>EDIÇÃO ESPECIAL</span><b>Saúde<br />em cada<br /><em>fase.</em></b></div>
-                <div className="story-copy"><p className="eyebrow">Longevidade</p><h2>O cuidado muda com o tempo. A atenção, não.</h2><p>Um guia sobre prevenção, escolhas e acompanhamento em cada etapa da vida.</p><span>Leitura de 6 minutos</span></div>
-              </article>
-              <div className="story-list">
-                {articles.map((article, index) => <article key={article.slug}><span>0{index + 1}</span><div><p className="eyebrow">{article.category}</p><h3>{article.title}</h3><p>{article.excerpt}</p><small>Conteúdo demonstrativo · 4 min</small></div></article>)}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="directory-section compact-home-section">
-          <div className="shell">
-            <div className="section-kicker light"><span>06</span><p>Profissionais perto de você</p></div>
-            <div className="directory-title"><h2>Quem cuida<br /><em>da nossa região.</em></h2><Link href="/buscar">Ver guia completo <ArrowRight size={14} /></Link></div>
-            <div className="profile-preview-grid">{featuredProfessionals.slice(0,3).map((item, index) => <article className="profile-preview" key={item.slug}><div className={`portrait portrait-${index+1}`}><Stethoscope size={42} /></div><div><span>{item.profession} · {item.city}</span><h3>{item.name}</h3><p>{item.specialty}</p><Link href={`/profissionais/${item.slug}`}>Ver perfil <ArrowUpRight size={14} /></Link></div></article>)}</div>
-          </div>
-        </section>
-
-        <section className="media-section compact-home-section" id="podcast">
-          <div className="shell media-grid">
-            <div className="podcast-card"><p>CONEXÃO SAÚDE <Mic size={14} /> PODCAST</p><div className="sound-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div><small>PRÓXIMO AO VIVO · 14/07 ÀS 19H</small><h2>Radiologia odontológica: como a tecnologia transforma tratamentos.</h2><p>Com Rodrigo Soares Costa, tecnólogo em radiologia.</p><button aria-label="Conhecer o episódio do Conexão Saúde"><Play size={20} fill="currentColor" /></button></div>
-            <div className="magazine-card" id="revista"><div className="mag-cover"><span>Guia</span><strong>Saúde</strong><small>REVISTA IMPRESSA</small><b>O FUTURO<br />DO CUIDADO<br /><em>É PERTO.</em></b><p>14ª EDIÇÃO</p></div><div><p className="eyebrow">Revista Guia Saúde</p><h2>Histórias, especialistas e marcas em uma edição impressa regional.</h2><span>Conhecer a revista <ArrowRight size={14} /></span></div></div>
-          </div>
-        </section>
-
       </main>
       <SiteFooter />
     </>

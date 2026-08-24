@@ -1,223 +1,183 @@
 import Link from "next/link";
-import { ArrowRight, Building2, MapPin, Megaphone, Newspaper, Podcast, Search, Star } from "lucide-react";
-import { AdSlot } from "@/components/AdSlot";
+import { ArrowRight, BadgeCheck, BookOpen, Building2, LayoutTemplate, MapPin, Megaphone, Mic2, Search } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { cities } from "@/lib/data";
+import { articles, cities, podcasts } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
+import { isCityAvailable } from "@/lib/cities";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
-  "Anuncie",
-  "Mídia kit do Guia Saúde com banners, revista impressa, podcast, Instagram e campanhas regionais de saúde.",
+  "Anuncie no Guia Saúde",
+  "Conheça as formas de anunciar sua clínica, empresa ou marca no portal Guia Saúde.",
   "/anuncie",
 );
 
-const channels = [
-  ["Portal", "Banners, perfis em destaque e presença segmentada por cidade ou categoria."],
-  ["Revista impressa", "Edições físicas, publieditoriais e cotas comerciais para marcas da saúde."],
-  ["Podcast", "Apoio de episódios, chamadas comerciais e conteúdo com autoridade regional."],
-  ["Instagram", "Distribuição social conectada às pautas, profissionais e campanhas."],
-];
-
 const formats = [
-  { title: "Banner topo", tag: "1200 x 420 px", image: "/ads/banner-topo.svg", text: "Presença nas páginas principais do portal, ideal para campanhas institucionais." },
-  { title: "Banner por cidade", tag: "900 x 620 px", image: "/ads/banner-cidade.svg", text: "Exibição em páginas de Piumhi, Capitólio, Arcos, Campo Belo, Bambuí e região." },
-  { title: "Perfil em destaque", tag: "900 x 620 px", image: "/ads/perfil-destaque.svg", text: "Mais destaque para profissionais, clínicas, consultórios, laboratórios e empresas." },
-  { title: "Conteúdo de marca", tag: "900 x 620 px", image: "/ads/materia-patrocinada.svg", text: "Matérias identificadas, entrevistas e pautas educativas com revisão editorial." },
-  { title: "Podcast apoiado", tag: "900 x 620 px", image: "/ads/podcast-apoiado.svg", text: "Cotas de apoio, chamada do apresentador e distribuição integrada do episódio." },
-  { title: "Revista impressa + portal", tag: "900 x 620 px", image: "/ads/revista-digital.svg", text: "Presença combinada na edição física, portal e redes sociais da Guia Saúde." },
-];
-
-const packages = [
   {
-    name: "Cidade",
-    bestFor: "Marcas que querem dominar presença em um município.",
-    items: ["Banner topo local", "Página da cidade", "Empresas e profissionais locais", "CTA comercial por cidade"],
+    icon: LayoutTemplate,
+    title: "Banner no portal",
+    text: "Sua marca aparece em posições de destaque nas páginas do portal ou de uma cidade escolhida.",
+    ideal: "Ideal para campanhas, inaugurações, serviços e reconhecimento de marca.",
   },
   {
-    name: "Destaque",
-    bestFor: "Profissionais, clínicas e empresas que precisam aparecer mais.",
-    items: ["Card premium", "Busca segmentada", "Imagem do anúncio", "Período definido"],
+    icon: BadgeCheck,
+    title: "Perfil em destaque",
+    text: "Profissionais, clínicas e empresas ganham mais visibilidade na busca e no diretório.",
+    ideal: "Ideal para quem deseja ser encontrado com mais facilidade.",
   },
   {
-    name: "Autoridade",
-    bestFor: "Campanhas com conteúdo, reputação e distribuição multiplataforma.",
-    items: ["Matéria identificada", "Podcast ou entrevista", "Revista impressa", "Distribuição social"],
+    icon: BookOpen,
+    title: "Conteúdo patrocinado",
+    text: "Matéria ou entrevista identificada como conteúdo de marca e revisada pela equipe editorial.",
+    ideal: "Ideal para explicar serviços, projetos e campanhas educativas.",
   },
-];
-
-const localProducts = [
-  { icon: MapPin, title: "Miniportal da cidade", text: "Presença em páginas locais como Piumhi, Capitólio, Arcos, Campo Belo, Bambuí, Pimenta e São Roque de Minas." },
-  { icon: Search, title: "Busca segmentada", text: "Apareça onde o usuário já está procurando especialistas, clínicas, farmácias ou serviços de saúde." },
-  { icon: Star, title: "Destaques premium", text: "Cards e posições de evidência para profissionais, empresas e marcas apoiadoras." },
-  { icon: Newspaper, title: "Conteúdo patrocinado", text: "Matérias e pautas identificadas para campanhas educativas, institucionais ou comerciais." },
+  {
+    icon: Mic2,
+    title: "Podcast e revista",
+    text: "Apoio a episódios, entrevistas e presença combinada na revista e nos canais digitais.",
+    ideal: "Ideal para fortalecer autoridade e presença regional.",
+  },
 ];
 
 const steps = [
-  "Definição do objetivo da marca",
-  "Escolha das cidades e categorias",
-  "Montagem do formato comercial",
-  "Publicação identificada e acompanhamento",
-];
-
-const cityAds = [
-  ["Piumhi", "/ads/cidade-piumhi.svg"],
-  ["Capitólio", "/ads/cidade-capitolio.svg"],
-  ["Pimenta", "/ads/cidade-pimenta.svg"],
-  ["Arcos", "/ads/cidade-arcos.svg"],
-  ["Campo Belo", "/ads/cidade-campo-belo.svg"],
-  ["Bambuí", "/ads/cidade-bambui.svg"],
-  ["São Roque de Minas", "/ads/cidade-sao-roque-de-minas.svg"],
+  ["1", "Conte o que deseja divulgar", "Informe sua empresa, objetivo, cidade e período da campanha."],
+  ["2", "Receba uma proposta", "Nossa equipe indica os formatos mais adequados e apresenta valores e disponibilidade."],
+  ["3", "Aprove e publique", "Após a aprovação, preparamos a campanha e combinamos a data de publicação."],
 ];
 
 export default function AdvertisePage() {
   return (
     <>
       <SiteHeader />
-      <main>
+      <main className="advertise-simple">
         <section className="advertise-hero media-kit-hero">
-          <div className="shell media-kit-hero-grid">
+          <div className="shell advertise-simple-hero">
             <div>
-              <p className="eyebrow">Mídia regional integrada</p>
-              <h1>Sua marca dentro do ecossistema Guia Saúde.</h1>
-              <p>Portal, revista impressa, podcast e Instagram conectados para campanhas de saúde, bem-estar, serviços e negócios regionais.</p>
+              <p className="eyebrow">Anuncie no Guia Saúde</p>
+              <h1>Mostre sua marca para quem busca saúde na região.</h1>
+              <p>
+                Divulgue sua clínica, empresa, serviço ou marca no portal, nas páginas das cidades,
+                no podcast e na revista Guia Saúde.
+              </p>
               <div className="media-kit-actions">
-                <a href="https://wa.me/5537999474443" target="_blank" rel="noreferrer">Solicitar proposta <ArrowRight size={14} /></a>
-                <Link href="/buscar">Ver diretório <Search size={14} /></Link>
-                <a href="/media-kit-guia-saude.pdf" target="_blank" rel="noreferrer">Baixar mídia kit <ArrowRight size={14} /></a>
+                <a href="https://wa.me/5537999474443" target="_blank" rel="noreferrer">
+                  Pedir uma proposta <ArrowRight size={15} />
+                </a>
+                <Link href="/buscar">Conhecer o portal <Search size={15} /></Link>
               </div>
             </div>
-            <aside className="media-kit-card">
-              <span>Guia Saúde</span>
-              <strong>mídia kit regional</strong>
-              <p>Formatos comerciais para profissionais, clínicas, laboratórios, escolas, marcas e empresas da saúde.</p>
-              <small>Centro-Oeste de Minas · Serra da Canastra</small>
+            <aside className="advertise-simple-summary">
+              <strong>Você escolhe:</strong>
+              <span><MapPin size={16} /> Em quais cidades anunciar</span>
+              <span><Megaphone size={16} /> Qual formato deseja usar</span>
+              <span><Building2 size={16} /> Por quanto tempo divulgar</span>
+              <small>Valores e disponibilidade são informados na proposta.</small>
             </aside>
           </div>
         </section>
 
-        <section className="section shell local-media-section">
-          <div className="media-kit-heading compact">
-            <div>
-              <p className="eyebrow">Venda por cidade</p>
-              <h2>O anunciante compra presença onde o público está.</h2>
-            </div>
-            <p>O portal trabalha com recortes locais. Isso permite vender campanhas por cidade, por categoria e por objetivo comercial.</p>
+        <section className="section shell advertise-why">
+          <div className="advertise-simple-heading">
+            <p className="eyebrow">Por que aqui</p>
+            <h2>Um público que já está procurando saúde</h2>
+            <p>Quem chega ao Guia Saúde não está distraído — está buscando um profissional, uma clínica ou uma informação de saúde na própria cidade. Sua marca aparece no momento da decisão.</p>
           </div>
-          <div className="local-product-grid">
-            {localProducts.map((item) => {
-              const Icon = item.icon;
-              return <article key={item.title}><Icon size={22} /><h3>{item.title}</h3><p>{item.text}</p></article>;
-            })}
+          <div className="advertise-stat-grid">
+            <div><strong>{cities.length}</strong><span>cidades do Centro-Oeste de Minas</span></div>
+            <div><strong>{podcasts.length}</strong><span>episódios do podcast Conexão Saúde</span></div>
+            <div><strong>{articles.length}</strong><span>matérias com especialistas da região</span></div>
+            <div><strong>100%</strong><span>público regional e segmentado em saúde</span></div>
           </div>
-          <div className="city-sales-grid">
-            {cities.map((city) => <Link key={city} href={`/cidades/${citySlug(city)}`}><MapPin size={15} /> Anunciar em {city}</Link>)}
-          </div>
+          <p className="advertise-who">Faz sentido para clínicas, consultórios, laboratórios, farmácias, óticas, academias, planos e marcas ligadas à saúde e ao bem-estar.</p>
         </section>
 
-        <section className="section shell channel-section">
-          <div className="section-kicker"><span>01</span><p>Canais comerciais</p></div>
-          <div className="media-kit-heading">
-            <h2>Uma presença distribuída, não um anúncio isolado.</h2>
-            <p>A proposta é vender campanhas com contexto: busca local, conteúdo editorial, revista, podcast e distribuição social.</p>
+        <section className="section shell advertise-simple-section">
+          <div className="advertise-simple-heading">
+            <p className="eyebrow">Formas de anunciar</p>
+            <h2>Escolha como sua marca vai aparecer</h2>
+            <p>Você não precisa decidir tudo agora. Nossa equipe ajuda a montar a melhor combinação.</p>
           </div>
-          <div className="channel-grid">
-            {channels.map(([title, text], index) => (
+          <div className="advertise-format-simple-grid">
+            {formats.map(({ icon: Icon, title, text, ideal }) => (
               <article key={title}>
-                <span>0{index + 1}</span>
+                <span className="advertise-format-icon"><Icon size={24} /></span>
                 <h3>{title}</h3>
                 <p>{text}</p>
+                <small>{ideal}</small>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="section shell">
-          <div className="media-kit-heading compact">
+        <section className="advertise-city-section">
+          <div className="shell advertise-city-layout">
             <div>
-              <p className="eyebrow">Inventário digital</p>
-              <h2>Formatos comerciais do portal</h2>
+              <p className="eyebrow">Onde anunciar</p>
+              <h2>Escolha uma cidade ou toda a região</h2>
+              <p>Sua campanha pode aparecer somente no município de interesse ou alcançar todas as cidades do portal.</p>
             </div>
-            <p>Todos os espaços devem ser identificados como publicidade, apoio ou conteúdo de marca quando aplicável.</p>
-          </div>
-          <div className="format-grid">
-            {formats.map((format) => (
-              <article key={format.title}>
-                <div className="format-preview" style={{backgroundImage:`url(${format.image})`}} />
-                <small>{format.tag}</small>
-                <h3>{format.title}</h3>
-                <p>{format.text}</p>
-              </article>
-            ))}
-          </div>
-          <AdSlot code="DEMONSTRACAO_COMERCIAL" />
-        </section>
-
-        <section className="section shell city-ad-mockups">
-          <div className="media-kit-heading compact">
-            <div>
-              <p className="eyebrow">Mockups por cidade</p>
-              <h2>Banners locais prontos para apresentar ao anunciante.</h2>
-            </div>
-            <p>Use estes modelos para vender cotas locais. Depois basta substituir a arte no cadastro da campanha.</p>
-          </div>
-          <div className="city-ad-grid">
-            {cityAds.map(([city, image]) => <article key={city}><div style={{backgroundImage:`url(${image})`}} /><strong>{city}</strong><span>Formato cidade · 900 x 620 px</span></article>)}
-          </div>
-        </section>
-
-        <section className="section shell commercial-examples">
-          <div>
-            <p className="eyebrow">Exemplos de venda</p>
-            <h2>Como apresentar para o anunciante.</h2>
-          </div>
-          <div className="commercial-example-grid">
-            <article><Megaphone size={22} /><strong>Farmácia local</strong><p>Banner topo na cidade + destaque em empresas + chamada em matéria de prevenção.</p></article>
-            <article><Building2 size={22} /><strong>Clínica ou laboratório</strong><p>Campanha por cidade + card premium + publieditorial educativo.</p></article>
-            <article><Podcast size={22} /><strong>Marca regional</strong><p>Portal + podcast + revista impressa + distribuição social integrada.</p></article>
-          </div>
-        </section>
-
-        <section className="media-kit-band">
-          <div className="shell package-layout">
-            <div>
-              <p className="eyebrow">Pacotes sugeridos</p>
-              <h2>Três caminhos para vender sem complicar.</h2>
-              <p>Os pacotes funcionam como ponto de partida. A proposta final pode combinar banners, perfil, conteúdo, podcast, revista impressa e redes sociais.</p>
-            </div>
-            <div className="package-grid">
-              {packages.map((item) => (
-                <article key={item.name}>
-                  <h3>{item.name}</h3>
-                  <p>{item.bestFor}</p>
-                  <ul>
-                    {item.items.map((feature) => <li key={feature}>{feature}</li>)}
-                  </ul>
-                </article>
+            <div className="advertise-city-links">
+              {cities.map((city) => (
+                isCityAvailable(city) ? <Link key={city} href={`/cidades/${citySlug(city)}`}>
+                  <MapPin size={14} /> {city}
+                </Link> : <span key={city} className="city-coming-soon" aria-disabled="true"><MapPin size={14} /> {city}<small>EM BREVE</small></span>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="section shell commercial-flow">
-          <div>
-            <p className="eyebrow">Como funciona</p>
-            <h2>Da conversa à campanha publicada.</h2>
+        <section className="section shell advertise-simple-section">
+          <div className="advertise-simple-heading">
+            <p className="eyebrow">Como contratar</p>
+            <h2>É simples começar</h2>
           </div>
-          <ol>
-            {steps.map((step) => <li key={step}>{step}</li>)}
+          <ol className="advertise-step-grid">
+            {steps.map(([number, title, text]) => (
+              <li key={number}>
+                <span>{number}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </li>
+            ))}
           </ol>
         </section>
 
-        <section className="commercial-cta">
-          <div className="shell commercial-grid">
+        <section className="shell advertise-faq">
+          <div>
+            <p className="eyebrow">Dúvidas frequentes</p>
+            <h2>Antes de solicitar sua proposta</h2>
+          </div>
+          <div>
+            <details>
+              <summary>Quanto custa anunciar?</summary>
+              <p>O valor depende da cidade, formato e período escolhidos. A proposta apresenta todas as condições antes da contratação.</p>
+            </details>
+            <details>
+              <summary>Preciso fornecer a arte?</summary>
+              <p>Você pode enviar uma arte pronta ou conversar com a equipe sobre a preparação do material.</p>
+            </details>
+            <details>
+              <summary>Posso anunciar em apenas uma cidade?</summary>
+              <p>Sim. Também é possível combinar várias cidades ou criar uma campanha para toda a região.</p>
+            </details>
+            <details>
+              <summary>Publicidade de saúde passa por revisão?</summary>
+              <p>Sim. Os materiais devem seguir as regras aplicáveis e são identificados claramente como publicidade ou conteúdo patrocinado.</p>
+            </details>
+          </div>
+        </section>
+
+        <section className="commercial-cta advertise-final-cta">
+          <div className="shell">
             <div>
-              <p className="eyebrow">Fale com a RM</p>
-              <h2>Vamos montar uma proposta por cidade, objetivo e canal.</h2>
+              <p className="eyebrow">Solicite uma proposta</p>
+              <h2>Conte onde e como você quer divulgar sua marca.</h2>
+              <p>Responderemos com formatos, disponibilidade, prazo e valores.</p>
             </div>
-            <p>Use esta página como mídia kit inicial. Depois podemos incluir valores, cotas, prazos, audiência e exemplos reais.</p>
-            <Link href="https://wa.me/5537999474443">Conversar pelo WhatsApp</Link>
+            <a href="https://wa.me/5537999474443" target="_blank" rel="noreferrer">
+              Falar pelo WhatsApp <ArrowRight size={15} />
+            </a>
           </div>
         </section>
       </main>

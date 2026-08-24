@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, BadgeCheck, BookOpen, Building2, ListFilter, MapPin, Mic, Newspaper, Search, Stethoscope } from "lucide-react";
-import { AdSlot } from "@/components/AdSlot";
+import { ArrowRight, ArrowUpRight, Building2, Glasses, ListFilter, MapPin, Megaphone, Pill, Search } from "lucide-react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { articles, cityDetails, organizations, professions, professionals } from "@/lib/data";
 import { publishedOrganizations, publishedProfessionals } from "@/lib/directory";
 import { pageMetadata } from "@/lib/seo";
-import { cityAdCode, citySlug } from "@/lib/city-utils";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -30,162 +29,180 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
   const localProfessionals = professionalSource.filter((item) => item.city === city.name);
   const localOrganizations = organizationSource.filter((item) => item.city === city.name);
   const localArticles = articles.filter((item) => item.city === city.name || item.city === "Regional");
+  const localSpecialties = Array.from(
+    new Set(
+      localProfessionals
+        .filter((item) => item.profession === "Médico" || item.profession === "Dentista")
+        .map((item) => item.specialty)
+        .filter(Boolean),
+    ),
+  ).sort((a, b) => a.localeCompare(b, "pt-BR"));
   const cityQuery = encodeURIComponent(city.name);
-  const cityVisual = `/ads/cidade-${citySlug(city.name)}.svg`;
+
+  // Inventário comercial: profissionais em destaque (um por especialidade-chave).
+  const featuredProfessions = ["Médico", "Dentista", "Psicólogo", "Fisioterapeuta", "Nutricionista", "Fonoaudiólogo"];
+  const featuredProfessionals = featuredProfessions
+    .map((profession) => localProfessionals.find((item) => item.profession === profession))
+    .filter((item): item is (typeof localProfessionals)[number] => Boolean(item))
+    .slice(0, 6);
+  const featuredPharmacy = localOrganizations.find((item) => /farm[áa]cia|drogaria/i.test(item.category));
+  const featuredClinic = localOrganizations.find(
+    (item) =>
+      /cl[íi]nica|laborat[óo]rio|diagn[óo]stico|est[ée]tica/i.test(item.category) &&
+      !/b[áa]sica|p[úu]blica|gest[ãa]o|secretaria/i.test(`${item.category} ${item.name}`) &&
+      item.slug !== featuredPharmacy?.slug,
+  );
+  const isPiumhi = slug === "piumhi";
+  const commercialPharmacy = isPiumhi
+    ? { name: "Drogaria Americana", address: "Rua Padre Abel, 365 · Centro", mapUrl: "https://www.google.com/maps/search/?api=1&query=Drogaria+Americana+Rua+Padre+Abel+365+Piumhi+MG" }
+    : featuredPharmacy
+      ? { name: featuredPharmacy.name, address: featuredPharmacy.address, mapUrl: `/buscar?cidade=${cityQuery}&tipo=empresas` }
+      : null;
+  const commercialOptical = isPiumhi
+    ? { name: "Ótica Star", address: "Praça Guia Lopes, 12 · Centro", mapUrl: "https://www.google.com/maps/search/?api=1&query=Otica+Star+Praca+Guia+Lopes+12+Piumhi+MG" }
+    : null;
+
   return (
     <>
       <SiteHeader />
       <main>
         <section className="city-hero city-portal-hero">
-          <div className="city-portal-hero-bg" aria-hidden="true" />
-          <div className="city-portal-hero-shade" aria-hidden="true" />
+          <div className={`city-portal-hero-bg${isPiumhi ? " city-portal-hero-bg-piumhi" : ""}`} aria-hidden="true" />
+          <div className={`city-portal-hero-shade${isPiumhi ? " city-portal-hero-shade-piumhi" : ""}`} aria-hidden="true" />
           <div className="shell city-portal-grid city-portal-landing-grid">
             <div className="city-landing-copy">
+              <Breadcrumbs items={[{ label: "Início", href: "/" }, { label: city.name }]} />
               <p className="eyebrow">{city.region}</p>
               <h1>{city.name}</h1>
-              <p>Guia local de saúde com matérias, profissionais, empresas, podcast, revista e serviços próximos.</p>
+              <p>Encontre profissionais, clínicas e informações de saúde em {city.name}.</p>
               <div className="city-hero-actions">
                 <Link href="/"><MapPin size={16} /> Alterar cidade</Link>
-                <Link href="#materias"><Newspaper size={16} /> Ver matérias</Link>
               </div>
+              <form className="city-search-panel city-search-panel-hero" action="/buscar">
+                <input type="hidden" name="cidade" value={city.name} />
+                <label><span><ListFilter size={16} /> Área</span><select name="profissao" defaultValue=""><option value="">Todas as áreas</option>{professions.map((item) => <option key={item}>{item}</option>)}</select></label>
+                <label><span><ListFilter size={16} /> Especialidade</span><select name="especialidade" defaultValue=""><option value="">Todas</option>{localSpecialties.map((item) => <option key={item}>{item}</option>)}</select></label>
+                <label><span><Search size={16} /> O que procura?</span><input name="q" placeholder="Ex.: cardiologia, clínica..." /></label>
+                <button type="submit">Buscar</button>
+              </form>
             </div>
           </div>
         </section>
 
         <section className="shell content-section city-portal-section">
-          <form className="city-search-panel" action="/buscar">
-            <input type="hidden" name="cidade" value={city.name} />
-            <label>
-              <span><ListFilter size={16} /> Selecione uma especialidade</span>
-              <select name="profissao" defaultValue="">
-                <option value="">Todas as áreas</option>
-                {professions.map((item) => <option key={item}>{item}</option>)}
-              </select>
-            </label>
-            <label>
-              <span><Search size={16} /> Digite o que procura</span>
-              <input name="q" placeholder="Ex.: cardiologia, clínica, farmácia..." />
-            </label>
-            <button type="submit">buscar</button>
-          </form>
-
-          <div className="city-head-banner">
-            <AdSlot code={cityAdCode(city.name)} />
-          </div>
-
-          <section className="city-visual-banner" style={{ backgroundImage: `url(${cityVisual})` }}>
-            <div>
-              <span>Guia Saúde em {city.name}</span>
-              <strong>Conteúdo local, busca de confiança e presença regional.</strong>
-              <p>Um ponto de entrada para matérias, profissionais, empresas de saúde, revista e podcast da cidade.</p>
-            </div>
-          </section>
-
-          <div className="local-content city-editorial-panel city-editorial-panel-main" id="materias">
-            <div>
-              <div className="city-editorial-head">
-                <p className="eyebrow">Matérias da cidade</p>
-                <h2>Conteúdo local de saúde</h2>
-                <p>Prevenção, entrevistas, campanhas públicas e pautas da revista para quem vive em {city.name}.</p>
+          <div className="city-sell-layout">
+            <div className="city-sell-main" id="profissionais">
+              <div className="city-block-head">
+                <p className="eyebrow">Profissionais em destaque</p>
+                <h2>Destaques de {city.name}</h2>
+                <span className="city-featured-criterion">Cadastros com informações mais completas</span>
               </div>
-              <div className="city-article-row">
-                {localArticles.slice(0, 2).map((article, index) => (
-                  <article key={article.slug}>
-                    <div className={`city-article-image city-article-image-${index + 1}`} aria-hidden="true" />
-                    <span>{article.category}</span>
-                    <strong>{article.title}</strong>
-                    <p>{article.excerpt}</p>
-                    <Link href="/materias">Ler matéria <ArrowRight size={13} /></Link>
-                  </article>
-                ))}
-              </div>
+
+              {featuredProfessionals.length ? (
+                <div className="city-featured-grid">
+                  {featuredProfessionals.map((item) => (
+                    <Link key={item.slug} href={`/profissionais/${item.slug}`} className="city-featured-card">
+                      <span className="city-featured-tag">{item.profession}</span>
+                      <strong>{item.name}</strong>
+                      <small>{item.specialty}</small>
+                      <span className="city-featured-org">{item.organization}</span>
+                      <em>Ver perfil <ArrowUpRight size={13} /></em>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="city-empty-card">
+                  <strong>Base da cidade em formação</strong>
+                  <p>Os profissionais desta cidade serão organizados por especialidade, com fonte e contato revisados.</p>
+                  <Link href="/inclusao">Indicar um profissional →</Link>
+                </div>
+              )}
+
+              <Link className="city-list-all" href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>
+                Ver todos os profissionais <ArrowRight size={14} />
+              </Link>
+
+              <Link className="city-sell-banner" href="/anuncie" aria-label={`Anuncie em ${city.name}`}>
+                <div>
+                  <span>Publicidade</span>
+                  <strong>Sua marca em {city.name}</strong>
+                  <small>Banner na página da cidade, visto por quem procura saúde aqui.</small>
+                </div>
+                <em>Anunciar <ArrowRight size={14} /></em>
+              </Link>
             </div>
-            <aside>
-              <small>GUIA DE {city.name.toUpperCase()}</small>
-              <strong>Comece pelo que você precisa agora</strong>
-              <p>Busque profissionais, encontre empresas de saúde ou acompanhe conteúdos locais do Guia Saúde.</p>
-              <Link href={`/buscar?cidade=${cityQuery}`}>Buscar no guia <Search size={14} /></Link>
+
+            <aside className="city-sell-side" id="servicos">
+              <p className="city-side-label">Espaços comerciais</p>
+
+              {commercialPharmacy ? (
+                <div className="city-sponsor-card">
+                  <span><Pill size={13} /> Farmácia em destaque</span>
+                  <strong>{commercialPharmacy.name}</strong>
+                  <small>{commercialPharmacy.address}</small>
+                  <Link href={commercialPharmacy.mapUrl} target={commercialPharmacy.mapUrl.startsWith("http") ? "_blank" : undefined} rel={commercialPharmacy.mapUrl.startsWith("http") ? "noreferrer" : undefined}>Ver localização</Link>
+                </div>
+              ) : (
+                <Link href="/anuncie" className="city-sponsor-card empty">
+                  <span><Pill size={13} /> Farmácia</span>
+                  <strong>Espaço para farmácia</strong>
+                  <small>Sua farmácia em destaque nesta página.</small>
+                </Link>
+              )}
+
+              {commercialOptical ? (
+                <div className="city-sponsor-card">
+                  <span><Glasses size={13} /> Ótica em destaque</span>
+                  <strong>{commercialOptical.name}</strong>
+                  <small>{commercialOptical.address}</small>
+                  <Link href={commercialOptical.mapUrl} target="_blank" rel="noreferrer">Ver localização</Link>
+                </div>
+              ) : featuredClinic ? (
+                <div className="city-sponsor-card">
+                  <span><Building2 size={13} /> Clínica em destaque</span>
+                  <strong>{featuredClinic.name}</strong>
+                  <small>{featuredClinic.services.slice(0, 2).join(" · ")}</small>
+                  <Link href={`/buscar?cidade=${cityQuery}&tipo=empresas`}>Ver detalhes</Link>
+                </div>
+              ) : (
+                <Link href="/anuncie" className="city-sponsor-card empty">
+                  <span><Building2 size={13} /> Clínica</span>
+                  <strong>Espaço para clínica</strong>
+                  <small>Destaque sua clínica na cidade.</small>
+                </Link>
+              )}
+
+              <Link href="/anuncie" className="city-sponsor-anuncie">
+                <Megaphone size={18} />
+                <strong>Quer aparecer aqui?</strong>
+                <small>Espaço para destaques, banners e conteúdo patrocinado.</small>
+                <em>Falar com o comercial <ArrowRight size={13} /></em>
+              </Link>
             </aside>
           </div>
 
-          <div className="city-local-grid">
-            <section className="city-professional-panel">
-              <div className="city-block-head">
-                <p className="eyebrow">Profissionais</p>
-                <h2>Perfis locais</h2>
+          {localArticles[0] ? (
+            <section className="city-content-direct" id="materias">
+              <div>
+                <p className="eyebrow">Informação</p>
+                <h2>Conteúdo de saúde</h2>
+                <p>Orientações e notícias para quem vive em {city.name}.</p>
               </div>
-              {localProfessionals.length ? (
-                <div className="city-mini-list city-professional-list">
-                  {localProfessionals.slice(0, 4).map((item) => (
-                    <Link href={`/profissionais/${item.slug}`} key={item.slug}>
-                      <span><BadgeCheck size={13} /> {item.profession}</span>
-                      <strong>{item.specialty}</strong>
-                      <small>{item.registration}</small>
-                      <em>Ver perfil</em>
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <div className="city-empty-card">
-                  <strong>Base local em formação</strong>
-                  <p>Esta cidade ainda não tem perfis demonstrativos suficientes. A coleta será priorizada na etapa de base regional.</p>
-                  <Link href="/inclusao">Solicitar inclusão →</Link>
-                </div>
-              )}
+              <article>
+                <span>{localArticles[0].category}</span>
+                <strong>{localArticles[0].title}</strong>
+                <p>{localArticles[0].excerpt}</p>
+                <Link href="/materias">Ver conteúdos <ArrowRight size={14} /></Link>
+              </article>
             </section>
+          ) : null}
 
-            <section className="city-business-panel">
-              <div className="city-block-head">
-                <p className="eyebrow">Empresas e serviços</p>
-                <h2>Estruturas locais</h2>
-              </div>
-              {localOrganizations.length ? (
-                <div className="city-mini-list city-business-list">
-                  {localOrganizations.slice(0, 4).map((item) => (
-                    <Link href={`/empresas?cidade=${cityQuery}`} key={item.slug}>
-                      <span><Building2 size={13} /> {item.category}</span>
-                      <strong>{item.name}</strong>
-                      <small>{item.services.slice(0, 2).join(" · ")}</small>
-                      <em>Ver detalhes</em>
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <div className="city-empty-card">
-                  <strong>Diretório comercial em validação</strong>
-                  <p>Clínicas, laboratórios e empresas locais serão organizados por categoria, fonte e contato revisado.</p>
-                  <Link href="/empresas">Ver empresas →</Link>
-                </div>
-              )}
-            </section>
-          </div>
-
-          <div className="city-media-strip city-media-strip-compact">
-            <article>
-              <div className="city-media-image city-media-image-revista" aria-hidden="true" />
-              <BookOpen size={22} />
-              <span>Revista física</span>
-              <strong>Presença impressa com extensão para {city.name}</strong>
-              <p>Matérias, entrevistas e anúncios da revista podem ganhar continuação no portal da cidade.</p>
-              <Link href="/revista">Ver revista <ArrowRight size={14} /></Link>
-            </article>
-            <article>
-              <div className="city-media-image city-media-image-podcast" aria-hidden="true" />
-              <Mic size={22} />
-              <span>Podcast</span>
-              <strong>Conexão Saúde com pauta local</strong>
-              <p>Episódios e cortes podem destacar especialistas, campanhas e temas relevantes para a população.</p>
-              <Link href="/podcast">Ver podcast <ArrowRight size={14} /></Link>
-            </article>
-            <article>
-              <div className="city-media-image city-media-image-guia" aria-hidden="true" />
-              <Stethoscope size={22} />
-              <span>Guia local</span>
-              <strong>Profissionais e empresas em um só lugar</strong>
-              <p>Acesso rápido à busca por especialidade, clínicas, farmácias, laboratórios e serviços da cidade.</p>
-              <Link href={`/buscar?cidade=${cityQuery}`}>Abrir busca <ArrowRight size={14} /></Link>
-            </article>
-          </div>
+          <nav className="city-more-links" aria-label="Outros conteúdos do Guia Saúde">
+            <span>Também no Guia Saúde</span>
+            <Link href="/podcast">Podcast</Link>
+            <Link href="/revista">Revista</Link>
+            <Link href="/inclusao">Cadastre-se no Guia</Link>
+          </nav>
         </section>
       </main>
       <SiteFooter />

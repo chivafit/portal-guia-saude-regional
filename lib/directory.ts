@@ -1,3 +1,5 @@
+import { resolveProfessionalImage } from "./avatars";
+
 export type DirectoryStatus = "imported" | "draft" | "review" | "published" | "archived";
 export type DirectoryEntity = "professional" | "organization";
 
@@ -18,12 +20,12 @@ export type AdminOrganization = {
 export type PublicProfessional = {
   slug: string; name: string; profession: string; specialty: string; city: string;
   organization: string; registration: string; verified: boolean; summary: string;
-  phone: string; whatsapp: string; services: string[]; imageUrl?: string; coverImageUrl?: string; logoUrl?: string;
+  phone: string; whatsapp: string; services: string[]; imageUrl?: string; coverImageUrl?: string; logoUrl?: string; source?: string;
 };
 
 export type PublicOrganization = {
   slug: string; name: string; category: string; city: string; address: string;
-  phone: string; summary: string; services: string[]; logoUrl?: string; coverImageUrl?: string;
+  phone: string; summary: string; services: string[]; logoUrl?: string; coverImageUrl?: string; source?: string;
 };
 
 async function getD1() { const { env } = await import("cloudflare:workers"); return env.DB; }
@@ -178,7 +180,7 @@ export async function publishedProfessionals(fallback: PublicProfessional[] = []
       phone: item.publicPhone ?? "Contato não informado",
       whatsapp: item.whatsapp ?? "#",
       services: splitServices(item.services),
-      imageUrl: item.imageUrl ?? undefined,
+      imageUrl: resolveProfessionalImage(item.slug, item.imageUrl ?? undefined),
       coverImageUrl: item.coverImageUrl ?? undefined,
       logoUrl: item.logoUrl ?? undefined,
     }));

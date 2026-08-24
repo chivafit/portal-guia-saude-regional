@@ -1,7 +1,9 @@
+import Link from "next/link";
+import { ArrowRight, HeartPulse, Newspaper, Stethoscope } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { articles } from "@/lib/data";
-import { publishedContent } from "@/lib/content";
+import { articles, articleImage } from "@/lib/data";
+import { publishedContent, type ContentRecord } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -10,10 +12,117 @@ export const metadata = pageMetadata(
   "/materias",
 );
 
-const extra = [
-  { category: "Saúde bucal", title: "Prevenção e acompanhamento: o que muda o cuidado com o sorriso", excerpt: "Orientações e conversas com especialistas para decisões mais informadas." },
-  { category: "Bem-estar", title: "Sono de qualidade também é parte da prevenção", excerpt: "Hábitos, sinais de atenção e o momento certo de procurar avaliação profissional." },
-  { category: "Alimentação", title: "Suplementação exige indicação individualizada", excerpt: "Informação responsável para entender quando suplementos podem fazer sentido." },
-];
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
-export default async function MateriasPage(){const saved=await publishedContent("article");const catalog=[...saved.map(item=>({category:item.citySlug?"Conteúdo local":"Guia Saúde",title:item.title,excerpt:item.summary||item.body||"Conteúdo publicado pela equipe editorial."})),...articles,...extra];return <><SiteHeader/><main><section className="content-hero"><div className="shell"><p className="eyebrow">Conteúdo editorial</p><h1>Informação para cuidar melhor.</h1><p>Matérias, entrevistas e orientações produzidas para aproximar conhecimento e comunidade.</p></div></section><section className="shell content-section"><div className="content-tabs"><b>Mais recentes</b><span>Prevenção</span><span>Bem-estar</span><span>Especialistas</span></div><div className="featured-article"><div className="article-visual">GUIA<br/>SAÚDE</div><div><p className="eyebrow">Especial da semana</p><h2>O cuidado muda com o tempo. A atenção, não.</h2><p>Uma leitura sobre prevenção, acompanhamento e escolhas conscientes em cada fase da vida.</p><span>Leitura de 6 minutos →</span></div></div><div className="content-card-grid">{catalog.map((item,index)=><article key={`${item.title}-${index}`}><div className={`content-card-art tone-${index%3}`}><span>{item.category}</span></div><small>{item.category}</small><h2>{item.title}</h2><p>{item.excerpt}</p><span>Ler matéria →</span></article>)}</div><div className="editorial-note"><strong>Compromisso editorial</strong><p>Conteúdos de saúde têm caráter informativo e não substituem avaliação ou orientação profissional.</p></div></section></main><SiteFooter/></>}
+function topicFor(category: string) {
+  if (/preven|medicamento|pele|oftalmo|saúde bucal/i.test(category)) return "Prevenção";
+  if (/alimenta|mental|reabilita|bem-estar|atividade/i.test(category)) return "Bem-estar";
+  return "Especialistas";
+}
+
+export default async function MateriasPage({ searchParams }: { searchParams: SearchParams }) {
+  const params = await searchParams;
+  const selectedTopic = typeof params.tema === "string" ? params.tema : "Todos";
+  const saved = await publishedContent("article");
+  const savedCards = saved.map((item: ContentRecord) => ({
+    slug: item.slug,
+    href: undefined as string | undefined,
+    category: item.citySlug ? "Conteúdo local" : "Guia Saúde",
+    title: item.title,
+    excerpt: item.summary || item.body || "Conteúdo publicado pela equipe editorial.",
+    author: undefined as string | undefined,
+    readingTime: undefined as string | undefined,
+    image: undefined as string | undefined,
+    topic: topicFor(item.citySlug ? "Conteúdo local" : "Guia Saúde"),
+  }));
+  const editorialCards = articles.map((item) => ({
+    slug: item.slug,
+    href: `/materias/${item.slug}`,
+    category: item.category,
+    title: item.title,
+    excerpt: item.excerpt,
+    author: item.author,
+    readingTime: item.readingTime,
+    image: articleImage(item),
+    topic: topicFor(item.category),
+  }));
+  const fullCatalog = [...savedCards, ...editorialCards];
+  const catalog = selectedTopic === "Todos" ? fullCatalog : fullCatalog.filter((item) => item.topic === selectedTopic);
+  const feature = catalog.find((item) => item.href) ?? catalog[0];
+
+  return (
+    <>
+      <SiteHeader />
+      <main>
+        <section className="content-hero portal-section-hero">
+          <div className="shell portal-section-hero-grid">
+            <div>
+              <p className="eyebrow">Conteúdo editorial</p>
+              <h1>Informação para cuidar melhor.</h1>
+              <p>Matérias, entrevistas e orientações produzidas com especialistas da região para aproximar conhecimento e comunidade.</p>
+            </div>
+            <aside className="portal-section-summary">
+              <strong>Conteúdo sobre:</strong>
+              <span><HeartPulse size={17} /> Prevenção e bem-estar</span>
+              <span><Stethoscope size={17} /> Orientações de especialistas</span>
+              <span><Newspaper size={17} /> Saúde em linguagem acessível</span>
+              <small>Use os temas para encontrar rapidamente o que precisa.</small>
+            </aside>
+          </div>
+        </section>
+        <section className="shell content-section">
+          <div className="content-tabs" aria-label="Filtrar matérias">
+            {["Todos", "Prevenção", "Bem-estar", "Especialistas"].map((topic) => (
+              <Link key={topic} className={selectedTopic === topic ? "active" : ""} href={topic === "Todos" ? "/materias" : `/materias?tema=${encodeURIComponent(topic)}`}>{topic === "Todos" ? "Mais recentes" : topic}</Link>
+            ))}
+          </div>
+
+          {feature ? (
+            <Link className="featured-article featured-article-link" href={feature.href}>
+              {feature.image ? (
+                <span className="article-visual has-photo" style={{ backgroundImage: `url(${feature.image})` }} role="img" aria-label={feature.title} />
+              ) : (
+                <div className="article-visual article-visual-fallback"><Newspaper size={42} /><span>Conteúdo Guia Saúde</span></div>
+              )}
+              <div>
+                <p className="eyebrow">Em destaque</p>
+                <h2>{feature.title}</h2>
+                <p>{feature.excerpt}</p>
+                <span>
+                  {feature.author ? `${feature.author} · ` : ""}{feature.readingTime || "Ler matéria"} <ArrowRight size={14} />
+                </span>
+              </div>
+            </Link>
+          ) : null}
+
+          <div className="content-card-grid">
+            {catalog.map((item, index) => {
+              const inner = (
+                <>
+                  <div
+                    className={`content-card-art tone-${index % 3}${item.image ? " has-photo" : ""}`}
+                    style={item.image ? { backgroundImage: `url(${item.image})` } : undefined}
+                  >
+                    <span>{item.category}</span>
+                    {!item.image ? <Newspaper className="content-card-fallback-icon" size={30} /> : null}
+                  </div>
+                  <small>{item.category}{item.readingTime ? ` · ${item.readingTime}` : ""}</small>
+                  <h2>{item.title}</h2>
+                  <p>{item.excerpt}</p>
+                  <span>Ler matéria <ArrowRight size={13} /></span>
+                </>
+              );
+              return item.href ? (
+                <Link key={`${item.slug}-${index}`} href={item.href} className="content-card-link">{inner}</Link>
+              ) : (
+                <article key={`${item.slug}-${index}`}>{inner}</article>
+              );
+            })}
+          </div>
+
+        </section>
+      </main>
+      <SiteFooter />
+    </>
+  );
+}

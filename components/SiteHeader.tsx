@@ -1,24 +1,15 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { BrandLink } from "@/components/BrandLink";
 import { CitySelector } from "@/components/CitySelector";
-import { GuiaSaudeLogo } from "@/components/GuiaSaudeLogo";
+import { ContextNav } from "@/components/ContextNav";
 
 export function SiteHeader() {
   return (
     <><div className="topline"><div className="shell">O portal de saúde do Centro-Oeste de Minas <span>Conteúdo, profissionais e serviços perto de você</span></div></div><header className="site-header">
       <div className="shell header-inner">
-        <Link href="/" className="brand" aria-label="Portal Guia Saúde — início">
-          <GuiaSaudeLogo />
-        </Link>
-        <nav className="main-nav" aria-label="Navegação principal">
-          <Link href="/buscar">Profissionais</Link>
-          <Link href="/empresas">Empresas</Link>
-          <Link href="/materias">Matérias</Link>
-          <Link href="/podcast">Podcast</Link>
-          <Link href="/revista">Revista</Link>
-          <Link href="/sobre">Sobre</Link>
-          <Link href="/inclusao">Inclusão</Link>
-        </nav>
+        <BrandLink />
+        <ContextNav />
         <div className="header-actions">
           <CitySelector />
           <Link href="/anuncie" className="admin-link">Anuncie <ArrowUpRight size={14} /></Link>
