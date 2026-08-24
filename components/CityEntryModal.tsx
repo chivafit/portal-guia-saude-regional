@@ -74,28 +74,39 @@ export function CityEntryModal() {
 
   if (!open) return null;
 
+  const availableCities = cities.filter(isCityAvailable);
+  const upcomingCities = cities.filter((city) => !isCityAvailable(city));
+
   return (
     <div className="city-entry-overlay" role="dialog" aria-modal="true" aria-labelledby="city-entry-title">
       <div className="city-entry-backdrop" onClick={dismiss} />
       <section className="city-entry-modal">
         <header className="city-entry-top">
           <div>
-            <h2 id="city-entry-title">Onde você quer cuidar da sua saúde?</h2>
-            <p>Escolha sua cidade para começar</p>
+            <span className="city-entry-eyebrow">Guia regional</span>
+            <h2 id="city-entry-title">Escolha sua cidade</h2>
+            <p>Veja profissionais e serviços disponíveis na sua região.</p>
           </div>
           <button className="city-entry-close" type="button" onClick={dismiss} aria-label="Fechar seleção de cidade">
             <X size={18} />
           </button>
         </header>
         <div className="city-entry-panel">
-          <div className="city-entry-grid">
-            {cities.map((city) => (
-              <button type="button" key={city} disabled={!isCityAvailable(city)} onClick={() => chooseCity(city)} className={selectedCity === city ? "active" : ""}>
+          <div className="city-entry-available">
+            <span className="city-entry-section-label">Disponível agora</span>
+            {availableCities.map((city) => (
+              <button type="button" key={city} onClick={() => chooseCity(city)} className={selectedCity === city ? "active" : ""}>
                 <span className="city-entry-pin"><MapPin size={18} /></span>
-                <span className="city-entry-name">{city}</span>
-                <small>{isCityAvailable(city) ? <>Abrir guia <ArrowRight size={14} /></> : "EM BREVE"}</small>
+                <span className="city-entry-city-copy"><strong>{city}</strong><small>Profissionais, serviços e conteúdos locais</small></span>
+                <span className="city-entry-open">Acessar <ArrowRight size={16} /></span>
               </button>
             ))}
+          </div>
+          <div className="city-entry-upcoming">
+            <span className="city-entry-section-label">Próximas cidades</span>
+            <div>
+              {upcomingCities.map((city) => <span key={city}>{city}<small>Em breve</small></span>)}
+            </div>
           </div>
         </div>
       </section>
