@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Activity, ArrowRight, BookOpen, Building2, FlaskConical, HeartPulse, MapPin, Newspaper, Pill, Podcast, Search, Stethoscope } from "lucide-react";
+import { ArrowRight, BookOpen, Building2, FlaskConical, HeartPulse, MapPin, Newspaper, Pill, Podcast, Search, Stethoscope } from "lucide-react";
+import { ToothIcon } from "@/components/ProfessionIcon";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { activeCities, isCityAvailable } from "@/lib/cities";
@@ -15,7 +16,7 @@ export const metadata = pageMetadata(
 export default function Home() {
   const shortcuts = [
     { label: "Médicos", href: "/buscar?profissao=M%C3%A9dico&tipo=profissionais", icon: Stethoscope },
-    { label: "Dentistas", href: "/buscar?profissao=Dentista&tipo=profissionais", icon: Activity },
+    { label: "Dentistas", href: "/buscar?profissao=Dentista&tipo=profissionais", icon: ToothIcon },
     { label: "Psicólogos", href: "/buscar?profissao=Psic%C3%B3logo&tipo=profissionais", icon: HeartPulse },
     { label: "Clínicas", href: "/buscar?q=cl%C3%ADnica&tipo=empresas", icon: Building2 },
     { label: "Farmácias", href: "/buscar?q=farm%C3%A1cia&tipo=empresas", icon: Pill },
@@ -24,6 +25,8 @@ export default function Home() {
   const latestEpisode = podcasts[0];
   const featuredEdition = magazineEditions.find((edition) => edition.featured) ?? magazineEditions[0];
   const latestArticle = articles[0];
+  const availableCities = activeCities.filter(isCityAvailable);
+  const upcomingCities = activeCities.filter((city) => !isCityAvailable(city));
   return (
     <>
       <SiteHeader />
@@ -53,24 +56,19 @@ export default function Home() {
               <span>Veja somente os atendimentos e conteúdos daquele município.</span>
             </div>
             <div className="city-choose-grid">
-              {activeCities.map((city) => (
-                isCityAvailable(city) ? <Link key={city.slug} href={`/cidades/${city.slug}`} className="city-choose-card">
+              {availableCities.map((city) => (
+                <Link key={city.slug} href={`/cidades/${city.slug}`} className="city-choose-card">
                   <span className="city-choose-pin"><MapPin size={18} /></span>
                   <span className="city-choose-name">{city.name}</span>
                   <small className="city-choose-region">{city.region}</small>
                   <em className="city-choose-cta">Ver saúde na cidade <ArrowRight size={14} /></em>
-                </Link> : <div key={city.slug} className="city-choose-card city-coming-soon" aria-disabled="true">
-                  <span className="city-choose-pin"><MapPin size={18} /></span>
-                  <span className="city-choose-name">{city.name}</span>
-                  <small className="city-choose-region">{city.region}</small>
-                  <em className="city-choose-cta">EM BREVE</em>
-                </div>
+                </Link>
               ))}
             </div>
-
-            <Link className="city-choose-search" href="/buscar?cidade=Piumhi">
-              <Activity size={16} /> Buscar em Piumhi
-            </Link>
+            <div className="city-coming-list" aria-label="Próximas cidades do Guia Saúde">
+              <span>Em breve</span>
+              <p>{upcomingCities.map((city) => city.name).join(" · ")}</p>
+            </div>
           </div>
         </section>
 

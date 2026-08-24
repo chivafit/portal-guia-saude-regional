@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { Activity, ArrowUpRight, BadgeCheck, Building2, HeartPulse, MapPin, Phone, ShieldCheck, SlidersHorizontal, Stethoscope, UserRound, X } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, ShieldCheck, SlidersHorizontal, X } from "lucide-react";
 import { AdSlot } from "@/components/AdSlot";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { cities, organizations, professions, professionals } from "@/lib/data";
+import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { publishedOrganizations, publishedProfessionals } from "@/lib/directory";
 import { filterOrganizations, filterProfessionals } from "@/lib/search";
 import { pageMetadata } from "@/lib/seo";
@@ -21,13 +22,6 @@ type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
 function param(value: string | string[] | undefined): string {
   return typeof value === "string" ? value : "";
-}
-
-function ProfessionIcon({ profession }: { profession: string }) {
-  if (profession === "Médico") return <Stethoscope size={25} />;
-  if (profession === "Dentista" || profession === "Fisioterapeuta") return <Activity size={25} />;
-  if (profession === "Psicólogo") return <HeartPulse size={25} />;
-  return <UserRound size={25} />;
 }
 
 function directContact(whatsapp?: string, phone?: string) {

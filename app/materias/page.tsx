@@ -49,6 +49,9 @@ export default async function MateriasPage({ searchParams }: { searchParams: Sea
   const fullCatalog = [...savedCards, ...editorialCards];
   const catalog = selectedTopic === "Todos" ? fullCatalog : fullCatalog.filter((item) => item.topic === selectedTopic);
   const feature = catalog.find((item) => item.href) ?? catalog[0];
+  const remainingCatalog = feature
+    ? catalog.filter((item) => item.slug !== feature.slug)
+    : catalog;
 
   return (
     <>
@@ -96,7 +99,7 @@ export default async function MateriasPage({ searchParams }: { searchParams: Sea
           ) : null}
 
           <div className="content-card-grid">
-            {catalog.map((item, index) => {
+            {remainingCatalog.map((item, index) => {
               const inner = (
                 <>
                   <div
