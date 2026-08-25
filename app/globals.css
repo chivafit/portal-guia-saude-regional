@@ -3046,6 +3046,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 .city-featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 .city-featured-card{min-height:206px!important;padding:20px!important}
 .city-featured-card strong{font-size:1.14rem!important;line-height:1.16!important}
+.city-featured-avatar{display:grid;place-items:center;width:46px;height:46px;margin-bottom:4px;border-radius:50%;background:#e9f4f1;color:#0b4f4a;font-size:.76rem;font-weight:850;letter-spacing:.04em}
+.city-featured-avatar.has-photo{background-position:center;background-size:cover;color:transparent}
 .city-featured-org{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 .city-featured-registration{margin-top:auto!important;font-size:.68rem!important;color:#74858a!important}
 .city-sell-side{gap:14px!important}.city-sponsor-card,.city-sponsor-anuncie{min-height:138px!important;border-radius:16px!important}

@@ -136,6 +136,13 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 <div className="city-featured-grid">
                   {featuredProfessionals.map((item) => (
                     <Link key={item.slug} href={`/profissionais/${item.slug}`} className="city-featured-card">
+                      <span
+                        className={`city-featured-avatar${item.imageUrl ? " has-photo" : ""}`}
+                        style={item.imageUrl ? { backgroundImage: `url(${item.imageUrl})` } : undefined}
+                        aria-hidden="true"
+                      >
+                        {!item.imageUrl ? item.name.split(" ").filter((word) => !/^dr\.?|^dra\.?$/i.test(word)).slice(0, 2).map((word) => word[0]).join("") : null}
+                      </span>
                       <span className="city-featured-tag">{item.profession}</span>
                       <strong>{item.name}</strong>
                       <small>{item.specialty}</small>
