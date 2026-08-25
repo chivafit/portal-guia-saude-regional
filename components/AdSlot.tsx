@@ -5,9 +5,14 @@ import { supporters } from "@/lib/data";
 // Nas páginas de conteúdo, um espaço não vendido não exibe criativo grande —
 // para o portal não parecer que tudo é anúncio.
 const DEMO_CODE = "DEMONSTRACAO_COMERCIAL";
+type StaticCampaign = { imageUrl: string | null; name: string; advertiserName: string; destinationUrl: string };
+
+function campaignForStaticSite(_code: string): StaticCampaign | null {
+  return null;
+}
 
 export async function AdSlot({ code, compact = false }: { code: string; compact?: boolean }) {
-  const campaign: { imageUrl: string | null; name: string; advertiserName: string; destinationUrl: string } | null = null;
+  const campaign = campaignForStaticSite(code);
 
   // Espaço vendido: exibe a campanha real (imagem, quando houver, + texto).
   if (campaign) {

@@ -8,6 +8,10 @@ import { articles, cityDetails, organizations, professions, professionals } from
 import { publishedOrganizations, publishedProfessionals } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
 
+export function generateStaticParams() {
+  return Object.keys(cityDetails).map((slug) => ({ slug }));
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const city = cityDetails[slug];

@@ -16,6 +16,8 @@ export const metadata = pageMetadata(
   "/empresas",
 );
 
+export const dynamic = "force-static";
+
 const categoryOptions = [
   "Clínica multiprofissional",
   "Laboratório",

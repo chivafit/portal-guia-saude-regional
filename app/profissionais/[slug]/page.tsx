@@ -9,6 +9,10 @@ import { findPublishedProfessional } from "@/lib/public-directory";
 import { podcastForProfessional } from "@/lib/podcasts";
 import { pageMetadata } from "@/lib/seo";
 
+export function generateStaticParams() {
+  return professionals.map((professional) => ({ slug: professional.slug }));
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const item = await findPublishedProfessional(slug, professionals);
