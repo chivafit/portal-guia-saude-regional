@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, ShieldCheck, SlidersHorizontal, Stethoscope, X } from "lucide-react";
 import { AdSlot } from "@/components/AdSlot";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -6,24 +10,12 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { cities, organizations, professions, professionals } from "@/lib/data";
 import { ProfessionIcon } from "@/components/ProfessionIcon";
-import { publishedOrganizations, publishedProfessionals } from "@/lib/public-directory";
 import { filterOrganizations, filterProfessionals } from "@/lib/search";
-import { pageMetadata } from "@/lib/seo";
 import { isCityAvailable } from "@/lib/cities";
 import { cityAdCode } from "@/lib/city-utils";
 
-export const metadata = pageMetadata(
-  "Buscar profissionais e empresas",
-  "Encontre profissionais e empresas da saúde por cidade, categoria e especialidade no Guia Saúde Regional.",
-  "/buscar",
-);
-
-export const dynamic = "force-static";
-
-type SearchParams = Promise<Record<string, string | string[] | undefined>>;
-
-function param(value: string | string[] | undefined): string {
-  return typeof value === "string" ? value : "";
+function param(value: string | null): string {
+  return value ?? "";
 }
 
 function directContact(whatsapp?: string, phone?: string) {
@@ -34,22 +26,22 @@ function directContact(whatsapp?: string, phone?: string) {
   return null;
 }
 
-export default async function SearchPage({ searchParams }: { searchParams: SearchParams }) {
-  const params = await searchParams;
-  const q = param(params.q);
-  const city = param(params.cidade);
-  const profession = param(params.profissao);
-  const specialty = param(params.especialidade);
-  const category = param(params.categoria);
-  const typeParam = param(params.tipo);
+function SearchDirectory() {
+  const params = useSearchParams();
+  const q = param(params.get("q"));
+  const city = param(params.get("cidade"));
+  const profession = param(params.get("profissao"));
+  const specialty = param(params.get("especialidade"));
+  const category = param(params.get("categoria"));
+  const typeParam = param(params.get("tipo"));
   const type = (["profissionais", "empresas"].includes(typeParam) ? typeParam : "todos") as
     | "todos"
     | "profissionais"
     | "empresas";
 
   const filters = { query: q, city, profession, specialty, category, type };
-  const professionalSource = await publishedProfessionals(professionals);
-  const organizationSource = await publishedOrganizations(organizations);
+  const professionalSource = professionals;
+  const organizationSource = organizations;
   const hasProfessionalFocus = Boolean(profession || specialty);
 
   const professionalResults = type === "empresas" ? [] : filterProfessionals(professionalSource, filters);
@@ -400,5 +392,13 @@ export default async function SearchPage({ searchParams }: { searchParams: Searc
       </main>
       <SiteFooter />
     </>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<main className="section shell"><p>Carregando busca…</p></main>}>
+      <SearchDirectory />
+    </Suspense>
   );
 }
