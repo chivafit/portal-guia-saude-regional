@@ -30,7 +30,7 @@ export function SiteFooter() {
           <GuiaSaudeLogo />
           <p>O portal de saúde do Centro-Oeste de Minas — conteúdo, profissionais e serviços perto de você.</p>
           <div className="footer-contact">
-            <a href="mailto:rmproguias@gmail.com"><Mail size={15} /> rmproguias@gmail.com</a>
+            <a href="mailto:rmproguia@gmail.com"><Mail size={15} /> rmproguia@gmail.com</a>
             <span><MapPin size={15} /> Centro-Oeste de Minas Gerais</span>
           </div>
           <div className="footer-social">
@@ -51,7 +51,7 @@ export function SiteFooter() {
             <span>Institucional</span>
             <Link href="/sobre">Sobre o Guia Saúde</Link>
             <Link href="/inclusao">Cadastre-se no Guia</Link>
-            <a href="mailto:rmproguias@gmail.com">Contato</a>
+            <a href="mailto:rmproguia@gmail.com">Contato</a>
           </div>
         </nav>
 
