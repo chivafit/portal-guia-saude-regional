@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { articles, cityDetails, organizations, professions, professionals } from "@/lib/data";
-import { publishedOrganizations, publishedProfessionals } from "@/lib/directory";
+import { publishedOrganizations, publishedProfessionals } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

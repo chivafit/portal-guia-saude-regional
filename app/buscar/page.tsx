@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { cities, organizations, professions, professionals } from "@/lib/data";
 import { ProfessionIcon } from "@/components/ProfessionIcon";
-import { publishedOrganizations, publishedProfessionals } from "@/lib/directory";
+import { publishedOrganizations, publishedProfessionals } from "@/lib/public-directory";
 import { filterOrganizations, filterProfessionals } from "@/lib/search";
 import { pageMetadata } from "@/lib/seo";
 import { isCityAvailable } from "@/lib/cities";

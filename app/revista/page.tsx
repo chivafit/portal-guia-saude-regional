@@ -3,7 +3,6 @@ import { Archive, ArrowRight, BookOpen, CalendarDays } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { editionArticles, magazineEditions, type Article } from "@/lib/data";
-import { publishedContent, type ContentRecord } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -13,20 +12,7 @@ export const metadata = pageMetadata(
 );
 
 export default async function RevistaPage() {
-  const saved = await publishedContent("magazine");
-  const editions = [
-    ...saved.map((item: ContentRecord, index: number) => ({
-      slug: undefined as string | undefined,
-      number: `${15 + index}ª`,
-      year: new Date().getFullYear().toString(),
-      title: item.title,
-      description: item.summary || item.body || "Edição publicada pela equipe Guia Saúde.",
-      featured: index === 0,
-      articles: [] as ReturnType<typeof editionArticles>,
-      coverUrl: undefined as string | undefined,
-      hasDigital: false,
-    })),
-    ...magazineEditions.map((edition) => ({
+  const editions = magazineEditions.map((edition) => ({
       slug: edition.slug,
       number: edition.number,
       year: edition.year,
@@ -36,8 +22,7 @@ export default async function RevistaPage() {
       articles: editionArticles(edition),
       coverUrl: edition.coverUrl,
       hasDigital: Boolean(edition.pdfUrl || edition.flipbook),
-    })),
-  ];
+    }));
   const featured = editions[0];
   const isUpcoming = !featured.hasDigital;
 

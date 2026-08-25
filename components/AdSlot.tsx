@@ -1,5 +1,4 @@
 import { ArrowRight } from "lucide-react";
-import { activeCampaign } from "@/lib/campaigns";
 import { supporters } from "@/lib/data";
 
 // Arte de exemplo usada APENAS na demonstração comercial (página /anuncie).
@@ -8,7 +7,7 @@ import { supporters } from "@/lib/data";
 const DEMO_CODE = "DEMONSTRACAO_COMERCIAL";
 
 export async function AdSlot({ code, compact = false }: { code: string; compact?: boolean }) {
-  const campaign = await activeCampaign(code);
+  const campaign: { imageUrl: string | null; name: string; advertiserName: string; destinationUrl: string } | null = null;
 
   // Espaço vendido: exibe a campanha real (imagem, quando houver, + texto).
   if (campaign) {

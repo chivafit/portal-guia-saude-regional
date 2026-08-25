@@ -3,7 +3,6 @@ import { ArrowUpRight, AtSign, Headphones, Play, UserRound, Video } from "lucide
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { podcasts } from "@/lib/data";
-import { publishedContent, type ContentRecord } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -26,19 +25,7 @@ type Episode = {
 };
 
 export default async function PodcastPage() {
-  const saved = await publishedContent("podcast");
-  const episodes: Episode[] = [
-    ...saved.map((item: ContentRecord) => ({
-      slug: item.slug,
-      guest: "Convidado informado no episódio",
-      role: item.summary || "Conexão Saúde",
-      topic: item.title,
-      date: item.publishedAt ? new Date(item.publishedAt).toLocaleDateString("pt-BR") : "Publicado",
-      duration: "Episódio",
-      status: "Disponível",
-    })),
-    ...podcasts,
-  ];
+  const episodes: Episode[] = podcasts;
   const feature = episodes.find((episode) => episode.status === "Disponível") ?? episodes[0];
 
   return (
