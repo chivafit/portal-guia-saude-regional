@@ -1,2 +1,2 @@
-:HL["/_next/static/css/fd04fb32f11d2efe.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"erika-costa-psicologia-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"4bJ4NtWj27DDFlDuUdrca"}
+:HL["/_next/static/css/e494ac167e2e3891.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"erika-costa-psicologia-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"RnMFa7aLo3dojXC8CTXim"}
