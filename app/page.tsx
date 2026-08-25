@@ -1,128 +1,38 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, Building2, FlaskConical, HeartPulse, MapPin, Newspaper, Pill, Podcast, Search, Stethoscope } from "lucide-react";
+import { ArrowRight, BookOpen, Building2, Ear, FlaskConical, HeartPulse, MapPin, Pill, Podcast, Search, Stethoscope, UserRound } from "lucide-react";
 import { ToothIcon } from "@/components/ProfessionIcon";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { activeCities, isCityAvailable } from "@/lib/cities";
-import { articles, magazineEditions, organizations, podcasts, professionals } from "@/lib/data";
+import { articleImage, articles, magazineEditions, organizations, podcasts, professionals } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata(
-  "Encontre atendimento de saúde perto de você",
-  "Busque profissionais, empresas, especialidades e serviços de saúde no Centro-Oeste de Minas.",
-  "/",
-);
+export const metadata = pageMetadata("Encontre atendimento de saúde perto de você", "Busque profissionais, empresas, especialidades e serviços de saúde no Centro-Oeste de Minas.", "/");
 
 export default function Home() {
   const shortcuts = [
-    { label: "Médicos", href: "/buscar?profissao=M%C3%A9dico&tipo=profissionais", icon: Stethoscope },
-    { label: "Dentistas", href: "/buscar?profissao=Dentista&tipo=profissionais", icon: ToothIcon },
-    { label: "Psicólogos", href: "/buscar?profissao=Psic%C3%B3logo&tipo=profissionais", icon: HeartPulse },
-    { label: "Clínicas", href: "/buscar?q=cl%C3%ADnica&tipo=empresas", icon: Building2 },
-    { label: "Farmácias", href: "/buscar?q=farm%C3%A1cia&tipo=empresas", icon: Pill },
-    { label: "Laboratórios", href: "/buscar?q=laborat%C3%B3rio&tipo=empresas", icon: FlaskConical },
+    { label: "Médicos", href: "/buscar?profissao=M%C3%A9dico&tipo=profissionais", icon: Stethoscope }, { label: "Dentistas", href: "/buscar?profissao=Dentista&tipo=profissionais", icon: ToothIcon }, { label: "Psicólogos", href: "/buscar?profissao=Psic%C3%B3logo&tipo=profissionais", icon: HeartPulse }, { label: "Clínicas", href: "/buscar?q=cl%C3%ADnica&tipo=empresas", icon: Building2 }, { label: "Farmácias", href: "/buscar?q=farm%C3%A1cia&tipo=empresas", icon: Pill }, { label: "Laboratórios", href: "/buscar?q=laborat%C3%B3rio&tipo=empresas", icon: FlaskConical },
+  ];
+  const categories = [
+    { label: "Médicos", href: "/buscar?cidade=Piumhi&profissao=M%C3%A9dico&tipo=profissionais", icon: Stethoscope }, { label: "Dentistas", href: "/buscar?cidade=Piumhi&profissao=Dentista&tipo=profissionais", icon: ToothIcon }, { label: "Psicólogos", href: "/buscar?cidade=Piumhi&profissao=Psic%C3%B3logo&tipo=profissionais", icon: HeartPulse }, { label: "Fisioterapeutas", href: "/buscar?cidade=Piumhi&profissao=Fisioterapeuta&tipo=profissionais", icon: UserRound }, { label: "Nutricionistas", href: "/buscar?cidade=Piumhi&profissao=Nutricionista&tipo=profissionais", icon: UserRound }, { label: "Fonoaudiólogos", href: "/buscar?cidade=Piumhi&profissao=Fonoaudi%C3%B3logo&tipo=profissionais", icon: Ear }, { label: "Clínicas", href: "/buscar?cidade=Piumhi&q=cl%C3%ADnica&tipo=empresas", icon: Building2 }, { label: "Farmácias", href: "/buscar?cidade=Piumhi&q=farm%C3%A1cia&tipo=empresas", icon: Pill }, { label: "Exames", href: "/buscar?cidade=Piumhi&q=exame&tipo=empresas", icon: FlaskConical },
   ];
   const latestEpisode = podcasts[0];
   const featuredEdition = magazineEditions.find((edition) => edition.featured) ?? magazineEditions[0];
-  const latestArticle = articles[0];
+  const readableEdition = magazineEditions.find((edition) => edition.coverUrl) ?? featuredEdition;
+  const latestArticle = articles.find((article) => article.slug === "radiologia-odontologica-diagnostico") ?? articles[0];
   const availableCities = activeCities.filter(isCityAvailable);
   const upcomingCities = activeCities.filter((city) => !isCityAvailable(city));
-  const featuredProfessionals = professionals.filter((item) => item.city === "Piumhi").slice(0, 3);
-  const featuredServices = organizations.filter((item) => item.city === "Piumhi").slice(0, 2);
-  return (
-    <>
-      <SiteHeader />
-      <main>
-        <section className="city-choose">
-          <div className="shell home-hero-layout">
-            <div className="home-hero-copy">
-              <p className="eyebrow">Guia Saúde · Centro-Oeste de Minas</p>
-              <h1>Encontre o cuidado que você precisa, perto de você.</h1>
-              <p className="city-choose-lead">Profissionais, clínicas e serviços de saúde do Centro-Oeste de Minas reunidos em um só lugar.</p>
-              <form action="/buscar" className="home-quick-search">
-                <label><Search size={18} /><span>O que você procura?</span><input name="q" aria-label="O que você procura?" placeholder="Cardiologista, dentista, psicólogo, clínica ou exame" /></label>
-                <label className="home-city-field"><MapPin size={17} /><select name="cidade" required defaultValue=""><option value="" disabled>Escolha sua cidade</option>{availableCities.map((city) => <option key={city.slug} value={city.name}>{city.name}</option>)}</select></label>
-                <button type="submit">Encontrar atendimento</button>
-              </form>
-              <div className="home-shortcuts" aria-label="Buscas rápidas">
-              {shortcuts.map(({ label, href, icon: Icon }) => (
-                <Link key={label} href={href}><Icon size={17} /> {label}</Link>
-              ))}
-              </div>
-            </div>
-            <aside className="home-hero-photo" role="img" aria-label="Atendimento de saúde acolhedor"><span>Informação e cuidado<br />para a nossa região</span></aside>
+  const featuredProfessionals = professionals.filter((item) => item.city === "Piumhi" && item.name !== "Perfil demonstrativo").slice(0, 3);
+  const featuredService = organizations.find((item) => item.city === "Piumhi" && /cl[íi]nica|hospital|laborat/i.test(item.category)) ?? organizations.find((item) => item.city === "Piumhi");
 
-            <div className="home-city-heading">
-              <strong>Encontre atendimento na sua cidade</strong>
-              <span>Veja somente os atendimentos e conteúdos daquele município.</span>
-            </div>
-            <div className="city-choose-grid">
-              {availableCities.map((city) => (
-                <Link key={city.slug} href={`/cidades/${city.slug}`} className="city-choose-card">
-                  <span className="city-choose-pin"><MapPin size={18} /></span>
-                  <span className="city-choose-name">{city.name}</span>
-                  <small className="city-choose-region">{city.region}</small>
-                  <em className="city-choose-cta">Ver saúde na cidade <ArrowRight size={14} /></em>
-                </Link>
-              ))}
-            </div>
-            <div className="city-coming-list" aria-label="Próximas cidades do Guia Saúde">
-              <span>Em breve</span>
-              <p>{upcomingCities.map((city) => city.name).join(" · ")}</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="shell home-help-section">
-          <div className="home-section-head"><p className="eyebrow">Como o Guia Saúde ajuda</p><h2>Uma navegação simples para cuidar melhor de você.</h2></div>
-          <div className="home-help-grid">
-            <article><Search size={22}/><strong>Encontre atendimento</strong><p>Pesquise profissionais, clínicas, exames e serviços perto de você.</p></article>
-            <article><MapPin size={22}/><strong>Consulte informações</strong><p>Veja especialidades, endereços e formas de contato.</p></article>
-            <article><Newspaper size={22}/><strong>Cuide-se com informação</strong><p>Acompanhe matérias, podcast e revista sobre saúde e bem-estar.</p></article>
-          </div>
-        </section>
-
-        {(featuredProfessionals.length || featuredServices.length) ? <section className="shell home-directory-section"><div className="home-section-head"><p className="eyebrow">Piumhi</p><h2>Profissionais e serviços em destaque</h2></div><div className="home-directory-grid">{featuredProfessionals.map((item)=><Link key={item.slug} href={`/profissionais/${item.slug}`}><span>{item.profession}</span><strong>{item.name}</strong><small>{item.specialty} · {item.organization}</small><em>Ver perfil <ArrowRight size={13}/></em></Link>)}{featuredServices.map((item)=><Link key={item.slug} href={`/buscar?cidade=Piumhi&q=${encodeURIComponent(item.name)}&tipo=empresas`}><span>{item.category}</span><strong>{item.name}</strong><small>{item.address}</small><em>Ver detalhes <ArrowRight size={13}/></em></Link>)}</div></section> : null}
-
-        <section className="section shell home-pillars">
-          <div className="home-section-head">
-            <p className="eyebrow">Além do diretório</p>
-            <h2>Conteúdo de saúde da região</h2>
-          </div>
-          <div className="home-pillars-grid">
-            <Link href="/podcast" className="home-pillar">
-              <span className="home-pillar-tag"><Podcast size={15} /> Podcast</span>
-              <strong>Conexão Saúde</strong>
-              <p>{latestEpisode.topic}</p>
-              <em>Ver episódios <ArrowRight size={14} /></em>
-            </Link>
-            <Link href="/revista" className="home-pillar">
-              <span className="home-pillar-tag"><BookOpen size={15} /> Revista</span>
-              <strong>{featuredEdition.number} edição</strong>
-              <p>{featuredEdition.title}</p>
-              <em>Folhear a revista <ArrowRight size={14} /></em>
-            </Link>
-            <Link href="/materias" className="home-pillar">
-              <span className="home-pillar-tag"><Newspaper size={15} /> Matérias</span>
-              <strong>{latestArticle.title}</strong>
-              <p>{latestArticle.excerpt}</p>
-              <em>Ler matérias <ArrowRight size={14} /></em>
-            </Link>
-          </div>
-        </section>
-
-        <section className="home-commercial">
-          <div className="shell home-commercial-inner">
-            <div>
-              <p className="eyebrow">Para marcas e profissionais</p>
-              <h2>Sua marca perto de quem busca saúde.</h2>
-              <p>Anuncie no portal, nas páginas das cidades, no podcast e na revista.</p>
-            </div>
-            <Link href="/anuncie">Anunciar no Guia <ArrowRight size={15} /></Link>
-          </div>
-        </section>
-      </main>
-      <SiteFooter />
-    </>
-  );
+  return <><SiteHeader /><main>
+    <section className="home-human-hero"><div className="shell home-human-hero-grid"><div className="home-human-copy"><p className="eyebrow">Guia Saúde · Centro-Oeste de Minas</p><h1>Encontre cuidado perto de você.</h1><p>Profissionais, clínicas, serviços e informação de saúde reunidos em um só lugar.</p><form action="/buscar" className="home-human-search"><label><Search size={18} /><span>O que você procura?</span><input name="q" aria-label="O que você procura?" placeholder="Cardiologista, dentista, psicólogo, clínica ou exame" /></label><label><MapPin size={17} /><select name="cidade" required defaultValue=""><option value="" disabled>Escolha sua cidade</option>{availableCities.map((city) => <option key={city.slug} value={city.name}>{city.name}</option>)}</select></label><button type="submit">Encontrar atendimento <ArrowRight size={16} /></button></form><nav className="home-human-shortcuts" aria-label="Buscas rápidas">{shortcuts.map(({ label, href, icon: Icon }) => <Link key={label} href={href}><Icon size={16} />{label}</Link>)}</nav></div><div className="home-human-art" role="img" aria-label="Profissional de saúde acolhendo pessoas em um ambiente tranquilo"><span className="home-art-note home-art-note-profile">Perfis e serviços locais</span><span className="home-art-note home-art-note-city"><MapPin size={14}/> Centro-Oeste de Minas</span></div></div></section>
+    <section className="home-availability"><div className="shell home-availability-inner"><div><p className="eyebrow">Disponível em Piumhi</p><strong>Encontre profissionais, clínicas, serviços e conteúdos da cidade.</strong></div><Link href="/cidades/piumhi">Acessar Guia de Piumhi <ArrowRight size={15}/></Link><p className="home-coming-inline"><span>Em breve:</span> {upcomingCities.map((city) => city.name).join(" · ")}</p></div></section>
+    <section className="shell home-guidance"><div className="home-guidance-head"><p className="eyebrow">Um caminho mais claro</p><h2>Cuidar da saúde pode ser mais simples.</h2><p>O Guia Saúde ajuda você a encontrar informações e atendimentos disponíveis na sua região.</p></div><div className="home-guidance-grid">{[["Encontre o profissional certo", "Pesquise por profissão, especialidade ou serviço."], ["Conheça antes de escolher", "Consulte especialidade, localização e informações profissionais."], ["Acesse as informações de atendimento", "Encontre endereço, contato e outras informações disponíveis no perfil."]].map(([title,text], index) => <article key={title}><span className={`home-guidance-art art-${index + 1}`} aria-hidden="true"/><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></section>
+    <section className="shell home-categories"><div className="home-section-head"><p className="eyebrow">Comece por aqui</p><h2>Por qual cuidado você procura?</h2><p>Comece escolhendo uma categoria.</p></div><nav className="home-category-grid" aria-label="Categorias de atendimento">{categories.map(({label,href,icon:Icon}) => <Link key={label} href={href}><Icon size={22}/><span>{label}</span><ArrowRight size={15}/></Link>)}</nav></section>
+    <section className="shell home-featured"><div className="home-featured-head"><div><p className="eyebrow">Piumhi</p><h2>Encontre atendimento em Piumhi</h2><p>Conheça alguns profissionais e serviços disponíveis na cidade.</p></div><Link href="/buscar?cidade=Piumhi">Ver todos em Piumhi <ArrowRight size={15}/></Link></div><div className="home-featured-grid">{featuredProfessionals.map((item) => <Link key={item.slug} href={`/profissionais/${item.slug}`} className="home-person-card"><span className="home-person-avatar" style={item.imageUrl ? {backgroundImage:`url(${item.imageUrl})`} : undefined}>{!item.imageUrl ? item.name.split(" ").filter((word)=>!/^dr(a)?\.?$/i.test(word)).slice(0,2).map((word)=>word[0]).join("") : null}</span><div><small>{item.profession}</small><strong>{item.name}</strong><p>{item.specialty}</p><em>{item.organization} · Piumhi</em></div><span className="home-card-cta">Conhecer profissional <ArrowRight size={14}/></span></Link>)}{featuredService ? <Link href={`/buscar?cidade=Piumhi&q=${encodeURIComponent(featuredService.name)}&tipo=empresas`} className="home-service-card"><span className="home-service-art"><Building2 size={28}/></span><small>{featuredService.category}</small><strong>{featuredService.name}</strong><p>{featuredService.address}</p><em>Ver detalhes <ArrowRight size={14}/></em></Link> : null}</div></section>
+    <section className="shell home-editorial"><div className="home-section-head"><p className="eyebrow">Conteúdo do Guia Saúde</p><h2>Informação para cuidar melhor de você</h2></div><div className="home-editorial-grid"><article className="home-editorial-article" style={{backgroundImage:`linear-gradient(90deg,rgba(9,43,40,.86),rgba(9,43,40,.26)),url(${articleImage(latestArticle) ?? "/materias/radiologia-odontologica-diagnostico.jpg"})`}}><span>{latestArticle.category}</span><h3>{latestArticle.title}</h3><p>{latestArticle.excerpt}</p><Link href={`/materias/${latestArticle.slug}`}>Ler matéria <ArrowRight size={14}/></Link></article><Link href="/podcast" className="home-editorial-podcast" style={{backgroundImage:`linear-gradient(0deg,rgba(11,61,57,.76),rgba(11,61,57,.04)),url(${latestEpisode.imageUrl})`}}><span><Podcast size={14}/> Podcast</span><strong>Conexão Saúde</strong><p>{latestEpisode.topic}</p><em>Ouvir episódio <ArrowRight size={14}/></em></Link><Link href={`/revista/${readableEdition.slug}`} className="home-editorial-magazine"><span><BookOpen size={14}/> Revista</span>{readableEdition.coverUrl ? <img src={readableEdition.coverUrl} alt={`Capa da ${readableEdition.number} edição da Guia Saúde`} /> : <div className="home-magazine-placeholder">guia saúde</div>}<div><strong>{readableEdition.number} edição</strong><p>{readableEdition.title}</p><em>Folhear revista <ArrowRight size={14}/></em></div></Link></div></section>
+    <section className="home-regional"><div className="shell home-regional-inner"><div><p className="eyebrow">Uma presença regional</p><h2>Saúde, informação e conexão regional.</h2><p>O Guia Saúde aproxima a população de profissionais, empresas e conteúdos do Centro-Oeste de Minas.</p><Link href="/sobre">Conheça o Guia Saúde <ArrowRight size={15}/></Link></div><div className="home-regional-image" role="img" aria-label="Vista da cidade de Piumhi"/></div></section>
+    <section className="home-commercial"><div className="shell home-commercial-inner"><div><p className="eyebrow">Para profissionais e marcas</p><h2>Seu trabalho mais perto de quem procura saúde.</h2><p>Cadastre seu perfil ou divulgue sua marca no portal, nas páginas das cidades, no podcast e na revista.</p></div><div className="home-commercial-actions"><Link href="/inclusao">Cadastrar meu perfil <ArrowRight size={15}/></Link><Link href="/anuncie">Anunciar no Guia <ArrowRight size={15}/></Link></div></div></section>
+  </main><SiteFooter /></>;
 }
