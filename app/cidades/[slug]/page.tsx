@@ -44,7 +44,10 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
   ).sort((a, b) => a.localeCompare(b, "pt-BR"));
   const cityQuery = encodeURIComponent(city.name);
   // A página da cidade deve orientar a busca, não virar uma nuvem interminável de filtros.
-  const discoverySpecialties = localSpecialties.slice(0, 12);
+  const prioritySpecialties = ["Cardiologia", "Clínica Médica", "Dermatologia", "Endocrinologia", "Ginecologia e Obstetrícia", "Neurologia", "Oftalmologia", "Ortopedia e Traumatologia", "Otorrinolaringologia", "Pediatria", "Psiquiatria", "Urologia"];
+  const discoverySpecialties = prioritySpecialties.filter((specialty) => localSpecialties.includes(specialty)).slice(0, 12);
+  const compactSpecialties = discoverySpecialties.length >= 8 ? discoverySpecialties : localSpecialties.slice(0, 12);
+  const registrationLabel = (registration: string, verified: boolean) => verified ? registration : registration.replace(/\s*·\s*aguardando validação/gi, "") + " · verificação pendente";
 
   // Inventário comercial: profissionais em destaque (um por especialidade-chave).
   const featuredProfessions = ["Médico", "Dentista", "Psicólogo", "Fisioterapeuta", "Nutricionista", "Fonoaudiólogo"];
@@ -107,13 +110,13 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               </Link>
             ))}
           </nav>
-          {discoverySpecialties.length ? (
+          {compactSpecialties.length ? (
             <div className="city-specialties">
               <strong>Especialidades em destaque</strong>
-              {discoverySpecialties.map((specialty) => (
+              {compactSpecialties.map((specialty) => (
                 <Link key={specialty} href={`/buscar?cidade=${cityQuery}&especialidade=${encodeURIComponent(specialty)}&tipo=profissionais`}>{specialty}</Link>
               ))}
-              {localSpecialties.length > discoverySpecialties.length ? (
+              {localSpecialties.length > compactSpecialties.length ? (
                 <Link className="city-specialties-all" href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>Ver todas</Link>
               ) : null}
             </div>
@@ -137,7 +140,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                       <strong>{item.name}</strong>
                       <small>{item.specialty}</small>
                       <span className="city-featured-org">{item.organization}</span>
-                      <span className="city-featured-org">{item.registration}</span>
+                      <span className="city-featured-org city-featured-registration">{registrationLabel(item.registration, item.verified)}</span>
                       <em>Ver perfil <ArrowUpRight size={13} /></em>
                     </Link>
                   ))}
@@ -220,7 +223,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 <h2>Conteúdo de saúde</h2>
                 <p>Orientações e notícias para quem vive em {city.name}.</p>
               </div>
-              <article>
+              <article className="city-content-editorial-card">
                 <span>{localArticles[0].category}</span>
                 <strong>{localArticles[0].title}</strong>
                 <p>{localArticles[0].excerpt}</p>

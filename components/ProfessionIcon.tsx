@@ -1,5 +1,5 @@
 import type { SVGProps } from "react";
-import { Activity, HeartPulse, Stethoscope, UserRound } from "lucide-react";
+import { Activity, Apple, Brain, Dumbbell, Ear, HeartPulse, Pill, Syringe, Stethoscope, UserRound } from "lucide-react";
 
 export function ToothIcon({ size = 25, ...props }: SVGProps<SVGSVGElement> & { size?: number }) {
   return (
@@ -27,6 +27,12 @@ export function ProfessionIcon({ profession, size = 25 }: { profession: string; 
   if (profession === "Médico") return <Stethoscope size={size} />;
   if (profession === "Dentista") return <ToothIcon size={size} />;
   if (profession === "Fisioterapeuta") return <Activity size={size} />;
-  if (profession === "Psicólogo") return <HeartPulse size={size} />;
+  if (profession === "Psicólogo") return <Brain size={size} />;
+  if (profession === "Nutricionista") return <Apple size={size} />;
+  if (profession === "Fonoaudiólogo") return <Ear size={size} />;
+  if (profession === "Enfermeiro") return <Syringe size={size} />;
+  if (profession === "Farmacêutico") return <Pill size={size} />;
+  if (profession === "Educador físico") return <Dumbbell size={size} />;
+  if (profession === "Terapeuta") return <HeartPulse size={size} />;
   return <UserRound size={size} />;
 }

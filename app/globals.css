@@ -3034,3 +3034,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 .city-search-panel-hero input{min-width:0}
 @media(max-width:900px){.city-search-panel-hero{grid-template-columns:1fr 1fr!important}}
 @media(max-width:700px){.city-search-panel-hero{grid-template-columns:1fr!important}}
+
+/* Acabamento final da página de Piumhi: hero, descoberta e cards em um único sistema. */
+.city-portal-hero{min-height:610px!important}
+.city-portal-hero-shade-piumhi{background:linear-gradient(180deg,rgba(7,42,39,.54) 0%,rgba(7,42,39,.42) 62%,#0b4f4a 100%)!important}
+.city-landing-copy h1{max-width:780px!important;font-size:clamp(3.35rem,6.4vw,5.65rem)!important;line-height:.97!important}
+.city-landing-copy p{max-width:650px!important;font-size:1.05rem!important}
+.city-search-panel-hero{margin:32px auto -104px!important;padding:24px 28px!important;z-index:5!important}
+.city-discovery{padding-top:152px!important}
+.city-category-row a{min-height:104px!important}
+.city-featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.city-featured-card{min-height:206px!important;padding:20px!important}
+.city-featured-card strong{font-size:1.14rem!important;line-height:1.16!important}
+.city-featured-org{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.city-featured-registration{margin-top:auto!important;font-size:.68rem!important;color:#74858a!important}
+.city-sell-side{gap:14px!important}.city-sponsor-card,.city-sponsor-anuncie{min-height:138px!important;border-radius:16px!important}
+.city-content-direct{padding:34px!important;border:1px solid #dce6e3!important;border-radius:18px!important;background:#fff!important}
+.city-content-editorial-card{min-height:220px;padding:26px!important;border:1px solid #dce6e3;border-radius:14px;background:linear-gradient(135deg,#f4faf8,#fff)!important}
+.city-content-editorial-card strong{font-size:1.55rem!important}
+@media(max-width:900px){.city-portal-hero{min-height:590px!important}.city-featured-grid{grid-template-columns:1fr!important}.city-sell-side{position:static}.city-discovery{padding-top:130px!important}}
+@media(max-width:700px){.city-portal-hero{min-height:520px!important}.city-landing-copy h1{font-size:2.55rem!important}.city-landing-copy p{font-size:.9rem!important}.city-search-panel-hero{margin:22px auto -150px!important;padding:17px!important}.city-discovery{padding-top:190px!important}.city-category-row{grid-template-columns:repeat(3,minmax(0,1fr))!important}.city-category-row a{min-height:82px!important}.city-content-direct{padding:20px!important}.city-content-editorial-card{min-height:0;padding:20px!important}}
