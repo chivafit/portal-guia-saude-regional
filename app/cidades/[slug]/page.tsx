@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { articles, cityDetails, organizations, professions, professionals } from "@/lib/data";
+import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { publishedOrganizations, publishedProfessionals } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
 
@@ -76,21 +77,35 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           <div className="shell city-portal-grid city-portal-landing-grid">
             <div className="city-landing-copy">
               <Breadcrumbs items={[{ label: "Início", href: "/" }, { label: city.name }]} />
-              <p className="eyebrow">{city.region}</p>
-              <h1>{city.name}</h1>
-              <p>Encontre profissionais, clínicas e informações de saúde em {city.name}.</p>
+              <p className="eyebrow">Guia Saúde · {city.region}</p>
+              <h1>Encontre profissionais de saúde em {city.name}</h1>
+              <p>Médicos, dentistas, psicólogos, fisioterapeutas, nutricionistas, clínicas e serviços perto de você.</p>
               <div className="city-hero-actions">
                 <Link href="/"><MapPin size={16} /> Alterar cidade</Link>
               </div>
               <form className="city-search-panel city-search-panel-hero" action="/buscar">
                 <input type="hidden" name="cidade" value={city.name} />
-                <label><span><ListFilter size={16} /> Área</span><select name="profissao" defaultValue=""><option value="">Todas as áreas</option>{professions.map((item) => <option key={item}>{item}</option>)}</select></label>
-                <label><span><ListFilter size={16} /> Especialidade</span><select name="especialidade" defaultValue=""><option value="">Todas</option>{localSpecialties.map((item) => <option key={item}>{item}</option>)}</select></label>
-                <label><span><Search size={16} /> O que procura?</span><input name="q" placeholder="Ex.: cardiologia, clínica..." /></label>
-                <button type="submit">Buscar</button>
+                <label><span><Search size={16} /> Profissão, especialidade ou serviço</span><input name="q" placeholder="Ex.: cardiologia, dentista, exame..." /></label>
+                <label><span><MapPin size={16} /> Cidade</span><input value={city.name} readOnly aria-label="Cidade selecionada" /></label>
+                <button type="submit">Encontrar atendimento</button>
               </form>
             </div>
           </div>
+        </section>
+
+        <section className="shell city-discovery" aria-label="Atalhos para atendimento">
+          <div className="city-discovery-head">
+            <div><p className="eyebrow">Comece por aqui</p><h2>Encontre por categoria</h2></div>
+            <Link href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>Ver todos <ArrowRight size={14} /></Link>
+          </div>
+          <nav className="city-category-row" aria-label="Categorias profissionais">
+            {professions.map((profession) => (
+              <Link key={profession} href={`/buscar?cidade=${cityQuery}&profissao=${encodeURIComponent(profession)}&tipo=profissionais`}>
+                <ProfessionIcon profession={profession} size={19} /><span>{profession}</span>
+              </Link>
+            ))}
+          </nav>
+          {localSpecialties.length ? <div className="city-specialties"><strong>Especialidades mais procuradas</strong>{localSpecialties.map((specialty) => <Link key={specialty} href={`/buscar?cidade=${cityQuery}&especialidade=${encodeURIComponent(specialty)}&tipo=profissionais`}>{specialty}</Link>)}</div> : null}
         </section>
 
         <section className="shell content-section city-portal-section">
@@ -110,6 +125,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                       <strong>{item.name}</strong>
                       <small>{item.specialty}</small>
                       <span className="city-featured-org">{item.organization}</span>
+                      <span className="city-featured-org">{item.registration}</span>
                       <em>Ver perfil <ArrowUpRight size={13} /></em>
                     </Link>
                   ))}
@@ -198,6 +214,15 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 <p>{localArticles[0].excerpt}</p>
                 <Link href="/materias">Ver conteúdos <ArrowRight size={14} /></Link>
               </article>
+            </section>
+          ) : null}
+
+          {localOrganizations.length ? (
+            <section className="city-services-section" id="empresas">
+              <div className="city-discovery-head"><div><p className="eyebrow">Serviços locais</p><h2>Clínicas e serviços de saúde em {city.name}</h2></div><Link href={`/buscar?cidade=${cityQuery}&tipo=empresas`}>Ver todos <ArrowRight size={14} /></Link></div>
+              <div className="city-services-list">
+                {localOrganizations.slice(0, 3).map((item) => <Link key={item.slug} href={`/buscar?cidade=${cityQuery}&q=${encodeURIComponent(item.name)}&tipo=empresas`}><span><Building2 size={18} /></span><div><strong>{item.name}</strong><small>{item.category} · {item.address}</small></div><ArrowUpRight size={15} /></Link>)}
+              </div>
             </section>
           ) : null}
 
