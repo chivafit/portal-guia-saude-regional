@@ -98,6 +98,29 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           </div>
         </section>
 
+        <section className="city-care-intro" aria-labelledby="city-care-title">
+          <div className="shell">
+            <div className="city-care-intro-head">
+              <p className="eyebrow">Guia Saúde em {city.name}</p>
+              <h2 id="city-care-title">Encontrar cuidado pode ser mais simples.</h2>
+              <p>O Guia Saúde aproxima você de profissionais e serviços disponíveis em {city.name}.</p>
+            </div>
+            <div className="city-care-benefits">
+              {[
+                { title: "Encontre o profissional certo", text: `Pesquise por profissão, especialidade ou serviço em ${city.name}.`, artwork: "first" },
+                { title: "Conheça antes de escolher", text: "Consulte especialidade, local de atendimento e informações profissionais.", artwork: "second" },
+                { title: "Entre em contato com facilidade", text: "Acesse o perfil e encontre as formas disponíveis de atendimento.", artwork: "third" },
+              ].map((benefit) => (
+                <article className="city-care-benefit" key={benefit.title}>
+                  <span className={`city-care-art city-care-art-${benefit.artwork}`} aria-hidden="true" />
+                  <h3>{benefit.title}</h3>
+                  <p>{benefit.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="shell city-discovery" aria-label="Atalhos para atendimento">
           <div className="city-discovery-head">
             <div><p className="eyebrow">Comece por aqui</p><h2>Encontre por categoria</h2></div>
@@ -112,7 +135,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           </nav>
           {compactSpecialties.length ? (
             <div className="city-specialties">
-              <strong>Especialidades em destaque</strong>
+              <strong>Por qual cuidado você procura?</strong>
               {compactSpecialties.map((specialty) => (
                 <Link key={specialty} href={`/buscar?cidade=${cityQuery}&especialidade=${encodeURIComponent(specialty)}&tipo=profissionais`}>{specialty}</Link>
               ))}
@@ -129,7 +152,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               <div className="city-block-head">
                 <p className="eyebrow">Profissionais em destaque</p>
                 <h2>Destaques de {city.name}</h2>
-                <span className="city-featured-criterion">Cadastros com informações mais completas</span>
+                <span className="city-featured-criterion">Conheça alguns profissionais que atendem em {city.name}</span>
               </div>
 
               {featuredProfessionals.length ? (
@@ -241,7 +264,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
 
           {localOrganizations.length ? (
             <section className="city-services-section" id="empresas">
-              <div className="city-discovery-head"><div><p className="eyebrow">Serviços locais</p><h2>Clínicas e serviços de saúde em {city.name}</h2></div><Link href={`/buscar?cidade=${cityQuery}&tipo=empresas`}>Ver todos <ArrowRight size={14} /></Link></div>
+              <div className="city-discovery-head city-services-head"><div><p className="eyebrow">Serviços locais</p><h2>Clínicas e serviços de saúde em {city.name}</h2><p>Encontre também hospitais, laboratórios, farmácias e outros serviços de cuidado.</p></div><Link href={`/buscar?cidade=${cityQuery}&tipo=empresas`}>Ver todos <ArrowRight size={14} /></Link></div>
               <div className="city-services-list">
                 {localOrganizations.slice(0, 3).map((item) => <Link key={item.slug} href={`/buscar?cidade=${cityQuery}&q=${encodeURIComponent(item.name)}&tipo=empresas`}><span><Building2 size={18} /></span><div><strong>{item.name}</strong><small>{item.category} · {item.address}</small></div><ArrowUpRight size={15} /></Link>)}
               </div>
