@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowUpRight, Building2, Glasses, ListFilter, MapPin, Megaphone, Pill, Search } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BookOpen, Building2, Glasses, MapPin, Megaphone, Pill, Podcast, Search } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { articles, cityDetails, organizations, professions, professionals } from "@/lib/data";
+import { articleImage, articles, cityDetails, magazineEditions, organizations, podcasts, professions, professionals } from "@/lib/data";
 import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { publishedOrganizations, publishedProfessionals } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
@@ -34,6 +34,9 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
   const localProfessionals = professionalSource.filter((item) => item.city === city.name);
   const localOrganizations = organizationSource.filter((item) => item.city === city.name);
   const localArticles = articles.filter((item) => item.city === city.name || item.city === "Regional");
+  const editorialArticle = localArticles.find((item) => item.slug === "radiologia-odontologica-diagnostico") ?? localArticles[0];
+  const latestEpisode = podcasts[0];
+  const readableEdition = magazineEditions.find((edition) => edition.coverUrl) ?? magazineEditions[0];
   const localSpecialties = Array.from(
     new Set(
       localProfessionals
@@ -76,15 +79,13 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
     <>
       <SiteHeader />
       <main>
-        <section className="city-hero city-portal-hero">
-          <div className={`city-portal-hero-bg${isPiumhi ? " city-portal-hero-bg-piumhi" : ""}`} aria-hidden="true" />
-          <div className={`city-portal-hero-shade${isPiumhi ? " city-portal-hero-shade-piumhi" : ""}`} aria-hidden="true" />
-          <div className="shell city-portal-grid city-portal-landing-grid">
+        <section className="city-human-hero">
+          <div className="shell city-human-hero-grid">
             <div className="city-landing-copy">
               <Breadcrumbs items={[{ label: "Início", href: "/" }, { label: city.name }]} />
-              <p className="eyebrow">Guia Saúde · {city.region}</p>
-              <h1>Encontre profissionais de saúde em {city.name}</h1>
-              <p>Médicos, dentistas, psicólogos, fisioterapeutas, nutricionistas, clínicas e serviços perto de você.</p>
+              <p className="eyebrow">Guia Saúde em {city.name}</p>
+              <h1>Encontre cuidado em {city.name}.</h1>
+              <p>Profissionais, clínicas e serviços de saúde perto de você.</p>
               <div className="city-hero-actions">
                 <Link href="/"><MapPin size={16} /> Alterar cidade</Link>
               </div>
@@ -95,8 +96,11 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 <button type="submit">Encontrar atendimento</button>
               </form>
             </div>
+            <div className="city-human-hero-art" role="img" aria-label="Profissional de saúde conversando com uma pessoa em um ambiente acolhedor" />
           </div>
         </section>
+
+        {isPiumhi ? <section className="city-regional-strip"><div className="shell"><div><p className="eyebrow">Piumhi, Minas Gerais</p><strong>Saúde e informação para quem vive em Piumhi.</strong><span>Conheça profissionais, serviços e conteúdos da cidade.</span></div></div></section> : null}
 
         <section className="city-care-intro" aria-labelledby="city-care-title">
           <div className="shell">
@@ -107,9 +111,9 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             </div>
             <div className="city-care-benefits">
               {[
-                { title: "Encontre o profissional certo", text: `Pesquise por profissão, especialidade ou serviço em ${city.name}.`, artwork: "first" },
+                { title: "Encontre o profissional certo", text: "Pesquise por profissão, especialidade ou serviço.", artwork: "first" },
                 { title: "Conheça antes de escolher", text: "Consulte especialidade, local de atendimento e informações profissionais.", artwork: "second" },
-                { title: "Entre em contato com facilidade", text: "Acesse o perfil e encontre as formas disponíveis de atendimento.", artwork: "third" },
+                { title: "Acesse as informações de atendimento", text: "Encontre endereço, contato e outras informações disponíveis.", artwork: "third" },
               ].map((benefit) => (
                 <article className="city-care-benefit" key={benefit.title}>
                   <span className={`city-care-art city-care-art-${benefit.artwork}`} aria-hidden="true" />
@@ -123,7 +127,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
 
         <section className="shell city-discovery" aria-label="Atalhos para atendimento">
           <div className="city-discovery-head">
-            <div><p className="eyebrow">Comece por aqui</p><h2>Encontre por categoria</h2></div>
+            <div><p className="eyebrow">Comece por aqui</p><h2>Por qual cuidado você procura?</h2></div>
             <Link href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>Ver todos <ArrowRight size={14} /></Link>
           </div>
           <nav className="city-category-row" aria-label="Categorias profissionais">
@@ -147,11 +151,11 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         </section>
 
         <section className="shell content-section city-portal-section">
-          <div className="city-sell-layout">
-            <div className="city-sell-main" id="profissionais">
+          <div className="city-pro-directory" id="profissionais">
+            <div className="city-pro-main">
               <div className="city-block-head">
                 <p className="eyebrow">Profissionais em destaque</p>
-                <h2>Destaques de {city.name}</h2>
+                <h2>Profissionais em destaque</h2>
                 <span className="city-featured-criterion">Conheça alguns profissionais que atendem em {city.name}</span>
               </div>
 
@@ -187,14 +191,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 Ver todos os profissionais <ArrowRight size={14} />
               </Link>
 
-              <Link className="city-sell-banner" href="/anuncie" aria-label={`Anuncie em ${city.name}`}>
-                <div>
-                  <span>Publicidade</span>
-                  <strong>Sua marca em {city.name}</strong>
-                  <small>Banner na página da cidade, visto por quem procura saúde aqui.</small>
-                </div>
-                <em>Anunciar <ArrowRight size={14} /></em>
-              </Link>
             </div>
 
             <aside className="city-sell-side" id="servicos">
@@ -246,19 +242,27 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             </aside>
           </div>
 
-          {localArticles[0] ? (
+          <section className="city-local-partners" aria-labelledby="city-partners-title">
+            <div><p className="eyebrow">Parceiros e serviços locais</p><h2 id="city-partners-title">Serviços que também fazem parte da cidade</h2></div>
+            <div className="city-partner-grid">
+              {commercialPharmacy ? <article><span>Patrocinado</span><Pill size={19}/><strong>{commercialPharmacy.name}</strong><p>{commercialPharmacy.address}</p><Link href={commercialPharmacy.mapUrl} target={commercialPharmacy.mapUrl.startsWith("http") ? "_blank" : undefined}>Ver localização <ArrowRight size={13}/></Link></article> : null}
+              {commercialOptical ? <article><span>Patrocinado</span><Glasses size={19}/><strong>{commercialOptical.name}</strong><p>{commercialOptical.address}</p><Link href={commercialOptical.mapUrl} target="_blank">Ver localização <ArrowRight size={13}/></Link></article> : null}
+              <Link href="/anuncie" className="city-partner-cta"><Megaphone size={19}/><strong>Quer aparecer no Guia Saúde?</strong><p>Mostre sua marca para quem procura atendimento em {city.name}.</p><em>Conhecer opções <ArrowRight size={13}/></em></Link>
+            </div>
+          </section>
+
+          {editorialArticle ? (
             <section className="city-content-direct" id="materias">
               <div>
                 <p className="eyebrow">Informação</p>
-                <h2>Conteúdo de saúde</h2>
+                <h2>Conteúdo para cuidar melhor de você</h2>
                 <p>Orientações e notícias para quem vive em {city.name}.</p>
               </div>
-              <article className="city-content-editorial-card">
-                <span>{localArticles[0].category}</span>
-                <strong>{localArticles[0].title}</strong>
-                <p>{localArticles[0].excerpt}</p>
-                <Link href="/materias">Ver conteúdos <ArrowRight size={14} /></Link>
-              </article>
+              <div className="city-editorial-mosaic">
+                <article className="city-content-editorial-card city-editorial-article" style={{ backgroundImage: `linear-gradient(90deg,rgba(9,43,40,.86),rgba(9,43,40,.22)),url(${articleImage(editorialArticle) ?? "/materias/radiologia-odontologica-diagnostico.jpg"})` }}><span>{editorialArticle.category}</span><strong>{editorialArticle.title}</strong><p>{editorialArticle.excerpt}</p><Link href={`/materias/${editorialArticle.slug}`}>Ler matéria <ArrowRight size={14} /></Link></article>
+                <Link href="/podcast" className="city-editorial-podcast" style={{ backgroundImage: `linear-gradient(0deg,rgba(11,61,57,.78),rgba(11,61,57,.08)),url(${latestEpisode.imageUrl})` }}><span><Podcast size={13}/> Podcast</span><strong>Conexão Saúde</strong><p>{latestEpisode.topic}</p><em>Ouvir episódio <ArrowRight size={13}/></em></Link>
+                <Link href={`/revista/${readableEdition.slug}`} className="city-editorial-magazine"><span><BookOpen size={13}/> Revista</span>{readableEdition.coverUrl ? <img src={readableEdition.coverUrl} alt={`Capa da ${readableEdition.number} edição da Guia Saúde`} /> : null}<div><strong>{readableEdition.number} edição</strong><p>{readableEdition.title}</p><em>Folhear revista <ArrowRight size={13}/></em></div></Link>
+              </div>
             </section>
           ) : null}
 
@@ -270,6 +274,11 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               </div>
             </section>
           ) : null}
+
+          <section className="city-final-cta">
+            <div><p className="eyebrow">Para profissionais e marcas</p><h2>Faça parte do Guia Saúde</h2><p>Apresente seu trabalho para quem procura atendimento em {city.name} e na região.</p></div>
+            <div><Link href="/inclusao">Cadastrar meu perfil <ArrowRight size={14}/></Link><Link href="/anuncie">Anunciar no Guia <ArrowRight size={14}/></Link></div>
+          </section>
 
           <nav className="city-more-links" aria-label="Outros conteúdos do Guia Saúde">
             <span>Também no Guia Saúde</span>
