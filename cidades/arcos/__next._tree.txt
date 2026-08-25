@@ -1,3 +1,3 @@
-:HL["/_next/static/css/c4312828f48941e2.css","style"]
+:HL["/_next/static/css/994df1632e88f5f5.css","style"]
 :HL["/revista/capas/2025.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"cidades","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"arcos","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"EXEvvAfCTLlHGTgx8TGGy"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"cidades","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"arcos","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"taTYj-SAWeW1UECJ9wVeI"}
