@@ -11,6 +11,8 @@ export const metadata = pageMetadata(
   "/materias",
 );
 
+export const dynamic = "force-static";
+
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
 function topicFor(category: string) {

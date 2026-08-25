@@ -30,5 +30,16 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "db",
+    "drizzle",
+    "server-admin",
+    "server-api",
+    "lib/campaigns.ts",
+    "lib/content.ts",
+    "lib/directory.ts",
+    "lib/inclusion.ts",
+    "lib/leads.ts"
+  ]
 }

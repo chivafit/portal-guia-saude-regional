@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, ShieldCheck, SlidersHorizontal, X } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, ShieldCheck, SlidersHorizontal, Stethoscope, X } from "lucide-react";
 import { AdSlot } from "@/components/AdSlot";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -17,6 +17,8 @@ export const metadata = pageMetadata(
   "Encontre profissionais e empresas da saúde por cidade, categoria e especialidade no Guia Saúde Regional.",
   "/buscar",
 );
+
+export const dynamic = "force-static";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
