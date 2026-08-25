@@ -4,7 +4,7 @@ import { ToothIcon } from "@/components/ProfessionIcon";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { activeCities, isCityAvailable } from "@/lib/cities";
-import { articles, magazineEditions, podcasts } from "@/lib/data";
+import { articles, magazineEditions, organizations, podcasts, professionals } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -27,32 +27,33 @@ export default function Home() {
   const latestArticle = articles[0];
   const availableCities = activeCities.filter(isCityAvailable);
   const upcomingCities = activeCities.filter((city) => !isCityAvailable(city));
+  const featuredProfessionals = professionals.filter((item) => item.city === "Piumhi").slice(0, 3);
+  const featuredServices = organizations.filter((item) => item.city === "Piumhi").slice(0, 2);
   return (
     <>
       <SiteHeader />
       <main>
         <section className="city-choose">
-          <div className="shell">
-            <p className="eyebrow">Portal Guia Saúde · Centro-Oeste de Minas</p>
-            <h1>Encontre atendimento de saúde perto de você</h1>
-            <p className="city-choose-lead">
-              Procure diretamente por especialidade, profissional, clínica, exame ou serviço.
-            </p>
-            <form action="/buscar" className="home-quick-search">
-              <label>
-                <Search size={18} />
-                <input name="q" aria-label="O que você procura?" placeholder="Especialidade, profissional, clínica ou exame" />
-              </label>
-              <button type="submit">Buscar</button>
-            </form>
-            <div className="home-shortcuts" aria-label="Buscas rápidas">
+          <div className="shell home-hero-layout">
+            <div className="home-hero-copy">
+              <p className="eyebrow">Guia Saúde · Centro-Oeste de Minas</p>
+              <h1>Encontre o cuidado que você precisa, perto de você.</h1>
+              <p className="city-choose-lead">Profissionais, clínicas e serviços de saúde do Centro-Oeste de Minas reunidos em um só lugar.</p>
+              <form action="/buscar" className="home-quick-search">
+                <label><Search size={18} /><span>O que você procura?</span><input name="q" aria-label="O que você procura?" placeholder="Cardiologista, dentista, psicólogo, clínica ou exame" /></label>
+                <label className="home-city-field"><MapPin size={17} /><select name="cidade" required defaultValue=""><option value="" disabled>Escolha sua cidade</option>{availableCities.map((city) => <option key={city.slug} value={city.name}>{city.name}</option>)}</select></label>
+                <button type="submit">Encontrar atendimento</button>
+              </form>
+              <div className="home-shortcuts" aria-label="Buscas rápidas">
               {shortcuts.map(({ label, href, icon: Icon }) => (
                 <Link key={label} href={href}><Icon size={17} /> {label}</Link>
               ))}
+              </div>
             </div>
+            <aside className="home-hero-photo" role="img" aria-label="Atendimento de saúde acolhedor"><span>Informação e cuidado<br />para a nossa região</span></aside>
 
             <div className="home-city-heading">
-              <strong>Ou escolha uma cidade</strong>
+              <strong>Encontre atendimento na sua cidade</strong>
               <span>Veja somente os atendimentos e conteúdos daquele município.</span>
             </div>
             <div className="city-choose-grid">
@@ -71,6 +72,17 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <section className="shell home-help-section">
+          <div className="home-section-head"><p className="eyebrow">Como o Guia Saúde ajuda</p><h2>Uma navegação simples para cuidar melhor de você.</h2></div>
+          <div className="home-help-grid">
+            <article><Search size={22}/><strong>Encontre atendimento</strong><p>Pesquise profissionais, clínicas, exames e serviços perto de você.</p></article>
+            <article><MapPin size={22}/><strong>Consulte informações</strong><p>Veja especialidades, endereços e formas de contato.</p></article>
+            <article><Newspaper size={22}/><strong>Cuide-se com informação</strong><p>Acompanhe matérias, podcast e revista sobre saúde e bem-estar.</p></article>
+          </div>
+        </section>
+
+        {(featuredProfessionals.length || featuredServices.length) ? <section className="shell home-directory-section"><div className="home-section-head"><p className="eyebrow">Piumhi</p><h2>Profissionais e serviços em destaque</h2></div><div className="home-directory-grid">{featuredProfessionals.map((item)=><Link key={item.slug} href={`/profissionais/${item.slug}`}><span>{item.profession}</span><strong>{item.name}</strong><small>{item.specialty} · {item.organization}</small><em>Ver perfil <ArrowRight size={13}/></em></Link>)}{featuredServices.map((item)=><Link key={item.slug} href={`/buscar?cidade=Piumhi&q=${encodeURIComponent(item.name)}&tipo=empresas`}><span>{item.category}</span><strong>{item.name}</strong><small>{item.address}</small><em>Ver detalhes <ArrowRight size={13}/></em></Link>)}</div></section> : null}
 
         <section className="section shell home-pillars">
           <div className="home-section-head">
