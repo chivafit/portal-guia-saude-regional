@@ -43,6 +43,8 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
     ),
   ).sort((a, b) => a.localeCompare(b, "pt-BR"));
   const cityQuery = encodeURIComponent(city.name);
+  // A página da cidade deve orientar a busca, não virar uma nuvem interminável de filtros.
+  const discoverySpecialties = localSpecialties.slice(0, 12);
 
   // Inventário comercial: profissionais em destaque (um por especialidade-chave).
   const featuredProfessions = ["Médico", "Dentista", "Psicólogo", "Fisioterapeuta", "Nutricionista", "Fonoaudiólogo"];
@@ -105,7 +107,17 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               </Link>
             ))}
           </nav>
-          {localSpecialties.length ? <div className="city-specialties"><strong>Especialidades mais procuradas</strong>{localSpecialties.map((specialty) => <Link key={specialty} href={`/buscar?cidade=${cityQuery}&especialidade=${encodeURIComponent(specialty)}&tipo=profissionais`}>{specialty}</Link>)}</div> : null}
+          {discoverySpecialties.length ? (
+            <div className="city-specialties">
+              <strong>Especialidades em destaque</strong>
+              {discoverySpecialties.map((specialty) => (
+                <Link key={specialty} href={`/buscar?cidade=${cityQuery}&especialidade=${encodeURIComponent(specialty)}&tipo=profissionais`}>{specialty}</Link>
+              ))}
+              {localSpecialties.length > discoverySpecialties.length ? (
+                <Link className="city-specialties-all" href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>Ver todas</Link>
+              ) : null}
+            </div>
+          ) : null}
         </section>
 
         <section className="shell content-section city-portal-section">
