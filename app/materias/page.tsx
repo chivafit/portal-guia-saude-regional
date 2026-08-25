@@ -3,7 +3,6 @@ import { ArrowRight, HeartPulse, Newspaper, Stethoscope } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { articles, articleImage } from "@/lib/data";
-import { publishedContent, type ContentRecord } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -23,18 +22,6 @@ function topicFor(category: string) {
 export default async function MateriasPage({ searchParams }: { searchParams: SearchParams }) {
   const params = await searchParams;
   const selectedTopic = typeof params.tema === "string" ? params.tema : "Todos";
-  const saved = await publishedContent("article");
-  const savedCards = saved.map((item: ContentRecord) => ({
-    slug: item.slug,
-    href: undefined as string | undefined,
-    category: item.citySlug ? "Conteúdo local" : "Guia Saúde",
-    title: item.title,
-    excerpt: item.summary || item.body || "Conteúdo publicado pela equipe editorial.",
-    author: undefined as string | undefined,
-    readingTime: undefined as string | undefined,
-    image: undefined as string | undefined,
-    topic: topicFor(item.citySlug ? "Conteúdo local" : "Guia Saúde"),
-  }));
   const editorialCards = articles.map((item) => ({
     slug: item.slug,
     href: `/materias/${item.slug}`,
@@ -46,7 +33,7 @@ export default async function MateriasPage({ searchParams }: { searchParams: Sea
     image: articleImage(item),
     topic: topicFor(item.category),
   }));
-  const fullCatalog = [...savedCards, ...editorialCards];
+  const fullCatalog = editorialCards;
   const catalog = selectedTopic === "Todos" ? fullCatalog : fullCatalog.filter((item) => item.topic === selectedTopic);
   const feature = catalog.find((item) => item.href) ?? catalog[0];
   const remainingCatalog = feature

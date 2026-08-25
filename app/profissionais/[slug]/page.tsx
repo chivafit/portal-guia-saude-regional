@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { professionals } from "@/lib/data";
-import { findPublishedProfessional } from "@/lib/directory";
+import { findPublishedProfessional } from "@/lib/public-directory";
 import { podcastForProfessional } from "@/lib/podcasts";
 import { pageMetadata } from "@/lib/seo";
 

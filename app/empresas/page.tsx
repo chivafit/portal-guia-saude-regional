@@ -5,7 +5,7 @@ import { ContactReveal } from "@/components/ContactReveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { cities, organizations } from "@/lib/data";
-import { publishedOrganizations } from "@/lib/directory";
+import { publishedOrganizations } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
 import { isCityAvailable } from "@/lib/cities";
 import { cityAdCode } from "@/lib/city-utils";
