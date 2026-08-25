@@ -1,0 +1,62 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1783988122226,
+      "tag": "0000_regular_maddog",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1783991204364,
+      "tag": "0001_lonely_red_shift",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1784031064776,
+      "tag": "0002_old_archangel",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1784044174350,
+      "tag": "0003_steady_night_nurse",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1784045881185,
+      "tag": "0004_motionless_bullseye",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1784050732735,
+      "tag": "0005_wet_james_howlett",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1784051461061,
+      "tag": "0006_mute_random",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1784830382449,
+      "tag": "0007_cities_enrichment",
+      "breakpoints": true
+    }
+  ]
+}
