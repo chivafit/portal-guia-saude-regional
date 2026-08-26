@@ -1,2 +1,2 @@
-:HL["/_next/static/css/fc0d3862ca3965b0.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dayse-mara-rodrigues-nutricao-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"zMu5ngsBE9Bhlt0Uc8R1E"}
+:HL["/_next/static/css/87eff068b9961c64.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dayse-mara-rodrigues-nutricao-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"Pv2165yYHTmbJQkqRxgEa"}
