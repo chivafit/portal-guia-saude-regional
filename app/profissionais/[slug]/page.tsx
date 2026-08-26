@@ -10,7 +10,7 @@ import { podcastForProfessional } from "@/lib/podcasts";
 import { pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
-  return professionals.map((professional) => ({ slug: professional.slug }));
+  return professionals.filter((professional) => professional.city === "Piumhi").map((professional) => ({ slug: professional.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

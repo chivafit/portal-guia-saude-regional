@@ -6,13 +6,13 @@ import { organizations, professionals, type Organization, type Professional } fr
  * alteração ao GitHub. Não há banco de dados ou servidor envolvidos.
  */
 export async function publishedProfessionals(fallback: Professional[] = professionals) {
-  return fallback;
+  return fallback.filter((item) => item.city === "Piumhi");
 }
 
 export async function publishedOrganizations(fallback: Organization[] = organizations) {
-  return fallback;
+  return fallback.filter((item) => item.city === "Piumhi");
 }
 
 export async function findPublishedProfessional(slug: string, fallback: Professional[] = professionals) {
-  return fallback.find((item) => item.slug === slug) ?? null;
+  return fallback.find((item) => item.city === "Piumhi" && item.slug === slug) ?? null;
 }

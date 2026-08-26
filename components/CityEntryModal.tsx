@@ -102,12 +102,12 @@ export function CityEntryModal() {
               </button>
             ))}
           </div>
-          <div className="city-entry-upcoming">
+          {upcomingCities.length ? <div className="city-entry-upcoming">
             <span className="city-entry-section-label">Próximas cidades</span>
             <div>
               {upcomingCities.map((city) => <span key={city}>{city}<small>Em breve</small></span>)}
             </div>
-          </div>
+          </div> : null}
         </div>
       </section>
     </div>

@@ -40,8 +40,8 @@ function SearchDirectory() {
     | "empresas";
 
   const filters = { query: q, city, profession, specialty, category, type };
-  const professionalSource = professionals;
-  const organizationSource = organizations;
+  const professionalSource = professionals.filter((item) => item.city === "Piumhi");
+  const organizationSource = organizations.filter((item) => item.city === "Piumhi");
   const hasProfessionalFocus = Boolean(profession || specialty);
 
   const professionalResults = type === "empresas" ? [] : filterProfessionals(professionalSource, filters);

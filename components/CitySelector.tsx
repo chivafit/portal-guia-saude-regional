@@ -44,11 +44,10 @@ export function CitySelector() {
     <div className="city-selector">
       <button type="button" aria-label="Selecionar cidade" onClick={() => window.dispatchEvent(new CustomEvent(openEventName))}>
         <MapPin size={15} />
-        <span>{selectedCity || "Todas as cidades"}</span>
+        <span>{selectedCity || "Piumhi"}</span>
         <ChevronDown size={14} />
       </button>
       <div className="city-selector-menu">
-        <button type="button" onClick={() => applyCity("Piumhi")}>Buscar em Piumhi</button>
         {cities.map((city) => (
           <button type="button" key={city} disabled={!isCityAvailable(city)} onClick={() => applyCity(city)} className={selectedCity === city ? "active" : ""}>
             <span>{city}</span>{!isCityAvailable(city) ? <small>EM BREVE</small> : null}

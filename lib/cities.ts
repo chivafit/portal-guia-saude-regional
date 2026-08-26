@@ -54,7 +54,7 @@ export const cityDatabase: City[] = [
     healthRegion: "Região de Saúde de Piumhi",
     region: "Serra da Canastra · Lago de Furnas",
     population: 9100,
-    active: true,
+    active: false,
     intro:
       "Um guia local para encontrar cuidado e acompanhar os assuntos de saúde de Capitólio.",
     seoDescription:
@@ -75,7 +75,7 @@ export const cityDatabase: City[] = [
     healthRegion: "Região de Saúde de Piumhi",
     region: "Lago de Furnas · Centro-Oeste de Minas",
     population: 8900,
-    active: true,
+    active: false,
     intro:
       "Serviços, especialistas e conteúdo de saúde reunidos em uma página dedicada a Pimenta.",
     seoDescription:
@@ -96,7 +96,7 @@ export const cityDatabase: City[] = [
     healthRegion: "Região de Saúde de Formiga",
     region: "Centro-Oeste de Minas",
     population: 40000,
-    active: true,
+    active: false,
     intro:
       "Encontre profissionais e empresas da saúde e acompanhe conteúdos relevantes para Arcos.",
     seoDescription:
@@ -117,7 +117,7 @@ export const cityDatabase: City[] = [
     healthRegion: "Região de Saúde de Formiga",
     region: "Centro-Oeste de Minas",
     population: 35000,
-    active: true,
+    active: false,
     intro:
       "Profissionais, clínicas e serviços de saúde reunidos para quem vive em Formiga e no entorno.",
     seoDescription:
@@ -138,7 +138,7 @@ export const cityDatabase: City[] = [
     healthRegion: "Região de Saúde de Campo Belo",
     region: "Oeste de Minas",
     population: 54000,
-    active: true,
+    active: false,
     intro:
       "O ecossistema de saúde de Campo Belo organizado para facilitar escolhas e conexões.",
     seoDescription:
@@ -159,7 +159,7 @@ export const cityDatabase: City[] = [
     healthRegion: "Região de Saúde de Piumhi",
     region: "Serra da Canastra · Centro-Oeste de Minas",
     population: 23000,
-    active: true,
+    active: false,
     intro:
       "Informação, prevenção e serviços de saúde próximos da comunidade de Bambuí.",
     seoDescription:
@@ -180,7 +180,7 @@ export const cityDatabase: City[] = [
     healthRegion: "Região de Saúde de Piumhi",
     region: "Serra da Canastra",
     population: 7200,
-    active: true,
+    active: false,
     intro:
       "Um ponto de encontro para profissionais, serviços e informação em saúde na Serra da Canastra.",
     seoDescription:
@@ -195,8 +195,8 @@ export const cityDatabase: City[] = [
 
 export const activeCities = cityDatabase.filter((city) => city.active);
 
-const bySlug = new Map(cityDatabase.map((city) => [city.slug, city]));
-const byName = new Map(cityDatabase.map((city) => [city.name, city]));
+const bySlug = new Map(activeCities.map((city) => [city.slug, city]));
+const byName = new Map(activeCities.map((city) => [city.name, city]));
 
 export function getCityBySlug(slug: string): City | undefined {
   return bySlug.get(slug);
@@ -217,5 +217,5 @@ export const cityNames = activeCities.map((city) => city.name);
 // Compatibilidade com o formato antigo (cityDetails) consumido pelas páginas.
 export const cityDetails: Record<string, { name: string; intro: string; region: string }> =
   Object.fromEntries(
-    cityDatabase.map((city) => [city.slug, { name: city.name, intro: city.intro, region: city.region }]),
+    activeCities.map((city) => [city.slug, { name: city.name, intro: city.intro, region: city.region }]),
   );
