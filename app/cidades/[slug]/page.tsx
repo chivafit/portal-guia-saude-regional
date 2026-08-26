@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, ArrowUpRight, BookOpen, Building2, Glasses, MapPin, Megaphone, Pill, Podcast, Search } from "lucide-react";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { articleImage, articles, cityDetails, magazineEditions, organizations, podcasts, professions, professionals } from "@/lib/data";
@@ -79,35 +78,49 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
     <>
       <SiteHeader />
       <main>
-        <section className="city-human-hero">
+        <section className="city-human-hero city-piumhi-banner">
           <div className="shell city-human-hero-grid">
             <div className="city-landing-copy">
-              <Breadcrumbs items={[{ label: "Início", href: "/" }, { label: city.name }]} />
-              <p className="eyebrow">Guia Saúde em {city.name}</p>
-              <h1>Encontre cuidado em {city.name}.</h1>
-              <p>Profissionais, clínicas e serviços de saúde perto de você.</p>
-              <div className="city-hero-actions">
-                <Link href="/"><MapPin size={16} /> Alterar cidade</Link>
-              </div>
+              <p className="eyebrow">Piumhi, Minas Gerais</p>
+              <h1>Encontre saúde e cuidado perto de você</h1>
+              <p>Profissionais, clínicas, serviços e conteúdos de saúde reunidos em um só lugar.</p>
               <form className="city-search-panel city-search-panel-hero" action="/buscar">
                 <input type="hidden" name="cidade" value={city.name} />
-                <label><span><Search size={16} /> Profissão, especialidade ou serviço</span><input name="q" placeholder="Ex.: cardiologia, dentista, exame..." /></label>
-                <label><span><MapPin size={16} /> Cidade</span><input value={city.name} readOnly aria-label="Cidade selecionada" /></label>
-                <button type="submit">Encontrar atendimento</button>
+                <label><span><Search size={16} /> Profissional, especialidade ou serviço</span><input name="q" placeholder="Profissional, especialidade ou serviço" /></label>
+                <button type="submit">Buscar <ArrowRight size={16}/></button>
               </form>
             </div>
-            <div className="city-human-hero-art" role="img" aria-label="Profissional de saúde conversando com uma pessoa em um ambiente acolhedor" />
           </div>
         </section>
 
-        {isPiumhi ? <section className="city-regional-strip"><div className="shell"><div><p className="eyebrow">Piumhi, Minas Gerais</p><strong>Saúde e informação para quem vive em Piumhi.</strong><span>Conheça profissionais, serviços e conteúdos da cidade.</span></div></div></section> : null}
+        <section className="shell city-discovery" aria-label="Atalhos para atendimento">
+          <div className="city-discovery-head">
+            <div><p className="eyebrow">Atendimento em Piumhi</p><h2>Escolha o tipo de profissional</h2><p>Selecione uma categoria para encontrar atendimento em Piumhi.</p></div>
+            <Link href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>Ver todos os profissionais <ArrowRight size={14} /></Link>
+          </div>
+          <nav className="city-category-row" aria-label="Categorias profissionais">
+            {professions.map((profession) => (
+              <Link key={profession} href={`/buscar?cidade=${cityQuery}&profissao=${encodeURIComponent(profession)}&tipo=profissionais`}>
+                <ProfessionIcon profession={profession} size={19} /><span>{({ "Médico": "Médicos", "Dentista": "Dentistas", "Psicólogo": "Psicólogos", "Fisioterapeuta": "Fisioterapeutas", "Nutricionista": "Nutricionistas", "Fonoaudiólogo": "Fonoaudiólogos", "Enfermeiro": "Enfermeiros", "Farmacêutico": "Farmacêuticos", "Educador físico": "Educadores físicos" } as Record<string, string>)[profession] ?? profession}</span>
+              </Link>
+            ))}
+          </nav>
+          {compactSpecialties.length ? (
+            <div className="city-specialties">
+              <div className="city-specialties-heading"><h3>Especialidades médicas mais buscadas</h3><Link className="city-specialties-all" href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>Ver todas as especialidades <ArrowRight size={13}/></Link></div>
+              {compactSpecialties.map((specialty) => (
+                <Link key={specialty} href={`/buscar?cidade=${cityQuery}&especialidade=${encodeURIComponent(specialty)}&tipo=profissionais`}>{specialty}</Link>
+              ))}
+            </div>
+          ) : null}
+        </section>
 
         <section className="city-care-intro" aria-labelledby="city-care-title">
           <div className="shell">
             <div className="city-care-intro-head">
-              <p className="eyebrow">Guia Saúde em {city.name}</p>
-              <h2 id="city-care-title">Encontrar cuidado pode ser mais simples.</h2>
-              <p>O Guia Saúde aproxima você de profissionais e serviços disponíveis em {city.name}.</p>
+              <p className="eyebrow">Como o Guia Saúde ajuda</p>
+              <h2 id="city-care-title">Seu guia de saúde em Piumhi</h2>
+              <p>Descubra profissionais, serviços e informações úteis para cuidar da sua saúde na cidade.</p>
             </div>
             <div className="city-care-benefits">
               {[
@@ -123,31 +136,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               ))}
             </div>
           </div>
-        </section>
-
-        <section className="shell city-discovery" aria-label="Atalhos para atendimento">
-          <div className="city-discovery-head">
-            <div><p className="eyebrow">Comece por aqui</p><h2>Por qual cuidado você procura?</h2></div>
-            <Link href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>Ver todos <ArrowRight size={14} /></Link>
-          </div>
-          <nav className="city-category-row" aria-label="Categorias profissionais">
-            {professions.map((profession) => (
-              <Link key={profession} href={`/buscar?cidade=${cityQuery}&profissao=${encodeURIComponent(profession)}&tipo=profissionais`}>
-                <ProfessionIcon profession={profession} size={19} /><span>{profession}</span>
-              </Link>
-            ))}
-          </nav>
-          {compactSpecialties.length ? (
-            <div className="city-specialties">
-              <strong>Por qual cuidado você procura?</strong>
-              {compactSpecialties.map((specialty) => (
-                <Link key={specialty} href={`/buscar?cidade=${cityQuery}&especialidade=${encodeURIComponent(specialty)}&tipo=profissionais`}>{specialty}</Link>
-              ))}
-              {localSpecialties.length > compactSpecialties.length ? (
-                <Link className="city-specialties-all" href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>Ver todas</Link>
-              ) : null}
-            </div>
-          ) : null}
         </section>
 
         <section className="shell content-section city-portal-section">
