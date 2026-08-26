@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { articleImage, articles, cityDetails, magazineEditions, organizations, podcasts, professions, professionals } from "@/lib/data";
 import { ProfessionIcon } from "@/components/ProfessionIcon";
+import { RootGuideSearch } from "@/components/RootGuideSearch";
 import { publishedOrganizations, publishedProfessionals } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
 
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   );
 }
 
-export default async function CityPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function CityPage({ params, rootLanding = false }: { params: Promise<{ slug: string }>; rootLanding?: boolean }) {
   const { slug } = await params;
   const city = cityDetails[slug];
   if (!city) notFound();
@@ -73,12 +74,34 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
   const commercialOptical = isPiumhi
     ? { name: "Ótica Star", address: "Praça Guia Lopes, 12 · Centro", mapUrl: "https://www.google.com/maps/search/?api=1&query=Otica+Star+Praca+Guia+Lopes+12+Piumhi+MG" }
     : null;
+  const serviceCategories = Array.from(new Set(localOrganizations.map((item) => item.category).filter(Boolean))).sort((a, b) => a.localeCompare(b, "pt-BR"));
+  const quickSearches = [
+    { label: "Médicos", href: `/buscar?cidade=${cityQuery}&profissao=M%C3%A9dico&tipo=profissionais` },
+    { label: "Dentistas", href: `/buscar?cidade=${cityQuery}&profissao=Dentista&tipo=profissionais` },
+    { label: "Psicólogos", href: `/buscar?cidade=${cityQuery}&profissao=Psic%C3%B3logo&tipo=profissionais` },
+    { label: "Cardiologistas", href: `/buscar?cidade=${cityQuery}&especialidade=Cardiologia&tipo=profissionais` },
+    { label: "Fisioterapeutas", href: `/buscar?cidade=${cityQuery}&profissao=Fisioterapeuta&tipo=profissionais` },
+    { label: "Clínicas", href: `/buscar?cidade=${cityQuery}&categoria=Cl%C3%ADnica&tipo=empresas` },
+    { label: "Laboratórios", href: `/buscar?cidade=${cityQuery}&categoria=Laborat%C3%B3rio&tipo=empresas` },
+  ];
 
   return (
     <>
-      <SiteHeader />
-      <main>
-        <section className="city-human-hero city-piumhi-banner">
+      {rootLanding ? <div className="home-commercial-topline"><div className="shell">É profissional ou empresa de saúde? <span>Apareça para quem procura atendimento na região.</span><Link href="/anuncie">Conheça as soluções <ArrowRight size={14} /></Link></div></div> : null}
+      <SiteHeader showTopline={!rootLanding} advertiseLabel={rootLanding ? "Anuncie no Guia" : "Anuncie"} />
+      <main className={rootLanding ? "root-guide-home" : undefined}>
+        {rootLanding ? (
+          <section className="root-guide-hero">
+            <div className="shell root-guide-hero-inner">
+              <p className="eyebrow">Guia Saúde · Portal Regional</p>
+              <h1>Encontre profissionais de saúde perto de você</h1>
+              <p>Pesquise por nome, profissão, especialidade, clínica ou serviço e encontre informações de saúde na sua região.</p>
+              <RootGuideSearch professions={professions} categories={serviceCategories} />
+              <div className="root-guide-quick-searches"><span>Buscas mais procuradas:</span>{quickSearches.map((search) => <Link key={search.label} href={search.href}>{search.label}</Link>)}</div>
+              <p className="root-guide-trust">Informações, endereço e formas de contato reunidos para facilitar sua busca.</p>
+            </div>
+          </section>
+        ) : <section className="city-human-hero city-piumhi-banner">
           <div className="shell city-human-hero-grid">
             <div className="city-landing-copy">
               <p className="eyebrow">Piumhi, Minas Gerais</p>
@@ -91,7 +114,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               </form>
             </div>
           </div>
-        </section>
+        </section>}
 
         <section className="shell city-discovery" aria-label="Atalhos para atendimento">
           <div className="city-discovery-head">

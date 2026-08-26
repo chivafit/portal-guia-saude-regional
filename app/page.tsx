@@ -9,5 +9,5 @@ export const metadata = pageMetadata(
 
 /** A página inicial é o Guia Saúde de Piumhi durante esta primeira fase do portal. */
 export default function Home() {
-  return <PiumhiGuidePage params={Promise.resolve({ slug: "piumhi" })} />;
+  return <PiumhiGuidePage params={Promise.resolve({ slug: "piumhi" })} rootLanding />;
 }

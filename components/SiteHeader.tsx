@@ -4,15 +4,15 @@ import { BrandLink } from "@/components/BrandLink";
 import { CitySelector } from "@/components/CitySelector";
 import { ContextNav } from "@/components/ContextNav";
 
-export function SiteHeader() {
+export function SiteHeader({ showTopline = true, advertiseLabel = "Anuncie" }: { showTopline?: boolean; advertiseLabel?: string }) {
   return (
-    <><div className="topline"><div className="shell">Conteúdo, profissionais e serviços <span>Perto de você</span></div></div><header className="site-header">
+    <>{showTopline ? <div className="topline"><div className="shell">Conteúdo, profissionais e serviços <span>Perto de você</span></div></div> : null}<header className="site-header">
       <div className="shell header-inner">
         <BrandLink />
         <ContextNav />
         <div className="header-actions">
           <CitySelector />
-          <Link href="/anuncie" className="admin-link">Anuncie <ArrowUpRight size={14} /></Link>
+          <Link href="/anuncie" className="admin-link">{advertiseLabel} <ArrowUpRight size={14} /></Link>
         </div>
       </div>
     </header></>
