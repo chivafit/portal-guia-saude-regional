@@ -3,5 +3,5 @@ Allow: /
 Disallow: /admin
 Disallow: /api/
 
-Host: https://guia-saude-regional.iararodriguesimih.chatgpt.site
-Sitemap: https://guia-saude-regional.iararodriguesimih.chatgpt.site/sitemap.xml
+Host: https://guiasaude.app.br
+Sitemap: https://guiasaude.app.br/sitemap.xml
