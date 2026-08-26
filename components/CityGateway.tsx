@@ -54,7 +54,7 @@ export function CityGateway() {
         <div className="city-gateway-actions">
           <Link href={`/buscar${cityQuery}`}><Stethoscope size={16} /> Especialistas <ArrowRight size={14} /></Link>
           <Link href={`/empresas${cityQuery}`}><Building2 size={16} /> Empresas <ArrowRight size={14} /></Link>
-          <Link href={selectedSlug ? `/cidades/${selectedSlug}` : "/materias"}><BookOpen size={16} /> Guia da cidade <ArrowRight size={14} /></Link>
+          <Link href={selectedSlug ? "/" : "/materias"}><BookOpen size={16} /> Guia da cidade <ArrowRight size={14} /></Link>
         </div>
         <div className="city-live-preview">
           <div><strong>{localProfessionals}</strong><span>{selectedCity ? "especialistas na cidade" : "especialistas na região"}</span></div>

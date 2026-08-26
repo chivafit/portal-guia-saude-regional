@@ -35,7 +35,7 @@ export function CitySelector() {
     else window.localStorage.removeItem(storageKey);
     window.localStorage.setItem(modalSeenKey, "1");
     window.dispatchEvent(new CustomEvent("guia-saude:city-change", { detail: city }));
-    if (city) window.location.assign(`/cidades/${citySlug(city)}`);
+    if (city) window.location.assign("/");
   }
 
   const selectedSlug = selectedCity ? citySlug(selectedCity) : "";
@@ -53,7 +53,7 @@ export function CitySelector() {
             <span>{city}</span>{!isCityAvailable(city) ? <small>EM BREVE</small> : null}
           </button>
         ))}
-        <Link href={selectedSlug ? `/cidades/${selectedSlug}` : "/buscar"}>{selectedSlug ? "Ver saúde na cidade" : "Abrir busca regional"}</Link>
+        <Link href={selectedSlug ? "/" : "/buscar"}>{selectedSlug ? "Abrir Guia Saúde" : "Abrir busca"}</Link>
       </div>
     </div>
   );

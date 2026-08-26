@@ -63,7 +63,7 @@ export function CityEntryModal() {
     window.localStorage.setItem(modalSeenKey, "1");
     window.sessionStorage.setItem(sessionSeenKey, "1");
     window.dispatchEvent(new CustomEvent("guia-saude:city-change", { detail: city }));
-    window.location.assign(`/cidades/${citySlug(city)}`);
+    window.location.assign("/");
   }
 
   function dismiss() {

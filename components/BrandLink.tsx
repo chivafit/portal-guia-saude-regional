@@ -27,7 +27,7 @@ export function BrandLink() {
   useEffect(() => {
     const update = () => {
       const city = cityFromUrl() || window.localStorage.getItem(storageKey) || "";
-      setHref(isCityAvailable(city) ? `/cidades/${citySlug(city)}` : "/");
+      setHref(isCityAvailable(city) ? "/" : "/");
     };
     update();
     window.addEventListener("guia-saude:city-change", update);

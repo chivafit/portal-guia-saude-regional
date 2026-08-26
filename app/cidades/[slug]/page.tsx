@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return pageMetadata(
     `Saúde em ${city.name}`,
     `${city.intro} Encontre profissionais, empresas, matérias, podcast e revista em ${city.name}.`,
-    `/cidades/${slug}`,
+    slug === "piumhi" ? "/" : `/cidades/${slug}`,
   );
 }
 

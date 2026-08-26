@@ -91,7 +91,7 @@ export default function AboutPage() {
           </div>
           <div className="about-city-grid">
             {cities.map((city) => (
-              isCityAvailable(city) ? <Link key={city} href={`/cidades/${city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replaceAll(" ", "-")}`}>
+              isCityAvailable(city) ? <Link key={city} href="/">
                 {city}
                 <span>Ver cidade →</span>
               </Link> : <div key={city} className="city-coming-soon" aria-disabled="true">{city}<span>EM BREVE</span></div>

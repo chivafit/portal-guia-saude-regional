@@ -52,7 +52,7 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
         <section className="shell profile-clean-wrap">
           <Breadcrumbs items={[
             { label: "Início", href: "/" },
-            { label: item.city, href: `/cidades/${item.city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}` },
+            { label: item.city, href: "/" },
             { label: "Profissionais", href: `/buscar?cidade=${encodeURIComponent(item.city)}&tipo=profissionais` },
             { label: item.name },
           ]} />

@@ -119,7 +119,7 @@ export default function AdvertisePage() {
             </div>
             <div className="advertise-city-links">
               {cities.map((city) => (
-                isCityAvailable(city) ? <Link key={city} href={`/cidades/${citySlug(city)}`}>
+                isCityAvailable(city) ? <Link key={city} href="/">
                   <MapPin size={14} /> {city}
                 </Link> : <span key={city} className="city-coming-soon" aria-disabled="true"><MapPin size={14} /> {city}<small>EM BREVE</small></span>
               ))}
