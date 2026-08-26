@@ -29,7 +29,7 @@ export function ContextNav() {
 
   return (
     <nav className="main-nav" aria-label="Navegação principal">
-      <Link href={`/buscar${query}`}>Encontrar atendimento</Link>
+      <Link href={`/buscar${query}`}>Encontrar profissionais</Link>
       <Link href={`/materias${query}`}>Conteúdos</Link>
       <Link href={`/podcast${query}`}>Podcast</Link>
       <Link href={`/revista${query}`}>Revista</Link>

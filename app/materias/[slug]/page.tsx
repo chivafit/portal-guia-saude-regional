@@ -4,7 +4,7 @@ import { ArrowRight, ArrowUpRight, Play } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { articles, articleImage, podcasts } from "@/lib/data";
+import { articles, articleImage, podcasts, professionals } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -31,6 +31,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const suggestions = related.length ? related : fallbackRelated;
   const body = article.body ?? [article.excerpt];
   const cover = articleImage(article);
+  const participatingProfessionalSlug = article.professionalSlug ?? episode?.professionalSlugs?.[0];
+  const participatingProfessional = participatingProfessionalSlug
+    ? professionals.find((professional) => professional.slug === participatingProfessionalSlug)
+    : undefined;
 
   return (
     <>
@@ -67,10 +71,26 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <p key={index}>{paragraph}</p>
             ))}
 
-            {article.professionalSlug ? (
-              <Link className="article-inline-link" href={`/profissionais/${article.professionalSlug}`}>
+            {participatingProfessionalSlug ? (
+              <Link className="article-inline-link" href={`/profissionais/${participatingProfessionalSlug}`}>
                 Ver o perfil de {article.author} no Guia <ArrowUpRight size={14} />
               </Link>
+            ) : null}
+
+            {article.author && article.author !== "Redação Guia Saúde" ? (
+              <p className="article-participation">Conteúdo produzido com a participação de profissional da região.</p>
+            ) : null}
+
+            {participatingProfessional ? (
+              <section className="article-professional-panel">
+                <p className="eyebrow">Especialista participante</p>
+                <strong>Conheça o profissional que participou deste conteúdo</strong>
+                <div>
+                  {participatingProfessional.imageUrl ? <span className="article-professional-avatar" style={{ backgroundImage: `url(${participatingProfessional.imageUrl})` }} aria-hidden="true" /> : null}
+                  <span><b>{participatingProfessional.name}</b><small>{participatingProfessional.specialty} · {participatingProfessional.city}</small></span>
+                  <Link href={`/profissionais/${participatingProfessional.slug}`}>Ver perfil no Guia Saúde <ArrowRight size={14} /></Link>
+                </div>
+              </section>
             ) : null}
 
             <div className="editorial-note">
