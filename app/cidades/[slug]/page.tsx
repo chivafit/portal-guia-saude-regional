@@ -150,7 +150,7 @@ export default async function CityPage({ params, rootLanding = false }: { params
           </div>
         </section> : null}
 
-        <section className="shell city-discovery" aria-label="Atalhos para atendimento">
+        {!rootLanding ? <section className="shell city-discovery" aria-label="Atalhos para atendimento">
           <div className="city-discovery-head">
             <div><p className="eyebrow">Atendimento em Piumhi</p><h2>Escolha o tipo de profissional</h2><p>Selecione uma categoria para encontrar atendimento em Piumhi.</p></div>
             <Link href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>Ver todos os profissionais <ArrowRight size={14} /></Link>
@@ -170,7 +170,7 @@ export default async function CityPage({ params, rootLanding = false }: { params
               ))}
             </div>
           ) : null}
-        </section>
+        </section> : null}
 
         {!rootLanding ? <section className="city-care-intro" aria-labelledby="city-care-title">
           <div className="shell">
