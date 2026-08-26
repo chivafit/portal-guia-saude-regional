@@ -28,10 +28,10 @@ export function SiteFooter() {
       <div className="shell footer-top">
         <div className="footer-brand">
           <GuiaSaudeLogo />
-          <p>O portal de saúde do Centro-Oeste de Minas — conteúdo, profissionais e serviços perto de você.</p>
+          <p>Conteúdo, profissionais e serviços de saúde perto de você.</p>
           <div className="footer-contact">
             <a href="mailto:rmproguia@gmail.com"><Mail size={15} /> rmproguia@gmail.com</a>
-            <span><MapPin size={15} /> Centro-Oeste de Minas Gerais</span>
+            <span><MapPin size={15} /> Piumhi, Minas Gerais</span>
           </div>
           <div className="footer-social">
             <a href="https://www.instagram.com/saudeguia" target="_blank" rel="noreferrer" aria-label="Instagram do Guia Saúde"><InstagramIcon /></a>

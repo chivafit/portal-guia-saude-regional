@@ -76,7 +76,7 @@ export default function AboutPage() {
             <div>
               <p className="eyebrow">Estrutura da plataforma</p>
               <h2>Um ecossistema editorial, comercial e regional.</h2>
-              <p>A proposta é integrar descoberta, autoridade, conteúdo e mídia para fortalecer a comunicação em saúde no Centro-Oeste de Minas e Serra da Canastra.</p>
+              <p>A proposta é integrar descoberta, autoridade, conteúdo e mídia para fortalecer a comunicação em saúde.</p>
             </div>
             <div className="about-structure-list">
               {structure.map((item) => <span key={item}>{item}</span>)}

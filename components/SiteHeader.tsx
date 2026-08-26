@@ -6,7 +6,7 @@ import { ContextNav } from "@/components/ContextNav";
 
 export function SiteHeader() {
   return (
-    <><div className="topline"><div className="shell">O portal de saúde do Centro-Oeste de Minas <span>Conteúdo, profissionais e serviços perto de você</span></div></div><header className="site-header">
+    <><div className="topline"><div className="shell">Conteúdo, profissionais e serviços <span>Perto de você</span></div></div><header className="site-header">
       <div className="shell header-inner">
         <BrandLink />
         <ContextNav />

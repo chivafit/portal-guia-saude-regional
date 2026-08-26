@@ -84,7 +84,7 @@ export default function AdvertisePage() {
             <p>Quem chega ao Guia Saúde não está distraído — está buscando um profissional, uma clínica ou uma informação de saúde na própria cidade. Sua marca aparece no momento da decisão.</p>
           </div>
           <div className="advertise-stat-grid">
-            <div><strong>{cities.length}</strong><span>cidades do Centro-Oeste de Minas</span></div>
+            <div><strong>{cities.length}</strong><span>cidade disponível no Guia Saúde</span></div>
             <div><strong>{podcasts.length}</strong><span>episódios do podcast Conexão Saúde</span></div>
             <div><strong>{articles.length}</strong><span>matérias com especialistas da região</span></div>
             <div><strong>100%</strong><span>público regional e segmentado em saúde</span></div>

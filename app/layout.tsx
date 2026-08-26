@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   applicationName: siteName,
   keywords: ["Guia Saúde", "portal de saúde", "profissionais de saúde", "Piumhi"],
-  openGraph: { title: "Guia Saúde — Portal Regional", description: defaultDescription, type: "website", locale: "pt_BR", siteName, images: [{ url: "/og.png", width: 1536, height: 864, alt: "Guia Saúde — o portal de saúde do Centro-Oeste de Minas" }] },
+  openGraph: { title: "Guia Saúde — Portal Regional", description: defaultDescription, type: "website", locale: "pt_BR", siteName, images: [{ url: "/og.png", width: 1536, height: 864, alt: "Guia Saúde — portal de saúde" }] },
   twitter: { card: "summary_large_image", title: "Guia Saúde — Portal Regional", description: defaultDescription, images: ["/og.png"] },
   robots: { index: true, follow: true },
 };

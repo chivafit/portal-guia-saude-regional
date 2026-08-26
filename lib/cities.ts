@@ -31,7 +31,7 @@ export const cityDatabase: City[] = [
     gentilic: "piumhiense",
     microregion: "Microrregião de Piumhi",
     healthRegion: "Região de Saúde de Piumhi",
-    region: "Centro-Oeste de Minas",
+    region: "Minas Gerais",
     population: 35000,
     active: true,
     intro:
@@ -73,7 +73,7 @@ export const cityDatabase: City[] = [
     gentilic: "pimentense",
     microregion: "Microrregião de Piumhi",
     healthRegion: "Região de Saúde de Piumhi",
-    region: "Lago de Furnas · Centro-Oeste de Minas",
+    region: "Lago de Furnas · Minas Gerais",
     population: 8900,
     active: false,
     intro:
@@ -94,7 +94,7 @@ export const cityDatabase: City[] = [
     gentilic: "arcoense",
     microregion: "Microrregião de Formiga",
     healthRegion: "Região de Saúde de Formiga",
-    region: "Centro-Oeste de Minas",
+    region: "Minas Gerais",
     population: 40000,
     active: false,
     intro:
@@ -115,7 +115,7 @@ export const cityDatabase: City[] = [
     gentilic: "formiguense",
     microregion: "Microrregião de Formiga",
     healthRegion: "Região de Saúde de Formiga",
-    region: "Centro-Oeste de Minas",
+    region: "Minas Gerais",
     population: 35000,
     active: false,
     intro:
@@ -157,7 +157,7 @@ export const cityDatabase: City[] = [
     gentilic: "bambuiense",
     microregion: "Microrregião de Piumhi",
     healthRegion: "Região de Saúde de Piumhi",
-    region: "Serra da Canastra · Centro-Oeste de Minas",
+    region: "Serra da Canastra · Minas Gerais",
     population: 23000,
     active: false,
     intro:
