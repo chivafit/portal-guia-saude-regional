@@ -119,6 +119,37 @@ export default async function CityPage({ params, rootLanding = false }: { params
 
         {rootLanding && compactSpecialties.length ? <RootSpecialties specialties={compactSpecialties} city={city.name} /> : null}
 
+        {rootLanding ? <section className="root-pathways" aria-labelledby="root-pathways-title">
+          <div className="shell">
+            <div className="root-pathways-head">
+              <h2 id="root-pathways-title">Saúde perto de você, informação para cuidar melhor.</h2>
+              <p>O Guia Saúde conecta você a profissionais, serviços e conteúdos da sua região.</p>
+            </div>
+            <div className="root-pathways-grid">
+              <article className="root-pathway root-pathway-guide">
+                <div>
+                  <span className="root-pathway-label">Guia regional</span>
+                  <h3>Encontre profissionais e serviços de saúde</h3>
+                  <p>Conheça médicos, dentistas, psicólogos, nutricionistas, clínicas, laboratórios e outros serviços disponíveis em sua cidade.</p>
+                  <small>Profissionais <b>•</b> Clínicas <b>•</b> Exames <b>•</b> Serviços</small>
+                  <Link href={`/buscar?cidade=${cityQuery}`}>Explorar o Guia <ArrowRight size={15} /></Link>
+                </div>
+                <span className="root-pathway-art" aria-hidden="true" />
+              </article>
+              <article className="root-pathway root-pathway-content">
+                <div>
+                  <span className="root-pathway-label">Conteúdos Guia Saúde</span>
+                  <h3>Informação que ajuda você a se cuidar</h3>
+                  <p>Acompanhe reportagens, entrevistas, revista, podcast e orientações produzidas pelo Guia Saúde com profissionais da região.</p>
+                  <small>Revista <b>•</b> Podcast <b>•</b> Entrevistas <b>•</b> Notícias</small>
+                  <Link href="/materias">Ver conteúdos <ArrowRight size={15} /></Link>
+                </div>
+                <span className="root-pathway-art" aria-hidden="true" />
+              </article>
+            </div>
+          </div>
+        </section> : null}
+
         <section className="shell city-discovery" aria-label="Atalhos para atendimento">
           <div className="city-discovery-head">
             <div><p className="eyebrow">Atendimento em Piumhi</p><h2>Escolha o tipo de profissional</h2><p>Selecione uma categoria para encontrar atendimento em Piumhi.</p></div>
