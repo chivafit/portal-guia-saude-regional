@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { articleImage, articles, cityDetails, magazineEditions, organizations, podcasts, professions, professionals } from "@/lib/data";
 import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { RootGuideSearch } from "@/components/RootGuideSearch";
+import { RootSpecialties } from "@/components/RootSpecialties";
 import { publishedOrganizations, publishedProfessionals } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
 
@@ -116,6 +117,8 @@ export default async function CityPage({ params, rootLanding = false }: { params
           </div>
         </section>}
 
+        {rootLanding && compactSpecialties.length ? <RootSpecialties specialties={compactSpecialties} city={city.name} /> : null}
+
         <section className="shell city-discovery" aria-label="Atalhos para atendimento">
           <div className="city-discovery-head">
             <div><p className="eyebrow">Atendimento em Piumhi</p><h2>Escolha o tipo de profissional</h2><p>Selecione uma categoria para encontrar atendimento em Piumhi.</p></div>
@@ -128,7 +131,7 @@ export default async function CityPage({ params, rootLanding = false }: { params
               </Link>
             ))}
           </nav>
-          {compactSpecialties.length ? (
+          {!rootLanding && compactSpecialties.length ? (
             <div className="city-specialties">
               <div className="city-specialties-heading"><h3>Especialidades médicas mais buscadas</h3><Link className="city-specialties-all" href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>Ver todas as especialidades <ArrowRight size={13}/></Link></div>
               {compactSpecialties.map((specialty) => (
