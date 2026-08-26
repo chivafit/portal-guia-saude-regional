@@ -172,7 +172,7 @@ export default async function CityPage({ params, rootLanding = false }: { params
           ) : null}
         </section>
 
-        <section className="city-care-intro" aria-labelledby="city-care-title">
+        {!rootLanding ? <section className="city-care-intro" aria-labelledby="city-care-title">
           <div className="shell">
             <div className="city-care-intro-head">
               <p className="eyebrow">Como o Guia Saúde ajuda</p>
@@ -193,7 +193,7 @@ export default async function CityPage({ params, rootLanding = false }: { params
               ))}
             </div>
           </div>
-        </section>
+        </section> : null}
 
         <section className="shell content-section city-portal-section">
           <div className="city-pro-directory" id="profissionais">
