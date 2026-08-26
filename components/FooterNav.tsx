@@ -37,7 +37,7 @@ export function FooterNav() {
   return (
     <div>
       <span>Navegue</span>
-      <Link href={`/buscar${query}`}>Encontrar atendimento</Link>
+      <Link href={`/buscar${query}`}>Encontrar profissionais</Link>
       <Link href={`/empresas${query}`}>Empresas e serviços</Link>
       <Link href="/materias">Matérias</Link>
     </div>
