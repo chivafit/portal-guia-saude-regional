@@ -81,7 +81,6 @@ export default function AdvertisePage() {
 
       <section id="proposta" className="shell commercial-proposal"><div><p className="eyebrow">Solicite uma proposta</p><h2>Receba uma proposta personalizada.</h2><p>Conte o que deseja apresentar e receba informações sobre formatos, disponibilidade, prazos e valores.</p></div><CommercialProposalForm /></section>
 
-      <section className="commercial-final"><div className="shell"><div><p className="eyebrow">Solicite uma proposta</p><h2>Vamos encontrar o formato certo para sua divulgação.</h2><p>Sem compromisso. A contratação acontece somente após a aprovação da proposta.</p></div><div><a href={whatsapp} target="_blank" rel="noreferrer">Falar pelo WhatsApp <ArrowRight size={16} /></a><a href="#proposta">Preencher formulário <ArrowRight size={16} /></a></div></div></section>
     </main>
     <SiteFooter />
   </>;
