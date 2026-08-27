@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { BrandLink } from "@/components/BrandLink";
 import { CitySelector } from "@/components/CitySelector";
 import { ContextNav } from "@/components/ContextNav";
+import { MobileMenu } from "@/components/MobileMenu";
 
 export function SiteHeader({ showTopline = true, advertiseLabel = "Anuncie" }: { showTopline?: boolean; advertiseLabel?: string }) {
   return (
@@ -13,6 +14,7 @@ export function SiteHeader({ showTopline = true, advertiseLabel = "Anuncie" }: {
         <div className="header-actions">
           <CitySelector />
           <Link href="/anuncie" className="admin-link">{advertiseLabel} <ArrowUpRight size={14} /></Link>
+          <MobileMenu />
         </div>
       </div>
     </header></>

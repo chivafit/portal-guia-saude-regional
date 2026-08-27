@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CityEntryModal } from "@/components/CityEntryModal";
 import { defaultDescription, siteName, siteUrl } from "@/lib/seo";
 import "./globals.css";
+import "./mobile-audit.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
