@@ -13,6 +13,7 @@ import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { filterOrganizations, filterProfessionals } from "@/lib/search";
 import { isCityAvailable } from "@/lib/cities";
 import { cityAdCode } from "@/lib/city-utils";
+import { ResponsiveFilterDisclosure } from "@/components/ResponsiveFilterDisclosure";
 
 function param(value: string | null): string {
   return value ?? "";
@@ -141,7 +142,7 @@ function SearchDirectory() {
 
         <section className="section shell results-layout doctoralia-layout">
           <aside className="filters directory-filters">
-            <details className="filter-disclosure">
+            <ResponsiveFilterDisclosure>
               <summary><SlidersHorizontal size={18} /> Filtrar resultados</summary>
               <div className="filter-panel">
               <form action="/buscar">
@@ -190,7 +191,7 @@ function SearchDirectory() {
                 <span><ShieldCheck size={13} /> Sem agendamento</span>
                 <span><BadgeCheck size={13} /> Perfis revisados</span>
               </div>
-            </details>
+            </ResponsiveFilterDisclosure>
           </aside>
 
           <div className="results directory-results">

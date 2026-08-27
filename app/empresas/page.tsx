@@ -9,6 +9,7 @@ import { publishedOrganizations } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
 import { isCityAvailable } from "@/lib/cities";
 import { cityAdCode } from "@/lib/city-utils";
+import { ResponsiveFilterDisclosure } from "@/components/ResponsiveFilterDisclosure";
 
 export const metadata = pageMetadata(
   "Empresas e serviços",
@@ -70,7 +71,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
 
         <section className="section shell company-layout">
           <aside className="filters directory-filters company-filters">
-            <details className="filter-disclosure">
+            <ResponsiveFilterDisclosure>
               <summary><Building2 size={18} /> Refinar empresas</summary>
               <div className="filter-panel">
                 <form action="/empresas">
@@ -98,7 +99,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
               <div className="filter-pills">
                 {ecosystemTags.slice(0, 5).map((tag) => <span key={tag}>{tag}</span>)}
               </div>
-            </details>
+            </ResponsiveFilterDisclosure>
           </aside>
 
           <div className="company-results">
