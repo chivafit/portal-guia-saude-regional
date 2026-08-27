@@ -70,8 +70,10 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
 
         <section className="section shell company-layout">
           <aside className="filters directory-filters company-filters">
-            <h2>Refinar empresas</h2>
-            <form action="/empresas">
+            <details className="filter-disclosure">
+              <summary><Building2 size={18} /> Refinar empresas</summary>
+              <div className="filter-panel">
+                <form action="/empresas">
               <label>
                 Nome, serviço ou categoria
                 <input name="q" defaultValue={params.q ?? ""} placeholder="Ex.: laboratório, exames..." />
@@ -91,10 +93,12 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
                 </select>
               </label>
               <button type="submit">Aplicar filtros</button>
-            </form>
-            <div className="filter-pills">
-              {ecosystemTags.slice(0, 5).map((tag) => <span key={tag}>{tag}</span>)}
-            </div>
+                </form>
+              </div>
+              <div className="filter-pills">
+                {ecosystemTags.slice(0, 5).map((tag) => <span key={tag}>{tag}</span>)}
+              </div>
+            </details>
           </aside>
 
           <div className="company-results">
