@@ -1,0 +1,8 @@
+<svg width="720" height="720" viewBox="0 0 720 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="720" rx="54" fill="#17384E"/>
+  <circle cx="360" cy="318" r="154" fill="#315F7C"/>
+  <rect x="328" y="188" width="64" height="192" rx="32" fill="#D97842"/>
+  <path d="M246 320c0 63 51 114 114 114s114-51 114-114" stroke="white" stroke-opacity=".84" stroke-width="26" stroke-linecap="round"/>
+  <text x="76" y="612" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700">Conexão Saúde</text>
+  <text x="80" y="658" fill="#9DB4C0" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="6">PODCAST APOIADO</text>
+</svg>
