@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight, MapPin, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cities } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
 import { isCityAvailable } from "@/lib/cities";
@@ -24,6 +24,7 @@ function cityFromCurrentUrl() {
 export function CityEntryModal() {
   const [open, setOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState("");
+  const modalRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const cityFromUrl = cityFromCurrentUrl();
@@ -50,11 +51,25 @@ export function CityEntryModal() {
 
   useEffect(() => {
     if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = "hidden";
+    modalRef.current?.querySelector<HTMLElement>("button")?.focus();
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") dismiss();
+      if (event.key !== "Tab" || !modalRef.current) return;
+      const focusables = Array.from(modalRef.current.querySelectorAll<HTMLElement>("a,button:not([disabled]),input,select,textarea"));
+      const first = focusables[0];
+      const last = focusables.at(-1);
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
     };
     window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKey);
+      previousFocus?.focus();
+    };
   }, [open]);
 
   function chooseCity(city: string) {
@@ -80,7 +95,7 @@ export function CityEntryModal() {
   return (
     <div className="city-entry-overlay" role="dialog" aria-modal="true" aria-labelledby="city-entry-title">
       <div className="city-entry-backdrop" onClick={dismiss} />
-      <section className="city-entry-modal">
+      <section ref={modalRef} className="city-entry-modal">
         <header className="city-entry-top">
           <div>
             <span className="city-entry-eyebrow">Guia regional</span>
