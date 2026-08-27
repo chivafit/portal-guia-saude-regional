@@ -1,7 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /admin
-Disallow: /api/
-
-Host: https://guiasaude.app.br
-Sitemap: https://guiasaude.app.br/sitemap.xml
