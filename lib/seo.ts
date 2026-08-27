@@ -5,11 +5,13 @@ export const siteName = "Guia Saúde";
 export const defaultDescription = "Portal de saúde com profissionais, empresas, matérias, podcast e revista para ajudar você a encontrar cuidado perto de você.";
 
 export function pageMetadata(title: string, description: string, path = "/"): Metadata {
-  const url = `${siteUrl}${path}`;
+  const normalizedPath = path === "/" ? "/" : `/${path.replace(/^\/+|\/+$/g, "")}/`;
+  const url = `${siteUrl}${normalizedPath}`;
   return {
     title,
     description,
     alternates: { canonical: url },
+    robots: { index: true, follow: true },
     openGraph: {
       title: `${title} | ${siteName}`,
       description,

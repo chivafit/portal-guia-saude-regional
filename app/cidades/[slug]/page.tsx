@@ -18,11 +18,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const city = cityDetails[slug];
   if (!city) return pageMetadata("Cidade não encontrada", "Página de cidade não encontrada no Guia Saúde.", `/cidades/${slug}`);
-  return pageMetadata(
+  const metadata = pageMetadata(
     `Saúde em ${city.name}`,
     `${city.intro} Encontre profissionais, empresas, matérias, podcast e revista em ${city.name}.`,
     slug === "piumhi" ? "/" : `/cidades/${slug}`,
   );
+  // Enquanto Piumhi é a única cidade ativa, a raiz é sua URL editorial oficial.
+  // GitHub Pages não oferece redirecionamento HTTP 301/308 por rota estática.
+  return slug === "piumhi" ? { ...metadata, robots: { index: false, follow: true } } : metadata;
 }
 
 export default async function CityPage({ params, rootLanding = false }: { params: Promise<{ slug: string }>; rootLanding?: boolean }) {

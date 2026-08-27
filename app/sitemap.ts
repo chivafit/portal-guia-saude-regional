@@ -1,22 +1,32 @@
 import type { MetadataRoute } from "next";
-import { professionals } from "@/lib/data";
+import { articles, magazineEditions, professionals } from "@/lib/data";
 import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-  const staticRoutes = ["", "/buscar", "/empresas", "/materias", "/podcast", "/revista", "/anuncie", "/sobre", "/inclusao"].map((path) => ({
-    url: `${siteUrl}${path}`,
-    lastModified: now,
-    changeFrequency: path === "" ? "daily" as const : "weekly" as const,
+  const url = (path = "") => path ? `${siteUrl}/${path.replace(/^\/+|\/+$/g, "")}/` : `${siteUrl}/`;
+  // Datas de deploy não representam atualização editorial. Sem uma data confiável,
+  // omitimos lastModified para não enviar sinais falsos aos mecanismos de busca.
+  const staticRoutes = ["", "empresas", "materias", "podcast", "revista", "anuncie", "sobre", "inclusao"].map((path) => ({
+    url: url(path),
+    changeFrequency: path === "" ? "weekly" as const : "monthly" as const,
     priority: path === "" ? 1 : 0.8,
   }));
   const profileRoutes = professionals.filter((item) => item.city === "Piumhi").map((item) => ({
-    url: `${siteUrl}/profissionais/${item.slug}`,
-    lastModified: now,
+    url: url(`profissionais/${item.slug}`),
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
-  return [...staticRoutes, ...profileRoutes];
+  const articleRoutes = articles.map((article) => ({
+    url: url(`materias/${article.slug}`),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+  const editionRoutes = magazineEditions.map((edition) => ({
+    url: url(`revista/${edition.slug}`),
+    changeFrequency: "yearly" as const,
+    priority: 0.6,
+  }));
+  return [...staticRoutes, ...articleRoutes, ...editionRoutes, ...profileRoutes];
 }
