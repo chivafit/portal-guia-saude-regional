@@ -141,8 +141,9 @@ function SearchDirectory() {
 
         <section className="section shell results-layout doctoralia-layout">
           <aside className="filters directory-filters">
-            <div className="filter-panel">
-              <h2 className="filter-title"><SlidersHorizontal size={18} /> Filtrar resultados</h2>
+            <details className="filter-disclosure">
+              <summary><SlidersHorizontal size={18} /> Filtrar resultados</summary>
+              <div className="filter-panel">
               <form action="/buscar">
               <label>
                 Especialidade, nome, exame ou serviço
@@ -184,11 +185,12 @@ function SearchDirectory() {
               {type !== "todos" ? <input type="hidden" name="tipo" value={type} /> : null}
               <button type="submit">Aplicar filtros</button>
               </form>
-            </div>
-            <div className="filter-pills">
-              <span><ShieldCheck size={13} /> Sem agendamento</span>
-              <span><BadgeCheck size={13} /> Perfis revisados</span>
-            </div>
+              </div>
+              <div className="filter-pills">
+                <span><ShieldCheck size={13} /> Sem agendamento</span>
+                <span><BadgeCheck size={13} /> Perfis revisados</span>
+              </div>
+            </details>
           </aside>
 
           <div className="results directory-results">
