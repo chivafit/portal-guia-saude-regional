@@ -13,10 +13,12 @@ export const serviceTaxonomy: ServiceCategory[] = [
   { key: "hospitais", label: "Hospitais e diagnóstico", aliases: ["hospital", "hospitais", "diagnostico", "imagem", "exames"] },
   { key: "academias", label: "Academias e atividade física", aliases: ["academia", "academias", "atividade fisica", "musculacao", "natacao", "hidroginastica"] },
   { key: "pilates", label: "Pilates e reabilitação", aliases: ["pilates", "reabilitacao", "fisioterapia", "quiropraxia"] },
+  { key: "fisioterapia-reabilitacao", label: "Fisioterapia e reabilitação", aliases: ["fisioterapia", "reabilitacao", "hidroterapia", "terapia"] },
   { key: "farmacias", label: "Farmácias", aliases: ["farmacia", "farmacias", "drogaria", "drogarias"] },
   { key: "oticas", label: "Óticas", aliases: ["otica", "oticas", "oculos", "lentes", "visao"] },
   { key: "laboratorios", label: "Laboratórios", aliases: ["laboratorio", "laboratorios", "coleta"] },
   { key: "estetica", label: "Estética e bem-estar", aliases: ["estetica", "bem estar", "bem-estar"] },
+  { key: "servicos-publicos", label: "Serviços públicos de saúde", aliases: ["saude publica", "secretaria municipal", "sus", "atencao basica"] },
 ];
 
 export function normalizeTaxonomyValue(value: string): string {

@@ -1,11 +1,16 @@
 [
   {
     "name": "Nome público da organização",
+    "slug": "nome-publico-da-organizacao-piumhi",
     "categoryKey": "clinicas",
     "city": "Piumhi",
     "address": "Endereço completo e público",
-    "phone": "(37) 0000-0000",
+    "phone": "(37) 99999-9999",
     "services": ["Serviço principal"],
-    "source": "https://fonte-publica-exemplo.com"
+    "sourceUrls": ["https://fonte-publica-exemplo.com"],
+    "lastVerifiedAt": "2026-08-28",
+    "publicationStatus": "draft",
+    "verificationStatus": "public-source",
+    "relationship": "organic"
   }
 ]

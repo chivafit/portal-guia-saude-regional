@@ -386,6 +386,10 @@ function SearchDirectory() {
                     </article>;
                   })}
                 </div>
+                <div className="directory-inclusion-call">
+                  <p>Seu estabelecimento ainda não aparece no Guia Saúde?</p>
+                  <Link href="/inclusao?tipo=organization">Solicitar inclusão <ArrowUpRight size={14} /></Link>
+                </div>
               </>
             ) : null}
           </div>

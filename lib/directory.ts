@@ -28,7 +28,10 @@ export type PublicOrganization = {
   phone: string; whatsapp?: string; summary: string; services: string[]; logoUrl?: string; coverImageUrl?: string; source?: string;
   categoryKey?: string; subcategories?: string[]; keywords?: string[]; sourceUrls?: string[];
   lastVerifiedAt?: string; publicationStatus?: "draft" | "published" | "inactive";
-  verificationStatus?: "verified" | "partner" | "pending"; featured?: boolean; sponsored?: boolean; displayOrder?: number;
+  updatedAt?: string; neighborhood?: string; state?: string; postalCode?: string;
+  website?: string; instagram?: string; mapUrl?: string;
+  verificationStatus?: "public-source" | "official-source" | "direct-confirmation";
+  relationship?: "organic" | "partner" | "sponsored"; featured?: boolean; sponsored?: boolean; displayOrder?: number;
 };
 
 async function getD1() { const { env } = await import("cloudflare:workers"); return env.DB; }
