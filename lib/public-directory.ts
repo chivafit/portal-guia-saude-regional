@@ -10,7 +10,11 @@ export async function publishedProfessionals(fallback: Professional[] = professi
 }
 
 export async function publishedOrganizations(fallback: Organization[] = organizations) {
-  return fallback.filter((item) => item.city === "Piumhi");
+  return fallback.filter((item) => item.city === "Piumhi" && item.publicationStatus === "published" && Boolean(item.phone));
+}
+
+export async function findPublishedOrganization(slug: string, fallback: Organization[] = organizations) {
+  return (await publishedOrganizations(fallback)).find((item) => item.slug === slug) ?? null;
 }
 
 export async function findPublishedProfessional(slug: string, fallback: Professional[] = professionals) {

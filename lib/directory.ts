@@ -25,7 +25,10 @@ export type PublicProfessional = {
 
 export type PublicOrganization = {
   slug: string; name: string; category: string; city: string; address: string;
-  phone: string; summary: string; services: string[]; logoUrl?: string; coverImageUrl?: string; source?: string;
+  phone: string; whatsapp?: string; summary: string; services: string[]; logoUrl?: string; coverImageUrl?: string; source?: string;
+  categoryKey?: string; subcategories?: string[]; keywords?: string[]; sourceUrls?: string[];
+  lastVerifiedAt?: string; publicationStatus?: "draft" | "published" | "inactive";
+  verificationStatus?: "verified" | "partner" | "pending"; featured?: boolean; sponsored?: boolean; displayOrder?: number;
 };
 
 async function getD1() { const { env } = await import("cloudflare:workers"); return env.DB; }

@@ -1,6 +1,7 @@
 // Busca do portal: normaliza acentos e caixa para comparações tolerantes.
 // Ex.: "cardiologia", "Cardiología" e "CARDIOLOGIA" batem com "Cardiologia".
 import type { PublicOrganization, PublicProfessional } from "./directory";
+import { categoryForOrganization, normalizeTaxonomyValue, organizationSearchText, resolveServiceCategory } from "./service-taxonomy";
 
 export function normalize(value: string): string {
   return value
@@ -23,7 +24,7 @@ export type SearchFilters = {
   profession?: string;
   specialty?: string;
   category?: string;
-  type?: "todos" | "profissionais" | "empresas";
+  type?: "todos" | "profissionais" | "servicos" | "empresas" | "professionals" | "services";
 };
 
 export function filterProfessionals(items: PublicProfessional[], filters: SearchFilters): PublicProfessional[] {
@@ -41,12 +42,19 @@ export function filterProfessionals(items: PublicProfessional[], filters: Search
 
 export function filterOrganizations(items: PublicOrganization[], filters: SearchFilters): PublicOrganization[] {
   const { query = "", city = "", category = "" } = filters;
+  const requestedCategory = resolveServiceCategory(category);
+  const normalizedCity = normalizeTaxonomyValue(city);
   return items.filter((item) => {
-    const haystack = `${item.name} ${item.category} ${item.city} ${item.summary} ${item.services.join(" ")}`;
+    const categoryMatch = !category || (
+      requestedCategory
+        ? categoryForOrganization(item)?.key === requestedCategory.key
+        : normalizeTaxonomyValue(item.category) === normalizeTaxonomyValue(category)
+    );
+    const haystack = organizationSearchText(item);
     return (
       (!query || matchesTerms(haystack, query)) &&
-      (!city || item.city === city) &&
-      (!category || item.category === category)
+      (!city || normalizeTaxonomyValue(item.city) === normalizedCity) &&
+      categoryMatch
     );
   });
 }

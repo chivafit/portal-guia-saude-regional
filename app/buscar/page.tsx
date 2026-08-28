@@ -8,10 +8,10 @@ import { AdSlot } from "@/components/AdSlot";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { cities, organizations, professions, professionals } from "@/lib/data";
+import { organizations, professions, professionals } from "@/lib/data";
 import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { filterOrganizations, filterProfessionals } from "@/lib/search";
-import { isCityAvailable } from "@/lib/cities";
+import { categoryOptionsFor } from "@/lib/service-taxonomy";
 import { cityAdCode } from "@/lib/city-utils";
 import { ResponsiveFilterDisclosure } from "@/components/ResponsiveFilterDisclosure";
 
@@ -30,22 +30,23 @@ function directContact(whatsapp?: string, phone?: string) {
 function SearchDirectory() {
   const params = useSearchParams();
   const q = param(params.get("q"));
-  const city = param(params.get("cidade"));
+  const requestedCity = param(params.get("cidade"));
+  const city = requestedCity && requestedCity.toLocaleLowerCase("pt-BR") !== "piumhi" ? "" : "Piumhi";
   const profession = param(params.get("profissao"));
   const specialty = param(params.get("especialidade"));
   const category = param(params.get("categoria"));
   const typeParam = param(params.get("tipo"));
-  const type = (["profissionais", "empresas"].includes(typeParam) ? typeParam : "todos") as
+  const type = ({ profissionais: "profissionais", professionals: "profissionais", empresas: "servicos", services: "servicos" }[typeParam] ?? "todos") as
     | "todos"
     | "profissionais"
-    | "empresas";
+    | "servicos";
 
   const filters = { query: q, city, profession, specialty, category, type };
   const professionalSource = professionals.filter((item) => item.city === "Piumhi");
   const organizationSource = organizations.filter((item) => item.city === "Piumhi");
   const hasProfessionalFocus = Boolean(profession || specialty);
 
-  const professionalResults = type === "empresas" ? [] : filterProfessionals(professionalSource, filters);
+  const professionalResults = type === "servicos" ? [] : filterProfessionals(professionalSource, filters);
   const organizationResults =
     type === "profissionais" || (type === "todos" && hasProfessionalFocus)
       ? []
@@ -53,7 +54,7 @@ function SearchDirectory() {
   const total = professionalResults.length + organizationResults.length;
   const showDirectoryLanding = !q && !profession && !specialty && !category && type === "todos";
 
-  const allCategories = Array.from(new Set(organizationSource.map((item) => item.category))).sort();
+  const serviceCategoryOptions = categoryOptionsFor(organizationSource);
   const cityProfessionals = filterProfessionals(professionalSource, { city });
   const cityOrganizations = filterOrganizations(organizationSource, { city });
   const specialtyChoices = Array.from(
@@ -67,14 +68,11 @@ function SearchDirectory() {
   const professionChoices = professions
     .map((name) => ({ name, count: cityProfessionals.filter((item) => item.profession === name).length }))
     .filter((item) => item.count > 0);
-  const categoryChoices = allCategories
-    .map((name) => ({ name, count: cityOrganizations.filter((item) => item.category === name).length }))
-    .filter((item) => item.count > 0)
-    .sort((a, b) => b.count - a.count);
+  const categoryChoices = categoryOptionsFor(cityOrganizations).sort((a, b) => b.count - a.count);
 
   // Nas abas Profissionais/Empresas, escolher a área antes de listar (evita lista longa).
   const showProfessionChooser = type === "profissionais" && !profession && !specialty && !q && professionChoices.length > 0;
-  const showCategoryChooser = type === "empresas" && !category && !q && categoryChoices.length > 0;
+  const showCategoryChooser = type === "servicos" && !category && !q && categoryChoices.length > 0;
 
   const activeFilters = [
     q && { label: `Busca: ${q}`, key: "q" },
@@ -86,7 +84,7 @@ function SearchDirectory() {
   const typeTabs: { value: typeof type; label: string }[] = [
     { value: "todos", label: "Tudo" },
     { value: "profissionais", label: "Profissionais" },
-    { value: "empresas", label: "Empresas" },
+    { value: "servicos", label: "Clínicas e serviços" },
   ];
 
   function tabHref(value: string) {
@@ -96,7 +94,7 @@ function SearchDirectory() {
     if (profession) search.set("profissao", profession);
     if (specialty) search.set("especialidade", specialty);
     if (category) search.set("categoria", category);
-    if (value !== "todos") search.set("tipo", value);
+    if (value !== "todos") search.set("tipo", value === "servicos" ? "services" : "professionals");
     const query = search.toString();
     return query ? `/buscar?${query}` : "/buscar";
   }
@@ -109,7 +107,7 @@ function SearchDirectory() {
     if (specialty && key !== "especialidade" && key !== "profissao") search.set("especialidade", specialty);
     if (category && key !== "categoria") search.set("categoria", category);
     if (key === "cidade") search.delete("cidade");
-    if (type !== "todos") search.set("tipo", type);
+    if (type !== "todos") search.set("tipo", type === "servicos" ? "services" : "professionals");
     const query = search.toString();
     return query ? `/buscar?${query}` : "/buscar";
   }
@@ -118,7 +116,7 @@ function SearchDirectory() {
     const search = new URLSearchParams();
     if (city) search.set("cidade", city);
     search.set(kind, value);
-    search.set("tipo", kind === "profissao" ? "profissionais" : "empresas");
+    search.set("tipo", kind === "profissao" ? "professionals" : "services");
     return `/buscar?${search.toString()}`;
   }
 
@@ -154,7 +152,7 @@ function SearchDirectory() {
                 Cidade
                 <select name="cidade" defaultValue={city}>
                   <option value="">Selecione</option>
-                  {cities.map((item) => <option key={item} disabled={!isCityAvailable(item)}>{item}{!isCityAvailable(item) ? " — EM BREVE" : ""}</option>)}
+                  <option value="Piumhi">Piumhi</option>
                 </select>
               </label>
               <label>
@@ -180,10 +178,10 @@ function SearchDirectory() {
                 Tipo de empresa
                 <select name="categoria" defaultValue={category}>
                   <option value="">Todas as empresas</option>
-                  {allCategories.map((item) => <option key={item}>{item}</option>)}
+                  {serviceCategoryOptions.map((item) => <option key={item.key} value={item.key}>{item.label}</option>)}
                 </select>
               </label>
-              {type !== "todos" ? <input type="hidden" name="tipo" value={type} /> : null}
+              {type !== "todos" ? <input type="hidden" name="tipo" value={type === "servicos" ? "services" : "professionals"} /> : null}
               <button type="submit">Aplicar filtros</button>
               </form>
               </div>
@@ -245,12 +243,12 @@ function SearchDirectory() {
                     </div>
                     <div className="directory-choice-links">
                       {categoryChoices.slice(0, 9).map((item) => (
-                        <Link key={item.name} href={choiceHref("categoria", item.name)}>
-                          <span>{item.name}</span><ArrowUpRight size={14} />
+                        <Link key={item.key} href={choiceHref("categoria", item.key)}>
+                          <span>{item.label}</span><ArrowUpRight size={14} />
                         </Link>
                       ))}
                     </div>
-                    <Link className="directory-choice-all" href={tabHref("empresas")}>Ver todas as clínicas e serviços</Link>
+                    <Link className="directory-choice-all" href={tabHref("servicos")}>Ver todas as clínicas e serviços</Link>
                   </article>
                 </div>
               </section>
@@ -296,8 +294,8 @@ function SearchDirectory() {
                     </div>
                     <div className="directory-choice-links choice-grid">
                       {categoryChoices.map((item) => (
-                        <Link key={item.name} href={choiceHref("categoria", item.name)}>
-                          <span>{item.name}</span><ArrowUpRight size={14} />
+                        <Link key={item.key} href={choiceHref("categoria", item.key)}>
+                          <span>{item.label}</span><ArrowUpRight size={14} />
                         </Link>
                       ))}
                     </div>
@@ -372,7 +370,7 @@ function SearchDirectory() {
                             <p>{item.category}</p>
                             <h2>{item.name}</h2>
                           </div>
-                          <span className="status-pill pending"><ShieldCheck size={14} /> Cadastro em revisão</span>
+                          <span className="status-pill verified"><BadgeCheck size={14} /> Dados publicados</span>
                         </div>
                         <div className="doctor-pills">
                           <span><MapPin size={13} /> {item.city}</span>
@@ -382,8 +380,8 @@ function SearchDirectory() {
                       </div>
                       <aside className="business-side">
                         <small><Phone size={14} /> Contato</small>
-                        {contact ? <a className="direct-contact-btn" href={contact.href}><Phone size={14} /> {contact.label}</a> : <span className="contact-pending">Contato em validação</span>}
-                        <Link href="/inclusao">Ver detalhes <ArrowUpRight size={14} /></Link>
+                        {contact ? <a className="direct-contact-btn" href={contact.href} target={contact.href.startsWith("http") ? "_blank" : undefined} rel={contact.href.startsWith("http") ? "noreferrer" : undefined}><Phone size={14} /> {contact.label}</a> : null}
+                        <Link href={`/empresas/${item.slug}`}>Ver detalhes <ArrowUpRight size={14} /></Link>
                       </aside>
                     </article>;
                   })}

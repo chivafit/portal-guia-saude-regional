@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Nome público da organização",
+    "categoryKey": "clinicas",
+    "city": "Piumhi",
+    "address": "Endereço completo e público",
+    "phone": "(37) 0000-0000",
+    "services": ["Serviço principal"],
+    "source": "https://fonte-publica-exemplo.com"
+  }
+]

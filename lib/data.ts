@@ -23,14 +23,26 @@ export type Organization = {
   slug: string;
   name: string;
   category: string;
+  /** Chave estável usada por filtros e URLs. Nunca exibir diretamente. */
+  categoryKey?: string;
+  subcategories?: string[];
+  keywords?: string[];
   city: string;
   address: string;
   phone: string;
+  whatsapp?: string;
   summary: string;
   services: string[];
   logoUrl?: string;
   coverImageUrl?: string;
   source?: string;
+  sourceUrls?: string[];
+  lastVerifiedAt?: string;
+  publicationStatus?: "draft" | "published" | "inactive";
+  verificationStatus?: "verified" | "partner" | "pending";
+  featured?: boolean;
+  sponsored?: boolean;
+  displayOrder?: number;
 };
 
 // Dados exclusivamente demonstrativos. Não representam pessoas reais.
@@ -752,8 +764,46 @@ const piumhiImportedOrganizations: Organization[] = [
   { slug: "clinica-psicologica-goncalves-piumhi", name: "Clínica Psicológica Gonçalves", category: "Clínica multiprofissional", city: "Piumhi", address: "Centro — endereço a validar", phone: "Contato a validar", summary: "Cadastro importado de fonte pública (CNES 4475100), pendente de validação editorial antes da publicação definitiva.", services: ["Psicologia", "Atenção básica"], logoUrl: "/placeholders/company-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://consultacnes.com/estabelecimento/4475100-clinica-psicologica-goncalves-ltda-piumhi-mg" },
 ];
 
-export const organizations: Organization[] = [...baseOrganizations, ...supplementalOrganizations, ...piumhiImportedOrganizations]
-  .filter((org) => notDemo(org));
+/**
+ * Fonte pública única de clínicas e serviços.
+ *
+ * A lista bruta acima é mantida apenas como histórico editorial. Somente os
+ * registros abaixo, com fonte e telefone públicos conferidos, chegam ao site.
+ * Itens em apuração continuam fora do diretório até a confirmação da equipe.
+ */
+const publishedOrganizationConfig: Record<string, Omit<Organization, "slug" | "name" | "category" | "city" | "address" | "phone" | "summary" | "services" | "logoUrl" | "coverImageUrl" | "source">> = {
+  "oraldents-piumhi": { categoryKey: "odontologia", subcategories: ["Clínica odontológica"], keywords: ["dentista", "odontologia", "saúde bucal"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 10 },
+  "centro-medico-odontologico-de-piumhi": { categoryKey: "odontologia", subcategories: ["Clínica odontológica"], keywords: ["dentista", "odontologia"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 20 },
+  "clinica-sao-rafael-unimed-piumhi": { categoryKey: "clinicas", subcategories: ["Clínica multiprofissional"], keywords: ["clínica", "unimed", "especialidades"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 30 },
+  "phd-piumhi-hospital-dia": { categoryKey: "hospitais", subcategories: ["Hospital", "Diagnóstico por imagem"], keywords: ["hospital", "exames", "imagem", "diagnóstico"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 40 },
+  "clinica-ophtalmocenter-piumhi": { categoryKey: "clinicas", subcategories: ["Clínica multiprofissional"], keywords: ["clínica", "oftalmologia", "olhos"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 50 },
+  "clinica-do-coracao-piumhi": { categoryKey: "clinicas", subcategories: ["Clínica multiprofissional"], keywords: ["clínica", "cardiologia", "coração"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 60 },
+  "nucleo-dermatologico-cirurgico-piumhi": { categoryKey: "clinicas", subcategories: ["Clínica multiprofissional"], keywords: ["clínica", "dermatologia"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 70 },
+  "clinica-moviment-piumhi": { categoryKey: "pilates", subcategories: ["Academia e atividade física"], keywords: ["pilates", "fisioterapia", "atividade física"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 80 },
+  "sport-mais-academia-piumhi": { categoryKey: "academias", subcategories: ["Academia e atividade física"], keywords: ["academia", "musculação", "atividade física"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 90 },
+  "rfitness-piumhi": { categoryKey: "academias", subcategories: ["Academia e atividade física"], keywords: ["academia", "musculação", "atividade física"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 100 },
+  "oficina-do-corpo-piumhi": { categoryKey: "academias", subcategories: ["Academia e atividade física"], keywords: ["academia", "musculação", "atividade física"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 110 },
+  "mergulho-natacao-piumhi": { categoryKey: "academias", subcategories: ["Academia e atividade física"], keywords: ["natação", "hidroginástica", "academia", "atividade física"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 120 },
+  "piumhi-tenis-clube-academia": { categoryKey: "academias", subcategories: ["Academia e atividade física"], keywords: ["academia", "atividade física", "clube"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 130 },
+  "academia-equilibrio-piumhi": { categoryKey: "academias", subcategories: ["Academia e atividade física"], keywords: ["academia", "treino funcional", "atividade física"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 140 },
+  "drogaria-americana-piumhi": { categoryKey: "farmacias", subcategories: ["Farmácia"], keywords: ["farmácia", "drogaria", "medicamentos"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 150 },
+  "central-otica-piumhi": { categoryKey: "oticas", subcategories: ["Ótica"], keywords: ["ótica", "óculos", "lentes", "visão"], verificationStatus: "verified", publicationStatus: "published", lastVerifiedAt: "2026-08-27", displayOrder: 160 },
+};
+
+const vettedLocalOrganizations: Organization[] = [
+  { slug: "drogaria-americana-piumhi", name: "Drogaria Americana", category: "Farmácia", city: "Piumhi", address: "Rua Padre Abel, 365, Centro", phone: "(37) 3371-1122", summary: "", services: ["Medicamentos", "Produtos de saúde"], source: "https://farmaciaqui.net/drogaria-americana-piumhi-mg-79529/amp" },
+  { slug: "central-otica-piumhi", name: "Central Ótica", category: "Ótica", city: "Piumhi", address: "Rua Padre Abel, 358, Centro", phone: "(37) 3371-2608", summary: "", services: ["Óculos", "Lentes", "Saúde visual"], source: "https://br.todosnegocios.com/pt/central-%C3%B3tica_45-37-3371-2608" },
+];
+
+export const organizations: Organization[] = [...piumhiImportedOrganizations, ...vettedLocalOrganizations]
+  .filter((org) => Boolean(publishedOrganizationConfig[org.slug]))
+  .map((org) => ({
+    ...org,
+    ...publishedOrganizationConfig[org.slug],
+    summary: `Informações públicas reunidas a partir da fonte indicada. Confirme detalhes diretamente com ${org.name}.`,
+    sourceUrls: org.source ? [org.source] : [],
+  }))
+  .sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999));
 
 export { cityNames as cities, cityDetails } from "./cities";
 export const professions = ["Médico", "Dentista", "Psicólogo", "Fisioterapeuta", "Nutricionista", "Fonoaudiólogo", "Enfermeiro", "Farmacêutico", "Educador físico"];

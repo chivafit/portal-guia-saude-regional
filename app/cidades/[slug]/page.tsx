@@ -9,6 +9,7 @@ import { RootGuideSearch } from "@/components/RootGuideSearch";
 import { RootSpecialties } from "@/components/RootSpecialties";
 import { publishedOrganizations, publishedProfessionals } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
+import { categoryOptionsFor } from "@/lib/service-taxonomy";
 
 export function generateStaticParams() {
   return Object.keys(cityDetails).map((slug) => ({ slug }));
@@ -69,24 +70,22 @@ export default async function CityPage({ params, rootLanding = false }: { params
       !/b[áa]sica|p[úu]blica|gest[ãa]o|secretaria/i.test(`${item.category} ${item.name}`) &&
       item.slug !== featuredPharmacy?.slug,
   );
-  const isPiumhi = slug === "piumhi";
-  const commercialPharmacy = isPiumhi
-    ? { name: "Drogaria Americana", address: "Rua Padre Abel, 365 · Centro", mapUrl: "https://www.google.com/maps/search/?api=1&query=Drogaria+Americana+Rua+Padre+Abel+365+Piumhi+MG" }
-    : featuredPharmacy
-      ? { name: featuredPharmacy.name, address: featuredPharmacy.address, mapUrl: `/buscar?cidade=${cityQuery}&tipo=empresas` }
-      : null;
-  const commercialOptical = isPiumhi
-    ? { name: "Ótica Star", address: "Praça Guia Lopes, 12 · Centro", mapUrl: "https://www.google.com/maps/search/?api=1&query=Otica+Star+Praca+Guia+Lopes+12+Piumhi+MG" }
+  const featuredOptical = localOrganizations.find((item) => item.categoryKey === "oticas");
+  const commercialPharmacy = featuredPharmacy
+    ? { name: featuredPharmacy.name, address: featuredPharmacy.address, mapUrl: `/empresas/${featuredPharmacy.slug}` }
     : null;
-  const serviceCategories = Array.from(new Set(localOrganizations.map((item) => item.category).filter(Boolean))).sort((a, b) => a.localeCompare(b, "pt-BR"));
+  const commercialOptical = featuredOptical
+    ? { name: featuredOptical.name, address: featuredOptical.address, mapUrl: `/empresas/${featuredOptical.slug}` }
+    : null;
+  const serviceCategories = categoryOptionsFor(localOrganizations);
   const quickSearches = [
     { label: "Médicos", href: `/buscar?cidade=${cityQuery}&profissao=M%C3%A9dico&tipo=profissionais` },
     { label: "Dentistas", href: `/buscar?cidade=${cityQuery}&profissao=Dentista&tipo=profissionais` },
     { label: "Psicólogos", href: `/buscar?cidade=${cityQuery}&profissao=Psic%C3%B3logo&tipo=profissionais` },
     { label: "Cardiologistas", href: `/buscar?cidade=${cityQuery}&especialidade=Cardiologia&tipo=profissionais` },
     { label: "Fisioterapeutas", href: `/buscar?cidade=${cityQuery}&profissao=Fisioterapeuta&tipo=profissionais` },
-    { label: "Clínicas", href: `/buscar?cidade=${cityQuery}&categoria=Cl%C3%ADnica&tipo=empresas` },
-    { label: "Laboratórios", href: `/buscar?cidade=${cityQuery}&categoria=Laborat%C3%B3rio&tipo=empresas` },
+    { label: "Clínicas", href: `/buscar?cidade=${cityQuery}&categoria=clinicas&tipo=services` },
+    { label: "Hospitais e diagnóstico", href: `/buscar?cidade=${cityQuery}&categoria=hospitais&tipo=services` },
   ];
 
   return (
@@ -271,7 +270,7 @@ export default async function CityPage({ params, rootLanding = false }: { params
                   <span><Building2 size={13} /> Clínica em destaque</span>
                   <strong>{featuredClinic.name}</strong>
                   <small>{featuredClinic.services.slice(0, 2).join(" · ")}</small>
-                  <Link href={`/buscar?cidade=${cityQuery}&tipo=empresas`}>Ver detalhes</Link>
+                  <Link href={`/buscar?cidade=${cityQuery}&tipo=services`}>Ver detalhes</Link>
                 </div>
               ) : (
                 <Link href="/anuncie" className="city-sponsor-card empty">
@@ -316,9 +315,9 @@ export default async function CityPage({ params, rootLanding = false }: { params
 
           {localOrganizations.length ? (
             <section className="city-services-section" id="empresas">
-              <div className="city-discovery-head city-services-head"><div><p className="eyebrow">Serviços locais</p><h2>Clínicas e serviços de saúde em {city.name}</h2><p>Encontre também hospitais, laboratórios, farmácias e outros serviços de cuidado.</p></div><Link href={`/buscar?cidade=${cityQuery}&tipo=empresas`}>Ver todos <ArrowRight size={14} /></Link></div>
+              <div className="city-discovery-head city-services-head"><div><p className="eyebrow">Serviços locais</p><h2>Clínicas e serviços de saúde em {city.name}</h2><p>Encontre também hospitais, academias e outros serviços de cuidado.</p></div><Link href={`/buscar?cidade=${cityQuery}&tipo=services`}>Ver todos <ArrowRight size={14} /></Link></div>
               <div className="city-services-list">
-                {localOrganizations.slice(0, 3).map((item) => <Link key={item.slug} href={`/buscar?cidade=${cityQuery}&q=${encodeURIComponent(item.name)}&tipo=empresas`}><span><Building2 size={18} /></span><div><strong>{item.name}</strong><small>{item.category} · {item.address}</small></div><ArrowUpRight size={15} /></Link>)}
+                {localOrganizations.slice(0, 3).map((item) => <Link key={item.slug} href={`/empresas/${item.slug}`}><span><Building2 size={18} /></span><div><strong>{item.name}</strong><small>{item.category} · {item.address}</small></div><ArrowUpRight size={15} /></Link>)}
               </div>
             </section>
           ) : null}
