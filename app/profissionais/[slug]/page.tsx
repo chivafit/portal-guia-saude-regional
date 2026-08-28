@@ -137,8 +137,8 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
               <p>Confirme seus dados para atualizar informações profissionais, contatos, foto e locais de atendimento.</p>
             </div>
             <div>
-              <a href="mailto:rmproguia@gmail.com?subject=Atualizar%20meus%20dados%20no%20Guia%20Sa%C3%BAde">Atualizar meus dados</a>
-              <a href="mailto:rmproguia@gmail.com?subject=Solicitar%20corre%C3%A7%C3%A3o%20de%20perfil">Solicitar correção</a>
+              <Link href={`/inclusao?tipo=professional&perfil=${encodeURIComponent(item.slug)}&acao=atualizacao`}>Atualizar meus dados</Link>
+              <Link href={`/inclusao?tipo=professional&perfil=${encodeURIComponent(item.slug)}&acao=correcao`}>Solicitar correção</Link>
             </div>
           </section>
         </section>
