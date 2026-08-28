@@ -1,3 +1,3 @@
 :HL["/_next/static/css/7c664239cc1af561.css","style"]
 :HL["/_next/static/css/0ec0f31295a45582.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"empresas","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"oraldents-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"_skUtaFO88hGXsRq2VId1"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"empresas","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"oraldents-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"WyMtKtOS1RBwlATLcivrc"}
