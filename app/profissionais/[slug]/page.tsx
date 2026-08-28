@@ -1,13 +1,27 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Building2, ClipboardCheck, MapPin, Play, Stethoscope } from "lucide-react";
+import { ArrowLeft, Building2, ClipboardCheck, MapPin, Phone, Play, Stethoscope } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { professionals } from "@/lib/data";
+import { organizations, professionals } from "@/lib/data";
 import { findPublishedProfessional, publicProfessionals } from "@/lib/public-directory";
 import { podcastForProfessional } from "@/lib/podcasts";
 import { pageMetadata } from "@/lib/seo";
+import { ProfileShareButton } from "@/components/ProfileShareButton";
+
+function presentationProfession(name: string, profession: string) {
+  if (/^Dra\.?\s/i.test(name) && profession === "Médico") return "Médica";
+  if (/^Dr\.?\s/i.test(name)) return profession;
+  return ({ "Médico": "Medicina", "Psicólogo": "Psicologia", "Fonoaudiólogo": "Fonoaudiologia", "Enfermeiro": "Enfermagem", "Educador físico": "Educação Física" } as Record<string, string>)[profession] ?? profession;
+}
+function completeRegistration(value: string) {
+  const clean = value.replace(/\s*·\s*[^·]*(a validar|aguardando validação|pendente|a confirmar)[^·]*/gi, "").trim();
+  return /\d/.test(clean) ? clean : "";
+}
+function usableService(value: string, specialty: string) {
+  return !/^(consulta|acompanhamento|atendimento|cuidado|saúde|consulta clínica)$/i.test(value.trim()) && value.toLocaleLowerCase("pt-BR") !== specialty.toLocaleLowerCase("pt-BR");
+}
 
 export function generateStaticParams() {
   // A exportação estática exige ao menos um parâmetro para a rota dinâmica.
@@ -38,7 +52,7 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
   const contactHref = whatsappDigits.length >= 10
     ? `https://wa.me/${whatsappDigits.startsWith("55") ? whatsappDigits : `55${whatsappDigits}`}`
     : phoneDigits.length >= 10 ? `tel:+55${phoneDigits}` : "";
-  const publicRegistration = item.registration.replace(/\s*·\s*(a validar|aguardando validação|pendente de confirmação|a confirmar)/gi, "").trim();
+  const publicRegistration = completeRegistration(item.registration);
   const publicSummary = /(a validar|aguardando validação|pendente|em revisão|a confirmar)/i.test(item.summary) ? "" : item.summary;
 
   const nameSkip = new Set(["da", "de", "do", "dos", "das", "e"]);
@@ -50,6 +64,14 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
     .map((part) => part[0])
     .join("")
     .toUpperCase();
+  const locationOrganization = organizations.find((organization) => item.organization.toLocaleLowerCase("pt-BR").includes(organization.name.toLocaleLowerCase("pt-BR")) && organization.city === item.city);
+  const locationName = locationOrganization?.name ?? item.organization;
+  const locationAddress = locationOrganization?.address && !/endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(locationOrganization.address) ? locationOrganization.address : "";
+  const locationPhone = locationOrganization?.phone?.replace(/\D/g, "") ?? "";
+  const locationHref = locationPhone.length >= 10 ? `tel:+55${locationPhone}` : "";
+  const mapHref = locationOrganization?.mapUrl || (locationAddress ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${locationAddress}, ${item.city}`)}` : "");
+  const visibleServices = item.services.filter((service) => usableService(service, item.specialty));
+  const canonicalUrl = `https://guiasaude.app.br/profissionais/${item.slug}/`;
 
   return (
     <>
@@ -77,7 +99,7 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
 
             <div className="profile-clean-main">
               <div className="profile-clean-title">
-                <p>{item.profession}</p>
+                <p>{presentationProfession(item.name, item.profession)}</p>
                 <h1>{item.name}</h1>
               </div>
 
@@ -88,30 +110,34 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
                 <span><MapPin size={14} /> {item.city}</span>
                 {publicRegistration ? <span><ClipboardCheck size={14} /> {publicRegistration}</span> : null}
               </div>
-              <p className="profile-clean-source">Informações reunidas a partir de fontes públicas e canais profissionais. <Link href="/sobre#como-verificamos">Como verificamos as informações</Link></p>
             </div>
 
             {contactHref ? <aside className="profile-clean-contact">
               <small>Contato</small>
               <a className="profile-direct-contact" href={contactHref} target={contactHref.startsWith("http") ? "_blank" : undefined} rel={contactHref.startsWith("http") ? "noreferrer" : undefined}>{contactHref.startsWith("http") ? "Chamar no WhatsApp" : "Ligar"}</a>
+              <ProfileShareButton name={item.name} url={canonicalUrl} />
             </aside> : null}
+            {!contactHref ? <aside className="profile-clean-contact"><ProfileShareButton name={item.name} url={canonicalUrl} /></aside> : null}
           </article>
 
           <section className="profile-clean-details">
-            {item.services.length ? <article>
-              <h2>Áreas de atendimento</h2>
+            {visibleServices.length ? <article>
+              <h2>Especialidades e áreas de atuação</h2>
               <div className="profile-clean-services">
-                {item.services.map((service) => <span key={service}>{service}</span>)}
+                {visibleServices.map((service) => <span key={service}>{service}</span>)}
               </div>
             </article> : null}
 
-            {item.organization ? <article>
+            {locationName ? <article>
               <h2>Local de atendimento</h2>
               <div className="profile-clean-location">
                 <Building2 size={20} />
                 <div>
-                  <strong>{item.organization}</strong>
-                  <span>{item.city}</span>
+                  <strong>{locationName}</strong>
+                  {locationAddress ? <span>{locationAddress}</span> : null}
+                  <span>{item.city}, Minas Gerais</span>
+                  {locationHref ? <a href={locationHref}>Ligar para {locationName}</a> : null}
+                  {mapHref ? <a href={mapHref} target="_blank" rel="noreferrer">Ver localização</a> : null}
                 </div>
               </div>
             </article> : null}
@@ -131,13 +157,15 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
             ) : null}
           </section>
 
+          <p className="profile-clean-source">Informações reunidas a partir de fontes públicas e canais profissionais. <Link href="/sobre#como-verificamos">Como verificamos as informações</Link></p>
+
           <section className="profile-clean-update" aria-label="Atualização do perfil">
             <div>
-              <h2>Este perfil é seu?</h2>
-              <p>Confirme seus dados para atualizar informações profissionais, contatos, foto e locais de atendimento.</p>
+              <h2>Atualize este perfil</h2>
+              <p>É este profissional ou representa o perfil? Solicite a atualização de contatos, fotografia, áreas de atuação e locais de atendimento.</p>
             </div>
             <div>
-              <Link href={`/inclusao?tipo=professional&perfil=${encodeURIComponent(item.slug)}&acao=atualizacao`}>Atualizar meus dados</Link>
+              <Link href={`/inclusao?tipo=professional&perfil=${encodeURIComponent(item.slug)}&acao=atualizacao`}>Atualizar informações</Link>
               <Link href={`/inclusao?tipo=professional&perfil=${encodeURIComponent(item.slug)}&acao=correcao`}>Solicitar correção</Link>
             </div>
           </section>
