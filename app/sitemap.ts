@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
-import { articles, magazineEditions, professionals } from "@/lib/data";
+import { articles, magazineEditions } from "@/lib/data";
+import { publicProfessionals } from "@/lib/public-directory";
 import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-static";
@@ -13,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: path === "" ? "weekly" as const : "monthly" as const,
     priority: path === "" ? 1 : 0.8,
   }));
-  const profileRoutes = professionals.filter((item) => item.city === "Piumhi").map((item) => ({
+  const profileRoutes = publicProfessionals.map((item) => ({
     url: url(`profissionais/${item.slug}`),
     changeFrequency: "monthly" as const,
     priority: 0.6,

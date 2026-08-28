@@ -1,16 +1,20 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, BadgeCheck, Building2, ClipboardCheck, MapPin, Play, ShieldCheck, Stethoscope } from "lucide-react";
+import { ArrowLeft, Building2, ClipboardCheck, MapPin, Play, Stethoscope } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { professionals } from "@/lib/data";
-import { findPublishedProfessional } from "@/lib/public-directory";
+import { findPublishedProfessional, publicProfessionals } from "@/lib/public-directory";
 import { podcastForProfessional } from "@/lib/podcasts";
 import { pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
-  return professionals.filter((professional) => professional.city === "Piumhi").map((professional) => ({ slug: professional.slug }));
+  // A exportação estática exige ao menos um parâmetro para a rota dinâmica.
+  // O identificador abaixo renderiza notFound e não representa um perfil público.
+  return publicProfessionals.length
+    ? publicProfessionals.map((professional) => ({ slug: professional.slug }))
+    : [{ slug: "perfil-indisponivel" }];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -69,53 +73,43 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
               <div className="profile-clean-title">
                 <p>{item.profession}</p>
                 <h1>{item.name}</h1>
-                <span className={item.verified ? "status-pill verified" : "status-pill pending"}>
-                  {item.verified ? <BadgeCheck size={14} /> : <ShieldCheck size={14} />}
-                  {item.verified ? "Perfil verificado" : "Cadastro em revisão"}
-                </span>
-                <div className="profile-clean-verification">
-                  {item.verified ? <BadgeCheck size={15} /> : <ShieldCheck size={15} />}
-                  <span>
-                    {item.verified ? "Informações verificadas pela equipe" : "Informações em revisão pela equipe"}
-                    {item.source ? <> · fonte: <a href={item.source} target="_blank" rel="noreferrer">{new URL(item.source).hostname.replace(/^www\./, "")}</a></> : null}
-                  </span>
-                </div>
               </div>
 
-              <p className="profile-clean-summary">{item.summary}</p>
+              {item.summary ? <p className="profile-clean-summary">{item.summary}</p> : null}
 
               <div className="profile-clean-tags">
                 <span><Stethoscope size={14} /> {item.specialty}</span>
                 <span><MapPin size={14} /> {item.city}</span>
                 <span><ClipboardCheck size={14} /> {item.registration}</span>
               </div>
+              <p className="profile-clean-source">Informações reunidas a partir de fontes públicas e canais profissionais. <Link href="/sobre#como-verificamos">Como verificamos as informações</Link></p>
             </div>
 
-            <aside className="profile-clean-contact">
+            {contactHref ? <aside className="profile-clean-contact">
               <small>Contato</small>
-              <strong>{item.organization}</strong>
-              {contactHref ? <a className="profile-direct-contact" href={contactHref} target={contactHref.startsWith("http") ? "_blank" : undefined} rel={contactHref.startsWith("http") ? "noreferrer" : undefined}>{contactHref.startsWith("http") ? "Falar pelo WhatsApp" : "Ligar para o consultório"}</a> : <span className="contact-pending">Contato em validação</span>}
-            </aside>
+              {item.organization ? <strong>{item.organization}</strong> : null}
+              <a className="profile-direct-contact" href={contactHref} target={contactHref.startsWith("http") ? "_blank" : undefined} rel={contactHref.startsWith("http") ? "noreferrer" : undefined}>{contactHref.startsWith("http") ? "Chamar no WhatsApp" : "Ligar"}</a>
+            </aside> : null}
           </article>
 
           <section className="profile-clean-details">
-            <article>
+            {item.services.length ? <article>
               <h2>Áreas de atendimento</h2>
               <div className="profile-clean-services">
                 {item.services.map((service) => <span key={service}>{service}</span>)}
               </div>
-            </article>
+            </article> : null}
 
-            <article>
+            {item.organization ? <article>
               <h2>Local de atendimento</h2>
               <div className="profile-clean-location">
                 <Building2 size={20} />
                 <div>
                   <strong>{item.organization}</strong>
-                  <span>{item.city} · endereço profissional a confirmar</span>
+                  <span>{item.city}</span>
                 </div>
               </div>
-            </article>
+            </article> : null}
 
             {podcastEpisode ? (
               <article className="profile-podcast">
@@ -130,6 +124,17 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
                 </a>
               </article>
             ) : null}
+          </section>
+
+          <section className="profile-clean-update" aria-label="Atualização do perfil">
+            <div>
+              <h2>Este perfil é seu?</h2>
+              <p>Confirme seus dados para atualizar informações profissionais, contatos, foto e locais de atendimento.</p>
+            </div>
+            <div>
+              <a href="mailto:rmproguia@gmail.com?subject=Atualizar%20meus%20dados%20no%20Guia%20Sa%C3%BAde">Atualizar meus dados</a>
+              <a href="mailto:rmproguia@gmail.com?subject=Solicitar%20corre%C3%A7%C3%A3o%20de%20perfil">Solicitar correção</a>
+            </div>
           </section>
         </section>
       </main>

@@ -69,6 +69,17 @@ export default function AboutPage() {
           ))}
         </section>
 
+        <section id="como-verificamos" className="shell content-section about-grid">
+          <div>
+            <p className="eyebrow">Como verificamos as informações</p>
+            <h2>Publicamos somente o que pode ser apresentado com responsabilidade.</h2>
+          </div>
+          <div>
+            <p>Antes de um perfil entrar no Guia Saúde, a equipe confere nome, profissão, cidade, registro quando aplicável, especialidade e ao menos um canal ou local profissional público. Fontes públicas e canais profissionais servem como referência; dados incompletos ficam fora da área pública até a revisão.</p>
+            <p>Profissionais também podem solicitar correções ou a atualização dos próprios dados pelo canal institucional do portal.</p>
+          </div>
+        </section>
+
         <section className="about-band">
           <div className="shell about-band-grid">
             <div>

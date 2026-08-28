@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen, Building2, MapPin, Search, Stethoscope } from "lucide-react";
 import { useEffect, useState } from "react";
-import { cities, organizations, professionals } from "@/lib/data";
+import { cities, organizations } from "@/lib/data";
+import { publicProfessionals } from "@/lib/public-professionals";
 import { citySlug } from "@/lib/city-utils";
 import { isCityAvailable } from "@/lib/cities";
 
@@ -30,7 +31,7 @@ export function CityGateway() {
 
   const cityQuery = selectedCity ? `?cidade=${encodeURIComponent(selectedCity)}` : "";
   const selectedSlug = selectedCity ? citySlug(selectedCity) : "";
-  const localProfessionals = selectedCity ? professionals.filter((item) => item.city === selectedCity).length : professionals.length;
+  const localProfessionals = selectedCity ? publicProfessionals.filter((item) => item.city === selectedCity).length : publicProfessionals.length;
   const localOrganizations = selectedCity ? organizations.filter((item) => item.city === selectedCity).length : organizations.length;
 
   return (

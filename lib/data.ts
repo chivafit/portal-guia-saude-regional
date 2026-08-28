@@ -17,6 +17,14 @@ export type Professional = {
   coverImageUrl?: string;
   logoUrl?: string;
   source?: string;
+  /** Dados editoriais internos. Nunca devem aparecer como selos técnicos na página pública. */
+  sourceUrls?: string[];
+  lastVerifiedAt?: string;
+  updatedAt?: string;
+  publicationStatus?: "draft" | "published" | "inactive" | "removed";
+  verificationStatus?: "public-source" | "official-source" | "direct-confirmation" | "needs-review";
+  commercialStatus?: "organic" | "partner" | "sponsored";
+  claimed?: boolean;
 };
 
 export type Organization = {
@@ -543,10 +551,20 @@ function notDemo(record: { slug: string; name: string; summary: string }) {
   return !isDemoRecord(record);
 }
 
+const professionalPublicationDefaults: Pick<Professional, "publicationStatus" | "verificationStatus" | "commercialStatus"> = {
+  // Nenhum dos registros importados possui confirmação oficial suficiente no
+  // conjunto atual. Eles são preservados para a equipe, mas não são públicos.
+  publicationStatus: "draft",
+  verificationStatus: "needs-review",
+  commercialStatus: "organic",
+};
+
 export const professionals: Professional[] = [...baseProfessionals, ...supplementalProfessionals, ...piumhiImportedProfessionals]
   .filter(notDemo)
   .map((professional) => ({
     ...professional,
+    ...professionalPublicationDefaults,
+    sourceUrls: professional.source ? [professional.source] : [],
     imageUrl: resolveProfessionalImage(professional.slug, professional.imageUrl),
   }));
 

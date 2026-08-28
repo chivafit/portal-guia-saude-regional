@@ -8,7 +8,8 @@ import { AdSlot } from "@/components/AdSlot";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { organizations, professions, professionals } from "@/lib/data";
+import { organizations, professions } from "@/lib/data";
+import { publicProfessionals } from "@/lib/public-professionals";
 import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { filterOrganizations, filterProfessionals } from "@/lib/search";
 import { categoryOptionsFor } from "@/lib/service-taxonomy";
@@ -42,7 +43,7 @@ function SearchDirectory() {
     | "servicos";
 
   const filters = { query: q, city, profession, specialty, category, type };
-  const professionalSource = professionals.filter((item) => item.city === "Piumhi");
+  const professionalSource = publicProfessionals;
   const organizationSource = organizations.filter((item) => item.city === "Piumhi");
   const hasProfessionalFocus = Boolean(profession || specialty);
 
@@ -331,10 +332,6 @@ function SearchDirectory() {
                             <p>{item.profession}</p>
                             <h2>{item.name}</h2>
                           </div>
-                          <span className={item.verified ? "status-pill verified" : "status-pill pending"}>
-                            {item.verified ? <BadgeCheck size={14} /> : <ShieldCheck size={14} />}
-                            {item.verified ? "Verificado" : "Cadastro em revisão"}
-                          </span>
                         </div>
                         <div className="doctor-pills">
                           <span><MapPin size={13} /> {item.city}</span>
@@ -343,7 +340,7 @@ function SearchDirectory() {
                         <p className="doctor-summary">{item.organization}</p>
                       </div>
                       <aside className="doctor-side">
-                        {contact ? <a className="direct-contact-btn" href={contact.href} target={contact.href.startsWith("http") ? "_blank" : undefined} rel={contact.href.startsWith("http") ? "noreferrer" : undefined}><Phone size={14} /> {contact.label}</a> : <span className="contact-pending">Contato em validação</span>}
+                        {contact ? <a className="direct-contact-btn" href={contact.href} target={contact.href.startsWith("http") ? "_blank" : undefined} rel={contact.href.startsWith("http") ? "noreferrer" : undefined}><Phone size={14} /> {contact.label}</a> : null}
                         <Link href={`/profissionais/${item.slug}`}>Ver perfil <ArrowUpRight size={14} /></Link>
                       </aside>
                     </article>;

@@ -3,7 +3,8 @@ import { ArrowRight, BadgeCheck, BookOpen, Building2, LayoutTemplate, MapPin, Me
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CommercialProposalForm } from "@/components/CommercialProposalForm";
-import { articleImage, articles, magazineEditions, podcasts, professionals } from "@/lib/data";
+import { articleImage, articles, magazineEditions, podcasts } from "@/lib/data";
+import { publicProfessionals } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
 import "./anuncie.css";
 
@@ -49,7 +50,7 @@ export default function AdvertisePage() {
           <div className="commercial-media-kit" aria-label="Exemplos de canais do Guia Saúde">
             <span className="commercial-media-kit-label">Exemplos do ecossistema</span>
             <div className="commercial-portal-demo"><Search size={16} /><span>Busca no Guia Saúde</span><b>Profissionais e serviços em Piumhi</b></div>
-            <div className="commercial-profile-demo"><BadgeCheck size={16} /><div><small>PERFIL NO GUIA</small><strong>{professionals[0]?.name}</strong><span>{professionals[0]?.specialty}</span></div></div>
+            <div className="commercial-profile-demo"><BadgeCheck size={16} /><div><small>PERFIL NO GUIA</small><strong>Informações profissionais</strong><span>Dados claros e canais de contato</span></div></div>
             {latestMagazine?.coverUrl && <img className="commercial-magazine-cover" src={latestMagazine.coverUrl} alt={`Capa da ${latestMagazine.number} edição da Revista Guia Saúde`} />}
             {featuredPodcast?.imageUrl && <img className="commercial-podcast-card" src={featuredPodcast.imageUrl} alt={`Episódio do Podcast Conexão Saúde com ${featuredPodcast.guest}`} />}
             {articleImage(featuredArticle) && <img className="commercial-article-card" src={articleImage(featuredArticle)} alt={`Matéria ${featuredArticle.title}`} />}
@@ -65,7 +66,7 @@ export default function AdvertisePage() {
         <article><Building2 size={27} /><h3>Sou empresa ou marca</h3><p>Quero divulgar uma campanha, produto, projeto, evento ou serviço relacionado à saúde e ao bem-estar.</p><span>Banner no portal · Conteúdo patrocinado · Apoio ao podcast · Publicidade na revista · Campanhas combinadas</span><a href="#formatos-marcas">Ver opções para marcas <ArrowRight size={15} /></a></article>
       </div></section>
 
-      <section className="shell commercial-value"><div className="commercial-section-heading"><p className="eyebrow">O Guia Saúde</p><h2>Um ecossistema regional de saúde e informação.</h2><p>Sua marca aparece durante a busca por profissionais, serviços e informações de saúde na cidade.</p></div><div className="commercial-fact-grid"><article><strong>{podcasts.length}</strong><span>episódios do Podcast Conexão Saúde</span></article><article><strong>{articles.length}</strong><span>matérias publicadas</span></article><article><strong>{magazineEditions.filter((edition) => edition.pdfUrl || edition.flipbook).length}</strong><span>edições digitalizadas da Revista Guia Saúde</span></article><article><strong>{professionals.length}</strong><span>perfis cadastrados no portal</span></article></div></section>
+      <section className="shell commercial-value"><div className="commercial-section-heading"><p className="eyebrow">O Guia Saúde</p><h2>Um ecossistema regional de saúde e informação.</h2><p>Sua marca aparece durante a busca por profissionais, serviços e informações de saúde na cidade.</p></div><div className="commercial-fact-grid"><article><strong>{podcasts.length}</strong><span>episódios do Podcast Conexão Saúde</span></article><article><strong>{articles.length}</strong><span>matérias publicadas</span></article><article><strong>{magazineEditions.filter((edition) => edition.pdfUrl || edition.flipbook).length}</strong><span>edições digitalizadas da Revista Guia Saúde</span></article><article><strong>{publicProfessionals.length}</strong><span>perfis publicados no portal</span></article></div></section>
 
       <section className="commercial-showcase"><div className="shell"><div className="commercial-section-heading"><p className="eyebrow">Veja como sua marca pode aparecer</p><h2>Formatos integrados ao conteúdo do Guia Saúde.</h2></div><div className="commercial-examples"><article><BadgeCheck size={23} /><div><small>PERFIL EM DESTAQUE</small><h3>Presença clara na busca</h3><p>O perfil aparece em posição de maior visibilidade, sempre identificado como destaque.</p><span>Indicado para profissionais, clínicas e serviços cadastrados.</span></div></article><article><LayoutTemplate size={23} /><div><small>BANNER NO PORTAL</small><h3>Campanha em posição selecionada</h3><p>Arte identificada como publicidade em áreas relacionadas ao Guia.</p><span>Pode apresentar campanha, serviço, evento ou marca.</span></div></article><article><Newspaper size={23} /><div><small>CONTEÚDO PATROCINADO</small><h3>Informação identificada com transparência</h3><p>Matérias e entrevistas em parceria recebem identificação editorial adequada.</p><span>Indicado para projetos e campanhas educativas.</span></div></article></div></div></section>
 

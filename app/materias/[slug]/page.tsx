@@ -4,7 +4,8 @@ import { ArrowRight, ArrowUpRight, Play } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { articles, articleImage, podcasts, professionals } from "@/lib/data";
+import { articles, articleImage, podcasts } from "@/lib/data";
+import { publicProfessionals } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -33,7 +34,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const cover = articleImage(article);
   const participatingProfessionalSlug = article.professionalSlug ?? episode?.professionalSlugs?.[0];
   const participatingProfessional = participatingProfessionalSlug
-    ? professionals.find((professional) => professional.slug === participatingProfessionalSlug)
+    ? publicProfessionals.find((professional) => professional.slug === participatingProfessionalSlug)
     : undefined;
 
   return (
@@ -71,7 +72,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <p key={index}>{paragraph}</p>
             ))}
 
-            {participatingProfessionalSlug ? (
+            {participatingProfessional ? (
               <Link className="article-inline-link" href={`/profissionais/${participatingProfessionalSlug}`}>
                 Ver o perfil de {article.author} no Guia <ArrowUpRight size={14} />
               </Link>

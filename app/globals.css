@@ -2587,6 +2587,7 @@ h1,h2,h3,
 @media(max-width:430px){.magazine-archive-grid{grid-template-columns:1fr}.archive-edition-cover{max-width:220px}}
 .direct-contact-btn,.profile-direct-contact{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 14px;border-radius:999px;background:var(--brand)!important;color:#fff!important;font-size:.72rem;font-weight:780;text-align:center}
 .profile-direct-contact{width:100%;margin-top:10px}.contact-pending{display:block;padding:10px 12px;border-radius:12px;background:#eef2f4;color:#687b87;font-size:.7rem;text-align:center}
+.profile-clean-update{display:flex;align-items:center;justify-content:space-between;gap:28px;margin-top:28px;padding:28px;border:1px solid var(--clinical-stroke,#dce7e6);border-radius:20px;background:#f8fbfa}.profile-clean-update h2{margin:0 0 8px;font-size:1.15rem}.profile-clean-update p{max-width:620px;margin:0;color:#667984;font-size:.88rem;line-height:1.55}.profile-clean-update>div:last-child{display:flex;flex-wrap:wrap;gap:10px}.profile-clean-update a{display:inline-flex;min-height:44px;align-items:center;justify-content:center;padding:0 16px;border:1px solid var(--clinical,#1f7770);border-radius:999px;color:var(--clinical,#1f7770);font-size:.78rem;font-weight:750}.profile-clean-update a:first-child{background:var(--clinical,#1f7770);color:#fff}@media(max-width:760px){.profile-clean-update{align-items:flex-start;flex-direction:column;padding:22px}.profile-clean-update>div:last-child,.profile-clean-update a{width:100%}}
 
 /* Redesign clínico · sistema visual azul-verde */
 :root{
