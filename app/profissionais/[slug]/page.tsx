@@ -59,7 +59,7 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
           <Breadcrumbs items={[
             { label: "Início", href: "/" },
             { label: item.city, href: "/" },
-            { label: "Profissionais", href: `/buscar?cidade=${encodeURIComponent(item.city)}&tipo=profissionais` },
+            { label: "Profissionais", href: `/buscar?cidade=${encodeURIComponent(item.city.toLowerCase())}&tipo=professionals` },
             { label: item.name },
           ]} />
           <Link href={`/buscar?cidade=${encodeURIComponent(item.city)}`} className="profile-clean-back">

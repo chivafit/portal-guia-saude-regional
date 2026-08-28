@@ -28,13 +28,13 @@ export function RootSpecialties({ specialties, city }: { specialties: string[]; 
         <div className="root-specialties-grid">
           {specialties.map((specialty) => {
             const Icon = icons[specialty] ?? Stethoscope;
-            return <Link key={specialty} href={`/buscar?cidade=${cityParam}&especialidade=${encodeURIComponent(specialty)}&tipo=profissionais`}>
+            return <Link key={specialty} href={`/buscar?cidade=${cityParam.toLowerCase()}&especialidade=${encodeURIComponent(specialty)}&tipo=professionals`}>
               <span className="root-specialty-icon"><Icon size={26} strokeWidth={1.8} /></span>
               <span>{specialty}</span>
             </Link>;
           })}
         </div>
-        <Link className="root-specialties-more" href={`/buscar?cidade=${cityParam}&tipo=profissionais`}>Ver todas as especialidades <ArrowRight size={15} /></Link>
+        <Link className="root-specialties-more" href={`/buscar?cidade=${cityParam.toLowerCase()}&tipo=professionals`}>Ver todas as especialidades <ArrowRight size={15} /></Link>
       </div>
     </section>
   );

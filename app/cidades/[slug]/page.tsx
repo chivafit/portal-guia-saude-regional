@@ -50,7 +50,7 @@ export default async function CityPage({ params, rootLanding = false }: { params
         .filter(Boolean),
     ),
   ).sort((a, b) => a.localeCompare(b, "pt-BR"));
-  const cityQuery = encodeURIComponent(city.name);
+  const cityQuery = encodeURIComponent(city.name.toLowerCase());
   // A página da cidade deve orientar a busca, não virar uma nuvem interminável de filtros.
   const prioritySpecialties = ["Cardiologia", "Clínica Médica", "Dermatologia", "Endocrinologia", "Ginecologia e Obstetrícia", "Neurologia", "Oftalmologia", "Ortopedia e Traumatologia", "Otorrinolaringologia", "Pediatria", "Psiquiatria", "Urologia"];
   const discoverySpecialties = prioritySpecialties.filter((specialty) => localSpecialties.includes(specialty)).slice(0, 12);
@@ -81,11 +81,11 @@ export default async function CityPage({ params, rootLanding = false }: { params
     : null;
   const serviceCategories = categoryOptionsFor(localOrganizations);
   const quickSearches = [
-    { label: "Médicos", href: `/buscar?cidade=${cityQuery}&profissao=M%C3%A9dico&tipo=profissionais` },
-    { label: "Dentistas", href: `/buscar?cidade=${cityQuery}&profissao=Dentista&tipo=profissionais` },
-    { label: "Psicólogos", href: `/buscar?cidade=${cityQuery}&profissao=Psic%C3%B3logo&tipo=profissionais` },
-    { label: "Cardiologistas", href: `/buscar?cidade=${cityQuery}&especialidade=Cardiologia&tipo=profissionais` },
-    { label: "Fisioterapeutas", href: `/buscar?cidade=${cityQuery}&profissao=Fisioterapeuta&tipo=profissionais` },
+    { label: "Médicos", href: `/buscar?cidade=${cityQuery}&profissao=M%C3%A9dico&tipo=professionals` },
+    { label: "Dentistas", href: `/buscar?cidade=${cityQuery}&profissao=Dentista&tipo=professionals` },
+    { label: "Psicólogos", href: `/buscar?cidade=${cityQuery}&profissao=Psic%C3%B3logo&tipo=professionals` },
+    { label: "Cardiologistas", href: `/buscar?cidade=${cityQuery}&especialidade=Cardiologia&tipo=professionals` },
+    { label: "Fisioterapeutas", href: `/buscar?cidade=${cityQuery}&profissao=Fisioterapeuta&tipo=professionals` },
     { label: "Clínicas", href: `/buscar?cidade=${cityQuery}&categoria=clinicas&tipo=services` },
     { label: "Hospitais e diagnóstico", href: `/buscar?cidade=${cityQuery}&categoria=hospitais&tipo=services` },
   ];
@@ -102,7 +102,7 @@ export default async function CityPage({ params, rootLanding = false }: { params
               <h1>Encontre profissionais de saúde perto de você</h1>
               <p>Pesquise por nome, profissão, especialidade, clínica ou serviço e encontre informações de saúde na sua região.</p>
               <RootGuideSearch professions={professions} categories={serviceCategories} />
-              <div className="root-guide-quick-searches"><span>Buscas mais procuradas:</span>{quickSearches.map((search) => <Link key={search.label} href={search.href}>{search.label}</Link>)}</div>
+              <div className="root-guide-quick-searches"><span>Buscas rápidas:</span>{quickSearches.map((search) => <Link key={search.label} href={search.href}>{search.label}</Link>)}</div>
               <p className="root-guide-trust">Informações, endereço e formas de contato reunidos para facilitar sua busca.</p>
             </div>
           </section>
@@ -157,20 +157,20 @@ export default async function CityPage({ params, rootLanding = false }: { params
         {!rootLanding ? <section className="shell city-discovery" aria-label="Atalhos para atendimento">
           <div className="city-discovery-head">
             <div><p className="eyebrow">Atendimento em Piumhi</p><h2>Escolha o tipo de profissional</h2><p>Selecione uma categoria para encontrar atendimento em Piumhi.</p></div>
-            <Link href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>Ver todos os profissionais <ArrowRight size={14} /></Link>
+            <Link href={`/buscar?cidade=${cityQuery}&tipo=professionals`}>Ver todos os profissionais <ArrowRight size={14} /></Link>
           </div>
           <nav className="city-category-row" aria-label="Categorias profissionais">
             {professions.map((profession) => (
-              <Link key={profession} href={`/buscar?cidade=${cityQuery}&profissao=${encodeURIComponent(profession)}&tipo=profissionais`}>
+              <Link key={profession} href={`/buscar?cidade=${cityQuery}&profissao=${encodeURIComponent(profession)}&tipo=professionals`}>
                 <ProfessionIcon profession={profession} size={19} /><span>{({ "Médico": "Médicos", "Dentista": "Dentistas", "Psicólogo": "Psicólogos", "Fisioterapeuta": "Fisioterapeutas", "Nutricionista": "Nutricionistas", "Fonoaudiólogo": "Fonoaudiólogos", "Enfermeiro": "Enfermeiros", "Farmacêutico": "Farmacêuticos", "Educador físico": "Educadores físicos" } as Record<string, string>)[profession] ?? profession}</span>
               </Link>
             ))}
           </nav>
           {!rootLanding && compactSpecialties.length ? (
             <div className="city-specialties">
-              <div className="city-specialties-heading"><h3>Especialidades médicas mais buscadas</h3><Link className="city-specialties-all" href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>Ver todas as especialidades <ArrowRight size={13}/></Link></div>
+              <div className="city-specialties-heading"><h3>Especialidades médicas mais buscadas</h3><Link className="city-specialties-all" href={`/buscar?cidade=${cityQuery}&tipo=professionals`}>Ver todas as especialidades <ArrowRight size={13}/></Link></div>
               {compactSpecialties.map((specialty) => (
-                <Link key={specialty} href={`/buscar?cidade=${cityQuery}&especialidade=${encodeURIComponent(specialty)}&tipo=profissionais`}>{specialty}</Link>
+                <Link key={specialty} href={`/buscar?cidade=${cityQuery}&especialidade=${encodeURIComponent(specialty)}&tipo=professionals`}>{specialty}</Link>
               ))}
             </div>
           ) : null}
@@ -236,7 +236,7 @@ export default async function CityPage({ params, rootLanding = false }: { params
                 </div>
               )}
 
-              <Link className="city-list-all" href={`/buscar?cidade=${cityQuery}&tipo=profissionais`}>
+              <Link className="city-list-all" href={`/buscar?cidade=${cityQuery}&tipo=professionals`}>
                 Ver todos os profissionais <ArrowRight size={14} />
               </Link>
 
@@ -294,8 +294,8 @@ export default async function CityPage({ params, rootLanding = false }: { params
           <section className="city-local-partners" aria-labelledby="city-partners-title">
             <div><p className="eyebrow">Parceiros e serviços locais</p><h2 id="city-partners-title">Serviços que também fazem parte da cidade</h2></div>
             <div className="city-partner-grid">
-              {commercialPharmacy ? <article><span>Patrocinado</span><Pill size={19}/><strong>{commercialPharmacy.name}</strong><p>{commercialPharmacy.address}</p><Link href={commercialPharmacy.mapUrl} target={commercialPharmacy.mapUrl.startsWith("http") ? "_blank" : undefined}>Ver localização <ArrowRight size={13}/></Link></article> : null}
-              {commercialOptical ? <article><span>Patrocinado</span><Glasses size={19}/><strong>{commercialOptical.name}</strong><p>{commercialOptical.address}</p><Link href={commercialOptical.mapUrl} target="_blank">Ver localização <ArrowRight size={13}/></Link></article> : null}
+              {commercialPharmacy ? <article><span>Serviços locais em destaque</span><Pill size={19}/><strong>{commercialPharmacy.name}</strong><p>{commercialPharmacy.address}</p><Link href={commercialPharmacy.mapUrl} target={commercialPharmacy.mapUrl.startsWith("http") ? "_blank" : undefined}>Ver localização <ArrowRight size={13}/></Link></article> : null}
+              {commercialOptical ? <article><span>Serviços locais em destaque</span><Glasses size={19}/><strong>{commercialOptical.name}</strong><p>{commercialOptical.address}</p><Link href={commercialOptical.mapUrl} target="_blank">Ver localização <ArrowRight size={13}/></Link></article> : null}
               <Link href="/anuncie" className="city-partner-cta"><Megaphone size={19}/><strong>Quer aparecer no Guia Saúde?</strong><p>Mostre sua marca para quem procura atendimento em {city.name}.</p><em>Conhecer opções <ArrowRight size={13}/></em></Link>
             </div>
           </section>

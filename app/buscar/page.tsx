@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, ShieldCheck, SlidersHorizontal, Stethoscope, X } from "lucide-react";
-import { AdSlot } from "@/components/AdSlot";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -13,7 +12,6 @@ import { publicProfessionals } from "@/lib/public-professionals";
 import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { filterOrganizations, filterProfessionals } from "@/lib/search";
 import { categoryOptionsFor } from "@/lib/service-taxonomy";
-import { cityAdCode } from "@/lib/city-utils";
 import { ResponsiveFilterDisclosure } from "@/components/ResponsiveFilterDisclosure";
 
 function param(value: string | null): string {
@@ -26,6 +24,16 @@ function directContact(whatsapp?: string, phone?: string) {
   const phoneDigits = (phone ?? "").replace(/\D/g, "");
   if (phoneDigits.length >= 10) return { href: `tel:+55${phoneDigits}`, label: "Ligar" };
   return null;
+}
+
+const PAGE_SIZE = 18;
+function publicAddress(address?: string) {
+  return address && !/endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(address) ? address : "";
+}
+function professionLabel(item: { profession: string; name: string }) {
+  if (/^Dra\.?\s/i.test(item.name)) return item.profession === "Médico" ? "Médica" : item.profession;
+  if (/^Dr\.?\s/i.test(item.name)) return item.profession;
+  return ({ "Médico": "Medicina", "Psicólogo": "Psicologia", "Fonoaudiólogo": "Fonoaudiologia", "Enfermeiro": "Enfermagem", "Educador físico": "Educação Física" } as Record<string, string>)[item.profession] ?? item.profession;
 }
 
 function SearchDirectory() {
@@ -42,6 +50,8 @@ function SearchDirectory() {
     | "profissionais"
     | "servicos";
 
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const loadMoreRef = useRef<HTMLButtonElement>(null);
   const filters = { query: q, city, profession, specialty, category, type };
   const professionalSource = publicProfessionals;
   const organizationSource = organizations.filter((item) => item.city === "Piumhi");
@@ -76,6 +86,10 @@ function SearchDirectory() {
   // diretório completo de Piumhi — não esconder os resultados em um atalho.
   const showProfessionChooser = false;
   const showCategoryChooser = type === "servicos" && !category && !q && categoryChoices.length > 0;
+  useEffect(() => setVisibleCount(PAGE_SIZE), [q, city, profession, specialty, category, type]);
+  const visibleProfessionals = professionalResults.slice(0, visibleCount);
+  const visibleOrganizations = organizationResults.slice(0, visibleCount);
+  const resultLabel = (count: number, noun: string) => `${count} ${noun}${count === 1 ? "" : "s"} encontrado${count === 1 ? "" : "s"}`;
 
   const activeFilters = [
     q && { label: `Busca: ${q}`, key: "q" },
@@ -93,10 +107,10 @@ function SearchDirectory() {
   function tabHref(value: string) {
     const search = new URLSearchParams();
     if (q) search.set("q", q);
-    if (city) search.set("cidade", city);
-    if (profession) search.set("profissao", profession);
-    if (specialty) search.set("especialidade", specialty);
-    if (category) search.set("categoria", category);
+    if (city) search.set("cidade", city.toLowerCase());
+    if (value !== "servicos" && profession) search.set("profissao", profession);
+    if (value !== "servicos" && specialty) search.set("especialidade", specialty);
+    if (value !== "profissionais" && category) search.set("categoria", category);
     if (value !== "todos") search.set("tipo", value === "servicos" ? "services" : "professionals");
     const query = search.toString();
     return query ? `/buscar?${query}` : "/buscar";
@@ -105,7 +119,7 @@ function SearchDirectory() {
   function removeFilterHref(key: string) {
     const search = new URLSearchParams();
     if (q && key !== "q") search.set("q", q);
-    if (city) search.set("cidade", city);
+    if (city) search.set("cidade", city.toLowerCase());
     if (profession && key !== "profissao") search.set("profissao", profession);
     if (specialty && key !== "especialidade" && key !== "profissao") search.set("especialidade", specialty);
     if (category && key !== "categoria") search.set("categoria", category);
@@ -117,7 +131,7 @@ function SearchDirectory() {
 
   function choiceHref(kind: "profissao" | "categoria", value: string) {
     const search = new URLSearchParams();
-    if (city) search.set("cidade", city);
+    if (city) search.set("cidade", city.toLowerCase());
     search.set(kind, value);
     search.set("tipo", kind === "profissao" ? "professionals" : "services");
     return `/buscar?${search.toString()}`;
@@ -148,24 +162,24 @@ function SearchDirectory() {
               <div className="filter-panel">
               <form action="/buscar">
               <label>
-                Especialidade, nome, exame ou serviço
-                <input name="q" defaultValue={q} placeholder="Ex.: cardiologia, laboratório" />
+                {type === "servicos" ? "Nome da empresa ou serviço" : "Nome, profissão ou especialidade"}
+                <input name="q" defaultValue={q} placeholder={type === "servicos" ? "Ex.: clínica, laboratório" : "Ex.: cardiologia, Dra. Ana"} />
               </label>
               <label>
                 Cidade
                 <select name="cidade" defaultValue={city}>
                   <option value="">Selecione</option>
-                  <option value="Piumhi">Piumhi</option>
+                  <option value="piumhi">Piumhi</option>
                 </select>
               </label>
-              <label>
+              {type !== "servicos" ? <label>
                 Categoria profissional
                 <select name="profissao" defaultValue={profession}>
                   <option value="">Todas as categorias</option>
                   {professions.map((item) => <option key={item}>{item}</option>)}
                 </select>
-              </label>
-              <label>
+              </label> : null}
+              {type !== "servicos" ? <label>
                 Especialidade
                 <select name="especialidade" defaultValue={specialty}>
                   <option value="">Todas as especialidades</option>
@@ -176,14 +190,14 @@ function SearchDirectory() {
                     ? `Especialidades de ${profession.toLowerCase()}`
                     : "Escolha Médico ou Dentista acima para reduzir esta lista"}
                 </small>
-              </label>
-              <label>
+              </label> : null}
+              {type !== "profissionais" ? <label>
                 Tipo de empresa
                 <select name="categoria" defaultValue={category}>
                   <option value="">Todas as empresas</option>
                   {serviceCategoryOptions.map((item) => <option key={item.key} value={item.key}>{item.label}</option>)}
                 </select>
-              </label>
+              </label> : null}
               {type !== "todos" ? <input type="hidden" name="tipo" value={type === "servicos" ? "services" : "professionals"} /> : null}
               <button type="submit">Aplicar filtros</button>
               </form>
@@ -196,11 +210,9 @@ function SearchDirectory() {
           </aside>
 
           <div className="results directory-results">
-            <AdSlot code={city ? cityAdCode(city) : "DIRECTORY_TOP"} compact />
-
-            <div className="search-type-tabs">
+            <div className="search-type-tabs" role="tablist" aria-label="Modalidade de busca">
               {typeTabs.map((tab) => (
-                <Link key={tab.value} href={tabHref(tab.value)} className={type === tab.value ? "active" : ""}>
+                <Link key={tab.value} href={tabHref(tab.value)} className={type === tab.value ? "active" : ""} role="tab" aria-selected={type === tab.value} aria-controls="search-results">
                   {tab.label}
                 </Link>
               ))}
@@ -307,13 +319,15 @@ function SearchDirectory() {
               </section>
             ) : null}
 
+            <div id="search-results" aria-live="polite" className="search-result-announcement">{!showDirectoryLanding && !showCategoryChooser ? resultLabel(type === "servicos" ? organizationResults.length : type === "profissionais" ? professionalResults.length : total, type === "servicos" ? "serviço" : type === "profissionais" ? "profissional" : "resultado") : null}</div>
             {!showDirectoryLanding && !showProfessionChooser && !showCategoryChooser && total === 0 ? (
               <div className="empty-state">
-                <h2>Nenhum resultado encontrado</h2>
-                <p>Tente buscar em todas as cidades, usar um termo mais amplo ou limpar os filtros selecionados.</p>
+                <h2>{type === "servicos" ? "Nenhum serviço encontrado" : "Nenhum profissional encontrado"}</h2>
+                <p>{type === "servicos" ? "Tente remover algum filtro ou buscar por outra clínica, empresa ou categoria." : "Tente remover algum filtro ou buscar por outro nome, profissão ou especialidade."}</p>
                 <div className="empty-state-actions">
                   <Link href="/buscar">Limpar filtros</Link>
-                  <Link href="/inclusao">Indicar um profissional</Link>
+                  <Link href={type === "servicos" ? "/buscar?cidade=piumhi&tipo=services" : "/buscar?cidade=piumhi&tipo=professionals"}>{type === "servicos" ? "Ver todos os serviços" : "Ver todos os profissionais"}</Link>
+                  <Link href={type === "servicos" ? "/inclusao?tipo=organization" : "/inclusao"}>{type === "servicos" ? "Solicitar inclusão" : "Indicar um profissional"}</Link>
                 </div>
               </div>
             ) : null}
@@ -322,7 +336,7 @@ function SearchDirectory() {
               <>
                 {type === "todos" ? <h3 className="results-group-title">Profissionais</h3> : null}
                 <div className="doctor-card-list">
-                  {professionalResults.map((item) => {
+                  {visibleProfessionals.map((item) => {
                     const contact = directContact(item.whatsapp, item.phone);
                     return <article className="doctor-card" key={item.slug}>
                       <div className="doctor-avatar doctor-profession-icon" aria-hidden="true">
@@ -331,7 +345,7 @@ function SearchDirectory() {
                       <div className="doctor-main">
                         <div className="doctor-card-head">
                           <div>
-                            <p>{item.profession}</p>
+                            <p>{professionLabel(item)}</p>
                             <h2>{item.name}</h2>
                           </div>
                         </div>
@@ -348,6 +362,7 @@ function SearchDirectory() {
                     </article>;
                   })}
                 </div>
+                {professionalResults.length > visibleProfessionals.length ? <button ref={loadMoreRef} type="button" className="load-more-results" onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}>Carregar mais profissionais</button> : null}
               </>
             ) : null}
 
@@ -355,7 +370,7 @@ function SearchDirectory() {
               <>
                 {type === "todos" ? <h3 className="results-group-title">Clínicas e serviços</h3> : null}
                 <div className="business-card-list">
-                  {organizationResults.map((item) => {
+                  {visibleOrganizations.map((item) => {
                     const contact = directContact(undefined, item.phone);
                     return <article className="business-card" key={item.slug}>
                       <div
@@ -373,7 +388,7 @@ function SearchDirectory() {
                         </div>
                         <div className="doctor-pills">
                           <span><MapPin size={13} /> {item.city}</span>
-                          <span>{item.address}</span>
+                          {publicAddress(item.address) ? <span>{publicAddress(item.address)}</span> : null}
                         </div>
                         <p className="doctor-summary">{item.services.slice(0, 2).join(" · ")}</p>
                       </div>
@@ -385,6 +400,7 @@ function SearchDirectory() {
                     </article>;
                   })}
                 </div>
+                {organizationResults.length > visibleOrganizations.length ? <button type="button" className="load-more-results" onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}>Carregar mais serviços</button> : null}
                 <div className="directory-inclusion-call">
                   <p>Seu estabelecimento ainda não aparece no Guia Saúde?</p>
                   <Link href="/inclusao?tipo=organization">Solicitar inclusão <ArrowUpRight size={14} /></Link>
@@ -401,7 +417,7 @@ function SearchDirectory() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={<main className="section shell"><p>Carregando busca…</p></main>}>
+    <Suspense fallback={<main className="section shell" aria-live="polite"><div className="search-loading">Carregando busca…</div></main>}>
       <SearchDirectory />
     </Suspense>
   );

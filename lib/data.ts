@@ -854,11 +854,8 @@ export const professions = ["Médico", "Dentista", "Psicólogo", "Fisioterapeuta
 // Logos das empresas apoiadoras exibidas nas páginas.
 // EXEMPLOS (public/supporters/*.png, fundo transparente). Troque pelos PNGs
 // reais das empresas — basta adicionar o arquivo e a entrada aqui.
-export const supporters = [
-  { name: "Farmácia (exemplo)", logo: "/supporters/empresa-farmacia.png" },
-  { name: "Clínica (exemplo)", logo: "/supporters/empresa-clinica.png" },
-  { name: "Laboratório (exemplo)", logo: "/supporters/empresa-laboratorio.png" },
-];
+// Sem apoiadores comerciais confirmados, a faixa permanece inativa na produção.
+export const supporters: { name: string; logo: string }[] = [];
 
 export type Article = {
   slug: string;
