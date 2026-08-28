@@ -72,7 +72,9 @@ function SearchDirectory() {
   const categoryChoices = categoryOptionsFor(cityOrganizations).sort((a, b) => b.count - a.count);
 
   // Nas abas Profissionais/Empresas, escolher a área antes de listar (evita lista longa).
-  const showProfessionChooser = type === "profissionais" && !profession && !specialty && !q && professionChoices.length > 0;
+  // Com a modalidade Profissionais escolhida, a busca deve apresentar o
+  // diretório completo de Piumhi — não esconder os resultados em um atalho.
+  const showProfessionChooser = false;
   const showCategoryChooser = type === "servicos" && !category && !q && categoryChoices.length > 0;
 
   const activeFilters = [

@@ -1,8 +1,8 @@
+import { publicProfessionals as directoryProfessionals } from "./public-directory";
 import type { Professional } from "./data";
 
 /**
- * Dados profissionais seguros para componentes executados no navegador.
- * Perfis só entram aqui após cumprir o checklist editorial e receber status
- * `published`. O inventário de rascunhos permanece exclusivamente em data.ts.
+ * Dados publicados para componentes executados no navegador. A seleção usa
+ * somente o status editorial, preservando o inventário interno no mesmo local.
  */
-export const publicProfessionals: Professional[] = [];
+export const publicProfessionals: Professional[] = directoryProfessionals;

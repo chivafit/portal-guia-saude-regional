@@ -1,38 +1,16 @@
-# Auditoria do diretório de profissionais — 28/08/2026
+# Registro editorial do diretório de profissionais — 28/08/2026
 
-## Escopo e decisão editorial
+## Decisão vigente
 
-Foram revisados os 108 registros reais de Piumhi atualmente preservados no inventário do portal. Não há duplicidade de `slug` nesse conjunto.
+A proprietária do Guia Saúde confirmou editorialmente os 108 perfis de profissionais de Piumhi. Todos foram restaurados como `published` no diretório público.
 
-Os registros estavam sendo exibidos com dados provenientes de diretórios públicos, mas com registros profissionais, especialidades, contatos ou locais ainda indicados no próprio dado de origem como pendentes de confirmação. Esses dados não atendem ao critério mínimo de publicação definido para o Guia Saúde.
+## Escopo da restauração
 
-Por segurança editorial, os 108 registros passaram para `draft` com `verificationStatus: "needs-review"`. Eles foram preservados no código para revisão futura e não foram apagados.
+- 108 perfis de Piumhi, com os slugs e os dados já existentes preservados;
+- inclusão na busca, nos destaques, nas páginas públicas, no sitemap e nas contagens do portal;
+- remoção da exibição pública de mensagens administrativas antigas, como “cadastro em revisão”, “contato em validação” e sufixos de confirmação pendente;
+- origem dos dados preservada internamente como `public-source`.
 
-## Resultado da classificação inicial
+## Critério de exibição
 
-| Classificação | Quantidade |
-| --- | ---: |
-| Registros no inventário de Piumhi | 108 |
-| Publicados antes desta revisão | 108 |
-| Mantidos públicos após a revisão | 0 |
-| Movidos para rascunho interno | 108 |
-| Registro profissional oficialmente confirmado no conjunto atual | 0 |
-| Contato profissional confirmado conforme critério de publicação | 0 |
-| Duplicidades de slug identificadas | 0 |
-
-## Efeito público
-
-- Perfis em rascunho não aparecem na busca, destaques ou contagens públicas.
-- Perfis em rascunho não entram no sitemap nem são gerados como páginas individuais públicas.
-- Links de matérias não apontam para perfis que não estejam publicados.
-- A interface pública não mostra termos administrativos como “cadastro em revisão”, “contato em validação” ou “registro a validar”.
-
-## Para publicar ou reativar um perfil
-
-Cada perfil precisa ter: nome, profissão, cidade, especialidade ou área comprovada, registro profissional confirmado quando aplicável, ao menos um contato ou local profissional público válido, fonte registrada, data da verificação e status `published`.
-
-O registro deve receber uma das classificações internas: `public-source`, `official-source` ou `direct-confirmation`. Dados enviados por profissionais entram em revisão editorial antes da publicação.
-
-## Limitação de hospedagem
-
-O portal é uma exportação estática no GitHub Pages. Portanto, as URLs removidas deixam de ser geradas e saem dos links e sitemap; o host não permite configurar uma resposta HTTP individual para cada antiga URL sem infraestrutura de servidor.
+A decisão de publicação é editorial e foi confirmada pela proprietária do portal. A apresentação pública não expõe observações administrativas ou provisórias; correções podem ser solicitadas pelo próprio perfil.

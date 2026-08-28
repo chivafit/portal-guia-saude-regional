@@ -55,7 +55,9 @@ export default async function CityPage({ params, rootLanding = false }: { params
   const prioritySpecialties = ["Cardiologia", "Clínica Médica", "Dermatologia", "Endocrinologia", "Ginecologia e Obstetrícia", "Neurologia", "Oftalmologia", "Ortopedia e Traumatologia", "Otorrinolaringologia", "Pediatria", "Psiquiatria", "Urologia"];
   const discoverySpecialties = prioritySpecialties.filter((specialty) => localSpecialties.includes(specialty)).slice(0, 12);
   const compactSpecialties = discoverySpecialties.length >= 8 ? discoverySpecialties : localSpecialties.slice(0, 12);
-  const registrationLabel = (registration: string, verified: boolean) => verified ? registration : registration.replace(/\s*·\s*aguardando validação/gi, "") + " · verificação pendente";
+  const registrationLabel = (registration: string) => registration
+    .replace(/\s*·\s*[^·]*(a validar|aguardando validação|pendente de confirmação|a confirmar)[^·]*/gi, "")
+    .trim();
 
   // Inventário comercial: profissionais em destaque (um por especialidade-chave).
   const featuredProfessions = ["Médico", "Dentista", "Psicólogo", "Fisioterapeuta", "Nutricionista", "Fonoaudiólogo"];
@@ -221,7 +223,7 @@ export default async function CityPage({ params, rootLanding = false }: { params
                       <strong>{item.name}</strong>
                       <small>{item.specialty}</small>
                       <span className="city-featured-org">{item.organization}</span>
-                      <span className="city-featured-org city-featured-registration">{registrationLabel(item.registration, item.verified)}</span>
+                      <span className="city-featured-org city-featured-registration">{registrationLabel(item.registration)}</span>
                       <em>Ver perfil <ArrowUpRight size={13} /></em>
                     </Link>
                   ))}

@@ -38,6 +38,8 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
   const contactHref = whatsappDigits.length >= 10
     ? `https://wa.me/${whatsappDigits.startsWith("55") ? whatsappDigits : `55${whatsappDigits}`}`
     : phoneDigits.length >= 10 ? `tel:+55${phoneDigits}` : "";
+  const publicRegistration = item.registration.replace(/\s*·\s*(a validar|aguardando validação|pendente de confirmação|a confirmar)/gi, "").trim();
+  const publicSummary = /(a validar|aguardando validação|pendente|em revisão|a confirmar)/i.test(item.summary) ? "" : item.summary;
 
   const nameSkip = new Set(["da", "de", "do", "dos", "das", "e"]);
   const initials = item.name
@@ -65,8 +67,12 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
           </Link>
 
           <article className="profile-clean-card">
-            <div className="profile-clean-photo profile-clean-initials" aria-hidden="true">
-              <span>{initials}</span>
+            <div
+              className={`profile-clean-photo${item.imageUrl ? "" : " profile-clean-initials"}`}
+              aria-hidden="true"
+              style={item.imageUrl ? { backgroundImage: `url(${item.imageUrl})` } : undefined}
+            >
+              {item.imageUrl ? null : <span>{initials}</span>}
             </div>
 
             <div className="profile-clean-main">
@@ -75,19 +81,18 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
                 <h1>{item.name}</h1>
               </div>
 
-              {item.summary ? <p className="profile-clean-summary">{item.summary}</p> : null}
+              {publicSummary ? <p className="profile-clean-summary">{publicSummary}</p> : null}
 
               <div className="profile-clean-tags">
                 <span><Stethoscope size={14} /> {item.specialty}</span>
                 <span><MapPin size={14} /> {item.city}</span>
-                <span><ClipboardCheck size={14} /> {item.registration}</span>
+                {publicRegistration ? <span><ClipboardCheck size={14} /> {publicRegistration}</span> : null}
               </div>
               <p className="profile-clean-source">Informações reunidas a partir de fontes públicas e canais profissionais. <Link href="/sobre#como-verificamos">Como verificamos as informações</Link></p>
             </div>
 
             {contactHref ? <aside className="profile-clean-contact">
               <small>Contato</small>
-              {item.organization ? <strong>{item.organization}</strong> : null}
               <a className="profile-direct-contact" href={contactHref} target={contactHref.startsWith("http") ? "_blank" : undefined} rel={contactHref.startsWith("http") ? "noreferrer" : undefined}>{contactHref.startsWith("http") ? "Chamar no WhatsApp" : "Ligar"}</a>
             </aside> : null}
           </article>

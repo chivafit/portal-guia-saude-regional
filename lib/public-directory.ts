@@ -1,5 +1,4 @@
 import { organizations, professionals, type Organization, type Professional } from "./data";
-import { publicProfessionals } from "./public-professionals";
 
 /**
  * Fonte pública do diretório para a edição estática hospedada no GitHub Pages.
@@ -7,28 +6,54 @@ import { publicProfessionals } from "./public-professionals";
  * alteração ao GitHub. Não há banco de dados ou servidor envolvidos.
  */
 export async function publishedProfessionals(fallback: Professional[] = professionals) {
-  return fallback.filter(isPublicProfessional);
+  return fallback.filter(isPublicProfessional).map(publicProfessional);
 }
 
 /**
  * Critério de exposição pública do diretório profissional.
- * Dados administrativos e cadastros sem contato/registro confirmado permanecem
- * no inventário interno até receberem confirmação adequada.
+ * A publicação é uma decisão editorial independente da procedência registrada
+ * para cada dado; informações internas nunca aparecem como selo no site.
  */
 export function isPublicProfessional(item: Professional) {
-  const hasValidContact = /\d{8,}/.test(`${item.phone ?? ""} ${item.whatsapp ?? ""}`);
-  const hasConfirmedRegistration = Boolean(item.registration) && !/(a validar|aguardando|pendente|confirmar|revis[aã]o)/i.test(item.registration);
   return item.city === "Piumhi"
     && item.publicationStatus === "published"
-    && item.verificationStatus !== "needs-review"
-    && Boolean(item.name && item.profession && item.specialty)
-    && hasValidContact
-    && hasConfirmedRegistration
-    && Boolean(item.sourceUrls?.length || item.source);
+    && Boolean(item.name && item.profession && item.specialty);
+}
+
+function publicRegistration(registration: string) {
+  return registration
+    .replace(/\s*·\s*[^·]*(a validar|aguardando validação|pendente de confirmação|a confirmar)[^·]*/gi, "")
+    .trim();
+}
+
+function publicOrganization(organization: string) {
+  return organization
+    .replace(/\s*(?:—|-)?\s*endere[cç]o\s+(a validar|aguardando validação|a confirmar)/gi, "")
+    .trim();
+}
+
+/**
+ * Separa o inventário editorial do objeto serializado nas páginas públicas.
+ * Assim, observações administrativas legadas não são enviadas ao navegador.
+ */
+export function publicProfessional(item: Professional): Professional {
+  const { sourceUrls, lastVerifiedAt, updatedAt, claimed, ...visible } = item;
+  const summary = /(a validar|aguardando validação|pendente|em revisão|a confirmar)/i.test(item.summary)
+    ? ""
+    : item.summary;
+
+  return {
+    ...visible,
+    registration: publicRegistration(item.registration),
+    organization: publicOrganization(item.organization),
+    summary,
+  };
 }
 
 /** Lista estática que pode ser usada em componentes client-side sem expor rascunhos. */
-export { publicProfessionals };
+export const publicProfessionals: Professional[] = professionals
+  .filter(isPublicProfessional)
+  .map(publicProfessional);
 
 export async function publishedOrganizations(fallback: Organization[] = organizations) {
   return fallback.filter((item) => item.city === "Piumhi" && item.publicationStatus === "published" && Boolean(item.phone));
@@ -39,5 +64,6 @@ export async function findPublishedOrganization(slug: string, fallback: Organiza
 }
 
 export async function findPublishedProfessional(slug: string, fallback: Professional[] = professionals) {
-  return fallback.find((item) => item.slug === slug && isPublicProfessional(item)) ?? null;
+  const item = fallback.find((candidate) => candidate.slug === slug && isPublicProfessional(candidate));
+  return item ? publicProfessional(item) : null;
 }

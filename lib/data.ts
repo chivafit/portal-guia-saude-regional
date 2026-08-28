@@ -552,10 +552,10 @@ function notDemo(record: { slug: string; name: string; summary: string }) {
 }
 
 const professionalPublicationDefaults: Pick<Professional, "publicationStatus" | "verificationStatus" | "commercialStatus"> = {
-  // Nenhum dos registros importados possui confirmação oficial suficiente no
-  // conjunto atual. Eles são preservados para a equipe, mas não são públicos.
-  publicationStatus: "draft",
-  verificationStatus: "needs-review",
+  // A proprietária do Guia Saúde confirmou editorialmente os cadastros de
+  // Piumhi. A procedência original continua registrada como fonte pública.
+  publicationStatus: "published",
+  verificationStatus: "public-source",
   commercialStatus: "organic",
 };
 
