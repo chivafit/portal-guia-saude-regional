@@ -2,8 +2,6 @@ import Link from "next/link";
 import { BookOpen, Building2, MapPin } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { cities } from "@/lib/data";
-import { isCityAvailable } from "@/lib/cities";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -84,20 +82,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="shell content-section about-cities">
-          <div>
-            <p className="eyebrow">Cidades prioritárias</p>
-            <h2>Atuação regional com páginas locais.</h2>
-          </div>
-          <div className="about-city-grid">
-            {cities.map((city) => (
-              isCityAvailable(city) ? <Link key={city} href="/">
-                {city}
-                <span>Ver cidade →</span>
-              </Link> : <div key={city} className="city-coming-soon" aria-disabled="true">{city}<span>EM BREVE</span></div>
-            ))}
-          </div>
-        </section>
 
         <section className="commercial-cta">
           <div className="shell commercial-grid">
