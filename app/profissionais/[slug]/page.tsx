@@ -23,6 +23,15 @@ function usableService(value: string, specialty: string) {
   return !/^(consulta|acompanhamento|atendimento|cuidado|saúde|consulta clínica)$/i.test(value.trim()) && value.toLocaleLowerCase("pt-BR") !== specialty.toLocaleLowerCase("pt-BR");
 }
 
+const maisSaudeLocation = {
+  name: "Clínica Mais Saúde GMS",
+  address: "Rua Padre Abel, 191 e 194, Centro",
+  phone: "5537999358585",
+};
+function hasConfirmedMaisSaudeLocation(organization: string) {
+  return /^Clínica Mais Saúde GMS\s+—\s+Rua Padre Abel, 191(?: e |\/)194, Centro$/i.test(organization.trim());
+}
+
 export function generateStaticParams() {
   // A exportação estática exige ao menos um parâmetro para a rota dinâmica.
   // O identificador abaixo renderiza notFound e não representa um perfil público.
@@ -64,12 +73,14 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
     .map((part) => part[0])
     .join("")
     .toUpperCase();
+  const usesMaisSaudeLocation = hasConfirmedMaisSaudeLocation(item.organization);
   const locationOrganization = organizations.find((organization) => item.organization.toLocaleLowerCase("pt-BR").includes(organization.name.toLocaleLowerCase("pt-BR")) && organization.city === item.city);
-  const locationName = locationOrganization?.name ?? item.organization;
-  const locationAddress = locationOrganization?.address && !/endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(locationOrganization.address) ? locationOrganization.address : "";
-  const locationPhone = locationOrganization?.phone?.replace(/\D/g, "") ?? "";
-  const locationHref = locationPhone.length >= 10 ? `tel:+55${locationPhone}` : "";
-  const mapHref = locationOrganization?.mapUrl || (locationAddress ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${locationAddress}, ${item.city}`)}` : "");
+  const locationName = usesMaisSaudeLocation ? maisSaudeLocation.name : locationOrganization?.name ?? item.organization;
+  const locationAddress = usesMaisSaudeLocation ? maisSaudeLocation.address : locationOrganization?.address && !/endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(locationOrganization.address) ? locationOrganization.address : "";
+  const locationPhone = usesMaisSaudeLocation ? maisSaudeLocation.phone : locationOrganization?.phone?.replace(/\D/g, "") ?? "";
+  const hasDirectContact = !usesMaisSaudeLocation && Boolean(contactHref);
+  const locationHref = locationPhone.length >= 10 ? `tel:+${locationPhone}` : "";
+  const mapHref = locationOrganization?.mapUrl || (locationAddress ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${locationName}, ${locationAddress}, ${item.city}, MG`)}` : "");
   const visibleServices = item.services.filter((service) => usableService(service, item.specialty));
   const canonicalUrl = `https://guiasaude.app.br/profissionais/${item.slug}/`;
 
@@ -112,12 +123,13 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
               </div>
             </div>
 
-            {contactHref ? <aside className="profile-clean-contact">
-              <small>Contato</small>
-              <a className="profile-direct-contact" href={contactHref} target={contactHref.startsWith("http") ? "_blank" : undefined} rel={contactHref.startsWith("http") ? "noreferrer" : undefined}>{contactHref.startsWith("http") ? "Chamar no WhatsApp" : "Ligar"}</a>
+            {hasDirectContact || locationHref ? <aside className="profile-clean-contact">
+              <small>{hasDirectContact ? "Contato do profissional" : "Contato do local"}</small>
+              {hasDirectContact ? <a className="profile-direct-contact" href={contactHref} target={contactHref.startsWith("http") ? "_blank" : undefined} rel={contactHref.startsWith("http") ? "noreferrer" : undefined}>{contactHref.startsWith("http") ? "WhatsApp do profissional" : "Ligar para o profissional"}</a> : null}
+              {locationHref ? <a className="profile-direct-contact" href={locationHref} aria-label={`Ligar para ${locationName}`}>Ligar para {locationName}</a> : null}
               <ProfileShareButton name={item.name} url={canonicalUrl} />
             </aside> : null}
-            {!contactHref ? <aside className="profile-clean-contact"><ProfileShareButton name={item.name} url={canonicalUrl} /></aside> : null}
+            {!hasDirectContact && !locationHref ? <aside className="profile-clean-contact"><ProfileShareButton name={item.name} url={canonicalUrl} /></aside> : null}
           </article>
 
           <section className="profile-clean-details">
@@ -136,8 +148,7 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
                   <strong>{locationName}</strong>
                   {locationAddress ? <span>{locationAddress}</span> : null}
                   <span>{item.city}, Minas Gerais</span>
-                  {locationHref ? <a href={locationHref}>Ligar para {locationName}</a> : null}
-                  {mapHref ? <a href={mapHref} target="_blank" rel="noreferrer">Ver localização</a> : null}
+                  {mapHref ? <a href={mapHref} target="_blank" rel="noopener noreferrer" aria-label={`Ver ${locationName} no mapa`}>Ver localização</a> : null}
                 </div>
               </div>
             </article> : null}

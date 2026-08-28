@@ -38,7 +38,7 @@ function publicOrganization(organization: string) {
  */
 export function publicProfessional(item: Professional): Professional {
   const { sourceUrls, lastVerifiedAt, updatedAt, claimed, ...visible } = item;
-  const summary = /(a validar|aguardando validação|pendente|em revisão|a confirmar)/i.test(item.summary)
+  const summary = /(a validar|aguardando validação|pendente|em revisão|a confirmar|sujeit[oa]s?\s+à\s+confirmação|levantamento editorial|contato em validação|especialidade pendente|endereço a confirmar)/i.test(item.summary)
     ? ""
     : item.summary;
 
