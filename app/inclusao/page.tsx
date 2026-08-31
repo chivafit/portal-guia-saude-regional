@@ -26,7 +26,7 @@ export default function InclusionPage() {
           <div className="shell">
             <p className="eyebrow">Solicitar inclusão</p>
             <h1>Cadastre interesse para aparecer no Guia Saúde.</h1>
-            <p>Use este formulário para indicar profissionais, clínicas, consultórios, laboratórios, farmácias, óticas, academias e outros serviços ligados à saúde.</p>
+            <p>Use este formulário para indicar profissionais, clínicas, consultórios, laboratórios, farmácias, óticas, academias e outros serviços ligados à saúde. Ao enviar, você concorda com a <Link href="/privacidade">Política de Privacidade</Link>.</p>
           </div>
         </section>
         <section className="shell content-section inclusion-layout">

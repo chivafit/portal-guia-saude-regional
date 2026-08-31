@@ -56,7 +56,12 @@ export const publicProfessionals: Professional[] = professionals
   .map(publicProfessional);
 
 export async function publishedOrganizations(fallback: Organization[] = organizations) {
-  return fallback.filter((item) => item.city === "Piumhi" && item.publicationStatus === "published" && Boolean(item.phone));
+  return fallback.filter((item) => item.city === "Piumhi"
+    && item.publicationStatus === "published"
+    && Boolean(item.phone)
+    // Nunca publicamos um estabelecimento quando o endereço ainda é um texto
+    // administrativo. Isso evita enviar informação assumidamente incompleta ao Google.
+    && !/(endere[cç]o\s+(aguardando validação|a validar|a confirmar)|pendente|em revisão)/i.test(item.address));
 }
 
 export async function findPublishedOrganization(slug: string, fallback: Organization[] = organizations) {

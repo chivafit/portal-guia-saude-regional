@@ -1,0 +1,4 @@
+import { LegalPage } from "@/components/LegalPage";
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata("Termos de Uso", "Condições de uso do portal Guia Saúde.", "/termos");
+export default function TermsPage(){return <LegalPage eyebrow="Termos" title="Termos de Uso" intro="Condições para utilizar o Guia Saúde."><h2>Caráter informativo</h2><p>O Guia Saúde é um portal informativo e não presta serviços médicos, não realiza agendamentos e não substitui avaliação profissional.</p><h2>Informações de terceiros</h2><p>Perfis, contatos e serviços são apresentados para facilitar a busca. Confirme informações diretamente com o profissional ou estabelecimento antes de qualquer decisão.</p><h2>Uso adequado</h2><p>Não é permitido utilizar o conteúdo do portal para fins ilícitos, enganosos ou que violem direitos de terceiros.</p></LegalPage>}

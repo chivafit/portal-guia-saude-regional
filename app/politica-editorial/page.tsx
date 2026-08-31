@@ -1,0 +1,4 @@
+import { LegalPage } from "@/components/LegalPage";
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata("Política Editorial", "Princípios editoriais do Guia Saúde.", "/politica-editorial");
+export default function EditorialPolicyPage(){return <LegalPage eyebrow="Editorial" title="Política Editorial" intro="Como o Guia Saúde produz e identifica seus conteúdos."><h2>Independência e clareza</h2><p>Conteúdos editoriais buscam informar o público com linguagem clara e fontes identificáveis. Publicidade, apoios e conteúdos patrocinados são identificados de forma visível.</p><h2>Limites do conteúdo</h2><p>As informações publicadas não constituem diagnóstico, prescrição ou orientação individual de saúde.</p><h2>Atualizações</h2><p>Buscamos corrigir informações factuais quando recebemos evidências confiáveis. Veja a política de correções e remoções para solicitar uma revisão.</p></LegalPage>}

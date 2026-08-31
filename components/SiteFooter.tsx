@@ -53,6 +53,13 @@ export function SiteFooter() {
             <Link href="/inclusao">Cadastre-se no Guia</Link>
             <a href="mailto:rmproguia@gmail.com">Contato</a>
           </div>
+          <div>
+            <span>Políticas</span>
+            <Link href="/privacidade">Privacidade</Link>
+            <Link href="/termos">Termos de uso</Link>
+            <Link href="/politica-editorial">Política editorial</Link>
+            <Link href="/correcoes">Correções e remoções</Link>
+          </div>
         </nav>
 
         <div className="footer-cta">

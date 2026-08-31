@@ -58,6 +58,7 @@ export default async function CityPage({ params, rootLanding = false }: { params
   const registrationLabel = (registration: string) => registration
     .replace(/\s*·\s*[^·]*(a validar|aguardando validação|pendente de confirmação|a confirmar)[^·]*/gi, "")
     .trim();
+  const confirmedRegistrationLabel = (registration: string) => /\d/.test(registrationLabel(registration)) ? registrationLabel(registration) : "";
 
   // Inventário comercial: profissionais em destaque (um por especialidade-chave).
   const featuredProfessions = ["Médico", "Dentista", "Psicólogo", "Fisioterapeuta", "Nutricionista", "Fonoaudiólogo"];
@@ -223,7 +224,7 @@ export default async function CityPage({ params, rootLanding = false }: { params
                       <strong>{item.name}</strong>
                       <small>{item.specialty}</small>
                       <span className="city-featured-org">{item.organization}</span>
-                      <span className="city-featured-org city-featured-registration">{registrationLabel(item.registration)}</span>
+                      {confirmedRegistrationLabel(item.registration) ? <span className="city-featured-org city-featured-registration">{confirmedRegistrationLabel(item.registration)}</span> : null}
                       <em>Ver perfil <ArrowUpRight size={13} /></em>
                     </Link>
                   ))}
