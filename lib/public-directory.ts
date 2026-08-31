@@ -17,7 +17,41 @@ export async function publishedProfessionals(fallback: Professional[] = professi
 export function isPublicProfessional(item: Professional) {
   return item.city === "Piumhi"
     && item.publicationStatus === "published"
-    && Boolean(item.name && item.profession && item.specialty);
+    && Boolean(item.name && item.profession && item.specialty)
+    && hasPublicContactRoute(item);
+}
+
+function digits(value?: string) {
+  return (value ?? "").replace(/\D/g, "");
+}
+
+function normalized(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("pt-BR");
+}
+
+function hasKnownMaisSaudeContact(organization: string) {
+  return /^Clínica Mais Saúde GMS\s+—\s+Rua Padre Abel, 191(?: e |\/)194, Centro$/i.test(organization.trim());
+}
+
+/**
+ * Um perfil só é exposto quando a pessoa consegue iniciar um contato real:
+ * pelo canal informado pelo próprio perfil ou pelo telefone público do local
+ * de atendimento identificado. Isso impede que páginas incompletas sejam
+ * indexadas como se possuíssem um contato disponível.
+ */
+function hasPublicContactRoute(item: Professional) {
+  if (digits(item.phone).length >= 10 || digits(item.whatsapp).length >= 10) return true;
+  if (hasKnownMaisSaudeContact(item.organization)) return true;
+
+  const profileOrganization = normalized(item.organization);
+  return organizations.some((organization) => (
+    organization.city === item.city
+    && digits(organization.phone).length >= 10
+    && profileOrganization.includes(normalized(organization.name))
+  ));
 }
 
 function publicRegistration(registration: string) {
