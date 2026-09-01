@@ -176,8 +176,7 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
               <p>É este profissional ou representa o perfil? Solicite a atualização de contatos, fotografia, áreas de atuação e locais de atendimento.</p>
             </div>
             <div>
-              <Link href={`/inclusao?tipo=professional&perfil=${encodeURIComponent(item.slug)}&acao=atualizacao`}>Atualizar informações</Link>
-              <Link href={`/inclusao?tipo=professional&perfil=${encodeURIComponent(item.slug)}&acao=correcao`}>Solicitar correção</Link>
+              <Link href={`/inclusao?tipo=professional&perfil=${encodeURIComponent(item.slug)}&acao=atualizacao`}>Atualizar este perfil</Link>
             </div>
           </section>
         </section>

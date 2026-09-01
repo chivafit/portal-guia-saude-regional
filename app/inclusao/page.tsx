@@ -1,12 +1,13 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { pageMetadata } from "@/lib/seo";
 import { InclusionForm } from "./InclusionForm";
 
 export const metadata = pageMetadata(
-  "Solicitar inclusão",
-  "Solicite inclusão de profissional, clínica, empresa ou serviço no diretório regional do Guia Saúde.",
+  "Atualizar perfil ou solicitar inclusão",
+  "Envie informações para atualizar um perfil público ou solicitar inclusão de profissional, clínica, empresa ou serviço no Guia Saúde.",
   "/inclusao",
 );
 
@@ -24,15 +25,15 @@ export default function InclusionPage() {
       <main>
         <section className="content-hero inclusion-hero">
           <div className="shell">
-            <p className="eyebrow">Solicitar inclusão</p>
-            <h1>Cadastre interesse para aparecer no Guia Saúde.</h1>
-            <p>Use este formulário para indicar profissionais, clínicas, consultórios, laboratórios, farmácias, óticas, academias e outros serviços ligados à saúde. Ao enviar, você concorda com a <Link href="/privacidade">Política de Privacidade</Link>.</p>
+            <p className="eyebrow">Atualização e inclusão</p>
+            <h1>Envie dados para manter o Guia Saúde atualizado.</h1>
+            <p>Use este formulário para atualizar um perfil existente ou indicar profissionais, clínicas, consultórios, laboratórios, farmácias, óticas, academias e outros serviços ligados à saúde. Ao enviar, você concorda com a <Link href="/privacidade">Política de Privacidade</Link>.</p>
           </div>
         </section>
         <section className="shell content-section inclusion-layout">
           <div>
             <p className="eyebrow">Fluxo de validação</p>
-            <h2>Solicitar não publica automaticamente.</h2>
+            <h2>O envio não altera o perfil automaticamente.</h2>
             <p>O Guia Saúde é um portal informativo. Toda inclusão precisa passar por revisão antes de aparecer publicamente.</p>
             <ol>
               {steps.map((step) => <li key={step}>{step}</li>)}
@@ -43,7 +44,7 @@ export default function InclusionPage() {
               <Link href="/anuncie">Ver oportunidades comerciais →</Link>
             </div>
           </div>
-          <InclusionForm />
+          <Suspense fallback={<div className="inclusion-form" aria-busy="true" />}><InclusionForm /></Suspense>
         </section>
       </main>
       <SiteFooter />

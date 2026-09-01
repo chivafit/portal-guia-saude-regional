@@ -12,7 +12,7 @@ export async function generateStaticParams() { return (await publishedOrganizati
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) { const item = await findPublishedOrganization((await params).slug); return item ? pageMetadata(item.name, `${item.category} em Piumhi. ${item.services.join(", ")}.`, `/empresas/${item.slug}`) : pageMetadata("Serviço não encontrado", "Este serviço não está disponível.", "/empresas"); }
 
 function updateRequestHref(slug: string) {
-  return `/inclusao?tipo=organization&perfil=${encodeURIComponent(slug)}&acao=correcao`;
+  return `/inclusao?tipo=organization&perfil=${encodeURIComponent(slug)}&acao=atualizacao`;
 }
 
 export default async function OrganizationPage({ params }: { params: Promise<{ slug: string }> }) {
