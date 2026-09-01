@@ -1,12 +1,19 @@
 import { organizations, professionals, type Organization, type Professional } from "./data";
+import { piumhiProfessionalAdditions } from "./data/professional-additions";
+import { applyProfessionalOverride } from "./data/professional-overrides";
 
 /**
  * Fonte pública do diretório para a edição estática hospedada no GitHub Pages.
- * Para publicar ou atualizar um perfil, a equipe edita lib/data.ts e envia a
- * alteração ao GitHub. Não há banco de dados ou servidor envolvidos.
+ * Registros legados recebem correções editoriais antes da exposição pública e
+ * profissionais novos validados entram por uma lista auditável separada.
  */
-export async function publishedProfessionals(fallback: Professional[] = professionals) {
-  return fallback.filter(isPublicProfessional).map(publicProfessional);
+function professionalDirectory(source: Professional[] = professionals) {
+  const enriched = source.map(applyProfessionalOverride);
+  return source === professionals ? [...enriched, ...piumhiProfessionalAdditions] : enriched;
+}
+
+export async function publishedProfessionals(fallback?: Professional[]) {
+  return professionalDirectory(fallback).filter(isPublicProfessional).map(publicProfessional);
 }
 
 /**
@@ -51,7 +58,7 @@ export function publicProfessional(item: Professional): Professional {
 }
 
 /** Lista estática que pode ser usada em componentes client-side sem expor rascunhos. */
-export const publicProfessionals: Professional[] = professionals
+export const publicProfessionals: Professional[] = professionalDirectory()
   .filter(isPublicProfessional)
   .map(publicProfessional);
 
@@ -68,7 +75,7 @@ export async function findPublishedOrganization(slug: string, fallback: Organiza
   return (await publishedOrganizations(fallback)).find((item) => item.slug === slug) ?? null;
 }
 
-export async function findPublishedProfessional(slug: string, fallback: Professional[] = professionals) {
-  const item = fallback.find((candidate) => candidate.slug === slug && isPublicProfessional(candidate));
+export async function findPublishedProfessional(slug: string, fallback?: Professional[]) {
+  const item = professionalDirectory(fallback).find((candidate) => candidate.slug === slug && isPublicProfessional(candidate));
   return item ? publicProfessional(item) : null;
 }
