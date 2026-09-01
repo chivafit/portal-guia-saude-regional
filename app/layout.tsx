@@ -4,6 +4,7 @@ import { defaultDescription, siteName, siteUrl } from "@/lib/seo";
 import "./globals.css";
 import "./mobile-audit.css";
 import "./podcast-highlight.css";
+import "./podcast-photo-highlight.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
