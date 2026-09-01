@@ -1,6 +1,7 @@
 import { organizations, professionals, type Organization, type Professional } from "./data";
 import { piumhiProfessionalAdditions } from "./data/professional-additions";
 import { piumhiMedicalSequenceAdditions } from "./data/medical-sequence-additions";
+import { piumhiNonMedicalSequenceAdditions } from "./data/nonmedical-sequence-additions";
 import { applyProfessionalOverride } from "./data/professional-overrides";
 import { applyMedicalSequenceOverride } from "./data/medical-sequence-overrides";
 import { applyNonMedicalSequenceOverride } from "./data/nonmedical-sequence-overrides";
@@ -17,7 +18,7 @@ function professionalDirectory(source: Professional[] = professionals) {
     .map(applyNonMedicalSequenceOverride);
 
   return source === professionals
-    ? [...enriched, ...piumhiProfessionalAdditions, ...piumhiMedicalSequenceAdditions]
+    ? [...enriched, ...piumhiProfessionalAdditions, ...piumhiMedicalSequenceAdditions, ...piumhiNonMedicalSequenceAdditions]
     : enriched;
 }
 
