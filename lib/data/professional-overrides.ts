@@ -38,6 +38,19 @@ export const professionalOverrides: Record<string, Partial<Professional>> = {
     lastVerifiedAt: "2026-09-01",
     verificationStatus: "public-source",
   },
+  "dr-paulo-henrique-faria-silva-oftalmologia-piumhi": {
+    registration: "CRM-MG 44048",
+    source: "https://www.lastromed.com.br/atuacao/oftalmologista/piumhi-mg",
+    lastVerifiedAt: "2026-09-01",
+    verificationStatus: "public-source",
+  },
+  "dra-mirian-sansoni-oftalmologia-piumhi": {
+    registration: "CRM-MG 82449 · RQE 51983",
+    organization: "Clínica São Judas Tadeu — Rua Armando Viotti, 190, sala 103, Centro",
+    source: "https://www.doctoralia.com.br/mirian-sansoni/oftalmologista/piumhi",
+    lastVerifiedAt: "2026-09-01",
+    verificationStatus: "public-source",
+  },
   "adenilson-leandro-ortodontia-piumhi": {
     specialty: "Ortodontia e Ortopedia Facial",
     registration: "CRO-MG 23264",
