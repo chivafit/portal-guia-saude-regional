@@ -40,9 +40,15 @@ export const professionalOverrides: Record<string, Partial<Professional>> = {
   },
   "dr-paulo-henrique-faria-silva-oftalmologia-piumhi": {
     registration: "CRM-MG 44048",
-    source: "https://www.lastromed.com.br/atuacao/oftalmologista/piumhi-mg",
+    organization: "PHD Piumhi Hospital Dia — Praça Guia Lopes, 278, Centro",
+    phone: "(37) 3412-0075",
+    whatsapp: "",
+    services: ["Consulta oftalmológica", "Catarata", "Cirurgia refrativa a laser", "Glaucoma", "Ceratocone", "Cirurgia plástica das pálpebras"],
+    source: "https://phdhospitaldia.com.br/portfolio-items/oftalmologia/",
+    sourceUrls: ["https://phdhospitaldia.com.br/portfolio-items/oftalmologia/"],
     lastVerifiedAt: "2026-09-01",
-    verificationStatus: "public-source",
+    updatedAt: "2026-09-01",
+    verificationStatus: "official-source",
   },
   "dra-mirian-sansoni-oftalmologia-piumhi": {
     registration: "CRM-MG 82449 · RQE 51983",
@@ -131,6 +137,6 @@ export function applyProfessionalOverride(professional: Professional): Professio
   return {
     ...professional,
     ...override,
-    sourceUrls: source ? [source] : professional.sourceUrls,
+    sourceUrls: override.sourceUrls ?? (source ? [source] : professional.sourceUrls),
   };
 }
