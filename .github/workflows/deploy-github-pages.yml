@@ -2,7 +2,7 @@ name: Publicar no GitHub Pages
 
 on:
   push:
-    branches: [main, corrige-build-pages]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -16,42 +16,24 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-      - name: Instalar dependencias
-        shell: bash
-        run: |
-          set -o pipefail
-          npm ci 2>&1 | tee npm-ci.log
-      - name: Gerar build estatico
-        shell: bash
-        run: |
-          set -o pipefail
-          npm run build:pages 2>&1 | tee build-pages.log
-      - name: Salvar diagnostico
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-diagnostics
-          path: |
-            npm-ci.log
-            build-pages.log
-          if-no-files-found: ignore
+      - run: npm ci
+      - run: npm run build:pages
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
   deploy:
-    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     needs: build
     steps:
       - id: deployment
