@@ -24,12 +24,40 @@ export const podcastProfessionalMap: Record<string, string[]> = {
   "cirurgia-refrativa-paulo-henrique-faria": ["dr-paulo-henrique-faria-silva-oftalmologia-piumhi"],
 };
 
+/**
+ * Foto editorial reutilizada do card/capa do episódio. É aplicada apenas aos
+ * participantes do podcast e pode ser substituída depois por retrato individual.
+ */
+export const podcastProfessionalImageMap: Record<string, string> = {
+  "gabriela-araujo-fisioterapia-pelvica-piumhi": "/podcast/gabriela-araujo-fisioterapia-pelvica-horizontal.png",
+  "patricia-terra-odontologia-piumhi": "/podcast/patricia-terra-estetica-regenerativa-horizontal.png",
+  "dra-simone-mota-bonisson-endocrinologia-piumhi": "/podcast/simone-bonisson-endocrinologia-horizontal.png",
+  "rodrigo-soares-costa-radiologia-piumhi": "/podcast/radiologia-odontologica.jpg",
+  "livia-pereira-implantodontia-piumhi": "/podcast/implantodontia-livia-pereira.jpg",
+  "dra-mirian-sansoni-oftalmologia-piumhi": "/podcast/blefaroplastia-mirian-sansoni.jpg",
+  "daniela-melo-farmacia-piumhi": "/podcast/medicalizacao-da-vida-daniela-melo.jpg",
+  "cintia-bonisson-psicanalise-piumhi": "/podcast/vinculos-afetivos-cintia-bonisson.jpg",
+  "dra-gabriela-goncalves-de-oliveira-dermatologia-piumhi": "/podcast/dermatologia-sem-filtro-gabriela-oliveira.jpg",
+  "ivana-mara-de-oliveira-rezende-fisioterapia-piumhi": "/podcast/fisioterapia-respiratoria-ivana-rezende.jpg",
+  "nayara-garcia-pediatria-pneumologia-infantil-piumhi": "/podcast/respiracao-na-infancia-nayara-garcia.jpg",
+  "daisy-cristina-de-faria-nutricao-piumhi": "/podcast/vida-saudavel-na-pratica-daisy-faria.jpg",
+  "reinaldo-lopes-soares-ortodontia-piumhi": "/podcast/ortodontia-atraves-das-geracoes-lopes-soares.jpg",
+  "victor-lopes-soares-ortodontia-piumhi": "/podcast/ortodontia-atraves-das-geracoes-lopes-soares.jpg",
+  "karla-soares-lopes-teixeira-ortodontia-piumhi": "/podcast/karla-soares-ortodontia.jpg",
+  "dr-diego-mota-fernandes-ortopedia-piumhi": "/podcast/diego-mota-fernandes-terapia-regenerativa.jpg",
+  "dr-paulo-henrique-faria-silva-oftalmologia-piumhi": "/podcast/paulo-henrique-faria-cirurgia-refrativa.jpg",
+};
+
 export function professionalSlugsForEpisode(episode: Pick<PodcastEpisode, "slug" | "professionalSlugs">): string[] {
   return Array.from(new Set([...(episode.professionalSlugs ?? []), ...(podcastProfessionalMap[episode.slug] ?? [])]));
 }
 
 export function isPodcastProfessional(slug: string): boolean {
   return Object.values(podcastProfessionalMap).some((slugs) => slugs.includes(slug));
+}
+
+export function podcastImageForProfessional(slug: string): string | undefined {
+  return podcastProfessionalImageMap[slug];
 }
 
 export function podcastEpisodeSlugsForProfessional(slug: string): string[] {

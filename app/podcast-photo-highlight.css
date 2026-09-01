@@ -1,0 +1,130 @@
+/* Reutiliza as artes/fotos editoriais dos episódios como retrato dos convidados.
+   Quando houver retrato individual, basta substituir o imageUrl do profissional. */
+
+.doctor-card:is(
+  :has(a[href*="gabriela-araujo-fisioterapia-pelvica-piumhi"]),
+  :has(a[href*="patricia-terra-odontologia-piumhi"]),
+  :has(a[href*="dra-simone-mota-bonisson-endocrinologia-piumhi"]),
+  :has(a[href*="rodrigo-soares-costa-radiologia-piumhi"]),
+  :has(a[href*="livia-pereira-implantodontia-piumhi"]),
+  :has(a[href*="dra-mirian-sansoni-oftalmologia-piumhi"]),
+  :has(a[href*="daniela-melo-farmacia-piumhi"]),
+  :has(a[href*="cintia-bonisson-psicanalise-piumhi"]),
+  :has(a[href*="dra-gabriela-goncalves-de-oliveira-dermatologia-piumhi"]),
+  :has(a[href*="ivana-mara-de-oliveira-rezende-fisioterapia-piumhi"]),
+  :has(a[href*="nayara-garcia-pediatria-pneumologia-infantil-piumhi"]),
+  :has(a[href*="daisy-cristina-de-faria-nutricao-piumhi"]),
+  :has(a[href*="reinaldo-lopes-soares-ortodontia-piumhi"]),
+  :has(a[href*="victor-lopes-soares-ortodontia-piumhi"]),
+  :has(a[href*="karla-soares-lopes-teixeira-ortodontia-piumhi"]),
+  :has(a[href*="dr-diego-mota-fernandes-ortopedia-piumhi"]),
+  :has(a[href*="dr-paulo-henrique-faria-silva-oftalmologia-piumhi"])
+) {
+  background: #f4ead4;
+  border: 1.5px solid #c89a45;
+  box-shadow: 0 14px 36px rgba(104, 72, 18, .14);
+}
+
+.doctor-card:is(
+  :has(a[href*="gabriela-araujo-fisioterapia-pelvica-piumhi"]),
+  :has(a[href*="patricia-terra-odontologia-piumhi"]),
+  :has(a[href*="dra-simone-mota-bonisson-endocrinologia-piumhi"]),
+  :has(a[href*="rodrigo-soares-costa-radiologia-piumhi"]),
+  :has(a[href*="livia-pereira-implantodontia-piumhi"]),
+  :has(a[href*="dra-mirian-sansoni-oftalmologia-piumhi"]),
+  :has(a[href*="daniela-melo-farmacia-piumhi"]),
+  :has(a[href*="cintia-bonisson-psicanalise-piumhi"]),
+  :has(a[href*="dra-gabriela-goncalves-de-oliveira-dermatologia-piumhi"]),
+  :has(a[href*="ivana-mara-de-oliveira-rezende-fisioterapia-piumhi"]),
+  :has(a[href*="nayara-garcia-pediatria-pneumologia-infantil-piumhi"]),
+  :has(a[href*="daisy-cristina-de-faria-nutricao-piumhi"]),
+  :has(a[href*="reinaldo-lopes-soares-ortodontia-piumhi"]),
+  :has(a[href*="victor-lopes-soares-ortodontia-piumhi"]),
+  :has(a[href*="karla-soares-lopes-teixeira-ortodontia-piumhi"]),
+  :has(a[href*="dr-diego-mota-fernandes-ortopedia-piumhi"]),
+  :has(a[href*="dr-paulo-henrique-faria-silva-oftalmologia-piumhi"])
+) .doctor-avatar {
+  width: 88px;
+  height: 88px;
+  flex: 0 0 88px;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px #c89a45;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.doctor-card:is(
+  :has(a[href*="gabriela-araujo-fisioterapia-pelvica-piumhi"]),
+  :has(a[href*="patricia-terra-odontologia-piumhi"]),
+  :has(a[href*="dra-simone-mota-bonisson-endocrinologia-piumhi"]),
+  :has(a[href*="rodrigo-soares-costa-radiologia-piumhi"]),
+  :has(a[href*="livia-pereira-implantodontia-piumhi"]),
+  :has(a[href*="dra-mirian-sansoni-oftalmologia-piumhi"]),
+  :has(a[href*="daniela-melo-farmacia-piumhi"]),
+  :has(a[href*="cintia-bonisson-psicanalise-piumhi"]),
+  :has(a[href*="dra-gabriela-goncalves-de-oliveira-dermatologia-piumhi"]),
+  :has(a[href*="ivana-mara-de-oliveira-rezende-fisioterapia-piumhi"]),
+  :has(a[href*="nayara-garcia-pediatria-pneumologia-infantil-piumhi"]),
+  :has(a[href*="daisy-cristina-de-faria-nutricao-piumhi"]),
+  :has(a[href*="reinaldo-lopes-soares-ortodontia-piumhi"]),
+  :has(a[href*="victor-lopes-soares-ortodontia-piumhi"]),
+  :has(a[href*="karla-soares-lopes-teixeira-ortodontia-piumhi"]),
+  :has(a[href*="dr-diego-mota-fernandes-ortopedia-piumhi"]),
+  :has(a[href*="dr-paulo-henrique-faria-silva-oftalmologia-piumhi"])
+) .doctor-avatar svg {
+  display: none;
+}
+
+.doctor-card:has(a[href*="gabriela-araujo-fisioterapia-pelvica-piumhi"]) .doctor-avatar { background-image: url('/podcast/gabriela-araujo-fisioterapia-pelvica-horizontal.png'); }
+.doctor-card:has(a[href*="patricia-terra-odontologia-piumhi"]) .doctor-avatar { background-image: url('/podcast/patricia-terra-estetica-regenerativa-horizontal.png'); }
+.doctor-card:has(a[href*="dra-simone-mota-bonisson-endocrinologia-piumhi"]) .doctor-avatar { background-image: url('/podcast/simone-bonisson-endocrinologia-horizontal.png'); }
+.doctor-card:has(a[href*="rodrigo-soares-costa-radiologia-piumhi"]) .doctor-avatar { background-image: url('/podcast/radiologia-odontologica.jpg'); }
+.doctor-card:has(a[href*="livia-pereira-implantodontia-piumhi"]) .doctor-avatar { background-image: url('/podcast/implantodontia-livia-pereira.jpg'); }
+.doctor-card:has(a[href*="dra-mirian-sansoni-oftalmologia-piumhi"]) .doctor-avatar { background-image: url('/podcast/blefaroplastia-mirian-sansoni.jpg'); }
+.doctor-card:has(a[href*="daniela-melo-farmacia-piumhi"]) .doctor-avatar { background-image: url('/podcast/medicalizacao-da-vida-daniela-melo.jpg'); }
+.doctor-card:has(a[href*="cintia-bonisson-psicanalise-piumhi"]) .doctor-avatar { background-image: url('/podcast/vinculos-afetivos-cintia-bonisson.jpg'); }
+.doctor-card:has(a[href*="dra-gabriela-goncalves-de-oliveira-dermatologia-piumhi"]) .doctor-avatar { background-image: url('/podcast/dermatologia-sem-filtro-gabriela-oliveira.jpg'); }
+.doctor-card:has(a[href*="ivana-mara-de-oliveira-rezende-fisioterapia-piumhi"]) .doctor-avatar { background-image: url('/podcast/fisioterapia-respiratoria-ivana-rezende.jpg'); }
+.doctor-card:has(a[href*="nayara-garcia-pediatria-pneumologia-infantil-piumhi"]) .doctor-avatar { background-image: url('/podcast/respiracao-na-infancia-nayara-garcia.jpg'); }
+.doctor-card:has(a[href*="daisy-cristina-de-faria-nutricao-piumhi"]) .doctor-avatar { background-image: url('/podcast/vida-saudavel-na-pratica-daisy-faria.jpg'); }
+.doctor-card:has(a[href*="reinaldo-lopes-soares-ortodontia-piumhi"]) .doctor-avatar,
+.doctor-card:has(a[href*="victor-lopes-soares-ortodontia-piumhi"]) .doctor-avatar { background-image: url('/podcast/ortodontia-atraves-das-geracoes-lopes-soares.jpg'); }
+.doctor-card:has(a[href*="karla-soares-lopes-teixeira-ortodontia-piumhi"]) .doctor-avatar { background-image: url('/podcast/karla-soares-ortodontia.jpg'); }
+.doctor-card:has(a[href*="dr-diego-mota-fernandes-ortopedia-piumhi"]) .doctor-avatar { background-image: url('/podcast/diego-mota-fernandes-terapia-regenerativa.jpg'); }
+.doctor-card:has(a[href*="dr-paulo-henrique-faria-silva-oftalmologia-piumhi"]) .doctor-avatar { background-image: url('/podcast/paulo-henrique-faria-cirurgia-refrativa.jpg'); }
+
+/* A foto reutilizada do episódio também ganha um tratamento mais editorial no perfil. */
+.profile-clean-wrap:has(.profile-podcast) .profile-clean-photo {
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 2px #c89a45, 0 12px 30px rgba(104,72,18,.15);
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 760px) {
+  .doctor-card:is(
+    :has(a[href*="gabriela-araujo-fisioterapia-pelvica-piumhi"]),
+    :has(a[href*="patricia-terra-odontologia-piumhi"]),
+    :has(a[href*="dra-simone-mota-bonisson-endocrinologia-piumhi"]),
+    :has(a[href*="rodrigo-soares-costa-radiologia-piumhi"]),
+    :has(a[href*="livia-pereira-implantodontia-piumhi"]),
+    :has(a[href*="dra-mirian-sansoni-oftalmologia-piumhi"]),
+    :has(a[href*="daniela-melo-farmacia-piumhi"]),
+    :has(a[href*="cintia-bonisson-psicanalise-piumhi"]),
+    :has(a[href*="dra-gabriela-goncalves-de-oliveira-dermatologia-piumhi"]),
+    :has(a[href*="ivana-mara-de-oliveira-rezende-fisioterapia-piumhi"]),
+    :has(a[href*="nayara-garcia-pediatria-pneumologia-infantil-piumhi"]),
+    :has(a[href*="daisy-cristina-de-faria-nutricao-piumhi"]),
+    :has(a[href*="reinaldo-lopes-soares-ortodontia-piumhi"]),
+    :has(a[href*="victor-lopes-soares-ortodontia-piumhi"]),
+    :has(a[href*="karla-soares-lopes-teixeira-ortodontia-piumhi"]),
+    :has(a[href*="dr-diego-mota-fernandes-ortopedia-piumhi"]),
+    :has(a[href*="dr-paulo-henrique-faria-silva-oftalmologia-piumhi"])
+  ) .doctor-avatar {
+    width: 72px;
+    height: 72px;
+    flex-basis: 72px;
+  }
+}
