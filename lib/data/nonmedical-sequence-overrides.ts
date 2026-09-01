@@ -28,6 +28,7 @@ const nonMedicalSequenceOverrides: Record<string, Partial<Professional>> = {
   "dra-ana-paula-soares-salviano-odontologia-piumhi": { registration: "CRO-MG 54872", organization: "ORTHOclínicas Piumhi — Rua Benedito Valadares, 92, Centro", phone: "(37) 99856-3333", source: "https://orthoclinicas.com/unidades/", verified: true, lastVerifiedAt: "2026-09-01", verificationStatus: "official-source" },
   "dr-goncalo-da-rocha-rolla-odontologia-piumhi": { registration: "CRO-RS 14428", organization: "Consultório particular — Av. Nonoai, 1745, sala 9", source: "https://www.doctoralia.com.br/goncalo-da-rocha-rolla/dentista/piumhi", verified: true, lastVerifiedAt: "2026-09-01", verificationStatus: "public-source" },
   "dra-franceliz-moleta-odontologia-piumhi": { registration: "CRO-PR 17317", organization: "Consultório particular — Av. 7 de Setembro, 152", source: "https://www.doctoralia.com.br/franceliz-moleta/dentista/piumhi", verified: true, lastVerifiedAt: "2026-09-01", verificationStatus: "public-source" },
+  "roseli-soares-terra-odontologia-piumhi": { registration: "CRO-MG 15163", specialty: "Odontologia Geral", organization: "Consultório Odontológico — Rua Silviano Brandão, 129, Centro", phone: "(37) 99954-0280", source: "https://transparencia.cromg.org.br/baixar_documento/19175", verified: true, lastVerifiedAt: "2026-09-01", verificationStatus: "official-source" },
 };
 
 export function applyNonMedicalSequenceOverride(professional: Professional): Professional {
