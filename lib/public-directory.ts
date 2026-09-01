@@ -6,6 +6,7 @@ import { podcastProfessionalAdditions } from "./data/podcast-professional-additi
 import { applyProfessionalOverride } from "./data/professional-overrides";
 import { applyMedicalSequenceOverride } from "./data/medical-sequence-overrides";
 import { applyNonMedicalSequenceOverride } from "./data/nonmedical-sequence-overrides";
+import { podcastImageForProfessional } from "./podcast-guests";
 
 /**
  * Fonte pública do diretório para a edição estática hospedada no GitHub Pages.
@@ -16,11 +17,21 @@ function professionalDirectory(source: Professional[] = professionals) {
   const enriched = source
     .map(applyProfessionalOverride)
     .map(applyMedicalSequenceOverride)
-    .map(applyNonMedicalSequenceOverride);
+    .map(applyNonMedicalSequenceOverride)
+    .map((professional) => ({
+      ...professional,
+      imageUrl: podcastImageForProfessional(professional.slug) ?? professional.imageUrl,
+    }));
 
-  return source === professionals
-    ? [...enriched, ...piumhiProfessionalAdditions, ...piumhiMedicalSequenceAdditions, ...piumhiNonMedicalSequenceAdditions, ...podcastProfessionalAdditions]
-    : enriched;
+  const additions = source === professionals
+    ? [...piumhiProfessionalAdditions, ...piumhiMedicalSequenceAdditions, ...piumhiNonMedicalSequenceAdditions, ...podcastProfessionalAdditions]
+        .map((professional) => ({
+          ...professional,
+          imageUrl: podcastImageForProfessional(professional.slug) ?? professional.imageUrl,
+        }))
+    : [];
+
+  return source === professionals ? [...enriched, ...additions] : enriched;
 }
 
 export async function publishedProfessionals(fallback?: Professional[]) {
