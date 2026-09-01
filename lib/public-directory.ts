@@ -1,15 +1,22 @@
 import { organizations, professionals, type Organization, type Professional } from "./data";
 import { piumhiProfessionalAdditions } from "./data/professional-additions";
+import { piumhiMedicalSequenceAdditions } from "./data/medical-sequence-additions";
 import { applyProfessionalOverride } from "./data/professional-overrides";
+import { applyMedicalSequenceOverride } from "./data/medical-sequence-overrides";
 
 /**
  * Fonte pública do diretório para a edição estática hospedada no GitHub Pages.
  * Registros legados recebem correções editoriais antes da exposição pública e
- * profissionais novos validados entram por uma lista auditável separada.
+ * profissionais novos validados entram por listas auditáveis separadas.
  */
 function professionalDirectory(source: Professional[] = professionals) {
-  const enriched = source.map(applyProfessionalOverride);
-  return source === professionals ? [...enriched, ...piumhiProfessionalAdditions] : enriched;
+  const enriched = source
+    .map(applyProfessionalOverride)
+    .map(applyMedicalSequenceOverride);
+
+  return source === professionals
+    ? [...enriched, ...piumhiProfessionalAdditions, ...piumhiMedicalSequenceAdditions]
+    : enriched;
 }
 
 export async function publishedProfessionals(fallback?: Professional[]) {
