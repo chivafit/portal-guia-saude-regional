@@ -1,4 +1,5 @@
 import { podcasts, type PodcastEpisode } from "./data";
+import { professionalSlugsForEpisode } from "./podcast-guests";
 import { normalize } from "./search";
 
 function cleanName(value: string): string {
@@ -11,7 +12,7 @@ function cleanName(value: string): string {
 export function podcastForProfessional(slug: string, name: string): PodcastEpisode | undefined {
   const professionalName = cleanName(name);
   return podcasts.find((episode) => {
-    if (episode.professionalSlugs?.includes(slug)) return true;
+    if (professionalSlugsForEpisode(episode).includes(slug)) return true;
     const guestName = cleanName(episode.guest);
     return guestName === professionalName || guestName.includes(professionalName) || professionalName.includes(guestName);
   });
