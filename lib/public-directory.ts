@@ -3,6 +3,7 @@ import { piumhiProfessionalAdditions } from "./data/professional-additions";
 import { piumhiMedicalSequenceAdditions } from "./data/medical-sequence-additions";
 import { applyProfessionalOverride } from "./data/professional-overrides";
 import { applyMedicalSequenceOverride } from "./data/medical-sequence-overrides";
+import { applyNonMedicalSequenceOverride } from "./data/nonmedical-sequence-overrides";
 
 /**
  * Fonte pública do diretório para a edição estática hospedada no GitHub Pages.
@@ -12,7 +13,8 @@ import { applyMedicalSequenceOverride } from "./data/medical-sequence-overrides"
 function professionalDirectory(source: Professional[] = professionals) {
   const enriched = source
     .map(applyProfessionalOverride)
-    .map(applyMedicalSequenceOverride);
+    .map(applyMedicalSequenceOverride)
+    .map(applyNonMedicalSequenceOverride);
 
   return source === professionals
     ? [...enriched, ...piumhiProfessionalAdditions, ...piumhiMedicalSequenceAdditions]
@@ -46,6 +48,18 @@ function publicOrganization(organization: string) {
     .trim();
 }
 
+function publicPhone(phone: string) {
+  return /(contato\s+(a validar|será validado|em validação)|aguardando validação|pendente|a confirmar)/i.test(phone)
+    ? ""
+    : phone;
+}
+
+function publicWhatsapp(whatsapp: string) {
+  return !whatsapp || whatsapp === "#" || /(a validar|aguardando validação|pendente|a confirmar)/i.test(whatsapp)
+    ? ""
+    : whatsapp;
+}
+
 /**
  * Separa o inventário editorial do objeto serializado nas páginas públicas.
  * Assim, observações administrativas legadas não são enviadas ao navegador.
@@ -60,6 +74,8 @@ export function publicProfessional(item: Professional): Professional {
     ...visible,
     registration: publicRegistration(item.registration),
     organization: publicOrganization(item.organization),
+    phone: publicPhone(item.phone),
+    whatsapp: publicWhatsapp(item.whatsapp),
     summary,
   };
 }
