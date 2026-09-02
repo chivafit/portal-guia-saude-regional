@@ -7,7 +7,7 @@ import { cities, organizations, professions } from "@/lib/data";
 import { publicProfessionals } from "@/lib/public-directory";
 
 const categories = ["Clínica multiprofissional", "Laboratório", "Diagnóstico por imagem", "Clínica odontológica", "Farmácia", "Ótica", "Estética e bem-estar", "Academia e atividade física", "Home care"];
-type FormState = { entityType: "professional" | "organization"; profile: string; name: string; category: string; cityName: string; contactName: string; contactEmail: string; contactPhone: string; whatsapp: string; address: string; organization: string; website: string; instagram: string; services: string; message: string; privacy: boolean };
+type FormState = { entityType: "professional" | "organization"; profile: string; name: string; category: string; cityName: string; contactName: string; contactEmail: string; contactPhone: string; whatsapp: string; address: string; organization: string; website: string; instagram: string; services: string; audience: string; commonNeeds: string; education: string; insuranceInfo: string; message: string; privacy: boolean };
 
 export function InclusionForm() {
   const searchParams = useSearchParams();
@@ -24,7 +24,7 @@ export function InclusionForm() {
     cityName: profile?.city ?? "", contactName: "", contactEmail: "", contactPhone: "", whatsapp: "",
     address: profile && "address" in profile ? profile.address : "", organization: profile && "organization" in profile ? profile.organization : "",
     website: profile && "website" in profile ? profile.website ?? "" : "", instagram: profile && "instagram" in profile ? profile.instagram ?? "" : "",
-    services: profile?.services.join(", ") ?? "", message: "", privacy: false,
+    services: profile?.services.join(", ") ?? "", audience: profile && "audience" in profile ? profile.audience?.join(", ") ?? "" : "", commonNeeds: profile && "commonNeeds" in profile ? profile.commonNeeds?.join(", ") ?? "" : "", education: profile && "education" in profile ? profile.education ?? "" : "", insuranceInfo: profile && "insuranceInfo" in profile ? profile.insuranceInfo ?? "" : "", message: "", privacy: false,
   }));
   const set = (patch: Partial<FormState>) => setForm((current) => ({ ...current, ...patch }));
   const options = form.entityType === "professional" ? professions : categories;
@@ -37,7 +37,12 @@ export function InclusionForm() {
       `Nome público: ${form.name}`, `Profissão ou categoria: ${form.category}`, `Cidade: ${form.cityName}`,
       form.entityType === "professional" ? `Local de atendimento: ${form.organization}` : "", `Endereço: ${form.address}`,
       `Telefone: ${form.contactPhone}`, `WhatsApp: ${form.whatsapp}`, `E-mail: ${form.contactEmail}`, `Site: ${form.website}`,
-      `Instagram: ${form.instagram}`, `Especialidades ou serviços: ${form.services}`, `Responsável pelo envio: ${form.contactName}`, "", `Outras correções ou informações: ${form.message}`,
+      `Instagram: ${form.instagram}`, `Especialidades ou serviços: ${form.services}`,
+      form.entityType === "professional" ? `Público atendido: ${form.audience}` : "",
+      form.entityType === "professional" ? `Principais demandas: ${form.commonNeeds}` : "",
+      form.entityType === "professional" ? `Formação e experiência: ${form.education}` : "",
+      form.entityType === "professional" ? `Convênios e formas de atendimento: ${form.insuranceInfo}` : "",
+      `Responsável pelo envio: ${form.contactName}`, "", `Outras correções ou informações: ${form.message}`,
     ].filter(Boolean).join("\n"));
     window.location.href = `mailto:rmproguia@gmail.com?subject=${subject}&body=${body}`;
     setSent(true);
@@ -57,6 +62,12 @@ export function InclusionForm() {
     <label>Site<input type="url" value={form.website} onChange={(event) => set({ website: event.target.value })} placeholder="https://" /></label>
     <label>Instagram<input value={form.instagram} onChange={(event) => set({ instagram: event.target.value })} placeholder="@perfil ou link" /></label>
     <label>Especialidades e serviços<textarea rows={3} value={form.services} onChange={(event) => set({ services: event.target.value })} placeholder="Separe os itens por vírgula." /></label>
+    {form.entityType === "professional" ? <>
+      <label>Público atendido<textarea rows={2} value={form.audience} onChange={(event) => set({ audience: event.target.value })} placeholder="Ex.: adultos, crianças, gestantes. Separe por vírgula." /></label>
+      <label>Principais demandas<textarea rows={3} value={form.commonNeeds} onChange={(event) => set({ commonNeeds: event.target.value })} placeholder="Ex.: acompanhamento de hipertensão, dor nas costas, saúde da pele." /></label>
+      <label>Formação e experiência<textarea rows={3} value={form.education} onChange={(event) => set({ education: event.target.value })} placeholder="Ex.: graduação, especializações e experiência profissional." /></label>
+      <label>Convênios e formas de atendimento<textarea rows={2} value={form.insuranceInfo} onChange={(event) => set({ insuranceInfo: event.target.value })} placeholder="Ex.: particular e convênios atendidos. Informe somente dados atualizados." /></label>
+    </> : null}
     <label>Observações ou correções adicionais<textarea rows={4} value={form.message} onChange={(event) => set({ message: event.target.value })} placeholder="Ex.: foto atualizada, registro profissional, horário ou informação a remover." /></label>
     <label className="form-consent"><input required type="checkbox" checked={form.privacy} onChange={(event) => set({ privacy: event.target.checked })} /> Li e concordo com a <Link href="/privacidade">Política de Privacidade</Link>.</label>
     <button type="submit">Preparar e-mail para revisão</button>

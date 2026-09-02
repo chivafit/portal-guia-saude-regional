@@ -10,6 +10,14 @@ export type Professional = {
   registration: string;
   verified: boolean;
   summary: string;
+  /** Conteúdo informado pelo profissional; exibido apenas quando confirmado editorialmente. */
+  audience?: string[];
+  commonNeeds?: string[];
+  education?: string;
+  insuranceInfo?: string;
+  website?: string;
+  instagram?: string;
+  confirmedAt?: string;
   phone: string;
   whatsapp: string;
   services: string[];

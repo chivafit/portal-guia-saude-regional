@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Building2, ClipboardCheck, MapPin, Phone, Play, Stethoscope } from "lucide-react";
+import { ArrowLeft, Building2, ClipboardCheck, MapPin, Play, Stethoscope } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -82,6 +82,8 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
   const locationHref = locationPhone.length >= 10 ? `tel:+${locationPhone}` : "";
   const mapHref = locationOrganization?.mapUrl || (locationAddress ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${locationName}, ${locationAddress}, ${item.city}, MG`)}` : "");
   const visibleServices = item.services.filter((service) => usableService(service, item.specialty));
+  const visibleAudience = item.audience?.filter(Boolean) ?? [];
+  const visibleNeeds = item.commonNeeds?.filter(Boolean) ?? [];
   const canonicalUrl = `https://guiasaude.app.br/profissionais/${item.slug}/`;
 
   return (
@@ -140,6 +142,30 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
               </div>
             </article> : null}
 
+            {item.education ? <article className="profile-clean-note">
+              <h2>Formação e experiência</h2>
+              <p>{item.education}</p>
+            </article> : null}
+
+            {visibleAudience.length ? <article>
+              <h2>Público atendido</h2>
+              <div className="profile-clean-services">
+                {visibleAudience.map((audience) => <span key={audience}>{audience}</span>)}
+              </div>
+            </article> : null}
+
+            {visibleNeeds.length ? <article>
+              <h2>Principais demandas</h2>
+              <div className="profile-clean-services">
+                {visibleNeeds.map((need) => <span key={need}>{need}</span>)}
+              </div>
+            </article> : null}
+
+            {item.insuranceInfo ? <article className="profile-clean-note">
+              <h2>Convênios e formas de atendimento</h2>
+              <p>{item.insuranceInfo}</p>
+            </article> : null}
+
             {locationName ? <article>
               <h2>Local de atendimento</h2>
               <div className="profile-clean-location">
@@ -169,6 +195,8 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
           </section>
 
           <p className="profile-clean-source">Informações reunidas a partir de fontes públicas e canais profissionais. <Link href="/sobre#como-verificamos">Como verificamos as informações</Link></p>
+
+          {item.confirmedAt ? <p className="profile-clean-confirmed">Informações confirmadas em {item.confirmedAt}.</p> : null}
 
           <section className="profile-clean-update" aria-label="Atualização do perfil">
             <div>
