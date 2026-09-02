@@ -132,6 +132,7 @@ export const podcastProfessionalAdditions: Professional[] = [
     publicationStatus: "published",
     verificationStatus: "direct-confirmation",
     commercialStatus: "organic",
+    featured: true,
   },
   {
     slug: "cintia-bonisson-psicanalise-piumhi",

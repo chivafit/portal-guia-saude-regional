@@ -24,6 +24,8 @@ export type Professional = {
   publicationStatus?: "draft" | "published" | "inactive" | "removed";
   verificationStatus?: "public-source" | "official-source" | "direct-confirmation" | "needs-review";
   commercialStatus?: "organic" | "partner" | "sponsored";
+  /** Destaque comercial/editorial exibido com identificação clara no diretório. */
+  featured?: boolean;
   claimed?: boolean;
 };
 

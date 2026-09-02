@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, ShieldCheck, SlidersHorizontal, Stethoscope, X } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, ShieldCheck, SlidersHorizontal, Star, Stethoscope, X } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -338,9 +338,14 @@ function SearchDirectory() {
                 <div className="doctor-card-list">
                   {visibleProfessionals.map((item) => {
                     const contact = directContact(item.whatsapp, item.phone);
-                    return <article className="doctor-card" key={item.slug}>
-                      <div className="doctor-avatar doctor-profession-icon" aria-hidden="true">
-                        <ProfessionIcon profession={item.profession} />
+                    return <article className={`doctor-card${item.featured ? " doctor-card-featured" : ""}`} key={item.slug}>
+                      {item.featured ? <span className="sponsored-ribbon"><Star size={12} fill="currentColor" /> Profissional em destaque</span> : null}
+                      <div
+                        className={`doctor-avatar${item.imageUrl ? " doctor-photo" : " doctor-profession-icon"}`}
+                        aria-hidden="true"
+                        style={item.imageUrl ? { backgroundImage: `url(${item.imageUrl})` } : undefined}
+                      >
+                        {item.imageUrl ? null : <ProfessionIcon profession={item.profession} />}
                       </div>
                       <div className="doctor-main">
                         <div className="doctor-card-head">
