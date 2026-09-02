@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
 import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, ShieldCheck, SlidersHorizontal, Star, Stethoscope, X } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -343,7 +343,7 @@ function SearchDirectory() {
                       <div
                         className={`doctor-avatar${item.imageUrl ? " doctor-photo" : " doctor-profession-icon"}`}
                         aria-hidden="true"
-                        style={item.imageUrl ? { backgroundImage: `url(${item.imageUrl})` } : undefined}
+                        style={item.imageUrl ? { "--doctor-photo": `url(${item.imageUrl})` } as CSSProperties : undefined}
                       >
                         {item.imageUrl ? null : <ProfessionIcon profession={item.profession} />}
                       </div>
