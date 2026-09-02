@@ -1,4 +1,4 @@
 :HL["/_next/static/css/15f4d708be32513a.css","style"]
-:HL["/_next/static/css/d7a582f08bbfb739.css","style"]
+:HL["/_next/static/css/1d0c2b57d1d5732f.css","style"]
 :HL["/_next/static/css/25f881887cddede7.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"revista","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"rUZXHkXlieMZkBHkBg7HF"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"revista","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"WkFP6rPlSDNP9eOPIF8SV"}
