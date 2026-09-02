@@ -2288,7 +2288,8 @@ h1,h2,h3,
 /* Foto do profissional removida — usamos iniciais no lugar */
 .doctor-avatar.doctor-initials{background-image:none!important;font-size:1rem}
 .doctor-card{position:relative;overflow:hidden}
-.doctor-avatar.doctor-photo{background-image:var(--doctor-photo)!important;background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important}
+.doctor-avatar.doctor-photo{background-image:var(--doctor-photo)!important;background-position:center 18%!important;background-size:cover!important;background-repeat:no-repeat!important}
+.profile-clean-photo:not(.profile-clean-initials),.photo-profile-thumb{background-position:center 18%!important;background-size:cover!important;background-repeat:no-repeat!important}
 .sponsored-ribbon{align-items:center;gap:5px}
 .photo-token-options{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:11px}.photo-token-options label{display:flex;align-items:center;gap:8px;color:#526e69;font-size:.74rem;font-weight:700;cursor:pointer}.photo-token-options input{width:16px;height:16px;accent-color:#0f6d66}.photo-token-options button{border:0;background:transparent;color:#0f6d66;font:inherit;font-size:.72rem;font-weight:800;text-decoration:underline;cursor:pointer}@media(max-width:560px){.photo-token-options{align-items:flex-start;flex-direction:column;gap:9px}}
 .profile-clean-photo.profile-clean-initials{display:grid;place-items:center;background-image:none!important;background-color:#eef5f7}
