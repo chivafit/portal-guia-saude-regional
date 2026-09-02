@@ -38,6 +38,16 @@ async function encodeFile(file: File) {
   return btoa(result);
 }
 
+async function githubError(response: Response, fallback: string) {
+  try {
+    const body = await response.json() as { message?: string };
+    if (body.message) return `${fallback} (${body.message})`;
+  } catch {
+    // Mantém a mensagem compreensível mesmo quando o GitHub não retorna JSON.
+  }
+  return fallback;
+}
+
 function extensionFor(file: File) {
   const byType: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
   return byType[file.type] ?? "jpg";
@@ -104,10 +114,10 @@ export function PhotoUpdateManager({ profiles }: Props) {
       const headers = contentHeaders(token);
       const base = `https://api.github.com/repos/${REPOSITORY}/contents`;
       const account = await fetch("https://api.github.com/user", { headers });
-      if (!account.ok) throw new Error("Não foi possível validar o token do GitHub. Gere um token com permissão de conteúdo neste repositório.");
+      if (!account.ok) throw new Error(await githubError(account, "Não foi possível validar o token do GitHub. Crie um token com acesso ao repositório e permissão Contents: Read and write."));
 
       const overridesResponse = await fetch(`${base}/${OVERRIDES_PATH}?ref=${BRANCH}`, { headers });
-      if (!overridesResponse.ok) throw new Error("Não foi possível abrir o catálogo de fotos do portal.");
+      if (!overridesResponse.ok) throw new Error(await githubError(overridesResponse, "Não foi possível abrir o catálogo de fotos do portal."));
       const overridesFile = await overridesResponse.json() as { content: string; sha: string };
       const overrides = JSON.parse(decodeBase64(overridesFile.content)) as Record<string, string>;
       const filePath = `public/professionals/${selected.slug}.${extensionFor(file)}`;
@@ -116,7 +126,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
         headers,
         body: JSON.stringify({ message: `Atualiza foto de ${selected.name}`, content: await encodeFile(file), branch: BRANCH }),
       });
-      if (!imageResponse.ok) throw new Error("A foto não foi enviada. Confira a permissão do token e tente novamente.");
+      if (!imageResponse.ok) throw new Error(await githubError(imageResponse, "A foto não foi enviada. Confirme que o token possui Contents: Read and write neste repositório."));
 
       overrides[selected.slug] = `/${filePath.replace(/^public\//, "")}`;
       const updateResponse = await fetch(`${base}/${OVERRIDES_PATH}`, {
@@ -124,7 +134,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
         headers,
         body: JSON.stringify({ message: `Vincula foto de ${selected.name}`, content: encodeText(`${JSON.stringify(overrides, null, 2)}\n`), sha: overridesFile.sha, branch: BRANCH }),
       });
-      if (!updateResponse.ok) throw new Error("A foto foi enviada, mas não foi possível vinculá-la ao perfil. Tente novamente para concluir.");
+      if (!updateResponse.ok) throw new Error(await githubError(updateResponse, "A foto foi enviada, mas não foi possível vinculá-la ao perfil. Tente novamente para concluir."));
 
       setNotice(`Foto de ${selected.name} atualizada. Ela aparecerá no portal assim que a publicação automática terminar.`);
       setFile(null);
