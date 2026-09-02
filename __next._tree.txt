@@ -1,4 +1,4 @@
-:HL["/_next/static/css/590f98e7362f36ad.css","style"]
-:HL["/_next/static/css/4f0aa97b52bb7474.css","style"]
+:HL["/_next/static/css/15f4d708be32513a.css","style"]
+:HL["/_next/static/css/d7a582f08bbfb739.css","style"]
 :HL["/revista/capas/2025.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"N-NZ-9Y5KzfDb1nd-B0rO"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"EQC0HWRE3lLhoric24fIs"}
