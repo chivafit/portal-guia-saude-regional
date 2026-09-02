@@ -8,6 +8,7 @@ type Props = { profiles: Profile[] };
 
 const REPOSITORY = "chivafit/portal-guia-saude-regional";
 const BRANCH = "main";
+const PUBLIC_BRANCH = "gh-pages";
 const OVERRIDES_PATH = "lib/data/professional-photo-overrides.json";
 const MAX_SIZE = 5 * 1024 * 1024;
 const TOKEN_STORAGE_KEY = "guia-saude-photo-update-token";
@@ -150,20 +151,19 @@ export function PhotoUpdateManager({ profiles }: Props) {
       const overridesFile = await overridesResponse.json() as { content: string; sha: string };
       const overrides = JSON.parse(decodeBase64(overridesFile.content)) as Record<string, string>;
       const filePath = `public/professionals/${selected.slug}.${extensionFor(file)}`;
-      // Ao substituir uma imagem existente, a API do GitHub exige o SHA atual.
-      // Para uma foto inédita a rota retorna 404 e o envio segue sem esse campo.
+      const publicPath = filePath.replace(/^public\//, "");
+      const encodedFile = await encodeFile(file);
+
       const existingImageResponse = await fetch(`${base}/${filePath}?ref=${BRANCH}`, { headers });
-      const existingImage = existingImageResponse.ok
-        ? await existingImageResponse.json() as { sha: string }
-        : null;
+      const existingImage = existingImageResponse.ok ? await existingImageResponse.json() as { sha: string } : null;
       const imageResponse = await fetch(`${base}/${filePath}`, {
         method: "PUT",
         headers,
-        body: JSON.stringify({ message: `Atualiza foto de ${selected.name}`, content: await encodeFile(file), branch: BRANCH, ...(existingImage?.sha ? { sha: existingImage.sha } : {}) }),
+        body: JSON.stringify({ message: `Atualiza foto de ${selected.name}`, content: encodedFile, branch: BRANCH, ...(existingImage?.sha ? { sha: existingImage.sha } : {}) }),
       });
       if (!imageResponse.ok) throw new Error(await githubError(imageResponse, "A foto não foi enviada. Confirme que o token possui Contents: Read and write neste repositório."));
 
-      overrides[selected.slug] = `/${filePath.replace(/^public\//, "")}`;
+      overrides[selected.slug] = `/${publicPath}`;
       const updateResponse = await fetch(`${base}/${OVERRIDES_PATH}`, {
         method: "PUT",
         headers,
@@ -171,7 +171,20 @@ export function PhotoUpdateManager({ profiles }: Props) {
       });
       if (!updateResponse.ok) throw new Error(await githubError(updateResponse, "A foto foi enviada, mas não foi possível vinculá-la ao perfil. Tente novamente para concluir."));
 
-      setNotice(`Foto de ${selected.name} atualizada. Ela aparecerá no portal assim que a publicação automática terminar.`);
+      // Publica também o arquivo diretamente no branch servido pelo GitHub Pages.
+      // Assim, substituições de fotos já vinculadas entram no ar sem depender do build do Next.
+      const publicImageResponse = await fetch(`${base}/${publicPath}?ref=${PUBLIC_BRANCH}`, { headers });
+      const publicImage = publicImageResponse.ok ? await publicImageResponse.json() as { sha: string } : null;
+      const publishAssetResponse = await fetch(`${base}/${publicPath}`, {
+        method: "PUT",
+        headers,
+        body: JSON.stringify({ message: `Publica foto de ${selected.name}`, content: encodedFile, branch: PUBLIC_BRANCH, ...(publicImage?.sha ? { sha: publicImage.sha } : {}) }),
+      });
+      if (!publishAssetResponse.ok) throw new Error(await githubError(publishAssetResponse, "A foto foi salva no cadastro, mas não foi possível publicar o arquivo no site."));
+
+      setNotice(selected.imageUrl
+        ? `Foto de ${selected.name} atualizada e enviada para o site. O GitHub Pages fará a troca automaticamente em instantes.`
+        : `Foto de ${selected.name} cadastrada e enviada ao site. Como este perfil ainda não tinha foto, a imagem ficará vinculada no próximo build completo do portal.`);
       setFile(null);
       setPreview("");
     } catch (caught) {
@@ -185,7 +198,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
     <div className="photo-admin-intro">
       <p className="eyebrow">GESTÃO EDITORIAL</p>
       <h1>Atualize fotos dos profissionais</h1>
-      <p>Escolha um perfil, envie uma fotografia e publique a atualização. A foto atual só é substituída depois da confirmação.</p>
+      <p>Escolha um perfil, envie uma fotografia e publique a atualização. Fotos já existentes são atualizadas diretamente no site.</p>
     </div>
 
     <div className="photo-admin-grid">
@@ -195,7 +208,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
         <div className="photo-profile-results" role="listbox" aria-label="Resultados da busca">
           {matches.map((profile) => <button type="button" key={profile.slug} className={profile.slug === profileSlug ? "selected" : ""} onClick={() => select(profile)}>
             <span className="photo-profile-thumb" style={profile.imageUrl ? { backgroundImage: `url(${profile.imageUrl})` } : undefined} />
-            <span><strong>{profile.name}</strong><small>{profile.profession} · {profile.specialty}</small></span>
+            <span><strong>{profile.name}</strong><small>{profile.profession} · {profile.specialty}</small><small>{profile.imageUrl ? "Foto atual cadastrada" : "Sem foto cadastrada"}</small></span>
             {profile.slug === profileSlug ? <CheckCircle2 size={18} /> : null}
           </button>)}
           {!matches.length ? <p>Nenhum profissional encontrado.</p> : null}
@@ -213,7 +226,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
 
       <section className="photo-admin-card photo-admin-publish">
         <div className="photo-admin-step-title"><span>3</span><div><h2>Confirme e publique</h2><p>Use o token uma vez e, se desejar, mantenha-o apenas neste navegador.</p></div></div>
-        {selected ? <div className="photo-confirmation"><span className="photo-profile-thumb large" style={selected.imageUrl ? { backgroundImage: `url(${selected.imageUrl})` } : undefined} /><div><strong>{selected.name}</strong><small>{selected.profession} · {selected.specialty}</small></div></div> : <p className="photo-empty-selection">Selecione um profissional para continuar.</p>}
+        {selected ? <div className="photo-confirmation"><span className="photo-profile-thumb large" style={selected.imageUrl ? { backgroundImage: `url(${selected.imageUrl})` } : undefined} /><div><strong>{selected.name}</strong><small>{selected.profession} · {selected.specialty}</small><small>{selected.imageUrl ? "A foto atual será substituída" : "Este perfil receberá a primeira foto"}</small></div></div> : <p className="photo-empty-selection">Selecione um profissional para continuar.</p>}
         <label className="photo-token"><KeyRound size={18} /><input type="password" value={token} onChange={(event) => changeToken(event.target.value)} placeholder="Token do GitHub com permissão de conteúdo" autoComplete="off" spellCheck="false" /></label>
         <div className="photo-token-options">
           <label><input type="checkbox" checked={rememberToken} onChange={(event) => changeRememberToken(event.target.checked)} /> Lembrar neste dispositivo</label>
