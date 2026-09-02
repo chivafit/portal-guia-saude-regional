@@ -1,3 +1,3 @@
-:HL["/_next/static/css/a9cad4c1c873c4c1.css","style"]
+:HL["/_next/static/css/461b17d449eacec1.css","style"]
 :HL["/_next/static/css/7108c2e92958284d.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-wagner-de-oliveira-dornela-pediatria-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"_0wi0GntEpeC5AqEjsdrN"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-wagner-de-oliveira-dornela-pediatria-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"W30O4nstn1g05nmqKLRaw"}
