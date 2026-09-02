@@ -59,6 +59,10 @@ function profileLabel(profile: Profile) {
   return `${profile.name} — ${profile.profession}${profile.specialty ? ` · ${profile.specialty}` : ""}`;
 }
 
+function hasDedicatedProfessionalPhoto(profile: Profile | null) {
+  return Boolean(profile?.imageUrl && /^\/professionals\//.test(profile.imageUrl));
+}
+
 export function PhotoUpdateManager({ profiles }: Props) {
   const [query, setQuery] = useState("");
   const [profileSlug, setProfileSlug] = useState("");
@@ -71,6 +75,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
   const [saving, setSaving] = useState(false);
 
   const selected = profiles.find((profile) => profile.slug === profileSlug) ?? null;
+  const selectedHasDedicatedPhoto = hasDedicatedProfessionalPhoto(selected);
   const matches = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("pt-BR");
     if (!normalized) return profiles.slice(0, 12);
@@ -152,6 +157,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
       const overrides = JSON.parse(decodeBase64(overridesFile.content)) as Record<string, string>;
       const filePath = `public/professionals/${selected.slug}.${extensionFor(file)}`;
       const publicPath = filePath.replace(/^public\//, "");
+      const expectedPublicUrl = `/${publicPath}`;
       const encodedFile = await encodeFile(file);
 
       const existingImageResponse = await fetch(`${base}/${filePath}?ref=${BRANCH}`, { headers });
@@ -163,7 +169,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
       });
       if (!imageResponse.ok) throw new Error(await githubError(imageResponse, "A foto não foi enviada. Confirme que o token possui Contents: Read and write neste repositório."));
 
-      overrides[selected.slug] = `/${publicPath}`;
+      overrides[selected.slug] = expectedPublicUrl;
       const updateResponse = await fetch(`${base}/${OVERRIDES_PATH}`, {
         method: "PUT",
         headers,
@@ -171,20 +177,33 @@ export function PhotoUpdateManager({ profiles }: Props) {
       });
       if (!updateResponse.ok) throw new Error(await githubError(updateResponse, "A foto foi enviada, mas não foi possível vinculá-la ao perfil. Tente novamente para concluir."));
 
-      // Publica também o arquivo diretamente no branch servido pelo GitHub Pages.
-      // Assim, substituições de fotos já vinculadas entram no ar sem depender do build do Next.
-      const publicImageResponse = await fetch(`${base}/${publicPath}?ref=${PUBLIC_BRANCH}`, { headers });
+      const publicImageResponse = await fetch(`${base}/${publicPath}?ref=${PUBLIC_BRANCH}`, { headers, cache: "no-store" });
       const publicImage = publicImageResponse.ok ? await publicImageResponse.json() as { sha: string } : null;
       const publishAssetResponse = await fetch(`${base}/${publicPath}`, {
         method: "PUT",
         headers,
         body: JSON.stringify({ message: `Publica foto de ${selected.name}`, content: encodedFile, branch: PUBLIC_BRANCH, ...(publicImage?.sha ? { sha: publicImage.sha } : {}) }),
       });
-      if (!publishAssetResponse.ok) throw new Error(await githubError(publishAssetResponse, "A foto foi salva no cadastro, mas não foi possível publicar o arquivo no site."));
+      if (!publishAssetResponse.ok) {
+        throw new Error(await githubError(
+          publishAssetResponse,
+          "A foto foi salva e vinculada no cadastro, mas não foi possível gravar o arquivo no gh-pages. O perfil ainda não foi atualizado no site.",
+        ));
+      }
 
-      setNotice(selected.imageUrl
-        ? `Foto de ${selected.name} atualizada e enviada para o site. O GitHub Pages fará a troca automaticamente em instantes.`
-        : `Foto de ${selected.name} cadastrada e enviada ao site. Como este perfil ainda não tinha foto, a imagem ficará vinculada no próximo build completo do portal.`);
+      const publishResult = await publishAssetResponse.json() as { content?: { sha?: string; path?: string } };
+      const verifyResponse = await fetch(`${base}/${publicPath}?ref=${PUBLIC_BRANCH}&t=${Date.now()}`, { headers, cache: "no-store" });
+      if (!verifyResponse.ok) {
+        throw new Error("A foto foi enviada ao gh-pages, mas a verificação final não encontrou o arquivo. Não considere a publicação concluída ainda.");
+      }
+      const verified = await verifyResponse.json() as { sha?: string; path?: string };
+      if (!verified.sha || verified.path !== publicPath || (publishResult.content?.sha && verified.sha !== publishResult.content.sha)) {
+        throw new Error("O GitHub respondeu ao envio, mas a verificação do arquivo publicado não corresponde à nova foto. Tente novamente antes de considerar a troca concluída.");
+      }
+
+      setNotice(selectedHasDedicatedPhoto
+        ? `Foto de ${selected.name} atualizada, vinculada e confirmada no gh-pages. O GitHub Pages fará a troca no site em instantes.`
+        : `Nova foto de ${selected.name} enviada e confirmada no gh-pages. O cadastro foi vinculado corretamente, mas como o perfil ainda não usava uma foto em /professionals/, é necessário um novo build completo para o HTML do perfil passar a apontar para ela.`);
       setFile(null);
       setPreview("");
     } catch (caught) {
@@ -198,7 +217,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
     <div className="photo-admin-intro">
       <p className="eyebrow">GESTÃO EDITORIAL</p>
       <h1>Atualize fotos dos profissionais</h1>
-      <p>Escolha um perfil, envie uma fotografia e publique a atualização. Fotos já existentes são atualizadas diretamente no site.</p>
+      <p>Escolha um perfil, envie uma fotografia e publique a atualização. O painel confirma se o arquivo realmente chegou ao site antes de informar sucesso.</p>
     </div>
 
     <div className="photo-admin-grid">
@@ -206,11 +225,14 @@ export function PhotoUpdateManager({ profiles }: Props) {
         <div className="photo-admin-step-title"><span>1</span><div><h2>Escolha o profissional</h2><p>Busque por nome, profissão ou especialidade.</p></div></div>
         <label className="photo-search"><Search size={18} /><input value={query} onChange={(event) => { setQuery(event.target.value); setProfileSlug(""); }} placeholder="Ex.: Gabriela Oliveira" autoComplete="off" /></label>
         <div className="photo-profile-results" role="listbox" aria-label="Resultados da busca">
-          {matches.map((profile) => <button type="button" key={profile.slug} className={profile.slug === profileSlug ? "selected" : ""} onClick={() => select(profile)}>
-            <span className="photo-profile-thumb" style={profile.imageUrl ? { backgroundImage: `url(${profile.imageUrl})` } : undefined} />
-            <span><strong>{profile.name}</strong><small>{profile.profession} · {profile.specialty}</small><small>{profile.imageUrl ? "Foto atual cadastrada" : "Sem foto cadastrada"}</small></span>
-            {profile.slug === profileSlug ? <CheckCircle2 size={18} /> : null}
-          </button>)}
+          {matches.map((profile) => {
+            const dedicated = hasDedicatedProfessionalPhoto(profile);
+            return <button type="button" key={profile.slug} className={profile.slug === profileSlug ? "selected" : ""} onClick={() => select(profile)}>
+              <span className="photo-profile-thumb" style={profile.imageUrl ? { backgroundImage: `url(${profile.imageUrl})` } : undefined} />
+              <span><strong>{profile.name}</strong><small>{profile.profession} · {profile.specialty}</small><small>{dedicated ? "Foto profissional cadastrada" : profile.imageUrl ? "Imagem atual não é foto profissional" : "Sem foto profissional cadastrada"}</small></span>
+              {profile.slug === profileSlug ? <CheckCircle2 size={18} /> : null}
+            </button>;
+          })}
           {!matches.length ? <p>Nenhum profissional encontrado.</p> : null}
         </div>
       </section>
@@ -226,7 +248,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
 
       <section className="photo-admin-card photo-admin-publish">
         <div className="photo-admin-step-title"><span>3</span><div><h2>Confirme e publique</h2><p>Use o token uma vez e, se desejar, mantenha-o apenas neste navegador.</p></div></div>
-        {selected ? <div className="photo-confirmation"><span className="photo-profile-thumb large" style={selected.imageUrl ? { backgroundImage: `url(${selected.imageUrl})` } : undefined} /><div><strong>{selected.name}</strong><small>{selected.profession} · {selected.specialty}</small><small>{selected.imageUrl ? "A foto atual será substituída" : "Este perfil receberá a primeira foto"}</small></div></div> : <p className="photo-empty-selection">Selecione um profissional para continuar.</p>}
+        {selected ? <div className="photo-confirmation"><span className="photo-profile-thumb large" style={selected.imageUrl ? { backgroundImage: `url(${selected.imageUrl})` } : undefined} /><div><strong>{selected.name}</strong><small>{selected.profession} · {selected.specialty}</small><small>{selectedHasDedicatedPhoto ? "A foto profissional atual será substituída diretamente" : "Será cadastrada uma nova foto profissional; a primeira vinculação exige novo build"}</small></div></div> : <p className="photo-empty-selection">Selecione um profissional para continuar.</p>}
         <label className="photo-token"><KeyRound size={18} /><input type="password" value={token} onChange={(event) => changeToken(event.target.value)} placeholder="Token do GitHub com permissão de conteúdo" autoComplete="off" spellCheck="false" /></label>
         <div className="photo-token-options">
           <label><input type="checkbox" checked={rememberToken} onChange={(event) => changeRememberToken(event.target.checked)} /> Lembrar neste dispositivo</label>
@@ -235,7 +257,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
         <p className="photo-security"><ShieldCheck size={16} /> Ao marcar a opção, o token é salvo somente no navegador deste dispositivo. Não use em computador compartilhado.</p>
         {error ? <p className="photo-message error">{error}</p> : null}
         {notice ? <p className="photo-message success">{notice}</p> : null}
-        <button type="button" className="photo-publish-button" onClick={publish} disabled={saving || !selected || !file}>{saving ? <><LoaderCircle className="spin" size={18} /> Publicando foto...</> : "Publicar nova foto"}</button>
+        <button type="button" className="photo-publish-button" onClick={publish} disabled={saving || !selected || !file}>{saving ? <><LoaderCircle className="spin" size={18} /> Publicando e verificando...</> : "Publicar nova foto"}</button>
       </section>
     </div>
   </section>;
