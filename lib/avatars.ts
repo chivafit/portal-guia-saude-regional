@@ -18,6 +18,9 @@ export function avatarForSlug(slug: string): string {
 // Retorna a imagem real do perfil quando houver; caso contrário, um avatar ilustrado.
 // O placeholder cinza genérico é tratado como "sem imagem".
 export function resolveProfessionalImage(slug: string, imageUrl?: string): string {
+  const updatedPhoto = photoOverrides[slug as keyof typeof photoOverrides];
+  if (updatedPhoto) return updatedPhoto;
   if (imageUrl && imageUrl !== PLACEHOLDER) return imageUrl;
   return avatarForSlug(slug);
 }
+import photoOverrides from "./data/professional-photo-overrides.json";
