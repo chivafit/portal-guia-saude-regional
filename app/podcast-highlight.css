@@ -5,6 +5,16 @@
   --podcast-border: #e8ce8c;
 }
 
+/* Miniaturas de profissionais usam linguagem visual de perfil: formato circular.
+   Mantemos as dimensões existentes e alteramos apenas a forma/enquadramento. */
+.doctor-avatar,
+.city-featured-avatar {
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
 /* Destaques editoriais do Guia Saúde. O !important é intencional: globals.css
    aplica fundo branco aos cards de busca com !important. */
 .doctor-card:has(.status-pill) {
