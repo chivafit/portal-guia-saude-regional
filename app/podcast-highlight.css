@@ -99,4 +99,52 @@
 
 @media (max-width: 760px) {
   .city-featured-card { box-shadow: 0 8px 22px rgba(121, 88, 23, .08) !important; }
+
+  /* Busca mobile: selo ocupa a primeira linha; foto e informações ficam lado a lado
+     abaixo dele. Isso evita a sobreposição da foto circular com o selo. */
+  .doctor-card:has(.status-pill) {
+    grid-template-columns: 58px minmax(0, 1fr) !important;
+    column-gap: 12px !important;
+    row-gap: 8px !important;
+    align-items: start !important;
+  }
+  .doctor-card:has(.status-pill) .doctor-avatar {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    width: 58px !important;
+    height: 58px !important;
+    min-height: 58px !important;
+    align-self: start !important;
+    margin: 0 !important;
+  }
+  .doctor-card:has(.status-pill) .doctor-main {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    min-width: 0 !important;
+    align-self: start !important;
+  }
+  .doctor-card:has(.status-pill) .doctor-card-head {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 3px !important;
+  }
+  .doctor-card:has(.status-pill) .status-pill {
+    position: absolute !important;
+    top: 12px !important;
+    left: 12px !important;
+    right: auto !important;
+    width: max-content !important;
+    max-width: calc(100% - 24px) !important;
+    margin: 0 !important;
+  }
+  .doctor-card:has(.status-pill) .doctor-avatar,
+  .doctor-card:has(.status-pill) .doctor-main {
+    margin-top: 38px !important;
+  }
+  .doctor-card:has(.status-pill) .doctor-side {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    margin-top: 2px !important;
+  }
 }
