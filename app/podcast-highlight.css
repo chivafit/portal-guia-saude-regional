@@ -85,6 +85,69 @@
   border-color: #d8a32d !important;
 }
 
+/* Diretório de destaques: cards horizontais, menores e mais densos que os cards da home. */
+.featured-directory-section { padding-top: 34px !important; }
+.featured-directory-head { margin-bottom: 20px !important; }
+.featured-directory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.featured-directory-card {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 106px;
+  padding: 14px 16px;
+  border: 1px solid var(--podcast-border);
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--podcast-soft) 0%, #fff 72%);
+  box-shadow: 0 7px 22px rgba(121, 88, 23, .06);
+  color: inherit;
+  text-decoration: none;
+}
+.featured-directory-card:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(121, 88, 23, .10); }
+.featured-directory-avatar {
+  width: 58px;
+  height: 58px;
+  border: 2px solid #d8a32d;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background-color: #fff4cf;
+  background-position: center;
+  background-size: cover;
+  color: var(--podcast-accent-dark);
+  font-size: 15px;
+  font-weight: 800;
+}
+.featured-directory-info { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; gap: 2px; }
+.featured-directory-info .city-featured-tag {
+  margin: 0 0 3px;
+  padding: 3px 7px;
+  color: var(--podcast-accent-dark) !important;
+  background: #fff1bd !important;
+  border: 1px solid var(--podcast-border) !important;
+  font-size: 9px;
+  line-height: 1.2;
+}
+.featured-directory-info strong { font-size: 15px; line-height: 1.2; color: #173d3a; }
+.featured-directory-info small { font-size: 12px; line-height: 1.25; color: #46615f; }
+.featured-directory-meta,
+.featured-directory-registration { font-size: 10.5px; line-height: 1.25; color: #788a88; }
+.featured-directory-card em {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--podcast-accent-dark);
+}
+
 /* Perfil completo de participante do podcast. */
 .profile-clean-wrap:has(.profile-podcast) .profile-clean-card {
   position: relative;
@@ -99,6 +162,17 @@
 
 @media (max-width: 760px) {
   .city-featured-card { box-shadow: 0 8px 22px rgba(121, 88, 23, .08) !important; }
+  .featured-directory-hero { padding-top: 26px !important; padding-bottom: 26px !important; }
+  .featured-directory-section { padding-top: 24px !important; }
+  .featured-directory-grid { grid-template-columns: 1fr; gap: 9px; }
+  .featured-directory-card {
+    grid-template-columns: 52px minmax(0, 1fr);
+    min-height: 92px;
+    padding: 11px 12px;
+    gap: 10px;
+  }
+  .featured-directory-avatar { width: 52px; height: 52px; }
+  .featured-directory-card em { grid-column: 2; margin-top: 3px; }
 
   /* Busca mobile: selo ocupa a primeira linha; foto e informações ficam lado a lado
      abaixo dele. Isso evita a sobreposição da foto circular com o selo. */
