@@ -150,10 +150,16 @@ export function PhotoUpdateManager({ profiles }: Props) {
       const overridesFile = await overridesResponse.json() as { content: string; sha: string };
       const overrides = JSON.parse(decodeBase64(overridesFile.content)) as Record<string, string>;
       const filePath = `public/professionals/${selected.slug}.${extensionFor(file)}`;
+      // Ao substituir uma imagem existente, a API do GitHub exige o SHA atual.
+      // Para uma foto inédita a rota retorna 404 e o envio segue sem esse campo.
+      const existingImageResponse = await fetch(`${base}/${filePath}?ref=${BRANCH}`, { headers });
+      const existingImage = existingImageResponse.ok
+        ? await existingImageResponse.json() as { sha: string }
+        : null;
       const imageResponse = await fetch(`${base}/${filePath}`, {
         method: "PUT",
         headers,
-        body: JSON.stringify({ message: `Atualiza foto de ${selected.name}`, content: await encodeFile(file), branch: BRANCH }),
+        body: JSON.stringify({ message: `Atualiza foto de ${selected.name}`, content: await encodeFile(file), branch: BRANCH, ...(existingImage?.sha ? { sha: existingImage.sha } : {}) }),
       });
       if (!imageResponse.ok) throw new Error(await githubError(imageResponse, "A foto não foi enviada. Confirme que o token possui Contents: Read and write neste repositório."));
 
