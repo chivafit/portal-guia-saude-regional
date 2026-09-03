@@ -4,4 +4,4 @@
 :HL["/revista/capas/2025.jpg","image"]
 :HL["/podcast/gabriela-araujo-fisioterapia-pelvica-horizontal.png","image"]
 :HL["/materias/radiologia-odontologica-diagnostico.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"anuncie","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"ulGe9wykL809-6bgvZ7g3"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"anuncie","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"aUpRPo6g0_NFicibYeCzI"}
