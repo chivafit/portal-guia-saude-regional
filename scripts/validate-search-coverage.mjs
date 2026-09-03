@@ -4,21 +4,29 @@ import { fileURLToPath } from "node:url";
 import { matchesProfessionalSpecialty, matchesSearchTerms } from "../lib/search-match.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+
+function collectTypeScriptFiles(directory) {
+  const result = [];
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const absolute = path.join(directory, entry.name);
+    if (entry.isDirectory()) result.push(...collectTypeScriptFiles(absolute));
+    else if (entry.isFile() && entry.name.endsWith(".ts")) result.push(absolute);
+  }
+  return result;
+}
+
 const sourceFiles = [
-  "lib/data.ts",
-  "lib/data/professional-additions.ts",
-  "lib/data/medical-sequence-additions.ts",
-  "lib/data/medical-expansion-otorrino.ts",
-  "lib/data/nonmedical-sequence-additions.ts",
-  "lib/data/podcast-professional-additions.ts",
+  path.join(root, "lib/data.ts"),
+  ...collectTypeScriptFiles(path.join(root, "lib/data")),
 ];
 
 function parseStringArray(source) {
   return [...source.matchAll(/"([^"]+)"/g)].map((match) => match[1]);
 }
 
-function recordsFromSource(relativePath) {
-  const source = fs.readFileSync(path.join(root, relativePath), "utf8");
+function recordsFromSource(absolutePath) {
+  const source = fs.readFileSync(absolutePath, "utf8");
+  const relativePath = path.relative(root, absolutePath);
   const records = [];
   const pattern = /slug:\s*"([^"]+)"[\s\S]*?name:\s*"([^"]+)"[\s\S]*?specialty:\s*"([^"]+)"[\s\S]*?services:\s*\[([^\]]*)\]/g;
   for (const match of source.matchAll(pattern)) {
@@ -57,7 +65,6 @@ for (const record of records) {
     }
   }
 
-  // O nome, a especialidade completa e cada serviço precisam continuar recuperáveis pela busca textual.
   const searchable = `${record.name} ${record.specialty} ${record.services.join(" ")}`;
   for (const requested of [record.name, record.specialty, ...record.services]) {
     if (!requested) continue;
@@ -90,6 +97,16 @@ const syntheticChecks = [
     expected: true,
   },
   {
+    label: "Endocrinologia inclui Endocrinologia e Metabologia",
+    result: matchesProfessionalSpecialty({ specialty: "Endocrinologia e Metabologia", services: [] }, "Endocrinologia"),
+    expected: true,
+  },
+  {
+    label: "Ortodontia inclui Ortodontia e Ortopedia Facial",
+    result: matchesProfessionalSpecialty({ specialty: "Ortodontia e Ortopedia Facial", services: [] }, "Ortodontia"),
+    expected: true,
+  },
+  {
     label: "Dermatologia não inclui Cardiologia",
     result: matchesProfessionalSpecialty({ specialty: "Cardiologia", services: ["Hipertensão"] }, "Dermatologia"),
     expected: false,
@@ -110,6 +127,7 @@ const duplicateSlugs = [...new Set(records.map((record) => record.slug).filter((
 
 console.log("Professional search coverage validation");
 console.log(JSON.stringify({
+  dataFilesScanned: sourceFiles.length,
   recordsScanned: records.length,
   compositeSpecialties,
   coverageAssertions,
