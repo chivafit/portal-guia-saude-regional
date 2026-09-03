@@ -1,21 +1,10 @@
-// Busca do portal: normaliza acentos e caixa para comparações tolerantes.
-// Ex.: "cardiologia", "Cardiología" e "CARDIOLOGIA" batem com "Cardiologia".
+// Busca do portal: normaliza acentos, caixa e pontuação para comparações tolerantes.
 import type { PublicOrganization, PublicProfessional } from "./directory";
 import { categoryForOrganization, normalizeTaxonomyValue, organizationSearchText, resolveServiceCategory } from "./service-taxonomy";
+import { matchesExactSearchValue, matchesProfessionalSpecialty, matchesSearchTerms, normalizeSearchValue } from "./search-match.js";
 
 export function normalize(value: string): string {
-  return value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .trim();
-}
-
-// Divide a busca em termos e exige que todos apareçam (AND), em qualquer ordem.
-function matchesTerms(haystack: string, query: string): boolean {
-  const normalizedHaystack = normalize(haystack);
-  const terms = normalize(query).split(/\s+/).filter(Boolean);
-  return terms.every((term) => normalizedHaystack.includes(term));
+  return normalizeSearchValue(value);
 }
 
 export type SearchFilters = {
@@ -31,12 +20,11 @@ export function filterProfessionals(items: PublicProfessional[], filters: Search
   const { query = "", city = "", profession = "", specialty = "" } = filters;
   return items.filter((item) => {
     const haystack = `${item.name} ${item.profession} ${item.specialty} ${item.organization} ${item.services.join(" ")}`;
-    const specialtyHaystack = `${item.specialty} ${item.services.join(" ")}`;
     return (
-      (!query || matchesTerms(haystack, query)) &&
-      (!city || item.city === city) &&
-      (!profession || item.profession === profession) &&
-      (!specialty || matchesTerms(specialtyHaystack, specialty))
+      (!query || matchesSearchTerms(haystack, query)) &&
+      (!city || matchesExactSearchValue(item.city, city)) &&
+      (!profession || matchesExactSearchValue(item.profession, profession)) &&
+      matchesProfessionalSpecialty(item, specialty)
     );
   });
 }
@@ -53,7 +41,7 @@ export function filterOrganizations(items: PublicOrganization[], filters: Search
     );
     const haystack = organizationSearchText(item);
     return (
-      (!query || matchesTerms(haystack, query)) &&
+      (!query || matchesSearchTerms(haystack, query)) &&
       (!city || normalizeTaxonomyValue(item.city) === normalizedCity) &&
       categoryMatch
     );
