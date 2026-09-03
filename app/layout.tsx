@@ -6,6 +6,7 @@ import "./mobile-audit.css";
 import "./podcast-highlight.css";
 import "./podcast-photo-highlight.css";
 import "./load-more-button.css";
+import "./home-featured-professionals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
