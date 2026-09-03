@@ -31,11 +31,12 @@ export function filterProfessionals(items: PublicProfessional[], filters: Search
   const { query = "", city = "", profession = "", specialty = "" } = filters;
   return items.filter((item) => {
     const haystack = `${item.name} ${item.profession} ${item.specialty} ${item.organization} ${item.services.join(" ")}`;
+    const specialtyHaystack = `${item.specialty} ${item.services.join(" ")}`;
     return (
       (!query || matchesTerms(haystack, query)) &&
       (!city || item.city === city) &&
       (!profession || item.profession === profession) &&
-      (!specialty || item.specialty === specialty)
+      (!specialty || matchesTerms(specialtyHaystack, specialty))
     );
   });
 }
