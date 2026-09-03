@@ -13,6 +13,12 @@ export const podcastProfessionalMap: Record<string, string[]> = {
   "implantodontia-livia-pereira": ["livia-pereira-implantodontia-piumhi"],
   "blefaroplastia-mirian-sansoni": ["dra-mirian-sansoni-oftalmologia-piumhi"],
   "medicalizacao-da-vida-daniela-melo": ["daniela-melo-farmacia-piumhi"],
+  "conexao-saude-elisa-ribeiro": [],
+  "neurologia-marcio-jr": ["dr-marcio-alves-da-cruz-junior-neurologia-piumhi"],
+  "oftalmologia-sergio-paulo": ["dr-sergio-paulo-mota-soares-oftalmologia-piumhi"],
+  "ginecologia-sem-tabu-larissa-vaz": ["dra-larissa-vaz-ginecologia-piumhi"],
+  "emagrecer-manter-peso-natalia-faria": [],
+  "natacao-saude-inclusao-raquel-moraes": [],
   "vinculos-afetivos-cintia-bonisson": ["cintia-bonisson-psicanalise-piumhi"],
   "dermatologia-sem-filtro-gabriela-oliveira": ["dra-gabriela-goncalves-de-oliveira-dermatologia-piumhi"],
   "fisioterapia-respiratoria-ivana-rezende": ["ivana-mara-de-oliveira-rezende-fisioterapia-piumhi"],
@@ -23,6 +29,15 @@ export const podcastProfessionalMap: Record<string, string[]> = {
   "terapia-regenerativa-diego-mota-fernandes": ["dr-diego-mota-fernandes-ortopedia-piumhi"],
   "cirurgia-refrativa-paulo-henrique-faria": ["dr-paulo-henrique-faria-silva-oftalmologia-piumhi"],
 };
+
+/**
+ * Participações confirmadas editorialmente cujo episódio ainda não está
+ * cadastrado na coleção histórica. Isso permite reconhecer o profissional como
+ * participante sem inventar um vínculo para um episódio inexistente.
+ */
+export const confirmedPodcastParticipantSlugs = new Set<string>([
+  "jaine-reis-psicologia-piumhi",
+]);
 
 /**
  * Foto editorial reutilizada do card/capa do episódio. É aplicada apenas aos
@@ -36,6 +51,9 @@ export const podcastProfessionalImageMap: Record<string, string> = {
   "livia-pereira-implantodontia-piumhi": "/podcast/implantodontia-livia-pereira.jpg",
   "dra-mirian-sansoni-oftalmologia-piumhi": "/podcast/blefaroplastia-mirian-sansoni.jpg",
   "daniela-melo-farmacia-piumhi": "/podcast/medicalizacao-da-vida-daniela-melo.jpg",
+  "dr-marcio-alves-da-cruz-junior-neurologia-piumhi": "/podcast/marcio-jr-neurologia.jpg",
+  "dr-sergio-paulo-mota-soares-oftalmologia-piumhi": "/podcast/sergio-paulo-oftalmologia.jpg",
+  "dra-larissa-vaz-ginecologia-piumhi": "/podcast/larissa-vaz-ginecologia.jpg",
   "cintia-bonisson-psicanalise-piumhi": "/podcast/vinculos-afetivos-cintia-bonisson.jpg",
   "dra-gabriela-goncalves-de-oliveira-dermatologia-piumhi": "/podcast/dermatologia-sem-filtro-gabriela-oliveira.jpg",
   "ivana-mara-de-oliveira-rezende-fisioterapia-piumhi": "/podcast/fisioterapia-respiratoria-ivana-rezende.jpg",
@@ -53,7 +71,7 @@ export function professionalSlugsForEpisode(episode: Pick<PodcastEpisode, "slug"
 }
 
 export function isPodcastProfessional(slug: string): boolean {
-  return Object.values(podcastProfessionalMap).some((slugs) => slugs.includes(slug));
+  return confirmedPodcastParticipantSlugs.has(slug) || Object.values(podcastProfessionalMap).some((slugs) => slugs.includes(slug));
 }
 
 export function podcastImageForProfessional(slug: string): string | undefined {
