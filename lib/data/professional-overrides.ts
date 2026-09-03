@@ -45,7 +45,6 @@ export const professionalOverrides: Record<string, Partial<Professional>> = {
     whatsapp: "",
     services: ["Consulta oftalmológica", "Catarata", "Cirurgia refrativa a laser", "Glaucoma", "Ceratocone", "Cirurgia plástica das pálpebras"],
     audience: ["Adultos", "Crianças"],
-    commonNeeds: ["Catarata", "Glaucoma", "Ceratocone", "Cirurgia refrativa a laser"],
     education: "Graduado em Medicina pela UFMG, com residência médica em Oftalmologia pelo HGIP/IPSEMG e fellowships em Glaucoma e Catarata pela Santa Casa de Belo Horizonte.",
     confirmedAt: "setembro de 2026",
     source: "https://phdhospitaldia.com.br/portfolio-items/oftalmologia/",
@@ -56,7 +55,6 @@ export const professionalOverrides: Record<string, Partial<Professional>> = {
   },
   "dr-diego-mota-fernandes-ortopedia-piumhi": {
     summary: "Médico ortopedista e participante do Podcast Conexão Saúde, com conteúdo publicado pelo Guia Saúde sobre terapia regenerativa no tratamento de lesões.",
-    commonNeeds: ["Lesões articulares", "Lesões de tecidos moles", "Ortopedia e traumatologia"],
     confirmedAt: "setembro de 2026",
     sourceUrls: ["https://www.youtube.com/watch?v=noazEavj3vY"],
     lastVerifiedAt: "2026-09-03",

@@ -83,7 +83,6 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
   const mapHref = locationOrganization?.mapUrl || (locationAddress ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${locationName}, ${locationAddress}, ${item.city}, MG`)}` : "");
   const visibleServices = item.services.filter((service) => usableService(service, item.specialty));
   const visibleAudience = item.audience?.filter(Boolean) ?? [];
-  const visibleNeeds = item.commonNeeds?.filter(Boolean) ?? [];
   const canonicalUrl = `https://guiasaude.app.br/profissionais/${item.slug}/`;
 
   return (
@@ -151,13 +150,6 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
               <h2>Público atendido</h2>
               <div className="profile-clean-services">
                 {visibleAudience.map((audience) => <span key={audience}>{audience}</span>)}
-              </div>
-            </article> : null}
-
-            {visibleNeeds.length ? <article>
-              <h2>Principais demandas</h2>
-              <div className="profile-clean-services">
-                {visibleNeeds.map((need) => <span key={need}>{need}</span>)}
               </div>
             </article> : null}
 

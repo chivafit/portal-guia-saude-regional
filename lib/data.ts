@@ -12,7 +12,6 @@ export type Professional = {
   summary: string;
   /** Conteúdo informado pelo profissional; exibido apenas quando confirmado editorialmente. */
   audience?: string[];
-  commonNeeds?: string[];
   education?: string;
   insuranceInfo?: string;
   website?: string;

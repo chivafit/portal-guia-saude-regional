@@ -17,7 +17,6 @@ export const podcastProfessionalAdditions: Professional[] = [
     verified: true,
     summary: "Fisioterapeuta pélvica e sócia fundadora do NIP, com atuação voltada à saúde da mulher.",
     audience: ["Mulheres", "Gestantes"],
-    commonNeeds: ["Saúde íntima", "Fisioterapia ginecológica", "Fisioterapia pélvica"],
     education: "Especialização em Fisioterapia em Ginecologia pela UNIFESP (2011) e formação em Pilates pela APB.",
     website: "https://www.nucleodeintegracaopelvica.com.br/gabriela-araujo",
     confirmedAt: "setembro de 2026",
