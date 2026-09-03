@@ -1,4 +1,4 @@
-import type { PodcastEpisode } from "./data";
+import { podcasts, type PodcastEpisode } from "./data";
 
 /**
  * Relação editorial entre episódios do Conexão Saúde e perfis do diretório.
@@ -27,19 +27,22 @@ export const podcastProfessionalMap: Record<string, string[]> = {
   "cirurgia-refrativa-paulo-henrique-faria": ["dr-paulo-henrique-faria-silva-oftalmologia-piumhi"],
 };
 
-/**
- * Participações confirmadas editorialmente cujo episódio ainda não está
- * cadastrado na coleção histórica. Isso permite reconhecer o profissional como
- * participante sem inventar um vínculo para um episódio inexistente.
- */
+/** Participações confirmadas cujo episódio ainda não está na coleção histórica. */
 export const confirmedPodcastParticipantSlugs = new Set<string>([
   "jaine-reis-psicologia-piumhi",
 ]);
 
 /**
- * Foto editorial reutilizada do card/capa do episódio. É aplicada apenas aos
- * participantes do podcast e pode ser substituída depois por retrato individual.
+ * Fonte única dos destaques: todos os perfis explicitamente vinculados aos
+ * episódios cadastrados + participações confirmadas editorialmente. Quando um
+ * novo episódio recebe professionalSlugs ou entra no mapa, o destaque passa a
+ * reconhecê-lo automaticamente, sem manter uma segunda lista manual.
  */
+export const podcastProfessionalSlugs = new Set<string>([
+  ...podcasts.flatMap((episode) => professionalSlugsForEpisode(episode)),
+  ...confirmedPodcastParticipantSlugs,
+]);
+
 export const podcastProfessionalImageMap: Record<string, string> = {
   "gabriela-araujo-fisioterapia-pelvica-piumhi": "/podcast/gabriela-araujo-fisioterapia-pelvica-horizontal.png",
   "patricia-terra-odontologia-piumhi": "/podcast/patricia-terra-estetica-regenerativa-horizontal.png",
@@ -68,7 +71,7 @@ export function professionalSlugsForEpisode(episode: Pick<PodcastEpisode, "slug"
 }
 
 export function isPodcastProfessional(slug: string): boolean {
-  return confirmedPodcastParticipantSlugs.has(slug) || Object.values(podcastProfessionalMap).some((slugs) => slugs.includes(slug));
+  return podcastProfessionalSlugs.has(slug);
 }
 
 export function podcastImageForProfessional(slug: string): string | undefined {
@@ -76,7 +79,7 @@ export function podcastImageForProfessional(slug: string): string | undefined {
 }
 
 export function podcastEpisodeSlugsForProfessional(slug: string): string[] {
-  return Object.entries(podcastProfessionalMap)
-    .filter(([, slugs]) => slugs.includes(slug))
-    .map(([episodeSlug]) => episodeSlug);
+  return podcasts
+    .filter((episode) => professionalSlugsForEpisode(episode).includes(slug))
+    .map((episode) => episode.slug);
 }
