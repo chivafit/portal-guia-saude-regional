@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type FeaturedProfessional = {
@@ -23,8 +23,6 @@ function shuffle<T>(items: T[]) {
 }
 
 export function FeaturedProfessionalsRotator({ professionals }: { professionals: FeaturedProfessional[] }) {
-  // Mantém os primeiros seis no HTML estático e sorteia somente depois da hidratação.
-  // Assim evitamos mismatch e preservamos conteúdo/SEO quando JavaScript estiver indisponível.
   const [visible, setVisible] = useState(() => professionals.slice(0, 6));
 
   useEffect(() => {
@@ -32,33 +30,33 @@ export function FeaturedProfessionalsRotator({ professionals }: { professionals:
   }, [professionals]);
 
   return (
-    <div className="city-featured-grid">
+    <div className="home-featured-professionals-grid">
       {visible.map((item) => (
-        <Link key={item.slug} href={`/profissionais/${item.slug}`} className="city-featured-card">
-          <div className="city-featured-card-top">
-            <span
-              className={`city-featured-avatar${item.imageUrl ? " has-photo" : ""}`}
-              style={item.imageUrl ? { backgroundImage: `url(${item.imageUrl})` } : undefined}
-              aria-hidden="true"
-            >
-              {!item.imageUrl
-                ? item.name
-                    .split(" ")
-                    .filter((word) => !/^dr\.?|^dra\.?$/i.test(word))
-                    .slice(0, 2)
-                    .map((word) => word[0])
-                    .join("")
-                : null}
-            </span>
-            <span className="city-featured-tag">★ Em destaque</span>
-          </div>
-          <div className="city-featured-card-copy">
-            <strong>{item.name}</strong>
+        <Link key={item.slug} href={`/profissionais/${item.slug}`} className="home-featured-professional-card">
+          <span
+            className={`home-featured-professional-avatar${item.imageUrl ? " has-photo" : ""}`}
+            style={item.imageUrl ? { backgroundImage: `url(${item.imageUrl})` } : undefined}
+            aria-hidden="true"
+          >
+            {!item.imageUrl
+              ? item.name
+                  .split(" ")
+                  .filter((word) => !/^dr\.?|^dra\.?$/i.test(word))
+                  .slice(0, 2)
+                  .map((word) => word[0])
+                  .join("")
+              : null}
+          </span>
+
+          <div className="home-featured-professional-copy">
+            <div className="home-featured-professional-name">
+              <strong>{item.name}</strong>
+              <span aria-label="Profissional em destaque" title="Profissional em destaque"><Star size={14} fill="currentColor" /></span>
+            </div>
             <small>{item.specialty}</small>
-            <span className="city-featured-org">{item.organization}</span>
-            {item.registration ? <span className="city-featured-org city-featured-registration">{item.registration}</span> : null}
+            {item.organization ? <span className="home-featured-professional-org">{item.organization}</span> : null}
+            <em>Ver perfil <ArrowUpRight size={13} /></em>
           </div>
-          <em>Ver perfil <ArrowUpRight size={13} /></em>
         </Link>
       ))}
     </div>
