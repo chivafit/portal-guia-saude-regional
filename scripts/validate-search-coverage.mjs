@@ -5,33 +5,30 @@ import { matchesProfessionalSpecialty, matchesSearchTerms } from "../lib/search-
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-function collectTypeScriptFiles(directory) {
-  const result = [];
-  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-    const absolute = path.join(directory, entry.name);
-    if (entry.isDirectory()) result.push(...collectTypeScriptFiles(absolute));
-    else if (entry.isFile() && entry.name.endsWith(".ts")) result.push(absolute);
-  }
-  return result;
-}
-
-const sourceFiles = [
-  path.join(root, "lib/data.ts"),
-  ...collectTypeScriptFiles(path.join(root, "lib/data")),
+// Somente fontes que realmente entram no diretório público. Arquivos de review,
+// overrides e filas editoriais não são cadastros concorrentes e não devem gerar
+// falso positivo de slug duplicado.
+const runtimeSources = [
+  { file: "lib/data.ts", tier: "legacy" },
+  { file: "lib/data/professional-additions.ts", tier: "curated" },
+  { file: "lib/data/medical-sequence-additions.ts", tier: "curated" },
+  { file: "lib/data/medical-expansion-otorrino.ts", tier: "curated" },
+  { file: "lib/data/nonmedical-sequence-additions.ts", tier: "curated" },
+  { file: "lib/data/podcast-professional-additions.ts", tier: "curated" },
 ];
 
 function parseStringArray(source) {
   return [...source.matchAll(/"([^"]+)"/g)].map((match) => match[1]);
 }
 
-function recordsFromSource(absolutePath) {
-  const source = fs.readFileSync(absolutePath, "utf8");
-  const relativePath = path.relative(root, absolutePath);
+function recordsFromSource({ file, tier }) {
+  const source = fs.readFileSync(path.join(root, file), "utf8");
   const records = [];
   const pattern = /slug:\s*"([^"]+)"[\s\S]*?name:\s*"([^"]+)"[\s\S]*?specialty:\s*"([^"]+)"[\s\S]*?services:\s*\[([^\]]*)\]/g;
   for (const match of source.matchAll(pattern)) {
     records.push({
-      source: relativePath,
+      source: file,
+      tier,
       slug: match[1],
       name: match[2],
       specialty: match[3],
@@ -49,7 +46,7 @@ function specialtyAnchors(specialty) {
   return [...new Set([specialty.trim(), ...anchors])];
 }
 
-const records = sourceFiles.flatMap(recordsFromSource);
+const records = runtimeSources.flatMap(recordsFromSource);
 const failures = [];
 let coverageAssertions = 0;
 let compositeSpecialties = 0;
@@ -76,67 +73,62 @@ for (const record of records) {
 }
 
 const syntheticChecks = [
-  {
-    label: "Pediatria inclui especialidade composta",
-    result: matchesProfessionalSpecialty({ specialty: "Pediatria e Pneumologia Infantil", services: ["Puericultura"] }, "Pediatria"),
-    expected: true,
-  },
-  {
-    label: "Pneumologia Infantil inclui especialidade composta",
-    result: matchesProfessionalSpecialty({ specialty: "Pediatria e Pneumologia Infantil", services: ["Puericultura"] }, "Pneumologia Infantil"),
-    expected: true,
-  },
-  {
-    label: "Ginecologia inclui Ginecologia e Obstetrícia",
-    result: matchesProfessionalSpecialty({ specialty: "Ginecologia e Obstetrícia", services: [] }, "Ginecologia"),
-    expected: true,
-  },
-  {
-    label: "Ortopedia inclui Ortopedia e Traumatologia",
-    result: matchesProfessionalSpecialty({ specialty: "Ortopedia e Traumatologia", services: [] }, "Ortopedia"),
-    expected: true,
-  },
-  {
-    label: "Endocrinologia inclui Endocrinologia e Metabologia",
-    result: matchesProfessionalSpecialty({ specialty: "Endocrinologia e Metabologia", services: [] }, "Endocrinologia"),
-    expected: true,
-  },
-  {
-    label: "Ortodontia inclui Ortodontia e Ortopedia Facial",
-    result: matchesProfessionalSpecialty({ specialty: "Ortodontia e Ortopedia Facial", services: [] }, "Ortodontia"),
-    expected: true,
-  },
-  {
-    label: "Dermatologia não inclui Cardiologia",
-    result: matchesProfessionalSpecialty({ specialty: "Cardiologia", services: ["Hipertensão"] }, "Dermatologia"),
-    expected: false,
-  },
-  {
-    label: "Acentos e caixa não impedem busca",
-    result: matchesProfessionalSpecialty({ specialty: "Ginecologia e Obstetrícia", services: [] }, "obstetricia"),
-    expected: true,
-  },
+  ["Pediatria inclui especialidade composta", { specialty: "Pediatria e Pneumologia Infantil", services: ["Puericultura"] }, "Pediatria", true],
+  ["Pneumologia Infantil inclui especialidade composta", { specialty: "Pediatria e Pneumologia Infantil", services: ["Puericultura"] }, "Pneumologia Infantil", true],
+  ["Ginecologia inclui Ginecologia e Obstetrícia", { specialty: "Ginecologia e Obstetrícia", services: [] }, "Ginecologia", true],
+  ["Ortopedia inclui Ortopedia e Traumatologia", { specialty: "Ortopedia e Traumatologia", services: [] }, "Ortopedia", true],
+  ["Endocrinologia inclui Endocrinologia e Metabologia", { specialty: "Endocrinologia e Metabologia", services: [] }, "Endocrinologia", true],
+  ["Ortodontia inclui Ortodontia e Ortopedia Facial", { specialty: "Ortodontia e Ortopedia Facial", services: [] }, "Ortodontia", true],
+  ["Dermatologia não inclui Cardiologia", { specialty: "Cardiologia", services: ["Hipertensão"] }, "Dermatologia", false],
+  ["Acentos e caixa não impedem busca", { specialty: "Ginecologia e Obstetrícia", services: [] }, "obstetricia", true],
 ];
 
-for (const check of syntheticChecks) {
+for (const [label, item, requested, expected] of syntheticChecks) {
   coverageAssertions += 1;
-  if (check.result !== check.expected) failures.push(`Regra de busca: ${check.label}`);
+  if (matchesProfessionalSpecialty(item, requested) !== expected) failures.push(`Regra de busca: ${label}`);
 }
 
-const duplicateSlugs = [...new Set(records.map((record) => record.slug).filter((slug, index, all) => all.indexOf(slug) !== index))];
+const bySlug = new Map();
+for (const record of records) {
+  const group = bySlug.get(record.slug) ?? [];
+  group.push(record);
+  bySlug.set(record.slug, group);
+}
+
+const duplicateSlugs = [];
+const controlledLegacyOverrides = [];
+for (const [slug, group] of bySlug) {
+  if (group.length < 2) continue;
+  const curated = group.filter((record) => record.tier === "curated");
+  const legacy = group.filter((record) => record.tier === "legacy");
+
+  // Um cadastro legado + exatamente uma versão curada é uma migração controlada:
+  // public-directory dá precedência determinística à versão curada pelo mesmo slug.
+  if (curated.length === 1 && legacy.length === 1 && group.length === 2) {
+    controlledLegacyOverrides.push(slug);
+    continue;
+  }
+
+  duplicateSlugs.push(slug);
+}
 
 console.log("Professional search coverage validation");
 console.log(JSON.stringify({
-  dataFilesScanned: sourceFiles.length,
+  runtimeDataFilesScanned: runtimeSources.length,
   recordsScanned: records.length,
   compositeSpecialties,
   coverageAssertions,
-  duplicateSlugsAcrossSources: duplicateSlugs,
+  controlledLegacyOverrides,
+  duplicateSlugsAcrossRuntimeSources: duplicateSlugs,
   failures: failures.length,
 }, null, 2));
 
 if (duplicateSlugs.length) {
-  console.warn(`Aviso: slugs repetidos entre fontes: ${duplicateSlugs.join(", ")}`);
+  for (const slug of duplicateSlugs) {
+    const locations = bySlug.get(slug).map((record) => record.source).join(", ");
+    console.error(`Slug duplicado sem precedência segura: ${slug} (${locations})`);
+  }
+  process.exitCode = 1;
 }
 
 if (failures.length) {
