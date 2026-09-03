@@ -1,3 +1,3 @@
 :HL["/_next/static/css/c6e23360c8270067.css","style"]
 :HL["/_next/static/css/9a54775c46f9aa08.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"marisa-de-fatima-ferreira-fisioterapia-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"xIVDCZMEeYh9g759IlbCe"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"marisa-de-fatima-ferreira-fisioterapia-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"pJcpNtyg-_IpUeDsO4aqN"}
