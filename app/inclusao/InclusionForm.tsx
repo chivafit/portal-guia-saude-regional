@@ -20,7 +20,7 @@ export function InclusionForm() {
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState<FormState>(() => ({
     entityType: requestedType, profile: profileSlug, name: profile?.name ?? "",
-    category: profile?.category ?? (profile && "profession" in profile ? profile.profession : requestedType === "professional" ? "Médico" : "Clínica multiprofissional"),
+    category: profile && "category" in profile ? profile.category : profile && "profession" in profile ? profile.profession : requestedType === "professional" ? "Médico" : "Clínica multiprofissional",
     cityName: profile?.city ?? "", contactName: "", contactEmail: "", contactPhone: "", whatsapp: "",
     address: profile && "address" in profile ? profile.address : "", organization: profile && "organization" in profile ? profile.organization : "",
     website: profile && "website" in profile ? profile.website ?? "" : "", instagram: profile && "instagram" in profile ? profile.instagram ?? "" : "",

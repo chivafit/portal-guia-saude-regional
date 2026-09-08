@@ -26,7 +26,9 @@ export function FeaturedProfessionalsRotator({ professionals }: { professionals:
   const [visible, setVisible] = useState(() => professionals.slice(0, 6));
 
   useEffect(() => {
-    if (professionals.length > 6) setVisible(shuffle(professionals).slice(0, 6));
+    if (professionals.length <= 6) return;
+    const rotate = window.setTimeout(() => setVisible(shuffle(professionals).slice(0, 6)), 0);
+    return () => window.clearTimeout(rotate);
   }, [professionals]);
 
   return (

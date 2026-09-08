@@ -86,7 +86,10 @@ function SearchDirectory() {
   // diretório completo de Piumhi — não esconder os resultados em um atalho.
   const showProfessionChooser = false;
   const showCategoryChooser = type === "servicos" && !category && !q && categoryChoices.length > 0;
-  useEffect(() => setVisibleCount(PAGE_SIZE), [q, city, profession, specialty, category, type]);
+  useEffect(() => {
+    const resetVisibleCount = window.setTimeout(() => setVisibleCount(PAGE_SIZE), 0);
+    return () => window.clearTimeout(resetVisibleCount);
+  }, [q, city, profession, specialty, category, type]);
   const visibleProfessionals = professionalResults.slice(0, visibleCount);
   const visibleOrganizations = organizationResults.slice(0, visibleCount);
   const resultLabel = (count: number, noun: string) => `${count} ${noun}${count === 1 ? "" : "s"} encontrado${count === 1 ? "" : "s"}`;

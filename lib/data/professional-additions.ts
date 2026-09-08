@@ -7,6 +7,29 @@ import type { Professional } from "../data";
  */
 export const piumhiProfessionalAdditions: Professional[] = [
   {
+    slug: "dr-nicollas-nunes-rabelo-neurologia-neurocirurgia-piumhi",
+    name: "Dr. Nicollas Nunes Rabelo",
+    profession: "Médico",
+    specialty: "Neurologia e Neurocirurgia",
+    city: "Piumhi",
+    organization: "Santa Casa de Piumhi — Praça Guia Lopes, 53, Centro",
+    registration: "",
+    verified: false,
+    summary: "Médico com atendimento em Piumhi informado em site profissional.",
+    phone: "",
+    whatsapp: "",
+    services: ["Neurologia", "Neurocirurgia"],
+    source: "https://drnicollasnunes.com.br/",
+    sourceUrls: [
+      "https://drnicollasnunes.com.br/",
+      "https://drnicollasnunes.com.br/dr-nicollas-nunes-rabelo/",
+    ],
+    lastVerifiedAt: "2026-09-08",
+    publicationStatus: "published",
+    verificationStatus: "needs-review",
+    commercialStatus: "organic",
+  },
+  {
     slug: "maria-carolina-tome-moura-terapia-ocupacional-piumhi",
     name: "Maria Carolina Tomé Moura",
     profession: "Terapeuta Ocupacional",

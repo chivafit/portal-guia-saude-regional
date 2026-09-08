@@ -759,6 +759,11 @@ h1,h2,h3,.brand span,.commercial-highlight-grid strong,.profession-card strong,.
   align-items:flex-start;
   color:#0f6d66;
 }
+.profile-clean-location+.profile-clean-location{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid #e7eef1;
+}
 .profile-clean-location strong{
   display:block;
   color:#0b4f4a;

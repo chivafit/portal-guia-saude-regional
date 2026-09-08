@@ -1,5 +1,15 @@
 import { resolveProfessionalImage } from "./avatars";
 
+export type ProfessionalLocation = {
+  name: string;
+  address?: string;
+  /** Telefone do estabelecimento; nunca deve ser interpretado como telefone pessoal. */
+  phone?: string;
+  whatsapp?: string;
+  mapUrl?: string;
+  sourceUrl?: string;
+};
+
 export type Professional = {
   slug: string;
   name: string;
@@ -7,6 +17,8 @@ export type Professional = {
   specialty: string;
   city: string;
   organization: string;
+  /** Locais de atendimento confirmados. organization permanece como resumo compatível. */
+  locations?: ProfessionalLocation[];
   registration: string;
   verified: boolean;
   summary: string;
@@ -425,10 +437,10 @@ const supplementalProfessionals: Professional[] = [
   }),
 ];
 
-// Profissionais REAIS de Piumhi importados de diretórios públicos (25/07/2026).
-// Status "Em validação" (verified:false): nome e área vêm da fonte; registro no
-// conselho (CRM/CRO) e contato NÃO foram confirmados — ficam "aguardando validação".
-// Não publicar como definitivo sem validar contato/registro e consentimento.
+// Profissionais reais de Piumhi importados de diretórios públicos (25/07/2026).
+// Perfis orgânicos podem ficar publicados quando nome, profissão, área e cidade
+// forem identificáveis. Registro, contato e outros dados incertos permanecem
+// omitidos da interface até haver fonte suficiente ou atualização do profissional.
 const piumhiImportedProfessionals: Professional[] = [
   { slug: "dr-wallace-costa-mota-clinica-medica-piumhi", name: "Dr. Wallace Costa Mota", profession: "Médico", specialty: "Clínica Médica", city: "Piumhi", organization: "Consultório Dr. Wallace Costa Mota — Rua Armando Viotti, 7, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (CatalogoMed), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Clínica médica", "Cirurgia geral"], source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },
   { slug: "dr-gabriel-wobeto-clinica-medica-piumhi", name: "Dr. Gabriel Wobeto", profession: "Médico", specialty: "Clínica Médica", city: "Piumhi", organization: "Clínica São Rafael (Unimed) — Praça Guia Lopes, 248, Centro", registration: "CRM-MG · aguardando validação", verified: false, summary: "Cadastro baseado em listagem pública (CatalogoMed), pendente de validação de contato e registro no conselho antes da confirmação.", phone: "Contato a validar", whatsapp: "#", services: ["Clínica médica", "Medicina de família e comunidade"], source: "https://www.catalogo.med.br/medicos/em-piumhi-mg" },

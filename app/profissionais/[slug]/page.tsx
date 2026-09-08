@@ -78,10 +78,14 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
   const locationName = usesMaisSaudeLocation ? maisSaudeLocation.name : locationOrganization?.name ?? item.organization;
   const locationAddress = usesMaisSaudeLocation ? maisSaudeLocation.address : locationOrganization?.address && !/endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(locationOrganization.address) ? locationOrganization.address : "";
   const locationPhone = usesMaisSaudeLocation ? maisSaudeLocation.phone : locationOrganization?.phone?.replace(/\D/g, "") ?? "";
+  const locations = item.locations?.length
+    ? item.locations
+    : locationName ? [{ name: locationName, address: locationAddress, phone: locationPhone, mapUrl: locationOrganization?.mapUrl }] : [];
+  const primaryLocation = locations[0];
+  const primaryLocationPhone = primaryLocation?.phone?.replace(/\D/g, "") ?? "";
   const hasDirectContact = !usesMaisSaudeLocation && Boolean(contactHref);
-  const locationHref = locationPhone.length >= 10 ? `tel:+${locationPhone}` : "";
+  const locationHref = primaryLocationPhone.length >= 10 ? `tel:+${primaryLocationPhone}` : "";
   const canShowContact = item.featured === true;
-  const mapHref = locationOrganization?.mapUrl || (locationAddress ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${locationName}, ${locationAddress}, ${item.city}, MG`)}` : "");
   const visibleServices = item.services.filter((service) => usableService(service, item.specialty));
   const visibleAudience = item.audience?.filter(Boolean) ?? [];
   const canonicalUrl = `https://guiasaude.app.br/profissionais/${item.slug}/`;
@@ -128,7 +132,7 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
             {canShowContact && (hasDirectContact || locationHref) ? <aside className="profile-clean-contact">
               <small>{hasDirectContact ? "Contato do profissional" : "Contato do local"}</small>
               {hasDirectContact ? <a className="profile-direct-contact" href={contactHref} target={contactHref.startsWith("http") ? "_blank" : undefined} rel={contactHref.startsWith("http") ? "noreferrer" : undefined}>{contactHref.startsWith("http") ? "WhatsApp do profissional" : "Ligar para o profissional"}</a> : null}
-              {locationHref ? <a className="profile-direct-contact" href={locationHref} aria-label={`Ligar para ${locationName}`}>Ligar para {locationName}</a> : null}
+              {locationHref ? <a className="profile-direct-contact" href={locationHref} aria-label={`Ligar para ${primaryLocation?.name}`}>Ligar para {primaryLocation?.name}</a> : null}
               <ProfileShareButton name={item.name} url={canonicalUrl} />
             </aside> : null}
             {!canShowContact ? <aside className="profile-clean-contact profile-contact-pending"><small>Informações de contato</small><p>Informações de contato em atualização.</p><ProfileShareButton name={item.name} url={canonicalUrl} /></aside> : null}
@@ -160,17 +164,20 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
               <p>{item.insuranceInfo}</p>
             </article> : null}
 
-            {locationName ? <article>
-              <h2>Local de atendimento</h2>
-              <div className="profile-clean-location">
-                <Building2 size={20} />
-                <div>
-                  <strong>{locationName}</strong>
-                  {locationAddress ? <span>{locationAddress}</span> : null}
-                  <span>{item.city}, Minas Gerais</span>
-                  {mapHref ? <a href={mapHref} target="_blank" rel="noopener noreferrer" aria-label={`Ver ${locationName} no mapa`}>Ver localização</a> : null}
-                </div>
-              </div>
+            {locations.length ? <article>
+              <h2>{locations.length > 1 ? "Locais de atendimento" : "Local de atendimento"}</h2>
+              {locations.map((location) => {
+                const locationMapHref = location.mapUrl || (location.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${location.name}, ${location.address}, ${item.city}, MG`)}` : "");
+                return <div className="profile-clean-location" key={`${location.name}-${location.address ?? ""}`}>
+                  <Building2 size={20} />
+                  <div>
+                    <strong>{location.name}</strong>
+                    {location.address ? <span>{location.address}</span> : null}
+                    <span>{item.city}, Minas Gerais</span>
+                    {locationMapHref ? <a href={locationMapHref} target="_blank" rel="noopener noreferrer" aria-label={`Ver ${location.name} no mapa`}>Ver localização</a> : null}
+                  </div>
+                </div>;
+              })}
             </article> : null}
 
             {podcastEpisode ? (

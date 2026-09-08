@@ -21,6 +21,7 @@ export type PublicProfessional = {
   slug: string; name: string; profession: string; specialty: string; city: string;
   organization: string; registration: string; verified: boolean; summary: string;
   phone: string; whatsapp: string; services: string[]; imageUrl?: string; coverImageUrl?: string; logoUrl?: string; source?: string;
+  featured?: boolean; sponsored?: boolean; displayOrder?: number;
 };
 
 export type PublicOrganization = {
@@ -34,7 +35,21 @@ export type PublicOrganization = {
   relationship?: "organic" | "partner" | "sponsored"; featured?: boolean; sponsored?: boolean; displayOrder?: number;
 };
 
-async function getD1() { const { env } = await import("cloudflare:workers"); return env.DB; }
+type D1Result<T> = { results: T[] };
+type D1Statement = {
+  bind(...values: unknown[]): D1Statement;
+  all<T>(): Promise<D1Result<T>>;
+  first<T>(): Promise<T | null>;
+};
+type DirectoryDatabase = {
+  prepare(query: string): D1Statement;
+  batch(statements: D1Statement[]): Promise<unknown>;
+};
+
+async function getD1() {
+  const { env } = await import("cloudflare:workers");
+  return env.DB as unknown as DirectoryDatabase;
+}
 
 function slugify(value: string) {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim()

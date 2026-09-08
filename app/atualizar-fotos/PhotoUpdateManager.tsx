@@ -84,10 +84,12 @@ export function PhotoUpdateManager({ profiles }: Props) {
 
   useEffect(() => {
     const savedToken = window.localStorage.getItem(TOKEN_STORAGE_KEY);
-    if (savedToken) {
+    if (!savedToken) return;
+    const restoreToken = window.setTimeout(() => {
       setToken(savedToken);
       setRememberToken(true);
-    }
+    }, 0);
+    return () => window.clearTimeout(restoreToken);
   }, []);
 
   function changeToken(value: string) {
