@@ -57,6 +57,7 @@ export function organizationSearchText(organization: Organization): string {
   const category = categoryForOrganization(organization);
   return [
     organization.name,
+    ...(organization.aliases ?? []),
     organization.category,
     category?.label,
     ...(category?.aliases ?? []),

@@ -4,8 +4,8 @@ import { ArrowLeft, Building2, ClipboardCheck, MapPin, Play, Stethoscope } from 
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { organizations, professionals } from "@/lib/data";
-import { findPublishedProfessional, publicProfessionals } from "@/lib/public-directory";
+import { professionals } from "@/lib/data";
+import { findPublishedProfessional, organizationForProfessional, publicProfessionals } from "@/lib/public-directory";
 import { podcastForProfessional } from "@/lib/podcasts";
 import { pageMetadata } from "@/lib/seo";
 import { ProfileShareButton } from "@/components/ProfileShareButton";
@@ -28,15 +28,6 @@ function whatsappHref(value: string) {
 }
 function usableService(value: string, specialty: string) {
   return !/^(consulta|acompanhamento|atendimento|cuidado|saúde|consulta clínica)$/i.test(value.trim()) && value.toLocaleLowerCase("pt-BR") !== specialty.toLocaleLowerCase("pt-BR");
-}
-
-const maisSaudeLocation = {
-  name: "Clínica Mais Saúde GMS",
-  address: "Rua Padre Abel, 191 e 194, Centro",
-  phone: "5537999358585",
-};
-function hasConfirmedMaisSaudeLocation(organization: string) {
-  return /^Clínica Mais Saúde GMS\s+—\s+Rua Padre Abel, 191(?: e |\/)194, Centro$/i.test(organization.trim());
 }
 
 export function generateStaticParams() {
@@ -96,11 +87,10 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
     .map((part) => part[0])
     .join("")
     .toUpperCase();
-  const usesMaisSaudeLocation = hasConfirmedMaisSaudeLocation(item.organization);
-  const locationOrganization = organizations.find((organization) => item.organization.toLocaleLowerCase("pt-BR").includes(organization.name.toLocaleLowerCase("pt-BR")) && organization.city === item.city);
-  const locationName = usesMaisSaudeLocation ? maisSaudeLocation.name : locationOrganization?.name ?? item.organization;
-  const locationAddress = usesMaisSaudeLocation ? maisSaudeLocation.address : locationOrganization?.address && !/endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(locationOrganization.address) ? locationOrganization.address : "";
-  const locationPhone = usesMaisSaudeLocation ? maisSaudeLocation.phone : locationOrganization?.phone?.replace(/\D/g, "") ?? "";
+  const locationOrganization = organizationForProfessional(item);
+  const locationName = locationOrganization?.name ?? item.organization;
+  const locationAddress = locationOrganization?.address && !/endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(locationOrganization.address) ? locationOrganization.address : "";
+  const locationPhone = locationOrganization?.phone?.replace(/\D/g, "") ?? "";
   const locations = item.locations?.length
     ? item.locations
     : locationName ? [{ name: locationName, address: locationAddress, phone: locationPhone, mapUrl: locationOrganization?.mapUrl }] : [];

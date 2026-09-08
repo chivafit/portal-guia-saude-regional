@@ -90,10 +90,27 @@ function publicWhatsapp(whatsapp: string) {
     : whatsapp;
 }
 
-function organizationFor(item: Professional) {
-  const organizationName = item.organization.toLocaleLowerCase("pt-BR");
-  return organizations.find((organization) => organization.city === item.city
-    && organizationName.includes(organization.name.toLocaleLowerCase("pt-BR")));
+function normalizedOrganizationValue(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("pt-BR")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+/**
+ * Relaciona somente quando o nome do estabelecimento (ou um alias editorial)
+ * aparece no local informado pelo profissional. Endereço compartilhado nunca
+ * é usado como atalho: Praça Guia Lopes, 53, por exemplo, abriga entidades
+ * distintas.
+ */
+export function organizationForProfessional(item: Pick<Professional, "city" | "organization">, source: Organization[] = organizations) {
+  const organizationName = normalizedOrganizationValue(item.organization);
+  return source.find((organization) => organization.city === item.city
+    && [organization.name, ...(organization.aliases ?? [])]
+      .map(normalizedOrganizationValue)
+      .some((alias) => Boolean(alias) && organizationName.includes(alias)));
 }
 
 function locationFromOrganization(item: Professional, phone: string, whatsapp: string) {
@@ -120,7 +137,7 @@ export function publicProfessional(item: Professional): Professional {
     ? ""
     : item.summary;
 
-  const organization = organizationFor(item);
+  const organization = organizationForProfessional(item);
   const locations = (item.locations ?? []).map((location) => ({
     ...location,
     phone: publicPhone(location.phone ?? ""),
