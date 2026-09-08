@@ -29,7 +29,9 @@ export type Professional = {
   website?: string;
   instagram?: string;
   confirmedAt?: string;
+  /** Contato direto confirmado do profissional; nunca reutilizar telefone do estabelecimento. */
   phone: string;
+  /** WhatsApp direto confirmado do profissional; contatos de locais ficam em locations. */
   whatsapp: string;
   services: string[];
   imageUrl?: string;

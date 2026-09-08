@@ -776,6 +776,16 @@ h1,h2,h3,.brand span,.commercial-highlight-grid strong,.profession-card strong,.
   font-size:.78rem;
   line-height:1.5;
 }
+.profile-location-contact{
+  display:inline-flex;
+  width:max-content;
+  margin-top:10px;
+  color:#0f6d66;
+  font-size:.76rem;
+  font-weight:800;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
 .profile-clean-confirmed{margin:12px 0 0;color:#71818b;font-size:.75rem;line-height:1.45}
 @media(max-width:980px){
   .profile-clean-card{

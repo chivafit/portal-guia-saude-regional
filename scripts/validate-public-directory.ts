@@ -30,6 +30,12 @@ for (const item of publicProfessionals) {
   const visible = [item.name, item.profession, item.specialty, item.city, item.organization, item.registration, item.phone, item.whatsapp, item.summary].join(" · ");
   if (forbiddenPublicText.test(visible)) errors.push(`${item.slug}: texto editorial pendente exposto publicamente.`);
   if (item.whatsapp && !whatsAppUrl.test(item.whatsapp)) errors.push(`${item.slug}: URL de WhatsApp inválida (${item.whatsapp}).`);
+  if (/\b(?:CRM|CRO|CRP|CREFITO|CRN|COREN|CRFa)\b/i.test(item.registration) && !/\d/.test(item.registration)) {
+    errors.push(`${item.slug}: sigla de conselho sem número exposta publicamente.`);
+  }
+  if (item.phone || item.whatsapp) {
+    errors.push(`${item.slug}: contato direto sem titularidade confirmada exposto publicamente.`);
+  }
   if (item.locations?.some((location) => forbiddenPublicText.test([location.name, location.address, location.phone, location.whatsapp].filter(Boolean).join(" · ")))) {
     errors.push(`${item.slug}: local com dado pendente exposto publicamente.`);
   }

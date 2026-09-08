@@ -9,6 +9,8 @@ import { findPublishedProfessional, publicProfessionals } from "@/lib/public-dir
 import { podcastForProfessional } from "@/lib/podcasts";
 import { pageMetadata } from "@/lib/seo";
 import { ProfileShareButton } from "@/components/ProfileShareButton";
+import { professionalRedirects, professionalRedirectTarget } from "@/lib/professional-redirects";
+import { siteUrl } from "@/lib/seo";
 
 function presentationProfession(name: string, profession: string) {
   if (/^Dra\.?\s/i.test(name) && profession === "Médico") return "Médica";
@@ -18,6 +20,11 @@ function presentationProfession(name: string, profession: string) {
 function completeRegistration(value: string) {
   const clean = value.replace(/\s*·\s*[^·]*(a validar|aguardando validação|pendente|a confirmar)[^·]*/gi, "").trim();
   return /\d/.test(clean) ? clean : "";
+}
+function whatsappHref(value: string) {
+  const digits = value.replace(/\D/g, "");
+  if (digits.length < 10) return "";
+  return `https://wa.me/${digits.startsWith("55") ? digits : `55${digits}`}`;
 }
 function usableService(value: string, specialty: string) {
   return !/^(consulta|acompanhamento|atendimento|cuidado|saúde|consulta clínica)$/i.test(value.trim()) && value.toLocaleLowerCase("pt-BR") !== specialty.toLocaleLowerCase("pt-BR");
@@ -36,12 +43,21 @@ export function generateStaticParams() {
   // A exportação estática exige ao menos um parâmetro para a rota dinâmica.
   // O identificador abaixo renderiza notFound e não representa um perfil público.
   return publicProfessionals.length
-    ? publicProfessionals.map((professional) => ({ slug: professional.slug }))
+    ? [...publicProfessionals.map((professional) => ({ slug: professional.slug })), ...Object.keys(professionalRedirects).map((slug) => ({ slug }))]
     : [{ slug: "perfil-indisponivel" }];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const redirectTarget = professionalRedirectTarget(slug);
+  if (redirectTarget) {
+    return {
+      title: "Perfil atualizado | Guia Saúde",
+      description: "Este endereço foi atualizado no Guia Saúde.",
+      alternates: { canonical: `${siteUrl}${redirectTarget}` },
+      robots: { index: false, follow: true },
+    };
+  }
   const item = await findPublishedProfessional(slug, professionals);
   if (!item) return pageMetadata("Profissional não encontrado", "Perfil profissional não encontrado no Guia Saúde.", `/profissionais/${slug}`);
   return pageMetadata(
@@ -53,14 +69,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProfessionalPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const redirectTarget = professionalRedirectTarget(slug);
+  if (redirectTarget) {
+    return (
+      <main className="shell" style={{ padding: "5rem 1.5rem" }}>
+        <meta httpEquiv="refresh" content={`0; url=${redirectTarget}`} />
+        <script dangerouslySetInnerHTML={{ __html: `window.location.replace(${JSON.stringify(redirectTarget)});` }} />
+        <h1>Endereço atualizado</h1>
+        <p>Você será direcionado para a página atual.</p>
+        <Link href={redirectTarget}>Continuar</Link>
+      </main>
+    );
+  }
   const item = await findPublishedProfessional(slug, professionals);
   if (!item) notFound();
   const podcastEpisode = podcastForProfessional(item.slug, item.name);
-  const whatsappDigits = (item.whatsapp ?? "").replace(/\D/g, "");
-  const phoneDigits = (item.phone ?? "").replace(/\D/g, "");
-  const contactHref = whatsappDigits.length >= 10
-    ? `https://wa.me/${whatsappDigits.startsWith("55") ? whatsappDigits : `55${whatsappDigits}`}`
-    : phoneDigits.length >= 10 ? `tel:+55${phoneDigits}` : "";
   const publicRegistration = completeRegistration(item.registration);
   const publicSummary = /(a validar|aguardando validação|pendente|em revisão|a confirmar)/i.test(item.summary) ? "" : item.summary;
 
@@ -81,11 +104,6 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
   const locations = item.locations?.length
     ? item.locations
     : locationName ? [{ name: locationName, address: locationAddress, phone: locationPhone, mapUrl: locationOrganization?.mapUrl }] : [];
-  const primaryLocation = locations[0];
-  const primaryLocationPhone = primaryLocation?.phone?.replace(/\D/g, "") ?? "";
-  const hasDirectContact = !usesMaisSaudeLocation && Boolean(contactHref);
-  const locationHref = primaryLocationPhone.length >= 10 ? `tel:+${primaryLocationPhone}` : "";
-  const canShowContact = item.featured === true;
   const visibleServices = item.services.filter((service) => usableService(service, item.specialty));
   const visibleAudience = item.audience?.filter(Boolean) ?? [];
   const canonicalUrl = `https://guiasaude.app.br/profissionais/${item.slug}/`;
@@ -129,14 +147,7 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
               </div>
             </div>
 
-            {canShowContact && (hasDirectContact || locationHref) ? <aside className="profile-clean-contact">
-              <small>{hasDirectContact ? "Contato do profissional" : "Contato do local"}</small>
-              {hasDirectContact ? <a className="profile-direct-contact" href={contactHref} target={contactHref.startsWith("http") ? "_blank" : undefined} rel={contactHref.startsWith("http") ? "noreferrer" : undefined}>{contactHref.startsWith("http") ? "WhatsApp do profissional" : "Ligar para o profissional"}</a> : null}
-              {locationHref ? <a className="profile-direct-contact" href={locationHref} aria-label={`Ligar para ${primaryLocation?.name}`}>Ligar para {primaryLocation?.name}</a> : null}
-              <ProfileShareButton name={item.name} url={canonicalUrl} />
-            </aside> : null}
-            {!canShowContact ? <aside className="profile-clean-contact profile-contact-pending"><small>Informações de contato</small><p>Informações de contato em atualização.</p><ProfileShareButton name={item.name} url={canonicalUrl} /></aside> : null}
-            {canShowContact && !hasDirectContact && !locationHref ? <aside className="profile-clean-contact"><ProfileShareButton name={item.name} url={canonicalUrl} /></aside> : null}
+            <aside className="profile-clean-contact"><ProfileShareButton name={item.name} url={canonicalUrl} /></aside>
           </article>
 
           <section className="profile-clean-details">
@@ -175,6 +186,8 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
                     {location.address ? <span>{location.address}</span> : null}
                     <span>{item.city}, Minas Gerais</span>
                     {locationMapHref ? <a href={locationMapHref} target="_blank" rel="noopener noreferrer" aria-label={`Ver ${location.name} no mapa`}>Ver localização</a> : null}
+                    {location.phone && location.phone.replace(/\D/g, "").length >= 10 ? <a className="profile-location-contact" href={`tel:+${location.phone.replace(/\D/g, "")}`} aria-label={`Ligar para ${location.name}`}>Ligar para {location.name}</a> : null}
+                    {location.whatsapp && whatsappHref(location.whatsapp) ? <a className="profile-location-contact" href={whatsappHref(location.whatsapp)} target="_blank" rel="noreferrer" aria-label={`WhatsApp de ${location.name}`}>WhatsApp de {location.name}</a> : null}
                   </div>
                 </div>;
               })}

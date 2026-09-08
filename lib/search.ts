@@ -19,7 +19,7 @@ export type SearchFilters = {
 export function filterProfessionals(items: PublicProfessional[], filters: SearchFilters): PublicProfessional[] {
   const { query = "", city = "", profession = "", specialty = "" } = filters;
   return items.filter((item) => {
-    const haystack = `${item.name} ${item.profession} ${item.specialty} ${item.organization} ${item.services.join(" ")}`;
+    const haystack = `${item.name} ${item.profession} ${item.specialty} ${item.organization} ${item.city} ${item.services.join(" ")}`;
     return (
       (!query || matchesSearchTerms(haystack, query)) &&
       (!city || matchesExactSearchValue(item.city, city)) &&

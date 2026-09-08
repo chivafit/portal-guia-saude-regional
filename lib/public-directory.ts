@@ -25,22 +25,23 @@ function professionalIdentity(item: Pick<Professional, "name" | "profession" | "
     .join("|");
 }
 
+function enrichProfessional(professional: Professional) {
+  // A ordem é intencional: as correções editoriais específicas são a última
+  // palavra sobre registros que também aparecem nas revisões sequenciais.
+  const corrected = applyProfessionalOverride(applyMedicalSequenceOverride(applyNonMedicalSequenceOverride(professional)));
+  return {
+    ...corrected,
+    imageUrl: resolveProfessionalImage(corrected.slug, podcastImageForProfessional(corrected.slug) ?? corrected.imageUrl),
+  };
+}
+
 function professionalDirectory(source: Professional[] = professionals) {
-  const enriched = source
-    .map(applyProfessionalOverride)
-    .map(applyMedicalSequenceOverride)
-    .map(applyNonMedicalSequenceOverride)
-    .map((professional) => ({
-      ...professional,
-      imageUrl: resolveProfessionalImage(professional.slug, podcastImageForProfessional(professional.slug) ?? professional.imageUrl),
-    }));
+  const enriched = source.map(enrichProfessional);
 
   const additions = source === professionals
     ? [...piumhiProfessionalAdditions, ...piumhiMedicalSequenceAdditions, ...piumhiOtorrinoAdditions, ...piumhiNonMedicalSequenceAdditions, ...podcastProfessionalAdditions]
-        .map((professional) => ({
-          ...professional,
-          imageUrl: resolveProfessionalImage(professional.slug, podcastImageForProfessional(professional.slug) ?? professional.imageUrl),
-        }))
+        // As adições também passam pelos overrides no fim da composição. Isso impede
+        // que uma versão editorial antiga substitua uma correção mais recente.
     : [];
 
   const combined = source === professionals ? [...enriched, ...additions] : enriched;
@@ -48,7 +49,8 @@ function professionalDirectory(source: Professional[] = professionals) {
   // A base histórica e as listas editoriais podem se referir ao mesmo profissional
   // com slugs diferentes. A lista editorial vem por último para preservar a versão
   // mais completa e impedir que uma pessoa apareça duas vezes no resultado.
-  return Array.from(new Map(combined.map((item) => [professionalIdentity(item), item])).values());
+  return Array.from(new Map(combined.map((item) => [professionalIdentity(item), item])).values())
+    .map(enrichProfessional);
 }
 
 export async function publishedProfessionals(fallback?: Professional[]) {
@@ -62,9 +64,12 @@ export function isPublicProfessional(item: Professional) {
 }
 
 function publicRegistration(registration: string) {
-  return registration
+  const clean = registration
     .replace(/\s*·\s*[^·]*(a validar|aguardando validação|pendente de confirmação|a confirmar)[^·]*/gi, "")
     .trim();
+  // Siglas isoladas (por exemplo, "CRM-MG") não são registro profissional
+  // confirmado e não podem aparecer como se fossem um número de conselho.
+  return /\d/.test(clean) ? clean : "";
 }
 
 function publicOrganization(organization: string) {
@@ -85,18 +90,82 @@ function publicWhatsapp(whatsapp: string) {
     : whatsapp;
 }
 
+function organizationFor(item: Professional) {
+  const organizationName = item.organization.toLocaleLowerCase("pt-BR");
+  return organizations.find((organization) => organization.city === item.city
+    && organizationName.includes(organization.name.toLocaleLowerCase("pt-BR")));
+}
+
+function locationFromOrganization(item: Professional, phone: string, whatsapp: string) {
+  const [name, ...addressParts] = item.organization.split(/\s+—\s+/);
+  // Uma frase genérica de presença na cidade não é um estabelecimento e não
+  // deve ganhar um botão de contato sem identificação de quem atende.
+  if (!name || /^(atua[cç][aã]o|atendimento)\b/i.test(name)) return null;
+  return {
+    name: name.trim(),
+    address: addressParts.join(" — ").trim() || undefined,
+    phone,
+    whatsapp,
+    sourceUrl: item.source,
+  };
+}
+
 export function publicProfessional(item: Professional): Professional {
-  const { sourceUrls, lastVerifiedAt, updatedAt, claimed, ...visible } = item;
+  const visible = { ...item };
+  delete visible.sourceUrls;
+  delete visible.lastVerifiedAt;
+  delete visible.updatedAt;
+  delete visible.claimed;
   const summary = /(a validar|aguardando validação|pendente|em revisão|a confirmar|sujeit[oa]s?\s+à\s+confirmação|levantamento editorial|contato em validação|especialidade pendente|endereço a confirmar)/i.test(item.summary)
     ? ""
     : item.summary;
+
+  const organization = organizationFor(item);
+  const locations = (item.locations ?? []).map((location) => ({
+    ...location,
+    phone: publicPhone(location.phone ?? ""),
+    whatsapp: publicWhatsapp(location.whatsapp ?? ""),
+  }));
+
+  // Telefones de organizações conhecidas pertencem ao local. Estruturá-los aqui
+  // evita que o mesmo número seja apresentado como contato pessoal do profissional.
+  if (!locations.length && organization) {
+    locations.push({
+      name: organization.name,
+      address: organization.address,
+      phone: publicPhone(organization.phone),
+      whatsapp: publicWhatsapp(organization.whatsapp ?? ""),
+      mapUrl: organization.mapUrl,
+      sourceUrl: organization.source,
+    });
+  }
+
+  const phone = publicPhone(item.phone);
+  const whatsapp = publicWhatsapp(item.whatsapp);
+  // Um número sem indicação explícita de titularidade não é exposto como
+  // pessoal. Quando há estabelecimento/consultório identificado, ele passa a
+  // ser contato daquele local; sem local identificado, permanece oculto.
+  if ((phone || whatsapp) && locations.length) {
+    const [firstLocation, ...remainingLocations] = locations;
+    locations.splice(0, locations.length, {
+      ...firstLocation,
+      phone: firstLocation.phone || phone,
+      whatsapp: firstLocation.whatsapp || whatsapp,
+    }, ...remainingLocations);
+  } else if ((phone || whatsapp) && !locations.length) {
+    const inferredLocation = locationFromOrganization(item, phone, whatsapp);
+    if (inferredLocation) locations.push(inferredLocation);
+  }
 
   return {
     ...visible,
     registration: publicRegistration(item.registration),
     organization: publicOrganization(item.organization),
-    phone: publicPhone(item.phone),
-    whatsapp: publicWhatsapp(item.whatsapp),
+    // A interface pública só expõe contatos com titularidade de local clara.
+    // phone/whatsapp ficam vazios até haver confirmação de contato pessoal.
+    phone: "",
+    whatsapp: "",
+    locations: locations.length ? locations : undefined,
     summary,
   };
 }
