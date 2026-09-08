@@ -337,7 +337,7 @@ function SearchDirectory() {
                 {type === "todos" ? <h3 className="results-group-title">Profissionais</h3> : null}
                 <div className="doctor-card-list">
                   {visibleProfessionals.map((item) => {
-                    const contact = directContact(item.whatsapp, item.phone);
+                    const contact = item.featured ? directContact(item.whatsapp, item.phone) : null;
                     return <article className={`doctor-card${item.featured ? " doctor-card-featured" : ""}`} key={item.slug}>
                       {item.featured ? <span className="sponsored-ribbon"><Star size={12} fill="currentColor" /> Profissional em destaque</span> : null}
                       <div
@@ -362,6 +362,7 @@ function SearchDirectory() {
                       </div>
                       <aside className="doctor-side">
                         {contact ? <a className="direct-contact-btn" href={contact.href} target={contact.href.startsWith("http") ? "_blank" : undefined} rel={contact.href.startsWith("http") ? "noreferrer" : undefined}><Phone size={14} /> {contact.label}</a> : null}
+                        {!item.featured ? <p className="contact-pending">Informações de contato em atualização.</p> : null}
                         <Link href={`/profissionais/${item.slug}`}>Ver perfil <ArrowUpRight size={14} /></Link>
                       </aside>
                     </article>;

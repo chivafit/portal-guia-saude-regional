@@ -80,6 +80,7 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
   const locationPhone = usesMaisSaudeLocation ? maisSaudeLocation.phone : locationOrganization?.phone?.replace(/\D/g, "") ?? "";
   const hasDirectContact = !usesMaisSaudeLocation && Boolean(contactHref);
   const locationHref = locationPhone.length >= 10 ? `tel:+${locationPhone}` : "";
+  const canShowContact = item.featured === true;
   const mapHref = locationOrganization?.mapUrl || (locationAddress ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${locationName}, ${locationAddress}, ${item.city}, MG`)}` : "");
   const visibleServices = item.services.filter((service) => usableService(service, item.specialty));
   const visibleAudience = item.audience?.filter(Boolean) ?? [];
@@ -124,13 +125,14 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
               </div>
             </div>
 
-            {hasDirectContact || locationHref ? <aside className="profile-clean-contact">
+            {canShowContact && (hasDirectContact || locationHref) ? <aside className="profile-clean-contact">
               <small>{hasDirectContact ? "Contato do profissional" : "Contato do local"}</small>
               {hasDirectContact ? <a className="profile-direct-contact" href={contactHref} target={contactHref.startsWith("http") ? "_blank" : undefined} rel={contactHref.startsWith("http") ? "noreferrer" : undefined}>{contactHref.startsWith("http") ? "WhatsApp do profissional" : "Ligar para o profissional"}</a> : null}
               {locationHref ? <a className="profile-direct-contact" href={locationHref} aria-label={`Ligar para ${locationName}`}>Ligar para {locationName}</a> : null}
               <ProfileShareButton name={item.name} url={canonicalUrl} />
             </aside> : null}
-            {!hasDirectContact && !locationHref ? <aside className="profile-clean-contact"><ProfileShareButton name={item.name} url={canonicalUrl} /></aside> : null}
+            {!canShowContact ? <aside className="profile-clean-contact profile-contact-pending"><small>Informações de contato</small><p>Informações de contato em atualização.</p><ProfileShareButton name={item.name} url={canonicalUrl} /></aside> : null}
+            {canShowContact && !hasDirectContact && !locationHref ? <aside className="profile-clean-contact"><ProfileShareButton name={item.name} url={canonicalUrl} /></aside> : null}
           </article>
 
           <section className="profile-clean-details">

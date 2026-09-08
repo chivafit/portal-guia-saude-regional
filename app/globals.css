@@ -710,6 +710,15 @@ h1,h2,h3,.brand span,.commercial-highlight-grid strong,.profession-card strong,.
   color:#0b4f4a;
   font-size:1rem;
 }
+.profile-contact-pending p{
+  margin:8px 0 14px;
+  color:#687b87;
+  font-size:.78rem;
+  line-height:1.45;
+}
+.profile-contact-pending .profile-share-button{
+  margin-top:0;
+}
 .profile-clean-details{
   display:grid;
   grid-template-columns:1.15fr .95fr .9fr;
