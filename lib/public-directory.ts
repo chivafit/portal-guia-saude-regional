@@ -10,6 +10,21 @@ import { applyNonMedicalSequenceOverride } from "./data/nonmedical-sequence-over
 import { podcastImageForProfessional } from "./podcast-guests";
 import { resolveProfessionalImage } from "./avatars";
 
+function normalizedProfessionalIdentity(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("pt-BR")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function professionalIdentity(item: Pick<Professional, "name" | "profession" | "city">) {
+  return [item.name, item.profession, item.city]
+    .map(normalizedProfessionalIdentity)
+    .join("|");
+}
+
 function professionalDirectory(source: Professional[] = professionals) {
   const enriched = source
     .map(applyProfessionalOverride)
@@ -29,7 +44,11 @@ function professionalDirectory(source: Professional[] = professionals) {
     : [];
 
   const combined = source === professionals ? [...enriched, ...additions] : enriched;
-  return Array.from(new Map(combined.map((item) => [item.slug, item])).values());
+
+  // A base histórica e as listas editoriais podem se referir ao mesmo profissional
+  // com slugs diferentes. A lista editorial vem por último para preservar a versão
+  // mais completa e impedir que uma pessoa apareça duas vezes no resultado.
+  return Array.from(new Map(combined.map((item) => [professionalIdentity(item), item])).values());
 }
 
 export async function publishedProfessionals(fallback?: Professional[]) {

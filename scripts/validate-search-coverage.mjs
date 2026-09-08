@@ -24,15 +24,17 @@ function parseStringArray(source) {
 function recordsFromSource({ file, tier }) {
   const source = fs.readFileSync(path.join(root, file), "utf8");
   const records = [];
-  const pattern = /slug:\s*"([^"]+)"[\s\S]*?name:\s*"([^"]+)"[\s\S]*?specialty:\s*"([^"]+)"[\s\S]*?services:\s*\[([^\]]*)\]/g;
+  const pattern = /slug:\s*"([^"]+)"[\s\S]*?name:\s*"([^"]+)"[\s\S]*?profession:\s*"([^"]+)"[\s\S]*?specialty:\s*"([^"]+)"[\s\S]*?city:\s*"([^"]+)"[\s\S]*?services:\s*\[([^\]]*)\]/g;
   for (const match of source.matchAll(pattern)) {
     records.push({
       source: file,
       tier,
       slug: match[1],
       name: match[2],
-      specialty: match[3],
-      services: parseStringArray(match[4]),
+      profession: match[3],
+      specialty: match[4],
+      city: match[5],
+      services: parseStringArray(match[6]),
     });
   }
   return records;
@@ -44,6 +46,15 @@ function specialtyAnchors(specialty) {
     .map((value) => value.trim())
     .filter((value) => value.length >= 4);
   return [...new Set([specialty.trim(), ...anchors])];
+}
+
+function normalizedIdentity(value) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("pt-BR")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
 }
 
 const records = runtimeSources.flatMap(recordsFromSource);
@@ -112,6 +123,36 @@ for (const [slug, group] of bySlug) {
   duplicateSlugs.push(slug);
 }
 
+const byProfessionalIdentity = new Map();
+for (const record of records) {
+  const identity = [record.name, record.profession, record.city].map(normalizedIdentity).join("|");
+  const group = byProfessionalIdentity.get(identity) ?? [];
+  group.push(record);
+  byProfessionalIdentity.set(identity, group);
+}
+
+const controlledIdentityMigrations = [];
+const duplicateProfessionalIdentities = [];
+for (const [identity, group] of byProfessionalIdentity) {
+  if (group.length < 2) continue;
+  const uniqueSlugs = new Set(group.map((record) => record.slug));
+  // Registros de demonstração não são perfis públicos. Versões com o mesmo slug
+  // já são auditadas acima como overrides controlados.
+  if (identity.startsWith("perfil demonstrativo|") || uniqueSlugs.size === 1) continue;
+  const curated = group.filter((record) => record.tier === "curated");
+  const legacy = group.filter((record) => record.tier === "legacy");
+
+  // A base histórica pode manter uma referência antiga enquanto a edição curada
+  // fornece os dados confirmados. public-directory consolida esta identidade em
+  // um único perfil e dá precedência à versão curada.
+  if (curated.length === 1 && legacy.length === 1 && group.length === 2 && uniqueSlugs.size === 2) {
+    controlledIdentityMigrations.push({ identity, slugs: group.map((record) => record.slug) });
+    continue;
+  }
+
+  duplicateProfessionalIdentities.push({ identity, slugs: group.map((record) => record.slug) });
+}
+
 console.log("Professional search coverage validation");
 console.log(JSON.stringify({
   runtimeDataFilesScanned: runtimeSources.length,
@@ -120,6 +161,8 @@ console.log(JSON.stringify({
   coverageAssertions,
   controlledLegacyOverrides,
   duplicateSlugsAcrossRuntimeSources: duplicateSlugs,
+  controlledIdentityMigrations,
+  duplicateProfessionalIdentities,
   failures: failures.length,
 }, null, 2));
 
@@ -127,6 +170,13 @@ if (duplicateSlugs.length) {
   for (const slug of duplicateSlugs) {
     const locations = bySlug.get(slug).map((record) => record.source).join(", ");
     console.error(`Slug duplicado sem precedência segura: ${slug} (${locations})`);
+  }
+  process.exitCode = 1;
+}
+
+if (duplicateProfessionalIdentities.length) {
+  for (const duplicate of duplicateProfessionalIdentities) {
+    console.error(`Profissional duplicado sem consolidação segura: ${duplicate.identity} (${duplicate.slugs.join(", ")})`);
   }
   process.exitCode = 1;
 }
