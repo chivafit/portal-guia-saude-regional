@@ -1,0 +1,7 @@
+<svg width="600" height="760" viewBox="0 0 600 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="760" rx="48" fill="#EEF5F7"/>
+  <circle cx="300" cy="260" r="118" fill="#D7E6ED"/>
+  <path d="M142 646c22-118 92-178 158-178s136 60 158 178" fill="#24465B"/>
+  <path d="M96 128c94-54 181-67 260-39 64 22 113 70 148 144" stroke="#D97842" stroke-width="18" stroke-linecap="round" opacity=".28"/>
+  <text x="56" y="694" fill="#7B8E99" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="5">FOTO PROFISSIONAL</text>
+</svg>
