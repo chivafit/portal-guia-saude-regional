@@ -12,6 +12,13 @@ export type PodcastParticipantReview = {
  */
 export const podcastParticipantReview: PodcastParticipantReview[] = [
   {
+    guest: "Biomagistral",
+    episodeSlug: "biomagistral-farmacia-manipulacao",
+    episodeUrl: "https://www.youtube.com/watch?v=uNyNAvumGdk",
+    status: "needs-episode-identification",
+    note: "Episódio institucional confirmado. Não vincular profissionais individualmente nem criar destaque automático sem a identificação editorial dos participantes.",
+  },
+  {
     guest: "Elisa Ribeiro",
     episodeSlug: "conexao-saude-elisa-ribeiro",
     episodeUrl: "https://www.youtube.com/watch?v=v7ymTasSRqQ",
