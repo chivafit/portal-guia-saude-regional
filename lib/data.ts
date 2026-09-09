@@ -1,4 +1,5 @@
 import { resolveProfessionalImage } from "./avatars";
+import { rehabilitationOrganizations } from "./data/rehabilitation-organizations";
 
 export type ProfessionalLocation = {
   name: string;
@@ -829,6 +830,7 @@ const piumhiImportedOrganizations: Organization[] = [
  * Itens em apuração continuam fora do diretório até a confirmação da equipe.
  */
 const publishedOrganizationConfig: Record<string, Partial<Organization>> = {
+  ...Object.fromEntries(rehabilitationOrganizations.map((item) => [item.slug, item])),
   "oraldents-piumhi": { categoryKey: "odontologia", subcategories: ["Clínica odontológica"], keywords: ["dentista", "odontologia", "saúde bucal"], verificationStatus: "official-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 10 },
   "instituto-nomma-piumhi": { categoryKey: "odontologia", subcategories: ["Clínica odontológica"], keywords: ["dentista", "odontologia", "saúde bucal"], verificationStatus: "public-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 15 },
   "centro-medico-odontologico-de-piumhi": { categoryKey: "odontologia", subcategories: ["Clínica odontológica"], keywords: ["dentista", "odontologia"], verificationStatus: "public-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 20 },
@@ -937,13 +939,13 @@ function mapSearchUrl(organization: Organization) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
-export const organizations: Organization[] = [...piumhiImportedOrganizations, ...vettedLocalOrganizations]
+export const organizations: Organization[] = [...piumhiImportedOrganizations.filter((item) => !rehabilitationOrganizations.some((entry) => entry.slug === item.slug)), ...vettedLocalOrganizations, ...rehabilitationOrganizations]
   .filter((org) => Boolean(publishedOrganizationConfig[org.slug]))
   .map((org) => ({
     ...org,
     ...publishedOrganizationConfig[org.slug],
     summary: org.publicSummary ?? `Informações públicas reunidas a partir da fonte indicada. Confirme detalhes diretamente com ${org.name}.`,
-    sourceUrls: org.source ? [org.source] : [],
+    sourceUrls: org.sourceUrls ?? (org.source ? [org.source] : []),
     updatedAt: org.lastVerifiedAt,
     relationship: "organic" as const,
     mapUrl: org.mapUrl ?? mapSearchUrl(org),

@@ -1,0 +1,70 @@
+import type { Organization } from "../data";
+
+// Pesquisa de setembro/2026. Atuação de Michelle e Pulmocardio também
+// confirmada pela responsável pelo portal. Essa confirmação não valida contatos.
+// Telefones cadastrais/divergentes, WhatsApp, horários e convênios são omitidos.
+export const rehabilitationOrganizations: Organization[] = [
+  {
+    slug: "recuperarte-fisioterapia-estetica-piumhi",
+    name: "Recuperarte Fisioterapia e Estética",
+    address: "Rua Dom Pedro II, 52, Centro",
+    phone: "(37) 3371-7081",
+    services: ["Fisioterapia", "Pilates", "Estética"],
+    summary: "Clínica de fisioterapia, Pilates e estética no Centro de Piumhi.",
+    source: "https://painelwebservice.cfa.org.br/?a=show&c=pesquisa&id=935",
+    sourceUrls: ["https://painelwebservice.cfa.org.br/?a=show&c=pesquisa&id=935", "https://br.todosnegocios.com/pt/recuperarte-cl%C3%ADnica-de-fisioterapia-e-37-3371-7081"],
+  },
+  {
+    slug: "life-mais-fisioterapia-pilates-piumhi",
+    name: "Life Mais Fisioterapia e Pilates",
+    address: "Avenida Dr. Osvaldo Soares Machado, 897, Nova Esperança",
+    phone: "",
+    services: ["Fisioterapia", "Pilates"],
+    summary: "Espaço de fisioterapia e Pilates no bairro Nova Esperança, em Piumhi.",
+    source: "https://localtreino.com/estudios-de-pilates/piumhi/life-mais-fisioterapia-e-pilates/",
+    sourceUrls: ["https://localtreino.com/estudios-de-pilates/piumhi/life-mais-fisioterapia-e-pilates/", "https://cnpj.biz/53535991000173"],
+  },
+  {
+    slug: "clinica-priorizze-piumhi",
+    name: "Clínica Priorizze",
+    address: "Rua Bambuí, 95, Centro",
+    phone: "",
+    services: ["Fisioterapia"],
+    summary: "Clínica de fisioterapia localizada na Rua Bambuí, no Centro de Piumhi.",
+    source: "https://www.waze.com/live-map/directions/brazil/state-of-minas-gerais/piumhi/clinica-priorizze?to=place.ChIJSwuvDj4TtJQRuvq23oWAY3o",
+    sourceUrls: ["https://www.waze.com/live-map/directions/brazil/state-of-minas-gerais/piumhi/clinica-priorizze?to=place.ChIJSwuvDj4TtJQRuvq23oWAY3o", "https://cnpj.biz/54058401000121"],
+  },
+  {
+    slug: "michelle-freire-pilates-fisioterapia-piumhi",
+    name: "Michelle Freire Pilates e Fisioterapia",
+    aliases: ["Michele Freire Pilates e Fisioterapia"],
+    address: "Rua 13 de Maio, 162, Dona Vicentina",
+    phone: "",
+    services: ["Fisioterapia", "Pilates"],
+    summary: "Espaço de Pilates e fisioterapia no bairro Dona Vicentina, em Piumhi.",
+    source: "https://www.econodata.com.br/maiores-empresas/mg-piumhi/busca-pilates",
+    sourceUrls: ["https://www.econodata.com.br/maiores-empresas/mg-piumhi/busca-pilates", "https://www.solutudo.com.br/empresas/mg/piumhi/fisioterapia?mais_buscadas=1"],
+  },
+  {
+    slug: "pulmocardio-fisioterapia-piumhi",
+    name: "Pulmocardio Clínica de Fisioterapia",
+    address: "Praça Guia Lopes, 248, sala 1, Centro",
+    phone: "",
+    services: ["Fisioterapia"],
+    summary: "Clínica de fisioterapia na Praça Guia Lopes, no Centro de Piumhi.",
+    source: "https://cnpj.biz/15019049000163",
+    sourceUrls: ["https://cnpj.biz/15019049000163", "https://sapl.piumhi.mg.leg.br/media/sapl/public/materialegislativa/2022/4341/2022-05-27_pdl_002_trofeu_prof_dest_saude_2022.pdf"],
+  },
+].map((item, index) => ({
+  ...item,
+  city: "Piumhi",
+  category: "Fisioterapia e reabilitação",
+  categoryKey: "fisioterapia-reabilitacao",
+  keywords: ["fisioterapia", "fisioterapeuta", "reabilitação", ...item.services],
+  subcategories: ["Fisioterapia e reabilitação", ...(item.services.includes("Pilates") ? ["Pilates"] : [])],
+  publicSummary: item.summary,
+  publicationStatus: "published" as const,
+  verificationStatus: "public-source" as const,
+  lastVerifiedAt: "2026-09-09",
+  displayOrder: 38 + index,
+}));
