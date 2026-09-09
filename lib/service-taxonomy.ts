@@ -14,7 +14,7 @@ export const serviceTaxonomy: ServiceCategory[] = [
   { key: "academias", label: "Academias e atividade física", aliases: ["academia", "academias", "atividade fisica", "musculacao", "natacao", "hidroginastica"] },
   { key: "pilates", label: "Pilates e reabilitação", aliases: ["pilates", "reabilitacao", "fisioterapia", "quiropraxia"] },
   { key: "fisioterapia-reabilitacao", label: "Fisioterapia e reabilitação", aliases: ["fisioterapia", "reabilitacao", "hidroterapia", "terapia"] },
-  { key: "farmacias", label: "Farmácias", aliases: ["farmacia", "farmacias", "drogaria", "drogarias"] },
+  { key: "farmacias", label: "Farmácias", aliases: ["farmacia", "farmacias", "drogaria", "drogarias", "remedio", "remedios", "medicamento", "medicamentos", "farmacia de manipulacao"] },
   { key: "oticas", label: "Óticas", aliases: ["otica", "oticas", "oculos", "lentes", "visao"] },
   { key: "laboratorios", label: "Laboratórios", aliases: ["laboratorio", "laboratorios", "coleta"] },
   { key: "estetica", label: "Estética e bem-estar", aliases: ["estetica", "bem estar", "bem-estar"] },

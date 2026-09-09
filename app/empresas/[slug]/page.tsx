@@ -53,7 +53,7 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
   const publicUrl = `https://guiasaude.app.br/empresas/${item.slug}/`;
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "MedicalBusiness",
+    "@type": item.categoryKey === "farmacias" ? "Pharmacy" : "MedicalBusiness",
     name: item.name,
     description: item.publicSummary ?? item.summary,
     url: publicUrl,

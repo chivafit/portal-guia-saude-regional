@@ -94,9 +94,21 @@ const syntheticChecks = [
   ["Acentos e caixa não impedem busca", { specialty: "Ginecologia e Obstetrícia", services: [] }, "obstetricia", true],
 ];
 
+const syntheticTextChecks = [
+  ["remédio encontra farmácia", "Farmácia com medicamentos e produtos de saúde", "remédio", true],
+  ["drogarias encontra farmácia", "Farmácia com medicamentos e produtos de saúde", "drogarias", true],
+  ["manipulação não encontra farmácia comum", "Farmácia com medicamentos e produtos de saúde", "manipulação", false],
+  ["manipulação encontra serviço confirmado", "Farmácia de manipulação de fórmulas", "farmácia de manipulação", true],
+];
+
 for (const [label, item, requested, expected] of syntheticChecks) {
   coverageAssertions += 1;
   if (matchesProfessionalSpecialty(item, requested) !== expected) failures.push(`Regra de busca: ${label}`);
+}
+
+for (const [label, haystack, requested, expected] of syntheticTextChecks) {
+  coverageAssertions += 1;
+  if (matchesSearchTerms(haystack, requested) !== expected) failures.push(`Regra de busca: ${label}`);
 }
 
 const bySlug = new Map();
