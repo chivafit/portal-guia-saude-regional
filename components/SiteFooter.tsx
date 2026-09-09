@@ -22,7 +22,7 @@ function YoutubeIcon() {
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({ hideCommercialCallout = false }: { hideCommercialCallout?: boolean }) {
   return (
     <footer className="site-footer">
       <div className="shell footer-top">
@@ -62,11 +62,11 @@ export function SiteFooter() {
           </div>
         </nav>
 
-        <div className="footer-cta">
+        {!hideCommercialCallout ? <div className="footer-cta">
           <strong>É profissional ou marca de saúde?</strong>
           <p>Apareça para quem procura atendimento na região.</p>
           <Link href="/anuncie">Anunciar no Guia <ArrowUpRight size={15} /></Link>
-        </div>
+        </div> : null}
       </div>
 
       <div className="shell footer-bottom">

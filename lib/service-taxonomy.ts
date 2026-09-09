@@ -18,7 +18,7 @@ export const serviceTaxonomy: ServiceCategory[] = [
   { key: "oticas", label: "Óticas", aliases: ["otica", "oticas", "oculos", "lentes", "visao"] },
   { key: "laboratorios", label: "Laboratórios", aliases: ["laboratorio", "laboratorios", "coleta"] },
   { key: "estetica", label: "Estética e bem-estar", aliases: ["estetica", "bem estar", "bem-estar"] },
-  { key: "servicos-publicos", label: "Serviços públicos de saúde", aliases: ["saude publica", "secretaria municipal", "sus", "atencao basica"] },
+  { key: "servicos-publicos", label: "Rede pública • SUS", aliases: ["saude publica", "rede publica", "secretaria municipal", "sus", "atencao basica", "ubs", "psf", "esf", "posto", "posto de saude", "saude da familia", "caps", "caps ad", "saude mental", "vacina", "vacinacao", "farmacia municipal", "farmacia sus", "dentista sus", "odontologia sus", "ceo", "fisioterapia sus", "reabilitacao", "hidroterapia", "exame sus", "diagnostico sus", "exames laboratoriais"] },
 ];
 
 export function normalizeTaxonomyValue(value: string): string {
@@ -60,7 +60,6 @@ export function organizationSearchText(organization: Organization): string {
     ...(organization.aliases ?? []),
     organization.category,
     category?.label,
-    ...(category?.aliases ?? []),
     ...(organization.subcategories ?? []),
     ...(organization.keywords ?? []),
     organization.city,

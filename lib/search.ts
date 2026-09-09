@@ -40,8 +40,15 @@ export function filterOrganizations(items: PublicOrganization[], filters: Search
         : normalizeTaxonomyValue(item.category) === normalizeTaxonomyValue(category)
     );
     const haystack = organizationSearchText(item);
+    const normalizedQuery = normalizeTaxonomyValue(query);
+    // Apelidos curtos, como “Tó”, não podem usar correspondência parcial:
+    // a forma normalizada "to" ocorre em praticamente qualquer texto em português.
+    const shortAliasMatch = normalizedQuery.length > 0 && normalizedQuery.length <= 2
+      && [item.name, ...(item.aliases ?? [])]
+        .map(normalizeTaxonomyValue)
+        .some((candidate) => candidate === normalizedQuery);
     return (
-      (!query || matchesSearchTerms(haystack, query)) &&
+      (!query || (normalizedQuery.length <= 2 ? shortAliasMatch : matchesSearchTerms(haystack, query))) &&
       (!city || normalizeTaxonomyValue(item.city) === normalizedCity) &&
       categoryMatch
     );

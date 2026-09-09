@@ -194,7 +194,6 @@ export const publicProfessionals: Professional[] = professionalDirectory()
 export async function publishedOrganizations(fallback: Organization[] = organizations) {
   return fallback.filter((item) => item.city === "Piumhi"
     && item.publicationStatus === "published"
-    && Boolean(item.phone)
     && !/(endere[cç]o\s+(aguardando validação|a validar|a confirmar)|pendente|em revisão)/i.test(item.address));
 }
 
