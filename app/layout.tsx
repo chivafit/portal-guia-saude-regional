@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { CityEntryModal } from "@/components/CityEntryModal";
-import { LiveProfessionalPhotos } from "@/components/LiveProfessionalPhotos";
 import { defaultDescription, siteName, siteUrl } from "@/lib/seo";
 import "./globals.css";
 import "./mobile-audit.css";
@@ -25,5 +24,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="pt-BR"><body>{children}<LiveProfessionalPhotos /><CityEntryModal /></body></html>;
+  return <html lang="pt-BR"><body>{children}<CityEntryModal /></body></html>;
 }

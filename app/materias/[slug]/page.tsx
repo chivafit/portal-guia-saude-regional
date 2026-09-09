@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { articles, articleImage, podcasts } from "@/lib/data";
 import { publicProfessionals } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
+import { ProfessionalImage } from "@/components/ProfessionalImage";
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
@@ -87,7 +88,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 <p className="eyebrow">Especialista participante</p>
                 <strong>Conheça o profissional que participou deste conteúdo</strong>
                 <div>
-                  {participatingProfessional.imageUrl ? <span className="article-professional-avatar" style={{ backgroundImage: `url(${participatingProfessional.imageUrl})` }} aria-hidden="true" /> : null}
+                  {participatingProfessional.imageUrl ? <span className="article-professional-avatar" aria-hidden="true"><ProfessionalImage src={participatingProfessional.imageUrl} sizes="52px" /></span> : null}
                   <span><b>{participatingProfessional.name}</b><small>{participatingProfessional.specialty} · {participatingProfessional.city}</small></span>
                   <Link href={`/profissionais/${participatingProfessional.slug}`}>Ver perfil no Guia Saúde <ArrowRight size={14} /></Link>
                 </div>

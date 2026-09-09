@@ -6,9 +6,12 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "optimize:professional-images": "node --import tsx scripts/optimize-professional-images.ts",
+    "predev": "npm run optimize:professional-images",
     "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
+    "prebuild": "npm run optimize:professional-images",
     "build": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
-    "build:pages": "npm run validate:directory && npm run validate:search && npm run validate:podcast && next build --webpack && node scripts/postbuild-seo.mjs && node --import tsx scripts/validate-public-directory.ts --check-sitemap",
+    "build:pages": "npm run optimize:professional-images && npm run validate:directory && npm run validate:search && npm run validate:podcast && next build --webpack && node scripts/postbuild-seo.mjs && node --import tsx scripts/validate-public-directory.ts --check-sitemap",
     "validate:seo": "node scripts/validate-seo.mjs",
     "validate:service-import": "node scripts/validate-service-import.mjs",
     "validate:professionals": "node scripts/validate-professionals.mjs",
@@ -16,7 +19,7 @@
     "validate:search": "node scripts/validate-search-coverage.mjs",
     "validate:podcast": "node scripts/validate-podcast-participants.mjs",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"
   },
@@ -40,6 +43,7 @@
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
     "react-server-dom-webpack": "19.2.6",
+    "sharp": "0.34.5",
     "tailwindcss": "4.2.1",
     "typescript": "5.9.3",
     "vinext": "0.0.50",

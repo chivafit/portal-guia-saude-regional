@@ -6,6 +6,7 @@ import { professionals } from "@/lib/data";
 import { publishedProfessionals } from "@/lib/public-directory";
 import { isPodcastProfessional } from "@/lib/podcast-guests";
 import { pageMetadata } from "@/lib/seo";
+import { ProfessionalImage } from "@/components/ProfessionalImage";
 
 export const metadata = pageMetadata(
   "Profissionais em destaque",
@@ -46,15 +47,12 @@ export default async function FeaturedProfessionalsPage() {
           </div>
 
           <div className="featured-directory-grid">
-            {featuredProfessionals.map((item) => {
+            {featuredProfessionals.map((item, index) => {
               const registration = registrationLabel(item.registration);
               return (
                 <Link key={item.slug} href={`/profissionais/${item.slug}`} className="featured-directory-card">
-                  <span
-                    className={`featured-directory-avatar${item.imageUrl ? " has-photo" : ""}`}
-                    style={item.imageUrl ? { backgroundImage: `url(${item.imageUrl})` } : undefined}
-                    aria-hidden="true"
-                  >
+                  <span className={`featured-directory-avatar${item.imageUrl ? " has-photo" : ""}`} aria-hidden="true">
+                    {item.imageUrl ? <ProfessionalImage src={item.imageUrl} sizes="(max-width: 760px) 52px, 58px" eager={index < 2} /> : null}
                     {!item.imageUrl
                       ? item.name
                           .split(" ")

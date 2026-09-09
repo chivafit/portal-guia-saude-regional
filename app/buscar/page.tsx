@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, ShieldCheck, SlidersHorizontal, Star, Stethoscope, X } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -13,6 +13,7 @@ import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { filterOrganizations, filterProfessionals } from "@/lib/search";
 import { categoryOptionsFor } from "@/lib/service-taxonomy";
 import { ResponsiveFilterDisclosure } from "@/components/ResponsiveFilterDisclosure";
+import { ProfessionalImage } from "@/components/ProfessionalImage";
 
 function param(value: string | null): string {
   return value ?? "";
@@ -339,16 +340,12 @@ function SearchDirectory() {
               <>
                 {type === "todos" ? <h3 className="results-group-title">Profissionais</h3> : null}
                 <div className="doctor-card-list">
-                  {visibleProfessionals.map((item) => {
+                  {visibleProfessionals.map((item, index) => {
                     const contact = item.featured ? directContact(item.whatsapp, item.phone) : null;
                     return <article className={`doctor-card${item.featured ? " doctor-card-featured" : ""}`} key={item.slug}>
                       {item.featured ? <span className="sponsored-ribbon"><Star size={12} fill="currentColor" /> Profissional em destaque</span> : null}
-                      <div
-                        className={`doctor-avatar${item.imageUrl ? " doctor-photo" : " doctor-profession-icon"}`}
-                        aria-hidden="true"
-                        style={item.imageUrl ? { "--doctor-photo": `url(${item.imageUrl})` } as CSSProperties : undefined}
-                      >
-                        {item.imageUrl ? null : <ProfessionIcon profession={item.profession} />}
+                      <div className={`doctor-avatar${item.imageUrl ? " doctor-photo" : " doctor-profession-icon"}`} aria-hidden="true">
+                        {item.imageUrl ? <ProfessionalImage src={item.imageUrl} sizes={item.featured ? "(max-width: 760px) 58px, 88px" : "(max-width: 700px) calc(100vw - 64px), 88px"} eager={index < 2} /> : <ProfessionIcon profession={item.profession} />}
                       </div>
                       <div className="doctor-main">
                         <div className="doctor-card-head">

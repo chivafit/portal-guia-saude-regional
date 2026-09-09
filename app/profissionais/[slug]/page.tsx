@@ -11,6 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 import { ProfileShareButton } from "@/components/ProfileShareButton";
 import { professionalRedirects, professionalRedirectTarget } from "@/lib/professional-redirects";
 import { siteUrl } from "@/lib/seo";
+import { ProfessionalImage } from "@/components/ProfessionalImage";
 
 function presentationProfession(name: string, profession: string) {
   if (/^Dra\.?\s/i.test(name) && profession === "Médico") return "Médica";
@@ -114,12 +115,8 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
           </Link>
 
           <article className="profile-clean-card">
-            <div
-              className={`profile-clean-photo${item.imageUrl ? "" : " profile-clean-initials"}`}
-              aria-hidden="true"
-              style={item.imageUrl ? { backgroundImage: `url(${item.imageUrl})` } : undefined}
-            >
-              {item.imageUrl ? null : <span>{initials}</span>}
+            <div className={`profile-clean-photo${item.imageUrl ? "" : " profile-clean-initials"}`} aria-hidden="true">
+              {item.imageUrl ? <ProfessionalImage src={item.imageUrl} sizes="(max-width: 700px) calc(100vw - 74px), 116px" eager fetchPriority="high" /> : <span>{initials}</span>}
             </div>
 
             <div className="profile-clean-main">

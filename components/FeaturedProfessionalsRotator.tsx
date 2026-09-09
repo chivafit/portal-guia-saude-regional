@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight, Star } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ProfessionalImage } from "@/components/ProfessionalImage";
 
 type FeaturedProfessional = {
   slug: string;
@@ -13,33 +13,15 @@ type FeaturedProfessional = {
   imageUrl?: string;
 };
 
-function shuffle<T>(items: T[]) {
-  const copy = [...items];
-  for (let i = copy.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}
-
 export function FeaturedProfessionalsRotator({ professionals }: { professionals: FeaturedProfessional[] }) {
-  const [visible, setVisible] = useState(() => professionals.slice(0, 6));
-
-  useEffect(() => {
-    if (professionals.length <= 6) return;
-    const rotate = window.setTimeout(() => setVisible(shuffle(professionals).slice(0, 6)), 0);
-    return () => window.clearTimeout(rotate);
-  }, [professionals]);
+  const visible = professionals.slice(0, 6);
 
   return (
     <div className="home-featured-professionals-grid">
-      {visible.map((item) => (
+      {visible.map((item, index) => (
         <Link key={item.slug} href={`/profissionais/${item.slug}`} className="home-featured-professional-card">
-          <span
-            className={`home-featured-professional-avatar${item.imageUrl ? " has-photo" : ""}`}
-            style={item.imageUrl ? { backgroundImage: `url(${item.imageUrl})` } : undefined}
-            aria-hidden="true"
-          >
+          <span className={`home-featured-professional-avatar${item.imageUrl ? " has-photo" : ""}`} aria-hidden="true">
+            {item.imageUrl ? <ProfessionalImage src={item.imageUrl} sizes="(max-width: 640px) 64px, 76px" eager={index < 3} /> : null}
             {!item.imageUrl
               ? item.name
                   .split(" ")
