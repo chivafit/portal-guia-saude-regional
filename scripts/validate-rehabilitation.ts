@@ -5,8 +5,8 @@ import { rehabilitationOrganizations } from "../lib/data/rehabilitation-organiza
 import { filterOrganizations } from "../lib/search";
 
 const organizations = await publishedOrganizations();
-assert.equal(organizations.length, 62);
-assert.equal((await publishedProfessionals()).length, 137);
+assert.equal(organizations.length, 64);
+assert.equal((await publishedProfessionals()).length, 139);
 assert.equal(new Set(organizations.map(item => item.slug)).size, organizations.length);
 const sitemap = readFileSync("out/sitemap.xml", "utf8");
 for (const item of rehabilitationOrganizations) {
@@ -26,4 +26,4 @@ for (const item of rehabilitationOrganizations) {
 }
 assert.ok(filterOrganizations(organizations, { query: "Michele Freire" }).some(item => item.slug.startsWith("michelle-freire")));
 assert.ok(!organizations.some(item => /recovery|borboletando|revivare/i.test(item.name)));
-console.log("Expansão validada: 5 páginas, fontes, buscas, mapas, contatos omitidos, sitemap; 62 estabelecimentos e 137 profissionais.");
+console.log("Expansão validada: 5 páginas, fontes, buscas, mapas, contatos omitidos, sitemap; 64 estabelecimentos e 139 profissionais.");

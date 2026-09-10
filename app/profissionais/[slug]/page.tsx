@@ -165,11 +165,12 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
             {locations.length ? <article>
               <h2>{locations.length > 1 ? "Locais de atendimento" : "Local de atendimento"}</h2>
               {locations.map((location) => {
+                const linkedOrganization = organizationForProfessional({ city: item.city, organization: location.name });
                 const locationMapHref = location.mapUrl || (location.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${location.name}, ${location.address}, ${item.city}, MG`)}` : "");
                 return <div className="profile-clean-location" key={`${location.name}-${location.address ?? ""}`}>
                   <Building2 size={20} />
                   <div>
-                    <strong>{location.name}</strong>
+                    <strong>{linkedOrganization ? <Link href={`/empresas/${linkedOrganization.slug}`}>{location.name}</Link> : location.name}</strong>
                     {location.address ? <span>{location.address}</span> : null}
                     <span>{item.city}, Minas Gerais</span>
                     {locationMapHref ? <a href={locationMapHref} target="_blank" rel="noopener noreferrer" aria-label={`Ver ${location.name} no mapa`}>Ver localização</a> : null}

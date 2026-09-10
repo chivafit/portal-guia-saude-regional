@@ -830,6 +830,8 @@ const piumhiImportedOrganizations: Organization[] = [
  * Itens em apuração continuam fora do diretório até a confirmação da equipe.
  */
 const publishedOrganizationConfig: Record<string, Partial<Organization>> = {
+  "clinica-sao-judas-tadeu-piumhi": { categoryKey: "clinicas", subcategories: ["Oftalmologia"], keywords: ["oftalmologia", "oftalmologista", "saúde ocular"], verificationStatus: "official-source", publicationStatus: "published", lastVerifiedAt: "2026-09-10" },
+  "clinica-olhos-roberto-santos-piumhi": { categoryKey: "clinicas", subcategories: ["Oftalmologia"], keywords: ["oftalmologia", "oftalmologista", "saúde ocular"], verificationStatus: "official-source", publicationStatus: "published", lastVerifiedAt: "2026-09-10" },
   ...Object.fromEntries(rehabilitationOrganizations.map((item) => [item.slug, item])),
   "oraldents-piumhi": { categoryKey: "odontologia", subcategories: ["Clínica odontológica"], keywords: ["dentista", "odontologia", "saúde bucal"], verificationStatus: "official-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 10 },
   "instituto-nomma-piumhi": { categoryKey: "odontologia", subcategories: ["Clínica odontológica"], keywords: ["dentista", "odontologia", "saúde bucal"], verificationStatus: "public-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 15 },
@@ -891,6 +893,36 @@ const publishedOrganizationConfig: Record<string, Partial<Organization>> = {
 };
 
 const vettedLocalOrganizations: Organization[] = [
+  {
+    "slug": "clinica-olhos-roberto-santos-piumhi",
+    "name": "Clínica de Olhos Dr. Roberto Santos",
+    "category": "Clínica multiprofissional",
+    "city": "Piumhi",
+    "address": "Rua Armando Viotti, 198, Centro",
+    "phone": "(37) 3371-2823",
+    "summary": "Clínica de oftalmologia do Dr. Roberto Santos no Centro de Piumhi.",
+    "publicSummary": "Clínica de oftalmologia do Dr. Roberto Santos no Centro de Piumhi.",
+    "services": [
+        "Oftalmologia"
+    ],
+    "source": "https://robertosantosoftalmologista.com/homepiumhi/",
+    "website": "https://robertosantosoftalmologista.com/homepiumhi/"
+},
+  {
+    "slug": "clinica-sao-judas-tadeu-piumhi",
+    "name": "Clínica São Judas Tadeu",
+    "category": "Clínica multiprofissional",
+    "city": "Piumhi",
+    "address": "Rua Armando Viotti, 190, Centro",
+    "phone": "(37) 3412-2295",
+    "summary": "Clínica em Piumhi com atendimento em oftalmologia.",
+    "publicSummary": "Clínica em Piumhi com atendimento em oftalmologia.",
+    "services": [
+        "Oftalmologia"
+    ],
+    "source": "https://sites.google.com/view/clinicasaojudastadeu/in%C3%ADcio",
+    "website": "https://sites.google.com/view/clinicasaojudastadeu/in%C3%ADcio"
+},
   { slug: "odant-medicina-diagnostica-piumhi", name: "O'DANT Medicina Diagnóstica", aliases: ["ODANT", "O DANT", "O'DANT", "O'DANT Medicina Diagnóstica"], category: "Diagnóstico por imagem", city: "Piumhi", address: "Praça Guia Lopes, 53, sala 04, Centro", phone: "(37) 99834-3495", whatsapp: "https://wa.me/5537998343495", summary: "Unidade de diagnóstico por imagem em Piumhi. Informações de serviços e contato reunidas a partir do site oficial.", services: ["Ressonância magnética", "Tomografia computadorizada", "Densitometria óssea", "Mamografia digital", "Ultrassom", "Ultrassom com Doppler"], source: "https://www.odant.com.br/blank-1", website: "https://www.odant.com.br/" },
   { slug: "nucleo-atencao-saude-unimed-piumhi", name: "Núcleo de Atenção à Saúde Unimed Piumhi", aliases: ["NAS Unimed Piumhi", "Núcleo de Atenção à Saúde em Piumhi", "Unimed Piumhi"], category: "Centro médico", city: "Piumhi", address: "Rua Armando Viotti, 190, 3º andar, Centro", phone: "(37) 3371-5243", summary: "Unidade da Unimed Sudoeste de Minas em Piumhi, com especialidades médicas e atendimentos multiprofissionais informados pela cooperativa.", services: ["Medicina de Família e Comunidade", "Clínica geral", "Dermatologia", "Ginecologia", "Oftalmologia", "Urologia", "Pediatria", "Nutrição", "Psicologia", "Fonoaudiologia"], source: "https://www.unimed.coop.br/site/web/sudoestedeminas/n%C3%BAcleo-de-aten%C3%A7%C3%A3o-%C3%A0-sa%C3%BAde-em-piumhi", website: "https://www.unimed.coop.br/site/web/sudoestedeminas/" },
   { slug: "laboratorio-bioanalise-piumhi", name: "Laboratório Bioanálise", aliases: ["Bioanálise", "Bioanalise"], category: "Laboratório", city: "Piumhi", address: "Rua Tereza Hostalácio, 63, Centro", phone: "(37) 99869-3435", summary: "Laboratório de análises clínicas com unidade informada em Piumhi.", services: ["Análises clínicas", "Exames laboratoriais"], source: "https://www.waze.com/live-map/directions/br/mg/laboratorio-bioanalise-analises-clinicas-ltda?to=place.ChIJAzFRop4TtJQRuTC8wtEUcbQ", website: "https://www.labbioanalisepiumhi.com.br/" },

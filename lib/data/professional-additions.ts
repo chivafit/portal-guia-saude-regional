@@ -6,6 +6,55 @@ import type { Professional } from "../data";
  * futuras revisões de fonte, registro e local de atendimento.
  */
 export const piumhiProfessionalAdditions: Professional[] = [
+  // Atendimento confirmado em fonte própria; CRM/RQE não verificados nesta revisão.
+  {
+    "slug": "dr-roberto-de-oliveira-santos-oftalmologia-piumhi",
+    "name": "Dr. Roberto de Oliveira Santos",
+    "profession": "Médico",
+    "specialty": "Oftalmologia",
+    "city": "Piumhi",
+    "organization": "Clínica de Olhos Dr. Roberto Santos — Rua Armando Viotti, 198, Centro",
+    "registration": "",
+    "verified": false,
+    "summary": "Oftalmologista com atendimento na Clínica de Olhos Dr. Roberto Santos, em Piumhi.",
+    "phone": "",
+    "whatsapp": "",
+    "services": [
+        "Oftalmologia"
+    ],
+    "source": "https://robertosantosoftalmologista.com/homepiumhi/",
+    "sourceUrls": [
+        "https://robertosantosoftalmologista.com/homepiumhi/"
+    ],
+    "lastVerifiedAt": "2026-09-10",
+    "publicationStatus": "published",
+    "verificationStatus": "official-source",
+    "commercialStatus": "organic"
+},
+  {
+    "slug": "dr-alvaro-ribeiro-vaz-de-faria-oftalmologia-piumhi",
+    "name": "Dr. Álvaro Ribeiro Vaz de Faria",
+    "profession": "Médico",
+    "specialty": "Oftalmologia",
+    "city": "Piumhi",
+    "organization": "Clínica São Judas Tadeu — Rua Armando Viotti, 190, Centro",
+    "registration": "",
+    "verified": false,
+    "summary": "Oftalmologista com atendimento na Clínica São Judas Tadeu, em Piumhi.",
+    "phone": "",
+    "whatsapp": "",
+    "services": [
+        "Oftalmologia"
+    ],
+    "source": "https://sites.google.com/view/clinicasaojudastadeu/in%C3%ADcio",
+    "sourceUrls": [
+        "https://sites.google.com/view/clinicasaojudastadeu/in%C3%ADcio"
+    ],
+    "lastVerifiedAt": "2026-09-10",
+    "publicationStatus": "published",
+    "verificationStatus": "official-source",
+    "commercialStatus": "organic"
+},
   {
     slug: "dr-nicollas-nunes-rabelo-neurologia-neurocirurgia-piumhi",
     name: "Dr. Nicollas Nunes Rabelo",

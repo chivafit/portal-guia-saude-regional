@@ -110,7 +110,7 @@ export function organizationForProfessional(item: Pick<Professional, "city" | "o
   return source.find((organization) => organization.city === item.city
     && [organization.name, ...(organization.aliases ?? [])]
       .map(normalizedOrganizationValue)
-      .some((alias) => Boolean(alias) && organizationName.includes(alias)));
+      .some((alias) => Boolean(alias) && ` ${organizationName} `.includes(` ${alias} `)));
 }
 
 function locationFromOrganization(item: Professional, phone: string, whatsapp: string) {
