@@ -18,6 +18,8 @@ export type AdminOrganization = {
 };
 
 export type PublicProfessional = {
+  aliases?: string[];
+  locations?: import("./data").ProfessionalLocation[];
   slug: string; name: string; profession: string; specialty: string; city: string;
   organization: string; registration: string; verified: boolean; summary: string;
   phone: string; whatsapp: string; services: string[]; imageUrl?: string; coverImageUrl?: string; logoUrl?: string; source?: string;

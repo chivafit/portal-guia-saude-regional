@@ -1,3 +1,4 @@
+import { directoryAuditAdditions } from "./data/directory-audit-additions";
 import { organizations, professionals, type Organization, type Professional } from "./data";
 import { piumhiProfessionalAdditions } from "./data/professional-additions";
 import { piumhiMedicalSequenceAdditions } from "./data/medical-sequence-additions";
@@ -39,7 +40,7 @@ function professionalDirectory(source: Professional[] = professionals) {
   const enriched = source.map(enrichProfessional);
 
   const additions = source === professionals
-    ? [...piumhiProfessionalAdditions, ...piumhiMedicalSequenceAdditions, ...piumhiOtorrinoAdditions, ...piumhiNonMedicalSequenceAdditions, ...podcastProfessionalAdditions]
+    ? [...piumhiProfessionalAdditions, ...piumhiMedicalSequenceAdditions, ...piumhiOtorrinoAdditions, ...piumhiNonMedicalSequenceAdditions, ...podcastProfessionalAdditions, ...directoryAuditAdditions]
         // As adições também passam pelos overrides no fim da composição. Isso impede
         // que uma versão editorial antiga substitua uma correção mais recente.
     : [];
@@ -105,12 +106,32 @@ function normalizedOrganizationValue(value: string) {
  * é usado como atalho: Praça Guia Lopes, 53, por exemplo, abriga entidades
  * distintas.
  */
-export function organizationForProfessional(item: Pick<Professional, "city" | "organization">, source: Organization[] = organizations) {
-  const organizationName = normalizedOrganizationValue(item.organization);
-  return source.find((organization) => organization.city === item.city
-    && [organization.name, ...(organization.aliases ?? [])]
+function organizationAliases(source: Organization[]) {
+  return source.filter((organization) => organization.publicationStatus === "published")
+    .flatMap((organization) => [organization.name, ...(organization.aliases ?? [])]
       .map(normalizedOrganizationValue)
-      .some((alias) => Boolean(alias) && ` ${organizationName} `.includes(` ${alias} `)));
+      .filter(Boolean)
+      .map((alias) => ({ organization, alias })))
+    .sort((a, b) => b.alias.length - a.alias.length);
+}
+const defaultOrganizationAliases = organizationAliases(organizations);
+
+export function organizationForProfessional(item: Pick<Professional, "city" | "organization">, source: Organization[] = organizations) {
+  const text = ` ${normalizedOrganizationValue(item.organization)} `;
+  const aliases = source === organizations ? defaultOrganizationAliases : organizationAliases(source);
+  // Nomes mais específicos têm precedência sobre aliases curtos sobrepostos.
+  return aliases.find(({ organization, alias }) => organization.city === item.city && text.includes(` ${alias} `))?.organization;
+}
+
+/** Todos os locais explicitamente nomeados, sem inferir vínculo por endereço. */
+export function organizationsForProfessional(
+  item: Pick<Professional, "city" | "organization" | "locations">,
+  source: Organization[] = organizations,
+): Organization[] {
+  const matches = [item.organization, ...(item.locations ?? []).map((location) => location.name)]
+    .map((organization) => organizationForProfessional({ city: item.city, organization }, source))
+    .filter((organization): organization is Organization => Boolean(organization));
+  return Array.from(new Map(matches.map((organization) => [organization.slug, organization])).values());
 }
 
 function locationFromOrganization(item: Professional, phone: string, whatsapp: string) {

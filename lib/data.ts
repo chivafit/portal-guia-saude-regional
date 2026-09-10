@@ -1,4 +1,5 @@
 import { resolveProfessionalImage } from "./avatars";
+import { directoryAuditOrganizations } from "./data/directory-audit-organizations";
 import { rehabilitationOrganizations } from "./data/rehabilitation-organizations";
 
 export type ProfessionalLocation = {
@@ -14,6 +15,7 @@ export type ProfessionalLocation = {
 export type Professional = {
   slug: string;
   name: string;
+  aliases?: string[];
   profession: string;
   specialty: string;
   city: string;
@@ -832,11 +834,12 @@ const piumhiImportedOrganizations: Organization[] = [
 const publishedOrganizationConfig: Record<string, Partial<Organization>> = {
   "clinica-sao-judas-tadeu-piumhi": { categoryKey: "clinicas", subcategories: ["Oftalmologia"], keywords: ["oftalmologia", "oftalmologista", "saúde ocular"], verificationStatus: "official-source", publicationStatus: "published", lastVerifiedAt: "2026-09-10" },
   "clinica-olhos-roberto-santos-piumhi": { categoryKey: "clinicas", subcategories: ["Oftalmologia"], keywords: ["oftalmologia", "oftalmologista", "saúde ocular"], verificationStatus: "official-source", publicationStatus: "published", lastVerifiedAt: "2026-09-10" },
+  ...Object.fromEntries(directoryAuditOrganizations.map((item) => [item.slug, item])),
   ...Object.fromEntries(rehabilitationOrganizations.map((item) => [item.slug, item])),
   "oraldents-piumhi": { categoryKey: "odontologia", subcategories: ["Clínica odontológica"], keywords: ["dentista", "odontologia", "saúde bucal"], verificationStatus: "official-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 10 },
   "instituto-nomma-piumhi": { categoryKey: "odontologia", subcategories: ["Clínica odontológica"], keywords: ["dentista", "odontologia", "saúde bucal"], verificationStatus: "public-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 15 },
   "centro-medico-odontologico-de-piumhi": { categoryKey: "odontologia", subcategories: ["Clínica odontológica"], keywords: ["dentista", "odontologia"], verificationStatus: "public-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 20 },
-  "clinica-sao-rafael-unimed-piumhi": { categoryKey: "clinicas", subcategories: ["Clínica multiprofissional"], keywords: ["clínica", "unimed", "especialidades"], verificationStatus: "public-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 30 },
+  "clinica-sao-rafael-unimed-piumhi": { aliases: ["Clínica São Rafael"], categoryKey: "clinicas", subcategories: ["Clínica multiprofissional"], keywords: ["clínica", "unimed", "especialidades"], verificationStatus: "public-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 30 },
   "odant-medicina-diagnostica-piumhi": { categoryKey: "hospitais", subcategories: ["Diagnóstico por imagem"], keywords: ["diagnóstico por imagem", "ressonância", "tomografia", "mamografia", "ultrassom", "doppler", "exames"], verificationStatus: "official-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 35 },
   "nucleo-atencao-saude-unimed-piumhi": { categoryKey: "clinicas", subcategories: ["Centro médico"], keywords: ["unimed", "centro médico", "especialidades", "nutrição", "psicologia", "fonoaudiologia"], verificationStatus: "official-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 36 },
   "fisiocenter-piumhi": { categoryKey: "fisioterapia-reabilitacao", subcategories: ["Fisioterapia e reabilitação"], keywords: ["fisioterapia", "quiropraxia", "pilates", "rpg", "acupuntura", "atendimento domiciliar"], verificationStatus: "public-source", publicationStatus: "published", lastVerifiedAt: "2026-09-08", displayOrder: 37 },
@@ -915,10 +918,10 @@ const vettedLocalOrganizations: Organization[] = [
     "city": "Piumhi",
     "address": "Rua Armando Viotti, 190, Centro",
     "phone": "(37) 3412-2295",
-    "summary": "Clínica em Piumhi com atendimento em oftalmologia.",
-    "publicSummary": "Clínica em Piumhi com atendimento em oftalmologia.",
+    "summary": "Clínica em Piumhi com oftalmologia, cirurgia geral e cirurgia oncológica.",
+    "publicSummary": "Clínica em Piumhi com oftalmologia, cirurgia geral e cirurgia oncológica.",
     "services": [
-        "Oftalmologia"
+        "Oftalmologia", "Cirurgia Geral", "Cirurgia Oncológica"
     ],
     "source": "https://sites.google.com/view/clinicasaojudastadeu/in%C3%ADcio",
     "website": "https://sites.google.com/view/clinicasaojudastadeu/in%C3%ADcio"
@@ -944,7 +947,7 @@ const vettedLocalOrganizations: Organization[] = [
   { slug: "solucao-farma-piumhi", name: "Solução Farma", aliases: ["Rede Inova Drogarias Piumhi", "Drogaria Inova", "Rede Inova"], category: "Farmácia de manipulação", city: "Piumhi", address: "Rua Armando Viotti, 135, Centro", phone: "(37) 3371-7888", whatsapp: "https://wa.me/553733717888", summary: "", publicSummary: "Farmácia com atendimento presencial, WhatsApp e setor de manipulação em Piumhi.", services: ["Medicamentos", "Manipulação de fórmulas", "Dermocosméticos", "Produtos de saúde"], hours: "Segunda a sexta, 8h–20h; sábado, 8h–12h", logoUrl: "/placeholders/pharmacy-logo.svg", coverImageUrl: "/placeholders/clinic-cover.svg", source: "https://solucaofarma.com.br/contato/", website: "https://solucaofarma.com.br/" },
   { slug: "certus-laboratorio-piumhi", name: "Certus Laboratório", category: "Laboratório", city: "Piumhi", address: "Praça Guia Lopes, 54, Centro — anexo à Santa Casa", phone: "(37) 3371-9511", whatsapp: "https://wa.me/5537999650200", summary: "", services: ["Análises clínicas", "Exames laboratoriais"], source: "https://www.certuslaboratorio.com.br/contato", website: "https://www.certuslaboratorio.com.br/" },
   { slug: "primelab-piumhi", name: "PrimeLab", category: "Laboratório", city: "Piumhi", address: "Rua Getúlio Vargas, 307, Centro", phone: "(37) 99967-0601", summary: "", services: ["Análises clínicas", "Exames laboratoriais"], source: "https://primelabpains.com.br/index", website: "https://primelabpains.com.br/" },
-  { slug: "santa-casa-piumhi", name: "Santa Casa de Misericórdia de Piumhi", category: "Hospital filantrópico • Atendimento SUS", city: "Piumhi", address: "Praça Guia Lopes, 53, Centro", phone: "(37) 3371-9500", summary: "", services: ["Atendimento hospitalar", "Serviços de saúde"], source: "https://www.mg.gov.br/instituicao_unidade/santa-casa-de-misericordia-de-piumhi", website: "https://www.santacasapiumhi.com.br/" },
+  { slug: "santa-casa-piumhi", aliases: ["Santa Casa de Piumhi", "Policlínica Santa Casa", "Hospital Santa Casa de Piumhi"], name: "Santa Casa de Misericórdia de Piumhi", category: "Hospital filantrópico • Atendimento SUS", city: "Piumhi", address: "Praça Guia Lopes, 53, Centro", phone: "(37) 3371-9500", summary: "", services: ["Atendimento hospitalar", "Serviços de saúde"], source: "https://www.mg.gov.br/instituicao_unidade/santa-casa-de-misericordia-de-piumhi", website: "https://www.santacasapiumhi.com.br/" },
   { slug: "centro-reabilitacao-hidroterapia-piumhi", name: "Centro de Reabilitação e Hidroterapia José Rodrigues de Castro", aliases: ["Centro de Reabilitação", "Hidroterapia SUS", "José Rodrigues de Castro"], category: "Rede pública • Reabilitação", city: "Piumhi", address: "Rua São Vicente, 954, Vila Nova", phone: "(37) 3371-2738", summary: "", publicSummary: "Unidade municipal de reabilitação e hidroterapia em Piumhi.", services: ["Reabilitação", "Hidroterapia", "Fisioterapia"], hours: "Segunda a sexta, 7h–17h", source: "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151502147386" },
   { slug: "secretaria-municipal-saude-piumhi", name: "Secretaria Municipal de Saúde de Piumhi", category: "Serviço público de saúde", city: "Piumhi", address: "Praça Dr. Avelino de Queiroz, 75, Centro", phone: "(37) 3371-9250", summary: "", services: ["Orientações de saúde", "Gestão pública de saúde"], source: "https://prefeiturapiumhi.mg.gov.br/", website: "https://prefeiturapiumhi.mg.gov.br/" },
   { slug: "psf-bossuet-costa-piumhi", name: "PSF Bossuet Costa", aliases: ["UBS Bossuet Costa", "ESF Bossuet Costa", "Posto Bossuet Costa"], category: "Rede pública • SUS", city: "Piumhi", address: "Rua Tenente Freitas, 899, Jardim América", phone: "(37) 3371-2737", summary: "", publicSummary: "Unidade de saúde da família da rede pública municipal.", services: ["Atenção primária à saúde"], source: "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151502147394" },
@@ -971,7 +974,7 @@ function mapSearchUrl(organization: Organization) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
-export const organizations: Organization[] = [...piumhiImportedOrganizations.filter((item) => !rehabilitationOrganizations.some((entry) => entry.slug === item.slug)), ...vettedLocalOrganizations, ...rehabilitationOrganizations]
+export const organizations: Organization[] = [...piumhiImportedOrganizations.filter((item) => !rehabilitationOrganizations.some((entry) => entry.slug === item.slug)), ...vettedLocalOrganizations, ...rehabilitationOrganizations, ...directoryAuditOrganizations]
   .filter((org) => Boolean(publishedOrganizationConfig[org.slug]))
   .map((org) => ({
     ...org,
@@ -985,7 +988,7 @@ export const organizations: Organization[] = [...piumhiImportedOrganizations.fil
   .sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999));
 
 export { cityNames as cities, cityDetails } from "./cities";
-export const professions = ["Médico", "Dentista", "Psicólogo", "Fisioterapeuta", "Nutricionista", "Fonoaudiólogo", "Enfermeiro", "Farmacêutico", "Educador físico"];
+export const professions = ["Médico", "Dentista", "Psicólogo", "Fisioterapeuta", "Nutricionista", "Fonoaudiólogo", "Enfermeiro", "Farmacêutico", "Educador físico", "Terapeuta Ocupacional", "Psicanalista", "Tecnólogo em radiologia"];
 
 // Logos das empresas apoiadoras exibidas nas páginas.
 // EXEMPLOS (public/supporters/*.png, fundo transparente). Troque pelos PNGs

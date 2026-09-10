@@ -1,0 +1,1947 @@
+{
+  "date": "2026-09-10",
+  "counts": {
+    "professionals": 149,
+    "organizations": 68
+  },
+  "professionals": [
+    {
+      "slug": "dr-wallace-costa-mota-clinica-medica-piumhi",
+      "name": "Dr. Wallace Costa Mota",
+      "profession": "Médico",
+      "specialty": "Clínica Médica",
+      "source": "https://www.catalogo.med.br/medicos/em-piumhi-mg",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-gabriel-wobeto-clinica-medica-piumhi",
+      "name": "Dr. Gabriel Wobeto",
+      "profession": "Médico",
+      "specialty": "Medicina de Família e Comunidade",
+      "source": "https://www.doctoralia.com.br/doencas/hipotireoidismo/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-paulo-henrique-faria-silva-oftalmologia-piumhi",
+      "name": "Dr. Paulo Henrique Faria Silva",
+      "profession": "Médico",
+      "specialty": "Oftalmologia",
+      "source": "https://phdhospitaldia.com.br/portfolio-items/oftalmologia/",
+      "organizations": [
+        "clinica-ophtalmocenter-piumhi",
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-diego-mota-fernandes-ortopedia-piumhi",
+      "name": "Dr. Diego Mota Fernandes",
+      "profession": "Médico",
+      "specialty": "Ortopedia e Traumatologia",
+      "source": "https://drdiegoortopedista.com/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-wenner-terra-freitas-otorrinolaringologia-piumhi",
+      "name": "Dr. Wenner Terra Freitas",
+      "profession": "Médico",
+      "specialty": "Otorrinolaringologia",
+      "source": "https://www.doctoralia.com.br/wenner-terra-freitas/otorrino/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-elton-henrique-alves-cardiologia-piumhi",
+      "name": "Dr. Elton Henrique Alves",
+      "profession": "Médico",
+      "specialty": "Cardiologia",
+      "source": "https://www.doctoralia.com.br/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-everton-arantes-melo-cardiologia-piumhi",
+      "name": "Dr. Éverton Arantes Melo",
+      "profession": "Médico",
+      "specialty": "Cardiologia",
+      "source": "https://clinicasdocoracao.com.br/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-wanessa-dornela-de-oliveira-otorrinolaringologia-piumhi",
+      "name": "Dra. Wanessa Dornela de Oliveira",
+      "profession": "Médico",
+      "specialty": "Otorrinolaringologia",
+      "source": "https://www.doctoralia.com.br/wanessa-dornela-de-oliveira/otorrino/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-wagner-de-oliveira-dornela-pediatria-piumhi",
+      "name": "Dr. Wagner de Oliveira Dornela",
+      "profession": "Médico",
+      "specialty": "Pediatria e Diagnóstico por Imagem",
+      "source": "https://www.doctoralia.com.br/piumhi/centro110?page=3",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-jose-antonio-dias-dermatologia-piumhi",
+      "name": "Dr. José Antônio Dias",
+      "profession": "Médico",
+      "specialty": "Dermatologia",
+      "source": "https://www.doctoralia.com.br/cirurgiao-geral/piumhi/piumhi2",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-gabriela-rezende-odontologia-piumhi",
+      "name": "Dra. Gabriela Rezende",
+      "profession": "Dentista",
+      "specialty": "Odontologia",
+      "source": "https://dragabrielarezende.codental.site/",
+      "organizations": [
+        "instituto-nomma-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-gilson-oliveira-implantodontia-piumhi",
+      "name": "Dr. Gilson A. Oliveira",
+      "profession": "Dentista",
+      "specialty": "Implantodontia",
+      "source": "https://sites.google.com/view/drgilsonoliveirapiumhi/",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-goncalo-da-rocha-rolla-odontologia-piumhi",
+      "name": "Dr. Gonçalo da Rocha Rolla",
+      "profession": "Dentista",
+      "specialty": "Odontologia geral",
+      "source": "https://www.doctoralia.com.br/goncalo-da-rocha-rolla/dentista/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "adenilson-leandro-ortodontia-piumhi",
+      "name": "Adenilson Leandro",
+      "profession": "Dentista",
+      "specialty": "Ortodontia e Ortopedia Facial",
+      "source": "https://www.doctoralia.com.br/adenilson-leandro/dentista/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-franceliz-moleta-odontologia-piumhi",
+      "name": "Dra. Franceliz Moleta",
+      "profession": "Dentista",
+      "specialty": "Odontologia geral",
+      "source": "https://www.doctoralia.com.br/franceliz-moleta/dentista/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "giuliano-souza-fisioterapia-piumhi",
+      "name": "Giuliano Carlos de Souza",
+      "profession": "Fisioterapeuta",
+      "specialty": "Fisioterapia",
+      "source": "https://www.doctoralia.com.br/giuliano-carlos-de-souza/fisioterapeuta/passos",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "giovanna-oliveira-beraldo-fisioterapia-piumhi",
+      "name": "Giovanna Oliveira Beraldo",
+      "profession": "Fisioterapeuta",
+      "specialty": "Fisioterapia",
+      "source": "https://www.doctoralia.com.br/giovanna-oliveira-beraldo/fisioterapeuta/piumhi",
+      "organizations": [
+        "borboletando-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "marisa-de-fatima-ferreira-fisioterapia-piumhi",
+      "name": "Marisa de Fátima Ferreira",
+      "profession": "Fisioterapeuta",
+      "specialty": "Fisioterapia",
+      "source": "https://www.piumhi.mg.leg.br/institucional/noticias/camara-municipal-de-piumhi-entrega-mocoes-de-congratulacoes-e-aplausos-na-40a-sessao-ordinaria",
+      "organizations": [
+        "borboletando-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "jaqueline-viana-modesto-psicologia-piumhi",
+      "name": "Jaqueline Viana Modesto",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica",
+      "source": "https://www.doctoralia.com.br/psicologo/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "cristina-sansoni-psicologia-piumhi",
+      "name": "Cristina Sansoni",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica",
+      "source": "https://www.doctoralia.com.br/psicologo/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "amanda-morais-psicologia-piumhi",
+      "name": "Amanda Morais",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica",
+      "source": "https://www.doctoralia.com.br/psicologo/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "kelly-cristina-do-prado-psicologia-piumhi",
+      "name": "Kelly C. do Prado",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica",
+      "source": "https://www.doctoralia.com.br/psicologo/piumhi",
+      "organizations": [
+        "clinica-mais-saude-gms-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "erika-costa-psicologia-piumhi",
+      "name": "Erika Costa",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia infantil",
+      "source": "https://www.doctoralia.com.br/piumhi/centro110?page=2",
+      "organizations": [
+        "clinica-mais-saude-gms-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "sandra-siris-faria-psicologia-piumhi",
+      "name": "Sandra Siris de O. Faria",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica",
+      "source": "https://www.doctoralia.com.br/servicos-de-tratamento/psicoterapia/piumhi",
+      "organizations": [
+        "clinica-mais-saude-gms-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "joao-paulo-soares-psicologia-piumhi",
+      "name": "João Paulo Soares",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica",
+      "source": "https://br.todosnegocios.com/pt/jo%C3%A3o-paulo-soares-psic%C3%B3logo_12-37-99944-3666",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "karina-honorio-psicologia-piumhi",
+      "name": "Karina Honório",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia e Psicanálise",
+      "source": "https://www.doctoralia.com.br/psicanalista/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "debora-araujo-sulzbacher-psicologia-piumhi",
+      "name": "Débora Araújo Sulzbacher",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia e Psicanálise",
+      "source": "https://www.doctoralia.com.br/servicos-de-tratamento/orientacao-profissional/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "maria-isabel-de-melo-psicologia-piumhi",
+      "name": "Maria Isabel de Melo",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica",
+      "source": "https://www.doctoralia.com.br/psicologo/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "jaqueline-dias-silva-psicologia-piumhi",
+      "name": "Jaqueline Dias Silva",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica",
+      "source": "https://www.doctoralia.com.br/psicologo/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "elisangela-lima-psicologia-piumhi",
+      "name": "Elisângela Lima",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica",
+      "source": "https://www.doctoralia.com.br/psicologo/piumhi",
+      "organizations": [
+        "clinapsi-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "clarissa-freitas-psicologia-piumhi",
+      "name": "Clarissa Freitas",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia infantil",
+      "source": "https://www.doctoralia.com.br/psicologo/piumhi/piumhi2",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "aldo-jose-costa-psicologia-piumhi",
+      "name": "Aldo José Costa",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia Clínica e Psicanálise",
+      "source": "https://www.doctoralia.com.br/aldo-jose-costa/psicologo-psicanalista/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "jose-ferreira-leite-psicologia-piumhi",
+      "name": "José Ferreira Leite",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica",
+      "source": "https://www.doctoralia.com.br/jose-ferreira-leite/psicologo/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "sandra-cristina-goncalves-psicologia-piumhi",
+      "name": "Sandra Cristina Gonçalves",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica",
+      "source": "https://www.doctoralia.com.br/sandra-cristina-goncalves/psicologo/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "jaine-reis-psicologia-piumhi",
+      "name": "Jaíne Reis",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica",
+      "source": "https://www.emdr.org.br/certificados",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-wanessa-terra-nutricao-piumhi",
+      "name": "Dra. Wanessa Terra",
+      "profession": "Nutricionista",
+      "specialty": "Nutrição Clínica",
+      "source": "https://www.doctoralia.com.br/wanessa-terra/nutricionista/piumhi",
+      "organizations": [
+        "clinica-mais-saude-gms-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-graziele-paiz-clinica-medica-piumhi",
+      "name": "Dra. Graziele Paiz",
+      "profession": "Médico",
+      "specialty": "Clínica Médica",
+      "source": "https://www.doctoralia.com.br/nutricionista/piumhi",
+      "organizations": [
+        "clinica-mais-saude-gms-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "julia-augusta-oliveira-lopes-fonoaudiologia-piumhi",
+      "name": "Júlia Augusta de Oliveira Lopes",
+      "profession": "Fonoaudiólogo",
+      "specialty": "Fonoaudiologia",
+      "source": "https://www.doctoralia.com.br/julia-augusta-de-oliveira-lopes/fonoaudiologo/piumhi",
+      "organizations": [
+        "borboletando-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-gabriel-tavares-pediatria-piumhi",
+      "name": "Dr. Gabriel Tavares",
+      "profession": "Médico",
+      "specialty": "Pediatria",
+      "source": "https://www.openstreetmap.org/",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "bruna-lopes-fisioterapia-piumhi",
+      "name": "Bruna Lopes",
+      "profession": "Fisioterapeuta",
+      "specialty": "Fisioterapia",
+      "source": "https://www.openstreetmap.org/",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-andre-fares-dias-angiologia-piumhi",
+      "name": "Dr. André Fares Dias",
+      "profession": "Médico",
+      "specialty": "Angiologia e Cirurgia Vascular",
+      "source": "https://phdhospitaldia.com.br/quem-somos/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-ludimila-souza-endocrinologia-piumhi",
+      "name": "Dra. Ludimila Souza e Silva",
+      "profession": "Médico",
+      "specialty": "Endocrinologia e Metabologia",
+      "source": "https://www.doctoralia.com.br/ludimila-souza-e-silva/endocrinologista/piumhi",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-jose-luiz-da-costa-neto-clinica-medica-piumhi",
+      "name": "Dr. José Luiz da Costa Neto",
+      "profession": "Médico",
+      "specialty": "Clínica Médica",
+      "source": "https://phdhospitaldia.com.br/quem-somos/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-bernardo-guimaraes-maia-anestesiologia-piumhi",
+      "name": "Dr. Bernardo Guimarães Maia",
+      "profession": "Médico",
+      "specialty": "Anestesiologia",
+      "source": "https://phdhospitaldia.com.br/quem-somos/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-samuel-de-oliveira-falcucci-anestesiologia-piumhi",
+      "name": "Dr. Samuel de Oliveira Falcucci",
+      "profession": "Médico",
+      "specialty": "Anestesiologia",
+      "source": "https://phdhospitaldia.com.br/quem-somos/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-silvio-cesar-mastologia-piumhi",
+      "name": "Dr. Silvio César",
+      "profession": "Médico",
+      "specialty": "Mastologia",
+      "source": "https://phdhospitaldia.com.br/quem-somos/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-gabriela-goncalves-de-oliveira-dermatologia-piumhi",
+      "name": "Dra. Gabriela Gonçalves de Oliveira",
+      "profession": "Médico",
+      "specialty": "Dermatologia",
+      "source": "https://phdhospitaldia.com.br/portfolio-items/dermatologia/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-sergio-medeiros-urologia-piumhi",
+      "name": "Dr. Sérgio Medeiros",
+      "profession": "Médico",
+      "specialty": "Urologia",
+      "source": "https://phdhospitaldia.com.br/quem-somos/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-rogerio-castro-reis-reumatologia-piumhi",
+      "name": "Dr. Rogério Castro Reis",
+      "profession": "Médico",
+      "specialty": "Reumatologia",
+      "source": "https://phdhospitaldia.com.br/quem-somos/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "miriam-terra-garcia-lopes-psicologia-piumhi",
+      "name": "Miriam Terra Garcia Lopes",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia clínica e Psicanálise",
+      "source": "https://phdhospitaldia.com.br/quem-somos/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-gabriel-gueba-ginecologia-piumhi",
+      "name": "Dr. Gabriel Guêba",
+      "profession": "Médico",
+      "specialty": "Ginecologia e Obstetrícia",
+      "source": "https://phdhospitaldia.com.br/quem-somos/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-laura-gomes-machado-pneumologia-piumhi",
+      "name": "Dra. Laura Gomes Machado",
+      "profession": "Médico",
+      "specialty": "Pneumologia",
+      "source": "https://phdhospitaldia.com.br/quem-somos/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-luis-gustavo-belizario-xavier-radiologia-piumhi",
+      "name": "Dr. Luis Gustavo Belizario Xavier",
+      "profession": "Médico",
+      "specialty": "Radiologia e Diagnóstico por Imagem",
+      "source": "https://www.doctoralia.com.br/piumhi/piumhi2",
+      "organizations": [
+        "ws-medicos-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-fernanda-piazza-endocrinologia-piumhi",
+      "name": "Dra. Fernanda Piazza",
+      "profession": "Médico",
+      "specialty": "Endocrinologia",
+      "source": "https://www.doctoralia.com.br/piumhi/piumhi2",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-lorrane-moura-generalista-piumhi",
+      "name": "Dra. Lorrane Moura",
+      "profession": "Médico",
+      "specialty": "Clínica Geral",
+      "source": "https://www.doctoralia.com.br/piumhi/piumhi2",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-melissa-lopes-batista-medicina-do-trabalho-piumhi",
+      "name": "Dra. Melissa Lopes Batista",
+      "profession": "Médico",
+      "specialty": "Medicina do Trabalho",
+      "source": "https://www.doctoralia.com.br/piumhi/piumhi2",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-ronaldo-saint-martin-ferreira-ortodontia-piumhi",
+      "name": "Dr. Ronaldo Saint Martin Ferreira",
+      "profession": "Dentista",
+      "specialty": "Ortodontia e Ortopedia Funcional dos Maxilares",
+      "source": "https://www.ident.com.br/dr.ronaldo",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-humberto-leite-ginecologia-piumhi",
+      "name": "Dr. Humberto Leite",
+      "profession": "Médico",
+      "specialty": "Ginecologia e Obstetrícia",
+      "source": "https://drhumbertoleite.com.br/",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "ivana-mara-de-oliveira-rezende-fisioterapia-piumhi",
+      "name": "Ivana Mara de Oliveira Rezende",
+      "profession": "Fisioterapeuta",
+      "specialty": "Fisioterapia Respiratória",
+      "source": "https://www.piumhi.mg.leg.br/institucional/noticias/camara-municipal-de-piumhi-entrega-mocoes-de-congratulacoes-e-aplausos-na-40a-sessao-ordinaria",
+      "organizations": [
+        "pulmocardio-fisioterapia-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "nayara-garcia-pediatria-pneumologia-infantil-piumhi",
+      "name": "Dra. Nayara Garcia",
+      "profession": "Médico",
+      "specialty": "Pediatria e Pneumologia Infantil",
+      "source": "https://www.youtube.com/watch?v=yDN7ox1vVTU",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "daisy-cristina-de-faria-nutricao-piumhi",
+      "name": "Daisy Cristina de Faria",
+      "profession": "Nutricionista",
+      "specialty": "Nutrição",
+      "source": "https://www.youtube.com/watch?v=xxV4UudRoAU",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "reinaldo-lopes-soares-ortodontia-piumhi",
+      "name": "Dr. Reinaldo Lopes Soares",
+      "profession": "Dentista",
+      "specialty": "Ortodontia",
+      "source": "https://www.youtube.com/watch?v=ugzEwowoSwI",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "victor-lopes-soares-ortodontia-piumhi",
+      "name": "Dr. Víctor Lopes Soares",
+      "profession": "Dentista",
+      "specialty": "Ortodontia",
+      "source": "https://www.youtube.com/watch?v=ugzEwowoSwI",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "karla-soares-lopes-teixeira-ortodontia-piumhi",
+      "name": "Dra. Karla Soares",
+      "profession": "Dentista",
+      "specialty": "Ortodontia",
+      "source": "https://www.youtube.com/watch?v=yPiZVLHvJLA",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-lucas-camargos-silva-felix-clinica-geral-piumhi",
+      "name": "Dr. Lucas Camargos Silva Felix",
+      "profession": "Médico",
+      "specialty": "Clínica Geral e Atenção Primária",
+      "source": "https://www.doctoralia.com.br/medico-clinico-geral/piumhi",
+      "organizations": [
+        "clinica-mais-saude-gms-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-hildebrando-rosa-junior-endocrinologia-piumhi",
+      "name": "Dr. Hildebrando Rosa Junior",
+      "profession": "Médico",
+      "specialty": "Clínica Médica e Endocrinologia",
+      "source": "https://www.doctoralia.com.br/medico-clinico-geral/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-maria-alcantara-de-oliveira-cirurgia-geral-piumhi",
+      "name": "Dra. Maria Alcantara de Oliveira",
+      "profession": "Médico",
+      "specialty": "Clínica Médica e Cirurgia Geral",
+      "source": "https://www.doctoralia.com.br/medico-clinico-geral/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-gil-cesar-paiva-otorrinolaringologia-piumhi",
+      "name": "Dr. Gil Cesar Paiva",
+      "profession": "Médico",
+      "specialty": "Otorrinolaringologia",
+      "source": "https://www.santacasapiumhi.com.br/_files/ugd/cf977d_cea3da1b207f412d961c37652d6d2854.pdf",
+      "organizations": [
+        "clinica-sao-rafael-unimed-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-jose-maria-veiga-azzi-radiologia-piumhi",
+      "name": "Dr. José Maria Veiga Azzi",
+      "profession": "Médico",
+      "specialty": "Radiologia e Clínica Médica",
+      "source": "https://www.doctoralia.com.br/jose-maria-veiga-azzi/medico-clinico-geral-radiologista/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-renato-antonio-soares-lima-medicina-de-familia-piumhi",
+      "name": "Dr. Renato Antonio Soares Lima",
+      "profession": "Médico",
+      "specialty": "Medicina de Família e Comunidade",
+      "source": "https://www.doctoralia.com.br/medico-de-familia/piumhi/piumhi2",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-amanda-s-matos-generalista-piumhi",
+      "name": "Dra. Amanda S. Matos",
+      "profession": "Médico",
+      "specialty": "Clínica Geral e Medicina do Trabalho",
+      "source": "https://www.doctoralia.com.br/generalista/pimenta",
+      "organizations": [
+        "clinica-mais-saude-gms-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-arthur-santos-rezende-melo-generalista-piumhi",
+      "name": "Dr. Arthur Santos Rezende Melo",
+      "profession": "Médico",
+      "specialty": "Clínica Geral",
+      "source": "https://www.doctoralia.com.br/generalista/pimenta",
+      "organizations": [
+        "clinica-mais-saude-gms-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-saulo-rosa-ferreira-psiquiatria-piumhi",
+      "name": "Dr. Saulo Rosa Ferreira",
+      "profession": "Médico",
+      "specialty": "Psiquiatria",
+      "source": "https://www.doctoralia.com.br/saulo-rosa-ferreira/psiquiatra/bambui",
+      "organizations": [
+        "centro-medico-odontologico-de-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-rodrigo-lana-martins-clinica-geral-piumhi",
+      "name": "Dr. Rodrigo Lana Martins",
+      "profession": "Médico",
+      "specialty": "Clínica Geral",
+      "source": "https://www.google.com/maps/search/?api=1&query=Dr.+Rodrigo+Lana+Martins+Piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-renata-oliveira-prado-odontologia-piumhi",
+      "name": "Dra. Renata Prado",
+      "profession": "Dentista",
+      "specialty": "Odontologia Geral",
+      "source": "https://www.ident.com.br/dra.renataprado",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-ana-paula-soares-salviano-odontologia-piumhi",
+      "name": "Dra. Ana Paula Soares Salviano",
+      "profession": "Dentista",
+      "specialty": "Odontologia",
+      "source": "https://orthoclinicas.com/unidades/",
+      "organizations": [
+        "orthoclinicas-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-luisa-polcaro-odontologia-piumhi",
+      "name": "Dra. Luisa Polcaro",
+      "profession": "Dentista",
+      "specialty": "Odontologia",
+      "source": "https://www.google.com/maps/search/?api=1&query=Dra.+Luisa+Polcaro+Piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "roseli-soares-terra-odontologia-piumhi",
+      "name": "Roseli Soares Terra",
+      "profession": "Dentista",
+      "specialty": "Odontologia Geral",
+      "source": "https://transparencia.cromg.org.br/baixar_documento/19175",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-keila-faria-odontologia-piumhi",
+      "name": "Dra. Keila Faria",
+      "profession": "Dentista",
+      "specialty": "Odontologia Especializada",
+      "source": "https://www.google.com/maps/search/?api=1&query=Dra.+Keila+Faria+Piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "philippe-andrade-nutricao-piumhi",
+      "name": "Philippe Andrade",
+      "profession": "Nutricionista",
+      "specialty": "Nutrição Clínica e Esportiva",
+      "source": "https://www.doctoralia.com.br/philippe-andrade/nutricionista/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "luana-cassini-nutricao-piumhi",
+      "name": "Luana Cassini",
+      "profession": "Nutricionista",
+      "specialty": "Nutrição Integrativa",
+      "source": "https://www.google.com/maps/search/?api=1&query=Luana+Cassini+Piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dayse-mara-rodrigues-nutricao-piumhi",
+      "name": "Dayse Mara Rodrigues",
+      "profession": "Nutricionista",
+      "specialty": "Nutrição",
+      "source": "https://www.google.com/maps/search/?api=1&query=Dayse+Mara+Rodrigues+Piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "deborah-faria-de-moura-psicologia-piumhi",
+      "name": "Déborah Faria de Moura",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia",
+      "source": "https://www.gov.br/pf/pt-br/assuntos/armas/psicologos/psicologos-crediciados/minas-gerais",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "luana-pessoa-costa-psicologia-piumhi",
+      "name": "Luana Pessôa Costa",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia",
+      "source": "https://www.google.com/maps/search/?api=1&query=Luana+Pessoa+Costa+Psicologa+Piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-paulo-dos-reis-jardim-ortopedia-piumhi",
+      "name": "Dr. Paulo Dos Reis Jardim",
+      "profession": "Médico",
+      "specialty": "Ortopedia e Traumatologia",
+      "source": "https://www.doctoralia.com.br/piumhi/centro110?page=2",
+      "organizations": [
+        "clinica-mais-saude-gms-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-messias-eustaquio-faria-alergologia-piumhi",
+      "name": "Dr. Messias Eustaquio Faria",
+      "profession": "Médico",
+      "specialty": "Alergologia",
+      "source": "https://www.doctoralia.com.br/piumhi/centro110?page=2",
+      "organizations": [
+        "clinica-mais-saude-gms-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-hiago-antunis-silva-neurologia-piumhi",
+      "name": "Dr. Hiago Antunis Silva",
+      "profession": "Médico",
+      "specialty": "Neurologia",
+      "source": "https://www.doctoralia.com.br/doencas/doencas-neuromusculares/piumhi",
+      "organizations": [
+        "clinica-mais-saude-gms-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-matheus-fonseca-cirurgia-geral-piumhi",
+      "name": "Dr. Matheus Fonseca",
+      "profession": "Médico",
+      "specialty": "Cirurgia Geral",
+      "source": "https://www.doctoralia.com.br/piumhi/centro110?page=2",
+      "organizations": [
+        "santa-casa-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-gustavo-sansoni-soares-ortopedia-piumhi",
+      "name": "Dr. Gustavo Sansoni Soares",
+      "profession": "Médico",
+      "specialty": "Ortopedia e Traumatologia do Joelho",
+      "source": "https://www.doctoralia.com.br/piumhi/centro110?page=2",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-marcelo-messias-lopes-pediatria-piumhi",
+      "name": "Dr. Marcelo Messias Lopes",
+      "profession": "Médico",
+      "specialty": "Pediatria",
+      "source": "https://www.doctoralia.com.br/pediatra/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-saygra-batista-sousa-pediatria-piumhi",
+      "name": "Dra. Saygra Batista Sousa",
+      "profession": "Médico",
+      "specialty": "Pediatria",
+      "source": "https://www.doctoralia.com.br/saygra-batista-sousa/pediatra/piumhi",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-cesar-francisco-batista-pediatria-piumhi",
+      "name": "Dr. Cesar Francisco Batista",
+      "profession": "Médico",
+      "specialty": "Pediatria",
+      "source": "https://www.doctoralia.com.br/cesar-francisco-batista/pediatra/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-jose-vaz-lara-pediatria-piumhi",
+      "name": "Dr. José Vaz Lara",
+      "profession": "Médico",
+      "specialty": "Pediatria",
+      "source": "https://www.doctoralia.com.br/jose-vaz-lara/pediatra/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-edson-antonio-julio-pediatria-piumhi",
+      "name": "Dr. Edson Antonio Julio",
+      "profession": "Médico",
+      "specialty": "Pediatria",
+      "source": "https://www.doctoralia.com.br/edson-antonio-julio/pediatra/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-eduardo-belizario-xavier-pediatria-piumhi",
+      "name": "Dr. Eduardo Belizario Xavier",
+      "profession": "Médico",
+      "specialty": "Pediatria",
+      "source": "https://www.doctoralia.com.br/pediatra/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-nelson-soares-de-melo-oftalmologia-piumhi",
+      "name": "Dr. Nelson Soares de Melo",
+      "profession": "Médico",
+      "specialty": "Oftalmologia",
+      "source": "https://www.doctoralia.com.br/piumhi?page=4",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-luiz-felipe-bittencourt-eluf-medicina-do-trabalho-piumhi",
+      "name": "Dr. Luiz Felipe Bittencourt Eluf",
+      "profession": "Médico",
+      "specialty": "Medicina do Trabalho",
+      "source": "https://www.doctoralia.com.br/piumhi/piumhi?page=4",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-joao-batista-soares-clinica-geral-piumhi",
+      "name": "Dr. João Batista Soares",
+      "profession": "Médico",
+      "specialty": "Clínica Geral",
+      "source": "https://www.doctoralia.com.br/piumhi/piumhi?page=4",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-wesley-da-costa-mota-medicina-do-trabalho-piumhi",
+      "name": "Dr. Wesley Da Costa Mota",
+      "profession": "Médico",
+      "specialty": "Medicina do Trabalho",
+      "source": "https://www.doctoralia.com.br/piumhi/piumhi?page=4",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-ivo-de-andrade-generalista-piumhi",
+      "name": "Dr. Ivo De Andrade",
+      "profession": "Médico",
+      "specialty": "Clínica Geral",
+      "source": "https://www.doctoralia.com.br/piumhi/piumhi?page=4",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-itamar-lopes-da-cunha-anestesiologia-piumhi",
+      "name": "Dr. Itamar Lopes Da Cunha",
+      "profession": "Médico",
+      "specialty": "Anestesiologia",
+      "source": "https://www.doctoralia.com.br/piumhi/piumhi?page=4",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-kenio-da-costa-lopes-medicina-de-familia-piumhi",
+      "name": "Dr. Kenio Da Costa Lopes",
+      "profession": "Médico",
+      "specialty": "Medicina de Família",
+      "source": "https://www.doctoralia.com.br/piumhi/piumhi?page=4",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-heraldo-francisco-costa-ginecologia-piumhi",
+      "name": "Dr. Heraldo Francisco Costa",
+      "profession": "Médico",
+      "specialty": "Ginecologia e Diagnóstico por Imagem",
+      "source": "https://www.doctoralia.com.br/ginecologista/piumhi/centro110",
+      "organizations": [
+        "santa-casa-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-mirian-sansoni-oftalmologia-piumhi",
+      "name": "Dra. Mírian Sansoni",
+      "profession": "Médico",
+      "specialty": "Oftalmologia",
+      "source": "https://www.doctoralia.com.br/mirian-sansoni/oftalmologista/piumhi",
+      "organizations": [
+        "clinica-sao-judas-tadeu-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-rodrigo-terra-lasmar-ortopedia-piumhi",
+      "name": "Dr. Rodrigo Terra Lasmar",
+      "profession": "Médico",
+      "specialty": "Ortopedia e Traumatologia",
+      "source": "https://www.medicosbrasil.com/profissionais/ortopedista-traumatologista--piumhi-mg",
+      "organizations": [
+        "santa-casa-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "cristiane-rezende-oliveira-endodontia-piumhi",
+      "name": "Cristiane Rezende Oliveira",
+      "profession": "Dentista",
+      "specialty": "Endodontia",
+      "source": "https://www.google.com/maps/search/?api=1&query=Cristiane+Rezende+Oliveira+Endodontia+Piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "cynthia-teixeira-de-oliveira-valerio-psicologia-piumhi",
+      "name": "Cynthia Teixeira de Oliveira Valério",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia",
+      "source": "https://sapl.piumhi.mg.leg.br/docadm/texto_integral/4466",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-roberto-de-oliveira-santos-oftalmologia-piumhi",
+      "name": "Dr. Roberto de Oliveira Santos",
+      "profession": "Médico",
+      "specialty": "Oftalmologia",
+      "source": "https://robertosantosoftalmologista.com/homepiumhi/",
+      "organizations": [
+        "clinica-olhos-roberto-santos-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-alvaro-ribeiro-vaz-de-faria-oftalmologia-piumhi",
+      "name": "Dr. Álvaro Ribeiro Vaz de Faria",
+      "profession": "Médico",
+      "specialty": "Oftalmologia",
+      "source": "https://sites.google.com/view/clinicasaojudastadeu/in%C3%ADcio",
+      "organizations": [
+        "clinica-sao-judas-tadeu-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-nicollas-nunes-rabelo-neurologia-neurocirurgia-piumhi",
+      "name": "Dr. Nicollas Nunes Rabelo",
+      "profession": "Médico",
+      "specialty": "Neurologia e Neurocirurgia",
+      "source": "https://drnicollasnunes.com.br/",
+      "organizations": [
+        "santa-casa-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "maria-carolina-tome-moura-terapia-ocupacional-piumhi",
+      "name": "Maria Carolina Tomé Moura",
+      "profession": "Terapeuta Ocupacional",
+      "specialty": "Terapia Ocupacional",
+      "source": "https://www.doctoralia.com.br/maria-carolina-tome-moura/terapeuta-ocupacional/piumhi",
+      "organizations": [
+        "borboletando-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "katia-aparecida-soares-enfermagem-piumhi",
+      "name": "Kátia Aparecida Soares",
+      "profession": "Enfermeiro",
+      "specialty": "Enfermagem",
+      "source": "https://www.doctoralia.com.br/piumhi/centro110?page=3",
+      "organizations": [
+        "borboletando-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-christopher-goncalves-clinica-medica-piumhi",
+      "name": "Dr. Christopher Gonçalves",
+      "profession": "Médico",
+      "specialty": "Clínica Geral",
+      "source": "https://www.doctoralia.com.br/doencas/hipotireoidismo/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-jose-teodoro-alves-neto-cardiologia-piumhi",
+      "name": "Dr. José Teodoro Alves Neto",
+      "profession": "Médico",
+      "specialty": "Cardiologia",
+      "source": "https://www.doctoralia.com.br/servicos-de-tratamento/primeira-consulta-cardiologia/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-luis-augusto-rodrigues-cardiologia-piumhi",
+      "name": "Dr. Luis Augusto Rodrigues",
+      "profession": "Médico",
+      "specialty": "Cardiologia",
+      "source": "https://www.doctoralia.com.br/servicos-de-tratamento/primeira-consulta-cardiologia/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-arthur-costa-mota-oftalmologia-piumhi",
+      "name": "Dr. Arthur Costa Mota",
+      "profession": "Médico",
+      "specialty": "Oftalmologia",
+      "source": "https://drarthurmota.com/",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-lucia-alves-da-silva-lara-ginecologia-piumhi",
+      "name": "Dra. Lucia Alves Da Silva Lara",
+      "profession": "Médico",
+      "specialty": "Ginecologia e Obstetrícia",
+      "source": "https://www.doctoralia.com.br/ginecologista/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-decio-amaral-faria-ginecologia-piumhi",
+      "name": "Dr. Decio Amaral Faria",
+      "profession": "Médico",
+      "specialty": "Ginecologia e Obstetrícia",
+      "source": "https://www.doctoralia.com.br/decio-amaral-faria/ginecologista-medico-clinico-geral/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-gustavo-craide-ortopedia-piumhi",
+      "name": "Dr. Gustavo Craide",
+      "profession": "Médico",
+      "specialty": "Ortopedia e Traumatologia",
+      "source": "https://www.doctoralia.com.br/gustavo-craide/ortopedista-traumatologista/piumhi",
+      "organizations": [
+        "ws-medicos-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-joao-de-oliveira-terra-junior-ortopedia-piumhi",
+      "name": "Dr. João de Oliveira Terra Junior",
+      "profession": "Médico",
+      "specialty": "Ortopedia e Traumatologia",
+      "source": "https://www.doctoralia.com.br/servicos-de-tratamento/primeira-consulta-ortopedia-e-traumatologia/piumhi",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-angelo-gualberto-de-macedo-cirurgia-geral-piumhi",
+      "name": "Dr. Angelo Gualberto de Macedo",
+      "profession": "Médico",
+      "specialty": "Cirurgia Geral",
+      "source": "https://www.doctoralia.com.br/cirurgiao-geral/piumhi/piumhi2",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-antonio-carlos-de-faria-cirurgia-geral-piumhi",
+      "name": "Dr. Antonio Carlos De Faria",
+      "profession": "Médico",
+      "specialty": "Cirurgia Geral",
+      "source": "https://www.doctoralia.com.br/piumhi/piumhi2?page=4",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-adir-batista-medicina-do-trabalho-piumhi",
+      "name": "Dr. Adir Batista",
+      "profession": "Médico",
+      "specialty": "Medicina do Trabalho",
+      "source": "https://www.doctoralia.com.br/medico-do-trabalho/piumhi/centro110",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-marcelo-aparecido-pereira-medicina-do-trabalho-piumhi",
+      "name": "Dr. Marcelo Aparecido Pereira",
+      "profession": "Médico",
+      "specialty": "Medicina do Trabalho",
+      "source": "https://www.doctoralia.com.br/medico-do-trabalho/piumhi/centro110",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-fernanda-helena-craide-dermatologia-piumhi",
+      "name": "Dra. Fernanda Helena Craide",
+      "profession": "Médico",
+      "specialty": "Dermatologia",
+      "source": "https://www.doctoralia.com.br/fernanda-helena-craide/dermatologista/rio-de-janeiro",
+      "organizations": [
+        "ws-medicos-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-julia-amelia-ricci-dermatologia-piumhi",
+      "name": "Dra. Júlia Amélia Ricci",
+      "profession": "Médico",
+      "specialty": "Dermatologia",
+      "source": "https://www.doctoralia.com.br/julia-amelia-ricci/dermatologista/belo-horizonte",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-adriana-correa-diniz-dermatologia-piumhi",
+      "name": "Dra. Adriana Correa Diniz",
+      "profession": "Médico",
+      "specialty": "Atuação em Dermatologia",
+      "source": "https://cliniguia.com/unidades/piumhi-mg/adriana-correa-diniz-6735673/",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-vinicius-costa-mota-dermatologia-piumhi",
+      "name": "Dr. Vinícius Costa Mota",
+      "profession": "Médico",
+      "specialty": "Atuação em Dermatologia",
+      "source": "https://www.findhealthclinics.org/BR/Piumhi/1566151636772212/Dr.--Vin%C3%ADcius-Costa-Mota",
+      "organizations": [
+        "clinica-sao-rafael-unimed-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "talitha-cristina-da-silva-psicologia-piumhi",
+      "name": "Talitha Cristina da Silva",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia",
+      "source": "https://www.gov.br/pf/pt-br/assuntos/armas/psicologos/psicologos-crediciados/minas-gerais",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "gabriela-araujo-fisioterapia-pelvica-piumhi",
+      "name": "Gabriela Araújo",
+      "profession": "Fisioterapeuta",
+      "specialty": "Fisioterapia Pélvica",
+      "source": "https://prefeiturapiumhi.mg.gov.br/roda-de-conversa-sobre-fisioterapia-pelvica-marca-evento-para-gestantes/",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "patricia-terra-odontologia-piumhi",
+      "name": "Patrícia Terra",
+      "profession": "Dentista",
+      "specialty": "Dentística e Harmonização Orofacial",
+      "source": "https://www.youtube.com/watch?v=uz1cICn0iks",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-simone-mota-bonisson-endocrinologia-piumhi",
+      "name": "Dra. Simone Mota Bonisson",
+      "profession": "Médico",
+      "specialty": "Endocrinologia e Metabologia",
+      "source": "https://www.doctoralia.com.br/simone-mota-bonisson/endocrinologista/juiz-de-fora",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "rodrigo-soares-costa-radiologia-piumhi",
+      "name": "Rodrigo Soares Costa",
+      "profession": "Tecnólogo em radiologia",
+      "specialty": "Radiologia Odontológica",
+      "source": "https://www.youtube.com/watch?v=w1tyFA2uzMA",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "livia-pereira-implantodontia-piumhi",
+      "name": "Lívia Pereira",
+      "profession": "Dentista",
+      "specialty": "Implantodontia e Reabilitação Oral",
+      "source": "https://www.youtube.com/watch?v=VGX9Udr2xFE",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "daniela-melo-farmacia-piumhi",
+      "name": "Daniela Melo",
+      "profession": "Farmacêutico",
+      "specialty": "Farmácia",
+      "source": "https://www.youtube.com/watch?v=zZxHOHky9us",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "cintia-bonisson-psicanalise-piumhi",
+      "name": "Cintia Bonisson",
+      "profession": "Psicanalista",
+      "specialty": "Psicanálise",
+      "source": "https://www.youtube.com/watch?v=ybViS7X_Okw",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-marcio-alves-da-cruz-junior-neurologia-piumhi",
+      "name": "Dr. Marcio Alves da Cruz Junior",
+      "profession": "Médico",
+      "specialty": "Neurologia",
+      "source": "https://idoutor.com/medico/mg/marcio-alves-da-cruz-junior-91035",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-sergio-paulo-mota-soares-oftalmologia-piumhi",
+      "name": "Dr. Sérgio Paulo Mota Soares",
+      "profession": "Médico",
+      "specialty": "Oftalmologia",
+      "source": "https://drsergiopaulooftalmo.framer.website/",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-larissa-vaz-ginecologia-piumhi",
+      "name": "Dra. Larissa Vaz",
+      "profession": "Médico",
+      "specialty": "Atuação em Ginecologia",
+      "source": "https://cnpj.biz/37332406000181",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-gesse-antonio-barrios-de-jesus-radiologia-piumhi",
+      "name": "Dr. Gessé Antônio Barrios de Jesus",
+      "profession": "Médico",
+      "specialty": "Radiologia e Diagnóstico por Imagem",
+      "source": "https://phdhospitaldia.com.br/portfolio-items/radiologia-e-diagnostico-por-imagem/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-gilson-antonio-barrios-de-jesus-radiologia-piumhi",
+      "name": "Dr. Gilson Antônio Barrios de Jesus",
+      "profession": "Médico",
+      "specialty": "Radiologia e Diagnóstico por Imagem",
+      "source": "https://phdhospitaldia.com.br/portfolio-items/radiologia-e-diagnostico-por-imagem/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-humberto-franca-ferreira-radiologia-piumhi",
+      "name": "Dr. Humberto França Ferreira",
+      "profession": "Médico",
+      "specialty": "Radiologia e Diagnóstico por Imagem",
+      "source": "https://phdhospitaldia.com.br/portfolio-items/radiologia-e-diagnostico-por-imagem/",
+      "organizations": [
+        "phd-piumhi-hospital-dia"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-matheus-lopes-sansoni-cirurgia-piumhi",
+      "name": "Dr. Matheus Lopes Sansoni",
+      "profession": "Médico",
+      "specialty": "Cirurgia Geral e Cirurgia Oncológica",
+      "source": "https://sites.google.com/view/clinicasaojudastadeu/in%C3%ADcio",
+      "organizations": [
+        "clinica-sao-judas-tadeu-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "adriana-oliveira-psicologia-piumhi",
+      "name": "Adriana Oliveira",
+      "profession": "Psicólogo",
+      "specialty": "Psicologia",
+      "source": "https://linktr.ee/psi.adriana.ocosta",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-fernanda-mesquita-odontologia-piumhi",
+      "name": "Dra. Fernanda Mesquita",
+      "profession": "Dentista",
+      "specialty": "Odontologia",
+      "source": "https://drafernandamesquita.com/",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-andre-luiz-da-silva-clinica-geral-piumhi",
+      "name": "Dr. André Luiz da Silva",
+      "profession": "Médico",
+      "specialty": "Clínica Geral",
+      "source": "https://www.santacasapiumhi.com.br/_files/ugd/cf977d_cea3da1b207f412d961c37652d6d2854.pdf",
+      "organizations": [],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-lancaster-de-souza-ortopedia-piumhi",
+      "name": "Dr. Lancaster de Souza",
+      "profession": "Médico",
+      "specialty": "Ortopedia e Traumatologia",
+      "source": "https://www.santacasapiumhi.com.br/_files/ugd/cf977d_cea3da1b207f412d961c37652d6d2854.pdf",
+      "organizations": [
+        "santa-casa-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dr-jose-orlando-da-silva-pereira-urologia-piumhi",
+      "name": "Dr. José Orlando da Silva Pereira",
+      "profession": "Médico",
+      "specialty": "Urologia",
+      "source": "https://www.santacasapiumhi.com.br/_files/ugd/cf977d_cea3da1b207f412d961c37652d6d2854.pdf",
+      "organizations": [
+        "santa-casa-piumhi"
+      ],
+      "searchByName": true
+    },
+    {
+      "slug": "dra-thayna-camargo-odontologia-piumhi",
+      "name": "Dra. Thayna Camargo",
+      "profession": "Dentista",
+      "specialty": "Odontologia",
+      "source": "https://www.santacasapiumhi.com.br/_files/ugd/cf977d_cea3da1b207f412d961c37652d6d2854.pdf",
+      "organizations": [],
+      "searchByName": true
+    }
+  ],
+  "organizations": [
+    {
+      "slug": "oraldents-piumhi",
+      "name": "OralDents Piumhi",
+      "source": "https://www.oraldentspiumhi.com.br/",
+      "professionals": []
+    },
+    {
+      "slug": "instituto-nomma-piumhi",
+      "name": "Instituto Nomma",
+      "source": "https://www.acharei.com.br/mg/piumhi/empresas/medicina_saude_e_equipamentos?pagina=2",
+      "professionals": [
+        "dra-gabriela-rezende-odontologia-piumhi"
+      ]
+    },
+    {
+      "slug": "centro-medico-odontologico-de-piumhi",
+      "name": "Centro Médico Odontológico de Piumhi",
+      "source": "https://www.clickdisk.com.br/telefone/piumhi/centro-medico-odontologico-de-piumhi",
+      "professionals": [
+        "dr-saulo-rosa-ferreira-psiquiatria-piumhi"
+      ]
+    },
+    {
+      "slug": "rizo-centro-odontologico-piumhi",
+      "name": "Rizo Centro Odontológico",
+      "source": "https://cnpj.biz/41404448000158",
+      "professionals": []
+    },
+    {
+      "slug": "clinica-sao-rafael-unimed-piumhi",
+      "name": "Clínica São Rafael (Unimed)",
+      "source": "https://www.santacasapiumhi.com.br/_files/ugd/cf977d_cea3da1b207f412d961c37652d6d2854.pdf",
+      "professionals": [
+        "dr-gil-cesar-paiva-otorrinolaringologia-piumhi",
+        "dr-vinicius-costa-mota-dermatologia-piumhi"
+      ]
+    },
+    {
+      "slug": "odant-medicina-diagnostica-piumhi",
+      "name": "O'DANT Medicina Diagnóstica",
+      "source": "https://www.odant.com.br/blank-1",
+      "professionals": []
+    },
+    {
+      "slug": "nucleo-atencao-saude-unimed-piumhi",
+      "name": "Núcleo de Atenção à Saúde Unimed Piumhi",
+      "source": "https://www.unimed.coop.br/site/web/sudoestedeminas/n%C3%BAcleo-de-aten%C3%A7%C3%A3o-%C3%A0-sa%C3%BAde-em-piumhi",
+      "professionals": []
+    },
+    {
+      "slug": "fisiocenter-piumhi",
+      "name": "Fisiocenter — Fisioterapia e Quiropraxia",
+      "source": "https://www.solutudo.com.br/empresas/mg/piumhi/fisioterapia/fisiocenter-fisioterapia-e-quiropraxia-22258077",
+      "professionals": []
+    },
+    {
+      "slug": "clinica-mais-saude-gms-piumhi",
+      "name": "Clínica Mais Saúde GMS",
+      "source": "https://www.doctoralia.com.br/clinicas/piumhi",
+      "professionals": [
+        "kelly-cristina-do-prado-psicologia-piumhi",
+        "erika-costa-psicologia-piumhi",
+        "sandra-siris-faria-psicologia-piumhi",
+        "dra-wanessa-terra-nutricao-piumhi",
+        "dra-graziele-paiz-clinica-medica-piumhi",
+        "dr-lucas-camargos-silva-felix-clinica-geral-piumhi",
+        "dra-amanda-s-matos-generalista-piumhi",
+        "dr-arthur-santos-rezende-melo-generalista-piumhi",
+        "dr-paulo-dos-reis-jardim-ortopedia-piumhi",
+        "dr-messias-eustaquio-faria-alergologia-piumhi",
+        "dr-hiago-antunis-silva-neurologia-piumhi"
+      ]
+    },
+    {
+      "slug": "recuperarte-fisioterapia-estetica-piumhi",
+      "name": "Recuperarte Fisioterapia e Estética",
+      "source": "https://painelwebservice.cfa.org.br/?a=show&c=pesquisa&id=935",
+      "professionals": []
+    },
+    {
+      "slug": "life-mais-fisioterapia-pilates-piumhi",
+      "name": "Life Mais Fisioterapia e Pilates",
+      "source": "https://localtreino.com/estudios-de-pilates/piumhi/life-mais-fisioterapia-e-pilates/",
+      "professionals": []
+    },
+    {
+      "slug": "phd-piumhi-hospital-dia",
+      "name": "PHD Piumhi Hospital Dia",
+      "source": "https://phdhospitaldia.com.br/acessos/",
+      "professionals": [
+        "dr-paulo-henrique-faria-silva-oftalmologia-piumhi",
+        "dr-diego-mota-fernandes-ortopedia-piumhi",
+        "dr-everton-arantes-melo-cardiologia-piumhi",
+        "dr-andre-fares-dias-angiologia-piumhi",
+        "dra-ludimila-souza-endocrinologia-piumhi",
+        "dr-jose-luiz-da-costa-neto-clinica-medica-piumhi",
+        "dr-bernardo-guimaraes-maia-anestesiologia-piumhi",
+        "dr-samuel-de-oliveira-falcucci-anestesiologia-piumhi",
+        "dr-silvio-cesar-mastologia-piumhi",
+        "dra-gabriela-goncalves-de-oliveira-dermatologia-piumhi",
+        "dr-sergio-medeiros-urologia-piumhi",
+        "dr-rogerio-castro-reis-reumatologia-piumhi",
+        "miriam-terra-garcia-lopes-psicologia-piumhi",
+        "dr-gabriel-gueba-ginecologia-piumhi",
+        "dra-laura-gomes-machado-pneumologia-piumhi",
+        "dra-saygra-batista-sousa-pediatria-piumhi",
+        "dra-julia-amelia-ricci-dermatologia-piumhi",
+        "dra-simone-mota-bonisson-endocrinologia-piumhi",
+        "dr-gesse-antonio-barrios-de-jesus-radiologia-piumhi",
+        "dr-gilson-antonio-barrios-de-jesus-radiologia-piumhi",
+        "dr-humberto-franca-ferreira-radiologia-piumhi"
+      ]
+    },
+    {
+      "slug": "clinica-priorizze-piumhi",
+      "name": "Clínica Priorizze",
+      "source": "https://www.waze.com/live-map/directions/brazil/state-of-minas-gerais/piumhi/clinica-priorizze?to=place.ChIJSwuvDj4TtJQRuvq23oWAY3o",
+      "professionals": []
+    },
+    {
+      "slug": "michelle-freire-pilates-fisioterapia-piumhi",
+      "name": "Michelle Freire Pilates e Fisioterapia",
+      "source": "https://www.econodata.com.br/maiores-empresas/mg-piumhi/busca-pilates",
+      "professionals": []
+    },
+    {
+      "slug": "pulmocardio-fisioterapia-piumhi",
+      "name": "Pulmocardio Clínica de Fisioterapia",
+      "source": "https://cnpj.biz/15019049000163",
+      "professionals": [
+        "ivana-mara-de-oliveira-rezende-fisioterapia-piumhi"
+      ]
+    },
+    {
+      "slug": "clinica-ophtalmocenter-piumhi",
+      "name": "Clínica Ophtalmocenter",
+      "source": "https://ophtalmocenter.com.br/",
+      "professionals": [
+        "dr-paulo-henrique-faria-silva-oftalmologia-piumhi"
+      ]
+    },
+    {
+      "slug": "clinica-do-coracao-piumhi",
+      "name": "Clínica do Coração",
+      "source": "https://cnes2.datasus.gov.br/",
+      "professionals": []
+    },
+    {
+      "slug": "nucleo-dermatologico-cirurgico-piumhi",
+      "name": "Núcleo Dermatológico Cirúrgico",
+      "source": "https://cnes2.datasus.gov.br/Mod_Ambulatorial.asp?VCo_Unidade=3151503685160",
+      "professionals": []
+    },
+    {
+      "slug": "clinica-moviment-piumhi",
+      "name": "Clínica Moviment (Pilates Studio)",
+      "source": "https://www.facebook.com/clinicaamoviment/",
+      "professionals": []
+    },
+    {
+      "slug": "sport-mais-academia-piumhi",
+      "name": "Sport Mais Academia",
+      "source": "https://www.cylex.com.br/piumhi/academia.html",
+      "professionals": []
+    },
+    {
+      "slug": "rfitness-piumhi",
+      "name": "RFitness Saúde & Bem-Estar",
+      "source": "https://wellhub.com/pt-br/search/partners/rfitness-saude-bem-estar-centro/",
+      "professionals": []
+    },
+    {
+      "slug": "oficina-do-corpo-piumhi",
+      "name": "Oficina do Corpo",
+      "source": "https://www.cylex.com.br/piumhi/academia.html",
+      "professionals": []
+    },
+    {
+      "slug": "mergulho-natacao-piumhi",
+      "name": "Mergulho Natação",
+      "source": "https://www.cylex.com.br/piumhi/academia.html",
+      "professionals": []
+    },
+    {
+      "slug": "piumhi-tenis-clube-academia",
+      "name": "Piumhi Tênis Clube — Academia",
+      "source": "https://ptc.com.br/academia/",
+      "professionals": []
+    },
+    {
+      "slug": "academia-equilibrio-piumhi",
+      "name": "Academia Equilíbrio",
+      "source": "https://wellhub.com/pt-br/search/partners/academia-equilibrio-0db85900-66cd-4ba9-8f30-89fdadf4d5d9/",
+      "professionals": []
+    },
+    {
+      "slug": "drogaria-americana-piumhi",
+      "name": "Drogaria Americana",
+      "source": "https://www.santacasapiumhi.com.br/_files/ugd/cf977d_cea3da1b207f412d961c37652d6d2854.pdf",
+      "professionals": []
+    },
+    {
+      "slug": "natus-farma-piumhi",
+      "name": "Natus Farma",
+      "source": "https://www.natusfarma.com.br/store/retire-na-praca-padre-alberico-73-centro-piumhi-mg-mg-37925-000/119",
+      "professionals": []
+    },
+    {
+      "slug": "farmelhor-centro-piumhi",
+      "name": "FarMelhor Centro",
+      "source": "https://unidades.franquiafarmelhor.com.br/farmelhor-centro-piumhi-mg-73447",
+      "professionals": []
+    },
+    {
+      "slug": "drogamelo-piumhi",
+      "name": "Drogamelo",
+      "source": "https://cnpj.biz/20106498000189",
+      "professionals": []
+    },
+    {
+      "slug": "drogarias-ultrapopular-piumhi",
+      "name": "Drogarias Ultrapopular",
+      "source": "https://www.econodata.com.br/consulta-empresa/08049349000120-drogaria-melo-coelho-ltda",
+      "professionals": []
+    },
+    {
+      "slug": "poupa-minas-piumhi",
+      "name": "Poupa Minas",
+      "source": "https://www.solutudo.com.br/empresas/mg/piumhi/farmacias/drogaria-stefany-oliveira-ltda-625683",
+      "professionals": []
+    },
+    {
+      "slug": "farmalucas-piumhi",
+      "name": "Farmalucas",
+      "source": "https://cnpj.biz/15401481000114",
+      "professionals": []
+    },
+    {
+      "slug": "drogamais-piumhi",
+      "name": "Drogamais",
+      "source": "https://casadosdados.com.br/solucao/cnpj/drogaria-neves-e-almeida-ltda-29283051000150",
+      "professionals": []
+    },
+    {
+      "slug": "biomagistral-farmaceutica-piumhi",
+      "name": "Biomagistral Farmacêutica",
+      "source": "https://www.econodata.com.br/consulta-empresa/60624755000199-matos-almeida-farmacia-de-manipulacao-ltda",
+      "professionals": []
+    },
+    {
+      "slug": "rosa-farma-manipulacao-piumhi",
+      "name": "Rosa Farma Manipulação",
+      "source": "https://casadosdados.com.br/solucao/cnpj/drogaria-piumhi-ltda-19717412000175",
+      "professionals": []
+    },
+    {
+      "slug": "central-otica-piumhi",
+      "name": "Central Ótica",
+      "source": "https://br.todosnegocios.com/pt/central-%C3%B3tica_45-37-3371-2608",
+      "professionals": []
+    },
+    {
+      "slug": "entrefarma-piumhi",
+      "name": "Entrefarma",
+      "source": "https://www.waze.com/live-map/directions/br/mg/farmacias-entrefarma?to=place.ChIJg1lCkJITtJQR56gLuPjCUhw",
+      "professionals": []
+    },
+    {
+      "slug": "drogaria-nossa-senhora-livramento-piumhi",
+      "name": "Drogaria Nossa Senhora do Livramento",
+      "source": "https://www.solutudo.com.br/empresas/mg/piumhi/farmacias/drogaria-nossa-senhora-do-livramento-ltda-8327526",
+      "professionals": []
+    },
+    {
+      "slug": "barufarma-piumhi",
+      "name": "Barufarma",
+      "source": "https://manipulacaobarufarma.com.br/",
+      "professionals": []
+    },
+    {
+      "slug": "solucao-farma-piumhi",
+      "name": "Solução Farma",
+      "source": "https://solucaofarma.com.br/contato/",
+      "professionals": []
+    },
+    {
+      "slug": "certus-laboratorio-piumhi",
+      "name": "Certus Laboratório",
+      "source": "https://www.certuslaboratorio.com.br/contato",
+      "professionals": []
+    },
+    {
+      "slug": "laboratorio-bioanalise-piumhi",
+      "name": "Laboratório Bioanálise",
+      "source": "https://www.waze.com/live-map/directions/br/mg/laboratorio-bioanalise-analises-clinicas-ltda?to=place.ChIJAzFRop4TtJQRuTC8wtEUcbQ",
+      "professionals": []
+    },
+    {
+      "slug": "primelab-piumhi",
+      "name": "PrimeLab",
+      "source": "https://primelabpains.com.br/index",
+      "professionals": []
+    },
+    {
+      "slug": "santa-casa-piumhi",
+      "name": "Santa Casa de Misericórdia de Piumhi",
+      "source": "https://www.mg.gov.br/instituicao_unidade/santa-casa-de-misericordia-de-piumhi",
+      "professionals": [
+        "dr-matheus-fonseca-cirurgia-geral-piumhi",
+        "dr-heraldo-francisco-costa-ginecologia-piumhi",
+        "dr-rodrigo-terra-lasmar-ortopedia-piumhi",
+        "dr-nicollas-nunes-rabelo-neurologia-neurocirurgia-piumhi",
+        "dr-lancaster-de-souza-ortopedia-piumhi",
+        "dr-jose-orlando-da-silva-pereira-urologia-piumhi"
+      ]
+    },
+    {
+      "slug": "centro-reabilitacao-hidroterapia-piumhi",
+      "name": "Centro de Reabilitação e Hidroterapia José Rodrigues de Castro",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151502147386",
+      "professionals": []
+    },
+    {
+      "slug": "secretaria-municipal-saude-piumhi",
+      "name": "Secretaria Municipal de Saúde de Piumhi",
+      "source": "https://prefeiturapiumhi.mg.gov.br/",
+      "professionals": []
+    },
+    {
+      "slug": "psf-bossuet-costa-piumhi",
+      "name": "PSF Bossuet Costa",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151502147394",
+      "professionals": []
+    },
+    {
+      "slug": "psf-inho-firmino-piumhi",
+      "name": "PSF Inhô Firmino",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151503243907",
+      "professionals": []
+    },
+    {
+      "slug": "ubs-joao-guilherme-to-rural-piumhi",
+      "name": "UBS João Guilherme Alves “Tó” e Rural",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151503243893",
+      "professionals": []
+    },
+    {
+      "slug": "psf-joaquim-terra-dos-santos-piumhi",
+      "name": "PSF Joaquim Terra dos Santos",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151502775468",
+      "professionals": []
+    },
+    {
+      "slug": "psf-jose-martins-de-faria-piumhi",
+      "name": "PSF José Martins de Faria",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151502172917",
+      "professionals": []
+    },
+    {
+      "slug": "ubs-arlindo-barbosa-neto-piumhi",
+      "name": "UBS Arlindo Barbosa Neto “Marcinho Contador”",
+      "source": "https://prefeiturapiumhi.mg.gov.br/municipio-inaugura-a-14a-unidade-basica-de-saude-nesta-sexta-feira-09/",
+      "professionals": []
+    },
+    {
+      "slug": "ubs-mitermyer-alves-terra-piumhi",
+      "name": "UBS Mitermyer Alves Terra",
+      "source": "https://prefeiturapiumhi.mg.gov.br/inauguracao-da-ubs-mitermyer-alves-terra-marca-mais-um-avanco-na-saude-de-piumhi/",
+      "professionals": []
+    },
+    {
+      "slug": "psf-sarah-vitoria-piumhi",
+      "name": "PSF Sarah Vitória",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151500994758",
+      "professionals": []
+    },
+    {
+      "slug": "psf-sudario-dos-santos-piumhi",
+      "name": "PSF Sudário dos Santos",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151502775751",
+      "professionals": []
+    },
+    {
+      "slug": "ubs-totonha-tome-dona-tina-piumhi",
+      "name": "UBS Totonha Tomé e Dona Tina",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151502775786",
+      "professionals": []
+    },
+    {
+      "slug": "caps-ii-piumhi",
+      "name": "CAPS II Piumhi",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151502147408",
+      "professionals": []
+    },
+    {
+      "slug": "caps-ad-desafio-piumhi",
+      "name": "CAPS AD Desafio",
+      "source": "https://cnes2.datasus.gov.br/Mod_Basico.asp?VCo_Unidade=3151507666128",
+      "professionals": []
+    },
+    {
+      "slug": "servico-municipal-diagnostico-piumhi",
+      "name": "Serviço Municipal de Diagnóstico por Imagem e Exames Laboratoriais",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151502172887",
+      "professionals": []
+    },
+    {
+      "slug": "ceo-socrates-alves-da-costa-piumhi",
+      "name": "Centro de Especialidades Odontológicas Sócrates Alves da Costa",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151506146813",
+      "professionals": []
+    },
+    {
+      "slug": "central-municipal-vacinacao-piumhi",
+      "name": "Central Municipal de Vacinação Julieta Luiza da Silveira Castro",
+      "source": "https://prefeiturapiumhi.mg.gov.br/campanha-de-vacinacao-contra-a-gripe-ja-esta-em-andamento-em-piumhi-e-neste-sabado-acontece-o-dia-d/",
+      "professionals": []
+    },
+    {
+      "slug": "farmacia-municipal-helvidio-menezes-piumhi",
+      "name": "Farmácia Municipal Helvídio Menezes",
+      "source": "https://cnes2.datasus.gov.br/Mod_Conjunto.asp?VCo_Unidade=3151506144691",
+      "professionals": []
+    },
+    {
+      "slug": "clinica-olhos-roberto-santos-piumhi",
+      "name": "Clínica de Olhos Dr. Roberto Santos",
+      "source": "https://robertosantosoftalmologista.com/homepiumhi/",
+      "professionals": [
+        "dr-roberto-de-oliveira-santos-oftalmologia-piumhi"
+      ]
+    },
+    {
+      "slug": "clinica-sao-judas-tadeu-piumhi",
+      "name": "Clínica São Judas Tadeu",
+      "source": "https://sites.google.com/view/clinicasaojudastadeu/in%C3%ADcio",
+      "professionals": [
+        "dra-mirian-sansoni-oftalmologia-piumhi",
+        "dr-alvaro-ribeiro-vaz-de-faria-oftalmologia-piumhi",
+        "dr-matheus-lopes-sansoni-cirurgia-piumhi"
+      ]
+    },
+    {
+      "slug": "borboletando-piumhi",
+      "name": "Borboletando Clínica Multidisciplinar de Reabilitação",
+      "source": "https://www.doctoralia.com.br/clinicas/borboletando-clinica-multidisciplinar-de-reabilitacao",
+      "professionals": [
+        "giovanna-oliveira-beraldo-fisioterapia-piumhi",
+        "marisa-de-fatima-ferreira-fisioterapia-piumhi",
+        "julia-augusta-oliveira-lopes-fonoaudiologia-piumhi",
+        "maria-carolina-tome-moura-terapia-ocupacional-piumhi",
+        "katia-aparecida-soares-enfermagem-piumhi"
+      ]
+    },
+    {
+      "slug": "ws-medicos-piumhi",
+      "name": "WS Médicos Associados",
+      "source": "https://cnes2.datasus.gov.br/Mod_Basico.asp?VCo_Unidade=3151509696180",
+      "professionals": [
+        "dr-luis-gustavo-belizario-xavier-radiologia-piumhi",
+        "dr-gustavo-craide-ortopedia-piumhi",
+        "dra-fernanda-helena-craide-dermatologia-piumhi"
+      ]
+    },
+    {
+      "slug": "orthoclinicas-piumhi",
+      "name": "ORTHOclínicas Piumhi",
+      "source": "https://orthoclinicas.com/unidades/",
+      "professionals": [
+        "dra-ana-paula-soares-salviano-odontologia-piumhi"
+      ]
+    },
+    {
+      "slug": "clinapsi-piumhi",
+      "name": "Clinapsi Clínica de Psicologia",
+      "source": "https://www.doctoralia.com.br/elisangela-lima-6/psicologo/piumhi",
+      "professionals": [
+        "elisangela-lima-psicologia-piumhi"
+      ]
+    }
+  ]
+}

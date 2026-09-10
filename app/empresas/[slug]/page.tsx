@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { organizations } from "@/lib/data";
-import { findPublishedOrganization, organizationForProfessional, publicProfessionals, publishedOrganizations } from "@/lib/public-directory";
+import { findPublishedOrganization, organizationsForProfessional, publicProfessionals, publishedOrganizations } from "@/lib/public-directory";
 import { pageMetadata } from "@/lib/seo";
 import { ProfessionalImage } from "@/components/ProfessionalImage";
 
@@ -40,7 +40,7 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
   const item = await findPublishedOrganization((await params).slug);
   if (!item) notFound();
 
-  const linkedProfessionals = publicProfessionals.filter((professional) => organizationForProfessional(professional)?.slug === item.slug);
+  const linkedProfessionals = publicProfessionals.filter((professional) => organizationsForProfessional(professional).some((organization) => organization.slug === item.slug));
   const visibleProfessionals = linkedProfessionals.slice(0, 6);
   const digits = item.phone.replace(/\D/g, "");
   const whatsappDigits = (item.whatsapp ?? "").replace(/\D/g, "");

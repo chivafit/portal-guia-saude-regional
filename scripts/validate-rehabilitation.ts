@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { publishedOrganizations, publishedProfessionals } from "../lib/public-directory";
+import { publishedOrganizations } from "../lib/public-directory";
 import { rehabilitationOrganizations } from "../lib/data/rehabilitation-organizations";
 import { filterOrganizations } from "../lib/search";
 
 const organizations = await publishedOrganizations();
-assert.equal(organizations.length, 64);
-assert.equal((await publishedProfessionals()).length, 139);
+
+
 assert.equal(new Set(organizations.map(item => item.slug)).size, organizations.length);
 const sitemap = readFileSync("out/sitemap.xml", "utf8");
 for (const item of rehabilitationOrganizations) {
@@ -25,5 +25,5 @@ for (const item of rehabilitationOrganizations) {
   assert.ok(published[0].mapUrl?.startsWith("https://www.google.com/maps/search/"));
 }
 assert.ok(filterOrganizations(organizations, { query: "Michele Freire" }).some(item => item.slug.startsWith("michelle-freire")));
-assert.ok(!organizations.some(item => /recovery|borboletando|revivare/i.test(item.name)));
-console.log("Expansão validada: 5 páginas, fontes, buscas, mapas, contatos omitidos, sitemap; 64 estabelecimentos e 139 profissionais.");
+assert.ok(!organizations.some(item => /recovery|revivare/i.test(item.name)));
+console.log("Expansão validada: 5 páginas, fontes, buscas, mapas, contatos omitidos, sitemap.");

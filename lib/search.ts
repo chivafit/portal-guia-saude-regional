@@ -1,3 +1,4 @@
+import { organizationsForProfessional } from "./public-directory";
 // Busca do portal: normaliza acentos, caixa e pontuação para comparações tolerantes.
 import type { PublicOrganization, PublicProfessional } from "./directory";
 import { categoryForOrganization, normalizeTaxonomyValue, organizationSearchText, resolveServiceCategory } from "./service-taxonomy";
@@ -19,7 +20,7 @@ export type SearchFilters = {
 export function filterProfessionals(items: PublicProfessional[], filters: SearchFilters): PublicProfessional[] {
   const { query = "", city = "", profession = "", specialty = "" } = filters;
   return items.filter((item) => {
-    const haystack = `${item.name} ${item.profession} ${item.specialty} ${item.organization} ${item.city} ${item.services.join(" ")}`;
+    const haystack = `${item.name} ${item.profession} ${item.specialty} ${item.organization} ${(item.aliases ?? []).join(" ")} ${(item.locations ?? []).map((location) => location.name).join(" ")} ${organizationsForProfessional(item).map((organization) => [organization.name, ...(organization.aliases ?? [])].join(" ")).join(" ")} ${item.city} ${item.services.join(" ")}`;
     return (
       (!query || matchesSearchTerms(haystack, query)) &&
       (!city || matchesExactSearchValue(item.city, city)) &&

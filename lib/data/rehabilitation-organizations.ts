@@ -48,6 +48,7 @@ export const rehabilitationOrganizations: Organization[] = [
   {
     slug: "pulmocardio-fisioterapia-piumhi",
     name: "Pulmocardio Clínica de Fisioterapia",
+    aliases: ["Pulmocárdio", "Pulmocardio"],
     address: "Praça Guia Lopes, 248, sala 1, Centro",
     phone: "",
     services: ["Fisioterapia"],

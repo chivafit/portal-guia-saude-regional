@@ -6,6 +6,16 @@ import type { Professional } from "../data";
  * conferidos em fontes públicas atuais antes de montar o diretório público.
  */
 export const professionalOverrides: Record<string, Partial<Professional>> = {
+  "dr-saulo-rosa-ferreira-psiquiatria-piumhi": {
+    organization: "Centro Médico Odontológico de Piumhi — Praça Tuiuti, 114, sala 05, Centro",
+    source: "https://www.doctoralia.com.br/saulo-rosa-ferreira/psiquiatra/bambui",
+    lastVerifiedAt: "2026-09-10",
+  },
+  "dr-gil-cesar-paiva-otorrinolaringologia-piumhi": {
+    organization: "Clínica São Rafael — Praça Guia Lopes, 248, Centro",
+    source: "https://www.santacasapiumhi.com.br/_files/ugd/cf977d_cea3da1b207f412d961c37652d6d2854.pdf",
+    lastVerifiedAt: "2026-09-10",
+  },
   "dr-rui-manuel-dos-prazeres-xavier-ginecologia-piumhi": {
     publicationStatus: "inactive",
     verificationStatus: "official-source",
