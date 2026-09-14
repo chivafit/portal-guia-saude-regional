@@ -12,6 +12,7 @@ import { ProfileShareButton } from "@/components/ProfileShareButton";
 import { professionalRedirects, professionalRedirectTarget } from "@/lib/professional-redirects";
 import { siteUrl } from "@/lib/seo";
 import { ProfessionalImage } from "@/components/ProfessionalImage";
+import { FavoriteButton } from "@/components/FavoriteButton";
 
 function presentationProfession(name: string, profession: string) {
   if (/^Dra\.?\s/i.test(name) && profession === "Médico") return "Médica";
@@ -134,7 +135,10 @@ export default async function ProfessionalPage({ params }: { params: Promise<{ s
               </div>
             </div>
 
-            <aside className="profile-clean-contact"><ProfileShareButton name={item.name} url={canonicalUrl} /></aside>
+            <aside className="profile-clean-contact">
+              <FavoriteButton professional={{ slug: item.slug, name: item.name, profession: item.profession, specialty: item.specialty, city: item.city, organization: item.organization, imageUrl: item.imageUrl }} />
+              <ProfileShareButton name={item.name} url={canonicalUrl} />
+            </aside>
           </article>
 
           <section className="profile-clean-details">
