@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { CityEntryModal } from "@/components/CityEntryModal";
 import { AppBootstrap } from "@/components/AppBootstrap";
+import { AppBottomNav } from "@/components/AppBottomNav";
 import { defaultDescription, siteName, siteUrl } from "@/lib/seo";
 import "./globals.css";
 import "./mobile-audit.css";
@@ -34,5 +35,5 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="pt-BR"><body><AppBootstrap />{children}<CityEntryModal /></body></html>;
+  return <html lang="pt-BR"><body><AppBootstrap />{children}<CityEntryModal /><AppBottomNav /></body></html>;
 }

@@ -14,6 +14,7 @@ import { filterOrganizations, filterProfessionals } from "@/lib/search";
 import { categoryOptionsFor } from "@/lib/service-taxonomy";
 import { ResponsiveFilterDisclosure } from "@/components/ResponsiveFilterDisclosure";
 import { ProfessionalImage } from "@/components/ProfessionalImage";
+import { FavoriteButton } from "@/components/FavoriteButton";
 
 function param(value: string | null): string {
   return value ?? "";
@@ -353,6 +354,7 @@ function SearchDirectory() {
                             <p>{professionLabel(item)}</p>
                             <h2>{item.name}</h2>
                           </div>
+                          <FavoriteButton professional={{ slug: item.slug, name: item.name, profession: item.profession, specialty: item.specialty, city: item.city, organization: item.organization, imageUrl: item.imageUrl }} compact />
                         </div>
                         <div className="doctor-pills">
                           <span><MapPin size={13} /> {item.city}</span>

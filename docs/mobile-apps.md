@@ -60,3 +60,17 @@ npm run app:assets
 ## PWA
 
 O manifesto e o service worker permitem instalar o Guia Saúde pela tela inicial. As páginas já visitadas e os recursos estáticos utilizados ficam disponíveis no cache; quando há conexão, a navegação busca sempre a versão mais recente.
+
+## Experiência no aplicativo
+
+O aplicativo oferece navegação inferior com acesso rápido ao início, busca, favoritos e conteúdos. Os favoritos são armazenados somente no aparelho, sem conta e sem envio da lista ao Guia Saúde. A política de privacidade pública descreve esse funcionamento.
+
+## Antes de enviar às lojas
+
+- confirmar que `br.com.guiasaude.portal` será o identificador definitivo;
+- testar telefone, WhatsApp, mapas, compartilhamento e links externos em aparelhos reais;
+- preparar nome, descrição, categoria, classificação etária e capturas de tela;
+- informar a política pública em `https://guiasaude.app.br/privacidade/`;
+- gerar e guardar com segurança a chave de assinatura do Android;
+- configurar a equipe e os certificados da conta Apple Developer;
+- preencher as declarações de privacidade e conteúdo de saúde nas duas lojas.
