@@ -1,7 +1,7 @@
-:HL["/_next/static/css/1acc3c9cdecb4b2d.css","style"]
+:HL["/_next/static/css/c8ca853a5cf2863f.css","style"]
 :HL["/_next/static/css/319c2fda654e7211.css","style"]
 :HL["/_next/static/css/337dfe5afa4a4dee.css","style"]
 :HL["/revista/capas/2025.jpg","image"]
 :HL["https://i.ytimg.com/vi/uNyNAvumGdk/hqdefault.jpg","image"]
 :HL["/materias/radiologia-odontologica-diagnostico.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"anuncie","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"PkLXC2mzYYZee8vj7dgGP"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"anuncie","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"oshsAIgD9qg_d1s26UqDx"}

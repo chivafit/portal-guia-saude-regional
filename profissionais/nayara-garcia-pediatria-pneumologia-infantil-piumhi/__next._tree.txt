@@ -1,3 +1,3 @@
-:HL["/_next/static/css/1acc3c9cdecb4b2d.css","style"]
+:HL["/_next/static/css/c8ca853a5cf2863f.css","style"]
 :HL["/_next/static/css/319c2fda654e7211.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"nayara-garcia-pediatria-pneumologia-infantil-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"PkLXC2mzYYZee8vj7dgGP"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"nayara-garcia-pediatria-pneumologia-infantil-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"oshsAIgD9qg_d1s26UqDx"}
