@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, Heart, Home, Search } from "lucide-react";
+import { BookOpen, Heart, Home, Mic2, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { favoritesChangedEvent, readFavorites } from "@/lib/favorites";
@@ -10,7 +10,8 @@ const items = [
   { href: "/", label: "Início", icon: Home, active: (path: string) => path === "/" || path.startsWith("/cidades/") },
   { href: "/buscar?cidade=piumhi", label: "Buscar", icon: Search, active: (path: string) => path.startsWith("/buscar") || path.startsWith("/profissionais/") || path.startsWith("/empresas/") },
   { href: "/favoritos", label: "Favoritos", icon: Heart, active: (path: string) => path.startsWith("/favoritos") },
-  { href: "/materias", label: "Conteúdos", icon: BookOpen, active: (path: string) => path.startsWith("/materias") || path.startsWith("/podcast") || path.startsWith("/revista") },
+  { href: "/podcast", label: "Podcast", icon: Mic2, active: (path: string) => path.startsWith("/podcast") },
+  { href: "/revista", label: "Revista", icon: BookOpen, active: (path: string) => path.startsWith("/revista") },
 ] as const;
 
 export function AppBottomNav() {
