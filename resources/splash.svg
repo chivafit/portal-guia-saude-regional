@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2732 2732">
+  <rect width="2732" height="2732" fill="#ffffff"/>
+  <rect x="866" y="866" width="1000" height="1000" rx="220" fill="#0032dc"/>
+  <circle cx="1366" cy="1366" r="326" fill="#ffffff"/>
+  <path fill="#0032dc" d="M1469 1252c-29-30-65-45-109-45-82 0-142 60-142 145 0 87 60 147 142 147 34 0 65-9 89-25v-62h-103v-85h201v196c-50 43-114 65-190 65-138 0-242-97-242-236 0-137 104-234 245-234 77 0 142 25 190 74l-81 60Z"/>
+  <path fill="#00a8e8" d="M1579 1109h68v72h71v68h-71v72h-68v-72h-72v-68h72z"/>
+  <text x="1366" y="2070" text-anchor="middle" font-family="Arial, sans-serif" font-size="124" font-weight="700" fill="#0032dc">Guia Saúde</text>
+</svg>
