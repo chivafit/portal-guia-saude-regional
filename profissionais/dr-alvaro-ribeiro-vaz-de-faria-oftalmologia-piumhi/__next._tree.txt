@@ -1,3 +1,3 @@
 :HL["/_next/static/css/3fea949e04d462d4.css","style"]
-:HL["/_next/static/css/5db7ee25716ec914.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-alvaro-ribeiro-vaz-de-faria-oftalmologia-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"Cstd45Zd8NW-pEs8QBo2R"}
+:HL["/_next/static/css/28f9ecc9c84ce52d.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-alvaro-ribeiro-vaz-de-faria-oftalmologia-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"JKD3bDfwCYDom6H37a6SR"}
