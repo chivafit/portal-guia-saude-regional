@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { CityEntryModal } from "@/components/CityEntryModal";
+import { AppBootstrap } from "@/components/AppBootstrap";
 import { defaultDescription, siteName, siteUrl } from "@/lib/seo";
 import "./globals.css";
 import "./mobile-audit.css";
@@ -18,11 +19,20 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   applicationName: siteName,
+  manifest: "/manifest.webmanifest",
+  appleWebApp: { capable: true, statusBarStyle: "default", title: "Guia Saúde" },
   keywords: ["Guia Saúde", "portal de saúde", "profissionais de saúde", "Piumhi"],
   openGraph: { title: "Guia Saúde — Portal Regional", description: defaultDescription, type: "website", locale: "pt_BR", siteName, images: [{ url: "/og.png", width: 1536, height: 864, alt: "Guia Saúde — portal de saúde" }] },
   twitter: { card: "summary_large_image", title: "Guia Saúde — Portal Regional", description: defaultDescription, images: ["/og.png"] },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0032dc",
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="pt-BR"><body>{children}<CityEntryModal /></body></html>;
+  return <html lang="pt-BR"><body><AppBootstrap />{children}<CityEntryModal /></body></html>;
 }

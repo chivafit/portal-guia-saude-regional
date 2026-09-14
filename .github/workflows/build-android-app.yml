@@ -1,0 +1,56 @@
+name: Gerar aplicativo Android
+
+on:
+  push:
+    branches: [codex/mobile-apps]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-app-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  apk-debug:
+    name: APK para testes
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Preparar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Preparar Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Gerar e sincronizar o portal
+        run: npm run build:app
+
+      - name: Compilar APK
+        working-directory: android
+        run: ./gradlew assembleDebug
+
+      - name: Publicar APK para download
+        uses: actions/upload-artifact@v4
+        with:
+          name: guia-saude-android-debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14

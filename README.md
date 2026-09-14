@@ -92,6 +92,17 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 - `npm test`: build the starter and verify its rendered loading skeleton
 - `npm run db:generate`: generate Drizzle migrations after schema changes
 
+## Aplicativos Android e iOS
+
+O portal também funciona como PWA instalável e como aplicativo nativo via Capacitor.
+
+- `npm run build:app`: valida o portal, gera a versão estática e sincroniza Android/iOS
+- `npm run app:assets`: atualiza ícones e telas de abertura nativas
+- `npm run app:android`: sincroniza e abre o projeto no Android Studio
+- `npm run app:ios`: sincroniza e abre o projeto no Xcode
+
+Consulte [`docs/mobile-apps.md`](docs/mobile-apps.md) para configuração, testes e publicação nas lojas.
+
 ## Learn More
 
 - [vinext Documentation](https://github.com/cloudflare/vinext)
