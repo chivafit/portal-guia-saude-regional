@@ -1,3 +1,3 @@
 :HL["/_next/static/css/3fea949e04d462d4.css","style"]
-:HL["/_next/static/css/7a4392a1b5a9cbbc.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"empresas","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"recuperarte-fisioterapia-estetica-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"zawwFZ_2lMxPVZvbBkSTe"}
+:HL["/_next/static/css/4c1bfe5ecb11ed7e.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"empresas","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"recuperarte-fisioterapia-estetica-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"9bOyrsCjv_1sfoWRUI9S2"}
