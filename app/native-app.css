@@ -1,0 +1,161 @@
+/* Mobile product layer: the portal behaves like a focused health app on small screens. */
+html.native-app {
+  --app-green: #0b5f57;
+  --app-green-deep: #073f3b;
+  --app-mint: #dff2ec;
+  --app-coral: #ee7c57;
+  --app-bg: #f3f7f6;
+  --app-card: #ffffff;
+  --app-text: #133c38;
+  --app-muted: #687e79;
+  --app-line: rgba(18, 72, 65, .12);
+  --app-shadow: 0 12px 34px rgba(16, 67, 61, .09);
+  color-scheme: light;
+  background: var(--app-bg);
+}
+
+html.native-app body { background: var(--app-bg); color: var(--app-text); }
+html.native-app main { animation: app-page-enter .32s cubic-bezier(.2,.75,.2,1) both; }
+html.native-app :where(a,button,input,select,summary) { -webkit-tap-highlight-color: transparent; }
+html.native-app :where(a,button,summary) { touch-action: manipulation; }
+html.native-app :where(a,button):active { transform: scale(.975); }
+html.native-app :where(button,a,input,select):focus-visible { outline: 3px solid rgba(15,109,102,.24); outline-offset: 2px; }
+
+html.native-app .site-header {
+  box-shadow: 0 7px 28px rgba(17, 56, 52, .07);
+}
+html.native-app .header-inner { min-height: 64px; }
+html.native-app .brand span { font-size: 1.22rem; font-weight: 650; }
+html.native-app .brand small { color: #748984; }
+html.native-app .city-selector>button {
+  width: 44px; min-width: 44px; height: 44px; padding: 0!important;
+  border: 0!important; border-radius: 15px!important; background: var(--app-mint)!important;
+  color: var(--app-green)!important; box-shadow: inset 0 0 0 1px rgba(14,94,84,.08);
+}
+
+html.native-app .app-bottom-nav {
+  min-height: 72px; padding-top: 7px;
+  border-top: 1px solid var(--app-line); background: rgba(255,255,255,.97);
+  box-shadow: 0 -12px 35px rgba(11,57,52,.1);
+}
+html.native-app .app-bottom-nav>a {
+  position: relative; min-height: 58px; gap: 4px; border-radius: 17px;
+  color: #728680; font-size: .66rem; font-weight: 760; transition: color .18s,background .18s,transform .16s;
+}
+html.native-app .app-bottom-nav>a[aria-current="page"] { background: var(--app-mint); color: var(--app-green-deep); }
+html.native-app .app-bottom-nav>a[aria-current="page"]::before {
+  content: ""; position: absolute; top: 3px; width: 20px; height: 3px;
+  border-radius: 999px; background: var(--app-coral);
+}
+html.native-app .app-bottom-nav-icon svg { transition: transform .2s; }
+html.native-app .app-bottom-nav>a[aria-current="page"] .app-bottom-nav-icon svg { transform: translateY(-1px) scale(1.08); }
+
+@keyframes app-page-enter { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+@keyframes app-card-enter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html.native-app main, html.native-app :where(a,button) { animation: none!important; transition: none!important; }
+}
+
+@media (max-width: 700px) {
+  body { background: var(--app-bg,#f3f7f6); }
+  .shell { width: min(100% - 32px,1180px); }
+  main { overflow: clip; }
+  :where(button,.primary-action,.profile-action,.organization-action) { min-height: 48px; }
+
+  /* Home: useful actions first, editorial content second. */
+  .root-guide-hero {
+    padding: 34px 0 30px!important; background:
+      radial-gradient(circle at 92% 8%,rgba(119,205,180,.34),transparent 32%),
+      linear-gradient(145deg,#073f3b 0%,#0b6d63 72%,#168578 100%)!important;
+  }
+  .root-guide-hero .eyebrow { color: #a9dfcf!important; }
+  .root-guide-hero h1 { max-width: 330px!important; margin-top: 10px!important; color: #fff!important; font-size: clamp(2.3rem,11vw,3.3rem)!important; line-height: .99!important; letter-spacing: -.06em!important; }
+  .root-guide-hero-inner>p:not(.eyebrow):not(.root-guide-trust) { max-width: 345px!important; margin-top: 14px!important; color: rgba(255,255,255,.78)!important; font-size: .96rem!important; line-height: 1.5!important; }
+  .root-guide-hero .root-guide-search { margin-top: 24px!important; padding: 8px!important; border: 0!important; border-radius: 22px!important; background: #fff!important; box-shadow: 0 20px 45px rgba(0,35,31,.24)!important; }
+  .root-guide-hero .root-guide-search :where(input,select) { min-height: 50px!important; font-size: .94rem!important; }
+  .root-guide-hero .root-guide-search button { min-height: 52px!important; border-radius: 16px!important; background: var(--app-coral,#ee7c57)!important; box-shadow: 0 8px 18px rgba(202,83,50,.25); }
+  .root-guide-quick-searches { justify-content:flex-start!important; flex-wrap:nowrap!important; overflow-x:auto; margin:18px -16px 0!important; padding:0 16px 5px; scrollbar-width:none; }
+  .root-guide-quick-searches::-webkit-scrollbar { display:none; }
+  .root-guide-quick-searches>span { display:none; }
+  .root-guide-quick-searches a { flex:0 0 auto; padding:9px 13px!important; border-color:rgba(255,255,255,.2)!important; background:rgba(255,255,255,.12)!important; color:#fff!important; backdrop-filter:blur(8px); }
+  .root-guide-trust { display:none; }
+  .root-specialties,.root-pathways,.city-portal-section { background: var(--app-bg,#f3f7f6)!important; }
+  .root-specialties { padding-block: 27px!important; }
+  .root-specialties h2,.root-pathways-head h2 { font-size: 1.55rem!important; line-height:1.08!important; }
+  .root-pathways { padding: 24px 0 8px!important; }
+  .root-pathways-head { margin-bottom: 18px!important; }
+  .root-pathways-grid { gap: 13px!important; }
+  .root-pathway { min-height: 0!important; padding: 22px!important; border: 1px solid var(--app-line)!important; border-radius: 24px!important; background:#fff!important; box-shadow:var(--app-shadow)!important; }
+  .root-pathway h3 { font-size:1.38rem!important; }
+  .root-pathway-art { display:none!important; }
+
+  /* Section rhythm and tactile cards across the whole product. */
+  :where(.section,.content-section,.podcast-library-listing,.magazine-archive-section) { padding-top: 34px!important; padding-bottom: 38px!important; }
+  :where(.city-pro-directory,.city-local-partners,.city-content-direct,.city-services-section) { margin-top: 36px!important; }
+  :where(.home-featured-professional-card,.featured-directory-card,.city-services-list>a,.city-partner-grid article,.city-partner-cta,.result-card,.favorite-card,.podcast-episode-card,.magazine-cover-card,.organization-information,.profile-clean-verification) {
+    border:1px solid var(--app-line)!important; border-radius:20px!important; background:var(--app-card,#fff)!important; box-shadow:var(--app-shadow)!important;
+  }
+  :where(.home-featured-professional-card,.featured-directory-card,.city-services-list>a,.result-card,.favorite-card,.podcast-episode-card,.magazine-cover-card) { transition: transform .18s ease,box-shadow .18s ease; }
+  :where(.home-featured-professional-card,.featured-directory-card,.city-services-list>a,.result-card,.favorite-card,.podcast-episode-card,.magazine-cover-card):active { transform:scale(.985); box-shadow:0 5px 17px rgba(16,67,61,.08)!important; }
+  :where(.city-block-head,.city-discovery-head,.podcast-library-heading,.magazine-archive-heading) h2 { font-size:1.65rem!important; line-height:1.12!important; }
+  .eyebrow { color:var(--app-coral,#ee7c57)!important; font-size:.68rem!important; }
+
+  /* Search behaves like an app search screen. */
+  .directory-hero-refined { padding:27px 0 23px!important; background:linear-gradient(145deg,#e4f2ee,#f6f9f8)!important; }
+  .directory-hero-refined .breadcrumbs { display:none; }
+  .directory-hero-refined h1 { margin-top:7px!important; font-size:2rem!important; line-height:1.04!important; }
+  .directory-hero-refined>div>p:last-child { margin-top:10px!important; font-size:.86rem!important; line-height:1.45!important; }
+  .doctoralia-layout { display:block!important; padding-top:17px!important; }
+  .directory-filters { margin-bottom:13px; }
+  .directory-filters summary { min-height:49px; padding:0 15px!important; border:1px solid var(--app-line)!important; border-radius:16px!important; background:#fff!important; box-shadow:var(--app-shadow); }
+  .filter-panel { border-radius:0 0 18px 18px!important; }
+  .search-type-tabs { position:sticky; top:64px; z-index:20; display:grid!important; grid-template-columns:repeat(3,1fr); gap:5px; padding:5px!important; border:1px solid var(--app-line)!important; border-radius:17px!important; background:rgba(255,255,255,.94)!important; box-shadow:0 8px 24px rgba(16,67,61,.08); backdrop-filter:blur(12px); }
+  .search-type-tabs a { display:grid; place-items:center; min-height:42px; padding:6px!important; border-radius:12px!important; font-size:.7rem!important; text-align:center; }
+  .search-type-tabs a.active { background:var(--app-green,#0b5f57)!important; color:#fff!important; }
+  .directory-choice-hub { padding:20px 0!important; }
+  .result-card { padding:15px!important; }
+  .result-card h2 { font-size:1.05rem!important; }
+  .result-card-actions :where(a,button) { min-height:43px!important; border-radius:13px!important; }
+
+  /* Profiles: make contact the dominant action. */
+  .profile-clean-wrap,.organization-wrap { padding-top:18px!important; background:var(--app-bg,#f3f7f6)!important; }
+  .profile-clean-back,.organization-back { margin-bottom:13px!important; }
+  .profile-clean-hero,.organization-hero { border-radius:25px!important; box-shadow:var(--app-shadow)!important; }
+  .profile-clean-hero h1,.organization-hero h1 { font-size:2rem!important; }
+  .profile-clean-actions,.organization-actions { position:sticky; bottom:83px; z-index:18; padding:8px; border:1px solid var(--app-line); border-radius:18px; background:rgba(255,255,255,.95); box-shadow:0 12px 34px rgba(10,58,52,.14); backdrop-filter:blur(14px); }
+  .profile-clean-actions>a:first-child,.organization-actions>a:first-child { background:var(--app-green,#0b5f57)!important; color:#fff!important; }
+
+  /* Podcast: visual player cards and horizontal topic chips. */
+  .podcast-library-hero { padding:31px 0 27px!important; background:linear-gradient(145deg,#073f3b,#0c7469)!important; }
+  .podcast-library-hero .eyebrow { color:#a9dfcf!important; }
+  .podcast-library-hero h1 { color:#fff!important; font-size:2.25rem!important; }
+  .podcast-library-hero p:not(.eyebrow) { color:rgba(255,255,255,.78)!important; }
+  .podcast-hero-actions a { min-height:48px!important; border-color:#fff!important; background:#fff!important; color:var(--app-green-deep,#073f3b)!important; }
+  .podcast-library-hero-art { box-shadow:0 18px 40px rgba(0,35,31,.28)!important; }
+  .podcast-latest-card { border-radius:24px!important; box-shadow:var(--app-shadow)!important; }
+  .podcast-latest-copy { padding:20px!important; }
+  .podcast-watch-btn { min-height:47px!important; }
+  .podcast-search { border-radius:19px!important; box-shadow:var(--app-shadow)!important; }
+  .podcast-filter-row { padding-bottom:5px!important; scrollbar-width:none; }
+  .podcast-filter-row button { min-height:39px!important; padding-inline:14px!important; }
+  .podcast-episode-card { overflow:hidden; border-radius:22px!important; }
+  .podcast-episode-media i { width:46px!important; height:46px!important; box-shadow:0 8px 20px rgba(0,0,0,.18); }
+
+  /* Magazine: editorial, but compact and action-led. */
+  .magazine-library-hero { padding:31px 0 34px!important; background:linear-gradient(145deg,#fff4eb,#e8f3ef)!important; }
+  .magazine-library-hero h1 { font-size:2.25rem!important; line-height:1.01!important; }
+  .magazine-hero-actions { display:grid!important; grid-template-columns:1fr; }
+  .magazine-hero-actions a { min-height:49px!important; }
+  .magazine-hero-cover-wrap { max-width:190px!important; }
+  .magazine-current-info,.magazine-launch,.magazine-history { padding-block:32px!important; }
+  .magazine-search { position:relative; border-radius:20px!important; box-shadow:var(--app-shadow)!important; }
+  .magazine-covers-grid { gap:13px!important; }
+  .magazine-cover-card { border-radius:18px!important; }
+  .magazine-commercial { margin-inline:16px!important; padding:24px!important; border-radius:24px!important; background:linear-gradient(145deg,#073f3b,#0b6d63)!important; box-shadow:0 18px 40px rgba(7,63,59,.2); }
+  .magazine-continue article { border-radius:20px!important; background:#fff!important; box-shadow:var(--app-shadow); }
+
+  /* Feedback: controls look alive without distracting motion. */
+  :where(.home-pillar,.root-pathway,.favorite-card,.result-card,.podcast-episode-card,.magazine-cover-card):nth-child(2) { animation-delay:.045s; }
+  :where(.home-pillar,.root-pathway,.favorite-card,.result-card,.podcast-episode-card,.magazine-cover-card):nth-child(3) { animation-delay:.09s; }
+  html.native-app :where(.home-pillar,.root-pathway,.favorite-card,.result-card,.podcast-episode-card,.magazine-cover-card) { animation:app-card-enter .38s cubic-bezier(.2,.75,.2,1) both; }
+}

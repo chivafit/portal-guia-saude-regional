@@ -9,6 +9,7 @@ import "./podcast-highlight.css";
 import "./podcast-photo-highlight.css";
 import "./load-more-button.css";
 import "./home-featured-professionals.css";
+import "./native-app.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -31,7 +32,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#0032dc",
+  themeColor: "#0b4f4a",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
