@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, ShieldCheck, SlidersHorizontal, Star, Stethoscope, X } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, Search, ShieldCheck, SlidersHorizontal, Star, Stethoscope, X } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -145,7 +145,7 @@ function SearchDirectory() {
   return (
     <>
       <SiteHeader />
-      <main>
+      <main className="app-search-page">
         <section className="directory-hero directory-hero-refined">
           <div className="shell">
             <Breadcrumbs items={[{ label: "Início", href: "/" }, { label: city || "Todas as cidades" }, { label: "Encontrar atendimento" }]} />
@@ -155,8 +155,20 @@ function SearchDirectory() {
                 <span>{city || "Região"}</span>
               </div>
             </div>
-            <h1>Encontre profissionais e empresas de saúde</h1>
-            <p>Busque por especialidade, nome, clínica, exame ou cidade. O portal exibe contatos e perfis informativos, sem agendamento online.</p>
+            <h1>O que você procura?</h1>
+            <p>Encontre profissionais, clínicas e serviços de saúde perto de você.</p>
+            <form className="app-search-primary" action="/buscar" role="search">
+              <Search size={20} aria-hidden="true" />
+              <input
+                name="q"
+                defaultValue={q}
+                aria-label="Buscar no Guia Saúde"
+                placeholder="Profissional, especialidade ou clínica"
+              />
+              <input type="hidden" name="cidade" value="piumhi" />
+              {type !== "todos" ? <input type="hidden" name="tipo" value={type === "servicos" ? "services" : "professionals"} /> : null}
+              <button type="submit" aria-label="Buscar"><Search size={19} /></button>
+            </form>
           </div>
         </section>
 
@@ -239,7 +251,7 @@ function SearchDirectory() {
                 <div className="directory-choice-intro">
                   <p className="eyebrow">Por onde você quer começar?</p>
                   <h2>Escolha o tipo de atendimento</h2>
-                  <p>Os cadastros aparecem somente depois que você selecionar uma área ou fizer uma busca.</p>
+                  <p>Toque em uma área ou pesquise pelo nome.</p>
                 </div>
                 <div className="directory-choice-columns">
                   <article>
@@ -248,7 +260,7 @@ function SearchDirectory() {
                       <div><strong>Profissionais</strong><small>Escolha a especialidade</small></div>
                     </div>
                     <div className="directory-choice-links">
-                      {professionChoices.map((item) => (
+                      {professionChoices.slice(0, 6).map((item) => (
                         <Link key={item.name} href={choiceHref("profissao", item.name)}>
                           <span>{item.name}</span><ArrowUpRight size={14} />
                         </Link>
@@ -262,7 +274,7 @@ function SearchDirectory() {
                       <div><strong>Clínicas e serviços</strong><small>Escolha a categoria</small></div>
                     </div>
                     <div className="directory-choice-links">
-                      {categoryChoices.slice(0, 9).map((item) => (
+                      {categoryChoices.slice(0, 6).map((item) => (
                         <Link key={item.key} href={choiceHref("categoria", item.key)}>
                           <span>{item.label}</span><ArrowUpRight size={14} />
                         </Link>
