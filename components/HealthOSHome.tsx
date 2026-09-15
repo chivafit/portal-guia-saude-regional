@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Bell, Building2, FlaskConical, MapPin, Pill, Search, Sparkles } from "lucide-react";
+import { ArrowRight, Building2, FlaskConical, MapPin, Pill, Search, Sparkles } from "lucide-react";
 import { FeaturedProfessionalsRotator } from "@/components/FeaturedProfessionalsRotator";
 import { publishedProfessionals } from "@/lib/public-directory";
 import { professionals } from "@/lib/data";
@@ -30,11 +30,10 @@ export async function HealthOSHome() {
       <section className="health-os-shell">
         <header className="health-os-topbar">
           <button className="health-os-location" type="button"><MapPin size={17} /><span>Piumhi · MG</span><small>⌄</small></button>
-          <button className="health-os-icon-button" type="button" aria-label="Notificações"><Bell size={19} /></button>
         </header>
 
         <div className="health-os-intro">
-          <span>Olá, Iara</span>
+          <span>Olá!</span>
           <h1>Como podemos<br /><em>cuidar de você</em> hoje?</h1>
         </div>
 
