@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { ArrowLeft, Bone, Brain, HeartPulse, Search, Sparkles, Stethoscope } from "lucide-react";
 
@@ -17,7 +18,14 @@ export function SearchReferenceLanding() {
   const pathname = usePathname();
   const params = useSearchParams();
   const hasSearchState = ["q", "profissao", "especialidade", "categoria", "tipo"].some((key) => Boolean(params.get(key)));
-  if (pathname !== "/buscar" || hasSearchState) return null;
+  const active = pathname === "/buscar" && !hasSearchState;
+
+  useEffect(() => {
+    document.body.classList.toggle("search-reference-mode", active);
+    return () => document.body.classList.remove("search-reference-mode");
+  }, [active]);
+
+  if (!active) return null;
 
   return (
     <main className="search-reference-landing" aria-label="Buscar no Guia Saúde">
