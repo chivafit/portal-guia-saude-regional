@@ -14,7 +14,7 @@ const shortcuts = [
 
 export async function HealthOSHome() {
   const source = await publishedProfessionals(professionals);
-  const featured = source.filter((item) => item.city === "Piumhi" && isFeaturedProfessional(item.slug)).slice(0, 3).map((item) => ({ slug: item.slug, name: item.name, specialty: item.specialty, organization: item.organization, registration: item.registration, imageUrl: item.imageUrl }));
+  const featured = source.filter((item) => item.city === "Piumhi" && isFeaturedProfessional(item.slug)).slice(0, 6).map((item) => ({ slug: item.slug, name: item.name, specialty: item.specialty, organization: item.organization, registration: item.registration, imageUrl: item.imageUrl }));
   return <main className="health-os-home"><div className="health-os-aura health-os-aura-one" aria-hidden="true" /><div className="health-os-aura health-os-aura-two" aria-hidden="true" /><section className="health-os-shell">
     <header className="health-os-topbar"><button className="health-os-location" type="button"><MapPin size={17} /><span>Piumhi · MG</span><small>⌄</small></button></header>
     <div className="health-os-intro"><span>Olá!</span><h1>Como podemos<br /><em>cuidar de você</em> hoje?</h1></div>
