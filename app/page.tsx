@@ -1,4 +1,4 @@
-import PiumhiGuidePage from "./cidades/[slug]/page";
+import { HealthOSHome } from "@/components/HealthOSHome";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -7,7 +7,6 @@ export const metadata = pageMetadata(
   "/",
 );
 
-/** A página inicial é o Guia Saúde de Piumhi durante esta primeira fase do portal. */
 export default function Home() {
-  return <PiumhiGuidePage params={Promise.resolve({ slug: "piumhi" })} rootLanding />;
+  return <HealthOSHome />;
 }
