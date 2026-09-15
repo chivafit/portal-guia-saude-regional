@@ -17,6 +17,7 @@ const items = [
 export function AppBottomNav() {
   const pathname = usePathname();
   const [favoriteCount, setFavoriteCount] = useState(0);
+  const [routeHint, setRouteHint] = useState("");
 
   useEffect(() => {
     const update = () => setFavoriteCount(readFavorites().length);
@@ -25,11 +26,23 @@ export function AppBottomNav() {
     return () => window.removeEventListener(favoritesChangedEvent, update);
   }, []);
 
+  useEffect(() => {
+    const detectRenderedRoute = () => {
+      setRouteHint(document.querySelector(".app-search-page") ? "/buscar" : "");
+    };
+    detectRenderedRoute();
+    const observer = new MutationObserver(detectRenderedRoute);
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  const activePath = routeHint || pathname;
+
   return (
     <nav className="app-bottom-nav" aria-label="Navegação do aplicativo">
       {items.map((item) => {
         const Icon = item.icon;
-        const selected = item.active(pathname);
+        const selected = item.active(activePath);
         return (
           <Link key={item.href} href={item.href} aria-current={selected ? "page" : undefined}>
             <span className="app-bottom-nav-icon">
