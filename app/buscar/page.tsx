@@ -2,24 +2,28 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useRef, useState } from "react";
-import { ArrowUpRight, BadgeCheck, Building2, MapPin, Phone, Search, ShieldCheck, SlidersHorizontal, Star, Stethoscope, X } from "lucide-react";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { Suspense, useEffect, useState } from "react";
+import { ArrowLeft, ArrowUpRight, Building2, ChevronRight, MapPin, Phone, Search, SlidersHorizontal, Sparkles, Stethoscope, X } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { FavoriteButton } from "@/components/FavoriteButton";
+import { ProfessionalImage } from "@/components/ProfessionalImage";
+import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { organizations, professions } from "@/lib/data";
 import { publicProfessionals } from "@/lib/public-professionals";
-import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { filterOrganizations, filterProfessionals } from "@/lib/search";
 import { categoryOptionsFor } from "@/lib/service-taxonomy";
-import { ResponsiveFilterDisclosure } from "@/components/ResponsiveFilterDisclosure";
-import { ProfessionalImage } from "@/components/ProfessionalImage";
-import { FavoriteButton } from "@/components/FavoriteButton";
 
-function param(value: string | null): string {
-  return value ?? "";
+const PAGE_SIZE = 18;
+const quickSpecialties = ["Cardiologia", "Dermatologia", "Ginecologia", "Ortopedia", "Pediatria", "Psicologia"];
+
+function param(value: string | null) { return value ?? ""; }
+function publicAddress(address?: string) { return address && !/endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(address) ? address : ""; }
+function professionLabel(item: { profession: string; name: string }) {
+  if (/^Dra\.?\s/i.test(item.name)) return item.profession === "Médico" ? "Médica" : item.profession;
+  if (/^Dr\.?\s/i.test(item.name)) return item.profession;
+  return ({ "Médico": "Medicina", "Psicólogo": "Psicologia", "Fonoaudiólogo": "Fonoaudiologia", "Enfermeiro": "Enfermagem", "Educador físico": "Educação Física" } as Record<string, string>)[item.profession] ?? item.profession;
 }
-
 function directContact(whatsapp?: string, phone?: string) {
   const whatsappDigits = (whatsapp ?? "").replace(/\D/g, "");
   if (whatsappDigits.length >= 10) return { href: `https://wa.me/${whatsappDigits.startsWith("55") ? whatsappDigits : `55${whatsappDigits}`}`, label: "WhatsApp" };
@@ -28,417 +32,152 @@ function directContact(whatsapp?: string, phone?: string) {
   return null;
 }
 
-const PAGE_SIZE = 18;
-function publicAddress(address?: string) {
-  return address && !/endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(address) ? address : "";
-}
-function professionLabel(item: { profession: string; name: string }) {
-  if (/^Dra\.?\s/i.test(item.name)) return item.profession === "Médico" ? "Médica" : item.profession;
-  if (/^Dr\.?\s/i.test(item.name)) return item.profession;
-  return ({ "Médico": "Medicina", "Psicólogo": "Psicologia", "Fonoaudiólogo": "Fonoaudiologia", "Enfermeiro": "Enfermagem", "Educador físico": "Educação Física" } as Record<string, string>)[item.profession] ?? item.profession;
-}
-
 function SearchDirectory() {
   const params = useSearchParams();
   const q = param(params.get("q"));
-  const requestedCity = param(params.get("cidade"));
-  const city = requestedCity && requestedCity.toLocaleLowerCase("pt-BR") !== "piumhi" ? "" : "Piumhi";
   const profession = param(params.get("profissao"));
   const specialty = param(params.get("especialidade"));
   const category = param(params.get("categoria"));
   const typeParam = param(params.get("tipo"));
-  const type = ({ profissionais: "profissionais", professionals: "profissionais", empresas: "servicos", services: "servicos" }[typeParam] ?? "todos") as
-    | "todos"
-    | "profissionais"
-    | "servicos";
-
+  const type = ({ profissionais: "profissionais", professionals: "profissionais", empresas: "servicos", services: "servicos" }[typeParam] ?? "todos") as "todos" | "profissionais" | "servicos";
+  const city = "Piumhi";
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
-  const loadMoreRef = useRef<HTMLButtonElement>(null);
   const filters = { query: q, city, profession, specialty, category, type };
   const professionalSource = publicProfessionals;
-  const organizationSource = organizations.filter((item) => item.city === "Piumhi");
+  const organizationSource = organizations.filter((item) => item.city === city);
   const hasProfessionalFocus = Boolean(profession || specialty);
-
   const professionalResults = type === "servicos" ? [] : filterProfessionals(professionalSource, filters);
-  const organizationResults =
-    type === "profissionais" || (type === "todos" && hasProfessionalFocus)
-      ? []
-      : filterOrganizations(organizationSource, filters);
+  const organizationResults = type === "profissionais" || (type === "todos" && hasProfessionalFocus) ? [] : filterOrganizations(organizationSource, filters);
   const total = professionalResults.length + organizationResults.length;
-  const showDirectoryLanding = !q && !profession && !specialty && !category && type === "todos";
-
-  const serviceCategoryOptions = categoryOptionsFor(organizationSource);
-  const cityProfessionals = filterProfessionals(professionalSource, { city });
-  const cityOrganizations = filterOrganizations(organizationSource, { city });
-  const specialtyChoices = Array.from(
-    new Set(
-      cityProfessionals
-        .filter((item) => !profession || item.profession === profession)
-        .map((item) => item.specialty)
-        .filter(Boolean),
-    ),
-  ).sort((a, b) => a.localeCompare(b, "pt-BR"));
-  const professionChoices = professions
-    .map((name) => ({ name, count: cityProfessionals.filter((item) => item.profession === name).length }))
-    .filter((item) => item.count > 0);
-  const categoryChoices = categoryOptionsFor(cityOrganizations).sort((a, b) => b.count - a.count);
-
-  // Nas abas Profissionais/Empresas, escolher a área antes de listar (evita lista longa).
-  // Com a modalidade Profissionais escolhida, a busca deve apresentar o
-  // diretório completo de Piumhi — não esconder os resultados em um atalho.
-  const showProfessionChooser = false;
-  const showCategoryChooser = type === "servicos" && !category && !q && categoryChoices.length > 0;
-  useEffect(() => {
-    const resetVisibleCount = window.setTimeout(() => setVisibleCount(PAGE_SIZE), 0);
-    return () => window.clearTimeout(resetVisibleCount);
-  }, [q, city, profession, specialty, category, type]);
+  const isLanding = !q && !profession && !specialty && !category && type === "todos";
+  const categoryChoices = categoryOptionsFor(organizationSource).sort((a, b) => b.count - a.count);
+  const specialtyChoices = Array.from(new Set(filterProfessionals(professionalSource, { city }).map((item) => item.specialty).filter(Boolean))).sort((a, b) => a.localeCompare(b, "pt-BR"));
   const visibleProfessionals = professionalResults.slice(0, visibleCount);
   const visibleOrganizations = organizationResults.slice(0, visibleCount);
-  const resultLabel = (count: number, noun: string) => `${count} ${noun}${count === 1 ? "" : "s"} encontrado${count === 1 ? "" : "s"}`;
 
-  const activeFilters = [
-    q && { label: `Busca: ${q}`, key: "q" },
-    city && { label: city, key: "cidade" },
-    profession && { label: profession, key: "profissao" },
-    specialty && { label: specialty, key: "especialidade" },
-    category && { label: category, key: "categoria" },
-  ].filter(Boolean) as { label: string; key: string }[];
-  const typeTabs: { value: typeof type; label: string }[] = [
-    { value: "todos", label: "Tudo" },
-    { value: "profissionais", label: "Profissionais" },
-    { value: "servicos", label: "Clínicas e serviços" },
-  ];
+  useEffect(() => { const timer = window.setTimeout(() => setVisibleCount(PAGE_SIZE), 0); return () => window.clearTimeout(timer); }, [q, profession, specialty, category, type]);
 
-  function tabHref(value: string) {
+  function hrefFor(nextType: typeof type) {
     const search = new URLSearchParams();
     if (q) search.set("q", q);
-    if (city) search.set("cidade", city.toLowerCase());
-    if (value !== "servicos" && profession) search.set("profissao", profession);
-    if (value !== "servicos" && specialty) search.set("especialidade", specialty);
-    if (value !== "profissionais" && category) search.set("categoria", category);
-    if (value !== "todos") search.set("tipo", value === "servicos" ? "services" : "professionals");
-    const query = search.toString();
-    return query ? `/buscar?${query}` : "/buscar";
+    search.set("cidade", "piumhi");
+    if (nextType !== "servicos" && profession) search.set("profissao", profession);
+    if (nextType !== "servicos" && specialty) search.set("especialidade", specialty);
+    if (nextType !== "profissionais" && category) search.set("categoria", category);
+    if (nextType !== "todos") search.set("tipo", nextType === "servicos" ? "services" : "professionals");
+    return `/buscar?${search.toString()}`;
   }
-
-  function removeFilterHref(key: string) {
-    const search = new URLSearchParams();
-    if (q && key !== "q") search.set("q", q);
-    if (city) search.set("cidade", city.toLowerCase());
-    if (profession && key !== "profissao") search.set("profissao", profession);
-    if (specialty && key !== "especialidade" && key !== "profissao") search.set("especialidade", specialty);
-    if (category && key !== "categoria") search.set("categoria", category);
-    if (key === "cidade") search.delete("cidade");
-    if (type !== "todos") search.set("tipo", type === "servicos" ? "services" : "professionals");
-    const query = search.toString();
-    return query ? `/buscar?${query}` : "/buscar";
-  }
-
-  function choiceHref(kind: "profissao" | "categoria", value: string) {
-    const search = new URLSearchParams();
-    if (city) search.set("cidade", city.toLowerCase());
-    search.set(kind, value);
-    search.set("tipo", kind === "profissao" ? "professionals" : "services");
+  function clearFilter(key: string) {
+    const search = new URLSearchParams(params.toString());
+    search.delete(key); search.set("cidade", "piumhi");
     return `/buscar?${search.toString()}`;
   }
 
-  return (
-    <>
-      <SiteHeader />
-      <main className="app-search-page">
-        <section className="directory-hero directory-hero-refined">
-          <div className="shell">
-            <Breadcrumbs items={[{ label: "Início", href: "/" }, { label: city || "Todas as cidades" }, { label: "Encontrar atendimento" }]} />
-            <div className="directory-hero-refined-head">
-              <p className="eyebrow">Encontre atendimento</p>
-              <div>
-                <span>{city || "Região"}</span>
-              </div>
-            </div>
-            <h1>O que você procura?</h1>
-            <p>Encontre profissionais, clínicas e serviços de saúde perto de você.</p>
-            <form className="app-search-primary" action="/buscar" role="search">
-              <Search size={20} aria-hidden="true" />
-              <input
-                name="q"
-                defaultValue={q}
-                aria-label="Buscar no Guia Saúde"
-                placeholder="Profissional, especialidade ou clínica"
-              />
-              <input type="hidden" name="cidade" value="piumhi" />
-              {type !== "todos" ? <input type="hidden" name="tipo" value={type === "servicos" ? "services" : "professionals"} /> : null}
-              <button type="submit" aria-label="Buscar"><Search size={19} /></button>
-            </form>
+  return <>
+    <SiteHeader />
+    <main className={`native-search-screen${isLanding ? " native-search-landing" : " native-search-results"}`}>
+      <div className="native-search-aura" aria-hidden="true" />
+      <div className="native-search-shell">
+        <header className="native-search-header">
+          <Link className="native-search-back" href="/" aria-label="Voltar"><ArrowLeft size={20} /></Link>
+          <div className="native-search-title">
+            <h1>Buscar</h1>
+            <p>Encontre profissionais, clínicas, exames e muito mais.</p>
           </div>
-        </section>
+        </header>
 
-        <section className="section shell results-layout doctoralia-layout">
-          <aside className="filters directory-filters">
-            <ResponsiveFilterDisclosure>
-              <summary><SlidersHorizontal size={18} /> Filtrar resultados</summary>
-              <div className="filter-panel">
-              <form action="/buscar">
-              <label>
-                {type === "servicos" ? "Nome da empresa ou serviço" : "Nome, profissão ou especialidade"}
-                <input name="q" defaultValue={q} placeholder={type === "servicos" ? "Ex.: clínica, laboratório" : "Ex.: cardiologia, Dra. Ana"} />
-              </label>
-              <label>
-                Cidade
-                <select name="cidade" defaultValue={city}>
-                  <option value="">Selecione</option>
-                  <option value="piumhi">Piumhi</option>
-                </select>
-              </label>
-              {type !== "servicos" ? <label>
-                Categoria profissional
-                <select name="profissao" defaultValue={profession}>
-                  <option value="">Todas as categorias</option>
-                  {professions.map((item) => <option key={item}>{item}</option>)}
-                </select>
-              </label> : null}
-              {type !== "servicos" ? <label>
-                Especialidade
-                <select name="especialidade" defaultValue={specialty}>
-                  <option value="">Todas as especialidades</option>
-                  {specialtyChoices.map((item) => <option key={item}>{item}</option>)}
-                </select>
-                <small className="filter-help">
-                  {profession
-                    ? `Especialidades de ${profession.toLowerCase()}`
-                    : "Escolha Médico ou Dentista acima para reduzir esta lista"}
-                </small>
-              </label> : null}
-              {type !== "profissionais" ? <label>
-                Tipo de empresa
-                <select name="categoria" defaultValue={category}>
-                  <option value="">Todas as empresas</option>
-                  {serviceCategoryOptions.map((item) => <option key={item.key} value={item.key}>{item.label}</option>)}
-                </select>
-              </label> : null}
-              {type !== "todos" ? <input type="hidden" name="tipo" value={type === "servicos" ? "services" : "professionals"} /> : null}
-              <button type="submit">Aplicar filtros</button>
-              </form>
-              </div>
-              <div className="filter-pills">
-                <span><ShieldCheck size={13} /> Sem agendamento</span>
-                <span><BadgeCheck size={13} /> Perfis revisados</span>
-              </div>
-            </ResponsiveFilterDisclosure>
-          </aside>
+        <form className="native-search-form" action="/buscar" role="search">
+          <Search size={19} aria-hidden="true" />
+          <input name="q" defaultValue={q} autoComplete="off" enterKeyHint="search" aria-label="O que você está buscando?" placeholder="O que você está buscando?" />
+          <input type="hidden" name="cidade" value="piumhi" />
+          {type !== "todos" ? <input type="hidden" name="tipo" value={type === "servicos" ? "services" : "professionals"} /> : null}
+          <button type="submit" aria-label="Buscar"><Search size={19} /></button>
+        </form>
 
-          <div className="results directory-results">
-            <div className="search-type-tabs" role="tablist" aria-label="Modalidade de busca">
-              {typeTabs.map((tab) => (
-                <Link key={tab.value} href={tabHref(tab.value)} className={type === tab.value ? "active" : ""} role="tab" aria-selected={type === tab.value} aria-controls="search-results">
-                  {tab.label}
-                </Link>
-              ))}
-            </div>
+        <nav className="native-search-tabs" aria-label="Modalidade de busca">
+          <Link href={hrefFor("todos")} className={type === "todos" ? "active" : ""}>Todos</Link>
+          <Link href={hrefFor("profissionais")} className={type === "profissionais" ? "active" : ""}>Profissionais</Link>
+          <Link href={hrefFor("servicos")} className={type === "servicos" ? "active" : ""}>Clínicas</Link>
+        </nav>
 
-            {activeFilters.length ? (
-              <div className="active-filter-row" aria-label="Filtros selecionados">
-                {activeFilters.map((filter) => (
-                  <Link key={filter.key} href={removeFilterHref(filter.key)}>
-                    {filter.label} <X size={13} aria-label="Remover filtro" />
-                  </Link>
-                ))}
-                <Link href="/buscar" className="clear-filters">Limpar filtros</Link>
-              </div>
-            ) : null}
-
-            {showDirectoryLanding ? (
-              <section className="directory-choice-hub">
-                <div className="directory-choice-intro">
-                  <p className="eyebrow">Por onde você quer começar?</p>
-                  <h2>Escolha o tipo de atendimento</h2>
-                  <p>Toque em uma área ou pesquise pelo nome.</p>
-                </div>
-                <div className="directory-choice-columns">
-                  <article>
-                    <div className="directory-choice-title">
-                      <span><Stethoscope size={20} /></span>
-                      <div><strong>Profissionais</strong><small>Escolha a especialidade</small></div>
-                    </div>
-                    <div className="directory-choice-links">
-                      {professionChoices.slice(0, 6).map((item) => (
-                        <Link key={item.name} href={choiceHref("profissao", item.name)}>
-                          <span>{item.name}</span><ArrowUpRight size={14} />
-                        </Link>
-                      ))}
-                    </div>
-                    <Link className="directory-choice-all" href={tabHref("profissionais")}>Ver todos os profissionais</Link>
-                  </article>
-                  <article>
-                    <div className="directory-choice-title">
-                      <span><Building2 size={20} /></span>
-                      <div><strong>Clínicas e serviços</strong><small>Escolha a categoria</small></div>
-                    </div>
-                    <div className="directory-choice-links">
-                      {categoryChoices.slice(0, 6).map((item) => (
-                        <Link key={item.key} href={choiceHref("categoria", item.key)}>
-                          <span>{item.label}</span><ArrowUpRight size={14} />
-                        </Link>
-                      ))}
-                    </div>
-                    <Link className="directory-choice-all" href={tabHref("servicos")}>Ver todas as clínicas e serviços</Link>
-                  </article>
-                </div>
-              </section>
-            ) : null}
-
-            {showProfessionChooser ? (
-              <section className="directory-choice-hub">
-                <div className="directory-choice-intro">
-                  <p className="eyebrow">Escolha uma especialidade</p>
-                  <h2>Qual profissional você procura?</h2>
-                  <p>Selecione a área para ver os profissionais{city ? ` de ${city}` : ""}.</p>
-                </div>
-                <div className="directory-choice-columns single">
-                  <article>
-                    <div className="directory-choice-title">
-                      <span><Stethoscope size={20} /></span>
-                      <div><strong>Profissionais</strong><small>Escolha a especialidade</small></div>
-                    </div>
-                    <div className="directory-choice-links choice-grid">
-                      {professionChoices.map((item) => (
-                        <Link key={item.name} href={choiceHref("profissao", item.name)}>
-                          <span>{item.name}</span><ArrowUpRight size={14} />
-                        </Link>
-                      ))}
-                    </div>
-                  </article>
-                </div>
-              </section>
-            ) : null}
-
-            {showCategoryChooser ? (
-              <section className="directory-choice-hub">
-                <div className="directory-choice-intro">
-                  <p className="eyebrow">Escolha uma categoria</p>
-                  <h2>Que tipo de estabelecimento?</h2>
-                  <p>Selecione a categoria para ver as clínicas e serviços{city ? ` de ${city}` : ""}.</p>
-                </div>
-                <div className="directory-choice-columns single">
-                  <article>
-                    <div className="directory-choice-title">
-                      <span><Building2 size={20} /></span>
-                      <div><strong>Clínicas e serviços</strong><small>Escolha a categoria</small></div>
-                    </div>
-                    <div className="directory-choice-links choice-grid">
-                      {categoryChoices.map((item) => (
-                        <Link key={item.key} href={choiceHref("categoria", item.key)}>
-                          <span>{item.label}</span><ArrowUpRight size={14} />
-                        </Link>
-                      ))}
-                    </div>
-                  </article>
-                </div>
-              </section>
-            ) : null}
-
-            <div id="search-results" aria-live="polite" className="search-result-announcement">{!showDirectoryLanding && !showCategoryChooser ? resultLabel(type === "servicos" ? organizationResults.length : type === "profissionais" ? professionalResults.length : total, type === "servicos" ? "serviço" : type === "profissionais" ? "profissional" : "resultado") : null}</div>
-            {!showDirectoryLanding && !showProfessionChooser && !showCategoryChooser && total === 0 ? (
-              <div className="empty-state">
-                <h2>{type === "servicos" ? "Nenhum serviço encontrado" : "Nenhum profissional encontrado"}</h2>
-                <p>{type === "servicos" ? "Tente remover algum filtro ou buscar por outra clínica, empresa ou categoria." : "Tente remover algum filtro ou buscar por outro nome, profissão ou especialidade."}</p>
-                <div className="empty-state-actions">
-                  <Link href="/buscar">Limpar filtros</Link>
-                  <Link href={type === "servicos" ? "/buscar?cidade=piumhi&tipo=services" : "/buscar?cidade=piumhi&tipo=professionals"}>{type === "servicos" ? "Ver todos os serviços" : "Ver todos os profissionais"}</Link>
-                  <Link href={type === "servicos" ? "/inclusao?tipo=organization" : "/inclusao"}>{type === "servicos" ? "Solicitar inclusão" : "Indicar um profissional"}</Link>
-                </div>
-              </div>
-            ) : null}
-
-            {!showDirectoryLanding && !showProfessionChooser && professionalResults.length ? (
-              <>
-                {type === "todos" ? <h3 className="results-group-title">Profissionais</h3> : null}
-                <div className="doctor-card-list">
-                  {visibleProfessionals.map((item, index) => {
-                    const contact = item.featured ? directContact(item.whatsapp, item.phone) : null;
-                    return <article className={`doctor-card${item.featured ? " doctor-card-featured" : ""}`} key={item.slug}>
-                      {item.featured ? <span className="sponsored-ribbon"><Star size={12} fill="currentColor" /> Profissional em destaque</span> : null}
-                      <div className={`doctor-avatar${item.imageUrl ? " doctor-photo" : " doctor-profession-icon"}`} aria-hidden="true">
-                        {item.imageUrl ? <ProfessionalImage src={item.imageUrl} sizes={item.featured ? "(max-width: 760px) 58px, 88px" : "(max-width: 700px) calc(100vw - 64px), 88px"} eager={index < 2} /> : <ProfessionIcon profession={item.profession} />}
-                      </div>
-                      <div className="doctor-main">
-                        <div className="doctor-card-head">
-                          <div>
-                            <p>{professionLabel(item)}</p>
-                            <h2>{item.name}</h2>
-                          </div>
-                          <FavoriteButton professional={{ slug: item.slug, name: item.name, profession: item.profession, specialty: item.specialty, city: item.city, organization: item.organization, imageUrl: item.imageUrl }} compact />
-                        </div>
-                        <div className="doctor-pills">
-                          <span><MapPin size={13} /> {item.city}</span>
-                          <span>{item.specialty}</span>
-                        </div>
-                        <p className="doctor-summary">{item.organization}</p>
-                      </div>
-                      <aside className="doctor-side">
-                        {contact ? <a className="direct-contact-btn" href={contact.href} target={contact.href.startsWith("http") ? "_blank" : undefined} rel={contact.href.startsWith("http") ? "noreferrer" : undefined}><Phone size={14} /> {contact.label}</a> : null}
-                        {!item.featured ? <p className="contact-pending">Informações de contato em atualização.</p> : null}
-                        <Link href={`/profissionais/${item.slug}`}>Ver perfil <ArrowUpRight size={14} /></Link>
-                      </aside>
-                    </article>;
-                  })}
-                </div>
-                {professionalResults.length > visibleProfessionals.length ? <button ref={loadMoreRef} type="button" className="load-more-results" onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}>Carregar mais profissionais</button> : null}
-              </>
-            ) : null}
-
-            {!showDirectoryLanding && !showCategoryChooser && organizationResults.length ? (
-              <>
-                {type === "todos" ? <h3 className="results-group-title">Clínicas e serviços</h3> : null}
-                <div className="business-card-list">
-                  {visibleOrganizations.map((item) => {
-                    const contact = directContact(undefined, item.phone);
-                    return <article className="business-card" key={item.slug}>
-                      <div
-                        className="business-icon business-logo"
-                        style={{ backgroundImage: `url(${item.logoUrl || "/placeholders/company-logo.svg"})` }}
-                        aria-label={`Logo de ${item.name}`}
-                      />
-                      <div className="business-main">
-                        <div className="business-head">
-                          <div>
-                            <p>{item.category}</p>
-                            <h2>{item.name}</h2>
-                          </div>
-                          <span className="status-pill verified"><BadgeCheck size={14} /> Dados publicados</span>
-                        </div>
-                        <div className="doctor-pills">
-                          <span><MapPin size={13} /> {item.city}</span>
-                          {publicAddress(item.address) ? <span>{publicAddress(item.address)}</span> : null}
-                        </div>
-                        <p className="doctor-summary">{item.services.slice(0, 2).join(" · ")}</p>
-                      </div>
-                      <aside className="business-side">
-                        <small><Phone size={14} /> Contato</small>
-                        {contact ? <a className="direct-contact-btn" href={contact.href} target={contact.href.startsWith("http") ? "_blank" : undefined} rel={contact.href.startsWith("http") ? "noreferrer" : undefined}><Phone size={14} /> {contact.label}</a> : null}
-                        <Link href={`/empresas/${item.slug}`}>Ver detalhes <ArrowUpRight size={14} /></Link>
-                      </aside>
-                    </article>;
-                  })}
-                </div>
-                {organizationResults.length > visibleOrganizations.length ? <button type="button" className="load-more-results" onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}>Carregar mais serviços</button> : null}
-                <div className="directory-inclusion-call">
-                  <p>Seu estabelecimento ainda não aparece no Guia Saúde?</p>
-                  <Link href="/inclusao?tipo=organization">Solicitar inclusão <ArrowUpRight size={14} /></Link>
-                </div>
-              </>
-            ) : null}
+        {isLanding ? <section className="native-search-discovery">
+          <div className="native-section-head"><h2>Especialidades</h2><Link href="/buscar?cidade=piumhi&tipo=professionals">Ver todos <ChevronRight size={15} /></Link></div>
+          <div className="native-specialty-grid">
+            {quickSpecialties.map((label, index) => <Link key={label} className={`native-specialty-card tone-${index + 1}`} href={`/buscar?q=${encodeURIComponent(label)}&cidade=piumhi&tipo=professionals`}>
+              <span><Stethoscope size={25} strokeWidth={1.55} /></span><strong>{label}</strong>
+            </Link>)}
           </div>
-        </section>
-      </main>
-      <SiteFooter />
-    </>
-  );
+          <div className="native-search-shortcuts">
+            <Link href="/buscar?cidade=piumhi&tipo=professionals"><span><Stethoscope size={20} /></span><div><strong>Todos os profissionais</strong><small>{professionalSource.length} perfis no guia</small></div><ChevronRight size={17} /></Link>
+            <Link href="/buscar?cidade=piumhi&tipo=services"><span><Building2 size={20} /></span><div><strong>Clínicas e serviços</strong><small>Atendimento em Piumhi</small></div><ChevronRight size={17} /></Link>
+          </div>
+        </section> : <>
+          <section className="native-results-toolbar">
+            <div><span>{type === "profissionais" ? professionalResults.length : type === "servicos" ? organizationResults.length : total}</span><p>{type === "profissionais" ? "profissionais encontrados" : type === "servicos" ? "serviços encontrados" : "resultados encontrados"}</p></div>
+            <details className="native-filter-sheet">
+              <summary><SlidersHorizontal size={16} /> Filtros</summary>
+              <div className="native-filter-backdrop" />
+              <div className="native-filter-panel">
+                <div className="native-filter-heading"><div><small>Refine sua busca</small><h2>Filtros</h2></div><span><X size={18} /></span></div>
+                <form action="/buscar">
+                  <input type="hidden" name="cidade" value="piumhi" />
+                  {type !== "todos" ? <input type="hidden" name="tipo" value={type === "servicos" ? "services" : "professionals"} /> : null}
+                  <label>Buscar<input name="q" defaultValue={q} placeholder="Nome ou especialidade" /></label>
+                  {type !== "servicos" ? <><label>Profissão<select name="profissao" defaultValue={profession}><option value="">Todas</option>{professions.map((item) => <option key={item}>{item}</option>)}</select></label><label>Especialidade<select name="especialidade" defaultValue={specialty}><option value="">Todas</option>{specialtyChoices.map((item) => <option key={item}>{item}</option>)}</select></label></> : null}
+                  {type !== "profissionais" ? <label>Tipo de serviço<select name="categoria" defaultValue={category}><option value="">Todos</option>{categoryChoices.map((item) => <option key={item.key} value={item.key}>{item.label}</option>)}</select></label> : null}
+                  <button type="submit">Aplicar filtros</button>
+                </form>
+              </div>
+            </details>
+          </section>
+
+          {(q || profession || specialty || category) ? <div className="native-active-filters">
+            {q ? <Link href={clearFilter("q")}>{q}<X size={11} /></Link> : null}
+            {profession ? <Link href={clearFilter("profissao")}>{profession}<X size={11} /></Link> : null}
+            {specialty ? <Link href={clearFilter("especialidade")}>{specialty}<X size={11} /></Link> : null}
+            {category ? <Link href={clearFilter("categoria")}>{category}<X size={11} /></Link> : null}
+          </div> : null}
+
+          {type === "servicos" && !q && !category ? <section className="native-category-picker">
+            <div className="native-section-head"><h2>O que você procura?</h2><span>Escolha uma categoria</span></div>
+            <div className="native-category-grid">{categoryChoices.map((item) => <Link key={item.key} href={`/buscar?categoria=${encodeURIComponent(item.key)}&cidade=piumhi&tipo=services`}><span><Building2 size={19} /></span><strong>{item.label}</strong><small>{item.count}</small></Link>)}</div>
+          </section> : null}
+
+          {total === 0 ? <section className="native-empty-state"><span><Search size={24} /></span><h2>Nada encontrado</h2><p>Tente outro termo ou remova alguns filtros.</p><Link href="/buscar">Limpar busca</Link></section> : null}
+
+          {professionalResults.length > 0 ? <section className="native-result-section">
+            {type === "todos" ? <div className="native-section-head"><h2>Profissionais</h2></div> : null}
+            <div className="native-professional-list">{visibleProfessionals.map((item, index) => {
+              const contact = item.featured ? directContact(item.whatsapp, item.phone) : null;
+              return <article className={`native-professional-card${item.featured ? " featured" : ""}`} key={item.slug}>
+                {item.featured ? <span className="native-featured"><Sparkles size={11} /> Destaque</span> : null}
+                <div className={`native-professional-avatar${item.imageUrl ? " has-photo" : ""}`}>{item.imageUrl ? <ProfessionalImage src={item.imageUrl} sizes="72px" eager={index < 2} /> : <ProfessionIcon profession={item.profession} />}</div>
+                <div className="native-professional-copy"><div className="native-card-name"><div><small>{professionLabel(item)}</small><h2>{item.name}</h2></div><FavoriteButton professional={{ slug: item.slug, name: item.name, profession: item.profession, specialty: item.specialty, city: item.city, organization: item.organization, imageUrl: item.imageUrl }} compact /></div><div className="native-card-tags"><span><MapPin size={11} /> {item.city}</span>{item.specialty ? <span>{item.specialty}</span> : null}</div>{item.organization ? <p>{item.organization}</p> : null}</div>
+                <div className="native-card-actions">{contact ? <a className="primary" href={contact.href} target={contact.href.startsWith("http") ? "_blank" : undefined} rel={contact.href.startsWith("http") ? "noreferrer" : undefined}><Phone size={14} /> {contact.label}</a> : null}<Link className={contact ? "" : "primary"} href={`/profissionais/${item.slug}`}>Ver perfil <ArrowUpRight size={14} /></Link></div>
+              </article>;
+            })}</div>
+            {professionalResults.length > visibleProfessionals.length ? <button className="native-load-more" type="button" onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}>Carregar mais profissionais</button> : null}
+          </section> : null}
+
+          {organizationResults.length > 0 && !(type === "servicos" && !q && !category) ? <section className="native-result-section">
+            {type === "todos" ? <div className="native-section-head"><h2>Clínicas e serviços</h2></div> : null}
+            <div className="native-business-list">{visibleOrganizations.map((item) => {
+              const contact = directContact(undefined, item.phone);
+              return <article className="native-business-card" key={item.slug}>
+                <div className="native-business-logo" style={{ backgroundImage: `url(${item.logoUrl || "/placeholders/company-logo.svg"})` }} />
+                <div className="native-business-copy"><small>{item.category}</small><h2>{item.name}</h2><div className="native-card-tags"><span><MapPin size={11} /> {item.city}</span></div>{publicAddress(item.address) ? <p>{publicAddress(item.address)}</p> : null}{item.services.length ? <p>{item.services.slice(0, 2).join(" · ")}</p> : null}</div>
+                <div className="native-card-actions">{contact ? <a className="primary" href={contact.href}><Phone size={14} /> {contact.label}</a> : null}<Link className={contact ? "" : "primary"} href={`/empresas/${item.slug}`}>Ver detalhes <ArrowUpRight size={14} /></Link></div>
+              </article>;
+            })}</div>
+            {organizationResults.length > visibleOrganizations.length ? <button className="native-load-more" type="button" onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}>Carregar mais serviços</button> : null}
+          </section> : null}
+        </>}
+      </div>
+    </main>
+    <SiteFooter />
+  </>;
 }
 
 export default function SearchPage() {
-  return (
-    <Suspense fallback={<main className="section shell" aria-live="polite"><div className="search-loading">Carregando busca…</div></main>}>
-      <SearchDirectory />
-    </Suspense>
-  );
+  return <Suspense fallback={<main className="native-search-screen"><div className="native-search-loading">Carregando busca…</div></main>}><SearchDirectory /></Suspense>;
 }
