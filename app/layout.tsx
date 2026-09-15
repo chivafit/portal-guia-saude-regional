@@ -29,6 +29,7 @@ import "./health-os-consolidated-native.css";
 import "./health-os-search-native-structural.css";
 import "./health-os-v1-final.css";
 import "./health-os-filter-modal-fix.css";
+import "./health-os-specialties.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -47,12 +48,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "Guia Saúde — Portal Regional", description: defaultDescription, images: ["/og.png"] },
 };
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  viewportFit: "cover",
-  themeColor: "#f4f7fa",
-};
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#f4f7fa" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="pt-BR"><body><AppBootstrap />{children}<CityEntryModal /><AppBottomNav /></body></html>;
