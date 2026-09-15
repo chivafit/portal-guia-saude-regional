@@ -27,6 +27,7 @@ import "./health-os-professionals-reference.css";
 import "./health-os-profile-reference.css";
 import "./health-os-consolidated-native.css";
 import "./health-os-search-native-structural.css";
+import "./health-os-v1-final.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
