@@ -1,3 +1,3 @@
-:HL["/_next/static/css/0cc9fe7b6b2997a8.css","style"]
-:HL["/_next/static/css/2e9c1a9276123731.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-sergio-medeiros-urologia-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"FTTAJZ1qhma3M_bXwofqz"}
+:HL["/_next/static/css/ca55c60c2a32efa4.css","style"]
+:HL["/_next/static/css/7f96d78045ab03a2.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-sergio-medeiros-urologia-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"u_hxW8SHEsskMYrXauHpv"}
