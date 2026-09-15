@@ -107,7 +107,6 @@ export default async function CityPage({ params, rootLanding = false }: { params
           {localOrganizations.length ? <section className="city-services-section" id="empresas"><div className="city-discovery-head city-services-head"><div><p className="eyebrow">Serviços locais</p><h2>Clínicas e serviços de saúde em {city.name}</h2><p>Encontre também hospitais, academias e outros serviços de cuidado.</p></div><Link href={`/buscar?cidade=${cityQuery}&tipo=services`}>Ver todos <ArrowRight size={14} /></Link></div><div className="city-services-list">{localOrganizations.slice(0, 3).map((item) => <Link key={item.slug} href={`/empresas/${item.slug}`}><span><Building2 size={18} /></span><div><strong>{item.name}</strong><small>{item.category} · {item.address}</small></div><ArrowUpRight size={15} /></Link>)}</div></section> : null}
 
           <section className="city-final-cta"><div><p className="eyebrow">Para profissionais e marcas</p><h2>Faça parte do Guia Saúde</h2><p>Apresente seu trabalho para quem procura atendimento em {city.name} e na região.</p></div><div><Link href="/inclusao">Cadastrar meu perfil <ArrowRight size={14}/></Link><Link href="/anuncie">Anunciar no Guia <ArrowRight size={14}/></Link></div></section>
-          <nav className="city-more-links" aria-label="Outros conteúdos do Guia Saúde"><span>Também no Guia Saúde</span><Link href="/podcast">Podcast</Link><Link href="/revista">Revista</Link><Link href="/inclusao">Cadastre-se no Guia</Link></nav>
         </section>
       </main>
       <SiteFooter />
