@@ -1,7 +1,7 @@
-:HL["/_next/static/css/3fea949e04d462d4.css","style"]
-:HL["/_next/static/css/4c1bfe5ecb11ed7e.css","style"]
+:HL["/_next/static/css/e751ca58b25034ea.css","style"]
+:HL["/_next/static/css/a61115e0ccd57de3.css","style"]
 :HL["/_next/static/css/337dfe5afa4a4dee.css","style"]
 :HL["/revista/capas/2025.jpg","image"]
 :HL["https://i.ytimg.com/vi/uNyNAvumGdk/hqdefault.jpg","image"]
 :HL["/materias/radiologia-odontologica-diagnostico.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"anuncie","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"9bOyrsCjv_1sfoWRUI9S2"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"anuncie","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"K6fIznvbM6Jk5IOQHLhrn"}
