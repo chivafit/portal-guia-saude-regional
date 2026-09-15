@@ -37,6 +37,7 @@ import "./health-os-osmo-interactions.css";
 import "./health-os-motion-complete.css";
 import "./health-os-professional-cards-v2.css";
 import "./health-os-canonical.css";
+import "./health-os-podcast-canonical.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl), title: { default: "Guia Saúde — Portal Regional", template: "%s | Guia Saúde" }, description: defaultDescription,
