@@ -17,6 +17,7 @@ import "./health-os-flow.css";
 import "./health-os-motion.css";
 import "./health-os-contact.css";
 import "./health-os-flow-a11y.css";
+import "./health-os-flow-desktop.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
