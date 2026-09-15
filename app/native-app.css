@@ -210,25 +210,46 @@ html.native-app .app-bottom-nav>a[aria-current="page"] .app-bottom-nav-icon svg 
   .root-guide-home .root-guide-hero-inner { align-items:flex-start!important; text-align:left!important; }
   .root-guide-home .root-guide-hero .eyebrow { margin-bottom:10px!important; color:#a9dfcf!important; }
   .root-guide-home .root-guide-hero h1 {
-    max-width:315px!important; margin:0!important; color:#fff!important;
+    width:100%; max-width:340px!important; margin:0!important; color:#fff!important;
     font-size:2.18rem!important; line-height:1.02!important; letter-spacing:-.06em!important;
   }
   .root-guide-home .root-guide-hero>div>p:not(.eyebrow):not(.root-guide-trust) {
-    max-width:315px!important; margin:12px 0 0!important; color:rgba(255,255,255,.78)!important;
+    width:100%; max-width:340px!important; margin:12px 0 0!important; color:rgba(255,255,255,.78)!important;
     font-size:.89rem!important; line-height:1.45!important;
   }
-  .root-guide-home .root-guide-search-wrap { margin-top:20px!important; }
-  .root-guide-home .root-guide-search-tabs { width:auto!important; padding:3px!important; border-color:rgba(255,255,255,.2)!important; background:rgba(255,255,255,.13)!important; }
-  .root-guide-home .root-guide-search-tabs button { min-height:38px!important; color:rgba(255,255,255,.78)!important; }
-  .root-guide-home .root-guide-search-tabs button.is-active { background:#fff!important; color:var(--app-green-deep)!important; box-shadow:none!important; }
-  .root-guide-home .root-guide-search { grid-template-columns:1fr 1fr!important; margin-top:9px!important; padding:7px!important; border:0!important; border-radius:22px!important; box-shadow:0 18px 38px rgba(0,34,30,.22)!important; }
+  .root-guide-home .root-guide-search-wrap { width:100%!important; margin-top:20px!important; }
+  .root-guide-home .root-guide-search-tabs {
+    width:100%!important; display:grid!important; grid-template-columns:1fr 1fr; gap:5px!important;
+    padding:7px 7px 5px!important; border:0!important; border-radius:22px 22px 0 0!important;
+    background:#fff!important;
+  }
+  .root-guide-home .root-guide-search-tabs button {
+    width:100%; min-height:42px!important; padding:0 10px!important; border-radius:15px!important;
+    color:#59736e!important; font-size:.74rem!important; line-height:1.18!important;
+  }
+  .root-guide-home .root-guide-search-tabs button.is-active {
+    background:#e5f3ef!important; color:var(--app-green-deep)!important;
+    box-shadow:inset 0 0 0 1px rgba(15,109,102,.1)!important;
+  }
+  .root-guide-home .root-guide-search {
+    grid-template-columns:1fr 1fr!important; margin-top:0!important; padding:3px 7px 7px!important;
+    border:0!important; border-radius:0 0 22px 22px!important; background:#fff!important;
+    box-shadow:0 18px 38px rgba(0,34,30,.22)!important;
+  }
   .root-guide-home .root-guide-query { grid-column:1/-1; min-height:48px!important; }
   .root-guide-home .root-guide-field { min-height:45px!important; border-bottom:0!important; }
   .root-guide-home .root-guide-field:nth-of-type(2) { border-right:1px solid #e3ece8!important; }
   .root-guide-home .root-guide-search>button { grid-column:1/-1; min-height:49px!important; border-radius:15px!important; background:var(--app-coral)!important; }
-  .root-guide-home .root-guide-quick-searches { width:calc(100% + 32px); flex-wrap:nowrap!important; overflow-x:auto; margin:15px -16px 0!important; padding:0 16px 4px; scroll-snap-type:x proximity; scrollbar-width:none; }
+  .root-guide-home .root-guide-quick-searches {
+    width:100%; justify-content:flex-start!important; flex-wrap:nowrap!important; overflow-x:auto;
+    margin:14px 0 0!important; padding:0 1px 5px; scroll-snap-type:x proximity; scrollbar-width:none;
+  }
   .root-guide-home .root-guide-quick-searches>span { display:none; }
-  .root-guide-home .root-guide-quick-searches a { flex:0 0 auto; min-height:36px; display:grid; place-items:center; padding:0 12px!important; border-color:rgba(255,255,255,.18)!important; background:rgba(255,255,255,.1)!important; color:#fff!important; scroll-snap-align:start; }
+  .root-guide-home .root-guide-quick-searches a {
+    flex:0 0 auto; min-height:35px; display:grid; place-items:center; padding:0 13px!important;
+    border-color:rgba(255,255,255,.25)!important; background:rgba(255,255,255,.12)!important;
+    color:#fff!important; scroll-snap-align:start;
+  }
 
   .root-guide-home .root-specialties { padding:25px 0 18px!important; background:var(--app-bg)!important; }
   .root-guide-home .root-specialties-head h2 { font-size:1.38rem!important; }
