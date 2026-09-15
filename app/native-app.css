@@ -372,7 +372,8 @@ html.native-app .app-bottom-nav>a[aria-current="page"] .app-bottom-nav-icon svg 
   html.native-app .app-search-page .active-filter-row::-webkit-scrollbar { display:none; }
   html.native-app .app-search-page .active-filter-row a { flex:0 0 auto; }
 
-  html.native-app .app-search-page .directory-choice-hub { padding:20px 0 4px!important; }
+  html.native-app .app-search-page .directory-choice-hub { padding:20px 0 30px!important; }
+  html.native-app .app-search-page .directory-choice-columns>article:last-child { margin-bottom:8px; }
   html.native-app .app-search-page .directory-choice-intro { margin-bottom:16px!important; }
   html.native-app .app-search-page .directory-choice-intro .eyebrow { margin-bottom:7px!important; }
   html.native-app .app-search-page .directory-choice-intro h2 { font-size:1.55rem!important; line-height:1.08!important; }
