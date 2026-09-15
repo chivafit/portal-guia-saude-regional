@@ -1,0 +1,32 @@
+/* Global native-app density pass — consistent safe areas and dock clearance. */
+@media (max-width:760px){
+html.native-app body{--hos-top-gap:10px;--hos-side-gap:16px;--hos-dock-clearance:96px}
+
+/* All main Health OS/native screens: start close to the iOS safe area and finish close to the dock. */
+html.native-app :is(.health-os-home,.native-search-screen,.native-featured-screen,.native-specialties-page,.profile-page-clean,.organization-page,.editorial-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.favorites-page){
+  padding-top:calc(env(safe-area-inset-top) + var(--hos-top-gap))!important;
+  padding-bottom:calc(env(safe-area-inset-bottom) + var(--hos-dock-clearance))!important;
+  min-height:100svh!important;
+}
+
+/* Home had legacy min-heights/spacers producing a large blank bottom region. */
+html.native-app .health-os-home .health-os-shell{padding-top:0!important;padding-bottom:0!important;min-height:0!important}
+html.native-app .health-os-home .health-os-topbar{margin-top:0!important;margin-bottom:10px!important}
+html.native-app .health-os-home .health-os-intro{margin-top:0!important;margin-bottom:10px!important}
+html.native-app .health-os-home .health-os-feature{margin-bottom:16px!important}
+html.native-app .health-os-home .health-os-section{margin-top:16px!important;margin-bottom:0!important}
+html.native-app .health-os-home .health-os-content-card{margin-top:16px!important;margin-bottom:0!important;min-height:0!important}
+html.native-app .health-os-home :is(.health-os-content,.health-os-content-section,.health-os-featured-section){min-height:0!important;padding-bottom:0!important;margin-bottom:0!important}
+
+/* Route shells should not add a second safe-area offset. */
+html.native-app :is(.native-search-shell,.native-featured-shell,.native-specialties-shell,.hos-podcast-shell,.native-magazine-shell,.native-magazine-reader-shell,.native-article-shell,.organization-wrap,.editorial-wrap,.favorites-wrap){
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+
+/* Keep page endings intentional instead of leaving desktop-sized whitespace. */
+html.native-app :is(.profile-page-clean,.organization-page,.editorial-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.favorites-page) > :last-child{margin-bottom:0!important}
+
+/* Dock remains visually separated, while content can use the screen beneath it efficiently. */
+html.native-app .health-os-dock{bottom:calc(7px + env(safe-area-inset-bottom))!important}
+}
