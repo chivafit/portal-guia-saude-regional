@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { CityEntryModal } from "@/components/CityEntryModal";
 import { AppBootstrap } from "@/components/AppBootstrap";
 import { AppBottomNav } from "@/components/AppBottomNav";
+import { SearchReferenceLanding } from "@/components/SearchReferenceLanding";
 import { defaultDescription, siteName, siteUrl } from "@/lib/seo";
 import "./globals.css";
 import "./mobile-audit.css";
@@ -20,6 +22,7 @@ import "./health-os-flow-a11y.css";
 import "./health-os-flow-desktop.css";
 import "./health-os-search-final.css";
 import "./health-os-search-reference.css";
+import "./search-reference-structural.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -46,5 +49,5 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="pt-BR"><body><AppBootstrap />{children}<CityEntryModal /><AppBottomNav /></body></html>;
+  return <html lang="pt-BR"><body><AppBootstrap /><Suspense fallback={null}><SearchReferenceLanding /></Suspense>{children}<CityEntryModal /><AppBottomNav /></body></html>;
 }
