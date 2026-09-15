@@ -15,10 +15,23 @@ export function AppBootstrap() {
         document.documentElement.classList.add("native-app");
 
         const motionTargets = document.querySelectorAll<HTMLElement>(
-          ".root-guide-home > section, .root-guide-home .home-featured-professional-card, .root-guide-home .city-partner-grid > *, .root-guide-home .city-editorial-mosaic > *",
+          [
+            ".root-guide-home > section",
+            ".root-guide-home .home-featured-professional-card",
+            ".root-guide-home .city-partner-grid > *",
+            ".root-guide-home .city-editorial-mosaic > *",
+            ".health-os-shortcut",
+            ".health-os-editorial-card",
+            ".search-reference-card",
+            ".app-search-page .doctor-card",
+            ".app-search-page .business-card",
+            ".app-search-page .directory-choice-columns > article",
+            ".profile-clean-card",
+          ].join(","),
         );
 
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reducedMotion) {
           motionTargets.forEach((target) => target.classList.add("app-reveal-visible"));
         } else {
           observer = new IntersectionObserver(
@@ -29,10 +42,11 @@ export function AppBootstrap() {
                 observer?.unobserve(entry.target);
               });
             },
-            { rootMargin: "0px 0px -8%", threshold: 0.08 },
+            { rootMargin: "0px 0px -6%", threshold: 0.06 },
           );
-          motionTargets.forEach((target) => {
+          motionTargets.forEach((target, index) => {
             target.classList.add("app-reveal");
+            target.style.setProperty("--app-reveal-delay", `${Math.min(index % 6, 5) * 42}ms`);
             observer?.observe(target);
           });
         }
