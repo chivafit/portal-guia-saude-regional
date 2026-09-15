@@ -1,4 +1,5 @@
 :HL["/_next/static/css/ca55c60c2a32efa4.css","style"]
 :HL["/_next/static/css/9715b222e8bbadec.css","style"]
-:HL["/_next/static/css/44163dc67acdd73f.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"cintia-bonisson-psicanalise-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"eC-dJRk8Wl5yrwP8liJos"}
+:HL["/_next/static/css/1ab7dca6f29d9ca0.css","style"]
+:HL["/_next/static/css/223b2849efc211c7.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"cintia-bonisson-psicanalise-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"gnygFNzPHwcgAFWq86-OM"}
