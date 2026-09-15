@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 import { publicProfessionals } from "../lib/public-professionals";
@@ -18,13 +18,30 @@ const outputDir = path.join(publicDir, "professionals", "optimized");
 const manifestPath = path.resolve("lib/data/professional-image-manifest.json");
 const localRaster = /\.(?:jpe?g|png)$/i;
 
-const sources = Array.from(
+const referencedSources = Array.from(
   new Set(
     publicProfessionals
       .map((professional) => professional.imageUrl)
       .filter((src): src is string => Boolean(src && src.startsWith("/") && localRaster.test(src))),
   ),
 ).sort();
+
+const sources: string[] = [];
+const missingSources: string[] = [];
+for (const src of referencedSources) {
+  const sourcePath = path.join(publicDir, src.replace(/^\//, ""));
+  try {
+    await access(sourcePath);
+    sources.push(src);
+  } catch {
+    missingSources.push(src);
+  }
+}
+
+if (missingSources.length) {
+  console.warn(`Professional images: skipping ${missingSources.length} missing source(s):`);
+  for (const src of missingSources) console.warn(`- ${src}`);
+}
 
 await rm(outputDir, { recursive: true, force: true });
 await mkdir(outputDir, { recursive: true });
@@ -69,4 +86,4 @@ for (const src of sources) {
 await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 
 const generated = await readdir(outputDir);
-console.log(`Professional images: ${sources.length} sources, ${generated.length} responsive assets.`);
+console.log(`Professional images: ${sources.length} sources, ${generated.length} responsive assets${missingSources.length ? `, ${missingSources.length} missing source(s) skipped` : ""}.`);
