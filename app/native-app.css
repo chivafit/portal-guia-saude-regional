@@ -427,3 +427,52 @@ html.native-app .app-bottom-nav>a[aria-current="page"] .app-bottom-nav-icon svg 
 @media (prefers-reduced-motion:reduce) {
   html.native-app .app-search-page :where(.app-search-primary,.directory-choice-columns>article,.doctor-card,.business-card) { animation:none!important; }
 }
+
+@media (max-width:700px) {
+  html.native-app .podcast-library-page { background:var(--app-bg,#f3f7f6)!important; }
+  html.native-app .podcast-library-hero { padding:25px 0 29px!important; background:radial-gradient(circle at 102% -5%,rgba(112,210,181,.4),transparent 38%),linear-gradient(145deg,#073f3b,#0b7065)!important; }
+  html.native-app .podcast-library-hero-grid { gap:19px!important; }
+  html.native-app .podcast-library-hero h1 { max-width:325px; margin-top:8px!important; font-size:2.18rem!important; line-height:1.02!important; letter-spacing:-.06em!important; }
+  html.native-app .podcast-library-hero p:not(.eyebrow) { max-width:315px; margin-top:12px!important; font-size:.87rem!important; line-height:1.45!important; }
+  html.native-app .podcast-hero-actions { margin-top:19px!important; }
+  html.native-app .podcast-hero-actions a { min-height:44px!important; padding:0 14px!important; font-size:.7rem!important; }
+  html.native-app .podcast-library-hero-art { display:none!important; }
+  html.native-app .podcast-latest { padding-top:17px!important; }
+  html.native-app .podcast-latest-card { border-radius:23px!important; }
+  html.native-app .podcast-latest-media .podcast-library-cover { min-height:188px!important; }
+  html.native-app .podcast-latest-media>i { width:58px;height:58px; }
+  html.native-app .podcast-latest-media>span { right:13px;bottom:12px; }
+  html.native-app .podcast-latest-copy { padding:19px!important; }
+  html.native-app .podcast-latest-copy h2 { margin-top:7px!important; font-size:1.42rem!important; }
+  html.native-app .podcast-latest-copy>p:not(.eyebrow) { display:none; }
+  html.native-app .podcast-latest-copy>div { width:100%;display:grid!important;grid-template-columns:1fr!important;margin-top:16px!important; }
+  html.native-app .podcast-watch-btn { width:100%;justify-content:center;min-height:48px!important;border-radius:14px!important;background:var(--app-coral,#ee7c57)!important; }
+  html.native-app .podcast-profile-button { justify-content:center;min-height:45px;border-radius:14px!important; }
+  html.native-app .podcast-library-controls { padding-top:20px!important; }
+  html.native-app .podcast-search { grid-template-columns:1fr auto!important;padding:6px!important;border-radius:18px!important; }
+  html.native-app .podcast-search label { min-width:0; }
+  html.native-app .podcast-search button { width:48px;padding:0;font-size:0; }
+  html.native-app .podcast-search button svg { width:19px;height:19px; }
+  html.native-app .podcast-filter-row { margin-right:-16px!important;padding-bottom:4px;scrollbar-width:none; }
+  html.native-app .podcast-filter-row::-webkit-scrollbar { display:none; }
+  html.native-app .podcast-library-listing { padding-top:31px!important; }
+  html.native-app .podcast-library-heading { gap:9px!important;margin-bottom:17px!important; }
+  html.native-app .podcast-library-heading h2 { font-size:1.55rem!important; }
+  html.native-app .podcast-library-heading>span { order:-1; }
+  html.native-app .podcast-card-grid { gap:11px!important; }
+  html.native-app .podcast-episode-card { display:grid!important;grid-template-columns:112px minmax(0,1fr);min-height:150px!important;border-radius:20px!important; }
+  html.native-app .podcast-episode-media { height:100%;min-height:150px; }
+  html.native-app .podcast-episode-media .podcast-library-cover { width:100%;height:100%;aspect-ratio:auto;background-position:center; }
+  html.native-app .podcast-episode-media i { right:9px!important;bottom:9px!important;width:38px!important;height:38px!important; }
+  html.native-app .podcast-episode-copy { min-width:0;padding:14px!important; }
+  html.native-app .podcast-episode-copy small { font-size:.57rem!important; }
+  html.native-app .podcast-episode-copy h3 { margin-top:6px!important;font-size:.92rem!important;-webkit-line-clamp:3; }
+  html.native-app .podcast-episode-copy p { margin-top:7px!important;font-size:.68rem!important; }
+  html.native-app .podcast-episode-copy>span { display:none; }
+  html.native-app .podcast-episode-copy>div { gap:8px!important;padding-top:10px!important; }
+  html.native-app .podcast-episode-copy>div>button { min-height:36px;padding:0 10px;border-radius:11px;background:#e9f4f0;color:var(--app-green,#0b5f57); }
+  html.native-app .podcast-episode-copy>div>a { display:none; }
+  html.native-app .podcast-platforms { margin-top:29px!important;border-radius:18px!important; }
+  html.native-app .podcast-player-backdrop { padding-bottom:calc(72px + env(safe-area-inset-bottom)); }
+  html.native-app .podcast-player-sheet { max-height:calc(100dvh - 88px); }
+}

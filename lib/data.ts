@@ -1217,6 +1217,7 @@ export type PodcastEpisode = {
   duration: string;
   status: string;
   episodeUrl?: string;
+  audioUrl?: string;
   imageUrl?: string;
   professionalSlugs?: string[];
 };
