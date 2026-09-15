@@ -11,6 +11,7 @@ import "./load-more-button.css";
 import "./home-featured-professionals.css";
 import "./native-app.css";
 import "./health-os.css";
+import "./health-os-extended.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
