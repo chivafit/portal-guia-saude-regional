@@ -1,0 +1,32 @@
+@media (max-width:760px){
+html.native-app body:has(.search-reference-landing)>.site-header,html.native-app body:has(.search-reference-landing)>header,html.native-app body:has(.search-reference-landing)>.app-search-page,html.native-app body:has(.search-reference-landing)>.site-footer{display:none!important}
+html.native-app body:has(.search-reference-landing){margin:0!important;background:#f4faf8!important;overflow:hidden!important}
+html.native-app .search-reference-landing{position:fixed;inset:0;z-index:30;overflow-y:auto;padding:calc(env(safe-area-inset-top) + 18px) 0 calc(104px + env(safe-area-inset-bottom));background:radial-gradient(circle at 86% 12%,rgba(215,255,90,.13),transparent 26%),radial-gradient(circle at 8% 45%,rgba(0,209,198,.09),transparent 31%),linear-gradient(160deg,#fbfdfd,#f2faf8 58%,#edf8f6);color:#10231f}
+html.native-app .search-reference-shell{width:min(100% - 34px,480px);margin:0 auto}
+html.native-app .search-reference-back{display:grid;width:42px;height:42px;place-items:center;margin:0 0 16px;border-radius:50%;background:rgba(222,248,241,.72);color:#238c76;text-decoration:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.85);backdrop-filter:blur(18px)}
+html.native-app .search-reference-heading h1{margin:0;color:#0b1714;font-size:38px;line-height:1;letter-spacing:-.055em;font-weight:650}
+html.native-app .search-reference-heading p{margin:7px 0 24px;color:#778783;font-size:14px;line-height:1.35}
+html.native-app .search-reference-form{display:grid;grid-template-columns:22px minmax(0,1fr) 50px;align-items:center;gap:8px;height:62px;padding:5px 6px 5px 17px;border:1px solid rgba(255,255,255,.98);border-radius:24px;background:rgba(255,255,255,.78);box-shadow:0 15px 38px rgba(21,86,72,.08),inset 0 1px 0 #fff;backdrop-filter:blur(28px) saturate(155%)}
+html.native-app .search-reference-form>svg{color:#819690}
+html.native-app .search-reference-form input{width:100%;min-width:0;height:48px;padding:0;border:0!important;outline:0;background:transparent!important;color:#17352e;font:inherit;font-size:16px}
+html.native-app .search-reference-form input::placeholder{color:#8d9b97;font-size:12px}
+html.native-app .search-reference-form button{display:grid;width:50px;height:50px;place-items:center;padding:0;border:0;border-radius:50%;background:linear-gradient(145deg,#17362f,#07130f);color:#fff;box-shadow:0 9px 20px rgba(7,35,29,.2)}
+html.native-app .search-reference-tabs{display:flex;gap:8px;margin:27px -2px 0;padding:0 2px 3px;overflow-x:auto;scrollbar-width:none}
+html.native-app .search-reference-tabs::-webkit-scrollbar{display:none}
+html.native-app .search-reference-tabs a{flex:0 0 auto;display:grid;min-height:42px;place-items:center;padding:0 19px;border:1px solid rgba(255,255,255,.95);border-radius:999px;background:rgba(255,255,255,.65);color:#61736e;font-size:11px;font-weight:650;text-decoration:none;box-shadow:0 6px 18px rgba(21,80,67,.035)}
+html.native-app .search-reference-tabs a.active{background:linear-gradient(135deg,#23aa89,#0d7f68);color:#fff;box-shadow:0 8px 20px rgba(15,157,126,.2),inset 0 1px 0 rgba(255,255,255,.28)}
+html.native-app .search-reference-specialties{margin-top:29px}
+html.native-app .search-reference-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+html.native-app .search-reference-section-head h2{margin:0;font-size:20px;letter-spacing:-.035em}
+html.native-app .search-reference-section-head a{color:#16947a;font-size:11px;font-weight:700;text-decoration:none}
+html.native-app .search-reference-section-head span{font-size:16px}
+html.native-app .search-reference-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+html.native-app .search-reference-card{position:relative;display:flex;min-width:0;height:132px;flex-direction:column;align-items:center;justify-content:center;gap:18px;border:1px solid rgba(255,255,255,.96);border-radius:25px;background:rgba(255,255,255,.61);color:#35534c;text-decoration:none;box-shadow:0 13px 30px rgba(22,83,70,.045),inset 0 1px 0 #fff;backdrop-filter:blur(22px) saturate(145%);overflow:hidden}
+html.native-app .search-reference-card:before{content:"";position:absolute;width:74px;height:74px;top:8px;border-radius:50%;filter:blur(18px);opacity:.18;pointer-events:none}
+html.native-app .search-reference-card.tone-mint:before{background:#00d1c6}.search-reference-card.tone-lime:before{background:#d7ff5a}.search-reference-card.tone-blue:before{background:#7ebcff}.search-reference-card.tone-aqua:before{background:#65d9ff}.search-reference-card.tone-rose:before{background:#f4bfd3}.search-reference-card.tone-violet:before{background:#c4b4ff}
+html.native-app .search-reference-card-icon{position:relative;z-index:1;display:grid;width:42px;height:42px;place-items:center;color:#268f7c}
+html.native-app .tone-lime .search-reference-card-icon{color:#8c9b3b}.search-reference-card.tone-blue .search-reference-card-icon{color:#447bc4}.search-reference-card.tone-aqua .search-reference-card-icon{color:#418fc7}.search-reference-card.tone-rose .search-reference-card-icon{color:#8d75aa}.search-reference-card.tone-violet .search-reference-card-icon{color:#665fa5}
+html.native-app .search-reference-card strong{position:relative;z-index:1;max-width:100%;font-size:10.5px;font-weight:650;white-space:nowrap}
+html.native-app body:has(.search-reference-landing) .health-os-dock{z-index:80!important;left:20px!important;right:20px!important;bottom:calc(10px + env(safe-area-inset-bottom))!important;max-width:470px!important;min-height:68px!important;border-radius:29px!important;background:linear-gradient(135deg,rgba(255,255,255,.58),rgba(232,248,244,.43))!important;backdrop-filter:blur(32px) saturate(175%)!important;-webkit-backdrop-filter:blur(32px) saturate(175%)!important}
+html.native-app body:has(.search-reference-landing) .health-os-liquid-orb{width:56px!important;height:56px!important;transform:translate(-50%,-55%) rotate(-8deg)!important}
+}
