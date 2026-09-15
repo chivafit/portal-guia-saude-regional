@@ -28,6 +28,7 @@ import "./health-os-profile-reference.css";
 import "./health-os-consolidated-native.css";
 import "./health-os-search-native-structural.css";
 import "./health-os-v1-final.css";
+import "./health-os-magazine.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

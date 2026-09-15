@@ -36,17 +36,17 @@ export default async function EditionPage({ params }: { params: Promise<{ slug: 
   return (
     <>
       <SiteHeader />
-      <main>
-        <section className="content-hero">
+      <main className="magazine-edition-page">
+        <section className="content-hero magazine-edition-hero">
           <div className="shell">
             <Breadcrumbs items={[{ label: "Início", href: "/" }, { label: "Revista", href: "/revista" }, { label: `${edition.number} edição` }]} />
-            <p className="eyebrow">Revista Guia Saúde · {edition.year}</p>
+            <p className="eyebrow">Biblioteca digital · {edition.year}</p>
             <h1>{edition.title}</h1>
             <p>{edition.description}</p>
           </div>
         </section>
 
-        <section className="shell content-section">
+        <section className="shell content-section magazine-edition-content">
           <article className="magazine-feature">
             <div className={`edition-cover${edition.coverUrl ? " edition-cover-published" : ""}`} style={edition.coverUrl ? { backgroundImage: `url('${edition.coverUrl}')` } : undefined}>
               {!edition.coverUrl ? <><small>REVISTA</small><strong>Guia<br />Saúde</strong><span>{edition.number} edição</span><p>SAÚDE, BEM-ESTAR<br />E QUALIDADE DE VIDA</p></> : null}
