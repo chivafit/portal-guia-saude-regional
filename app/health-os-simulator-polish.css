@@ -15,6 +15,7 @@
 
 /* Home featured: compact information rows, never giant cards */
 .health-os-home .home-featured-controls{margin-bottom:8px!important}
+.health-os-home .home-featured-controls>button,.health-os-home .home-featured-controls .home-featured-nav,.health-os-home .home-featured-arrows{display:none!important}
 .health-os-home .home-featured-spatial-rail{display:flex!important;gap:9px!important;padding:0 1px 4px!important}
 .health-os-home .home-featured-spatial-card{display:grid!important;grid-template-columns:52px minmax(0,1fr)!important;align-items:center!important;gap:10px!important;flex:0 0 min(82vw,310px)!important;width:auto!important;min-width:0!important;height:92px!important;min-height:92px!important;max-height:92px!important;padding:11px 12px!important;border-radius:21px!important;background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(237,249,245,.82))!important;overflow:hidden!important}
 .health-os-home .home-featured-professional-avatar{position:relative!important;inset:auto!important;width:52px!important;height:52px!important;min-width:52px!important;min-height:52px!important;max-width:52px!important;max-height:52px!important;margin:0!important;border-radius:50%!important;overflow:hidden!important}
