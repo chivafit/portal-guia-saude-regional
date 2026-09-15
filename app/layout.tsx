@@ -10,6 +10,7 @@ import "./podcast-photo-highlight.css";
 import "./load-more-button.css";
 import "./home-featured-professionals.css";
 import "./native-app.css";
+import "./health-os.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -32,7 +33,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#0b4f4a",
+  themeColor: "#f4f7fa",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
