@@ -1,3 +1,3 @@
 :HL["/_next/static/css/e751ca58b25034ea.css","style"]
-:HL["/_next/static/css/a61115e0ccd57de3.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"materias","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"implantodontia-reabilitacao-oral","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"K6fIznvbM6Jk5IOQHLhrn"}
+:HL["/_next/static/css/08d197167b928c6a.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"materias","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"implantodontia-reabilitacao-oral","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"MRDSrB2YsaPxRUi1GDIwL"}
