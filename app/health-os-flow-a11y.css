@@ -1,0 +1,3 @@
+@media(max-width:760px){
+.health-os-dock a:focus-visible,.app-search-primary input:focus-visible,.app-search-primary button:focus-visible,.search-type-tabs a:focus-visible,.directory-choice-links a:focus-visible,.doctor-card a:focus-visible,.business-card a:focus-visible,.profile-page-clean a:focus-visible,.profile-page-clean button:focus-visible{outline:3px solid rgba(0,160,132,.28)!important;outline-offset:3px!important}.health-os-dock>a,.app-search-primary button,.search-type-tabs a,.directory-filters summary,.profile-clean-contact a,.profile-clean-contact button,.profile-location-contact{touch-action:manipulation;-webkit-tap-highlight-color:transparent}.app-search-primary input{font-size:16px!important}
+}

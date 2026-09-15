@@ -1,0 +1,3 @@
+Health OS core flow v3
+Status: implementation complete
+Flow: Home -> Buscar -> Resultados -> Perfil -> Contato
