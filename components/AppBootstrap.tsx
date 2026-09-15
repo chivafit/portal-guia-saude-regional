@@ -1,11 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function AppBootstrap() {
+  const [nativeLaunch, setNativeLaunch] = useState(false);
+  const [launchLeaving, setLaunchLeaving] = useState(false);
+
   useEffect(() => {
     let active = true;
     let observer: IntersectionObserver | undefined;
+    let leaveTimer: number | undefined;
+    let removeTimer: number | undefined;
 
     void import("@capacitor/core").then(({ Capacitor }) => {
       if (!active) return;
@@ -13,6 +18,9 @@ export function AppBootstrap() {
       if (Capacitor.isNativePlatform()) {
         document.documentElement.dataset.platform = Capacitor.getPlatform();
         document.documentElement.classList.add("native-app");
+        setNativeLaunch(true);
+        leaveTimer = window.setTimeout(() => setLaunchLeaving(true), 1050);
+        removeTimer = window.setTimeout(() => setNativeLaunch(false), 1550);
 
         const motionTargets = document.querySelectorAll<HTMLElement>(
           [
@@ -22,11 +30,12 @@ export function AppBootstrap() {
             ".root-guide-home .city-editorial-mosaic > *",
             ".health-os-shortcut",
             ".health-os-editorial-card",
-            ".search-reference-card",
-            ".app-search-page .doctor-card",
-            ".app-search-page .business-card",
-            ".app-search-page .directory-choice-columns > article",
+            ".native-search-card",
+            ".native-search-category",
+            ".native-search-results .doctor-card",
+            ".native-search-results .business-card",
             ".profile-clean-card",
+            ".profile-clean-details > article",
           ].join(","),
         );
 
@@ -54,18 +63,24 @@ export function AppBootstrap() {
       }
 
       if ("serviceWorker" in navigator && window.isSecureContext) {
-        void navigator.serviceWorker.register("/sw.js", {
-          scope: "/",
-          updateViaCache: "none",
-        });
+        void navigator.serviceWorker.register("/sw.js", { scope: "/", updateViaCache: "none" });
       }
     });
 
     return () => {
       active = false;
       observer?.disconnect();
+      if (leaveTimer) window.clearTimeout(leaveTimer);
+      if (removeTimer) window.clearTimeout(removeTimer);
     };
   }, []);
 
-  return null;
+  if (!nativeLaunch) return null;
+  return (
+    <div className={`health-os-launch${launchLeaving ? " is-leaving" : ""}`} aria-hidden="true">
+      <div className="health-os-launch-aurora" />
+      <div className="health-os-launch-orb"><i /><b /></div>
+      <div className="health-os-launch-copy"><strong>Guia Saúde</strong><span>SAÚDE MAIS PERTO DE VOCÊ</span><small>PIUMHI · MG</small></div>
+    </div>
+  );
 }
