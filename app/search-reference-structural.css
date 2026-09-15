@@ -1,7 +1,8 @@
+.search-reference-landing{display:none}
 @media (max-width:760px){
 html.native-app body:has(.search-reference-landing)>.site-header,html.native-app body:has(.search-reference-landing)>header,html.native-app body:has(.search-reference-landing)>.app-search-page,html.native-app body:has(.search-reference-landing)>.site-footer{display:none!important}
 html.native-app body:has(.search-reference-landing){margin:0!important;background:#f4faf8!important;overflow:hidden!important}
-html.native-app .search-reference-landing{position:fixed;inset:0;z-index:30;overflow-y:auto;padding:calc(env(safe-area-inset-top) + 18px) 0 calc(104px + env(safe-area-inset-bottom));background:radial-gradient(circle at 86% 12%,rgba(215,255,90,.13),transparent 26%),radial-gradient(circle at 8% 45%,rgba(0,209,198,.09),transparent 31%),linear-gradient(160deg,#fbfdfd,#f2faf8 58%,#edf8f6);color:#10231f}
+html.native-app .search-reference-landing{display:block;position:fixed;inset:0;z-index:30;overflow-y:auto;padding:calc(env(safe-area-inset-top) + 18px) 0 calc(104px + env(safe-area-inset-bottom));background:radial-gradient(circle at 86% 12%,rgba(215,255,90,.13),transparent 26%),radial-gradient(circle at 8% 45%,rgba(0,209,198,.09),transparent 31%),linear-gradient(160deg,#fbfdfd,#f2faf8 58%,#edf8f6);color:#10231f}
 html.native-app .search-reference-shell{width:min(100% - 34px,480px);margin:0 auto}
 html.native-app .search-reference-back{display:grid;width:42px;height:42px;place-items:center;margin:0 0 16px;border-radius:50%;background:rgba(222,248,241,.72);color:#238c76;text-decoration:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.85);backdrop-filter:blur(18px)}
 html.native-app .search-reference-heading h1{margin:0;color:#0b1714;font-size:38px;line-height:1;letter-spacing:-.055em;font-weight:650}
