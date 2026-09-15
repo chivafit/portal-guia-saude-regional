@@ -1,3 +1,3 @@
 :HL["/_next/static/css/e751ca58b25034ea.css","style"]
-:HL["/_next/static/css/6cd7c166dd50f6fb.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dra-fernanda-mesquita-odontologia-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"CjsB6UZIjFW2j-Vw5lYlA"}
+:HL["/_next/static/css/770fe4ceacb5ad21.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dra-fernanda-mesquita-odontologia-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"CXypxwUMpLeMJOk9PsdQQ"}
