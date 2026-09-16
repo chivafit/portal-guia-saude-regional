@@ -14,11 +14,9 @@ if(!imports.length) failures.push("Nenhum CSS global encontrado em app/layout.ts
 for(const obsolete of ["health-os-reference-pages-final.css","health-os-nav-reference-final.css"]){
   if(imports.includes(obsolete)) failures.push(`Camada obsoleta voltou ao runtime: ${obsolete}`);
 }
-if(imports.at(-1)!=="health-os-continuous-canvas.css") failures.push("health-os-continuous-canvas.css deve ser a ultima camada CSS global.");
+if(imports.at(-1)!=="health-os-continuous-canvas.css") failures.push("health-os-continuous-canvas.css deve ser a ultima camada CSS global e permanecer visual-only.");
 
-/* Generated interface copy is forbidden in the Health OS/native styling layers.
-   globals.css also serves the public web portal, so legacy editorial web pseudo-copy
-   is outside this native-app ownership check and must not create false positives here. */
+/* Generated interface copy is forbidden in Health OS/native styling layers. */
 for(const file of imports.filter(file=>file.startsWith("health-os-"))){
   const full=path.join(appDir,file);
   if(!fs.existsSync(full)){failures.push(`Import CSS inexistente: ${file}`);continue}
@@ -39,6 +37,8 @@ if(fs.existsSync(compatPath)){
 
 const familyOwners={
   "navbar":"health-os-navbar.css",
+  "back navigation":"health-os-back-navigation-fix.css",
+  "profile controls":"health-os-profile-controls-final.css",
   "podcast":"health-os-podcast-canonical.css",
   "conteudos":"health-os-content-hub-final.css",
   "leitor de conteudo":"health-os-content-reader-canonical.css",
@@ -48,18 +48,36 @@ for(const [family,owner] of Object.entries(familyOwners)){
   if(!imports.includes(owner)) failures.push(`Owner canonico ausente para ${family}: ${owner}`);
 }
 
-/* Native Home regression guard: decorative aura DIVs must stay outside normal flow.
-   iOS WebKit exposed a severe regression where 390px + 420px of relative-positioned
-   aura layers pushed the real Home shell 810px down the viewport. */
+/* The final canvas may not take ownership back from canonical interactive components. */
 const canvasPath=path.join(appDir,"health-os-continuous-canvas.css");
 if(fs.existsSync(canvasPath)){
   const canvas=stripComments(fs.readFileSync(canvasPath,"utf8"));
+  const canvasSelectors=selectorPrelude(canvas);
+  const forbiddenCanvasSelectors=["profile-clean-back","favorite-control","profile-share","hos-navbar","health-os-dock","hos-nav-item","hos-nav-orb","organization-back","native-search-back"];
+  for(const selector of forbiddenCanvasSelectors){
+    if(canvasSelectors.includes(selector)) failures.push(`health-os-continuous-canvas.css e visual-only e nao pode possuir ${selector}.`);
+  }
+
+  /* Native Home regression guard: decorative aura DIVs stay outside normal flow. */
   const auraRule=/\.health-os-home\s*>\s*\.health-os-aura\s*\{([^}]*)\}/m.exec(canvas)?.[1]??"";
   if(!/position\s*:\s*absolute\s*!important\s*;/i.test(auraRule)) failures.push("As auras decorativas da Home devem permanecer position:absolute!important para nao empurrar o shell no iOS WebKit.");
   if(!/pointer-events\s*:\s*none\s*!important\s*;/i.test(auraRule)) failures.push("As auras decorativas da Home devem permanecer sem interacao (pointer-events:none!important).");
 }
 
+/* Canonical owner sanity checks. */
+const ownerChecks={
+  "health-os-navbar.css":["hos-navbar","hos-nav-item","hos-nav-orb"],
+  "health-os-back-navigation-fix.css":["profile-clean-back","organization-back","native-search-back"],
+  "health-os-profile-controls-final.css":["favorite-control","profile-share"]
+};
+for(const [file,required] of Object.entries(ownerChecks)){
+  const full=path.join(appDir,file);
+  if(!fs.existsSync(full)) continue;
+  const selectors=selectorPrelude(stripComments(fs.readFileSync(full,"utf8")));
+  for(const selector of required){if(!selectors.includes(selector)) failures.push(`${file}: owner canonico perdeu ${selector}.`)}
+}
+
 console.log("CSS architecture validation");
-console.log(JSON.stringify({globalCssImports:imports.length,lastLayer:imports.at(-1),legacyCompatibility:imports.includes("health-os-legacy-compat.css"),failures:failures.length},null,2));
+console.log(JSON.stringify({globalCssImports:imports.length,lastLayer:imports.at(-1),legacyCompatibility:imports.includes("health-os-legacy-compat.css"),canonicalOwners:familyOwners,failures:failures.length},null,2));
 if(failures.length){for(const failure of failures) console.error(`- ${failure}`);process.exit(1)}
-console.log("Arquitetura CSS validada: sem UI textual nas camadas Health OS, sem camadas reference obsoletas e com ownership canonico protegido.");
+console.log("Arquitetura CSS validada: canvas visual-only, owners canonicos protegidos e sem UI textual gerada por CSS.");
