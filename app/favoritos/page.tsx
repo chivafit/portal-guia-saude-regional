@@ -1,6 +1,6 @@
+import Link from "next/link";
+import { ArrowLeft, Heart } from "lucide-react";
 import { FavoritesList } from "@/components/FavoritesList";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -11,17 +11,21 @@ export const metadata = pageMetadata(
 
 export default function FavoritesPage() {
   return (
-    <>
-      <SiteHeader />
-      <main className="favorites-page">
-        <header className="shell favorites-header">
-          <p className="eyebrow">Acesso rápido</p>
-          <h1>Meus favoritos</h1>
-          <p>Os perfis ficam salvos somente neste aparelho.</p>
+    <main className="native-favorites-screen">
+      <div className="native-favorites-aura" aria-hidden="true" />
+      <section className="native-favorites-shell">
+        <header className="native-favorites-topbar">
+          <Link href="/" aria-label="Voltar"><ArrowLeft size={19} /></Link>
+          <div><small>GUIA SAÚDE</small><strong>Favoritos</strong></div>
+          <span aria-hidden="true"><Heart size={18} /></span>
         </header>
-        <div className="shell"><FavoritesList /></div>
-      </main>
-      <SiteFooter />
-    </>
+        <section className="native-favorites-intro">
+          <p>SUA LISTA</p>
+          <h1>Cuidados que você<br/><em>quer ter por perto.</em></h1>
+          <span>Seus profissionais salvos ficam disponíveis neste aparelho para acesso rápido.</span>
+        </section>
+        <FavoritesList />
+      </section>
+    </main>
   );
 }
