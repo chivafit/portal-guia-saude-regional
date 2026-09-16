@@ -5,7 +5,7 @@ import { AppBottomNav } from "@/components/AppBottomNav";
 import { defaultDescription, siteName, siteUrl } from "@/lib/seo";
 
 /* Portal foundation + canonical Health OS stack.
-   Superseded experimental/reference layers were intentionally removed. */
+   Legacy compatibility is isolated and must never own canonical families. */
 import "./globals.css";
 import "./native-app.css";
 import "./health-os.css";
@@ -21,7 +21,7 @@ import "./health-os-canonical.css";
 import "./health-os-podcast-canonical.css";
 import "./health-os-route-audit.css";
 import "./health-os-content-reader-canonical.css";
-import "./health-os-reference-pages-final.css";
+import "./health-os-legacy-compat.css";
 import "./health-os-global-density-final.css";
 import "./health-os-content-hub-final.css";
 import "./health-os-final-consolidation.css";
