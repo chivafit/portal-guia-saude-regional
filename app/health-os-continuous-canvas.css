@@ -1,72 +1,49 @@
 /* Continuous ambient canvas — final visual seam guard.
    Keeps the liquid aura fading naturally into page content instead of ending as a rectangular hero. */
 @media(max-width:760px){
-  html.native-app :where(.health-os-home,.native-search-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-specialties-screen,.favorites-native-page,.app-search-page){
-    position:relative!important;
-    isolation:isolate!important;
-    overflow-x:hidden!important;
-    background:linear-gradient(155deg,#f9fbfc 0%,#f3f9f7 42%,#eef8f7 72%,#f7fafb 100%)!important;
-  }
-  html.native-app :where(.health-os-home,.native-search-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-specialties-screen,.favorites-native-page,.app-search-page)::before{
-    content:"";
-    position:absolute;
-    z-index:0;
-    pointer-events:none;
-    top:-90px;
-    left:-28%;
-    width:156%;
-    height:720px;
-    background:
-      radial-gradient(ellipse 46% 48% at 84% 15%,rgba(215,255,90,.28) 0%,rgba(0,209,198,.13) 42%,transparent 76%),
-      radial-gradient(ellipse 42% 50% at 10% 54%,rgba(15,157,126,.12) 0%,rgba(0,209,198,.06) 45%,transparent 78%);
-    filter:blur(18px);
-    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 48%,rgba(0,0,0,.78) 64%,rgba(0,0,0,.38) 78%,rgba(0,0,0,.12) 90%,transparent 100%);
-    mask-image:linear-gradient(to bottom,#000 0%,#000 48%,rgba(0,0,0,.78) 64%,rgba(0,0,0,.38) 78%,rgba(0,0,0,.12) 90%,transparent 100%);
-  }
-  html.native-app :where(.health-os-home,.native-search-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-specialties-screen,.favorites-native-page,.app-search-page)>*{
-    position:relative;
-    z-index:1;
-  }
-
-  /* Home owns the full viewport, but its content shell must be top-anchored.
-     The two liquid aura DIVs are purely decorative and must never participate
-     in normal flow. They previously occupied 390px + 420px and pushed the
-     real Home shell 810px below the top in iOS WebKit. */
-  html.native-app .health-os-home{
-    display:block!important;
-    padding-top:0!important;
-    margin-top:0!important;
-    align-content:normal!important;
-    justify-content:normal!important;
-  }
-  html.native-app .health-os-home>.health-os-aura{
-    position:absolute!important;
-    pointer-events:none!important;
-    z-index:0!important;
-  }
-  html.native-app .health-os-home>.health-os-shell{
-    position:relative!important;
-    top:0!important;
-    width:min(100% - 32px,520px)!important;
-    margin:0 auto!important;
-    padding-top:0!important;
-    transform:none!important;
-    align-self:auto!important;
-    z-index:1!important;
-  }
-  html.native-app .health-os-home .health-os-topbar{
-    margin-top:0!important;
-    padding-top:calc(env(safe-area-inset-top) + 10px)!important;
-  }
-
+  html.native-app :where(.health-os-home,.native-search-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-specialties-screen,.favorites-native-page,.app-search-page){position:relative!important;isolation:isolate!important;overflow-x:hidden!important;background:linear-gradient(155deg,#f9fbfc 0%,#f3f9f7 42%,#eef8f7 72%,#f7fafb 100%)!important}
+  html.native-app :where(.health-os-home,.native-search-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-specialties-screen,.favorites-native-page,.app-search-page)::before{content:"";position:absolute;z-index:0;pointer-events:none;top:-90px;left:-28%;width:156%;height:720px;background:radial-gradient(ellipse 46% 48% at 84% 15%,rgba(215,255,90,.28) 0%,rgba(0,209,198,.13) 42%,transparent 76%),radial-gradient(ellipse 42% 50% at 10% 54%,rgba(15,157,126,.12) 0%,rgba(0,209,198,.06) 45%,transparent 78%);filter:blur(18px);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 48%,rgba(0,0,0,.78) 64%,rgba(0,0,0,.38) 78%,rgba(0,0,0,.12) 90%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 48%,rgba(0,0,0,.78) 64%,rgba(0,0,0,.38) 78%,rgba(0,0,0,.12) 90%,transparent 100%)}
+  html.native-app :where(.health-os-home,.native-search-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-specialties-screen,.favorites-native-page,.app-search-page)>*{position:relative;z-index:1}
+  html.native-app .health-os-home{display:block!important;padding-top:0!important;margin-top:0!important;align-content:normal!important;justify-content:normal!important}
+  html.native-app .health-os-home>.health-os-aura{position:absolute!important;pointer-events:none!important;z-index:0!important}
+  html.native-app .health-os-home>.health-os-shell{position:relative!important;top:0!important;width:min(100% - 32px,520px)!important;margin:0 auto!important;padding-top:0!important;transform:none!important;align-self:auto!important;z-index:1!important}
+  html.native-app .health-os-home .health-os-topbar{margin-top:0!important;padding-top:calc(env(safe-area-inset-top) + 10px)!important}
   html.native-app .hos-section-header + .hos-section-context{background:transparent!important;box-shadow:none!important}
-
-  /* Podcast: neutralize the superseded reference pseudo-label. */
   html.native-app .hos-podcast-section-head h2{font-size:15px!important}
   html.native-app .hos-podcast-section-head h2::after{content:none!important;display:none!important}
-
-  /* Revista: the catalog is a real 3 x 3 library, not a 3-card horizontal rail. */
   html.native-app .native-magazine-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;width:100%!important;overflow:visible!important;padding:1px 1px 8px!important;scroll-snap-type:none!important}
   html.native-app .native-magazine-grid>a{width:100%!important;min-width:0!important;flex:none!important;scroll-snap-align:none!important}
   html.native-app .native-magazine-cover{width:100%!important;aspect-ratio:.70!important}
+
+  /* Organization detail — compact, app-native hierarchy and safe-area spacing. */
+  html.native-app .organization-page{padding:0 0 calc(112px + env(safe-area-inset-bottom))!important;min-height:100svh!important}
+  html.native-app .organization-page .organization-wrap{width:100%!important;max-width:none!important;padding:calc(env(safe-area-inset-top) + 18px) 16px 28px!important}
+  html.native-app .organization-back{display:inline-flex!important;align-items:center!important;gap:7px!important;width:auto!important;max-width:100%!important;margin:0 0 14px!important;padding:8px 11px!important;border:1px solid rgba(15,109,102,.12)!important;border-radius:999px!important;background:rgba(255,255,255,.72)!important;color:#0f6d66!important;font-size:11px!important;font-weight:700!important;line-height:1!important;white-space:nowrap!important;backdrop-filter:blur(14px)!important}
+  html.native-app .organization-hero{display:block!important;min-height:0!important;margin:0 0 12px!important;padding:20px 18px 18px!important;border:1px solid rgba(15,109,102,.10)!important;border-radius:24px!important;background:rgba(255,255,255,.78)!important;box-shadow:0 14px 38px rgba(31,72,67,.07)!important;overflow:visible!important}
+  html.native-app .organization-hero-mark{display:none!important}
+  html.native-app .organization-classification{display:flex!important;flex-wrap:wrap!important;gap:6px!important;margin:0 0 11px!important}
+  html.native-app .organization-classification span{padding:6px 9px!important;border-radius:999px!important;background:#eaf7f4!important;color:#168777!important;font-size:9px!important;font-weight:800!important;letter-spacing:.08em!important;text-transform:uppercase!important}
+  html.native-app .organization-hero h1{margin:0!important;color:#0b151b!important;font-family:inherit!important;font-size:25px!important;font-weight:750!important;line-height:1.05!important;letter-spacing:-.035em!important}
+  html.native-app .organization-hero-location{display:flex!important;align-items:center!important;gap:5px!important;margin:9px 0 0!important;color:#6d7f7d!important;font-size:12px!important}
+  html.native-app .organization-summary{margin:12px 0 0!important;color:#667a78!important;font-size:12px!important;line-height:1.5!important;display:block!important;overflow:visible!important}
+  html.native-app .organization-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;margin:16px 0 0!important}
+  html.native-app .organization-action{min-width:0!important;min-height:42px!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;padding:0 10px!important;border:1px solid rgba(15,109,102,.12)!important;border-radius:13px!important;background:#fff!important;color:#24443f!important;font-size:11px!important;font-weight:750!important;box-shadow:none!important}
+  html.native-app .organization-action.primary{background:#126f66!important;color:#fff!important;border-color:#126f66!important}
+  html.native-app .organization-layout{display:flex!important;flex-direction:column!important;gap:12px!important;margin:0!important}
+  html.native-app .organization-main{display:contents!important}
+  html.native-app .organization-section,html.native-app .organization-information{margin:0!important;padding:17px!important;border:1px solid rgba(15,109,102,.09)!important;border-radius:20px!important;background:rgba(255,255,255,.82)!important;box-shadow:none!important}
+  html.native-app .organization-section-kicker{margin:0 0 5px!important;color:#179783!important;font-size:9px!important;font-weight:850!important;letter-spacing:.13em!important;text-transform:uppercase!important}
+  html.native-app .organization-section h2,html.native-app .organization-information h2{margin:0 0 13px!important;color:#12201f!important;font-family:inherit!important;font-size:16px!important;font-weight:750!important;letter-spacing:-.02em!important}
+  html.native-app .organization-service-list{display:flex!important;flex-wrap:wrap!important;gap:7px!important}
+  html.native-app .organization-service-list span{padding:7px 10px!important;border:1px solid rgba(15,109,102,.11)!important;border-radius:999px!important;background:#edf8f5!important;color:#27766d!important;font-size:10px!important;font-weight:650!important}
+  html.native-app .organization-about p:last-child{margin:0!important;color:#667a78!important;font-size:12px!important;line-height:1.55!important}
+  html.native-app .organization-information{order:10!important}
+  html.native-app .organization-information-list{display:grid!important;gap:0!important}
+  html.native-app .organization-information-list>div{display:grid!important;grid-template-columns:34px 1fr!important;gap:10px!important;padding:12px 0!important;border-bottom:1px solid rgba(15,109,102,.08)!important}
+  html.native-app .organization-information-list>div:last-child{border-bottom:0!important}
+  html.native-app .organization-information-list>div>svg{width:32px!important;height:32px!important;padding:8px!important;border-radius:10px!important;background:#edf8f5!important;color:#168777!important}
+  html.native-app .organization-information-list small{display:block!important;margin-bottom:3px!important;color:#849390!important;font-size:9px!important;text-transform:uppercase!important;letter-spacing:.08em!important}
+  html.native-app .organization-information-list strong,html.native-app .organization-information-list p,html.native-app .organization-info-contact{margin:0!important;color:#233b38!important;font-size:11px!important;line-height:1.45!important}
+  html.native-app .organization-information-list a{color:#0f806f!important;font-weight:750!important}
+  html.native-app .organization-footer-note{margin:12px 0 0!important;padding:0 4px!important;color:#82918f!important;font-size:9px!important;line-height:1.45!important}
 }
