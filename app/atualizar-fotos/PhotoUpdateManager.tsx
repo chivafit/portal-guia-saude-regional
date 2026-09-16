@@ -11,7 +11,7 @@ const BRANCH = "main";
 const PUBLIC_BRANCH = "gh-pages";
 const OVERRIDES_PATH = "lib/data/professional-photo-overrides.json";
 const MAX_SIZE = 5 * 1024 * 1024;
-const TOKEN_STORAGE_KEY = "guia-saude-photo-update-token";
+const LEGACY_TOKEN_STORAGE_KEY = "guia-saude-photo-update-token";
 
 function contentHeaders(token: string) {
   return {
@@ -67,12 +67,15 @@ export function PhotoUpdateManager({ profiles }: Props) {
   const [query, setQuery] = useState("");
   const [profileSlug, setProfileSlug] = useState("");
   const [token, setToken] = useState("");
-  const [rememberToken, setRememberToken] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState("");
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    window.localStorage.removeItem(LEGACY_TOKEN_STORAGE_KEY);
+  }, []);
 
   const selected = profiles.find((profile) => profile.slug === profileSlug) ?? null;
   const selectedHasDedicatedPhoto = hasDedicatedProfessionalPhoto(selected);
@@ -81,35 +84,6 @@ export function PhotoUpdateManager({ profiles }: Props) {
     if (!normalized) return profiles.slice(0, 12);
     return profiles.filter((profile) => profileLabel(profile).toLocaleLowerCase("pt-BR").includes(normalized)).slice(0, 12);
   }, [profiles, query]);
-
-  useEffect(() => {
-    const savedToken = window.localStorage.getItem(TOKEN_STORAGE_KEY);
-    if (!savedToken) return;
-    const restoreToken = window.setTimeout(() => {
-      setToken(savedToken);
-      setRememberToken(true);
-    }, 0);
-    return () => window.clearTimeout(restoreToken);
-  }, []);
-
-  function changeToken(value: string) {
-    setToken(value);
-    if (rememberToken) window.localStorage.setItem(TOKEN_STORAGE_KEY, value);
-  }
-
-  function changeRememberToken(remember: boolean) {
-    setRememberToken(remember);
-    if (remember && token.trim()) window.localStorage.setItem(TOKEN_STORAGE_KEY, token.trim());
-    if (!remember) window.localStorage.removeItem(TOKEN_STORAGE_KEY);
-  }
-
-  function removeSavedToken() {
-    window.localStorage.removeItem(TOKEN_STORAGE_KEY);
-    setToken("");
-    setRememberToken(false);
-    setNotice("Token removido deste navegador.");
-    setError("");
-  }
 
   function select(profile: Profile) {
     setProfileSlug(profile.slug);
@@ -249,14 +223,10 @@ export function PhotoUpdateManager({ profiles }: Props) {
       </section>
 
       <section className="photo-admin-card photo-admin-publish">
-        <div className="photo-admin-step-title"><span>3</span><div><h2>Confirme e publique</h2><p>Use o token uma vez e, se desejar, mantenha-o apenas neste navegador.</p></div></div>
+        <div className="photo-admin-step-title"><span>3</span><div><h2>Confirme e publique</h2><p>Informe um token do GitHub somente para esta atualização.</p></div></div>
         {selected ? <div className="photo-confirmation"><span className="photo-profile-thumb large" style={selected.imageUrl ? { backgroundImage: `url(${selected.imageUrl})` } : undefined} /><div><strong>{selected.name}</strong><small>{selected.profession} · {selected.specialty}</small><small>{selectedHasDedicatedPhoto ? "A foto profissional atual será substituída diretamente" : "Será cadastrada uma nova foto profissional; a primeira vinculação exige novo build"}</small></div></div> : <p className="photo-empty-selection">Selecione um profissional para continuar.</p>}
-        <label className="photo-token"><KeyRound size={18} /><input type="password" value={token} onChange={(event) => changeToken(event.target.value)} placeholder="Token do GitHub com permissão de conteúdo" autoComplete="off" spellCheck="false" /></label>
-        <div className="photo-token-options">
-          <label><input type="checkbox" checked={rememberToken} onChange={(event) => changeRememberToken(event.target.checked)} /> Lembrar neste dispositivo</label>
-          {rememberToken ? <button type="button" onClick={removeSavedToken}>Remover token salvo</button> : null}
-        </div>
-        <p className="photo-security"><ShieldCheck size={16} /> Ao marcar a opção, o token é salvo somente no navegador deste dispositivo. Não use em computador compartilhado.</p>
+        <label className="photo-token"><KeyRound size={18} /><input type="password" value={token} onChange={(event) => setToken(event.target.value)} placeholder="Token do GitHub com permissão de conteúdo" autoComplete="off" spellCheck="false" /></label>
+        <p className="photo-security"><ShieldCheck size={16} /> O token não é salvo neste dispositivo. Use apenas um token com acesso restrito a este repositório.</p>
         {error ? <p className="photo-message error">{error}</p> : null}
         {notice ? <p className="photo-message success">{notice}</p> : null}
         <button type="button" className="photo-publish-button" onClick={publish} disabled={saving || !selected || !file}>{saving ? <><LoaderCircle className="spin" size={18} /> Publicando e verificando...</> : "Publicar nova foto"}</button>

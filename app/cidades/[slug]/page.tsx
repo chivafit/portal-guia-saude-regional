@@ -29,7 +29,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return slug === "piumhi" ? { ...metadata, robots: { index: false, follow: true } } : metadata;
 }
 
-export default async function CityPage({ params, rootLanding = false }: { params: Promise<{ slug: string }>; rootLanding?: boolean }) {
+export default function CityPage({ params }: { params: Promise<{ slug: string }> }) {
+  return <CityPageContent params={params} />;
+}
+
+async function CityPageContent({ params, rootLanding = false }: { params: Promise<{ slug: string }>; rootLanding?: boolean }) {
   const { slug } = await params;
   const city = cityDetails[slug];
   if (!city) notFound();

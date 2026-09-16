@@ -14,6 +14,7 @@ export function MobileMenu() {
   useEffect(() => {
     if (!open) return;
     const previousOverflow = document.body.style.overflow;
+    const trigger = button.current;
     document.body.style.overflow = "hidden";
     panel.current?.querySelector<HTMLElement>("a")?.focus();
     const onKey = (event: KeyboardEvent) => {
@@ -25,7 +26,7 @@ export function MobileMenu() {
       if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
     };
     document.addEventListener("keydown", onKey);
-    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener("keydown", onKey); button.current?.focus(); };
+    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener("keydown", onKey); trigger?.focus(); };
   }, [open]);
 
   return <div className="mobile-menu">

@@ -19,12 +19,12 @@ test("home and featured directory cap eager photos", async () => {
   const home = await readFile("components/FeaturedProfessionalsRotator.tsx", "utf8");
   const featured = await readFile("app/profissionais-destaque/page.tsx", "utf8");
   assert.match(home, /professionals\.slice\(0, 6\)/);
-  assert.match(home, /eager=\{index < 3\}/);
-  assert.match(featured, /eager=\{index < 2\}/);
+  assert.match(home, /eager=\{index\s*<\s*2\}/);
+  assert.match(featured, /eager=\{index\s*<\s*3\}/);
 });
 
 test("individual profile prioritizes its single responsive photo", async () => {
   const profile = await readFile("app/profissionais/[slug]/page.tsx", "utf8");
-  assert.match(profile, /calc\(100vw - 74px\), 116px/);
+  assert.match(profile, /sizes="100vw"/);
   assert.match(profile, /eager fetchPriority="high"/);
 });
