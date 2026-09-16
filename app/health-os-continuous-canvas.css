@@ -1,0 +1,31 @@
+/* Continuous ambient canvas — final visual seam guard.
+   Keeps the liquid aura fading naturally into page content instead of ending as a rectangular hero. */
+@media(max-width:760px){
+  html.native-app :where(.health-os-home,.native-search-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-specialties-screen,.favorites-native-page,.app-search-page){
+    position:relative!important;
+    isolation:isolate!important;
+    overflow-x:hidden!important;
+    background:linear-gradient(155deg,#f9fbfc 0%,#f3f9f7 42%,#eef8f7 72%,#f7fafb 100%)!important;
+  }
+  html.native-app :where(.health-os-home,.native-search-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-specialties-screen,.favorites-native-page,.app-search-page)::before{
+    content:"";
+    position:absolute;
+    z-index:0;
+    pointer-events:none;
+    top:-90px;
+    left:-28%;
+    width:156%;
+    height:720px;
+    background:
+      radial-gradient(ellipse 46% 48% at 84% 15%,rgba(215,255,90,.28) 0%,rgba(0,209,198,.13) 42%,transparent 76%),
+      radial-gradient(ellipse 42% 50% at 10% 54%,rgba(15,157,126,.12) 0%,rgba(0,209,198,.06) 45%,transparent 78%);
+    filter:blur(18px);
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 54%,rgba(0,0,0,.72) 70%,rgba(0,0,0,.28) 84%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 0%,#000 54%,rgba(0,0,0,.72) 70%,rgba(0,0,0,.28) 84%,transparent 100%);
+  }
+  html.native-app :where(.health-os-home,.native-search-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-specialties-screen,.favorites-native-page,.app-search-page)>*{
+    position:relative;
+    z-index:1;
+  }
+  html.native-app .hos-section-header + .hos-section-context{background:transparent!important;box-shadow:none!important}
+}
