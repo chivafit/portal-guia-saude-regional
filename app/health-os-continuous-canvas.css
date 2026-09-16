@@ -27,6 +27,28 @@
     position:relative;
     z-index:1;
   }
+
+  /* Home must begin immediately below the iOS safe area. This last-layer guard
+     prevents any legacy/global shell spacing from creating a viewport-sized blank hero. */
+  html.native-app .health-os-home{
+    padding-top:0!important;
+    margin-top:0!important;
+    align-content:start!important;
+    justify-content:start!important;
+  }
+  html.native-app .health-os-home>.health-os-shell{
+    position:relative!important;
+    top:0!important;
+    margin-top:0!important;
+    padding-top:0!important;
+    transform:none!important;
+    align-self:start!important;
+  }
+  html.native-app .health-os-home .health-os-topbar{
+    margin-top:0!important;
+    padding-top:calc(env(safe-area-inset-top) + 10px)!important;
+  }
+
   html.native-app .hos-section-header + .hos-section-context{background:transparent!important;box-shadow:none!important}
 
   /* Podcast: neutralize the superseded reference pseudo-label. */
