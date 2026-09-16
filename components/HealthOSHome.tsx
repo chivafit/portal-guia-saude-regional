@@ -22,6 +22,6 @@ export async function HealthOSHome() {
     <nav className="health-os-shortcuts" aria-label="Atalhos de saúde">{shortcuts.map(({ label, href, icon: Icon }) => <Link href={href} key={label}><span><Icon size={21} /></span><small>{label}</small></Link>)}</nav>
     <Link href="/buscar?cidade=piumhi" className="health-os-feature"><div className="health-os-feature-copy"><span><Sparkles size={14} /> GUIA SAÚDE</span><h2>Saúde mais perto de você</h2><p>Descubra profissionais e serviços da sua região.</p></div><span className="health-os-feature-orb" aria-hidden="true" /><span className="health-os-feature-arrow"><ArrowRight size={19} /></span></Link>
     <section className="health-os-section"><div className="health-os-section-head"><div><span>SELEÇÃO GUIA SAÚDE</span><h2>Profissionais em destaque</h2></div><Link href="/profissionais-destaque">Ver todos <ArrowRight size={13} /></Link></div><FeaturedProfessionalsRotator professionals={featured} /></section>
-    <section className="health-os-content-card"><div><span>CONTEÚDOS</span><h2>Informação para cuidar melhor.</h2><p>Matérias, podcast e revista com profissionais da região.</p></div><Link href="/materias">Explorar <ArrowRight size={15} /></Link></section>
+    <Link href="/materias" className="health-os-content-card" aria-label="Explorar conteúdos do Guia Saúde"><div><span>CONTEÚDOS</span><h2>Informação para cuidar melhor.</h2><p>Matérias, podcast e revista com profissionais da região.</p></div><span>Explorar <ArrowRight size={15} /></span></Link>
   </section></main>;
 }
