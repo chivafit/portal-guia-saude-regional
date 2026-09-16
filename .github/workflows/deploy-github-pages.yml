@@ -1,24 +1,26 @@
-name: Validar build do portal
+name: Validar release do Guia Saúde
 
 on:
-  # O site e publicado manualmente na branch gh-pages.
-  # Este workflow fica disponivel somente para validacao sob demanda.
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: validate-portal-${{ github.ref }}
+  group: validate-release-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Build e validacoes
+  release-gate:
+    name: Lint, dados, SEO e build
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
-      - name: Baixar o codigo
+      - name: Baixar o código
         uses: actions/checkout@v4
 
       - name: Preparar Node.js
@@ -27,8 +29,8 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Instalar dependencias
+      - name: Instalar dependências
         run: npm ci
 
-      - name: Validar e gerar o portal
-        run: npm run build:pages
+      - name: Executar gate de release
+        run: npm run validate:release

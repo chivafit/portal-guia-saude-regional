@@ -1,0 +1,45 @@
+/* Guia Saúde — canonical mobile navbar, liquid-lens finish. */
+:root{--hos-nav-h:70px;--hos-nav-orb:58px;--hos-nav-bottom:10px}
+@media(max-width:760px){
+ html.native-app .hos-navbar{position:fixed!important;z-index:900!important;left:14px!important;right:14px!important;bottom:calc(var(--hos-nav-bottom) + env(safe-area-inset-bottom))!important;width:auto!important;height:var(--hos-nav-h)!important;min-height:var(--hos-nav-h)!important;padding:7px 8px!important;display:grid!important;grid-template-columns:1fr 1fr 1.12fr 1fr 1fr!important;align-items:center!important;gap:2px!important;border:1px solid rgba(255,255,255,.84)!important;border-radius:28px!important;background:linear-gradient(145deg,rgba(255,255,255,.76),rgba(250,254,253,.68))!important;box-shadow:0 18px 46px rgba(35,91,82,.10),0 3px 12px rgba(35,91,82,.05),inset 0 1px 0 rgba(255,255,255,.96),inset 0 -1px 0 rgba(199,225,219,.22)!important;backdrop-filter:blur(30px) saturate(1.18)!important;-webkit-backdrop-filter:blur(30px) saturate(1.18)!important;isolation:isolate!important;overflow:visible!important}
+ html.native-app .hos-navbar::before{content:"";position:absolute;z-index:-1;inset:2px;border-radius:26px;pointer-events:none;background:linear-gradient(112deg,rgba(255,255,255,.46),rgba(0,209,198,.018) 42%,rgba(215,255,90,.025) 72%,rgba(255,255,255,.34))}
+ html.native-app .hos-navbar::after{content:"";position:absolute;pointer-events:none;left:20px;right:20px;top:3px;height:1px;border-radius:50%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent)}
+
+ html.native-app .hos-nav-item{position:relative!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;min-width:0!important;min-height:54px!important;padding:3px 2px!important;border-radius:19px!important;color:#84918e!important;text-decoration:none!important;background:transparent!important;transition:color .18s ease,transform .18s ease!important}
+ html.native-app .hos-nav-icon{position:relative!important;display:grid!important;place-items:center!important;width:34px!important;height:32px!important;border-radius:50%!important;transition:background .2s ease,box-shadow .2s ease,transform .2s ease!important}
+ html.native-app .hos-nav-icon svg{position:relative!important;z-index:1!important;width:20px!important;height:20px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.7!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+ html.native-app .hos-nav-label{max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important;color:inherit!important;font-size:10.5px!important;line-height:1!important;font-weight:560!important;letter-spacing:-.012em!important;white-space:nowrap!important}
+
+ /* Active items use a luminous milk-glass lens, matching the visual reference. */
+ html.native-app .hos-nav-item.is-active{color:#08735f!important;background:transparent!important}
+ html.native-app .hos-nav-item.is-active .hos-nav-icon{background:radial-gradient(circle at 36% 28%,rgba(255,255,255,.96),rgba(222,248,240,.80) 48%,rgba(183,233,220,.56) 100%)!important;box-shadow:0 5px 14px rgba(15,157,126,.10),0 0 0 7px rgba(222,247,240,.32),inset 0 1px 2px rgba(255,255,255,.98)!important;transform:translateY(-1px)!important}
+ html.native-app .hos-nav-item.is-active .hos-nav-icon::after{content:"";position:absolute;inset:3px;border-radius:50%;border:1px solid rgba(255,255,255,.72);pointer-events:none}
+ html.native-app .hos-nav-item.is-active .hos-nav-icon svg{stroke-width:2.05!important}
+ html.native-app .hos-nav-item.is-active::after{display:none!important}
+
+ /* Central search keeps our IA and brand role, but receives the same liquid-lens finish. */
+ html.native-app .hos-nav-orb{position:relative!important;align-self:stretch!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-end!important;gap:2px!important;min-height:56px!important;padding:0 0 3px!important;color:#657570!important;text-decoration:none!important;overflow:visible!important}
+ html.native-app .hos-nav-orb::before{content:"";position:absolute;left:50%;top:-21px;transform:translateX(-50%);width:70px;height:70px;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 38% 30%,rgba(255,255,255,.94),rgba(255,255,255,.66) 48%,rgba(238,249,247,.46) 72%,rgba(255,255,255,.22));border:1px solid rgba(255,255,255,.82);box-shadow:0 10px 28px rgba(53,108,99,.10),inset 0 1px 2px rgba(255,255,255,.98);backdrop-filter:blur(18px) saturate(1.15);-webkit-backdrop-filter:blur(18px) saturate(1.15)}
+ html.native-app .hos-nav-orb .health-os-liquid-orb{position:absolute!important;z-index:1!important;left:50%!important;top:-15px!important;transform:translateX(-50%)!important;width:var(--hos-nav-orb)!important;height:var(--hos-nav-orb)!important;border-radius:50%!important;background:radial-gradient(circle at 34% 24%,rgba(255,255,255,.92) 0 7%,transparent 24%),radial-gradient(circle at 70% 70%,rgba(215,255,90,.40),transparent 38%),linear-gradient(145deg,rgba(215,255,90,.96),rgba(0,209,198,.90) 48%,rgba(15,157,126,.94))!important;border:1px solid rgba(255,255,255,.88)!important;box-shadow:0 9px 22px rgba(15,157,126,.18),inset 0 2px 8px rgba(255,255,255,.64),inset 0 -3px 8px rgba(8,115,95,.10)!important;filter:saturate(.94)!important;transition:transform .22s cubic-bezier(.2,.8,.2,1),filter .22s ease,box-shadow .22s ease!important;overflow:hidden!important}
+ html.native-app .hos-nav-orb .health-os-liquid-orb::after{content:"";position:absolute;inset:5px 7px auto auto;width:21px;height:17px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.72),transparent 68%);filter:blur(1px)}
+ html.native-app .hos-nav-orb .health-os-liquid-orb i,html.native-app .hos-nav-orb .health-os-liquid-orb b{display:block!important;position:absolute!important;border-radius:50%!important;pointer-events:none!important}
+ html.native-app .hos-nav-orb .health-os-liquid-orb i{width:31px;height:25px;left:-4px;bottom:1px;background:rgba(215,255,90,.30);filter:blur(5px)}
+ html.native-app .hos-nav-orb .health-os-liquid-orb b{width:28px;height:28px;right:-7px;top:16px;background:rgba(0,209,198,.30);filter:blur(6px)}
+ html.native-app .hos-nav-orb .health-os-orb-label{position:relative!important;z-index:2!important;margin-top:auto!important;color:inherit!important;font-size:10.5px!important;line-height:1!important;font-weight:640!important}
+ html.native-app .hos-nav-orb.is-active{color:#08735f!important}
+ html.native-app .hos-nav-orb.is-active::before{box-shadow:0 11px 30px rgba(15,157,126,.13),0 0 0 4px rgba(215,255,90,.045),inset 0 1px 2px rgba(255,255,255,.98)}
+ html.native-app .hos-nav-orb.is-active .health-os-liquid-orb{transform:translateX(-50%) translateY(-1px) scale(1.035)!important;box-shadow:0 12px 26px rgba(15,157,126,.23),inset 0 2px 9px rgba(255,255,255,.68),inset 0 -3px 8px rgba(8,115,95,.10)!important;filter:saturate(1.02)!important}
+
+ html.native-app .hos-nav-item:active{transform:scale(.95)!important}
+ html.native-app .hos-nav-orb:active .health-os-liquid-orb{transform:translateX(-50%) scale(.95)!important}
+ html.native-app .hos-nav-orb.is-active:active .health-os-liquid-orb{transform:translateX(-50%) translateY(-1px) scale(.97)!important}
+ html.native-app :where(.hos-nav-item,.hos-nav-orb):focus-visible{outline:2px solid var(--gs-aqua)!important;outline-offset:2px!important}
+
+ html.native-app body:has(.profile-page-clean) .hos-navbar,
+ html.native-app body:has(.organization-page) .hos-navbar,
+ html.native-app body:has(.native-article-screen) .hos-navbar,
+ html.native-app body:has(.native-magazine-reader-screen) .hos-navbar{background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(250,254,253,.64))!important;box-shadow:0 14px 38px rgba(35,91,82,.08),inset 0 1px 0 rgba(255,255,255,.94)!important}
+
+ @media(max-height:520px){html.native-app .hos-navbar{transform:translateY(calc(100% + 30px))!important;pointer-events:none!important;opacity:0!important}}
+}
+@media(prefers-reduced-motion:reduce){html.native-app :where(.hos-nav-item,.hos-nav-icon,.health-os-liquid-orb){transition:none!important}}

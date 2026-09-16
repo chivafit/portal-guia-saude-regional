@@ -1,6 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <rect width="1024" height="1024" rx="224" fill="#0032dc"/>
-  <circle cx="512" cy="512" r="334" fill="#ffffff"/>
-  <path fill="#0032dc" d="M618 395c-30-31-67-46-112-46-84 0-146 61-146 149 0 89 62 151 146 151 35 0 67-9 91-26v-63H492v-88h206v201c-51 44-117 67-195 67-142 0-249-100-249-242 0-141 107-240 252-240 79 0 146 26 195 76l-83 61Z"/>
-  <path fill="#00a8e8" d="M730 250h70v74h73v70h-73v74h-70v-74h-74v-70h74z"/>
+  <defs>
+    <linearGradient id="bg" x1="120" y1="80" x2="900" y2="950" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FFF8"/><stop offset="1" stop-color="#DFF6EF"/>
+    </linearGradient>
+    <linearGradient id="a" x1="285" y1="225" x2="690" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D9FF58"/><stop offset=".5" stop-color="#65DFAE"/><stop offset="1" stop-color="#12A98A"/>
+    </linearGradient>
+    <linearGradient id="b" x1="760" y1="255" x2="335" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F6F61"/><stop offset=".55" stop-color="#149B82"/><stop offset="1" stop-color="#55D6B1"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="30" stdDeviation="34" flood-color="#176F5D" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="1024" height="1024" rx="232" fill="url(#bg)"/>
+  <g filter="url(#shadow)">
+    <path d="M250 370c0-94 76-170 170-170h143c81 0 147 66 147 147 0 61-37 116-94 138l-210 82c-26 10-43 35-43 63 0 37 30 67 67 67h116c43 0 78-35 78-78v-25l150 58v18c0 126-102 228-228 228H430c-120 0-217-97-217-217 0-89 54-169 137-201l207-80c21-8 35-29 35-52 0-31-25-56-56-56H420c-33 0-60 27-60 60v40l-110-42z" fill="url(#a)"/>
+    <path d="M774 654c0 94-76 170-170 170H461c-81 0-147-66-147-147 0-61 37-116 94-138l210-82c26-10 43-35 43-63 0-37-30-67-67-67H478c-43 0-78 35-78 78v25l-150-58v-18c0-126 102-228 228-228h116c120 0 217 97 217 217 0 89-54 169-137 201l-207 80c-21 8-35 29-35 52 0 31 25 56 56 56h116c33 0 60-27 60-60v-40l110 42z" fill="url(#b)" fill-opacity=".88"/>
+    <ellipse cx="398" cy="302" rx="92" ry="38" fill="#fff" fill-opacity=".28" transform="rotate(-24 398 302)"/>
+  </g>
 </svg>

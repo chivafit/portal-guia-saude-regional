@@ -1,6 +1,5 @@
 import { FavoritesList } from "@/components/FavoritesList";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
+import { HealthOSSectionHeader } from "@/components/HealthOSSectionHeader";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -11,17 +10,16 @@ export const metadata = pageMetadata(
 
 export default function FavoritesPage() {
   return (
-    <>
-      <SiteHeader />
-      <main className="favorites-page">
-        <header className="shell favorites-header">
-          <p className="eyebrow">Acesso rápido</p>
-          <h1>Meus favoritos</h1>
-          <p>Os perfis ficam salvos somente neste aparelho.</p>
-        </header>
-        <div className="shell"><FavoritesList /></div>
-      </main>
-      <SiteFooter />
-    </>
+    <main className="native-favorites-screen hos-standard-screen">
+      <div className="native-favorites-aura" aria-hidden="true" />
+      <section className="native-favorites-shell hos-standard-shell">
+        <HealthOSSectionHeader
+          eyebrow="SUA LISTA"
+          title="Favoritos"
+          description="Seus profissionais salvos ficam disponíveis neste aparelho para acesso rápido."
+        />
+        <FavoritesList />
+      </section>
+    </main>
   );
 }

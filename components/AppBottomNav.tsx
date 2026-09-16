@@ -1,70 +1,34 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, Heart, Home, Search } from "lucide-react";
+import { BookOpen, Home, Mic2, Newspaper } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { favoritesChangedEvent, readFavorites } from "@/lib/favorites";
 
-const items = [
-  { href: "/", label: "Início", icon: Home, active: (path: string) => path === "/" || path.startsWith("/cidades/") },
-  { href: "/buscar?cidade=piumhi", label: "Buscar", icon: Search, active: (path: string) => path.startsWith("/buscar") || path.startsWith("/profissionais/") || path.startsWith("/empresas/") },
-  { href: "/materias", label: "Conteúdos", icon: BookOpen, active: (path: string) => path.startsWith("/materias") || path.startsWith("/podcast") || path.startsWith("/revista") },
-  { href: "/favoritos", label: "Favoritos", icon: Heart, active: (path: string) => path.startsWith("/favoritos") },
-] as const;
+const searchHref = "/buscar?cidade=piumhi";
+function tactile(ms=8){ if(typeof navigator!=="undefined" && "vibrate" in navigator) navigator.vibrate(ms); }
+
+type NavItemProps = { href:string; label:string; active:boolean; children:React.ReactNode };
+function NavItem({ href, label, active, children }:NavItemProps){
+  return <Link href={href} onPointerDown={()=>tactile()} className={`hos-nav-item${active?" is-active":""}`} aria-label={label} aria-current={active?"page":undefined}>
+    <span className="hos-nav-icon" aria-hidden="true">{children}</span><span className="hos-nav-label">{label}</span>
+  </Link>;
+}
 
 export function AppBottomNav() {
   const pathname = usePathname();
-  const [favoriteCount, setFavoriteCount] = useState(0);
-  const [routeHint, setRouteHint] = useState("");
+  const homeActive = pathname === "/" || pathname.startsWith("/cidades/");
+  const contentActive = pathname.startsWith("/materias");
+  const searchActive = pathname.startsWith("/buscar") || pathname.startsWith("/profissionais/") || pathname.startsWith("/empresas/");
+  const podcastActive = pathname.startsWith("/podcast");
+  const magazineActive = pathname.startsWith("/revista");
 
-  useEffect(() => {
-    const update = () => setFavoriteCount(readFavorites().length);
-    update();
-    window.addEventListener(favoritesChangedEvent, update);
-    return () => window.removeEventListener(favoritesChangedEvent, update);
-  }, []);
-
-  useEffect(() => {
-    const detectRenderedRoute = () => setRouteHint(document.querySelector(".app-search-page") ? "/buscar" : "");
-    detectRenderedRoute();
-    const observer = new MutationObserver(detectRenderedRoute);
-    observer.observe(document.body, { childList: true, subtree: true });
-    return () => observer.disconnect();
-  }, [pathname]);
-
-  const activePath = routeHint || pathname;
-
-  return (
-    <nav className="app-bottom-nav health-os-dock" aria-label="Navegação do aplicativo">
-      {items.slice(0, 2).map((item) => {
-        const Icon = item.icon;
-        const selected = item.active(activePath);
-        return (
-          <Link key={item.href} href={item.href} aria-current={selected ? "page" : undefined}>
-            <span className="app-bottom-nav-icon"><Icon size={20} strokeWidth={selected ? 2.4 : 1.8} /></span>
-            <span>{item.label}</span>
-          </Link>
-        );
-      })}
-
-      <Link href="/" className="health-os-brand-action" aria-label="Guia Saúde — início">
-        <span className="health-os-liquid-orb" aria-hidden="true"><i /><b /></span>
-      </Link>
-
-      {items.slice(2).map((item) => {
-        const Icon = item.icon;
-        const selected = item.active(activePath);
-        return (
-          <Link key={item.href} href={item.href} aria-current={selected ? "page" : undefined}>
-            <span className="app-bottom-nav-icon">
-              <Icon size={20} strokeWidth={selected ? 2.4 : 1.8} fill={item.label === "Favoritos" && selected ? "currentColor" : "none"} />
-              {item.label === "Favoritos" && favoriteCount > 0 ? <small aria-label={`${favoriteCount} favoritos`}>{favoriteCount > 9 ? "9+" : favoriteCount}</small> : null}
-            </span>
-            <span>{item.label}</span>
-          </Link>
-        );
-      })}
-    </nav>
-  );
+  return <nav className="app-bottom-nav health-os-dock hos-navbar" aria-label="Navegação principal">
+    <NavItem href="/" label="Início" active={homeActive}><Home /></NavItem>
+    <NavItem href="/materias" label="Conteúdos" active={contentActive}><Newspaper /></NavItem>
+    <Link href={searchHref} onPointerDown={()=>tactile(12)} className={`health-os-brand-action health-os-search-action hos-nav-orb${searchActive?" is-active":""}`} aria-label="Buscar profissionais, clínicas e serviços" aria-current={searchActive?"page":undefined}>
+      <span className="health-os-liquid-orb" aria-hidden="true"><i/><b/></span><span className="health-os-orb-label">Buscar</span>
+    </Link>
+    <NavItem href="/podcast" label="Podcast" active={podcastActive}><Mic2 /></NavItem>
+    <NavItem href="/revista" label="Revista" active={magazineActive}><BookOpen /></NavItem>
+  </nav>;
 }

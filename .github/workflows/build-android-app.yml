@@ -2,7 +2,7 @@ name: Gerar aplicativo Android
 
 on:
   push:
-    branches: [codex/mobile-apps]
+    branches: [main]
   workflow_dispatch:
 
 permissions:

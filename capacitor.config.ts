@@ -4,9 +4,9 @@ const config: CapacitorConfig = {
   appId: "br.com.guiasaude.portal",
   appName: "Guia Saúde",
   webDir: "out",
-  backgroundColor: "#ffffff",
-  android: { backgroundColor: "#ffffff" },
-  ios: { backgroundColor: "#ffffff", contentInset: "automatic" },
+  backgroundColor: "#f5faf8",
+  android: { backgroundColor: "#f5faf8" },
+  ios: { backgroundColor: "#f5faf8", contentInset: "never" },
 };
 
 export default config;
