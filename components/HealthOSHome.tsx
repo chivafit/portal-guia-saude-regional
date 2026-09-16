@@ -16,7 +16,7 @@ export async function HealthOSHome() {
   const source = await publishedProfessionals(professionals);
   const featured = source.filter((item) => item.city === "Piumhi" && isFeaturedProfessional(item.slug)).map((item) => ({ slug: item.slug, name: item.name, specialty: item.specialty, organization: item.organization, registration: item.registration, imageUrl: item.imageUrl }));
   return <main className="health-os-home"><div className="health-os-aura health-os-aura-one" aria-hidden="true" /><div className="health-os-aura health-os-aura-two" aria-hidden="true" /><section className="health-os-shell">
-    <header className="health-os-topbar"><button className="health-os-location" type="button"><MapPin size={17} /><span>Piumhi · MG</span><small>⌄</small></button></header>
+    <header className="health-os-topbar"><div className="health-os-location" aria-label="Localização atual: Piumhi, Minas Gerais"><MapPin size={14} /><span>Piumhi · MG</span></div></header>
     <div className="health-os-intro"><span>Olá!</span><h1>Como podemos<br /><em>cuidar de você</em> hoje?</h1></div>
     <form className="health-os-search" action="/buscar"><input type="hidden" name="cidade" value="piumhi" /><Search size={20} /><input name="q" aria-label="Buscar" placeholder="Profissional, especialidade ou serviço" /><button type="submit" aria-label="Pesquisar"><ArrowRight size={19} /></button></form>
     <nav className="health-os-shortcuts" aria-label="Atalhos de saúde">{shortcuts.map(({ label, href, icon: Icon }) => <Link href={href} key={label}><span><Icon size={21} /></span><small>{label}</small></Link>)}</nav>
