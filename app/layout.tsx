@@ -5,11 +5,10 @@ import { AppBottomNav } from "@/components/AppBottomNav";
 import { defaultDescription, siteName, siteUrl } from "@/lib/seo";
 
 /* Portal foundation + canonical Health OS stack.
-   Superseded experimental/reference layers were intentionally removed. */
+   Legacy compatibility is isolated and must never own canonical families. */
 import "./globals.css";
 import "./native-app.css";
 import "./health-os.css";
-import "./health-os-nav-reference-final.css";
 import "./health-os-home-reference-final.css";
 import "./health-os-profile-reference.css";
 import "./health-os-specialties.css";
@@ -21,7 +20,7 @@ import "./health-os-canonical.css";
 import "./health-os-podcast-canonical.css";
 import "./health-os-route-audit.css";
 import "./health-os-content-reader-canonical.css";
-import "./health-os-reference-pages-final.css";
+import "./health-os-legacy-compat.css";
 import "./health-os-global-density-final.css";
 import "./health-os-content-hub-final.css";
 import "./health-os-final-consolidation.css";
@@ -35,6 +34,7 @@ import "./health-os-spatial-system.css";
 import "./health-os-variants.css";
 import "./health-os-navbar.css";
 import "./health-os-product-polish.css";
+import "./health-os-continuous-canvas.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl), title: { default: "Guia Saúde — Portal Regional", template: "%s | Guia Saúde" }, description: defaultDescription,

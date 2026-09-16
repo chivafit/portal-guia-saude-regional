@@ -26,7 +26,7 @@ export function AppBottomNav() {
     <NavItem href="/" label="Início" active={homeActive}><Home /></NavItem>
     <NavItem href="/materias" label="Conteúdos" active={contentActive}><Newspaper /></NavItem>
     <Link href={searchHref} onPointerDown={()=>tactile(12)} className={`health-os-brand-action health-os-search-action hos-nav-orb${searchActive?" is-active":""}`} aria-label="Buscar profissionais, clínicas e serviços" aria-current={searchActive?"page":undefined}>
-      <span className="health-os-liquid-orb" aria-hidden="true"><i/><b/></span><span className="health-os-orb-label">Buscar</span>
+      <span className="health-os-liquid-orb" aria-hidden="true"><i/><b/></span>
     </Link>
     <NavItem href="/podcast" label="Podcast" active={podcastActive}><Mic2 /></NavItem>
     <NavItem href="/revista" label="Revista" active={magazineActive}><BookOpen /></NavItem>

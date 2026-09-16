@@ -16,9 +16,10 @@ export function HealthOSSectionHeader({
   title,
   description,
   backHref = "/",
-  location = "Piumhi · MG",
+  location,
   meta,
 }: HealthOSSectionHeaderProps) {
+  const hasContext = Boolean(location || meta);
   return <>
     <header className="hos-section-header">
       <Link className="hos-section-back" href={backHref} aria-label="Voltar"><ArrowLeft size={20} /></Link>
@@ -28,9 +29,9 @@ export function HealthOSSectionHeader({
         <p>{description}</p>
       </div>
     </header>
-    <div className="hos-section-context">
-      <span><MapPin size={15} />{location}</span>
+    {hasContext ? <div className="hos-section-context">
+      {location ? <span><MapPin size={15} />{location}</span> : <span aria-hidden="true" />}
       {meta ? <strong>{meta}</strong> : null}
-    </div>
+    </div> : null}
   </>;
 }
