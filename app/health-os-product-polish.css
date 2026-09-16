@@ -4,9 +4,14 @@
  html.native-app :where(.native-card-avatar,.native-featured-avatar,.favorite-card-avatar,.organization-logo,.profile-clean-photo){background:var(--hos-media-bg)!important;overflow:hidden!important;contain:paint}
  html.native-app :where(.native-card-avatar,.native-featured-avatar,.favorite-card-avatar,.organization-logo,.profile-clean-photo) img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 28%!important}
  html.native-app :where(.content-native-card,.editorial-card,.native-magazine-grid>a,.native-magazine-feature) img{width:100%!important;height:auto!important;object-fit:cover!important;background:var(--hos-media-bg)!important}
-
  html.native-app .home-featured-spatial-rail{display:grid!important;grid-template-columns:minmax(0,1fr)!important;width:100%!important;max-width:none!important;overflow:visible!important;gap:10px!important;padding-left:0!important;padding-right:0!important;scroll-snap-type:none!important}
  html.native-app .home-featured-professional-card.home-featured-spatial-card{box-sizing:border-box!important;display:grid!important;grid-template-columns:96px minmax(0,1fr)!important;flex:none!important;width:100%!important;max-width:none!important;min-width:0!important;margin-left:0!important;margin-right:0!important;scroll-snap-align:none!important}
+
+ /* Search result types: horizontally scalable without squeezing labels. */
+ html.native-app .native-search-tabs.native-search-tabs-scroll{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:7px!important;width:100%!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important;-webkit-overflow-scrolling:touch!important;scroll-snap-type:x proximity!important;padding:6px!important}
+ html.native-app .native-search-tabs-scroll::-webkit-scrollbar{display:none!important}
+ html.native-app .native-search-tabs-scroll>a{flex:0 0 auto!important;min-width:max-content!important;padding-inline:16px!important;scroll-snap-align:start!important;white-space:nowrap!important}
+ html.native-app .native-search-tabs-scroll>a.active{box-shadow:0 7px 18px rgba(11,15,20,.12)!important}
 
  /* Expanded specialty directory: 12 meaningful shortcuts, each with its own medical symbol. */
  html.native-app .native-specialty-grid.native-specialty-grid-expanded{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;width:100%!important}
@@ -15,12 +20,10 @@
  html.native-app .native-specialty-grid-expanded .native-specialty-card>span svg{width:23px!important;height:23px!important;stroke-width:1.75!important}
  html.native-app .native-specialty-grid-expanded .native-specialty-card strong{font-size:13px!important;line-height:1.08!important;font-weight:720!important;letter-spacing:-.025em!important;color:var(--gs-graphite)!important;overflow-wrap:anywhere!important}
  html.native-app .native-specialty-grid-expanded .native-specialty-card:active{transform:scale(.975)!important}
-
  html.native-app :where(.native-professional-card,.native-business-card,.native-featured-card,.favorite-card,.content-native-card,.editorial-card,.native-specialties-list>a,.native-category-grid>a,.native-search-shortcuts>a,.hos-podcast-row){transition:transform .16s ease,box-shadow .18s ease,border-color .18s ease!important;will-change:transform}
  html.native-app :where(.native-professional-card,.native-business-card,.native-featured-card,.favorite-card,.content-native-card,.editorial-card,.native-specialties-list>a,.native-category-grid>a,.native-search-shortcuts>a,.hos-podcast-row):active{transform:scale(.985)!important;box-shadow:var(--gs-elevation-1)!important}
  html.native-app .favorite-control button[aria-pressed="true"]{color:var(--gs-emerald)!important;background:rgba(15,157,126,.08)!important;border-color:rgba(15,157,126,.16)!important}
  html.native-app .favorite-control button[aria-pressed="true"] svg{filter:drop-shadow(0 3px 7px rgba(15,157,126,.16))}
-
  html.native-app .hos-skeleton{display:block!important;min-height:12px!important;border-radius:10px!important;background:linear-gradient(100deg,rgba(230,241,238,.72) 20%,rgba(250,253,252,.98) 38%,rgba(230,241,238,.72) 56%)!important;background-size:220% 100%!important;animation:hos-polish-shimmer 1.35s linear infinite!important}
  html.native-app .hos-skeleton.is-avatar{width:64px!important;height:64px!important;border-radius:20px!important}
  html.native-app .hos-skeleton.is-line{height:12px!important}.hos-skeleton.is-line.is-short{width:58%!important}
