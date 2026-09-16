@@ -9,7 +9,6 @@ import { defaultDescription, siteName, siteUrl } from "@/lib/seo";
 import "./globals.css";
 import "./native-app.css";
 import "./health-os.css";
-import "./health-os-nav-reference-final.css";
 import "./health-os-home-reference-final.css";
 import "./health-os-profile-reference.css";
 import "./health-os-specialties.css";
