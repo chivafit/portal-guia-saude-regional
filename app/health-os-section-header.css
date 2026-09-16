@@ -1,0 +1,36 @@
+/* Unified Health OS section header — canonical mobile hierarchy based on Professionals. */
+@media(max-width:760px){
+html.native-app .hos-section-header{display:flex!important;align-items:flex-start!important;gap:12px!important;margin:0 0 12px!important;padding:0!important}
+html.native-app .hos-section-back{display:grid!important;place-items:center!important;flex:0 0 40px!important;width:40px!important;height:40px!important;margin:0!important;padding:0!important;border:1px solid rgba(255,255,255,.96)!important;border-radius:15px!important;background:rgba(255,255,255,.74)!important;color:#168c75!important;box-shadow:0 8px 22px rgba(18,76,63,.06),inset 0 1px 0 #fff!important;backdrop-filter:blur(20px) saturate(1.25)!important;-webkit-backdrop-filter:blur(20px) saturate(1.25)!important;text-decoration:none!important}
+html.native-app .hos-section-title{min-width:0!important;flex:1!important;padding-top:1px!important}
+html.native-app .hos-section-title>span{display:block!important;margin:0 0 4px!important;color:#168c75!important;font-size:11px!important;line-height:1.1!important;font-weight:850!important;letter-spacing:.11em!important;text-transform:uppercase!important}
+html.native-app .hos-section-title h1{margin:0!important;color:#173a31!important;font-size:28px!important;line-height:1!important;font-weight:780!important;letter-spacing:-.045em!important;text-wrap:balance!important}
+html.native-app .hos-section-title p{max-width:390px!important;margin:6px 0 0!important;color:#71857e!important;font-size:13px!important;line-height:1.4!important;font-weight:450!important}
+html.native-app .hos-section-context{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;min-height:38px!important;margin:0 0 18px!important;padding:0 4px 0 52px!important;color:#678079!important}
+html.native-app .hos-section-context>span{display:inline-flex!important;align-items:center!important;gap:5px!important;min-width:0!important;font-size:12px!important;font-weight:650!important;white-space:nowrap!important}
+html.native-app .hos-section-context>span svg{flex:0 0 auto!important;width:14px!important;height:14px!important;color:#168c75!important}
+html.native-app .hos-section-context>strong{display:inline-flex!important;align-items:center!important;min-height:28px!important;padding:0 9px!important;border:1px solid rgba(255,255,255,.92)!important;border-radius:999px!important;background:rgba(255,255,255,.62)!important;color:#237562!important;font-size:11px!important;line-height:1!important;font-weight:780!important;white-space:nowrap!important;box-shadow:0 5px 15px rgba(18,76,63,.035)!important}
+
+/* Give the four primary libraries the same safe-area start and horizontal rhythm. */
+html.native-app .native-featured-screen,
+html.native-app .content-native-page,
+html.native-app .native-magazine-screen,
+html.native-app .hos-podcast-page{padding-top:calc(env(safe-area-inset-top) + 14px)!important}
+html.native-app .native-featured-shell,
+html.native-app .content-native-shell,
+html.native-app .native-magazine-shell,
+html.native-app .hos-podcast-shell{width:100%!important;max-width:560px!important;margin-inline:auto!important}
+
+/* Remove superseded, page-specific hero/header spacing once unified header is present. */
+html.native-app .content-native-page .content-native-header{display:none!important}
+html.native-app .native-magazine-screen .native-magazine-topbar,
+html.native-app .native-magazine-screen .native-magazine-intro,
+html.native-app .hos-podcast-page .hos-podcast-header,
+html.native-app .hos-podcast-page .hos-podcast-intro{display:none!important}
+
+/* Consistent transition from header to each page's unique content. */
+html.native-app .content-native-page .content-native-search{margin-top:0!important}
+html.native-app .native-magazine-screen .native-magazine-feature{margin-top:0!important}
+html.native-app .hos-podcast-page .hos-podcast-feature{margin-top:0!important}
+html.native-app .native-featured-screen .native-featured-list{margin-top:0!important}
+}
