@@ -1,0 +1,72 @@
+/* Final app-only guard for the Conteúdos featured card.
+   Loaded after every visual layer so legacy rules cannot stretch the card. */
+@media (max-width:760px){
+  html.native-app .content-native-page .content-native-shell .content-native-feature{
+    display:grid!important;
+    grid-template-columns:96px minmax(0,1fr)!important;
+    grid-template-rows:138px!important;
+    width:100%!important;
+    min-height:0!important;
+    height:166px!important;
+    max-height:166px!important;
+    padding:14px!important;
+    gap:14px!important;
+    align-items:stretch!important;
+    overflow:hidden!important;
+    box-sizing:border-box!important;
+    border-radius:26px!important;
+  }
+  html.native-app .content-native-page .content-native-feature .content-native-image.is-featured{
+    display:block!important;
+    width:96px!important;
+    min-width:96px!important;
+    max-width:96px!important;
+    height:138px!important;
+    min-height:138px!important;
+    max-height:138px!important;
+    aspect-ratio:auto!important;
+    align-self:stretch!important;
+    border-radius:18px!important;
+    background-size:cover!important;
+    background-position:center!important;
+  }
+  html.native-app .content-native-page .content-native-feature .content-native-feature-copy{
+    min-width:0!important;
+    height:138px!important;
+    min-height:0!important;
+    max-height:138px!important;
+    padding:1px 0!important;
+    overflow:hidden!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+  }
+  html.native-app .content-native-page .content-native-feature h2{
+    margin:5px 0!important;
+    font-size:17px!important;
+    line-height:1.02!important;
+    display:-webkit-box!important;
+    -webkit-line-clamp:4!important;
+    -webkit-box-orient:vertical!important;
+    overflow:hidden!important;
+  }
+  html.native-app .content-native-page .content-native-feature p{
+    margin:0 0 4px!important;
+    font-size:9.5px!important;
+    line-height:1.3!important;
+    -webkit-line-clamp:2!important;
+  }
+  html.native-app .content-native-page .content-native-feature small{
+    font-size:8.5px!important;
+    line-height:1.25!important;
+    display:-webkit-box!important;
+    -webkit-line-clamp:2!important;
+    -webkit-box-orient:vertical!important;
+    overflow:hidden!important;
+  }
+  html.native-app .content-native-page .content-native-feature b{
+    margin-top:auto!important;
+    font-size:9.5px!important;
+    flex:none!important;
+  }
+}
