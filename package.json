@@ -2,9 +2,7 @@
   "name": "guia-saude-portal",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": ">=22.13.0"
-  },
+  "engines": { "node": ">=22.13.0" },
   "scripts": {
     "optimize:professional-images": "node --import tsx scripts/optimize-professional-images.ts",
     "predev": "npm run optimize:professional-images",
@@ -23,11 +21,12 @@
     "validate:directory": "node --import tsx scripts/validate-public-directory.ts",
     "validate:search": "node scripts/validate-search-coverage.mjs",
     "validate:podcast": "node scripts/validate-podcast-participants.mjs",
+    "validate:audit": "node --import tsx scripts/validate-directory-audit.ts",
+    "validate:release": "npm run lint && npm run validate:seo && npm run validate:service-import && npm run validate:professionals && npm run build:pages",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
     "test": "npm run build && node --test tests/*.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern android/app/build --ignore-pattern android/app/src/main/assets/public --ignore-pattern ios/App/App/public",
-    "db:generate": "drizzle-kit generate",
-    "validate:audit": "node --import tsx scripts/validate-directory-audit.ts"
+    "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.2",
