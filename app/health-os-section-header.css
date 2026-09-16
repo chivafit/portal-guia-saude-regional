@@ -1,4 +1,4 @@
-/* Unified Health OS section header — canonical mobile hierarchy based on Professionals. */
+/* Unified Health OS headers — audited hierarchy for section, search and detail screens. */
 @media(max-width:760px){
 html.native-app .hos-section-header{display:flex!important;align-items:flex-start!important;gap:12px!important;margin:0 0 12px!important;padding:0!important}
 html.native-app .hos-section-back{display:grid!important;place-items:center!important;flex:0 0 40px!important;width:40px!important;height:40px!important;margin:0!important;padding:0!important;border:1px solid rgba(255,255,255,.96)!important;border-radius:15px!important;background:rgba(255,255,255,.74)!important;color:#168c75!important;box-shadow:0 8px 22px rgba(18,76,63,.06),inset 0 1px 0 #fff!important;backdrop-filter:blur(20px) saturate(1.25)!important;-webkit-backdrop-filter:blur(20px) saturate(1.25)!important;text-decoration:none!important}
@@ -11,26 +11,59 @@ html.native-app .hos-section-context>span{display:inline-flex!important;align-it
 html.native-app .hos-section-context>span svg{flex:0 0 auto!important;width:14px!important;height:14px!important;color:#168c75!important}
 html.native-app .hos-section-context>strong{display:inline-flex!important;align-items:center!important;min-height:28px!important;padding:0 9px!important;border:1px solid rgba(255,255,255,.92)!important;border-radius:999px!important;background:rgba(255,255,255,.62)!important;color:#237562!important;font-size:11px!important;line-height:1!important;font-weight:780!important;white-space:nowrap!important;box-shadow:0 5px 15px rgba(18,76,63,.035)!important}
 
-/* Give the four primary libraries the same safe-area start and horizontal rhythm. */
+/* Canonical safe-area and shell rhythm for every primary section screen. */
 html.native-app .native-featured-screen,
 html.native-app .content-native-page,
 html.native-app .native-magazine-screen,
-html.native-app .hos-podcast-page{padding-top:calc(env(safe-area-inset-top) + 14px)!important}
+html.native-app .hos-podcast-page,
+html.native-app .hos-standard-screen{padding-top:calc(env(safe-area-inset-top) + 14px)!important}
 html.native-app .native-featured-shell,
 html.native-app .content-native-shell,
 html.native-app .native-magazine-shell,
-html.native-app .hos-podcast-shell{width:100%!important;max-width:560px!important;margin-inline:auto!important}
+html.native-app .hos-podcast-shell,
+html.native-app .hos-standard-shell{width:100%!important;max-width:560px!important;margin-inline:auto!important}
 
-/* Remove superseded, page-specific hero/header spacing once unified header is present. */
-html.native-app .content-native-page .content-native-header{display:none!important}
+/* Superseded page-specific heroes are intentionally removed. */
+html.native-app .content-native-page .content-native-header,
 html.native-app .native-magazine-screen .native-magazine-topbar,
 html.native-app .native-magazine-screen .native-magazine-intro,
 html.native-app .hos-podcast-page .hos-podcast-header,
-html.native-app .hos-podcast-page .hos-podcast-intro{display:none!important}
+html.native-app .hos-podcast-page .hos-podcast-intro,
+html.native-app .native-favorites-screen .native-favorites-topbar,
+html.native-app .native-favorites-screen .native-favorites-intro{display:none!important}
 
-/* Consistent transition from header to each page's unique content. */
-html.native-app .content-native-page .content-native-search{margin-top:0!important}
-html.native-app .native-magazine-screen .native-magazine-feature{margin-top:0!important}
-html.native-app .hos-podcast-page .hos-podcast-feature{margin-top:0!important}
-html.native-app .native-featured-screen .native-featured-list{margin-top:0!important}
+html.native-app .content-native-page .content-native-search,
+html.native-app .native-magazine-screen .native-magazine-feature,
+html.native-app .hos-podcast-page .hos-podcast-feature,
+html.native-app .native-featured-screen .native-featured-list,
+html.native-app .native-specialties-screen .native-search-form{margin-top:0!important}
+html.native-app .native-specialties-screen .native-specialties-meta{display:none!important}
+
+/* Search is a functional variant: same visual grammar, compact because the search field follows immediately. */
+html.native-app .native-search-screen{padding-top:calc(env(safe-area-inset-top) + 14px)!important}
+html.native-app .native-search-header{display:flex!important;align-items:flex-start!important;gap:12px!important;margin:0 0 14px!important;padding:0!important}
+html.native-app .native-search-back{display:grid!important;place-items:center!important;flex:0 0 40px!important;width:40px!important;height:40px!important;border:1px solid rgba(255,255,255,.96)!important;border-radius:15px!important;background:rgba(255,255,255,.74)!important;color:#168c75!important;box-shadow:0 8px 22px rgba(18,76,63,.06),inset 0 1px 0 #fff!important;backdrop-filter:blur(20px) saturate(1.25)!important;-webkit-backdrop-filter:blur(20px) saturate(1.25)!important}
+html.native-app .native-search-title{padding-top:1px!important}
+html.native-app .native-search-title h1{margin:0!important;color:#173a31!important;font-size:28px!important;line-height:1!important;font-weight:780!important;letter-spacing:-.045em!important}
+html.native-app .native-search-title p{margin:6px 0 0!important;color:#71857e!important;font-size:13px!important;line-height:1.4!important}
+
+/* Detail screens keep their richer identity, but navigation geometry and safe-area now match the system. */
+html.native-app .profile-page-clean,
+html.native-app .organization-page,
+html.native-app .native-article-screen,
+html.native-app .native-magazine-reader-screen{padding-top:calc(env(safe-area-inset-top) + 12px)!important}
+html.native-app .profile-clean-back,
+html.native-app .organization-back,
+html.native-app .native-article-topbar>a:first-child,
+html.native-app .native-magazine-reader-topbar>a:first-child{min-width:40px!important;min-height:40px!important;border-radius:15px!important}
+html.native-app .profile-clean-back,
+html.native-app .organization-back{display:inline-flex!important;align-items:center!important;gap:6px!important;color:#168c75!important;font-size:12px!important;font-weight:760!important}
+html.native-app .native-article-topbar,
+html.native-app .native-magazine-reader-topbar{min-height:44px!important;margin-top:0!important}
+
+/* Detail titles follow the same readable hierarchy without flattening the content-specific hero. */
+html.native-app .profile-clean-title h1,
+html.native-app .organization-hero h1{font-size:clamp(26px,7vw,32px)!important;line-height:1.03!important;letter-spacing:-.04em!important}
+html.native-app .native-article-heading h1,
+html.native-app .native-magazine-reader-head h1{font-size:clamp(25px,6.8vw,31px)!important;line-height:1.06!important;letter-spacing:-.035em!important}
 }
