@@ -28,21 +28,24 @@
     z-index:1;
   }
 
-  /* Home must begin immediately below the iOS safe area. This last-layer guard
-     prevents any legacy/global shell spacing from creating a viewport-sized blank hero. */
+  /* Home owns the full viewport, but its content shell must be top-anchored.
+     margin:auto on the base shell was vertically centering it when the Home was
+     temporarily shorter than the viewport during native reveal/bootstrap. */
   html.native-app .health-os-home{
+    display:block!important;
     padding-top:0!important;
     margin-top:0!important;
-    align-content:start!important;
-    justify-content:start!important;
+    align-content:normal!important;
+    justify-content:normal!important;
   }
   html.native-app .health-os-home>.health-os-shell{
     position:relative!important;
     top:0!important;
-    margin-top:0!important;
+    width:min(100% - 32px,520px)!important;
+    margin:0 auto!important;
     padding-top:0!important;
     transform:none!important;
-    align-self:start!important;
+    align-self:auto!important;
   }
   html.native-app .health-os-home .health-os-topbar{
     margin-top:0!important;
