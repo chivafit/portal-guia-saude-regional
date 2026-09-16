@@ -1,16 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export function AppBootstrap() {
-  const [nativeLaunch, setNativeLaunch] = useState(false);
-  const [launchLeaving, setLaunchLeaving] = useState(false);
-
   useEffect(() => {
     let active = true;
     let observer: IntersectionObserver | undefined;
-    let leaveTimer: number | undefined;
-    let removeTimer: number | undefined;
     let scrollTimer: number | undefined;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const routeFx = document.createElement("div");
@@ -57,9 +52,6 @@ export function AppBootstrap() {
       if (Capacitor.isNativePlatform()) {
         document.documentElement.dataset.platform = Capacitor.getPlatform();
         document.documentElement.classList.add("native-app");
-        setNativeLaunch(true);
-        leaveTimer = window.setTimeout(() => setLaunchLeaving(true), 1050);
-        removeTimer = window.setTimeout(() => setNativeLaunch(false), 1550);
 
         const motionTargets = document.querySelectorAll<HTMLElement>([
           ".health-os-home .health-os-intro",
@@ -107,11 +99,8 @@ export function AppBootstrap() {
       window.removeEventListener("scroll", handleScroll);
       routeFx.remove();
       if (scrollTimer) window.clearTimeout(scrollTimer);
-      if (leaveTimer) window.clearTimeout(leaveTimer);
-      if (removeTimer) window.clearTimeout(removeTimer);
     };
   }, []);
 
-  if (!nativeLaunch) return null;
-  return <div className={`health-os-launch${launchLeaving ? " is-leaving" : ""}`} aria-hidden="true"><div className="health-os-launch-aurora" /><div className="health-os-launch-orb"><i /><b /></div><div className="health-os-launch-copy"><strong>Guia Saúde</strong><span>SAÚDE MAIS PERTO DE VOCÊ</span><small>PIUMHI · MG</small></div></div>;
+  return null;
 }
