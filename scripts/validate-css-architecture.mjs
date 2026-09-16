@@ -9,7 +9,9 @@ const imports=[...layout.matchAll(/import\s+["']\.\/(.+?\.css)["'];/g)].map(m=>m
 const failures=[];
 
 if(!imports.length) failures.push("Nenhum CSS global encontrado em app/layout.tsx.");
-if(imports.includes("health-os-reference-pages-final.css")) failures.push("Camada obsoleta health-os-reference-pages-final.css voltou ao runtime.");
+for(const obsolete of ["health-os-reference-pages-final.css","health-os-nav-reference-final.css"]){
+  if(imports.includes(obsolete)) failures.push(`Camada obsoleta voltou ao runtime: ${obsolete}`);
+}
 if(imports.at(-1)!=="health-os-continuous-canvas.css") failures.push("health-os-continuous-canvas.css deve ser a ultima camada CSS global.");
 
 for(const file of imports){
@@ -25,14 +27,16 @@ for(const file of imports){
 const compatPath=path.join(appDir,"health-os-legacy-compat.css");
 if(fs.existsSync(compatPath)){
   const compat=fs.readFileSync(compatPath,"utf8");
-  const forbidden=["hos-podcast","native-magazine","content-native","native-search-tabs","native-specialty-grid"];
+  const forbidden=["hos-podcast","native-magazine","content-native","native-search","native-specialty","health-os-dock","hos-navbar","organization-"];
   for(const selector of forbidden){if(compat.includes(selector)) failures.push(`health-os-legacy-compat.css nao pode possuir a familia ${selector}.`)}
 }
 
 const familyOwners={
-  "hos-podcast":"health-os-podcast-canonical.css",
-  "content-native":"health-os-content-hub-final.css",
-  "content-reader":"health-os-content-reader-canonical.css"
+  "navbar":"health-os-navbar.css",
+  "podcast":"health-os-podcast-canonical.css",
+  "conteudos":"health-os-content-hub-final.css",
+  "leitor de conteudo":"health-os-content-reader-canonical.css",
+  "canvas":"health-os-continuous-canvas.css"
 };
 for(const [family,owner] of Object.entries(familyOwners)){
   if(!imports.includes(owner)) failures.push(`Owner canonico ausente para ${family}: ${owner}`);
@@ -41,4 +45,4 @@ for(const [family,owner] of Object.entries(familyOwners)){
 console.log("CSS architecture validation");
 console.log(JSON.stringify({globalCssImports:imports.length,lastLayer:imports.at(-1),legacyCompatibility:imports.includes("health-os-legacy-compat.css"),failures:failures.length},null,2));
 if(failures.length){for(const failure of failures) console.error(`- ${failure}`);process.exit(1)}
-console.log("Arquitetura CSS validada: sem UI textual via CSS e sem ownership legado de Podcast/Revista/Conteudos/Buscar.");
+console.log("Arquitetura CSS validada: sem UI textual via CSS, sem camadas reference obsoletas e com ownership canonico protegido.");
