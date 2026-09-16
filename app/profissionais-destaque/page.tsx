@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, MapPin, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { professionals } from "@/lib/data";
 import { publishedProfessionals } from "@/lib/public-directory";
 import { isFeaturedProfessional } from "@/lib/featured-professionals";
 import { pageMetadata } from "@/lib/seo";
 import { ProfessionalImage } from "@/components/ProfessionalImage";
+import { HealthOSSectionHeader } from "@/components/HealthOSSectionHeader";
 
 export const metadata = pageMetadata("Profissionais em destaque", "Conheça os profissionais em destaque do Guia Saúde em Piumhi.", "/profissionais-destaque");
 
@@ -20,11 +21,7 @@ export default async function FeaturedProfessionalsPage() {
   return <main className="native-featured-screen">
     <div className="native-search-aura" aria-hidden="true" />
     <section className="native-featured-shell">
-      <header className="native-search-header">
-        <Link className="native-search-back" href="/" aria-label="Voltar"><ArrowLeft size={20} /></Link>
-        <div className="native-search-title"><span>SELEÇÃO GUIA SAÚDE</span><h1>Profissionais em destaque</h1><p>Uma seleção editorial de profissionais do Guia Saúde em Piumhi.</p></div>
-      </header>
-      <div className="native-featured-location"><MapPin size={15} /><span>Piumhi · MG</span><strong>{featuredProfessionals.length} destaques</strong></div>
+      <HealthOSSectionHeader eyebrow="SELEÇÃO GUIA SAÚDE" title="Profissionais em destaque" description="Uma seleção editorial de profissionais do Guia Saúde em Piumhi." meta={`${featuredProfessionals.length} destaques`} />
       <section className="native-featured-list" aria-label="Profissionais em destaque">
         {featuredProfessionals.map((item, index) => {
           const registration = registrationLabel(item.registration);
