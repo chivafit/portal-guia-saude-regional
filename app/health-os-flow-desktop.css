@@ -1,3 +1,0 @@
-@media(min-width:761px){
-.profile-page-clean .profile-clean-card,.app-search-page .doctor-card,.app-search-page .business-card{transition:transform .18s ease,box-shadow .18s ease}.app-search-page .doctor-card:hover,.app-search-page .business-card:hover{transform:translateY(-2px);box-shadow:0 20px 54px rgba(18,76,65,.10)!important}.profile-page-clean .profile-clean-details>article{scroll-margin-top:90px}
-}
