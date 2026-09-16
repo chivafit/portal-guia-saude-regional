@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BookOpen, Headphones, Search, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Headphones, Search } from "lucide-react";
 import { FormEvent, useMemo, useState } from "react";
+import { HealthOSSectionHeader } from "@/components/HealthOSSectionHeader";
 
 type EditorialArticle = { slug:string; category:string; title:string; excerpt:string; author?:string; authorRole?:string; date?:string; readingTime?:string; professionalSlug?:string; image?:string };
 const topics=["Mais recentes","Prevenção","Saúde da mulher","Saúde infantil","Saúde bucal","Alimentação","Saúde mental","Pele","Cardiologia","Ortopedia","Oftalmologia","Bem-estar"];
@@ -14,7 +15,7 @@ export function MateriasCatalog({articles,podcastImage,magazineCover,magazineSlu
  const catalog=useMemo(()=>{const q=submitted.trim().toLocaleLowerCase("pt-BR");return articles.filter(a=>(topic==="Mais recentes"||topicsFor(a).includes(topic))&&(!q||`${a.title} ${a.excerpt} ${a.category} ${a.author??""}`.toLocaleLowerCase("pt-BR").includes(q)))},[articles,topic,submitted]);
  const feature=catalog[0], recent=catalog.slice(1,count+1); const search=(e:FormEvent)=>{e.preventDefault();setSubmitted(query);setCount(8)};
  return <main className="content-native-page"><section className="content-native-shell">
-   <header className="content-native-header"><span className="content-native-kicker"><Sparkles size={13}/> GUIA SAÚDE</span><h1>Conteúdos</h1><p>Informação confiável para cuidar melhor.</p></header>
+   <HealthOSSectionHeader eyebrow="GUIA SAÚDE" title="Conteúdos" description="Informação confiável para cuidar melhor." meta={`${catalog.length} matérias`} />
    <form className="content-native-search" onSubmit={search}><Search size={18}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Busque um tema ou especialidade" aria-label="Buscar conteúdos"/><button aria-label="Buscar"><ArrowRight size={18}/></button></form>
    <div className="content-native-topics">{topics.map(t=><button type="button" key={t} className={topic===t?"active":""} onClick={()=>{setTopic(t);setCount(8)}}>{t}</button>)}</div>
    {feature?<Link href={`/materias/${feature.slug}`} className="content-native-feature"><Img article={feature} featured/><div className="content-native-feature-copy"><span>{feature.category}</span><h2>{feature.title}</h2><p>{feature.excerpt}</p><small>{byline(feature)}</small><b>Ler matéria <ArrowRight size={14}/></b></div></Link>:<div className="content-native-empty"><strong>Nenhum conteúdo encontrado</strong><p>Tente outro tema ou categoria.</p></div>}
