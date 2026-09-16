@@ -6,6 +6,10 @@
  html.native-app :where(.native-card-avatar,.native-featured-avatar,.favorite-card-avatar,.organization-logo,.profile-clean-photo) img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 28%!important}
  html.native-app :where(.content-native-card,.editorial-card,.native-magazine-grid>a,.native-magazine-feature) img{width:100%!important;height:auto!important;object-fit:cover!important;background:var(--hos-media-bg)!important}
 
+ /* Home featured professionals: use the complete content width, with symmetrical page gutters. */
+ html.native-app .home-featured-spatial-rail{display:grid!important;grid-template-columns:minmax(0,1fr)!important;width:100%!important;max-width:none!important;overflow:visible!important;gap:10px!important;padding-left:0!important;padding-right:0!important;scroll-snap-type:none!important}
+ html.native-app .home-featured-professional-card.home-featured-spatial-card{box-sizing:border-box!important;display:grid!important;grid-template-columns:96px minmax(0,1fr)!important;flex:none!important;width:100%!important;max-width:none!important;min-width:0!important;margin-left:0!important;margin-right:0!important;scroll-snap-align:none!important}
+
  /* Touch feedback: subtle and consistent, never decorative noise. */
  html.native-app :where(.native-professional-card,.native-business-card,.native-featured-card,.favorite-card,.content-native-card,.editorial-card,.native-specialties-list>a,.native-category-grid>a,.native-search-shortcuts>a,.hos-podcast-row){transition:transform .16s ease,box-shadow .18s ease,border-color .18s ease!important;will-change:transform}
  html.native-app :where(.native-professional-card,.native-business-card,.native-featured-card,.favorite-card,.content-native-card,.editorial-card,.native-specialties-list>a,.native-category-grid>a,.native-search-shortcuts>a,.hos-podcast-row):active{transform:scale(.985)!important;box-shadow:var(--gs-elevation-1)!important}
