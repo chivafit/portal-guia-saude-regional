@@ -1,28 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { ArrowUpRight, Star } from "lucide-react";
 import { ProfessionalImage } from "@/components/ProfessionalImage";
 
 type FeaturedProfessional = { slug:string; name:string; specialty:string; organization:string; registration:string; imageUrl?:string };
 
-function pickThree(professionals: FeaturedProfessional[]) {
-  if (professionals.length <= 3) return professionals;
-  const shuffled = [...professionals];
-  for (let index = shuffled.length - 1; index > 0; index -= 1) {
-    const randomIndex = Math.floor(Math.random() * (index + 1));
-    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
-  }
-  return shuffled.slice(0, 3);
-}
-
 export function FeaturedProfessionalsRotator({ professionals }: { professionals: FeaturedProfessional[] }) {
-  const [visible, setVisible] = useState(() => professionals.slice(0, 3));
-
-  useEffect(() => {
-    setVisible(pickThree(professionals));
-  }, [professionals]);
+  const visible = professionals.slice(0, 3);
 
   return <div className="home-featured-spatial">
     <div className="home-featured-professionals-grid home-featured-spatial-rail">
