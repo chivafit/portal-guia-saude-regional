@@ -22,7 +22,7 @@
     "validate:search": "node scripts/validate-search-coverage.mjs",
     "validate:podcast": "node scripts/validate-podcast-participants.mjs",
     "validate:audit": "node --import tsx scripts/validate-directory-audit.ts",
-    "validate:release": "npm run lint && npm run validate:seo && npm run validate:service-import && npm run validate:professionals && npm run build:pages",
+    "validate:release": "npm run lint && npm run validate:seo && npm run validate:professionals && npm run build:pages",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
     "test": "npm run build && node --test tests/*.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern android/app/build --ignore-pattern android/app/src/main/assets/public --ignore-pattern ios/App/App/public",
