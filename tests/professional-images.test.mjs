@@ -18,7 +18,7 @@ test("professional image manifest contains versioned AVIF and WebP variants", as
 test("home and featured directory cap eager photos", async () => {
   const home = await readFile("components/FeaturedProfessionalsRotator.tsx", "utf8");
   const featured = await readFile("app/profissionais-destaque/page.tsx", "utf8");
-  assert.match(home, /professionals\.slice\(0, 6\)/);
+  assert.match(home, /professionals\.slice\(0, 3\)/);
   assert.match(home, /eager=\{index\s*<\s*2\}/);
   assert.match(featured, /eager=\{index\s*<\s*3\}/);
 });

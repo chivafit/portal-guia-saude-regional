@@ -13,7 +13,7 @@ test("renders the Health OS home and navigation", async () => {
   assert.match(html, /Como podemos/);
   assert.match(html, /cuidar de você/);
   assert.match(html, /Saúde mais perto de você/);
-  assert.match(html, /Navegação do aplicativo/);
+  assert.match(html, /Navegação principal/);
 });
 
 test("exports the main app routes with titles", async () => {

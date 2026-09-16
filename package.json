@@ -2,7 +2,9 @@
   "name": "guia-saude-portal",
   "version": "0.1.0",
   "private": true,
-  "engines": { "node": ">=22.13.0" },
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "scripts": {
     "optimize:professional-images": "node --import tsx scripts/optimize-professional-images.ts",
     "predev": "npm run optimize:professional-images",
@@ -34,7 +36,7 @@
     "@capacitor/ios": "^8.5.2",
     "drizzle-orm": "0.45.2",
     "lucide-react": "^1.24.0",
-    "next": "16.2.6",
+    "next": "^16.3.5",
     "page-flip": "^2.0.7",
     "react": "19.2.6",
     "react-dom": "19.2.6"
@@ -51,9 +53,9 @@
     "@vitejs/plugin-rsc": "0.5.26",
     "drizzle-kit": "0.31.10",
     "eslint": "9.39.4",
-    "eslint-config-next": "16.2.6",
+    "eslint-config-next": "^16.3.5",
     "react-server-dom-webpack": "19.2.6",
-    "sharp": "0.34.5",
+    "sharp": "^0.35.4",
     "tailwindcss": "4.2.1",
     "typescript": "5.9.3",
     "vinext": "0.0.50",
