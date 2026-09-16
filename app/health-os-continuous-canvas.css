@@ -29,14 +29,20 @@
   }
 
   /* Home owns the full viewport, but its content shell must be top-anchored.
-     margin:auto on the base shell was vertically centering it when the Home was
-     temporarily shorter than the viewport during native reveal/bootstrap. */
+     The two liquid aura DIVs are purely decorative and must never participate
+     in normal flow. They previously occupied 390px + 420px and pushed the
+     real Home shell 810px below the top in iOS WebKit. */
   html.native-app .health-os-home{
     display:block!important;
     padding-top:0!important;
     margin-top:0!important;
     align-content:normal!important;
     justify-content:normal!important;
+  }
+  html.native-app .health-os-home>.health-os-aura{
+    position:absolute!important;
+    pointer-events:none!important;
+    z-index:0!important;
   }
   html.native-app .health-os-home>.health-os-shell{
     position:relative!important;
@@ -46,6 +52,7 @@
     padding-top:0!important;
     transform:none!important;
     align-self:auto!important;
+    z-index:1!important;
   }
   html.native-app .health-os-home .health-os-topbar{
     margin-top:0!important;
