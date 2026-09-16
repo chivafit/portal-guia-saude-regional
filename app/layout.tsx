@@ -35,6 +35,7 @@ import "./health-os-variants.css";
 import "./health-os-navbar.css";
 import "./health-os-product-polish.css";
 import "./health-os-continuous-canvas.css";
+import "./health-os-back-navigation-fix.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl), title: { default: "Guia Saúde — Portal Regional", template: "%s | Guia Saúde" }, description: defaultDescription,
