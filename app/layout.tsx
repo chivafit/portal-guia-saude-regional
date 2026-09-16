@@ -39,6 +39,8 @@ import "./health-os-back-navigation-fix.css";
 import "./health-os-profile-controls-final.css";
 /* Visual atmosphere only: must never own navbar/profile/back controls. */
 import "./health-os-continuous-canvas.css";
+/* Route-specific release guard: intentionally last so legacy content rules cannot stretch the featured card. */
+import "./health-os-content-feature-guard.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl), title: { default: "Guia Saúde — Portal Regional", template: "%s | Guia Saúde" }, description: defaultDescription,
