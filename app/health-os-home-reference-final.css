@@ -7,7 +7,7 @@
   html.native-app .health-os-location{
     position:relative!important;
     display:inline-grid!important;
-    grid-template-columns:28px auto 20px!important;
+    grid-template-columns:28px auto!important;
     align-items:center!important;
     gap:7px!important;
     min-height:48px!important;
