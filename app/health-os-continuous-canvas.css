@@ -15,10 +15,18 @@
   html.native-app .native-magazine-grid>a{width:100%!important;min-width:0!important;flex:none!important;scroll-snap-align:none!important}
   html.native-app .native-magazine-cover{width:100%!important;aspect-ratio:.70!important}
 
+  /* One predictable back-button language across the native app. */
+  html.native-app :where(.profile-clean-back,.organization-back,.native-search-back){box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:none!important;gap:6px!important;width:auto!important;min-width:40px!important;max-width:max-content!important;height:40px!important;min-height:40px!important;margin:0!important;padding:0 12px!important;border:1px solid rgba(15,109,102,.14)!important;border-radius:20px!important;background:rgba(255,255,255,.82)!important;color:#0f6d66!important;font-family:inherit!important;font-size:11px!important;font-weight:750!important;line-height:1!important;letter-spacing:0!important;text-decoration:none!important;white-space:nowrap!important;word-break:normal!important;overflow:hidden!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important;box-shadow:0 5px 18px rgba(26,71,65,.06)!important}
+  html.native-app :where(.profile-clean-back,.organization-back,.native-search-back) svg{display:block!important;flex:0 0 auto!important;width:17px!important;height:17px!important;min-width:17px!important;max-width:17px!important;margin:0!important}
+  html.native-app :where(.profile-clean-back,.organization-back,.native-search-back) span{display:inline-block!important;width:auto!important;max-width:none!important;margin:0!important;padding:0!important;line-height:1!important;white-space:nowrap!important;writing-mode:horizontal-tb!important}
+  html.native-app .native-search-back{width:40px!important;max-width:40px!important;padding:0!important;border-radius:50%!important}
+  html.native-app .profile-clean-back{position:absolute!important;z-index:12!important;top:calc(env(safe-area-inset-top) + 18px)!important;left:16px!important;background:rgba(247,252,250,.80)!important}
+  html.native-app .profile-clean-wrap{position:relative!important}
+
   /* Organization detail — compact, app-native hierarchy and safe-area spacing. */
   html.native-app .organization-page{padding:0 0 calc(112px + env(safe-area-inset-bottom))!important;min-height:100svh!important}
   html.native-app .organization-page .organization-wrap{width:100%!important;max-width:none!important;padding:calc(env(safe-area-inset-top) + 18px) 16px 28px!important}
-  html.native-app .organization-back{display:inline-flex!important;align-items:center!important;gap:7px!important;width:auto!important;max-width:100%!important;margin:0 0 14px!important;padding:8px 11px!important;border:1px solid rgba(15,109,102,.12)!important;border-radius:999px!important;background:rgba(255,255,255,.72)!important;color:#0f6d66!important;font-size:11px!important;font-weight:700!important;line-height:1!important;white-space:nowrap!important;backdrop-filter:blur(14px)!important}
+  html.native-app .organization-back{margin:0 0 14px!important}
   html.native-app .organization-hero{display:block!important;min-height:0!important;margin:0 0 12px!important;padding:20px 18px 18px!important;border:1px solid rgba(15,109,102,.10)!important;border-radius:24px!important;background:rgba(255,255,255,.78)!important;box-shadow:0 14px 38px rgba(31,72,67,.07)!important;overflow:visible!important}
   html.native-app .organization-hero-mark{display:none!important}
   html.native-app .organization-classification{display:flex!important;flex-wrap:wrap!important;gap:6px!important;margin:0 0 11px!important}
