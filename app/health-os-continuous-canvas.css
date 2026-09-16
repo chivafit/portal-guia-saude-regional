@@ -1,9 +1,12 @@
-/* Continuous ambient canvas — final visual seam guard.
-   Keeps the liquid aura fading naturally into page content instead of ending as a rectangular hero. */
+/* Continuous ambient canvas — FINAL VISUAL LAYER ONLY.
+   Ownership rule: atmosphere/background/seam fixes live here. Navbar, back navigation,
+   profile controls and organization controls belong to their canonical component files. */
 @media(max-width:760px){
   html.native-app :where(.health-os-home,.native-search-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-specialties-screen,.favorites-native-page,.app-search-page){position:relative!important;isolation:isolate!important;overflow-x:hidden!important;background:linear-gradient(155deg,#f9fbfc 0%,#f3f9f7 42%,#eef8f7 72%,#f7fafb 100%)!important}
   html.native-app :where(.health-os-home,.native-search-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-specialties-screen,.favorites-native-page,.app-search-page)::before{content:"";position:absolute;z-index:0;pointer-events:none;top:-90px;left:-28%;width:156%;height:720px;background:radial-gradient(ellipse 46% 48% at 84% 15%,rgba(215,255,90,.28) 0%,rgba(0,209,198,.13) 42%,transparent 76%),radial-gradient(ellipse 42% 50% at 10% 54%,rgba(15,157,126,.12) 0%,rgba(0,209,198,.06) 45%,transparent 78%);filter:blur(18px);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 48%,rgba(0,0,0,.78) 64%,rgba(0,0,0,.38) 78%,rgba(0,0,0,.12) 90%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 48%,rgba(0,0,0,.78) 64%,rgba(0,0,0,.38) 78%,rgba(0,0,0,.12) 90%,transparent 100%)}
   html.native-app :where(.health-os-home,.native-search-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-specialties-screen,.favorites-native-page,.app-search-page)>*{position:relative;z-index:1}
+
+  /* Home flow regression guard for iOS WebKit. */
   html.native-app .health-os-home{display:block!important;padding-top:0!important;margin-top:0!important;align-content:normal!important;justify-content:normal!important}
   html.native-app .health-os-home>.health-os-aura{position:absolute!important;pointer-events:none!important;z-index:0!important}
   html.native-app .health-os-home>.health-os-shell{position:relative!important;top:0!important;width:min(100% - 32px,520px)!important;margin:0 auto!important;padding-top:0!important;transform:none!important;align-self:auto!important;z-index:1!important}
@@ -15,18 +18,9 @@
   html.native-app .native-magazine-grid>a{width:100%!important;min-width:0!important;flex:none!important;scroll-snap-align:none!important}
   html.native-app .native-magazine-cover{width:100%!important;aspect-ratio:.70!important}
 
-  /* One predictable back-button language across the native app. */
-  html.native-app :where(.profile-clean-back,.organization-back,.native-search-back){box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:none!important;gap:6px!important;width:auto!important;min-width:40px!important;max-width:max-content!important;height:40px!important;min-height:40px!important;margin:0!important;padding:0 12px!important;border:1px solid rgba(15,109,102,.14)!important;border-radius:20px!important;background:rgba(255,255,255,.82)!important;color:#0f6d66!important;font-family:inherit!important;font-size:11px!important;font-weight:750!important;line-height:1!important;letter-spacing:0!important;text-decoration:none!important;white-space:nowrap!important;word-break:normal!important;overflow:hidden!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important;box-shadow:0 5px 18px rgba(26,71,65,.06)!important}
-  html.native-app :where(.profile-clean-back,.organization-back,.native-search-back) svg{display:block!important;flex:0 0 auto!important;width:17px!important;height:17px!important;min-width:17px!important;max-width:17px!important;margin:0!important}
-  html.native-app :where(.profile-clean-back,.organization-back,.native-search-back) span{display:inline-block!important;width:auto!important;max-width:none!important;margin:0!important;padding:0!important;line-height:1!important;white-space:nowrap!important;writing-mode:horizontal-tb!important}
-  html.native-app .native-search-back{width:40px!important;max-width:40px!important;padding:0!important;border-radius:50%!important}
-  html.native-app .profile-clean-back{position:absolute!important;z-index:12!important;top:calc(env(safe-area-inset-top) + 18px)!important;left:16px!important;background:rgba(247,252,250,.80)!important}
-  html.native-app .profile-clean-wrap{position:relative!important}
-
-  /* Organization detail — compact, app-native hierarchy and safe-area spacing. */
+  /* Organization detail surface/layout only. Controls are intentionally excluded. */
   html.native-app .organization-page{padding:0 0 calc(112px + env(safe-area-inset-bottom))!important;min-height:100svh!important}
   html.native-app .organization-page .organization-wrap{width:100%!important;max-width:none!important;padding:calc(env(safe-area-inset-top) + 18px) 16px 28px!important}
-  html.native-app .organization-back{margin:0 0 14px!important}
   html.native-app .organization-hero{display:block!important;min-height:0!important;margin:0 0 12px!important;padding:20px 18px 18px!important;border:1px solid rgba(15,109,102,.10)!important;border-radius:24px!important;background:rgba(255,255,255,.78)!important;box-shadow:0 14px 38px rgba(31,72,67,.07)!important;overflow:visible!important}
   html.native-app .organization-hero-mark{display:none!important}
   html.native-app .organization-classification{display:flex!important;flex-wrap:wrap!important;gap:6px!important;margin:0 0 11px!important}
@@ -54,21 +48,4 @@
   html.native-app .organization-information-list strong,html.native-app .organization-information-list p,html.native-app .organization-info-contact{margin:0!important;color:#233b38!important;font-size:11px!important;line-height:1.45!important}
   html.native-app .organization-information-list a{color:#0f806f!important;font-weight:750!important}
   html.native-app .organization-footer-note{margin:12px 0 0!important;padding:0 4px!important;color:#82918f!important;font-size:9px!important;line-height:1.45!important}
-
-  /* Profile detail — hard final ownership. Keep this in the canonical last layer. */
-  html.native-app .profile-page-clean .profile-clean-back{z-index:60!important;top:calc(env(safe-area-inset-top) + 18px)!important;left:16px!important;width:40px!important;min-width:40px!important;max-width:40px!important;height:40px!important;padding:0!important;border-radius:50%!important}
-  html.native-app .profile-page-clean .profile-clean-back span{display:none!important}
-  html.native-app .profile-page-clean .profile-clean-contact{position:absolute!important;z-index:60!important;top:calc(env(safe-area-inset-top) + 18px)!important;right:16px!important;display:flex!important;align-items:center!important;gap:8px!important;width:auto!important;margin:0!important;padding:0!important}
-  html.native-app .profile-page-clean .favorite-control,html.native-app .profile-page-clean .profile-share{position:relative!important;display:block!important;width:40px!important;height:40px!important;margin:0!important;padding:0!important}
-  html.native-app .profile-page-clean .favorite-control button,html.native-app .profile-page-clean .profile-share button{box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:0!important;width:40px!important;min-width:40px!important;max-width:40px!important;height:40px!important;min-height:40px!important;margin:0!important;padding:0!important;border:1px solid rgba(15,109,102,.14)!important;border-radius:50%!important;background:rgba(250,253,252,.90)!important;color:#47716b!important;box-shadow:0 5px 18px rgba(25,64,60,.08)!important;font-size:0!important;line-height:0!important;overflow:hidden!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important}
-  html.native-app .profile-page-clean .favorite-control button span{display:none!important}
-  html.native-app .profile-page-clean .favorite-control button svg,html.native-app .profile-page-clean .profile-share button svg{display:block!important;flex:none!important;width:18px!important;height:18px!important;min-width:18px!important;margin:0!important}
-  html.native-app .profile-page-clean .profile-share>span,html.native-app .profile-page-clean .favorite-control>.sr-only{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important}
-  html.native-app .profile-page-clean .favorite-control button[aria-pressed="true"]{background:#e8f7f2!important;color:#0f8d78!important}
-  html.native-app body:has(.profile-page-clean) .app-bottom-nav.health-os-dock.hos-navbar{position:fixed!important;z-index:100!important;left:16px!important;right:16px!important;bottom:calc(env(safe-area-inset-bottom) + 10px)!important;top:auto!important;transform:none!important;width:auto!important;max-width:none!important;height:64px!important;min-height:64px!important;margin:0!important;padding:7px 10px!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:center!important;border-radius:24px!important}
-  html.native-app body:has(.profile-page-clean) .app-bottom-nav .hos-nav-item{height:50px!important;min-width:0!important;padding:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important}
-  html.native-app body:has(.profile-page-clean) .app-bottom-nav .hos-nav-label{font-size:9px!important;line-height:1!important;white-space:nowrap!important}
-  html.native-app body:has(.profile-page-clean) .app-bottom-nav .health-os-search-action.hos-nav-orb{position:relative!important;inset:auto!important;transform:none!important;justify-self:center!important;width:50px!important;height:50px!important;min-width:50px!important;margin:0!important}
-  html.native-app body:has(.profile-page-clean) .app-bottom-nav .health-os-liquid-orb{width:50px!important;height:50px!important;transform:none!important}
-  html.native-app .profile-page-clean .profile-clean-wrap{padding-bottom:118px!important}
 }
