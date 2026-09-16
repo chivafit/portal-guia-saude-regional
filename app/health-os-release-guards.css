@@ -9,6 +9,7 @@
   html.native-app input,html.native-app select,html.native-app textarea{font-size:16px}
   html.native-app :where(a,button,input,select,textarea,summary):focus-visible{outline:2px solid #168c75!important;outline-offset:3px!important}
   html.native-app :where(.native-search-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-favorites-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader){overflow-x:clip}
+  html.native-app body::before{content:"";position:fixed;z-index:1400;top:0;left:0;right:0;height:env(safe-area-inset-top);pointer-events:none;background:rgba(245,250,248,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
   html.native-app .health-os-dock{padding-bottom:max(5px,env(safe-area-inset-bottom))!important}
   html.native-app body.podcast-player-open{overflow:hidden!important}
   .hos-podcast-feature.is-unavailable,.hos-podcast-row.is-unavailable{opacity:.72}
