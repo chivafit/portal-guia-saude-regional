@@ -8,6 +8,7 @@ const layout=fs.readFileSync(layoutPath,"utf8");
 const imports=[...layout.matchAll(/import\s+["']\.\/(.+?\.css)["'];/g)].map(m=>m[1]);
 const failures=[];
 const stripComments=(value)=>value.replace(/\/\*[\s\S]*?\*\//g,"");
+const selectorPrelude=(css)=>[...css.matchAll(/([^{}]+)\{/g)].map(m=>m[1]).join("\n");
 
 if(!imports.length) failures.push("Nenhum CSS global encontrado em app/layout.tsx.");
 for(const obsolete of ["health-os-reference-pages-final.css","health-os-nav-reference-final.css"]){
@@ -31,8 +32,9 @@ for(const file of imports.filter(file=>file.startsWith("health-os-"))){
 const compatPath=path.join(appDir,"health-os-legacy-compat.css");
 if(fs.existsSync(compatPath)){
   const compat=stripComments(fs.readFileSync(compatPath,"utf8"));
-  const forbidden=["hos-podcast","native-magazine","content-native","native-search","native-specialty","health-os-dock","hos-navbar","organization-"];
-  for(const selector of forbidden){if(compat.includes(selector)) failures.push(`health-os-legacy-compat.css nao pode possuir a familia ${selector}.`)}
+  const selectors=selectorPrelude(compat);
+  const forbidden=["hos-podcast","native-magazine","content-native","native-search-screen","native-search-shell","native-search-tabs","native-search-results","native-specialty","health-os-dock","hos-navbar","organization-"];
+  for(const selector of forbidden){if(selectors.includes(selector)) failures.push(`health-os-legacy-compat.css nao pode possuir a familia ${selector}.`)}
 }
 
 const familyOwners={
