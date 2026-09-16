@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useState, type ComponentType } from "react";
-import { ArrowLeft, ArrowUpRight, Baby, Bone, Brain, Building2, ChevronRight, Ellipsis, Eye, HeartPulse, Lungs, Phone, Search, SlidersHorizontal, Sparkles, Stethoscope, Tooth, Venus, X } from "lucide-react";
+import { Activity, ArrowLeft, ArrowUpRight, Baby, Bone, Brain, Building2, ChevronRight, Ellipsis, Eye, HeartPulse, Phone, Search, SlidersHorizontal, Sparkles, Stethoscope, Venus, X } from "lucide-react";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { ProfessionalImage } from "@/components/ProfessionalImage";
 import { ProfessionIcon } from "@/components/ProfessionIcon";
@@ -15,7 +15,7 @@ import { categoryOptionsFor } from "@/lib/service-taxonomy";
 const PAGE_SIZE = 18;
 type SpecialtyIcon = ComponentType<{ size?: number; strokeWidth?: number }>;
 const quickSpecialties: Array<{label:string; query:string; Icon:SpecialtyIcon}> = [
- {label:"Cardiologia",query:"Cardiologia",Icon:HeartPulse},{label:"Dermatologia",query:"Dermatologia",Icon:Sparkles},{label:"Ginecologia",query:"Ginecologia",Icon:Venus},{label:"Ortopedia",query:"Ortopedia",Icon:Bone},{label:"Pediatria",query:"Pediatria",Icon:Baby},{label:"Psicologia",query:"Psicologia",Icon:Brain},{label:"Odontologia",query:"Dentista",Icon:Tooth},{label:"Oftalmologia",query:"Oftalmologia",Icon:Eye},{label:"Psiquiatria",query:"Psiquiatria",Icon:Brain},{label:"Pneumologia",query:"Pneumologia",Icon:Lungs},{label:"Clínica médica",query:"Clínica Médica",Icon:Stethoscope},{label:"Outras especialidades",query:"",Icon:Ellipsis},
+ {label:"Cardiologia",query:"Cardiologia",Icon:HeartPulse},{label:"Dermatologia",query:"Dermatologia",Icon:Sparkles},{label:"Ginecologia",query:"Ginecologia",Icon:Venus},{label:"Ortopedia",query:"Ortopedia",Icon:Bone},{label:"Pediatria",query:"Pediatria",Icon:Baby},{label:"Psicologia",query:"Psicologia",Icon:Brain},{label:"Odontologia",query:"Dentista",Icon:Activity},{label:"Oftalmologia",query:"Oftalmologia",Icon:Eye},{label:"Psiquiatria",query:"Psiquiatria",Icon:Brain},{label:"Pneumologia",query:"Pneumologia",Icon:Activity},{label:"Clínica médica",query:"Clínica Médica",Icon:Stethoscope},{label:"Outras especialidades",query:"",Icon:Ellipsis},
 ];
 function param(value:string|null){return value??""}
 function publicAddress(address?:string){return address&&!/endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(address)?address:""}
