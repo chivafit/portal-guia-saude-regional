@@ -1,0 +1,25 @@
+/* Release guards: interaction, accessibility and failure-state safety. */
+@media (max-width:760px){
+  html.native-app{background:#f5faf8;color-scheme:light;-webkit-text-size-adjust:100%}
+  html.native-app body{min-height:100svh;overscroll-behavior-y:none;-webkit-font-smoothing:antialiased}
+  html.native-app a,html.native-app button,html.native-app input,html.native-app select{touch-action:manipulation}
+  html.native-app button,html.native-app a{-webkit-tap-highlight-color:transparent}
+  html.native-app button:disabled{cursor:default;opacity:.48;box-shadow:none!important}
+  html.native-app img{max-width:100%;height:auto}
+  html.native-app input,html.native-app select,html.native-app textarea{font-size:16px}
+  html.native-app :where(a,button,input,select,textarea,summary):focus-visible{outline:2px solid #168c75!important;outline-offset:3px!important}
+  html.native-app :where(.native-search-screen,.native-featured-screen,.profile-page-clean,.organization-page,.native-favorites-screen,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader){overflow-x:clip}
+  html.native-app .health-os-dock{padding-bottom:max(5px,env(safe-area-inset-bottom))!important}
+  html.native-app body.podcast-player-open{overflow:hidden!important}
+  .hos-podcast-feature.is-unavailable,.hos-podcast-row.is-unavailable{opacity:.72}
+  .hos-podcast-feature.is-unavailable button:disabled,.hos-podcast-row.is-unavailable button:disabled{pointer-events:none}
+  .hos-podcast-row-soon{justify-self:end;color:#71857e;font-size:7px;font-weight:750;white-space:nowrap}
+  .hos-player-error{margin:14px 0;padding:12px 14px;border-radius:14px;background:rgba(255,238,235,.9);color:#8d453d;font-size:11px;line-height:1.4;text-align:center}
+  .native-filter-sheet[open]>summary{position:relative;z-index:1202}
+  .native-filter-sheet:not([open])>.native-filter-backdrop,.native-filter-sheet:not([open])>.native-filter-panel{display:none!important}
+  .favorite-card,.native-professional-card,.native-business-card,.organization-professional-card,.content-native-card,.hos-podcast-row{contain:layout paint}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .app-reveal{opacity:1!important;transform:none!important}
+}
