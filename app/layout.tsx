@@ -5,7 +5,7 @@ import { AppBottomNav } from "@/components/AppBottomNav";
 import { defaultDescription, siteName, siteUrl } from "@/lib/seo";
 
 /* Portal foundation + canonical Health OS stack.
-   Legacy compatibility is isolated and must never own canonical families. */
+   Component families have one canonical owner; continuous-canvas is visual-only and loads last. */
 import "./globals.css";
 import "./native-app.css";
 import "./health-os.css";
@@ -32,11 +32,13 @@ import "./health-os-iconography.css";
 import "./health-os-components.css";
 import "./health-os-spatial-system.css";
 import "./health-os-variants.css";
-import "./health-os-navbar.css";
 import "./health-os-product-polish.css";
-import "./health-os-continuous-canvas.css";
+/* Canonical component owners. Keep these immediately before the visual canvas. */
+import "./health-os-navbar.css";
 import "./health-os-back-navigation-fix.css";
 import "./health-os-profile-controls-final.css";
+/* Visual atmosphere only: must never own navbar/profile/back controls. */
+import "./health-os-continuous-canvas.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl), title: { default: "Guia Saúde — Portal Regional", template: "%s | Guia Saúde" }, description: defaultDescription,
