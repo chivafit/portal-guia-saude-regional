@@ -28,6 +28,7 @@ import "./health-os-final-consolidation.css";
 import "./health-os-release-guards.css";
 import "./health-os-typography-a11y.css";
 import "./health-os-section-header.css";
+import "./health-os-design-system.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl), title: { default: "Guia Saúde — Portal Regional", template: "%s | Guia Saúde" }, description: defaultDescription,
@@ -36,5 +37,5 @@ export const metadata: Metadata = {
   openGraph: { title: "Guia Saúde — Portal Regional", description: defaultDescription, type: "website", locale: "pt_BR", siteName, images: [{ url: "/og.png", width: 1536, height: 864, alt: "Guia Saúde — portal de saúde" }] },
   twitter: { card: "summary_large_image", title: "Guia Saúde — Portal Regional", description: defaultDescription, images: ["/og.png"] },
 };
-export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#168c75" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#0f9d7e" };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="pt-BR"><body><AppBootstrap />{children}<CityEntryModal /><AppBottomNav /></body></html>; }
