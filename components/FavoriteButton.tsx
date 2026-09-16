@@ -9,6 +9,10 @@ import {
   writeFavorites,
 } from "@/lib/favorites";
 
+function tactile(ms = 12) {
+  if (typeof navigator !== "undefined" && "vibrate" in navigator) navigator.vibrate(ms);
+}
+
 export function FavoriteButton({ professional, compact = false }: { professional: FavoriteProfessional; compact?: boolean }) {
   const [saved, setSaved] = useState(false);
   const [message, setMessage] = useState("");
@@ -33,6 +37,7 @@ export function FavoriteButton({ professional, compact = false }: { professional
         ? favorites.filter((item) => item.slug !== professional.slug)
         : [professional, ...favorites.filter((item) => item.slug !== professional.slug)]);
       setSaved(!isSaved);
+      tactile(isSaved ? 8 : 14);
       setMessage(isSaved ? "Removido dos favoritos" : "Salvo nos favoritos");
       if (messageTimer.current) window.clearTimeout(messageTimer.current);
       messageTimer.current = window.setTimeout(() => setMessage(""), 1800);
