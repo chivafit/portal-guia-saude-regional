@@ -13,3 +13,29 @@
 .about-principles{padding:105px 0}.about-principles-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.about-principles-grid article{padding:24px 21px;border-top:2px solid #a9dfc9}.about-principles-grid article>span{color:#159473;font-family:Georgia,serif;font-size:20px}.about-principles-grid h3{margin:34px 0 9px;color:#17453e;font-family:Arial,sans-serif;font-size:17px;letter-spacing:-.035em}.about-principles-grid p{margin:0;color:#6a847d;font-size:12px;line-height:1.5}
 .about-final{padding:76px 0;background:linear-gradient(110deg,#dff9ef,#efffdc)}.about-final-inner{display:flex;align-items:center;justify-content:space-between;gap:50px}.about-final h2{max-width:550px;margin-top:15px}.about-final p:not(.about-section-label){max-width:560px;margin:17px 0 0;color:#5d7b72;font-size:14px;line-height:1.5}.about-final-actions{display:flex;flex:none;gap:10px}.about-button-light{border:1px solid rgba(15,141,112,.2);background:rgba(255,255,255,.7);color:#16755f}.about-button-light:hover{background:#fff;transform:translateY(-2px)}
 @media (max-width:900px){.about-shell{width:min(100% - 36px,620px)}.about-intro{padding:56px 0 38px}.about-intro-grid,.about-purpose-grid,.about-check-grid{grid-template-columns:1fr;gap:35px}.about-intro h1{font-size:clamp(39px,11vw,60px)}.about-intro-panel{min-height:300px}.about-panel-card-main{right:3%;width:90%}.about-numbers{grid-template-columns:1fr}.about-numbers>div{min-height:76px;padding:15px 0}.about-numbers>div+div{border-left:0;border-top:1px solid #dcebe5}.about-purpose,.about-principles{padding:68px 0}.about-section-heading{display:block}.about-section-heading>p{margin-top:15px}.about-ecosystem-grid,.about-principles-grid{grid-template-columns:1fr}.about-ecosystem-grid article{min-height:220px}.about-check-section{padding:65px 0}.about-final-inner{display:block}.about-final-actions{margin-top:25px;flex-wrap:wrap}.about-button{min-height:44px}.about-intro-actions{flex-wrap:wrap}}
+
+/* Final UX/UI pass: tighter desktop rhythm and readable editorial scale */
+@media (min-width:901px){
+  .about-intro{padding:62px 0 50px}
+  .about-intro-grid{gap:54px}
+  .about-intro h1{max-width:610px;margin:17px 0 16px;font-size:clamp(42px,4.45vw,62px);line-height:1.01}
+  .about-lead{max-width:520px;font-size:15px;line-height:1.52}
+  .about-intro-actions{margin-top:23px}
+  .about-intro-panel{min-height:316px}
+  .about-panel-card-main{padding:24px 26px}
+  .about-panel-card-main strong{margin-top:24px;font-size:29px}
+  .about-panel-card-main small{margin-top:21px}
+  .about-purpose{padding:76px 0 70px}
+  .about-purpose-grid{gap:68px;margin-top:16px}
+  .about-purpose h2,.about-section-heading h2,.about-check-grid h2,.about-final h2{font-size:clamp(30px,2.8vw,43px);line-height:1.04}
+  .about-purpose-grid p{font-size:14px;line-height:1.58}
+  .about-ecosystem{padding-bottom:74px}
+  .about-ecosystem-grid article{min-height:244px;padding:22px}
+  .about-ecosystem-grid h3{margin-top:25px;font-size:19px}
+  .about-ecosystem-grid p{font-size:12px}
+  .about-check-section{padding:62px 0}
+  .about-check-grid{gap:68px}
+  .about-principles{padding:74px 0}
+  .about-principles-grid h3{margin-top:27px}
+  .about-final{padding:56px 0}
+}
