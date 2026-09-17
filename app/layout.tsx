@@ -60,6 +60,8 @@ import "./desktop-app-reference.css";
 import "./desktop-design-polish.css";
 /* Editorial redesign for the institutional About page. */
 import "./about-page-polish.css";
+/* Compact service flow for the profile inclusion page. */
+import "./inclusion-page-polish.css";
 /* Visual atmosphere only: must remain the final global CSS layer. */
 import "./health-os-continuous-canvas.css";
 
