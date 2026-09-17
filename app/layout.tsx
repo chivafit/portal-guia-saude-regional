@@ -39,7 +39,7 @@ import "./health-os-navbar.css";
 import "./health-os-back-navigation-fix.css";
 import "./health-os-profile-controls-final.css";
 /* Desktop-only route adaptation. Mobile is intentionally untouched. */
-import "./health-os-desktop-routes.css";
+import "./desktop-routes.css";
 /* Visual atmosphere only: must remain the final global CSS layer. */
 import "./health-os-continuous-canvas.css";
 
