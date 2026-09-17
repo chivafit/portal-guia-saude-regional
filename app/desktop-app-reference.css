@@ -1,0 +1,161 @@
+/* Desktop app showcase — composition matched to the approved reference. */
+@media (min-width: 901px) {
+  .desktop-home .desktop-app.desktop-app-premium {
+    width: min(1440px, calc(100% - 48px)) !important;
+    min-height: 690px !important;
+    margin: 0 auto 78px !important;
+    padding: 72px 4.2% 48px !important;
+    grid-template-columns: 47% 53% !important;
+    align-items: center !important;
+    overflow: visible !important;
+    background: #fff !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  .desktop-home .desktop-app.desktop-app-premium::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: -30px -20px -20px 46% !important;
+    background: radial-gradient(circle at 58% 48%, rgba(175,244,205,.22), rgba(255,255,255,0) 62%) !important;
+    pointer-events: none !important;
+  }
+  .desktop-home .desktop-app-premium .premium-copy {
+    align-self: center !important;
+    max-width: 660px !important;
+    padding: 0 0 8px !important;
+    z-index: 8 !important;
+  }
+  .desktop-home .desktop-app-premium .premium-copy > span {
+    margin-bottom: 22px !important;
+    font-size: 12px !important;
+    letter-spacing: .22em !important;
+    color: #149678 !important;
+  }
+  .desktop-home .desktop-app-premium .premium-copy h2 {
+    max-width: 660px !important;
+    margin: 0 !important;
+    font-size: clamp(50px, 4.65vw, 74px) !important;
+    line-height: .94 !important;
+    letter-spacing: -.06em !important;
+  }
+  .desktop-home .desktop-app-premium .premium-copy > p {
+    max-width: 650px !important;
+    margin: 25px 0 28px !important;
+    font-size: 18px !important;
+    line-height: 1.55 !important;
+  }
+  .desktop-home .desktop-app-premium .premium-stores {
+    gap: 18px !important;
+    margin: 0 0 42px !important;
+  }
+  .desktop-home .desktop-app-premium .premium-stores > span {
+    min-width: 220px !important;
+    height: 66px !important;
+    border-radius: 15px !important;
+    padding: 10px 22px !important;
+  }
+  .desktop-home .desktop-app-premium .premium-stores svg { width: 31px !important; height: 31px !important; }
+  .desktop-home .desktop-app-premium .premium-stores small { font-size: 10px !important; }
+  .desktop-home .desktop-app-premium .premium-stores b { font-size: 18px !important; }
+  .desktop-home .desktop-app-premium .premium-benefits {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 28px !important;
+    max-width: 670px !important;
+  }
+  .desktop-home .desktop-app-premium .premium-benefits > span {
+    grid-template-columns: 52px 1fr !important;
+    column-gap: 13px !important;
+  }
+  .desktop-home .desktop-app-premium .premium-benefits i {
+    width: 52px !important; height: 52px !important;
+    background: #e8fbf2 !important;
+  }
+  .desktop-home .desktop-app-premium .premium-benefits b { font-size: 13px !important; line-height: 1.28 !important; }
+  .desktop-home .desktop-app-premium .premium-benefits small { font-size: 11px !important; line-height: 1.4 !important; }
+
+  .desktop-home .desktop-app-premium .premium-visual {
+    height: 650px !important;
+    min-height: 650px !important;
+    margin: -38px -42px -42px -10px !important;
+    overflow: visible !important;
+    z-index: 5 !important;
+  }
+  .desktop-home .desktop-app-premium .premium-orb-one {
+    width: 570px !important;
+    height: 570px !important;
+    left: 7% !important;
+    top: 45px !important;
+    background: radial-gradient(circle at 45% 38%, #dfffd7 0, #baf5c6 42%, #a7ead2 72%, rgba(167,234,210,.2) 100%) !important;
+    opacity: .9 !important;
+  }
+  .desktop-home .desktop-app-premium .premium-orb-two {
+    width: 390px !important;
+    height: 390px !important;
+    left: 34% !important;
+    top: 135px !important;
+    background: rgba(82,211,157,.2) !important;
+  }
+  .desktop-home .desktop-app-premium .premium-phone {
+    border-width: 7px !important;
+    border-radius: 48px !important;
+    box-shadow: 0 32px 65px rgba(17,55,47,.22) !important;
+  }
+  .desktop-home .desktop-app-premium .premium-phone-main {
+    width: 330px !important;
+    height: 640px !important;
+    left: 5% !important;
+    top: -5px !important;
+    transform: rotate(4deg) !important;
+    z-index: 5 !important;
+  }
+  .desktop-home .desktop-app-premium .premium-phone-profile {
+    width: 286px !important;
+    height: 555px !important;
+    left: 48% !important;
+    top: 103px !important;
+    transform: rotate(4deg) !important;
+    z-index: 6 !important;
+  }
+  .desktop-home .desktop-app-premium .premium-notch { height: 21px !important; }
+  .desktop-home .desktop-app-premium .premium-phone-main .premium-screen { padding: 33px 15px 14px !important; }
+  .desktop-home .desktop-app-premium .premium-phone-brand { height: 38px !important; }
+  .desktop-home .desktop-app-premium .premium-phone-brand svg { width: 112px !important; }
+  .desktop-home .desktop-app-premium .premium-search { height: 35px !important; margin: 9px 0 !important; font-size: 8px !important; }
+  .desktop-home .desktop-app-premium .premium-shortcuts { margin: 12px 0 !important; }
+  .desktop-home .desktop-app-premium .premium-shortcuts svg { width: 18px !important; height: 18px !important; }
+  .desktop-home .desktop-app-premium .premium-shortcuts small { font-size: 7px !important; }
+  .desktop-home .desktop-app-premium .premium-screen-title { margin: 14px 0 8px !important; }
+  .desktop-home .desktop-app-premium .premium-screen-title b { font-size: 9px !important; }
+  .desktop-home .desktop-app-premium .premium-screen-title small { font-size: 7px !important; }
+  .desktop-home .desktop-app-premium .premium-profile-row { grid-template-columns: 46px 1fr 18px !important; padding: 8px !important; }
+  .desktop-home .desktop-app-premium .premium-profile-row img,
+  .desktop-home .desktop-app-premium .premium-profile-row > i { width: 46px !important; height: 46px !important; }
+  .desktop-home .desktop-app-premium .premium-profile-row b { font-size: 8px !important; }
+  .desktop-home .desktop-app-premium .premium-profile-row small { font-size: 7px !important; }
+  .desktop-home .desktop-app-premium .premium-content-cards i { height: 78px !important; }
+  .desktop-home .desktop-app-premium .premium-content-cards b { font-size: 8px !important; }
+  .desktop-home .desktop-app-premium .premium-bottom-nav { bottom: 8px !important; padding: 9px 4px !important; }
+  .desktop-home .desktop-app-premium .premium-profile-photo { height: 230px !important; }
+  .desktop-home .desktop-app-premium .premium-profile-info { padding: 19px !important; }
+  .desktop-home .desktop-app-premium .premium-profile-info h3 { font-size: 20px !important; }
+  .desktop-home .desktop-app-premium .premium-profile-info > p { font-size: 9px !important; }
+  .desktop-home .desktop-app-premium .premium-profile-info > small { font-size: 8px !important; }
+  .desktop-home .desktop-app-premium .premium-profile-info > div { margin: 18px 0 !important; }
+  .desktop-home .desktop-app-premium .premium-handnote {
+    right: -2% !important;
+    top: 68px !important;
+    font-size: 25px !important;
+    line-height: 1.22 !important;
+    z-index: 9 !important;
+    transform: rotate(-5deg) !important;
+  }
+  .desktop-home .desktop-app-premium .premium-handnote svg { width: 56px !important; margin: 8px 0 0 25px !important; }
+}
+
+@media (min-width: 901px) and (max-width: 1250px) {
+  .desktop-home .desktop-app.desktop-app-premium { grid-template-columns: 49% 51% !important; padding-inline: 4% !important; }
+  .desktop-home .desktop-app-premium .premium-copy h2 { font-size: 52px !important; }
+  .desktop-home .desktop-app-premium .premium-stores > span { min-width: 190px !important; }
+  .desktop-home .desktop-app-premium .premium-visual { transform: scale(.88); transform-origin: left center; width: 114% !important; }
+}
