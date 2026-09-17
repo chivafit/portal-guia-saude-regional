@@ -4,5 +4,5 @@
 :HL["/_next/static/css/e6d3290e5f3ce2cf.css","style"]
 :HL["/_next/static/css/8d6b5958656f883d.css","style"]
 :HL["/_next/static/css/e2a3f4580d8310cb.css","style"]
-:HL["/_next/static/css/0420e5980a5b86b6.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"revista","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"1a-edicao","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"UYe_XW2NHcELVblk_1Wq8"}
+:HL["/_next/static/css/559ef0d9b1864929.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"revista","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"1a-edicao","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"B9c2YaUT2F6NkjXmgISE6"}
