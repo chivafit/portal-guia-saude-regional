@@ -130,39 +130,130 @@
     color: #66817a;
   }
 
-  .desktop-hero-proof {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    max-width: 550px;
-    margin-top: 26px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(15, 157, 126, 0.13);
+  .desktop-hero-app {
+    max-width: 620px;
+    margin-top: 22px;
+    padding: 16px 18px 14px;
+    border: 1px solid rgba(15, 157, 126, 0.14);
+    border-radius: 18px;
+    background: linear-gradient(105deg, rgba(233, 255, 246, 0.78), rgba(255, 255, 255, 0.56));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
   }
 
-  .desktop-hero-proof > span {
+  .desktop-hero-app-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .desktop-hero-app-top > div:first-child {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     min-width: 0;
-    padding-right: 18px;
   }
 
-  .desktop-hero-proof > span + span {
-    padding-left: 18px;
-    border-left: 1px solid rgba(15, 157, 126, 0.13);
-  }
-
-  .desktop-hero-proof strong {
-    color: #173f38;
-    font-size: 12px;
+  .desktop-hero-app-top span {
+    color: #159473;
+    font-size: 9px;
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.16em;
   }
 
-  .desktop-hero-proof small {
-    color: #7b918b;
+  .desktop-hero-app-top strong {
+    color: #173f38;
+    font-size: 15px;
+    letter-spacing: -0.025em;
+  }
+
+  .desktop-hero-store-buttons {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 8px;
+  }
+
+  .desktop-hero-store-buttons > a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 106px;
+    min-height: 40px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    background: #11191a;
+    color: #fff;
+    text-decoration: none;
+    transition: transform 180ms cubic-bezier(.23, 1, .32, 1), box-shadow 180ms ease, background-color 180ms ease;
+  }
+
+  .desktop-hero-store-buttons > a:hover {
+    background: #1e292b;
+    box-shadow: 0 10px 20px rgba(16, 23, 25, 0.18);
+    transform: translateY(-2px);
+  }
+
+  .desktop-hero-store-buttons svg {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 auto;
+  }
+
+  .desktop-hero-store-buttons small,
+  .desktop-hero-store-buttons b {
+    display: block;
+    line-height: 1.1;
+  }
+
+  .desktop-hero-store-buttons small {
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 7px;
+  }
+
+  .desktop-hero-store-buttons b {
+    font-size: 11px;
+  }
+
+  .desktop-hero-app-benefits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(15, 157, 126, 0.12);
+  }
+
+  .desktop-hero-app-benefits > span {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    column-gap: 8px;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .desktop-hero-app-benefits i {
+    grid-row: 1 / 3;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #dff9ed;
+    color: #159473;
+    font-style: normal;
+  }
+
+  .desktop-hero-app-benefits b {
+    color: #284d45;
     font-size: 10px;
-    line-height: 1.25;
+    line-height: 1.15;
+  }
+
+  .desktop-hero-app-benefits small {
+    color: #78918a;
+    font-size: 9px;
+    line-height: 1.15;
   }
 
   .desktop-category-grid > a,
@@ -368,20 +459,6 @@
   .desktop-home :where(a, button, input):focus-visible {
     outline: 3px solid rgba(0, 209, 198, 0.72) !important;
     outline-offset: 4px !important;
-  }
-}
-
-@media (min-width: 901px) and (max-width: 1220px) {
-  .desktop-hero-proof {
-    max-width: 500px;
-  }
-
-  .desktop-hero-proof strong {
-    font-size: 11px;
-  }
-
-  .desktop-hero-proof small {
-    font-size: 9px;
   }
 }
 
