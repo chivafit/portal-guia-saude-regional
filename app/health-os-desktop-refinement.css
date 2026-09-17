@@ -467,3 +467,60 @@
     transition: none !important;
   }
 }
+
+
+@media (min-width: 901px) {
+  /* Editorial contrast: keep all copy readable over the dark graphite panel. */
+  .desktop-editorial-copy > p {
+    color: #e5f2ed !important;
+  }
+
+  .desktop-editorial-copy > a {
+    color: #effff7 !important;
+  }
+
+  .desktop-editorial-cards > a {
+    color: #ffffff !important;
+    background: rgba(255,255,255,.13) !important;
+    border-color: rgba(255,255,255,.24) !important;
+  }
+
+  .desktop-editorial-cards > a > svg:first-child {
+    color: #8ff1d0 !important;
+  }
+
+  .desktop-editorial-cards small {
+    color: #b9f5df !important;
+  }
+
+  .desktop-editorial-cards strong {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+
+  .desktop-editorial-cards > a > svg:last-child {
+    color: #d7ff5a !important;
+  }
+
+  /* Full wordmark: the footer must not render graphite text on graphite background. */
+  .desktop-brand-new .guia-logo-tagline {
+    display: none !important;
+  }
+
+  .desktop-brand-footer .guia-logo-main {
+    color: #ffffff !important;
+  }
+
+  .desktop-brand-footer .guia-logo-kicker {
+    color: #76e5c1 !important;
+  }
+
+  .desktop-brand-footer .guia-logo-symbol {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .desktop-brand-footer .guia-logo-word {
+    line-height: .88 !important;
+  }
+}
