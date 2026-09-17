@@ -1,5 +1,6 @@
-:HL["/_next/static/css/ca55c60c2a32efa4.css","style"]
-:HL["/_next/static/css/9715b222e8bbadec.css","style"]
-:HL["/_next/static/css/1ab7dca6f29d9ca0.css","style"]
-:HL["/_next/static/css/223b2849efc211c7.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"empresas","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"laboratorio-bioanalise-piumhi","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"gnygFNzPHwcgAFWq86-OM"}
+:HL["/_next/static/css/e9d36a359ea78dc0.css","style"]
+:HL["/_next/static/css/86588f37da440869.css","style"]
+:HL["/_next/static/css/b79af30bd303c8e6.css","style"]
+:HL["/_next/static/css/e6d3290e5f3ce2cf.css","style"]
+:HL["/_next/static/css/c737b81645779cd2.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"empresas","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"laboratorio-bioanalise-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"EMruhkkPYOJSgz0AkLEP3"}
