@@ -3,5 +3,5 @@
 :HL["/_next/static/css/b79af30bd303c8e6.css","style"]
 :HL["/_next/static/css/e6d3290e5f3ce2cf.css","style"]
 :HL["/_next/static/css/8d6b5958656f883d.css","style"]
-:HL["/_next/static/css/9e1ecfe7ffed6559.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-rodrigo-lana-martins-clinica-geral-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"JITAqP0o8y-SZGSoXSUCr"}
+:HL["/_next/static/css/303933bdfbdf8386.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-rodrigo-lana-martins-clinica-geral-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"n3kn2Cgv9VIT-TxBuWeJ2"}
