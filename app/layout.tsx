@@ -54,6 +54,8 @@ import "./health-os-mobile-accessibility.css";
 import "./health-os-contrast-fixes.css";
 /* Logo composition aligned to the supplied Guia Saúde identity reference. */
 import "./health-os-logo-reference.css";
+/* Approved desktop app showcase composition. */
+import "./desktop-app-reference.css";
 /* Visual atmosphere only: must remain the final global CSS layer. */
 import "./health-os-continuous-canvas.css";
 
