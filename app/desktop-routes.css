@@ -21,6 +21,9 @@
   .native-featured-info{visibility:visible!important;opacity:1!important;position:relative!important;z-index:2!important}
   .native-featured-arrow{visibility:visible!important;opacity:1!important;position:relative!important;z-index:2!important}
 
+  /* Desktop home: ranking numbers are decorative and intentionally hidden. */
+  .desktop-pro-photo>b{display:none!important}
+
   /* Results: protect the desktop card geometry from mobile/global image rules. */
   .native-professional-list,.native-business-list{align-items:stretch!important}
   .native-professional-card,.native-business-card{height:auto!important;min-height:180px!important;overflow:hidden!important;position:relative!important}
