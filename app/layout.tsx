@@ -44,6 +44,10 @@ import "./desktop-routes.css";
 import "./health-os-brand-refresh.css";
 /* Visual atmosphere only: must remain the final global CSS layer. */
 import "./health-os-continuous-canvas.css";
+/* Home-only fidelity refinement against the official Guia Saúde identity board. */
+import "./health-os-home-refinement.css";
+/* Shared native-page refinement for directory, profile and editorial surfaces. */
+import "./health-os-pages-refinement.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl), title: { default: "Guia Saúde — Portal Regional", template: "%s | Guia Saúde" }, description: defaultDescription,
