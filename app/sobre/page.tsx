@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, Building2, Check, MapPin, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, BookOpen, Building2, Check, MapPin, ShieldCheck, Users, type LucideIcon } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { pageMetadata } from "@/lib/seo";
@@ -17,7 +17,7 @@ const principles = [
   ["Revisão editorial", "Dados públicos passam por conferência antes de aparecerem na área pública do portal."],
 ];
 
-const ecosystem = [
+const ecosystem: Array<[string, string, LucideIcon]> = [
   ["Diretório", "Profissionais, clínicas e empresas organizados para uma busca mais simples.", Users],
   ["Conteúdo", "Matérias, entrevistas, podcast e revista para transformar informação em cuidado.", BookOpen],
   ["Conexão", "Canais de contato e presença regional para quem oferece saúde e bem-estar.", Building2],
