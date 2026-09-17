@@ -40,16 +40,16 @@ import "./health-os-back-navigation-fix.css";
 import "./health-os-profile-controls-final.css";
 /* Desktop-only route adaptation. Mobile is intentionally untouched. */
 import "./desktop-routes.css";
-/* Brand identity override: non-destructive and intentionally late in the cascade. */
-import "./health-os-brand-refresh.css";
-/* Visual atmosphere only: must remain the final global CSS layer. */
-import "./health-os-continuous-canvas.css";
+/* Desktop-only fidelity refinement against the official Guia Saúde identity board. */
+import "./health-os-desktop-refinement.css";
 /* Home-only fidelity refinement against the official Guia Saúde identity board. */
 import "./health-os-home-refinement.css";
 /* Shared native-page refinement for directory, profile and editorial surfaces. */
 import "./health-os-pages-refinement.css";
-/* Desktop-only fidelity refinement against the official Guia Saúde identity board. */
-import "./health-os-desktop-refinement.css";
+/* Brand identity override: non-destructive and intentionally late in the cascade. */
+import "./health-os-brand-refresh.css";
+/* Visual atmosphere only: must remain the final global CSS layer. */
+import "./health-os-continuous-canvas.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl), title: { default: "Guia Saúde — Portal Regional", template: "%s | Guia Saúde" }, description: defaultDescription,
