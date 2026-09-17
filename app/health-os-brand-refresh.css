@@ -1,0 +1,77 @@
+/* Guia Saúde — non-destructive brand refresh layer.
+   Loaded after canonical route/component CSS and before continuous canvas.
+   Purpose: unify the portal with the Emerald / Aqua / Lime / Ice / Graphite identity
+   without replacing existing route layouts. */
+
+:root{
+  --brand-emerald:#0f9d7e;
+  --brand-emerald-deep:#08735f;
+  --brand-aqua:#00d1c6;
+  --brand-lime:#d7ff5a;
+  --brand-ice:#f4f7fa;
+  --brand-graphite:#0b0f14;
+  --brand-muted:#6f7f7b;
+  --brand-glass:rgba(255,255,255,.76);
+  --brand-line:rgba(15,157,126,.12);
+  --brand-shadow:0 16px 44px rgba(8,68,58,.08);
+}
+
+/* Shared logo component */
+.guia-logo{display:inline-flex;align-items:center;gap:10px;min-width:0;color:var(--brand-graphite)}
+.guia-logo-symbol{width:46px;height:46px;display:block;flex:none;filter:drop-shadow(0 8px 14px rgba(15,157,126,.14))}
+.guia-logo-word{display:flex;flex-direction:column;min-width:0;line-height:.84}
+.guia-logo-kicker{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--brand-emerald)}
+.guia-logo-main{margin-top:4px;font-size:22px;font-weight:650;letter-spacing:-.055em;color:currentColor}
+.guia-logo-tagline{margin-top:7px;font-size:8px;font-weight:500;line-height:1.15;letter-spacing:.02em;color:var(--brand-muted);white-space:nowrap}
+.guia-logo-compact{gap:8px}.guia-logo-compact .guia-logo-symbol{width:36px;height:36px}.guia-logo-compact .guia-logo-main{font-size:18px}
+
+@media(min-width:901px){
+  .desktop-home{background:var(--brand-ice)!important;color:var(--brand-graphite)!important}
+  .desktop-nav{border-bottom-color:var(--brand-line)!important}
+
+  /* Existing DesktopHome brand markup: transform it visually without touching layout/content. */
+  .desktop-brand{position:relative;gap:10px!important;color:var(--brand-graphite)!important}
+  .desktop-brand>span{width:42px!important;height:42px!important;border-radius:16px!important;font-size:0!important;color:transparent!important;background:radial-gradient(circle at 70% 22%,var(--brand-lime) 0 10%,transparent 36%),radial-gradient(circle at 27% 72%,var(--brand-emerald) 0 8%,var(--brand-aqua) 38%,rgba(244,247,250,.94) 70%)!important;box-shadow:0 10px 25px rgba(15,157,126,.18)!important;overflow:hidden}
+  .desktop-brand>span:after{content:"";width:18px;height:18px;border-radius:48% 52% 55% 45%;background:rgba(255,255,255,.72);box-shadow:8px -6px 0 rgba(215,255,90,.34);transform:rotate(-18deg)}
+  .desktop-brand div{line-height:.82!important}
+  .desktop-brand b{font-size:8px!important;letter-spacing:.16em!important;color:var(--brand-emerald)!important}
+  .desktop-brand strong{font-size:19px!important;font-weight:650!important;letter-spacing:-.055em!important;color:var(--brand-graphite)!important}
+  .desktop-brand-footer strong{color:#fff!important}
+
+  .desktop-nav nav{color:#526b66!important}.desktop-nav nav a:hover{color:var(--brand-emerald)!important}
+  .desktop-download{background:var(--brand-graphite)!important;border-radius:999px!important;box-shadow:0 8px 20px rgba(11,15,20,.12)}
+  .desktop-eyebrow,.desktop-section-title>span,.desktop-section-head span,.desktop-editorial-copy>span,.desktop-app-copy>span,.desktop-business span{color:var(--brand-emerald)!important}
+  .desktop-hero h1 em{color:var(--brand-emerald)!important}.desktop-hero-copy>p{color:var(--brand-muted)!important}
+  .desktop-glow{background:radial-gradient(circle at 62% 32%,rgba(215,255,90,.72),rgba(0,209,198,.18) 42%,rgba(244,247,250,0) 72%)!important}
+  .desktop-phone,.desktop-app-phone{border-color:var(--brand-graphite)!important}.desktop-phone:before,.desktop-app-phone:before{background:var(--brand-graphite)!important}
+  .desktop-phone-screen{background:radial-gradient(circle at 90% 10%,rgba(215,255,90,.28),transparent 30%),var(--brand-ice)!important}
+  .desktop-phone-screen small,.desktop-phone-screen h3 em,.desktop-app-phone small{color:var(--brand-emerald)!important}
+  .desktop-mini-search,.desktop-app-search{border-radius:999px!important}
+
+  .desktop-search{background:rgba(255,255,255,.82)!important;border-color:#fff!important;border-radius:999px!important;box-shadow:var(--brand-shadow)!important;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+  .desktop-search>svg{color:var(--brand-emerald)!important}.desktop-search>span{border-left-color:var(--brand-line)!important}.desktop-search button{background:var(--brand-graphite)!important;border-radius:999px!important}
+  .desktop-hero-actions a:first-child{background:var(--brand-emerald)!important;border-radius:999px!important}
+
+  .desktop-category-grid>a,.desktop-pro-card,.desktop-business{background:var(--brand-glass)!important;border-color:rgba(255,255,255,.94)!important;box-shadow:0 13px 34px rgba(8,68,58,.055)!important;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+  .desktop-category-grid>a>svg:first-child{background:linear-gradient(145deg,rgba(0,209,198,.15),rgba(215,255,90,.23))!important;color:var(--brand-emerald)!important}
+  .desktop-section-head>a,.desktop-pro-copy>small,.desktop-pro-copy>div svg{color:var(--brand-emerald)!important}
+  .desktop-pro-photo>b{display:none!important}
+
+  .desktop-editorial{background:var(--brand-graphite)!important}
+  .desktop-editorial:after{background:radial-gradient(circle,rgba(215,255,90,.22),rgba(0,209,198,.08) 58%,transparent 70%)!important}
+  .desktop-editorial-copy>span{color:#8ce9d4!important}
+  .desktop-editorial-cards>a>svg:first-child{color:#8ce9d4!important}
+
+  .desktop-app{background:radial-gradient(circle at 88% 25%,rgba(215,255,90,.42),transparent 25%),linear-gradient(120deg,#e5fbf7,var(--brand-ice) 48%,#efffd0)!important}
+  .desktop-app-orb{background:radial-gradient(circle at 65% 28%,var(--brand-lime),rgba(0,209,198,.28) 40%,rgba(244,247,250,0) 70%)!important}
+  .desktop-app-benefits span{border-radius:999px!important}
+  .desktop-store-buttons>span{background:var(--brand-graphite)!important}
+  .desktop-app-badge{background:rgba(255,255,255,.88)!important;color:var(--brand-emerald)!important;backdrop-filter:blur(16px)}
+  .desktop-app-badge b{color:var(--brand-graphite)!important}
+  .desktop-business>a{background:var(--brand-emerald)!important;border-radius:999px!important;box-shadow:0 10px 24px rgba(15,157,126,.16)!important}
+  .desktop-footer{background:var(--brand-graphite)!important}
+}
+
+@media(max-width:900px){
+  .guia-logo-symbol{width:40px;height:40px}.guia-logo-main{font-size:19px}.guia-logo-tagline{display:none}
+}
