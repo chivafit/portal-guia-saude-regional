@@ -50,6 +50,8 @@ import "./health-os-pages-refinement.css";
 import "./health-os-brand-refresh.css";
 /* Mobile-only accessibility refinement for secondary copy, states and logo legibility. */
 import "./health-os-mobile-accessibility.css";
+/* Targeted WCAG contrast fixes for profile editorial surfaces. */
+import "./health-os-contrast-fixes.css";
 /* Visual atmosphere only: must remain the final global CSS layer. */
 import "./health-os-continuous-canvas.css";
 
