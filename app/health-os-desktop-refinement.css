@@ -845,3 +845,55 @@
     letter-spacing: -.02em !important;
   }
 }
+
+
+@media (min-width: 901px) {
+  /* Desktop finishing pass: stronger brand presence and clearer action hierarchy. */
+  .desktop-nav { padding-inline: clamp(28px, 4vw, 72px) !important; }
+  .desktop-brand-new .guia-logo-symbol { width: 44px !important; height: 44px !important; }
+  .desktop-brand-new .guia-logo-main { font-size: 21px !important; }
+  .desktop-hero {
+    grid-template-columns: minmax(0, 1.02fr) minmax(430px, .98fr) !important;
+    gap: clamp(34px, 4vw, 72px) !important;
+    padding-top: 62px !important;
+    padding-bottom: 64px !important;
+  }
+  .desktop-phone-stage { transform: translateX(10px) scale(1.04); transform-origin: center right; }
+  .profile-primary-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(150px, 1fr)) !important;
+    gap: 10px !important;
+    width: min(100%, 350px) !important;
+  }
+  .profile-primary-actions .profile-primary-action {
+    min-height: 48px !important;
+    justify-content: center !important;
+    padding-inline: 16px !important;
+    font-size: .84rem !important;
+    font-weight: 750 !important;
+  }
+  .profile-primary-actions .profile-primary-call {
+    background: linear-gradient(145deg, #172126, #0b0f14) !important;
+    color: #fff !important;
+  }
+  .profile-primary-actions .profile-primary-route {
+    background: rgba(255,255,255,.9) !important;
+    color: #0b0f14 !important;
+    border: 1px solid rgba(15,157,126,.22) !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1220px) {
+  .desktop-nav nav { gap: 16px !important; }
+  .desktop-nav nav a { font-size: .76rem !important; }
+  .desktop-download { padding-inline: 13px !important; font-size: .74rem !important; }
+  .desktop-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(390px, .9fr) !important;
+    gap: 24px !important;
+  }
+  .desktop-hero h1 { font-size: clamp(54px, 5.7vw, 70px) !important; }
+  .desktop-phone-stage { transform: translateX(0) scale(.92); }
+  .premium-copy h2 { font-size: clamp(40px, 4.5vw, 56px) !important; }
+  .premium-stores { flex-wrap: wrap !important; }
+  .premium-benefits { gap: 10px !important; }
+}

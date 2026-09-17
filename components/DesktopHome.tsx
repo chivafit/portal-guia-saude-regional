@@ -25,7 +25,7 @@ export async function DesktopHome(){
     <span>GUIA SAÚDE NO SEU CELULAR</span>
     <h2>Leve sua rede de<br/>saúde <em>com você.</em></h2>
     <p>Acesse profissionais, serviços, conteúdos, podcast e revista em uma experiência criada para o seu dia a dia.</p>
-    <div className="desktop-store-buttons premium-stores" aria-label="Baixe o aplicativo Guia Saúde"><a href="#" aria-label="Baixar o Guia Saúde na App Store"><AppleMark/><span><small>Baixar na</small><b>App Store</b></span></a><a href="#" aria-label="Baixar o Guia Saúde no Google Play"><PlayMark/><span><small>Disponível no</small><b>Google Play</b></span></a></div>
+    <div className="desktop-store-buttons premium-stores" aria-label="Disponibilidade do aplicativo Guia Saúde"><a href="#aplicativo" aria-label="Guia Saúde em breve na App Store"><AppleMark/><span><small>Em breve na</small><b>App Store</b></span></a><a href="#aplicativo" aria-label="Guia Saúde em breve no Google Play"><PlayMark/><span><small>Em breve no</small><b>Google Play</b></span></a></div>
     <div className="desktop-app-benefits premium-benefits">
      <span><i><Heart size={21}/></i><b>Salve seus profissionais</b><small>Tenha seus favoritos sempre à mão.</small></span>
      <span><i><Search size={21}/></i><b>Encontre serviços rapidamente</b><small>Busque por especialidade, bairro ou nome.</small></span>
@@ -64,7 +64,7 @@ export async function DesktopHome(){
     .premium-copy h2 em{color:#1ba37c;font-style:normal}
     .premium-copy>p{max-width:590px;margin:22px 0 25px!important;color:#6d7d82!important;font-size:17px!important;line-height:1.55!important}
     .premium-stores{display:flex!important;gap:14px!important;margin:0 0 35px!important}
-    .premium-stores>span{min-width:205px!important;height:62px!important;padding:9px 20px!important;border-radius:13px!important;background:#101719!important;color:#fff!important;display:flex!important;align-items:center!important;gap:12px!important}
+    .premium-stores>a{min-width:205px!important;height:62px!important;padding:9px 20px!important;border-radius:13px!important;background:#101719!important;color:#fff!important;display:flex!important;align-items:center!important;gap:12px!important;text-decoration:none!important}
     .premium-stores svg{width:29px!important;height:29px!important}.premium-stores small{display:block!important;color:#fff!important;font-size:10px!important;line-height:1.1!important}.premium-stores b{display:block!important;font-size:17px!important;line-height:1.15!important}
     .premium-benefits{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:18px!important;margin:0!important}
     .premium-benefits>span{display:grid!important;grid-template-columns:44px 1fr!important;column-gap:11px!important;align-items:center!important;padding:0!important;background:transparent!important;border:0!important;color:#172024!important}
