@@ -52,6 +52,8 @@ import "./health-os-brand-refresh.css";
 import "./health-os-mobile-accessibility.css";
 /* Targeted WCAG contrast fixes for profile editorial surfaces. */
 import "./health-os-contrast-fixes.css";
+/* Logo composition aligned to the supplied Guia Saúde identity reference. */
+import "./health-os-logo-reference.css";
 /* Visual atmosphere only: must remain the final global CSS layer. */
 import "./health-os-continuous-canvas.css";
 
