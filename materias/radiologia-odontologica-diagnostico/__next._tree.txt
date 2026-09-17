@@ -2,5 +2,5 @@
 :HL["/_next/static/css/86588f37da440869.css","style"]
 :HL["/_next/static/css/b79af30bd303c8e6.css","style"]
 :HL["/_next/static/css/e6d3290e5f3ce2cf.css","style"]
-:HL["/_next/static/css/c737b81645779cd2.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"materias","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"radiologia-odontologica-diagnostico","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"EMruhkkPYOJSgz0AkLEP3"}
+:HL["/_next/static/css/6fd8fdeedb369a94.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"materias","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"radiologia-odontologica-diagnostico","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"cN3fByYnex-9UHRqjc2sg"}
