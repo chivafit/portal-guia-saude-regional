@@ -40,6 +40,8 @@ import "./health-os-back-navigation-fix.css";
 import "./health-os-profile-controls-final.css";
 /* Desktop-only route adaptation. Mobile is intentionally untouched. */
 import "./desktop-routes.css";
+/* Brand identity override: non-destructive and intentionally late in the cascade. */
+import "./health-os-brand-refresh.css";
 /* Visual atmosphere only: must remain the final global CSS layer. */
 import "./health-os-continuous-canvas.css";
 
