@@ -17,3 +17,100 @@
 .desktop-home .desktop-app-premium .premium-handnote{position:absolute!important;right:-1%!important;top:77px!important;z-index:11!important;color:#159473!important;font-family:Georgia,'Times New Roman',serif!important;font-size:21px!important;font-style:italic!important;line-height:1.18!important;transform:rotate(-5deg)!important;text-align:left!important}.desktop-home .desktop-app-premium .premium-handnote svg{display:block!important;width:48px!important;margin:7px 0 0 20px!important;transform:rotate(28deg)!important}
 }
 @media (min-width:901px) and (max-width:1250px){.desktop-home .desktop-app.desktop-app-premium{width:calc(100% - 36px)!important;height:570px!important;min-height:570px!important;grid-template-columns:49% 51%!important;padding:64px 4% 32px!important}.desktop-home .desktop-app-premium .premium-copy h2{font-size:48px!important}.desktop-home .desktop-app-premium .premium-copy>p{font-size:15px!important}.desktop-home .desktop-app-premium .premium-stores>span{width:180px!important}.desktop-home .desktop-app-premium .premium-benefits{gap:13px!important}.desktop-home .desktop-app-premium .premium-visual{transform:scale(.86)!important;transform-origin:left center!important;width:116%!important;margin-top:-88px!important}}
+
+
+/* Final desktop overrides: loaded after the legacy showcase rules so the approved
+   identity and accessibility refinements are the rules users actually receive. */
+@media (min-width: 901px) {
+  .desktop-home .desktop-nav {
+    padding-inline: clamp(28px, 4vw, 72px) !important;
+  }
+
+  .desktop-home .desktop-brand-new .guia-logo-symbol {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .desktop-home .desktop-brand-new .guia-logo-main {
+    font-size: 21px !important;
+  }
+
+  .desktop-home .desktop-hero {
+    grid-template-columns: minmax(0, 1.02fr) minmax(430px, .98fr) !important;
+    gap: clamp(34px, 4vw, 72px) !important;
+    padding-top: 62px !important;
+    padding-bottom: 64px !important;
+  }
+
+  .desktop-home .desktop-phone-stage {
+    transform: translateX(10px) scale(1.04) !important;
+    transform-origin: center right !important;
+  }
+
+  .desktop-home .premium-stores > a {
+    position: relative !important;
+    width: 210px !important;
+    min-width: 0 !important;
+    height: 62px !important;
+    padding: 9px 20px !important;
+    border-radius: 13px !important;
+    background: #101719 !important;
+    color: #fff !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 13px !important;
+    text-decoration: none !important;
+  }
+
+  .desktop-home .premium-stores > a small {
+    font-size: 10px !important;
+    color: #fff !important;
+  }
+
+  .desktop-home .premium-stores > a svg {
+    opacity: 1 !important;
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .desktop-home .premium-stores > a:nth-child(2)::before,
+  .desktop-home .premium-stores > a:nth-child(2) > svg {
+    opacity: 1 !important;
+  }
+
+  .desktop-home .premium-stores > a:nth-child(2)::before {
+    content: none !important;
+  }
+
+  .profile-primary-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(150px, 1fr)) !important;
+    gap: 10px !important;
+    width: min(100%, 350px) !important;
+  }
+
+  .profile-primary-actions .profile-primary-action {
+    min-height: 48px !important;
+    justify-content: center !important;
+    padding-inline: 16px !important;
+    font-size: .84rem !important;
+    font-weight: 750 !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1220px) {
+  .desktop-home .desktop-nav nav { gap: 16px !important; }
+  .desktop-home .desktop-nav nav a { font-size: .76rem !important; }
+  .desktop-home .desktop-download { padding-inline: 13px !important; font-size: .74rem !important; }
+  .desktop-home .desktop-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(390px, .9fr) !important;
+    gap: 24px !important;
+  }
+  .desktop-home .desktop-hero h1 { font-size: clamp(54px, 5.7vw, 70px) !important; }
+  .desktop-home .desktop-phone-stage { transform: translateX(0) scale(.92) !important; }
+  .desktop-home .premium-stores { flex-wrap: wrap !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-home .desktop-phone-stage { transform: none !important; }
+}
