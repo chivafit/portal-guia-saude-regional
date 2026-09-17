@@ -42,12 +42,13 @@
 
   /* Dark brand panels must always use light typography. */
   .profile-podcast,.profile-podcast *{color:#fff!important}.profile-podcast>div>span{color:rgba(255,255,255,.72)!important}.profile-podcast>div>p{color:rgba(255,255,255,.68)!important}.profile-podcast-icon{background:#fff!important;color:#178b72!important}.profile-podcast-icon *{color:#178b72!important}.profile-podcast>a{background:#fff!important;color:#178b72!important}.profile-podcast>a *{color:#178b72!important}
+  .hos-podcast-feature>div{display:flex!important;flex-direction:column!important;align-items:flex-start!important;min-width:0!important}
   .hos-podcast-feature>div>small{color:rgba(255,255,255,.74)!important}
   .hos-podcast-feature>div>h3{color:#fff!important}
   .hos-podcast-feature>div>p{color:rgba(255,255,255,.78)!important}
-  .hos-podcast-feature>div>span{color:rgba(255,255,255,.62)!important}
+  .hos-podcast-feature>div>span{color:rgba(255,255,255,.62)!important;display:block!important;max-width:100%!important;margin-top:22px!important;white-space:normal!important}
   .hos-podcast-feature>div>em{color:rgba(255,255,255,.78)!important}
-  .hos-podcast-feature>div>button{background:#fff!important;color:#178b72!important}
+  .hos-podcast-feature>div>button{position:static!important;inset:auto!important;transform:none!important;display:inline-flex!important;align-items:center!important;align-self:flex-start!important;width:auto!important;margin-top:12px!important;background:#fff!important;color:#178b72!important}
   .hos-podcast-feature>div>button svg{color:#178b72!important}
 
   .native-refine-overlay{position:fixed!important;inset:0!important;z-index:150!important;display:grid!important;place-items:center!important;padding:32px!important;background:rgba(7,35,31,.42)!important;backdrop-filter:blur(8px)!important}
