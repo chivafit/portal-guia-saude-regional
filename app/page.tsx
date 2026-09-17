@@ -1,3 +1,4 @@
+import { DesktopHome } from "@/components/DesktopHome";
 import { HealthOSHome } from "@/components/HealthOSHome";
 import { pageMetadata } from "@/lib/seo";
 
@@ -8,5 +9,5 @@ export const metadata = pageMetadata(
 );
 
 export default function Home() {
-  return <HealthOSHome />;
+  return <><DesktopHome /><HealthOSHome /></>;
 }
