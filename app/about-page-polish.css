@@ -39,3 +39,11 @@
   .about-principles-grid h3{margin-top:27px}
   .about-final{padding:56px 0}
 }
+
+/* Principles: editorial list, no card treatment */
+.about-principles-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 58px;border-top:1px solid #d9e9e2}
+.about-principles-grid article{display:grid;grid-template-columns:34px 1fr;grid-template-rows:auto auto;column-gap:14px;padding:22px 0 24px;border-top:0;border-bottom:1px solid #d9e9e2}
+.about-principles-grid article>span{grid-row:1 / span 2;font-size:19px;line-height:1;color:#159473}
+.about-principles-grid h3{margin:0;color:#17453e;font-size:16px;line-height:1.15}
+.about-principles-grid p{margin:8px 0 0;max-width:330px;font-size:12px;line-height:1.5}
+@media (max-width:900px){.about-principles-grid{grid-template-columns:1fr;gap:0}.about-principles-grid article{padding:19px 0 21px}}
