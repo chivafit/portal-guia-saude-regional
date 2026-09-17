@@ -764,3 +764,84 @@
     object-position: top center !important;
   }
 }
+
+
+@media (min-width: 901px) {
+  /* Two real app screens: home in front, professional profile behind. */
+  .desktop-phone-back {
+    display: block !important;
+    left: 18px !important;
+    top: 82px !important;
+    opacity: 1 !important;
+    transform: rotate(-7deg) scale(.9) !important;
+    z-index: 1 !important;
+  }
+
+  .desktop-phone-front {
+    right: 44px !important;
+    top: 10px !important;
+    transform: rotate(4deg) scale(1.03) !important;
+    z-index: 2 !important;
+  }
+
+  .desktop-phone-real-screen {
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #f5fbf8 !important;
+  }
+
+  .desktop-phone-real-screen img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: top center !important;
+  }
+
+  .premium-stores > a {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    min-width: 154px !important;
+    min-height: 52px !important;
+    padding: 0 17px !important;
+    border-radius: 14px !important;
+    background: #080d0e !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    box-shadow: 0 12px 25px rgba(8,13,14,.16) !important;
+    transition: transform .2s ease, box-shadow .2s ease !important;
+  }
+
+  .premium-stores > a:hover,
+  .premium-stores > a:focus-visible {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 16px 30px rgba(8,13,14,.22) !important;
+  }
+
+  .premium-stores > a > svg {
+    width: 24px !important;
+    height: 24px !important;
+    flex: 0 0 auto !important;
+  }
+
+  .premium-stores > a > span {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    text-align: left !important;
+  }
+
+  .premium-stores > a small {
+    color: rgba(255,255,255,.72) !important;
+    font-size: 9px !important;
+    line-height: 1 !important;
+  }
+
+  .premium-stores > a b {
+    color: #fff !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+    letter-spacing: -.02em !important;
+  }
+}
