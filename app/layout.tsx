@@ -56,6 +56,8 @@ import "./health-os-contrast-fixes.css";
 import "./health-os-logo-reference.css";
 /* Approved desktop app showcase composition. */
 import "./desktop-app-reference.css";
+/* Final desktop interaction, hierarchy and contrast polish. */
+import "./desktop-design-polish.css";
 /* Visual atmosphere only: must remain the final global CSS layer. */
 import "./health-os-continuous-canvas.css";
 

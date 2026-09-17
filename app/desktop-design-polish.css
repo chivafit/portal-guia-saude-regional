@@ -1,0 +1,393 @@
+/* Guia Saúde — desktop design polish
+   Final, presentation-only layer. Mobile keeps the canonical Health OS experience. */
+
+@media (min-width: 901px) {
+  .desktop-home {
+    --desktop-panel: rgba(255, 255, 255, 0.78);
+    --desktop-border: rgba(15, 157, 126, 0.14);
+    --desktop-ink-soft: #58736c;
+  }
+
+  .desktop-nav {
+    height: 82px !important;
+    padding-inline: clamp(28px, 4.8vw, 72px) !important;
+    gap: clamp(24px, 3vw, 44px) !important;
+  }
+
+  .desktop-nav nav {
+    gap: clamp(16px, 2.15vw, 30px) !important;
+  }
+
+  .desktop-nav nav a {
+    color: #46645e !important;
+    font-size: 12px !important;
+    font-weight: 650 !important;
+    letter-spacing: -0.01em;
+  }
+
+  .desktop-download {
+    min-width: 132px !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+    padding-inline: 18px !important;
+    font-size: 11px !important;
+    letter-spacing: -0.01em;
+    transition: transform 180ms cubic-bezier(.23, 1, .32, 1), box-shadow 180ms ease, background-color 180ms ease;
+  }
+
+  .desktop-download:hover {
+    background: #08735f !important;
+    box-shadow: 0 12px 28px rgba(15, 157, 126, 0.23) !important;
+    transform: translateY(-2px);
+  }
+
+  .desktop-hero {
+    min-height: 674px !important;
+    padding-top: 70px !important;
+    padding-bottom: 72px !important;
+  }
+
+  .desktop-hero-copy {
+    max-width: 650px;
+  }
+
+  .desktop-eyebrow {
+    gap: 8px !important;
+    font-size: 11px !important;
+  }
+
+  .desktop-hero h1 {
+    max-width: 650px !important;
+    margin-top: 24px !important;
+    font-size: clamp(62px, 5.35vw, 80px) !important;
+  }
+
+  .desktop-hero-copy > p {
+    max-width: 540px !important;
+    margin-bottom: 30px !important;
+  }
+
+  .desktop-search {
+    height: 74px !important;
+    max-width: 720px !important;
+    padding-left: 23px !important;
+    transition: box-shadow 180ms ease, border-color 180ms ease, transform 180ms ease;
+  }
+
+  .desktop-search:focus-within {
+    border-color: rgba(15, 157, 126, 0.4) !important;
+    box-shadow: 0 20px 54px rgba(15, 80, 68, 0.14), 0 0 0 4px rgba(0, 209, 198, 0.1), inset 0 1px 0 #fff !important;
+    transform: translateY(-1px);
+  }
+
+  .desktop-search input::placeholder {
+    color: #849590;
+    opacity: 1;
+  }
+
+  .desktop-search button {
+    min-width: 112px !important;
+    transition: transform 160ms cubic-bezier(.23, 1, .32, 1), background-color 160ms ease, box-shadow 160ms ease;
+  }
+
+  .desktop-search button:hover {
+    background: #08735f !important;
+    box-shadow: 0 8px 18px rgba(15, 157, 126, 0.2);
+    transform: translateX(2px);
+  }
+
+  .desktop-hero-actions {
+    margin-top: 24px !important;
+  }
+
+  .desktop-hero-actions a:first-child,
+  .desktop-hero-actions a:last-child {
+    transition: transform 180ms cubic-bezier(.23, 1, .32, 1), color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  }
+
+  .desktop-hero-actions a:first-child:hover {
+    box-shadow: 0 14px 28px rgba(15, 157, 126, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .desktop-hero-actions a:last-child:hover {
+    color: #08735f !important;
+    transform: translateX(3px);
+  }
+
+  .desktop-trust {
+    align-items: center;
+    gap: 10px !important;
+    margin-top: 26px !important;
+  }
+
+  .desktop-trust span {
+    min-height: 30px;
+    padding: 7px 10px;
+    border: 1px solid rgba(15, 157, 126, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.46);
+    color: #66817a;
+  }
+
+  .desktop-hero-proof {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 550px;
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(15, 157, 126, 0.13);
+  }
+
+  .desktop-hero-proof > span {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+    padding-right: 18px;
+  }
+
+  .desktop-hero-proof > span + span {
+    padding-left: 18px;
+    border-left: 1px solid rgba(15, 157, 126, 0.13);
+  }
+
+  .desktop-hero-proof strong {
+    color: #173f38;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .desktop-hero-proof small {
+    color: #7b918b;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+
+  .desktop-category-grid > a,
+  .desktop-pro-card,
+  .desktop-editorial-cards > a,
+  .desktop-business {
+    transition: transform 180ms cubic-bezier(.23, 1, .32, 1), box-shadow 180ms ease, border-color 180ms ease, background-color 180ms ease;
+  }
+
+  .desktop-category-grid > a {
+    min-height: 146px !important;
+    position: relative;
+  }
+
+  .desktop-category-grid > a:hover {
+    border-color: rgba(15, 157, 126, 0.28) !important;
+    box-shadow: 0 20px 44px rgba(8, 68, 58, 0.1), inset 0 1px 0 #fff !important;
+    transform: translateY(-5px);
+  }
+
+  .desktop-category-grid > a > svg:last-child {
+    transition: transform 180ms ease, color 180ms ease;
+  }
+
+  .desktop-category-grid > a:hover > svg:last-child {
+    color: #0f9d7e !important;
+    transform: translateX(4px);
+  }
+
+  .desktop-featured {
+    padding-bottom: 58px !important;
+  }
+
+  .desktop-section-head {
+    align-items: center !important;
+  }
+
+  .desktop-section-head > a {
+    min-height: 38px;
+    padding: 0 13px;
+    border: 1px solid rgba(15, 157, 126, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  }
+
+  .desktop-section-head > a:hover {
+    border-color: rgba(15, 157, 126, 0.32);
+    background: rgba(255, 255, 255, 0.82);
+    transform: translateX(3px);
+  }
+
+  .desktop-pro-card {
+    position: relative;
+    min-height: 218px !important;
+  }
+
+  .desktop-pro-card:hover {
+    border-color: rgba(15, 157, 126, 0.28) !important;
+    box-shadow: 0 22px 48px rgba(8, 68, 58, 0.11), inset 0 1px 0 #fff !important;
+    transform: translateY(-5px);
+  }
+
+  .desktop-pro-copy {
+    padding: 22px 21px !important;
+  }
+
+  .desktop-pro-copy h3 {
+    max-width: 190px;
+  }
+
+  .desktop-pro-copy > div {
+    padding-top: 14px !important;
+  }
+
+  .desktop-pro-copy > div svg {
+    transition: transform 180ms ease;
+  }
+
+  .desktop-pro-card:hover .desktop-pro-copy > div svg {
+    transform: translateX(4px);
+  }
+
+  .desktop-editorial {
+    padding: 62px 68px !important;
+  }
+
+  .desktop-editorial-cards > a:hover {
+    border-color: rgba(15, 157, 126, 0.3) !important;
+    background: rgba(255, 255, 255, 0.78) !important;
+    box-shadow: 0 16px 34px rgba(8, 68, 58, 0.1) !important;
+    transform: translateY(-5px);
+  }
+
+  .desktop-editorial-cards > a:hover > svg:last-child {
+    transform: translateX(4px);
+  }
+
+  .desktop-editorial-cards > a > svg:last-child {
+    transition: transform 180ms ease;
+  }
+
+  .desktop-app-premium .premium-stores > a {
+    transition: transform 180ms cubic-bezier(.23, 1, .32, 1), box-shadow 180ms ease, background-color 180ms ease;
+  }
+
+  .desktop-app-premium .premium-stores > a:hover {
+    background: #1e292b !important;
+    box-shadow: 0 12px 24px rgba(16, 23, 25, 0.2) !important;
+    transform: translateY(-3px);
+  }
+
+  .desktop-app-premium .premium-stores > a::after {
+    content: "Em breve";
+    position: absolute;
+    right: 10px;
+    top: -10px;
+    padding: 4px 7px;
+    border: 1px solid rgba(15, 157, 126, 0.2);
+    border-radius: 999px;
+    background: #e8fff1;
+    color: #0b765f;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .desktop-app-premium .premium-stores > a:hover::after,
+  .desktop-app-premium .premium-stores > a:focus-visible::after {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .desktop-business {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .desktop-business::after {
+    content: "";
+    position: absolute;
+    right: 220px;
+    bottom: -110px;
+    width: 260px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 209, 198, 0.13), transparent 68%);
+    pointer-events: none;
+  }
+
+  .desktop-business > div,
+  .desktop-business > a {
+    position: relative;
+    z-index: 1;
+  }
+
+  .desktop-business > a {
+    transition: transform 180ms cubic-bezier(.23, 1, .32, 1), box-shadow 180ms ease, background-color 180ms ease;
+  }
+
+  .desktop-business > a:hover {
+    background: #08735f !important;
+    box-shadow: 0 15px 30px rgba(15, 157, 126, 0.24) !important;
+    transform: translateY(-3px);
+  }
+
+  .desktop-footer {
+    border-top: 1px solid rgba(15, 157, 126, 0.2) !important;
+    background: linear-gradient(180deg, #e9f7f2 0%, #f7fbfa 100%) !important;
+  }
+
+  .desktop-footer-top {
+    padding-bottom: 8px;
+  }
+
+  .desktop-footer-top > p,
+  .desktop-footer-links a,
+  .desktop-footer-bottom,
+  .desktop-footer-bottom a {
+    color: #506c65 !important;
+  }
+
+  .desktop-footer-links b {
+    color: #173f38 !important;
+  }
+
+  .desktop-footer-links a {
+    transition: color 160ms ease, transform 160ms ease;
+  }
+
+  .desktop-footer-links a:hover {
+    color: #0f9d7e !important;
+    transform: translateX(3px);
+  }
+
+  .desktop-footer-bottom {
+    border-top-color: rgba(15, 157, 126, 0.18) !important;
+  }
+
+  .desktop-home :where(a, button, input):focus-visible {
+    outline: 3px solid rgba(0, 209, 198, 0.72) !important;
+    outline-offset: 4px !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1220px) {
+  .desktop-hero-proof {
+    max-width: 500px;
+  }
+
+  .desktop-hero-proof strong {
+    font-size: 11px;
+  }
+
+  .desktop-hero-proof small {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-home :where(a, button, input),
+  .desktop-home :where(a, button, input)::after {
+    transition: none !important;
+  }
+}
