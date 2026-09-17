@@ -7,4 +7,4 @@
 :HL["/_next/static/css/ba5aca19c35352d9.css","style"]
 :HL["/guia-saude-mobile-home-real.png","image"]
 :HL["/guia-saude-mobile-profile-real.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4224,"slots":null}}},"staleTime":300,"buildId":"ekprw6JYqyF-KvxKDR6gb"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4224,"slots":null}}},"staleTime":300,"buildId":"UCl7QY_5ykxapFxwYUAkc"}
