@@ -33,6 +33,7 @@ import "./health-os-components.css";
 import "./health-os-spatial-system.css";
 import "./health-os-variants.css";
 import "./health-os-product-polish.css";
+import "./health-os-desktop-home.css";
 /* Canonical component owners. Keep these immediately before the visual canvas. */
 import "./health-os-navbar.css";
 import "./health-os-back-navigation-fix.css";
