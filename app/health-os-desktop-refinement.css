@@ -1,0 +1,469 @@
+/* Guia Saúde — desktop fidelity refinement
+   Presentation-only layer for the desktop experience. Existing routes, content and
+   interactions remain unchanged. */
+
+@media (min-width: 901px) {
+  .desktop-home {
+    position: relative;
+    isolation: isolate;
+    background:
+      radial-gradient(ellipse 42% 22% at 93% 7%, rgba(215,255,90,.20), transparent 72%),
+      radial-gradient(ellipse 33% 25% at 5% 28%, rgba(0,209,198,.10), transparent 72%),
+      var(--brand-ice, #f4f7fa) !important;
+  }
+
+  .desktop-home::before,
+  .desktop-home::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: 46% 54% 58% 42%;
+    filter: blur(4px);
+  }
+
+  .desktop-home::before {
+    width: 360px;
+    height: 360px;
+    top: 470px;
+    left: -180px;
+    background:
+      radial-gradient(circle at 62% 32%, rgba(0,209,198,.16), transparent 50%),
+      radial-gradient(circle at 35% 70%, rgba(215,255,90,.20), transparent 58%);
+    transform: rotate(-18deg);
+  }
+
+  .desktop-home::after {
+    width: 420px;
+    height: 420px;
+    right: -220px;
+    top: 1220px;
+    background:
+      radial-gradient(circle at 35% 35%, rgba(255,255,255,.92), transparent 24%),
+      radial-gradient(circle at 60% 62%, rgba(0,209,198,.18), transparent 52%),
+      radial-gradient(circle at 38% 66%, rgba(215,255,90,.25), transparent 65%);
+  }
+
+  .desktop-nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    height: 78px !important;
+    border-bottom-color: rgba(15,157,126,.12) !important;
+    background: rgba(244,247,250,.78) !important;
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  }
+
+  .desktop-brand-new .guia-logo {
+    gap: 8px !important;
+  }
+
+  .desktop-brand-new .guia-logo-symbol {
+    width: 39px !important;
+    height: 39px !important;
+  }
+
+  .desktop-brand-new .guia-logo-main {
+    font-size: 19px !important;
+  }
+
+  .desktop-nav nav {
+    gap: 28px !important;
+    color: #526b66 !important;
+  }
+
+  .desktop-nav nav a {
+    position: relative;
+    padding: 8px 0;
+    transition: color .2s ease;
+  }
+
+  .desktop-nav nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: 1px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--brand-emerald, #0f9d7e);
+    transition: right .2s ease;
+  }
+
+  .desktop-nav nav a:hover::after,
+  .desktop-nav nav a:focus-visible::after {
+    right: 0;
+  }
+
+  .desktop-download {
+    min-height: 42px !important;
+    padding: 0 17px !important;
+    border-radius: 999px !important;
+    background: var(--brand-graphite, #0b0f14) !important;
+    box-shadow: 0 8px 20px rgba(11,15,20,.12) !important;
+  }
+
+  .desktop-hero {
+    min-height: 650px !important;
+    padding: 72px 0 78px !important;
+    gap: 74px !important;
+  }
+
+  .desktop-hero-copy {
+    position: relative;
+    z-index: 2;
+  }
+
+  .desktop-eyebrow,
+  .desktop-section-title > span,
+  .desktop-section-head span,
+  .desktop-editorial-copy > span,
+  .desktop-app-copy > span,
+  .desktop-business > div > span {
+    color: var(--brand-emerald, #0f9d7e) !important;
+    letter-spacing: .17em !important;
+  }
+
+  .desktop-hero h1 {
+    max-width: 620px !important;
+    margin: 21px 0 25px !important;
+    font-size: clamp(62px, 5.5vw, 82px) !important;
+    line-height: .91 !important;
+    letter-spacing: -.065em !important;
+    color: var(--brand-graphite, #0b0f14) !important;
+  }
+
+  .desktop-hero h1 em {
+    color: var(--brand-emerald, #0f9d7e) !important;
+  }
+
+  .desktop-hero-copy > p {
+    max-width: 560px !important;
+    margin-bottom: 32px !important;
+    color: var(--brand-muted, #6f7f7b) !important;
+    font-size: 17px !important;
+    line-height: 1.58 !important;
+  }
+
+  .desktop-search {
+    height: 72px !important;
+    max-width: 710px !important;
+    padding-left: 22px !important;
+    border: 1px solid rgba(255,255,255,.96) !important;
+    border-radius: 999px !important;
+    background: rgba(255,255,255,.72) !important;
+    box-shadow: 0 18px 48px rgba(15,80,68,.09), inset 0 1px 0 #fff !important;
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  }
+
+  .desktop-search > svg {
+    color: var(--brand-emerald, #0f9d7e) !important;
+  }
+
+  .desktop-search input {
+    font-size: 14px !important;
+  }
+
+  .desktop-search > span {
+    min-height: 34px;
+    border-left-color: rgba(15,157,126,.14) !important;
+    color: var(--brand-muted, #6f7f7b) !important;
+  }
+
+  .desktop-search button {
+    height: 54px !important;
+    padding: 0 22px !important;
+    border-radius: 999px !important;
+    background: var(--brand-graphite, #0b0f14) !important;
+  }
+
+  .desktop-hero-actions {
+    gap: 18px !important;
+    margin-top: 23px !important;
+  }
+
+  .desktop-hero-actions a:first-child {
+    min-height: 46px;
+    padding: 0 20px !important;
+    border-radius: 999px !important;
+    background: var(--brand-emerald, #0f9d7e) !important;
+    box-shadow: 0 10px 24px rgba(15,157,126,.16);
+  }
+
+  .desktop-hero-actions a:last-child {
+    color: var(--brand-graphite, #0b0f14) !important;
+    font-weight: 650 !important;
+  }
+
+  .desktop-phone-stage {
+    min-height: 535px;
+  }
+
+  .desktop-phone-stage::before,
+  .desktop-phone-stage::after {
+    content: "";
+    position: absolute;
+    border-radius: 44% 56% 54% 46%;
+    pointer-events: none;
+  }
+
+  .desktop-phone-stage::before {
+    width: 360px;
+    height: 245px;
+    left: 50%;
+    top: 105px;
+    transform: translateX(-50%) rotate(-13deg);
+    background:
+      radial-gradient(circle at 26% 46%, rgba(255,255,255,.95), transparent 25%),
+      radial-gradient(circle at 62% 52%, rgba(0,209,198,.28), transparent 58%),
+      radial-gradient(circle at 43% 68%, rgba(215,255,90,.42), transparent 66%);
+    filter: blur(5px);
+  }
+
+  .desktop-phone-stage::after {
+    width: 150px;
+    height: 150px;
+    right: -4px;
+    bottom: 26px;
+    background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.92), rgba(0,209,198,.20) 45%, transparent 72%);
+    filter: blur(2px);
+  }
+
+  .desktop-glow {
+    width: 480px !important;
+    height: 480px !important;
+    background: radial-gradient(circle at 52% 48%, rgba(215,255,90,.40), rgba(0,209,198,.16) 42%, rgba(244,247,250,0) 72%) !important;
+  }
+
+  .desktop-phone {
+    border-color: var(--brand-graphite, #0b0f14) !important;
+    box-shadow: 0 30px 65px rgba(8,68,58,.16), inset 0 1px 0 rgba(255,255,255,.7) !important;
+  }
+
+  .desktop-phone::before {
+    background: var(--brand-graphite, #0b0f14) !important;
+  }
+
+  .desktop-phone-back {
+    left: 23px !important;
+    top: 78px !important;
+    opacity: .78 !important;
+    transform: rotate(-7deg) scale(.93) !important;
+  }
+
+  .desktop-phone-front {
+    right: 38px !important;
+    top: 20px !important;
+    transform: rotate(4deg) scale(1.02) !important;
+  }
+
+  .desktop-section {
+    padding: 82px 0 !important;
+  }
+
+  .desktop-discovery {
+    border-top-color: rgba(15,157,126,.12) !important;
+  }
+
+  .desktop-section-title {
+    max-width: 660px !important;
+    margin-bottom: 35px !important;
+  }
+
+  .desktop-section-title h2,
+  .desktop-section-head h2,
+  .desktop-app h2,
+  .desktop-business h2 {
+    color: var(--brand-graphite, #0b0f14) !important;
+    font-weight: 550 !important;
+    letter-spacing: -.06em !important;
+  }
+
+  .desktop-section-title h2 {
+    font-size: 45px !important;
+  }
+
+  .desktop-category-grid {
+    gap: 15px !important;
+  }
+
+  .desktop-category-grid > a {
+    min-height: 138px !important;
+    border: 1px solid rgba(255,255,255,.94) !important;
+    border-radius: 26px !important;
+    background: rgba(255,255,255,.68) !important;
+    box-shadow: 0 15px 36px rgba(8,68,58,.055), inset 0 1px 0 #fff !important;
+    backdrop-filter: blur(20px) saturate(1.15);
+    -webkit-backdrop-filter: blur(20px) saturate(1.15);
+  }
+
+  .desktop-category-grid > a > svg:first-child {
+    background: linear-gradient(145deg, rgba(0,209,198,.15), rgba(215,255,90,.25)) !important;
+    color: var(--brand-emerald, #0f9d7e) !important;
+  }
+
+  .desktop-category-grid strong {
+    color: var(--brand-graphite, #0b0f14) !important;
+  }
+
+  .desktop-category-grid small {
+    color: var(--brand-muted, #6f7f7b) !important;
+  }
+
+  .desktop-featured {
+    padding-top: 34px !important;
+  }
+
+  .desktop-section-head {
+    margin-bottom: 28px !important;
+  }
+
+  .desktop-section-head h2 {
+    font-size: 43px !important;
+  }
+
+  .desktop-pro-grid {
+    gap: 18px !important;
+  }
+
+  .desktop-pro-card {
+    min-height: 208px !important;
+    grid-template-columns: 154px minmax(0,1fr) !important;
+    border: 1px solid rgba(255,255,255,.94) !important;
+    border-radius: 26px !important;
+    background: rgba(255,255,255,.74) !important;
+    box-shadow: 0 15px 36px rgba(8,68,58,.06), inset 0 1px 0 #fff !important;
+    backdrop-filter: blur(20px) saturate(1.12);
+    -webkit-backdrop-filter: blur(20px) saturate(1.12);
+  }
+
+  .desktop-pro-photo {
+    min-height: 208px !important;
+    background: linear-gradient(145deg, rgba(0,209,198,.12), rgba(215,255,90,.24)) !important;
+  }
+
+  .desktop-pro-copy {
+    padding: 20px 19px !important;
+  }
+
+  .desktop-pro-copy h3 {
+    color: var(--brand-graphite, #0b0f14) !important;
+    font-size: 18px !important;
+  }
+
+  .desktop-pro-copy > div {
+    border-top-color: rgba(15,157,126,.12) !important;
+  }
+
+  .desktop-pro-copy > div svg {
+    color: var(--brand-emerald, #0f9d7e) !important;
+  }
+
+  .desktop-editorial {
+    margin-top: 36px !important;
+    border-radius: 40px !important;
+    padding: 58px 62px !important;
+    background:
+      radial-gradient(circle at 90% 12%, rgba(215,255,90,.18), transparent 25%),
+      radial-gradient(circle at 62% 100%, rgba(0,209,198,.13), transparent 42%),
+      var(--brand-graphite, #0b0f14) !important;
+  }
+
+  .desktop-editorial-copy h2 {
+    color: #fff !important;
+    font-weight: 540 !important;
+  }
+
+  .desktop-editorial-cards > a {
+    min-height: 225px !important;
+    border-color: rgba(255,255,255,.16) !important;
+    border-radius: 26px !important;
+    background: rgba(255,255,255,.075) !important;
+    backdrop-filter: blur(16px);
+  }
+
+  .desktop-app {
+    margin-top: 28px !important;
+    border-radius: 40px !important;
+    padding: 60px 70px !important;
+    background:
+      radial-gradient(circle at 88% 18%, rgba(215,255,90,.38), transparent 25%),
+      linear-gradient(120deg, #e5fbf7, var(--brand-ice, #f4f7fa) 48%, #efffd0) !important;
+  }
+
+  .desktop-app h2 {
+    font-size: 46px !important;
+  }
+
+  .desktop-app-benefits span {
+    border-radius: 999px !important;
+    border: 1px solid rgba(255,255,255,.78);
+    background: rgba(255,255,255,.58) !important;
+  }
+
+  .desktop-store-buttons > span {
+    border-radius: 999px !important;
+    background: var(--brand-graphite, #0b0f14) !important;
+  }
+
+  .desktop-business {
+    margin-top: 28px !important;
+    padding: 48px 60px !important;
+    border: 1px solid rgba(255,255,255,.94) !important;
+    border-radius: 34px !important;
+    background: rgba(255,255,255,.70) !important;
+    box-shadow: 0 16px 42px rgba(8,68,58,.055), inset 0 1px 0 #fff !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .desktop-business h2 {
+    font-size: 39px !important;
+  }
+
+  .desktop-business > a {
+    min-height: 48px;
+    padding: 0 22px !important;
+    border-radius: 999px !important;
+    background: var(--brand-graphite, #0b0f14) !important;
+  }
+
+  .desktop-footer {
+    margin-top: 70px !important;
+    padding-top: 72px !important;
+    background: var(--brand-graphite, #0b0f14) !important;
+  }
+
+  .desktop-footer-top {
+    gap: 65px !important;
+  }
+
+  .desktop-footer-links b {
+    color: var(--brand-aqua, #00d1c6) !important;
+  }
+
+  .desktop-footer-links a,
+  .desktop-footer-top > p {
+    color: rgba(244,247,250,.66) !important;
+  }
+
+  .desktop-footer-bottom {
+    border-top-color: rgba(255,255,255,.14) !important;
+    color: rgba(244,247,250,.54) !important;
+  }
+
+  .desktop-home :where(a, button, input):focus-visible {
+    outline: 3px solid var(--brand-aqua, #00d1c6) !important;
+    outline-offset: 4px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-nav nav a::after,
+  .desktop-category-grid > a,
+  .desktop-pro-card {
+    transition: none !important;
+  }
+}
