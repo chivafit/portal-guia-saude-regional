@@ -555,6 +555,68 @@
     padding-bottom: 58px !important;
   }
 
+  .desktop-featured-carousel {
+    position: relative;
+  }
+
+  .desktop-featured-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    min-height: 42px;
+    margin-top: 18px;
+    color: #78918a;
+    font-size: 10px;
+  }
+
+  .desktop-featured-controls > div {
+    display: flex;
+    gap: 6px;
+  }
+
+  .desktop-featured-controls button {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid rgba(15, 157, 126, 0.16);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.65);
+    color: #167d67;
+    cursor: pointer;
+    transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+  }
+
+  .desktop-featured-controls button:hover {
+    border-color: rgba(15, 157, 126, 0.32);
+    background: #e8fff4;
+    transform: translateY(-2px);
+  }
+
+  .desktop-featured-dots {
+    display: flex !important;
+    align-items: center;
+    gap: 5px !important;
+    margin-left: 2px;
+  }
+
+  .desktop-featured-dots button {
+    width: 7px;
+    height: 7px;
+    min-height: 7px;
+    padding: 0;
+    border: 0;
+    background: #c8ddd5;
+  }
+
+  .desktop-featured-dots button.is-active {
+    width: 20px;
+    border-radius: 999px;
+    background: #159473;
+  }
+
   .desktop-section-head {
     align-items: center !important;
   }
