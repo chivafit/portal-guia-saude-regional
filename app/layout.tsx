@@ -48,6 +48,8 @@ import "./health-os-home-refinement.css";
 import "./health-os-pages-refinement.css";
 /* Brand identity override: non-destructive and intentionally late in the cascade. */
 import "./health-os-brand-refresh.css";
+/* Mobile-only accessibility refinement for secondary copy, states and logo legibility. */
+import "./health-os-mobile-accessibility.css";
 /* Visual atmosphere only: must remain the final global CSS layer. */
 import "./health-os-continuous-canvas.css";
 
