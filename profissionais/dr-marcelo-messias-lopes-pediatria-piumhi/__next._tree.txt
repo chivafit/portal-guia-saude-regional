@@ -3,5 +3,5 @@
 :HL["/_next/static/css/b79af30bd303c8e6.css","style"]
 :HL["/_next/static/css/e6d3290e5f3ce2cf.css","style"]
 :HL["/_next/static/css/8d6b5958656f883d.css","style"]
-:HL["/_next/static/css/e3e891e570ac5542.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-marcelo-messias-lopes-pediatria-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"QgXi5jj4bL0C1dKhXx7GL"}
+:HL["/_next/static/css/cacd58f2d127374f.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-marcelo-messias-lopes-pediatria-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"OwObjiOWX18yDNZj3EUjI"}
