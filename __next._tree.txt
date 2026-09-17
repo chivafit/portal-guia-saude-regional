@@ -3,7 +3,7 @@
 :HL["/_next/static/css/b79af30bd303c8e6.css","style"]
 :HL["/_next/static/css/e6d3290e5f3ce2cf.css","style"]
 :HL["/_next/static/css/8d6b5958656f883d.css","style"]
-:HL["/_next/static/css/cacd58f2d127374f.css","style"]
+:HL["/_next/static/css/9e1ecfe7ffed6559.css","style"]
 :HL["/guia-saude-mobile-profile-real.png","image"]
 :HL["/guia-saude-mobile-home-real.png","image"]
 :HL["/professionals/dr-paulo-henrique-faria-silva-oftalmologia-piumhi.jpg","image"]
@@ -12,4 +12,4 @@
 :HL["/professionals/dra-gabriela-goncalves-de-oliveira-dermatologia-piumhi.png","image"]
 :HL["/professionals/ivana-mara-de-oliveira-rezende-fisioterapia-piumhi.jpg","image"]
 :HL["/professionals/nayara-garcia-pediatria-pneumologia-infantil-piumhi.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4224,"slots":null}}},"staleTime":300,"buildId":"HypdzgYtlPRIiGxxhSaMw"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4224,"slots":null}}},"staleTime":300,"buildId":"JITAqP0o8y-SZGSoXSUCr"}
