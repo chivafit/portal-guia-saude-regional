@@ -504,26 +504,6 @@
     object-fit: cover;
   }
 
-  .desktop-reference-note {
-    position: absolute;
-    right: -2%;
-    top: 92px;
-    z-index: 4;
-    color: #159473;
-    font-family: Georgia, serif;
-    font-size: 22px;
-    font-style: italic;
-    line-height: 1.25;
-    transform: rotate(-5deg);
-  }
-
-  .desktop-reference-note svg {
-    display: block;
-    width: 48px;
-    margin: 8px 0 0 20px;
-    transform: rotate(25deg);
-  }
-
   .desktop-category-grid > a,
   .desktop-pro-card,
   .desktop-editorial-cards > a,
