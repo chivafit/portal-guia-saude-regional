@@ -66,3 +66,40 @@
     line-height: .86 !important;
   }
 }
+
+
+/* The reference uses a horizontal symbol + wordmark lockup. */
+.brand .guia-logo,
+.desktop-brand-new .guia-logo,
+.desktop-brand-footer .guia-logo {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+.brand .guia-logo-word,
+.desktop-brand-new .guia-logo-word,
+.desktop-brand-footer .guia-logo-word {
+  width: auto !important;
+  height: auto !important;
+}
+
+.brand .guia-logo-symbol {
+  width: 38px !important;
+  height: 38px !important;
+}
+
+.brand .guia-logo-kicker,
+.brand .guia-logo-main {
+  font-size: 1.16rem !important;
+}
+
+@media (max-width: 760px) {
+  html.native-app .health-os-topbar .guia-logo {
+    flex-direction: row !important;
+    gap: 8px !important;
+  }
+}
