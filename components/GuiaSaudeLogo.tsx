@@ -25,9 +25,9 @@ export function GuiaSaudeLogo({ compact = false }: { compact?: boolean }) {
         <path d="M35 36c8-8 21-9 30-3 8 6 11 16 7 25-4 9-14 15-24 14-10-1-18-8-20-17-2-7 1-14 7-19Z" fill="#F4F7FA" opacity=".82"/>
       </svg>
       <span className="guia-logo-word">
-        <span className="guia-logo-kicker">Guia</span>
-        <span className="guia-logo-main">Saúde</span>
-        {!compact ? <span className="guia-logo-tagline">Saúde mais perto de você</span> : null}
+        <span className="guia-logo-kicker">GUIA</span>
+        <span className="guia-logo-main">saúde</span>
+        {!compact ? <span className="guia-logo-tagline">PORTAL REGIONAL</span> : null}
       </span>
     </span>
   );

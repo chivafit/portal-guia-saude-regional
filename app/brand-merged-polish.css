@@ -1,0 +1,11 @@
+/* Brand merge: current gradient symbol + supplied wordmark typography */
+.guia-logo-word{display:flex!important;flex-direction:column!important;line-height:.84!important}
+.guia-logo-kicker{font-family:"IBM Plex Sans",Arial,sans-serif!important;font-size:.7rem!important;font-weight:800!important;letter-spacing:.16em!important;line-height:1!important;text-transform:uppercase!important;color:#0b0f14!important}
+.guia-logo-main{margin-top:1px!important;font-family:"Libre Baskerville",Georgia,serif!important;font-size:1.22rem!important;font-weight:700!important;letter-spacing:-.06em!important;line-height:.86!important;text-transform:lowercase!important;color:#0b0f14!important}
+.guia-logo-tagline{margin-top:7px!important;font-family:"IBM Plex Sans",Arial,sans-serif!important;font-size:.34rem!important;font-weight:700!important;letter-spacing:.16em!important;line-height:1.1!important;text-transform:uppercase!important;color:#0b0f14!important}
+.guia-logo-symbol{flex:none}
+.guia-logo-compact .guia-logo-kicker,.guia-logo-compact .guia-logo-main{font-size:.92rem!important}
+.desktop-brand-new .guia-logo-kicker,.desktop-brand-new .guia-logo-main{font-size:1rem!important}
+.desktop-brand-footer .guia-logo-kicker,.desktop-brand-footer .guia-logo-main,.site-footer .guia-logo-kicker,.site-footer .guia-logo-main{color:#fff!important}
+.desktop-brand-footer .guia-logo-tagline,.site-footer .guia-logo-tagline{color:rgba(255,255,255,.78)!important}
+@media(max-width:760px){.guia-logo-main{font-size:1.05rem!important}.guia-logo-kicker{font-size:.61rem!important}.guia-logo-tagline{font-size:.3rem!important}}

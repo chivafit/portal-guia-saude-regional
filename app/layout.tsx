@@ -64,6 +64,8 @@ import "./about-page-polish.css";
 import "./inclusion-page-polish.css";
 /* Shared header CTA sizing and capitalization. */
 import "./header-cta-polish.css";
+/* Merged brand: current symbol with the supplied wordmark typography. */
+import "./brand-merged-polish.css";
 /* Visual atmosphere only: must remain the final global CSS layer. */
 import "./health-os-continuous-canvas.css";
 
