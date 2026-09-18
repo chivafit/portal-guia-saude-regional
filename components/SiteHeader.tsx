@@ -5,7 +5,7 @@ import { CitySelector } from "@/components/CitySelector";
 import { ContextNav } from "@/components/ContextNav";
 import { MobileMenu } from "@/components/MobileMenu";
 
-export function SiteHeader({ showTopline = true, advertiseLabel = "Anuncie" }: { showTopline?: boolean; advertiseLabel?: string }) {
+export function SiteHeader({ showTopline = true, advertiseLabel = "ANUNCIE" }: { showTopline?: boolean; advertiseLabel?: string }) {
   return (
     <>{showTopline ? <div className="topline"><div className="shell">Conteúdo, profissionais e serviços <span>Perto de você</span></div></div> : null}<header className="site-header">
       <div className="shell header-inner">

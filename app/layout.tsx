@@ -62,6 +62,8 @@ import "./desktop-design-polish.css";
 import "./about-page-polish.css";
 /* Compact service flow for the profile inclusion page. */
 import "./inclusion-page-polish.css";
+/* Shared header CTA sizing and capitalization. */
+import "./header-cta-polish.css";
 /* Visual atmosphere only: must remain the final global CSS layer. */
 import "./health-os-continuous-canvas.css";
 
