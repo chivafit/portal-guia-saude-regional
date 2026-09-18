@@ -860,3 +860,19 @@
   .desktop-business{width:calc(100% - 28px);margin:14px auto 0;padding:25px 20px;border-radius:21px;display:block}.desktop-business h2{font-size:28px;line-height:1.02;margin:10px 0 8px}.desktop-business p{font-size:12px;line-height:1.45}.desktop-business>a{display:inline-flex;margin-top:16px;padding:12px 15px;border-radius:12px;font-size:10px}
   .desktop-footer{margin-top:35px;padding:38px 20px 20px}.desktop-footer-top{display:block}.desktop-footer-top>p{margin:15px 0 23px;font-size:11px;line-height:1.5}.desktop-footer-links{grid-template-columns:repeat(2,1fr);gap:23px 16px}.desktop-footer-links>div{gap:7px}.desktop-footer-links b{font-size:9px}.desktop-footer-links a{font-size:9px}.desktop-footer-bottom{display:grid;gap:9px;margin-top:29px;padding-top:16px;font-size:8px;line-height:1.4}.desktop-footer-bottom nav{display:flex;flex-wrap:wrap;gap:7px}
 }
+
+/* Featured professionals: stable card/image dimensions across carousel states */
+@media (min-width:901px){
+  .desktop-featured .desktop-pro-card{height:190px;min-height:190px}
+  .desktop-featured .desktop-pro-photo{height:190px;min-height:190px}
+  .desktop-featured .desktop-pro-copy{height:190px;overflow:hidden}
+  .desktop-featured .desktop-pro-copy h3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+  .desktop-featured .desktop-pro-copy>p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
+@media (max-width:900px){
+  .desktop-featured .desktop-pro-card{height:132px;min-height:132px}
+  .desktop-featured .desktop-pro-photo{height:132px;min-height:132px}
+  .desktop-featured .desktop-pro-copy{height:132px;overflow:hidden}
+  .desktop-featured .desktop-pro-copy h3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+  .desktop-featured .desktop-pro-copy>p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
