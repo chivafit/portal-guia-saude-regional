@@ -4,5 +4,5 @@
 :HL["/_next/static/css/e6d3290e5f3ce2cf.css","style"]
 :HL["/_next/static/css/aba2fbc39d1e98f2.css","style"]
 :HL["/_next/static/css/10e8d3f03390676b.css","style"]
-:HL["/_next/static/css/36be8779e5911692.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-gabriel-tavares-pediatria-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"9hmgbVkSj7Mzi2ZRk5H1L"}
+:HL["/_next/static/css/68829f3b12b4ef31.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-gabriel-tavares-pediatria-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"f0_wki5UH3k6mciYVbZCa"}
