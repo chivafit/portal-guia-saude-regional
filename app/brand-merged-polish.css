@@ -39,5 +39,5 @@
 .guia-logo-compact .guia-logo-symbol{width:34px!important;height:34px!important}
 .desktop-brand-new .guia-logo-wordmark{width:132px!important}
 .desktop-brand-new .guia-logo-symbol{width:36px!important;height:36px!important}
-.desktop-brand-footer .guia-logo-wordmark{filter:brightness(0) invert(1)!important}
+.desktop-brand-footer .guia-logo-wordmark,.guia-logo-footer .guia-logo-wordmark{filter:none!important}
 @media(max-width:760px){.guia-logo-wordmark{width:120px!important}.guia-logo-symbol{width:36px!important;height:36px!important}.guia-logo-compact .guia-logo-wordmark{width:96px!important}.guia-logo-compact .guia-logo-symbol{width:30px!important;height:30px!important}}

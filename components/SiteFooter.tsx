@@ -27,7 +27,7 @@ export function SiteFooter({ hideCommercialCallout = false }: { hideCommercialCa
     <footer className="site-footer">
       <div className="shell footer-top">
         <div className="footer-brand">
-          <GuiaSaudeLogo />
+          <GuiaSaudeLogo footer />
           <p>Conteúdo, profissionais e serviços de saúde perto de você.</p>
           <div className="footer-contact">
             <a href="mailto:rmproguia@gmail.com"><Mail size={15} /> rmproguia@gmail.com</a>

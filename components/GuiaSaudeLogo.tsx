@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-export function GuiaSaudeLogo({ compact = false }: { compact?: boolean }) {
+export function GuiaSaudeLogo({ compact = false, footer = false }: { compact?: boolean; footer?: boolean }) {
   return (
-    <span className={compact ? "guia-logo guia-logo-compact" : "guia-logo"} aria-label="Guia Saúde">
+    <span className={`${compact ? "guia-logo guia-logo-compact" : "guia-logo"}${footer ? " guia-logo-footer" : ""}`} aria-label="Guia Saúde">
       <svg className="guia-logo-symbol" viewBox="0 0 96 96" role="img" aria-label="Símbolo Guia Saúde">
         <defs>
           <linearGradient id="guia-a" x1="10" y1="14" x2="78" y2="80" gradientUnits="userSpaceOnUse">
@@ -28,7 +28,7 @@ export function GuiaSaudeLogo({ compact = false }: { compact?: boolean }) {
       </svg>
       <Image
         className="guia-logo-wordmark"
-        src={compact ? "/brand/guia-saude-wordmark-compact.svg" : "/brand/guia-saude-wordmark.svg"}
+        src={footer ? "/brand/guia-saude-wordmark-footer.svg" : compact ? "/brand/guia-saude-wordmark-compact.svg" : "/brand/guia-saude-wordmark.svg"}
         alt=""
         width={compact ? 110 : 145}
         height={compact ? 80 : 85}
