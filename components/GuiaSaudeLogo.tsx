@@ -28,7 +28,7 @@ export function GuiaSaudeLogo({ compact = false, footer = false, lightFooter = f
       </svg>
       <Image
         className="guia-logo-wordmark"
-        src={lightFooter ? "/brand/guia-saude-wordmark.svg" : footer ? "/brand/guia-saude-wordmark-footer.svg" : compact ? "/brand/guia-saude-wordmark-compact.svg" : "/brand/guia-saude-wordmark.svg"}
+        src="/brand/guia-saude-wordmark-primary.svg"
         alt=""
         width={compact ? 110 : 145}
         height={compact ? 80 : 85}
