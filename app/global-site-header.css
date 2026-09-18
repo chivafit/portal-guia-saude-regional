@@ -1,0 +1,140 @@
+/* Shared Guia Saúde header: the home lockup is the identity source for every route. */
+.global-site-header {
+  position: relative;
+  z-index: 40;
+  color: #173f38;
+  background: #f9fbfc;
+}
+
+.global-site-header-desktop {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3vw, 44px);
+  min-height: 82px;
+  padding: 0 clamp(28px, 4.8vw, 72px);
+  border-bottom: 1px solid rgba(15, 157, 126, 0.09);
+  background: rgba(249, 251, 252, 0.92);
+  box-shadow: 0 8px 24px rgba(20, 76, 65, 0.035);
+}
+
+.global-site-header-desktop .desktop-brand {
+  flex: 0 0 auto;
+}
+
+.global-site-header-desktop nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.15vw, 30px);
+  min-width: 0;
+}
+
+.global-site-header-desktop nav a {
+  color: #46645e;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.global-site-header-desktop nav a:hover,
+.global-site-header-desktop nav a:focus-visible {
+  color: #08735f;
+  transform: translateY(-1px);
+}
+
+.global-site-header-desktop .desktop-search-link {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-left: auto;
+  border-radius: 50%;
+  color: #173f38;
+  background: #f7fbfa;
+  text-decoration: none;
+  transition: transform 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.global-site-header-desktop .desktop-search-link:hover,
+.global-site-header-desktop .desktop-search-link:focus-visible {
+  color: #08735f;
+  background: #e7faf2;
+  transform: translateY(-2px);
+}
+
+.global-site-header-desktop .desktop-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 132px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  color: #fff;
+  background: #0f9d7e;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.global-site-header-desktop .desktop-download:hover,
+.global-site-header-desktop .desktop-download:focus-visible {
+  background: #08735f;
+  box-shadow: 0 12px 28px rgba(15, 157, 126, 0.23);
+  transform: translateY(-2px);
+}
+
+.global-site-header-mobile { display: none; }
+
+@media (max-width: 760px) {
+  .global-site-header {
+    background: linear-gradient(145deg, #f9fbfc 0%, #f0f7f5 47%, #edf8f8 100%);
+  }
+
+  .global-site-header-desktop { display: none; }
+
+  .global-site-header-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(100% - 32px, 520px);
+    min-height: 72px;
+    margin: 0 auto;
+    padding: 14px 0;
+  }
+
+  .global-site-header-mobile .health-os-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 13px;
+    border: 1px solid rgba(255,255,255,.85);
+    border-radius: 999px;
+    color: #17352e;
+    background: rgba(255,255,255,.55);
+    box-shadow: 0 8px 30px rgba(14,70,59,.07), inset 0 1px 0 #fff;
+    font-weight: 650;
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+  }
+
+  .global-site-header-mobile .health-os-brand-link {
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@media (min-width: 761px) {
+  .global-site-header + .desktop-home { margin-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-site-header * { transition: none !important; }
+}

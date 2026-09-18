@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { CityEntryModal } from "@/components/CityEntryModal";
 import { AppBootstrap } from "@/components/AppBootstrap";
 import { AppBottomNav } from "@/components/AppBottomNav";
+import { GlobalSiteHeader } from "@/components/GlobalSiteHeader";
 import { defaultDescription, siteName, siteUrl } from "@/lib/seo";
 
 /* Portal foundation + canonical Health OS stack.
@@ -64,6 +65,7 @@ import "./about-page-polish.css";
 import "./inclusion-page-polish.css";
 /* Shared header CTA sizing and capitalization. */
 import "./header-cta-polish.css";
+import "./global-site-header.css";
 /* Merged brand: current symbol with the supplied wordmark typography. */
 import "./brand-merged-polish.css";
 /* Visual atmosphere only: must remain the final global CSS layer. */
@@ -77,4 +79,4 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "Guia Saúde — Portal Regional", description: defaultDescription, images: ["/og.png"] },
 };
 export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#0f9d7e" };
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="pt-BR"><body><AppBootstrap />{children}<CityEntryModal /><AppBottomNav /></body></html>; }
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="pt-BR"><body><AppBootstrap /><GlobalSiteHeader />{children}<CityEntryModal /><AppBottomNav /></body></html>; }
