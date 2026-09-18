@@ -7,4 +7,4 @@
 :HL["/_next/static/css/13227116569ad8b4.css","style"]
 :HL["/guia-saude-mobile-home-real.png","image"]
 :HL["/guia-saude-mobile-specialties-real.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4224,"slots":null}}},"staleTime":300,"buildId":"nRISvDVSfeq9DGXnY6XDI"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4224,"slots":null}}},"staleTime":300,"buildId":"hCUK8vnGZefE0Tk3HG-_e"}
