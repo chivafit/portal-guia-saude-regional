@@ -41,3 +41,22 @@
 .desktop-brand-new .guia-logo-symbol{width:36px!important;height:36px!important}
 .desktop-brand-footer .guia-logo-wordmark,.guia-logo-footer .guia-logo-wordmark{filter:none!important}
 @media(max-width:760px){.guia-logo-wordmark{width:120px!important}.guia-logo-symbol{width:36px!important;height:36px!important}.guia-logo-compact .guia-logo-wordmark{width:96px!important}.guia-logo-compact .guia-logo-symbol{width:30px!important;height:30px!important}}
+
+/* Footer follows the same palette as the header: black GUIA, green saúde and the gradient symbol. */
+.site-footer:has(.guia-logo-light-footer){
+  background:linear-gradient(145deg,#f7fcfa,#edf8f4)!important;
+  border-top:1px solid rgba(15,157,126,.12);
+}
+.site-footer .guia-logo-light-footer .guia-logo-wordmark{filter:none!important}
+.site-footer:has(.guia-logo-light-footer) .footer-brand>p{color:#58736c!important}
+.site-footer:has(.guia-logo-light-footer) .footer-contact a,
+.site-footer:has(.guia-logo-light-footer) .footer-contact span{color:#5e7871!important}
+.site-footer:has(.guia-logo-light-footer) .footer-social a{color:#0f9d7e!important;background:rgba(255,255,255,.72)!important;border-color:rgba(15,157,126,.13)!important}
+.site-footer:has(.guia-logo-light-footer) .footer-links span{color:#0f8f73!important}
+.site-footer:has(.guia-logo-light-footer) .footer-links a{color:#55736b!important}
+.site-footer:has(.guia-logo-light-footer) .footer-links a:hover{color:#08735f!important}
+.site-footer:has(.guia-logo-light-footer) .footer-cta{border-color:rgba(15,157,126,.15)!important;background:rgba(255,255,255,.62)!important;box-shadow:0 14px 34px rgba(18,76,65,.06)}
+.site-footer:has(.guia-logo-light-footer) .footer-cta strong{color:#173f38!important}
+.site-footer:has(.guia-logo-light-footer) .footer-cta p{color:#66817a!important}
+.site-footer:has(.guia-logo-light-footer) .footer-cta a{background:#0f9d7e!important;color:#fff!important}
+.site-footer:has(.guia-logo-light-footer) .footer-bottom{border-color:rgba(15,157,126,.14);color:#78918a!important}
