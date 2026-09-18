@@ -82,3 +82,17 @@ html.native-app .health-os-topbar .guia-logo-word {
     gap: 8px !important;
   }
 }
+
+/* Internal light footer: social icons must remain legible against the refreshed surface. */
+.site-footer:has(.guia-logo-light-footer) .footer-social a{
+  color:#0f806f!important;
+  background:rgba(255,255,255,.78)!important;
+  border-color:rgba(15,128,111,.24)!important;
+}
+.site-footer:has(.guia-logo-light-footer) .footer-social a:hover,
+.site-footer:has(.guia-logo-light-footer) .footer-social a:focus-visible{
+  color:#fff!important;
+  background:#0f9d7e!important;
+  border-color:#0f9d7e!important;
+}
+.site-footer:has(.guia-logo-light-footer) .footer-social svg{color:currentColor!important}
