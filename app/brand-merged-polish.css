@@ -9,3 +9,24 @@
 .desktop-brand-footer .guia-logo-kicker,.desktop-brand-footer .guia-logo-main,.site-footer .guia-logo-kicker,.site-footer .guia-logo-main{color:#fff!important}
 .desktop-brand-footer .guia-logo-tagline,.site-footer .guia-logo-tagline{color:rgba(255,255,255,.78)!important}
 @media(max-width:760px){.guia-logo-main{font-size:1.05rem!important}.guia-logo-kicker{font-size:.61rem!important}.guia-logo-tagline{font-size:.3rem!important}}
+
+/* Web mobile/tablet QA fixes: native dock must not cover the responsive website. */
+@media(max-width:900px){
+  html:not(.native-app) body .app-bottom-nav,
+  html:not(.native-app) body .health-os-dock{display:none!important}
+  html:not(.native-app) body .site-header .main-nav{display:none!important}
+  html:not(.native-app) body .desktop-home{padding-bottom:20px}
+  html:not(.native-app) body .site-footer{padding-bottom:24px}
+}
+@media(min-width:600px) and (max-width:900px){
+  .desktop-reference-app{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr);align-items:center;min-height:420px;padding:35px 32px;gap:14px}
+  .desktop-reference-app-copy h2{font-size:36px;line-height:.98}
+  .desktop-reference-app-copy>p{font-size:12px}
+  .desktop-reference-benefits{gap:7px}
+  .desktop-reference-benefits b{font-size:8px}
+  .desktop-reference-benefits small{font-size:6.5px}
+  .desktop-reference-visual{height:335px}
+  .desktop-reference-phone{width:130px;height:285px}
+  .desktop-reference-phone-main{left:calc(50% - 72px);top:22px}
+  .desktop-reference-phone-profile{right:calc(50% - 88px);top:45px}
+}
