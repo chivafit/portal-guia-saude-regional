@@ -4,5 +4,5 @@
 :HL["/_next/static/css/e6d3290e5f3ce2cf.css","style"]
 :HL["/_next/static/css/8d6b5958656f883d.css","style"]
 :HL["/_next/static/css/10e8d3f03390676b.css","style"]
-:HL["/_next/static/css/13227116569ad8b4.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-hildebrando-rosa-junior-endocrinologia-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"hCUK8vnGZefE0Tk3HG-_e"}
+:HL["/_next/static/css/2180bc7b9e34cfa7.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-hildebrando-rosa-junior-endocrinologia-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"m2aXswjm9L72etwTDhS54"}
