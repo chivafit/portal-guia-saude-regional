@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, MapPin, Phone } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
 import { organizations } from "@/lib/data";
 import { publishedOrganizations } from "@/lib/public-directory";
 import { filterOrganizations } from "@/lib/search";
@@ -22,7 +21,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
   const source = await publishedOrganizations(organizations);
   const categories = categoryOptionsFor(source);
   const results = filterOrganizations(source, { city: "Piumhi", category, query: params.q ?? "", type: "services" });
-  return <><SiteHeader /><main>
+  return <><main>
     <section className="directory-hero company-directory-hero"><div className="shell directory-hero-grid"><div><p className="eyebrow">Clínicas e serviços em Piumhi</p><h1>Encontre serviços de saúde</h1><p>Localize organizações publicadas com informações de contato e endereço.</p></div></div></section>
     <section className="section shell company-layout"><aside className="filters directory-filters company-filters"><form action="/empresas" className="filter-panel"><label>Nome ou serviço<input name="q" defaultValue={params.q ?? ""} placeholder="Ex.: pilates, clínica, exames" /></label><input type="hidden" name="cidade" value="piumhi" /><label>Categoria<select name="categoria" defaultValue={category}><option value="">Todas as categorias</option>{categories.map((item) => <option key={item.key} value={item.key}>{item.label} ({item.count})</option>)}</select></label><button type="submit">Aplicar filtros</button></form></aside>
       <div className="company-results"><div className="result-toolbar"><div><strong>{results.length} {results.length === 1 ? "resultado" : "resultados"}</strong><span>{params.q || category ? "Resultados para os filtros selecionados" : "Serviços publicados em Piumhi"}</span></div><Link href="/buscar?cidade=piumhi&tipo=services">Abrir busca completa <ArrowUpRight size={14} /></Link></div>

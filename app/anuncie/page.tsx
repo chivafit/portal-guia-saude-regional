@@ -1,6 +1,5 @@
 import { ArrowRight, BadgeCheck, BookOpen, Building2, LayoutTemplate, MapPin, Mic2, Newspaper, Search, Sparkles } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
 import { CommercialProposalForm } from "@/components/CommercialProposalForm";
 import { articleImage, articles, magazineEditions, podcasts } from "@/lib/data";
 import { publicProfessionals } from "@/lib/public-directory";
@@ -36,7 +35,6 @@ export default function AdvertisePage() {
   const featuredPodcast = podcasts.find((episode) => episode.imageUrl);
 
   return <>
-    <SiteHeader advertiseLabel="Anuncie" />
     <main className="commercial-page">
       <section className="commercial-hero">
         <div className="shell commercial-hero-grid">

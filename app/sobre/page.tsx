@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen, Building2, Check, MapPin, ShieldCheck, Users, type LucideIcon } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -26,7 +25,6 @@ const ecosystem: Array<[string, string, LucideIcon]> = [
 export default function AboutPage() {
   return (
     <>
-      <SiteHeader />
       <main className="about-page">
         <section className="about-intro"><div className="about-shell about-intro-grid"><div className="about-intro-copy"><p className="about-kicker">SOBRE O GUIA SAÚDE · PIUMHI E REGIÃO</p><h1>Saúde mais próxima começa com informação que faz sentido.</h1><p className="about-lead">O Guia Saúde é um portal regional que aproxima pessoas, profissionais, empresas e conteúdos em uma experiência simples, confiável e feita para a realidade da nossa região.</p><div className="about-intro-actions"><Link className="about-button about-button-primary" href="/buscar?cidade=piumhi">Explorar o Guia <ArrowRight size={16} /></Link><Link className="about-text-link" href="#como-verificamos">Como verificamos <ArrowRight size={15} /></Link></div></div><div className="about-intro-panel"><div className="about-panel-orb"/><div className="about-panel-card about-panel-card-main"><span><MapPin size={16}/> Piumhi · MG</span><strong>Uma rede local<br/><em>mais fácil de encontrar.</em></strong><small>Profissionais · Clínicas · Conteúdos</small></div><div className="about-panel-card about-panel-card-float"><ShieldCheck size={17}/><span><b>Diretório regional</b><small>Informação revisada</small></span></div></div></div></section>
         <section className="about-shell about-numbers" aria-label="O que o Guia Saúde reúne"><div><strong>01</strong><span>Uma busca mais direta para a saúde local.</span></div><div><strong>02</strong><span>Conteúdo editorial para decisões mais informadas.</span></div><div><strong>03</strong><span>Presença digital para profissionais e empresas.</span></div></section>
