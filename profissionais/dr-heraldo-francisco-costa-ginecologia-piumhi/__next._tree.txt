@@ -2,7 +2,7 @@
 :HL["/_next/static/css/86588f37da440869.css","style"]
 :HL["/_next/static/css/b79af30bd303c8e6.css","style"]
 :HL["/_next/static/css/e6d3290e5f3ce2cf.css","style"]
-:HL["/_next/static/css/49af1f5d234353a3.css","style"]
+:HL["/_next/static/css/aba2fbc39d1e98f2.css","style"]
 :HL["/_next/static/css/10e8d3f03390676b.css","style"]
 :HL["/_next/static/css/5709a39e45f9fa69.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-heraldo-francisco-costa-ginecologia-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"q-CMrGJ9URr9ODZsJJpX-"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-heraldo-francisco-costa-ginecologia-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"azpC20jnRQMNEO_w9GXZx"}
