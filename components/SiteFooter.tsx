@@ -33,7 +33,7 @@ export function SiteFooter({ hideCommercialCallout = false }: { hideCommercialCa
             <a href="mailto:rmproguia@gmail.com"><Mail size={15} /> rmproguia@gmail.com</a>
             <span><MapPin size={15} /> Piumhi, Minas Gerais</span>
           </div>
-          <div className="footer-social">
+          <div className="footer-social footer-social-light">
             <a href="https://www.instagram.com/saudeguia" target="_blank" rel="noreferrer" aria-label="Instagram do Guia Saúde"><InstagramIcon /></a>
             <a href="https://www.youtube.com/@redemeggabrasil" target="_blank" rel="noreferrer" aria-label="Canal do podcast no YouTube"><YoutubeIcon /></a>
           </div>

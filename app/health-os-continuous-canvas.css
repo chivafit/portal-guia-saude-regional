@@ -96,3 +96,25 @@ html.native-app .health-os-topbar .guia-logo-word {
   border-color:#0f9d7e!important;
 }
 .site-footer:has(.guia-logo-light-footer) .footer-social svg{color:currentColor!important}
+
+/* Explicit social contrast hook for the light internal footer. */
+.footer-social-light a,
+.site-footer .footer-social-light a{
+  color:#0f806f!important;
+  background:rgba(255,255,255,.86)!important;
+  border-color:rgba(15,128,111,.28)!important;
+}
+.footer-social-light a svg,
+.site-footer .footer-social-light a svg{color:#0f806f!important;stroke:currentColor!important}
+.footer-social-light a:hover,
+.footer-social-light a:focus-visible,
+.site-footer .footer-social-light a:hover,
+.site-footer .footer-social-light a:focus-visible{
+  color:#fff!important;
+  background:#0f9d7e!important;
+  border-color:#0f9d7e!important;
+}
+.footer-social-light a:hover svg,
+.footer-social-light a:focus-visible svg,
+.site-footer .footer-social-light a:hover svg,
+.site-footer .footer-social-light a:focus-visible svg{color:#fff!important;stroke:currentColor!important}
