@@ -30,3 +30,14 @@
   .desktop-reference-phone-main{left:calc(50% - 72px);top:22px}
   .desktop-reference-phone-profile{right:calc(50% - 88px);top:45px}
 }
+
+/* Final logo lockup: preserve the supplied SVG wordmark and add only the current symbol. */
+.guia-logo{display:inline-flex!important;flex-direction:row!important;align-items:center!important;gap:8px!important;width:auto!important;height:auto!important}
+.guia-logo-wordmark{display:block!important;width:145px!important;height:auto!important;max-width:none!important;object-fit:contain!important}
+.guia-logo-symbol{display:block!important;flex:none!important;width:40px!important;height:40px!important}
+.guia-logo-compact .guia-logo-wordmark{width:110px!important}
+.guia-logo-compact .guia-logo-symbol{width:34px!important;height:34px!important}
+.desktop-brand-new .guia-logo-wordmark{width:132px!important}
+.desktop-brand-new .guia-logo-symbol{width:36px!important;height:36px!important}
+.desktop-brand-footer .guia-logo-wordmark{filter:brightness(0) invert(1)!important}
+@media(max-width:760px){.guia-logo-wordmark{width:120px!important}.guia-logo-symbol{width:36px!important;height:36px!important}.guia-logo-compact .guia-logo-wordmark{width:96px!important}.guia-logo-compact .guia-logo-symbol{width:30px!important;height:30px!important}}
