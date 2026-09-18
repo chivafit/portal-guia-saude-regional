@@ -5,4 +5,4 @@
 :HL["/_next/static/css/8d6b5958656f883d.css","style"]
 :HL["/_next/static/css/f232403e6c4b79cf.css","style"]
 :HL["/_next/static/css/a7c6faffbe73ddca.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"cynthia-teixeira-de-oliveira-valerio-psicologia-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"3106tvz6K6EEehB-9Q6OC"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"cynthia-teixeira-de-oliveira-valerio-psicologia-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"6o5_qxNWSLAxf-H3w4Hcv"}
