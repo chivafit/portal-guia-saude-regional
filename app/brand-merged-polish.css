@@ -33,14 +33,14 @@
 
 /* Final logo lockup: preserve the supplied SVG wordmark and add only the current symbol. */
 .guia-logo{display:inline-flex!important;flex-direction:row!important;align-items:center!important;gap:8px!important;width:auto!important;height:auto!important}
-.guia-logo-wordmark{display:block!important;width:145px!important;height:auto!important;max-width:none!important;object-fit:contain!important}
+.guia-logo-wordmark{display:block!important;width:auto!important;height:auto!important;max-width:none!important;color:#0b1518!important;font-family:Arial,Helvetica,sans-serif!important;font-size:22px!important;font-weight:750!important;letter-spacing:-.06em!important;line-height:1!important;white-space:nowrap!important}
 .guia-logo-symbol{display:block!important;flex:none!important;width:40px!important;height:40px!important}
-.guia-logo-compact .guia-logo-wordmark{width:110px!important}
+.guia-logo-compact .guia-logo-wordmark{font-size:18px!important}
 .guia-logo-compact .guia-logo-symbol{width:34px!important;height:34px!important}
-.desktop-brand-new .guia-logo-wordmark{width:132px!important}
+.desktop-brand-new .guia-logo-wordmark{font-size:19px!important}
 .desktop-brand-new .guia-logo-symbol{width:36px!important;height:36px!important}
 .desktop-brand-footer .guia-logo-wordmark,.guia-logo-footer .guia-logo-wordmark{filter:none!important}
-@media(max-width:760px){.guia-logo-wordmark{width:120px!important}.guia-logo-symbol{width:36px!important;height:36px!important}.guia-logo-compact .guia-logo-wordmark{width:96px!important}.guia-logo-compact .guia-logo-symbol{width:30px!important;height:30px!important}}
+@media(max-width:760px){.guia-logo-wordmark{font-size:19px!important}.guia-logo-symbol{width:36px!important;height:36px!important}.guia-logo-compact .guia-logo-wordmark{font-size:16px!important}.guia-logo-compact .guia-logo-symbol{width:30px!important;height:30px!important}}
 
 /* Footer follows the same palette as the header: black GUIA, green saúde and the gradient symbol. */
 .site-footer:has(.guia-logo-light-footer){

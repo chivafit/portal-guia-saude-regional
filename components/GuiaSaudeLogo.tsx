@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export function GuiaSaudeLogo({ compact = false, footer = false, lightFooter = false }: { compact?: boolean; footer?: boolean; lightFooter?: boolean }) {
   return (
     <span className={`${compact ? "guia-logo guia-logo-compact" : "guia-logo"}${footer ? " guia-logo-footer" : ""}${lightFooter ? " guia-logo-light-footer" : ""}`} aria-label="Guia Saúde">
@@ -26,14 +24,7 @@ export function GuiaSaudeLogo({ compact = false, footer = false, lightFooter = f
         <path d="M48 43c9-8 22-9 31-2 9 7 11 19 5 29-7 11-20 17-32 12-10-4-16-14-15-24 1-6 5-11 11-15Z" fill="url(#guia-c)" opacity=".92"/>
         <path d="M35 36c8-8 21-9 30-3 8 6 11 16 7 25-4 9-14 15-24 14-10-1-18-8-20-17-2-7 1-14 7-19Z" fill="#F4F7FA" opacity=".82"/>
       </svg>
-      <Image
-        className="guia-logo-wordmark"
-        src="/brand/guia-saude-wordmark-primary.svg"
-        alt=""
-        width={compact ? 110 : 145}
-        height={compact ? 80 : 85}
-        priority
-      />
+      <span className="guia-logo-wordmark" aria-hidden="true">Guia Saúde</span>
     </span>
   );
 }

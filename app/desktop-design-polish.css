@@ -859,6 +859,21 @@
   .desktop-featured{padding-top:40px;padding-bottom:35px}.desktop-section-head{align-items:flex-end;margin-bottom:17px;gap:12px}.desktop-section-head h2{font-size:26px}.desktop-section-head>a{font-size:10px;white-space:nowrap}.desktop-pro-grid{grid-template-columns:1fr;gap:10px}.desktop-pro-card{grid-template-columns:94px minmax(0,1fr);min-height:132px;border-radius:17px}.desktop-pro-photo{min-height:132px}.desktop-pro-copy{padding:13px 12px}.desktop-pro-copy>small{font-size:7px}.desktop-pro-copy h3{font-size:14px;margin:5px 0}.desktop-pro-copy>p{font-size:8px}.desktop-pro-copy>div{padding-top:8px}.desktop-pro-copy>div span{font-size:8px}.desktop-featured-controls{justify-content:center;flex-wrap:wrap;gap:8px;margin-top:14px;font-size:9px}
   .desktop-business{width:calc(100% - 28px);margin:14px auto 0;padding:25px 20px;border-radius:21px;display:block}.desktop-business h2{font-size:28px;line-height:1.02;margin:10px 0 8px}.desktop-business p{font-size:12px;line-height:1.45}.desktop-business>a{display:inline-flex;margin-top:16px;padding:12px 15px;border-radius:12px;font-size:10px}
   .desktop-footer{margin-top:35px;padding:38px 20px 20px}.desktop-footer-top{display:block}.desktop-footer-top>p{margin:15px 0 23px;font-size:11px;line-height:1.5}.desktop-footer-links{grid-template-columns:repeat(2,1fr);gap:23px 16px}.desktop-footer-links>div{gap:7px}.desktop-footer-links b{font-size:9px}.desktop-footer-links a{font-size:9px}.desktop-footer-bottom{display:grid;gap:9px;margin-top:29px;padding-top:16px;font-size:8px;line-height:1.4}.desktop-footer-bottom nav{display:flex;flex-wrap:wrap;gap:7px}
+  }
+
+/* Narrow mobile guard: keep editorial cards and app benefits readable. */
+@media (max-width:480px){
+  .desktop-reference-editorial .desktop-editorial-cards{grid-template-columns:1fr;gap:9px;margin-top:20px}
+  .desktop-reference-editorial .desktop-editorial-cards>a{min-height:0;padding:14px 13px;display:grid;grid-template-columns:22px minmax(0,1fr) 14px;align-items:center;column-gap:10px}
+  .desktop-reference-editorial .desktop-editorial-cards>a>svg:first-child{width:20px;height:20px;margin:0}
+  .desktop-reference-editorial .desktop-editorial-cards small{grid-column:2;font-size:8px;line-height:1.2;margin:0}
+  .desktop-reference-editorial .desktop-editorial-cards strong{grid-column:2;font-size:13px;line-height:1.25;margin:3px 0 0}
+  .desktop-reference-editorial .desktop-editorial-cards>a>svg:last-child{grid-column:3;grid-row:1 / span 2;width:14px;height:14px}
+  .desktop-reference-benefits{grid-template-columns:1fr;gap:11px;margin-top:19px}
+  .desktop-reference-benefits>span{display:grid;grid-template-columns:30px minmax(0,1fr);column-gap:9px;align-items:center}
+  .desktop-reference-benefits i{grid-row:1 / span 2;width:30px;height:30px;margin:0}
+  .desktop-reference-benefits b{font-size:10px;line-height:1.2}
+  .desktop-reference-benefits small{margin-top:2px;font-size:8px;line-height:1.3}
 }
 
 /* Featured professionals: stable card/image dimensions across carousel states */

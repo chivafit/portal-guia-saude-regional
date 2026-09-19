@@ -118,3 +118,441 @@ html.native-app .health-os-topbar .guia-logo-word {
 .footer-social-light a:focus-visible svg,
 .site-footer .footer-social-light a:hover svg,
 .site-footer .footer-social-light a:focus-visible svg{color:#fff!important;stroke:currentColor!important}
+
+
+/* Responsive desktop composition: same home, reorganized for narrow screens. */
+@media (max-width: 900px) {
+  .desktop-home {
+    min-width: 0 !important;
+    overflow-x: hidden !important;
+    background: #f8fbfa !important;
+  }
+
+  .desktop-nav {
+    width: min(100% - 32px, 1180px) !important;
+    height: 72px !important;
+    gap: 16px !important;
+    border-bottom: 1px solid #e2eeea !important;
+  }
+
+  .desktop-nav .desktop-brand-new {
+    transform: none !important;
+  }
+
+  .desktop-download {
+    min-width: 92px !important;
+    min-height: 40px !important;
+    padding-inline: 15px !important;
+    font-size: 10px !important;
+  }
+
+  .desktop-reference-editorial {
+    width: min(100% - 32px, 1180px) !important;
+    margin: 18px auto 0 !important;
+    padding: clamp(28px, 6vw, 52px) clamp(20px, 6vw, 56px) !important;
+    border-radius: 28px !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-copy h2 {
+    max-width: 620px !important;
+    margin: 14px 0 12px !important;
+    font-size: clamp(34px, 7vw, 58px) !important;
+    line-height: .98 !important;
+    letter-spacing: -.055em !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-copy p {
+    max-width: 560px !important;
+    font-size: clamp(14px, 2.2vw, 17px) !important;
+    line-height: 1.5 !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-copy > a {
+    margin-top: 18px !important;
+    font-size: 13px !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: clamp(10px, 2vw, 18px) !important;
+    margin-top: 28px !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards > a {
+    min-height: 190px !important;
+    padding: clamp(16px, 3vw, 24px) !important;
+    border-radius: 20px !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards > a > svg:first-child {
+    width: 22px !important;
+    height: 22px !important;
+    margin-bottom: auto !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards small {
+    font-size: 9px !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards strong {
+    margin: 8px 0 18px !important;
+    font-size: clamp(13px, 2vw, 16px) !important;
+    line-height: 1.3 !important;
+  }
+
+  .desktop-reference-app {
+    width: min(100% - 32px, 1180px) !important;
+    min-height: 0 !important;
+    margin: 22px auto 0 !important;
+    padding: clamp(30px, 6vw, 56px) clamp(20px, 6vw, 56px) 0 !important;
+    border-radius: 28px !important;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, .85fr) !important;
+    gap: 28px !important;
+  }
+
+  .desktop-reference-app-copy > span {
+    font-size: 10px !important;
+  }
+
+  .desktop-reference-app-copy h2 {
+    margin: 14px 0 16px !important;
+    font-size: clamp(36px, 6vw, 58px) !important;
+    line-height: .98 !important;
+  }
+
+  .desktop-reference-app-copy > p {
+    max-width: 520px !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+  }
+
+  .desktop-reference-store-buttons > a {
+    min-width: 0 !important;
+    min-height: 48px !important;
+    padding: 8px 12px !important;
+  }
+
+  .desktop-reference-store-buttons small { font-size: 7px !important; }
+  .desktop-reference-store-buttons b { font-size: 12px !important; }
+
+  .desktop-reference-benefits {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    margin-top: 22px !important;
+  }
+
+  .desktop-reference-benefits > span {
+    display: block !important;
+    min-width: 0 !important;
+  }
+
+  .desktop-reference-benefits i {
+    width: 30px !important;
+    height: 30px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .desktop-reference-benefits b { font-size: 11px !important; line-height: 1.25 !important; }
+  .desktop-reference-benefits small { margin-top: 5px !important; font-size: 9px !important; line-height: 1.35 !important; }
+
+  .desktop-reference-visual {
+    width: 100% !important;
+    height: 380px !important;
+  }
+
+  .desktop-section {
+    width: min(100% - 40px, 1120px) !important;
+    padding: 64px 0 24px !important;
+  }
+
+  .desktop-section-title h2,
+  .desktop-section-head h2 {
+    font-size: clamp(30px, 5vw, 44px) !important;
+  }
+
+  .desktop-section-title p { font-size: 14px !important; line-height: 1.5 !important; }
+  .desktop-category-grid { gap: 12px !important; }
+  .desktop-category-grid > a { min-height: 112px !important; padding: 17px !important; }
+  .desktop-category-grid strong { font-size: 13px !important; }
+  .desktop-category-grid small { font-size: 10px !important; }
+
+  .desktop-featured .desktop-pro-card { height: 170px !important; min-height: 170px !important; }
+  .desktop-featured .desktop-pro-photo { height: 170px !important; min-height: 170px !important; }
+  .desktop-featured .desktop-pro-copy { height: 170px !important; padding: 18px !important; }
+  .desktop-featured .desktop-pro-copy h3 { font-size: 18px !important; }
+  .desktop-featured .desktop-pro-copy > p { font-size: 11px !important; }
+
+  .desktop-business {
+    width: min(100% - 32px, 1180px) !important;
+    margin: 22px auto 0 !important;
+    padding: 34px clamp(22px, 5vw, 54px) !important;
+  }
+
+  .desktop-business h2 { font-size: clamp(30px, 5vw, 42px) !important; }
+  .desktop-business p { font-size: 14px !important; line-height: 1.5 !important; }
+  .desktop-business > a { font-size: 12px !important; }
+
+  .desktop-footer { margin-top: 48px !important; padding: 52px 24px 24px !important; }
+  .desktop-footer-top > p { font-size: 12px !important; }
+  .desktop-footer-links a { font-size: 11px !important; }
+}
+
+@media (max-width: 600px) {
+  .desktop-reference-editorial .desktop-editorial-cards,
+  .desktop-reference-benefits,
+  .desktop-reference-app {
+    grid-template-columns: 1fr !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards > a {
+    min-height: 142px !important;
+  }
+
+  .desktop-reference-app {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 22px !important;
+  }
+
+  .desktop-reference-benefits > span {
+    display: grid !important;
+    grid-template-columns: 34px minmax(0, 1fr) !important;
+    column-gap: 10px !important;
+    align-items: center !important;
+  }
+
+  .desktop-reference-benefits i {
+    grid-row: 1 / span 2 !important;
+    margin: 0 !important;
+  }
+
+  .desktop-reference-benefits b { font-size: 12px !important; }
+  .desktop-reference-benefits small { font-size: 10px !important; }
+  .desktop-reference-visual { height: 340px !important; }
+  .desktop-category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .desktop-section-head { align-items: flex-start !important; }
+  .desktop-section-head > a { margin-top: 8px !important; }
+  .desktop-business { display: block !important; }
+  .desktop-business > a { display: inline-flex !important; margin-top: 18px !important; }
+}
+
+@media (max-width: 420px) {
+  .desktop-reference-editorial .desktop-editorial-cards > a { min-height: 126px !important; }
+  .desktop-reference-editorial .desktop-editorial-cards strong { font-size: 15px !important; }
+  .desktop-reference-store-buttons { flex-direction: column !important; }
+  .desktop-category-grid { grid-template-columns: 1fr !important; }
+}
+
+
+/* Mobile design refinement: preserve desktop identity with intentional card surfaces. */
+@media (max-width: 600px) {
+  .desktop-home {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(215, 255, 90, .18), transparent 34rem),
+      #f7faf9 !important;
+  }
+
+  .desktop-reference-editorial {
+    position: relative !important;
+    overflow: hidden !important;
+    background: linear-gradient(135deg, #e5faf1 0%, #f0ffe5 100%) !important;
+    box-shadow: 0 18px 50px rgba(32, 105, 83, .10) !important;
+  }
+
+  .desktop-reference-editorial::after {
+    content: "";
+    position: absolute;
+    right: -90px;
+    bottom: -120px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(215,255,90,.33), rgba(0,209,198,.08) 48%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-copy,
+  .desktop-reference-editorial .desktop-editorial-cards {
+    position: relative;
+    z-index: 1;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-copy > span,
+  .desktop-reference-app-copy > span {
+    color: #08745f !important;
+    font-weight: 800 !important;
+    letter-spacing: .16em !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-copy h2 {
+    max-width: 340px !important;
+    color: #0b1518 !important;
+    font-weight: 760 !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-copy p {
+    color: #55736b !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-copy > a {
+    color: #08745f !important;
+    font-weight: 800 !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards {
+    gap: 12px !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards > a {
+    position: relative !important;
+    min-height: 132px !important;
+    padding: 18px !important;
+    border: 1px solid rgba(255,255,255,.96) !important;
+    border-radius: 20px !important;
+    background: rgba(255,255,255,.78) !important;
+    box-shadow: 0 12px 24px rgba(36, 103, 83, .08), inset 0 1px 0 #fff !important;
+    color: #0b1518 !important;
+    transition: transform 180ms ease, box-shadow 180ms ease !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards > a:active {
+    transform: translateY(1px) !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards > a > svg:first-child {
+    display: grid !important;
+    place-items: center !important;
+    width: 34px !important;
+    height: 34px !important;
+    margin-bottom: 16px !important;
+    padding: 8px !important;
+    border-radius: 12px !important;
+    background: #e1f6ed !important;
+    color: #08745f !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards small {
+    color: #08745f !important;
+    font-size: 9px !important;
+    font-weight: 800 !important;
+    letter-spacing: .12em !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards strong {
+    display: block !important;
+    max-width: 260px !important;
+    margin: 7px 0 14px !important;
+    color: #10211e !important;
+    font-size: 15px !important;
+    font-weight: 750 !important;
+    line-height: 1.3 !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards > a > svg:last-child {
+    color: #0f9d7e !important;
+  }
+
+  .desktop-reference-app {
+    position: relative !important;
+    overflow: hidden !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f1fbf7 100%) !important;
+    border: 1px solid rgba(15, 157, 126, .08) !important;
+    box-shadow: 0 18px 50px rgba(32, 105, 83, .08) !important;
+  }
+
+  .desktop-reference-app-copy h2 {
+    color: #0b1518 !important;
+    font-weight: 760 !important;
+  }
+
+  .desktop-reference-app-copy h2 em {
+    color: #159473 !important;
+  }
+
+  .desktop-reference-app-copy > p {
+    color: #647a74 !important;
+  }
+
+  .desktop-reference-store-buttons > a {
+    background: #10191a !important;
+    box-shadow: 0 8px 16px rgba(16, 25, 26, .14) !important;
+  }
+
+  .desktop-reference-benefits > span {
+    padding: 12px !important;
+    border: 1px solid rgba(15, 157, 126, .09) !important;
+    border-radius: 16px !important;
+    background: rgba(255,255,255,.78) !important;
+  }
+
+  .desktop-reference-benefits i {
+    display: grid !important;
+    place-items: center !important;
+    border-radius: 11px !important;
+    background: #e4f7ef !important;
+    color: #0f806f !important;
+  }
+
+  .desktop-reference-benefits b { color: #173f38 !important; }
+  .desktop-reference-benefits small { color: #71847f !important; }
+
+  .desktop-reference-visual {
+    position: relative !important;
+    min-height: 280px !important;
+    border-radius: 24px 24px 0 0 !important;
+    background: radial-gradient(circle at 50% 50%, rgba(190,255,121,.36), rgba(0,209,198,.08) 44%, transparent 70%) !important;
+  }
+
+  .desktop-reference-screen {
+    background: linear-gradient(160deg, #f9fffb, #dff7ed) !important;
+  }
+
+  .desktop-reference-screen img {
+    color: transparent !important;
+    font-size: 0 !important;
+  }
+
+  .desktop-section-title h2,
+  .desktop-section-head h2 {
+    color: #0b1518 !important;
+    font-weight: 760 !important;
+  }
+
+  .desktop-category-grid > a {
+    border: 1px solid #e1eee9 !important;
+    border-radius: 18px !important;
+    background: #fff !important;
+    box-shadow: 0 10px 24px rgba(32, 105, 83, .06) !important;
+  }
+
+  .desktop-category-grid > a > svg:first-child {
+    color: #0f806f !important;
+    background: #e4f7ef !important;
+  }
+
+  .desktop-featured .desktop-pro-card {
+    border: 1px solid #e1eee9 !important;
+    border-radius: 20px !important;
+    box-shadow: 0 12px 28px rgba(32, 105, 83, .08) !important;
+  }
+
+  .desktop-business {
+    border: 1px solid #dcebe5 !important;
+    background: linear-gradient(135deg, #e8faf2, #f3ffdf) !important;
+    box-shadow: 0 14px 34px rgba(32, 105, 83, .07) !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .desktop-reference-editorial,
+  .desktop-reference-app,
+  .desktop-business { border-radius: 24px !important; }
+
+  .desktop-reference-editorial .desktop-editorial-cards > a {
+    min-height: 128px !important;
+  }
+
+  .desktop-reference-editorial .desktop-editorial-cards strong {
+    font-size: 14px !important;
+  }
+}
