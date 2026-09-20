@@ -9,4 +9,4 @@
 :HL["/revista/capas/2025.jpg","image"]
 :HL["https://i.ytimg.com/vi/uNyNAvumGdk/hqdefault.jpg","image"]
 :HL["/materias/radiologia-odontologica-diagnostico.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"anuncie","param":null,"prefetchHints":4160,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"a7cTRNPjbgmthoX8G8XFQ"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"anuncie","param":null,"prefetchHints":4160,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"IH-8Y-eS2NMCrFX3303c8"}
