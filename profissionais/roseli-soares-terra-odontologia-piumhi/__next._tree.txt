@@ -3,6 +3,6 @@
 :HL["/_next/static/css/251e95fe38f9f903.css","style"]
 :HL["/_next/static/css/9c387b6c0fb4de4f.css","style"]
 :HL["/_next/static/css/aba2fbc39d1e98f2.css","style"]
-:HL["/_next/static/css/9c115218502fee09.css","style"]
-:HL["/_next/static/css/da227ad1742e632b.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"roseli-soares-terra-odontologia-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"98afpiI_l1on34v2Mjujl"}
+:HL["/_next/static/css/bc6c569cf0f1d30c.css","style"]
+:HL["/_next/static/css/3f0c29da4aa952ac.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"roseli-soares-terra-odontologia-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"lt41jZQWD7pAQw_P-3oJG"}
