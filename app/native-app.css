@@ -538,3 +538,118 @@ html.native-app .app-bottom-nav>a[aria-current="page"] .app-bottom-nav-icon svg 
   html.native-app .podcast-player-backdrop { padding-bottom:calc(72px + env(safe-area-inset-bottom)); }
   html.native-app .podcast-player-sheet { max-height:calc(100dvh - 88px); }
 }
+
+
+/* Final cross-route mobile system: shared rhythm, cards, media and actions. */
+@media (max-width:700px) {
+  html.native-app body { overflow-x:hidden; }
+  html.native-app :where(.shell,.content-shell,.profile-clean-wrap,.organization-wrap,.native-page-shell) {
+    width:min(100% - 32px, 1180px)!important;
+    margin-inline:auto!important;
+  }
+  html.native-app :where(h1,h2,h3,p) { overflow-wrap:anywhere; }
+  html.native-app :where(h1) { letter-spacing:-.055em; }
+  html.native-app :where(h2) { letter-spacing:-.035em; }
+  html.native-app :where(.section-header,.content-section-head,.page-heading,.directory-hero-refined-head) { min-width:0; }
+
+  /* Media never causes horizontal overflow and keeps a stable visual frame. */
+  html.native-app :where(img,video,svg) { max-width:100%; }
+  html.native-app :where(.professional-image,.professional-image-picture,.doctor-avatar,.business-icon,.podcast-episode-media,.magazine-cover-card img,.city-editorial-mosaic img) {
+    overflow:hidden!important;
+    background:linear-gradient(145deg,#e5f3ee,#d4e9e3)!important;
+  }
+  html.native-app :where(.professional-image img,.professional-image-picture img,.doctor-avatar img,.business-icon img,.podcast-episode-media img,.magazine-cover-card img,.city-editorial-mosaic img) {
+    width:100%!important; height:100%!important; object-fit:cover!important; object-position:center!important;
+  }
+
+  /* All route cards share one surface language. */
+  html.native-app :where(.result-card,.doctor-card,.business-card,.favorite-card,.featured-directory-card,.home-featured-professional-card,.podcast-episode-card,.magazine-cover-card,.city-partner-grid article,.city-services-list>a,.root-pathway,.directory-choice-columns>article) {
+    min-width:0!important;
+    border:1px solid rgba(18,72,65,.12)!important;
+    border-radius:20px!important;
+    background:#fff!important;
+    box-shadow:0 12px 30px rgba(16,67,61,.075)!important;
+  }
+  html.native-app :where(.result-card,.doctor-card,.business-card,.favorite-card,.featured-directory-card,.home-featured-professional-card,.podcast-episode-card,.magazine-cover-card,.city-partner-grid article,.city-services-list>a):active {
+    transform:scale(.985)!important;
+    box-shadow:0 6px 18px rgba(16,67,61,.08)!important;
+  }
+
+  /* Featured professionals and directory cards: readable name, specialty and action. */
+  html.native-app :where(.home-featured-professionals-grid,.featured-directory-grid,.doctor-card-list,.business-card-list,.favorites-grid) {
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+    min-width:0!important;
+  }
+  html.native-app :where(.home-featured-professional-card,.featured-directory-card,.doctor-card,.business-card,.favorite-card) {
+    width:100%!important;
+    min-height:124px!important;
+    overflow:hidden!important;
+  }
+  html.native-app :where(.home-featured-professional-card,.featured-directory-card) {
+    grid-template-columns:76px minmax(0,1fr) auto!important;
+    gap:13px!important;
+    padding:14px!important;
+    align-items:center!important;
+  }
+  html.native-app :where(.home-featured-professional-card .professional-image,.featured-directory-card .professional-image) {
+    width:76px!important; height:76px!important; min-width:76px!important; border-radius:18px!important;
+  }
+  html.native-app :where(.home-featured-professional-name,.featured-directory-card-copy) { min-width:0!important; }
+  html.native-app :where(.home-featured-professional-name strong,.featured-directory-card h2) { display:block; font-size:1rem!important; line-height:1.16!important; }
+  html.native-app :where(.home-featured-professional-copy small,.featured-directory-card small) { color:#0b6d63!important; font-size:.64rem!important; }
+  html.native-app :where(.home-featured-professional-copy p,.featured-directory-card p) { color:#6b807b!important; font-size:.72rem!important; line-height:1.35!important; }
+  html.native-app :where(.home-featured-professional-card a,.featured-directory-card a) { min-height:40px!important; border-radius:12px!important; }
+
+  /* Profiles and organizations: keep hero content readable and actions reachable. */
+  html.native-app :where(.profile-clean-hero,.organization-hero) { padding:20px!important; overflow:hidden!important; }
+  html.native-app :where(.profile-clean-hero h1,.organization-hero h1) { max-width:100%!important; font-size:clamp(1.8rem,8vw,2.35rem)!important; line-height:1.03!important; }
+  html.native-app :where(.profile-clean-hero,.organization-hero) :where(p,small) { line-height:1.45!important; }
+  html.native-app :where(.profile-clean-actions,.organization-actions) { grid-template-columns:1fr!important; gap:8px!important; }
+  html.native-app :where(.profile-clean-actions a,.organization-actions a) { width:100%!important; min-height:48px!important; justify-content:center!important; }
+  html.native-app :where(.profile-clean-section,.organization-section,.organization-information) { padding:18px!important; border-radius:20px!important; }
+
+  /* Editorial, podcast and magazine: one-column rhythm with stronger reading width. */
+  html.native-app :where(.content-native-page,.native-article-screen,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen) {
+    min-width:0!important;
+  }
+  html.native-app :where(.content-native-page h1,.native-article-screen h1,.magazine-library-hero h1,.podcast-library-hero h1) {
+    max-width:100%!important; font-size:clamp(2rem,9vw,2.7rem)!important; line-height:1.02!important;
+  }
+  html.native-app :where(.content-native-page p,.native-article-screen p,.podcast-library-page p,.magazine-library-page p) {
+    line-height:1.55!important;
+  }
+  html.native-app :where(.content-grid,.article-grid,.podcast-episode-grid,.magazine-covers-grid) {
+    grid-template-columns:1fr!important; gap:13px!important;
+  }
+  html.native-app :where(.content-card,.article-card,.podcast-episode-card,.magazine-cover-card) { overflow:hidden!important; }
+  html.native-app :where(.content-card img,.article-card img,.podcast-episode-card img,.magazine-cover-card img) { aspect-ratio:16/9; object-fit:cover!important; }
+  html.native-app :where(.magazine-cover-card img) { aspect-ratio:.72; }
+  html.native-app :where(.article-reader,.native-article-content,.magazine-reader-content) { max-width:100%!important; padding-inline:0!important; }
+
+  /* City, company and institutional pages: section spacing and full-width CTAs. */
+  html.native-app :where(.city-portal-section,.city-content-direct,.city-services-section,.city-pro-directory,.city-local-partners,.institutional-page,.about-page,.inclusion-page) {
+    min-width:0!important;
+  }
+  html.native-app :where(.city-services-list,.city-partner-grid,.city-editorial-mosaic,.root-pathways-grid) { grid-template-columns:1fr!important; gap:13px!important; }
+  html.native-app :where(.city-final-cta,.city-partner-cta,.directory-inclusion-call) { border-radius:20px!important; padding:20px!important; }
+  html.native-app :where(.city-final-cta a,.city-partner-cta a,.directory-inclusion-call a,.primary-action) { width:100%!important; min-height:48px!important; justify-content:center!important; }
+
+  /* Forms and filters: no clipped controls on phones. */
+  html.native-app :where(form,.filter-panel,.search-form,.contact-form) { min-width:0!important; }
+  html.native-app :where(input,select,textarea) { max-width:100%!important; border-radius:14px!important; }
+  html.native-app :where(.filter-row,.active-filter-row,.tag-row,.podcast-filter-row) { max-width:100vw!important; overflow-x:auto!important; scrollbar-width:none!important; }
+  html.native-app :where(.filter-row,.active-filter-row,.tag-row,.podcast-filter-row)::-webkit-scrollbar { display:none; }
+
+  /* Footer and bottom navigation always clear the safe-area. */
+  html.native-app :where(.site-footer,.desktop-footer,.global-footer) { padding-bottom:calc(96px + env(safe-area-inset-bottom))!important; }
+  html.native-app .app-bottom-nav { padding-bottom:calc(7px + env(safe-area-inset-bottom))!important; }
+}
+
+@media (max-width:420px) {
+  html.native-app :where(.shell,.content-shell,.profile-clean-wrap,.organization-wrap,.native-page-shell) { width:calc(100% - 24px)!important; }
+  html.native-app :where(.home-featured-professional-card,.featured-directory-card) { grid-template-columns:62px minmax(0,1fr)!important; }
+  html.native-app :where(.home-featured-professional-card .professional-image,.featured-directory-card .professional-image) { width:62px!important; height:62px!important; min-width:62px!important; }
+  html.native-app :where(.home-featured-professional-card a,.featured-directory-card a) { grid-column:1/-1!important; }
+}
