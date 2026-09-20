@@ -1,8 +1,8 @@
-:HL["/_next/static/css/413ece815ae41729.css","style"]
+:HL["/_next/static/css/e9d36a359ea78dc0.css","style"]
 :HL["/_next/static/css/953fb854606e6ee1.css","style"]
 :HL["/_next/static/css/251e95fe38f9f903.css","style"]
 :HL["/_next/static/css/9c387b6c0fb4de4f.css","style"]
 :HL["/_next/static/css/aba2fbc39d1e98f2.css","style"]
 :HL["/_next/static/css/9c115218502fee09.css","style"]
 :HL["/_next/static/css/da227ad1742e632b.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"empresas","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"biomagistral-farmaceutica-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"IH-8Y-eS2NMCrFX3303c8"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"empresas","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"biomagistral-farmaceutica-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"98afpiI_l1on34v2Mjujl"}
