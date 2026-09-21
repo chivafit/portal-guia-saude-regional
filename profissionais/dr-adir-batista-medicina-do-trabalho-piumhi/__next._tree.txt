@@ -4,5 +4,5 @@
 :HL["/_next/static/css/9c387b6c0fb4de4f.css","style"]
 :HL["/_next/static/css/aba2fbc39d1e98f2.css","style"]
 :HL["/_next/static/css/bc6c569cf0f1d30c.css","style"]
-:HL["/_next/static/css/96ced05634566f6e.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-adir-batista-medicina-do-trabalho-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"VpAxfrGYcPH7nUqfmFcf4"}
+:HL["/_next/static/css/634685995df5c46b.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"profissionais","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"dr-adir-batista-medicina-do-trabalho-piumhi","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"d4oRYSki0fPeXwhoVyVcD"}
