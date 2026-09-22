@@ -1,0 +1,53 @@
+/* Guia Saúde — refinamento editorial do redesign 2026.
+   Prioriza informação real, superfícies planas e densidade de diretório. */
+:root{--guia-paper:#f7f8f5;--guia-ink:#10221d;--guia-green:#0f806f;--guia-line:#dfe8e3;--guia-muted:#566a64}
+
+@media (min-width:901px){
+  .desktop-home{background:var(--guia-paper)}
+  .gs-hero{padding-top:54px;padding-bottom:64px}
+  .gs-hero-form{box-shadow:none;border-color:#cfded8;border-radius:12px}
+  .gs-hero-form button,.desktop-download{border-radius:9px!important}
+  .gs-hero-chips a{border-radius:999px;background:transparent;border:1px solid #cfded8}
+  .gs-hero-stats{border-top:1px solid var(--guia-line);padding-top:22px}
+
+  .gs-hero-directory{align-self:stretch;display:flex;flex-direction:column;justify-content:center;padding:30px 0 30px 34px;border-left:1px solid var(--guia-line);background:transparent}
+  .gs-hero-directory-head{display:grid;grid-template-columns:1fr auto;gap:5px 18px;align-items:end;padding-bottom:18px;border-bottom:1px solid var(--guia-line)}
+  .gs-hero-directory-head>span{grid-column:1/-1;font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--guia-green)}
+  .gs-hero-directory-head>strong{font-family:var(--gsr-serif);font-size:27px;letter-spacing:-.025em;color:var(--guia-ink)}
+  .gs-hero-directory-head>a{display:flex;align-items:center;gap:6px;color:var(--guia-green);font-size:13px;font-weight:700;text-decoration:none}
+  .gs-hero-directory-list{display:flex;flex-direction:column}
+  .gs-hero-person{display:grid;grid-template-columns:62px minmax(0,1fr) 18px;gap:15px;align-items:center;padding:15px 0;border-bottom:1px solid var(--guia-line);color:inherit;text-decoration:none}
+  .gs-hero-person>div,.gs-hero-person>img{width:62px!important;height:70px!important;min-height:70px!important;border-radius:8px!important;object-fit:cover}
+  .gs-hero-person>span{display:flex;min-width:0;flex-direction:column;gap:3px}
+  .gs-hero-person strong{font-size:15px;color:var(--guia-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .gs-hero-person small{font-size:13px;color:var(--guia-green)}
+  .gs-hero-person em{font-size:11px;color:var(--guia-muted);font-style:normal}
+  .gs-hero-person>svg{color:#78908a}
+  .gs-hero-directory-search{display:flex;align-items:center;gap:8px;margin-top:18px;color:var(--guia-ink);font-size:13px;font-weight:700;text-decoration:none}
+
+  .desktop-category-grid>a{border-radius:8px!important;box-shadow:none!important;background:transparent!important}
+  .desktop-pro-card{border-radius:10px!important;box-shadow:none!important}
+  .desktop-reference-editorial,.desktop-reference-app,.desktop-business{border-radius:10px!important}
+  .desktop-editorial-cards>a{border-radius:8px!important}
+  .desktop-reference-store-buttons>a{border-radius:8px!important}
+  .desktop-business>a{border-radius:9px!important}
+  .desktop-reference-glow{display:none!important}
+}
+
+/* Mobile: reduz a sensação de card sobre card sem mudar a arquitetura funcional. */
+@media (max-width:760px){
+  html.native-app body{background:var(--guia-paper)!important}
+  html.native-app .health-os-feature,
+  html.native-app .health-os-content-card,
+  html.native-app .native-professional-card,
+  html.native-app .native-business-card,
+  html.native-app .content-native-card,
+  html.native-app .profile-clean-details,
+  html.native-app .profile-clean-location,
+  html.native-app .profile-clean-update{box-shadow:none!important;border-color:var(--guia-line)!important}
+  html.native-app .native-professional-card,
+  html.native-app .native-business-card{border-radius:12px!important}
+  html.native-app .native-card-actions>a,
+  html.native-app .profile-primary-action,
+  html.native-app .content-native-more{border-radius:9px!important}
+}
