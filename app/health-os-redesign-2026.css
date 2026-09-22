@@ -786,3 +786,15 @@
   .company-layout .company-results{width:100%!important;max-width:none!important}
   .company-layout .business-card-list{grid-template-columns:repeat(3,1fr)!important}
 }
+
+/* busca 3a — refinamentos: Ordenar, checkboxes de refino */
+@media (min-width:901px){
+  .gss-results-head{display:flex!important;align-items:center;justify-content:space-between;gap:16px}
+  .gss-sort{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 12px;border:1px solid #dceae5;border-radius:12px;background:#fff;color:var(--gsr-muted);font-size:14px;white-space:nowrap}
+  .gss-sort select{border:0;outline:0;background:transparent;font:inherit;font-size:14px;color:var(--gsr-ink);font-weight:600;cursor:pointer}
+  .gss-sort>svg{color:#5c706b;flex:none}
+  .gss-checks{display:flex;flex-direction:column;gap:10px;margin:2px 0 16px}
+  .gss-check{display:flex!important;align-items:center;gap:9px;margin:0!important;padding:0!important;font-weight:600!important;letter-spacing:0!important;text-transform:none!important;color:var(--gsr-ink)!important;cursor:pointer}
+  .gss-check input{width:18px;height:18px;flex:none;accent-color:var(--gsr-action);margin:0}
+  .gss-check span{font-size:14px;font-weight:600}
+}
