@@ -32,6 +32,47 @@
   .desktop-reference-store-buttons>a{border-radius:8px!important}
   .desktop-business>a{border-radius:9px!important}
   .desktop-reference-glow{display:none!important}
+
+  /* Busca: mais diretório, menos dashboard gerado. */
+  .native-search-screen{padding-top:52px!important;background:var(--guia-paper)!important}
+  .native-search-header{align-items:flex-start!important;margin-bottom:26px!important}
+  .native-search-back{border-radius:8px!important;box-shadow:none!important}
+  .native-search-title h1{font-family:var(--gsr-serif)!important;font-size:44px!important;font-weight:600!important;line-height:1!important;color:var(--guia-ink)!important}
+  .native-search-title p{font-size:14px!important;color:var(--guia-muted)!important}
+  .native-search-form{height:64px!important;max-width:none!important;border-radius:10px!important;border-color:#cad9d3!important;box-shadow:none!important}
+  .native-search-form button{width:48px!important;height:48px!important;border-radius:8px!important}
+  .native-search-tabs{margin:14px 0 42px!important;padding-bottom:15px!important;border-bottom:1px solid var(--guia-line)!important;gap:22px!important}
+  .native-search-tabs a{padding:7px 0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#61746f!important;font-size:13px!important}
+  .native-search-tabs a.active{background:transparent!important;color:var(--guia-green)!important;box-shadow:inset 0 -2px var(--guia-green)!important}
+  .native-section-head h2{font-family:var(--gsr-serif)!important;font-size:29px!important;font-weight:600!important;color:var(--guia-ink)!important}
+  .native-refine-trigger,.native-filter-sheet summary{border-radius:8px!important;background:transparent!important;box-shadow:none!important}
+  .native-specialty-grid{grid-template-columns:repeat(4,1fr)!important;gap:0!important;border-top:1px solid var(--guia-line)!important;border-left:1px solid var(--guia-line)!important}
+  .native-specialty-card{min-height:112px!important;padding:18px!important;border:0!important;border-right:1px solid var(--guia-line)!important;border-bottom:1px solid var(--guia-line)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+  .native-specialty-card>span{width:34px!important;height:34px!important;border-radius:50%!important;background:#e7f1ed!important}
+  .native-specialty-card strong{font-size:14px!important;font-weight:700!important}
+
+  .native-results-toolbar{padding-bottom:14px!important;border-bottom:1px solid var(--guia-line)!important}
+  .native-results-toolbar>div span{font-family:var(--gsr-serif)!important;font-size:31px!important;font-weight:600!important}
+  .native-results-toolbar p{font-size:13px!important}
+  .native-active-filters a{border:1px solid #cddbd6!important;border-radius:999px!important;background:transparent!important}
+  .native-category-grid{gap:0!important;border-top:1px solid var(--guia-line)!important;border-left:1px solid var(--guia-line)!important}
+  .native-category-grid>a{min-height:90px!important;border:0!important;border-right:1px solid var(--guia-line)!important;border-bottom:1px solid var(--guia-line)!important;border-radius:0!important;background:transparent!important}
+
+  .native-professional-list,.native-business-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:0!important;border-top:1px solid var(--guia-line)!important}
+  .native-professional-card,.native-business-card{min-height:156px!important;padding:20px 18px!important;border:0!important;border-bottom:1px solid var(--guia-line)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+  .native-professional-card:nth-child(odd),.native-business-card:nth-child(odd){border-right:1px solid var(--guia-line)!important}
+  .native-professional-card:hover,.native-business-card:hover{transform:none!important;background:#fff!important;box-shadow:none!important}
+  .native-professional-avatar{width:72px!important;height:84px!important;max-width:72px!important;max-height:84px!important;min-width:72px!important;min-height:84px!important;border-radius:7px!important;margin-right:16px!important}
+  .native-business-logo{width:72px!important;height:72px!important;max-width:72px!important;max-height:72px!important;border-radius:7px!important;background-color:#fff!important}
+  .native-professional-copy small,.native-business-copy small{font-size:11px!important;letter-spacing:.08em!important}
+  .native-professional-copy h2,.native-business-copy h2{font-size:18px!important;margin:5px 0!important}
+  .native-professional-copy p,.native-business-copy p{font-size:12px!important;line-height:1.45!important}
+  .native-card-tags span{padding:4px 0!important;border-radius:0!important;background:transparent!important;font-size:11px!important;color:var(--guia-green)!important}
+  .native-featured{top:18px!important;right:18px!important;border-radius:4px!important;background:#eaf0d7!important;font-size:9px!important}
+  .native-card-actions{padding-top:14px!important;border-top:1px solid #e8eeeb!important}
+  .native-card-actions a{padding:8px 0!important;border-radius:0!important;background:transparent!important;font-size:11px!important}
+  .native-card-actions a.primary{padding:8px 11px!important;border-radius:7px!important;background:var(--guia-ink)!important}
+  .native-empty-state{box-shadow:none!important;border:1px solid var(--guia-line)!important;border-radius:8px!important;background:transparent!important}
 }
 
 /* Mobile: reduz a sensação de card sobre card sem mudar a arquitetura funcional. */
