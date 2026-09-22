@@ -1,6 +1,6 @@
 /* Global native-app density pass — consistent safe areas and dock clearance. */
 @media (max-width:760px){
-html.native-app body{--hos-top-gap:10px;--hos-side-gap:16px;--hos-dock-clearance:96px}
+html.native-app body{--hos-top-gap:10px;--hos-side-gap:16px;--hos-dock-clearance:calc(var(--hos-nav-h, 70px) + var(--hos-nav-bottom, 10px) + env(safe-area-inset-bottom) + 24px)}
 
 /* All main Health OS/native screens: start close to the iOS safe area and finish close to the dock. */
 html.native-app :is(.health-os-home,.native-search-screen,.native-featured-screen,.native-specialties-page,.profile-page-clean,.organization-page,.editorial-page,.hos-podcast-page,.native-magazine-screen,.native-magazine-reader-screen,.native-article-screen,.favorites-page){
