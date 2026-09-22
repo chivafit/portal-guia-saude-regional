@@ -1,11 +1,8 @@
 "use client";
-
 import Link from "next/link";
 import { ArrowRight, BookOpen, Headphones, Search } from "lucide-react";
 import { FormEvent, useMemo, useState } from "react";
-import { HealthOSSectionHeader } from "@/components/HealthOSSectionHeader";
-
-type EditorialArticle = { slug:string; category:string; title:string; excerpt:string; author?:string; authorRole?:string; date?:string; readingTime?:string; professionalSlug?:string; image?:string };
+type EditorialArticle={slug:string;category:string;title:string;excerpt:string;author?:string;authorRole?:string;date?:string;readingTime?:string;professionalSlug?:string;image?:string};
 const topics=["Mais recentes","Prevenção","Saúde da mulher","Saúde infantil","Saúde bucal","Alimentação","Saúde mental","Pele","Cardiologia","Ortopedia","Oftalmologia","Bem-estar"];
 function topicsFor(a:EditorialArticle){const c=`${a.category} ${a.title} ${a.excerpt}`.toLocaleLowerCase("pt-BR");const m:[string,RegExp][]=[["Prevenção",/preven|medicamento/],["Saúde da mulher",/mulher|gineco|gesta/],["Saúde infantil",/infância|infantil|pediatr/],["Saúde bucal",/bucal|odonto|implant/],["Alimentação",/alimenta|nutri/],["Saúde mental",/mental|vínculo|psican/],["Pele",/pele|dermat/],["Cardiologia",/cardio/],["Ortopedia",/ortoped|lesão/],["Oftalmologia",/oftalmo|olho|cirurgia refrativa/],["Bem-estar",/reabilita|vida saudável|respirat|qualidade de vida/]];return m.filter(([,r])=>r.test(c)).map(([t])=>t)}
 function byline(a:EditorialArticle){if(!a.author||a.author==="Redação Guia Saúde")return a.readingTime?`Guia Saúde · ${a.readingTime}`:"Guia Saúde";return `${a.author}${a.authorRole?` · ${a.authorRole}`:""}${a.readingTime?` · ${a.readingTime}`:""}`}

@@ -14,6 +14,7 @@ type SearchParams = Promise<{ cidade?: string; categoria?: string; q?: string }>
 function contactHref(phone: string) { const digits = phone.replace(/\D/g, ""); return digits.length >= 10 ? `tel:+55${digits}` : undefined; }
 function publicAddress(address: string) { return /endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(address) ? "" : address; }
 function directionsHref(mapUrl:string|undefined,address:string){if(mapUrl)return mapUrl;if(!address)return undefined;return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${address}, Piumhi - MG`)}`;}
+function CategoryIcon({label}:{label:string}){const value=label.toLocaleLowerCase("pt-BR");if(/farm/.test(value))return <Pill size={20}/>;if(/labor|exame|diagn/.test(value))return <FlaskConical size={20}/>;if(/academ|fitness|esport/.test(value))return <Dumbbell size={20}/>;if(/hospital|cl[ií]nica|m[eé]dic/.test(value))return <Stethoscope size={20}/>;if(/fisi|reabil/.test(value))return <HeartPulse size={20}/>;return <Building2 size={20}/>;}
 
 export default async function CompaniesPage({ searchParams }: { searchParams: SearchParams }) {
   const params = await searchParams;
