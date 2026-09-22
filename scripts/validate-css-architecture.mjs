@@ -20,13 +20,15 @@ const canvasLayer="health-os-continuous-canvas.css";
 const redesignLayer="health-os-redesign-2026.css";
 const exactHomeLayer="exact-reference-home.css";
 const referenceLayer="reference-pages-final.css";
+const podcastReferenceLayer="podcast-reference-exact.css";
 if(imports.includes(redesignLayer)){
   const redesignIndex=imports.indexOf(redesignLayer);
   if(imports[redesignIndex-1]!==canvasLayer) failures.push("health-os-continuous-canvas.css deve permanecer imediatamente antes da camada de redesign e continuar visual-only.");
-  const allowedAfter=[exactHomeLayer,referenceLayer].filter(file=>imports.includes(file));
+  const allowedAfter=[exactHomeLayer,referenceLayer,podcastReferenceLayer].filter(file=>imports.includes(file));
   const actualAfter=imports.slice(redesignIndex+1);
   if(JSON.stringify(actualAfter)!==JSON.stringify(allowedAfter)) failures.push(`Apenas camadas de fidelidade aprovadas podem vir apos ${redesignLayer}.`);
-  if(imports.includes(referenceLayer)&&imports.at(-1)!==referenceLayer) failures.push(`${referenceLayer} deve ser a ultima camada quando presente.`);
+  const expectedLast=allowedAfter.at(-1);
+  if(expectedLast&&imports.at(-1)!==expectedLast) failures.push(`${expectedLast} deve ser a ultima camada de fidelidade quando presente.`);
 }else if(imports.at(-1)!==canvasLayer){
   failures.push("health-os-continuous-canvas.css deve ser a ultima camada CSS global quando nao houver redesign.");
 }
