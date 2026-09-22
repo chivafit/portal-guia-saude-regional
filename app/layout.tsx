@@ -69,8 +69,10 @@ import "./header-cta-polish.css";
 import "./global-site-header.css";
 /* Merged brand: current symbol with the supplied wordmark typography. */
 import "./brand-merged-polish.css";
-/* Visual atmosphere only: must remain the final global CSS layer. */
+/* Visual atmosphere only: must remain the final visual CSS layer. */
 import "./health-os-continuous-canvas.css";
+/* Redesign 2026: tipografia, contraste e alvos de toque. Sempre o último. */
+import "./health-os-redesign-2026.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl), title: { default: "Guia Saúde — Portal Regional", template: "%s | Guia Saúde" }, description: defaultDescription,

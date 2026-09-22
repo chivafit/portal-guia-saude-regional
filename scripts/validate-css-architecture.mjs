@@ -14,7 +14,16 @@ if(!imports.length) failures.push("Nenhum CSS global encontrado em app/layout.ts
 for(const obsolete of ["health-os-reference-pages-final.css","health-os-nav-reference-final.css"]){
   if(imports.includes(obsolete)) failures.push(`Camada obsoleta voltou ao runtime: ${obsolete}`);
 }
-if(imports.at(-1)!=="health-os-continuous-canvas.css") failures.push("health-os-continuous-canvas.css deve ser a ultima camada CSS global e permanecer visual-only.");
+/* Accessibility redesign layer, when present, is the final cascade layer and must sit
+   directly above the visual-only canvas (canvas stays the last visual atmosphere layer). */
+const canvasLayer="health-os-continuous-canvas.css";
+const redesignLayer="health-os-redesign-2026.css";
+if(imports.includes(redesignLayer)){
+  if(imports.at(-1)!==redesignLayer) failures.push(`${redesignLayer} deve ser a ultima camada CSS global (redesign de acessibilidade sobre o canvas).`);
+  if(imports.at(-2)!==canvasLayer) failures.push("health-os-continuous-canvas.css deve permanecer imediatamente antes da camada de redesign e continuar visual-only.");
+}else if(imports.at(-1)!==canvasLayer){
+  failures.push("health-os-continuous-canvas.css deve ser a ultima camada CSS global e permanecer visual-only.");
+}
 
 /* Generated interface copy is forbidden in Health OS/native styling layers. */
 for(const file of imports.filter(file=>file.startsWith("health-os-"))){

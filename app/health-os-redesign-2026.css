@@ -1,0 +1,300 @@
+/* ==========================================================================
+   Guia Saúde — camada de redesign (2026)
+   Deve ser o ÚLTIMO import de CSS em app/layout.tsx, depois de
+   ./health-os-continuous-canvas.css. Não altera nenhuma regra existente:
+   apenas sobrepõe tipografia, contraste e alvos de toque.
+
+   Tokens desta camada
+   --------------------------------------------------------------------------
+   ação/marca      #0f9d7e   (--gs-emerald já existente)
+   marca escura    #08735f
+   navegação/ink   #0b1f1a   grafite editorial
+   texto secundário #4f635e  (substitui #6d817c/#8ba099/#80948f/#9fb9b2 fracos)
+   superfície      #fff / #f7fbf9
+   borda           #e3efeb
+   ========================================================================== */
+
+:root{
+  --gsr-ink:#0b1f1a;
+  --gsr-muted:#4f635e;
+  --gsr-line:#e3efeb;
+  --gsr-surface:#ffffff;
+  --gsr-bg:#f7fbf9;
+  --gsr-action:#0f9d7e;
+  --gsr-action-deep:#08735f;
+  --gsr-graphite:#0b2a25;
+  --gsr-lime:#d7ff5a;
+  --gsr-serif:"Libre Baskerville",Georgia,serif;
+}
+
+/* ==========================================================================
+   1. DESKTOP (≥901px)
+   ========================================================================== */
+@media (min-width:901px){
+
+  /* 1.1 Navegação — 11px/650 era ilegível; alvos de 44px */
+  .desktop-nav nav a,
+  .global-site-header-desktop nav a{
+    font-size:.875rem!important;      /* 14px */
+    font-weight:600!important;
+    color:#3d5c55!important;
+  }
+  .desktop-nav nav a:hover,
+  .global-site-header-desktop nav a:hover{color:var(--gsr-action)!important}
+
+  .desktop-download{
+    min-height:44px!important;
+    padding:0 20px!important;
+    border-radius:12px!important;
+    background:var(--gsr-graphite)!important;
+    font-size:.875rem!important;
+    font-weight:650!important;
+    letter-spacing:0!important;
+    text-transform:none!important;
+  }
+  .desktop-search-link{
+    display:grid!important;place-items:center!important;
+    width:44px!important;height:44px!important;
+    border-radius:12px!important;
+    color:#0b1f1a!important;
+  }
+
+  /* 1.2 Títulos de seção na serifa da marca */
+  .desktop-section-title h2,
+  .desktop-section-head h2,
+  .desktop-editorial-copy h2,
+  .desktop-reference-editorial h2,
+  .desktop-reference-app-copy h2,
+  .desktop-business h2{
+    font-family:var(--gsr-serif)!important;
+    font-weight:600!important;
+    letter-spacing:-.03em!important;
+    line-height:1.05!important;
+  }
+  .desktop-eyebrow,
+  .desktop-section-title>span,
+  .desktop-section-head span,
+  .desktop-editorial-copy>span,
+  .desktop-reference-app-copy>span,
+  .desktop-business span{
+    font-size:.75rem!important;       /* 12px */
+    letter-spacing:.14em!important;
+    color:var(--gsr-action-deep)!important;
+  }
+  .desktop-section-title p{color:var(--gsr-muted)!important;font-size:1.0625rem!important;line-height:1.55!important}
+
+  /* 1.3 Cards de categoria */
+  .desktop-category-grid>a{min-height:120px!important;padding:20px!important;border-color:var(--gsr-line)!important}
+  .desktop-category-grid strong{font-size:.9375rem!important}
+  .desktop-category-grid small{font-size:.875rem!important;color:var(--gsr-muted)!important;margin-top:4px!important}
+
+  /* 1.4 Cards de profissional em destaque — metadados eram 8–9px */
+  .desktop-pro-copy>small{font-size:.75rem!important;letter-spacing:.1em!important;color:var(--gsr-action-deep)!important}
+  .desktop-pro-copy h3{font-size:1.1875rem!important;line-height:1.18!important}
+  .desktop-pro-copy>p{font-size:.8125rem!important;color:var(--gsr-muted)!important}
+  .desktop-pro-copy>div span{font-size:.8125rem!important;color:var(--gsr-muted)!important}
+  .desktop-pro-card{border-color:var(--gsr-line)!important}
+
+  /* 1.5 Faixa editorial escura */
+  .desktop-editorial,
+  .desktop-reference-editorial{background:var(--gsr-graphite)!important}
+  .desktop-editorial-cards small{font-size:.75rem!important;letter-spacing:.12em!important;color:#b8d9cf!important}
+  .desktop-editorial-cards strong{font-size:1.125rem!important;line-height:1.25!important}
+  .desktop-editorial-copy p{font-size:1.0625rem!important;color:#cfe0db!important}
+  .desktop-editorial-copy>a{
+    display:inline-flex!important;align-items:center!important;
+    min-height:48px!important;padding:0 20px!important;
+    border-radius:14px!important;
+    background:var(--gsr-lime)!important;color:#183d10!important;
+    font-size:.9375rem!important;font-weight:700!important;
+  }
+
+  /* 1.6 Bloco do app e CTA comercial */
+  .desktop-app p,.desktop-reference-app-copy>p{color:var(--gsr-muted)!important;font-size:1.0625rem!important}
+  .desktop-app-benefits span,.desktop-reference-benefits b{font-size:.8125rem!important;color:#173f38!important}
+  .desktop-reference-benefits small{font-size:.75rem!important;color:var(--gsr-muted)!important}
+  .desktop-business p{color:var(--gsr-muted)!important;font-size:1rem!important}
+  .desktop-business>a{min-height:52px!important;padding:0 24px!important;font-size:.9375rem!important;border-radius:14px!important}
+
+  /* 1.7 Rodapé — 8–10px não é legível */
+  .desktop-footer-top>p{font-size:.9375rem!important;color:#a9c3bc!important;line-height:1.6!important}
+  .desktop-footer-links b{font-size:.875rem!important}
+  .desktop-footer-links a{font-size:.875rem!important;color:#a9c3bc!important}
+  .desktop-footer-bottom{font-size:.8125rem!important;color:#8fada6!important}
+
+  /* 1.8 Perfil desktop — ações e corpo */
+  .profile-clean-details h2{font-size:1.25rem!important}
+  .profile-clean-details p{font-size:1rem!important;line-height:1.6!important;color:var(--gsr-muted)!important}
+  .profile-clean-summary{font-size:1.0625rem!important;color:var(--gsr-muted)!important}
+  .profile-primary-actions .profile-primary-action{min-height:52px!important;font-size:1rem!important}
+}
+
+/* ==========================================================================
+   2. MOBILE / APP NATIVO (≤760px)
+   Correções de legibilidade: nenhuma fonte abaixo de 12px.
+   ========================================================================== */
+@media (max-width:760px){
+
+  /* 2.1 Home nativa */
+  html.native-app .health-os-intro h1{font-weight:560!important}
+  html.native-app .health-os-section-head h2{font-size:1.25rem!important}
+  html.native-app .health-os-feature p{font-size:.8125rem!important;color:var(--gsr-muted)!important}
+
+  /* 2.2 Cards de resultado — metadados eram 6,6–7,2px */
+  html.native-app .native-card-name small,
+  html.native-app .native-business-copy>small{font-size:.75rem!important;letter-spacing:.08em!important}
+  html.native-app .native-card-name h2,
+  html.native-app .native-business-copy h2{font-size:1rem!important;line-height:1.2!important}
+  html.native-app .native-card-tags span{height:auto!important;min-height:26px!important;padding:4px 10px!important;font-size:.75rem!important;color:#3d5c55!important}
+  html.native-app .native-professional-copy>p,
+  html.native-app .native-business-copy>p{font-size:.8125rem!important;color:var(--gsr-muted)!important;white-space:normal!important}
+  html.native-app .native-featured{font-size:.6875rem!important;padding:4px 8px!important}
+
+  /* 2.3 Ações do card: 28px → 44px, largura total */
+  html.native-app .native-search-results .native-professional-card,
+  html.native-app .native-search-results .native-business-card{
+    grid-template-columns:76px minmax(0,1fr)!important;
+    grid-template-areas:"media copy" "actions actions"!important;
+    gap:12px!important;padding:14px!important;
+  }
+  html.native-app .native-professional-avatar,
+  html.native-app .native-business-logo{
+    width:76px!important;max-width:76px!important;min-width:76px!important;
+    height:88px!important;min-height:88px!important;max-height:88px!important;
+  }
+  html.native-app .native-card-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;margin-top:4px!important}
+  html.native-app .native-card-actions>a{
+    width:auto!important;height:44px!important;min-height:44px!important;
+    border-radius:12px!important;font-size:.875rem!important;font-weight:650!important;
+  }
+
+  /* 2.4 Busca */
+  html.native-app .native-search-title p{font-size:.8125rem!important;color:var(--gsr-muted)!important}
+  html.native-app .native-search-tabs a{min-height:42px!important;padding:0 18px!important;font-size:.875rem!important}
+  html.native-app .native-specialty-card strong{font-size:.8125rem!important;line-height:1.2!important}
+  html.native-app .native-specialty-card{min-height:108px!important}
+  html.native-app .native-results-toolbar>div p{font-size:.8125rem!important;color:var(--gsr-muted)!important}
+  html.native-app .native-results-toolbar>div span{font-size:1.125rem!important}
+  html.native-app .native-filter-sheet summary{min-height:42px!important;padding:0 16px!important;font-size:.875rem!important}
+  html.native-app .native-active-filters a{min-height:34px!important;padding:0 12px!important;font-size:.75rem!important}
+  html.native-app .native-category-grid>a>strong{font-size:.9375rem!important}
+  html.native-app .native-load-more{min-height:48px!important;font-size:.875rem!important}
+
+  /* 2.5 Perfil */
+  html.native-app .profile-clean-title p{font-size:.75rem!important}
+  html.native-app .profile-clean-summary{font-size:.9375rem!important;line-height:1.5!important;color:var(--gsr-muted)!important}
+  html.native-app .profile-clean-tags span{min-height:32px!important;padding:6px 12px!important;font-size:.8125rem!important;color:#3d5c55!important}
+  html.native-app .profile-clean-details h2{font-size:1.0625rem!important}
+  html.native-app .profile-clean-details p{font-size:.9375rem!important;line-height:1.55!important;color:var(--gsr-muted)!important}
+  html.native-app .profile-clean-services span{min-height:34px!important;padding:6px 12px!important;font-size:.875rem!important;color:#3d5c55!important}
+  html.native-app .profile-clean-location strong{font-size:.9375rem!important}
+  html.native-app .profile-clean-location span{font-size:.875rem!important;color:var(--gsr-muted)!important}
+  html.native-app .profile-clean-location a{min-height:40px!important;padding:0 12px!important;font-size:.8125rem!important;align-items:center!important}
+  html.native-app .profile-primary-action{min-height:48px!important;font-size:.9375rem!important}
+  html.native-app .profile-clean-source,
+  html.native-app .profile-clean-confirmed{font-size:.75rem!important;color:var(--gsr-muted)!important}
+  html.native-app .profile-clean-update h2{font-size:1.0625rem!important}
+  html.native-app .profile-clean-update p{font-size:.875rem!important;color:var(--gsr-muted)!important}
+  html.native-app .profile-clean-update a{min-height:48px!important;font-size:.9375rem!important}
+
+  /* 2.6 Conteúdos / podcast — o catálogo usa 8,5–9,5px */
+  html.native-app .content-native-card h3{font-size:1rem!important;line-height:1.25!important}
+  html.native-app .content-native-card small{font-size:.8125rem!important;color:var(--gsr-muted)!important}
+  html.native-app .content-native-topics button{min-height:40px!important;padding:0 16px!important;font-size:.875rem!important}
+  html.native-app .hos-podcast-row h3{font-size:1rem!important}
+  html.native-app .hos-podcast-row p,
+  html.native-app .hos-podcast-row small{font-size:.8125rem!important;color:var(--gsr-muted)!important}
+  html.native-app .hos-podcast-row-play{width:48px!important;height:48px!important}
+
+  /* 2.7 Dock — rótulos com contraste suficiente */
+  html.native-app .app-bottom-nav .hos-nav-item{color:#4f635e!important}
+  html.native-app .app-bottom-nav .hos-nav-label{font-size:.6875rem!important;font-weight:600!important}
+}
+
+/* ==========================================================================
+   3. HERO DE BUSCA DA HOME DESKTOP (novo — ver DesktopSearchHero.tsx)
+   ========================================================================== */
+@media (min-width:901px){
+  .gs-hero{
+    width:min(1280px,calc(100% - 64px));margin:0 auto;
+    padding:44px 0 56px;
+    display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+    gap:56px;align-items:center;
+  }
+  .gs-hero-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;
+    border-radius:999px;background:rgba(15,157,126,.09);
+    color:var(--gsr-action-deep);font-size:.75rem;font-weight:700;letter-spacing:.1em;
+  }
+  .gs-hero h1{
+    margin:18px 0 16px;max-width:660px;
+    font-family:var(--gsr-serif);font-size:clamp(42px,4vw,62px);
+    line-height:1.02;letter-spacing:-.035em;font-weight:600;color:var(--gsr-ink);
+    text-wrap:pretty;
+  }
+  .gs-hero h1 em{font-style:normal;color:var(--gsr-action)}
+  .gs-hero-lede{margin:0 0 28px;max-width:580px;color:var(--gsr-muted);font-size:1.125rem;line-height:1.55}
+
+  .gs-hero-form{
+    display:flex;align-items:center;gap:8px;
+    height:72px;padding:8px;max-width:700px;
+    border:1px solid #dcebe6;border-radius:18px;background:#fff;
+    box-shadow:0 18px 44px rgba(15,80,68,.09);
+  }
+  .gs-hero-field{display:flex;align-items:center;gap:10px;flex:1;min-width:0;padding:0 12px}
+  .gs-hero-field>svg{color:var(--gsr-action);flex:none}
+  .gs-hero-field input{
+    flex:1;min-width:0;height:44px;border:0;outline:0;background:transparent;
+    color:var(--gsr-ink);font:inherit;font-size:1rem;
+  }
+  .gs-hero-field input::placeholder{color:#5c706b}
+  .gs-hero-divider{width:1px;height:34px;background:#e6efec;flex:none}
+  .gs-hero-city{display:flex;align-items:center;gap:8px;padding:0 14px;color:#3d5c55;font-size:.9375rem;font-weight:600;white-space:nowrap}
+  .gs-hero-form button{
+    display:inline-flex;align-items:center;gap:8px;
+    height:56px;padding:0 24px;border:0;border-radius:14px;
+    background:var(--gsr-action);color:#fff;font:inherit;font-size:1rem;font-weight:650;cursor:pointer;
+  }
+  .gs-hero-form button:hover{background:var(--gsr-action-deep)}
+
+  .gs-hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .gs-hero-chips a{
+    display:inline-flex;align-items:center;height:38px;padding:0 14px;
+    border:1px solid #e0edea;border-radius:999px;background:#fff;
+    color:#3d5c55;font-size:.875rem;font-weight:550;text-decoration:none;
+  }
+  .gs-hero-chips a:hover{border-color:var(--gsr-action);color:var(--gsr-action)}
+
+  .gs-hero-stats{display:flex;gap:28px;margin-top:30px;padding-top:24px;border-top:1px solid #e4efeb}
+  .gs-hero-stats div strong{display:block;font-size:1.5rem;letter-spacing:-.03em;color:var(--gsr-ink)}
+  .gs-hero-stats div span{color:var(--gsr-muted);font-size:.875rem}
+
+  .gs-hero-visual{position:relative;height:560px}
+  .gs-hero-glow{
+    position:absolute;width:430px;height:430px;right:20px;top:60px;border-radius:50%;
+    background:radial-gradient(circle at 40% 34%,#eaffc7,#d6f7c4 30%,#b4efd0 58%,rgba(155,226,207,0) 82%);
+    opacity:.9;
+  }
+  .gs-hero-photo{
+    position:absolute;left:0;top:0;width:340px;height:420px;border-radius:26px;overflow:hidden;
+    border:1px solid rgba(255,255,255,.9);box-shadow:0 26px 60px rgba(14,69,61,.16);background:#e9f6f1;
+  }
+  .gs-hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .gs-hero-trending{
+    position:absolute;right:0;bottom:60px;width:300px;padding:18px;border-radius:22px;
+    background:#fff;box-shadow:0 22px 50px rgba(14,69,61,.14);
+  }
+  .gs-hero-trending>span{display:block;color:var(--gsr-action-deep);font-size:.75rem;font-weight:700;letter-spacing:.1em}
+  .gs-hero-trending a{display:flex;align-items:center;gap:12px;margin-top:14px;text-decoration:none;color:var(--gsr-ink)}
+  .gs-hero-trending a i{flex:none;width:56px;height:56px;border-radius:16px;background:#e9f6f1;display:grid;place-items:center;color:var(--gsr-action)}
+  .gs-hero-trending strong{display:block;font-size:1rem;letter-spacing:-.02em}
+  .gs-hero-trending small{color:var(--gsr-muted);font-size:.8125rem}
+}
+
+@media (min-width:901px) and (max-width:1180px){
+  .gs-hero{grid-template-columns:minmax(0,1fr);gap:32px}
+  .gs-hero-visual{height:420px}
+}
+@media (max-width:900px){
+  .gs-hero{display:none}
+}
