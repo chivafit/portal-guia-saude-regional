@@ -1,6 +1,6 @@
 import { DesktopHome } from "@/components/DesktopHome";
+import { HealthOSHome } from "@/components/HealthOSHome";
 import { pageMetadata } from "@/lib/seo";
-import "./exact-reference-home.css";
 
 export const metadata = pageMetadata(
   "Saúde em Piumhi",
@@ -9,5 +9,10 @@ export const metadata = pageMetadata(
 );
 
 export default function Home() {
-  return <DesktopHome />;
+  return (
+    <>
+      <DesktopHome />
+      <HealthOSHome />
+    </>
+  );
 }
