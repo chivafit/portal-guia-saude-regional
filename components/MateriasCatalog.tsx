@@ -15,7 +15,7 @@ export function MateriasCatalog({articles,podcastImage,magazineCover,magazineSlu
  const catalog=useMemo(()=>{const q=submitted.trim().toLocaleLowerCase("pt-BR");return articles.filter(a=>(topic==="Mais recentes"||topicsFor(a).includes(topic))&&(!q||`${a.title} ${a.excerpt} ${a.category} ${a.author??""}`.toLocaleLowerCase("pt-BR").includes(q)))},[articles,topic,submitted]);
  const feature=catalog[0], recent=catalog.slice(1,count+1); const search=(e:FormEvent)=>{e.preventDefault();setSubmitted(query);setCount(8)};
  return <main className="content-native-page"><section className="content-native-shell">
-   <HealthOSSectionHeader eyebrow="GUIA SAÚDE" title="Conteúdos" description="Informação confiável para cuidar melhor." />
+   <header className="content-native-header"><span>GUIA SAÚDE</span><h1>Conteúdos</h1><p>Informação confiável para cuidar melhor.</p></header>
    <form className="content-native-search" onSubmit={search}><Search size={18}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Busque um tema ou especialidade" aria-label="Buscar conteúdos"/><button aria-label="Buscar"><ArrowRight size={18}/></button></form>
    <div className="content-native-topics">{topics.map(t=><button type="button" key={t} className={topic===t?"active":""} onClick={()=>{setTopic(t);setCount(8)}}>{t}</button>)}</div>
    {feature?<CompactFeature article={feature}/>:<div className="content-native-empty"><strong>Nenhum conteúdo encontrado</strong><p>Tente outro tema ou categoria.</p></div>}
