@@ -26,10 +26,10 @@
     "validate:podcast": "node scripts/validate-podcast-participants.mjs",
     "validate:audit": "node --import tsx scripts/validate-directory-audit.ts",
     "validate:css": "node scripts/validate-css-architecture.mjs",
-    "validate:release": "npm run lint && npm run validate:css && npm run validate:seo && npm run validate:professionals && npm run build:pages",
+    "validate:release": "npm run lint && npm run validate:css && npm run validate:professionals && npm run build:pages && npm run validate:seo",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
     "test": "npm run build:pages && node --test tests/*.test.mjs",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern android/app/build --ignore-pattern android/app/src/main/assets/public --ignore-pattern ios/App/App/public",
+    "lint": "eslint app components lib db scripts tests server-admin server-api worker *.ts *.mjs --no-warn-ignored",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {

@@ -7,12 +7,12 @@ import { supporters } from "@/lib/data";
 const DEMO_CODE = "DEMONSTRACAO_COMERCIAL";
 type StaticCampaign = { imageUrl: string | null; name: string; advertiserName: string; destinationUrl: string };
 
-function campaignForStaticSite(_code: string): StaticCampaign | null {
+function campaignForStaticSite(): StaticCampaign | null {
   return null;
 }
 
 export async function AdSlot({ code, compact = false }: { code: string; compact?: boolean }) {
-  const campaign = campaignForStaticSite(code);
+  const campaign = campaignForStaticSite();
 
   // Espaço vendido: exibe a campanha real (imagem, quando houver, + texto).
   if (campaign) {

@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export function AppBootstrap() {
+  const router = useRouter();
   useEffect(() => {
     let active = true;
     let observer: IntersectionObserver | undefined;
@@ -23,7 +25,7 @@ export function AppBootstrap() {
       const allSpecialties = target?.closest(".native-search-discovery .native-section-head a");
       if (allSpecialties) {
         event.preventDefault();
-        window.location.href = "/buscar/especialidades";
+        router.push("/buscar/especialidades");
         return;
       }
       const anchor = target?.closest("a[href]") as HTMLAnchorElement | null;
@@ -100,7 +102,7 @@ export function AppBootstrap() {
       routeFx.remove();
       if (scrollTimer) window.clearTimeout(scrollTimer);
     };
-  }, []);
+  }, [router]);
 
   return null;
 }

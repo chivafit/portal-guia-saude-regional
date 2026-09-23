@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChevronDown, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cities } from "@/lib/data";
@@ -22,6 +23,7 @@ function currentCityFromUrl() {
 }
 
 export function CitySelector() {
+  const router = useRouter();
   const [selectedCity, setSelectedCity] = useState("");
 
   useEffect(() => {
@@ -35,7 +37,7 @@ export function CitySelector() {
     else window.localStorage.removeItem(storageKey);
     window.localStorage.setItem(modalSeenKey, "1");
     window.dispatchEvent(new CustomEvent("guia-saude:city-change", { detail: city }));
-    if (city) window.location.assign("/");
+    if (city) router.push("/");
   }
 
   const selectedSlug = selectedCity ? citySlug(selectedCity) : "";
