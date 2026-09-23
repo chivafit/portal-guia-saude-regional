@@ -798,3 +798,12 @@
   .gss-check input{width:18px;height:18px;flex:none;accent-color:var(--gsr-action);margin:0}
   .gss-check span{font-size:14px;font-weight:600}
 }
+
+/* 2c: card de busca mobile — especialidade + DESTAQUE + meta CRM·bairro */
+@media (max-width:900px){
+  .native-search-results .native-professional-card .native-card-name{display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:wrap!important;margin:0!important}
+  .native-search-results .native-professional-card .native-card-name small{color:var(--gsr-action-deep)!important;font-size:.6875rem!important;font-weight:800!important;letter-spacing:.08em!important;text-transform:uppercase!important}
+  .native-search-results .native-professional-card .native-featured-tag{display:inline-flex!important;align-items:center!important;height:20px!important;padding:0 8px!important;border-radius:999px!important;background:rgba(215,255,90,.9)!important;color:#3f5c00!important;font-size:.625rem!important;font-weight:800!important;letter-spacing:.04em!important;font-style:normal!important}
+  .native-search-results .native-professional-copy h2{font-size:1rem!important;line-height:1.2!important;margin:4px 0 2px!important}
+  .native-search-results .native-professional-card .native-card-meta{margin:0!important;color:var(--gsr-muted)!important;font-size:.8125rem!important;line-height:1.35!important}
+}
