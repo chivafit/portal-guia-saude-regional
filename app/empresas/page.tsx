@@ -22,7 +22,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
   const source = await publishedOrganizations(organizations);
   const categories = categoryOptionsFor(source);
   const results = filterOrganizations(source, { city: "Piumhi", category, query: params.q ?? "", type: "services" });
-  return <><main>
+  return <><main className="company-directory-page">
     <section className="directory-hero company-directory-hero"><div className="shell directory-hero-grid"><div><p className="eyebrow">Clínicas e serviços em Piumhi</p><h1>Encontre serviços de saúde</h1><p>Localize organizações publicadas com informações de contato e endereço.</p></div></div></section>
     <section className="section shell" style={{ paddingBottom: 0 }}><div className="company-category-grid">{categories.slice(0, 6).map((item) => <Link key={item.key} href={`/empresas?categoria=${encodeURIComponent(item.key)}`}><CategoryIcon label={item.label}/><strong>{item.label}</strong><small>{item.count} {item.count === 1 ? "serviço" : "serviços"}</small></Link>)}</div></section>
     <section className="section shell company-layout"><aside className="filters directory-filters company-filters"><form action="/empresas" className="filter-panel"><label>Nome ou serviço<input name="q" defaultValue={params.q ?? ""} placeholder="Ex.: pilates, clínica, exames" /></label><input type="hidden" name="cidade" value="piumhi" /><label>Categoria<select name="categoria" defaultValue={category}><option value="">Todas as categorias</option>{categories.map((item) => <option key={item.key} value={item.key}>{item.label} ({item.count})</option>)}</select></label><button type="submit">Aplicar filtros</button></form></aside>
