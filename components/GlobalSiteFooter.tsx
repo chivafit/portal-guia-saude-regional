@@ -17,7 +17,10 @@ const routesWithLocalFooter = [
 
 export function GlobalSiteFooter() {
   const pathname = usePathname();
-  const hasLocalFooter = routesWithLocalFooter.some((route) => route === "/cidades/" ? pathname.startsWith(route) : pathname === route);
-  if (pathname === "/" || hasLocalFooter) return null;
+  // Static export usa trailing slash (ex.: "/inclusao/"), então normalizamos antes de
+  // comparar — sem isto o match exato falha e o rodapé global soma ao rodapé local (duplicado).
+  const path = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+  const hasLocalFooter = routesWithLocalFooter.some((route) => route === "/cidades/" ? path.startsWith("/cidades") : path === route);
+  if (path === "/" || hasLocalFooter) return null;
   return <SiteFooter />;
 }
