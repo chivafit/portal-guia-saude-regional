@@ -808,22 +808,29 @@
   .native-search-results .native-professional-card .native-card-meta{margin:0!important;color:var(--gsr-muted)!important;font-size:.8125rem!important;line-height:1.35!important}
 }
 
-/* 2d: perfil mobile — barra de ação fixa (WhatsApp + Como chegar) */
+/* 2d: perfil mobile — barra de ação fixa (WhatsApp/Ligar + Como chegar) ACIMA do dock */
 .profile-fixed-bar{display:none}
 /* Vale para todo mobile (≤900px): app nativo E navegador mobile.
    Uma camada anterior aplicava position:fixed em .profile-primary-actions, que fica
-   dentro do .profile-clean-main (card com backdrop-filter) — o backdrop-filter cria
-   bloco de contenção e prende o fixed no meio do card. Aqui escondemos essas ações
-   inline e usamos .profile-fixed-bar, renderizada como irmã do <main> (filha do body),
-   que escapa do trap e ancora de fato na base da viewport. */
+   dentro do .profile-clean-main (card com backdrop-filter) e prendia o fixed no card.
+   Escondemos essas ações inline e usamos .profile-fixed-bar (irmã do <main>, filha do
+   body). O dock de navegação também aparece no perfil (pedido do usuário), então a
+   barra de ação fica logo acima do dock. */
 @media (max-width:900px){
-  html.native-app body:has(.profile-page-clean) .app-bottom-nav.health-os-dock.hos-navbar.gsm-dock{display:none!important}
-  .profile-page-clean{padding-bottom:calc(90px + env(safe-area-inset-bottom))!important}
+  .profile-page-clean{padding-bottom:calc(162px + env(safe-area-inset-bottom))!important}
   body:has(.profile-page-clean) .profile-primary-actions{display:none!important}
-  .profile-fixed-bar{position:fixed!important;left:0;right:0;bottom:0;z-index:70;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 16px calc(16px + env(safe-area-inset-bottom));background:linear-gradient(to top,#eef8f6 62%,rgba(238,248,246,0));pointer-events:none}
+  .profile-fixed-bar{position:fixed!important;left:0;right:0;bottom:calc(88px + env(safe-area-inset-bottom));z-index:60;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px;background:none;pointer-events:none}
   .profile-fixed-bar.is-single{grid-template-columns:1fr}
-  .profile-fixed-bar a{pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:14px;font-size:16px;font-weight:650;letter-spacing:-.01em;text-decoration:none;box-shadow:0 10px 26px rgba(11,42,37,.12)}
+  .profile-fixed-bar a{pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:14px;font-size:16px;font-weight:650;letter-spacing:-.01em;text-decoration:none;box-shadow:0 10px 26px rgba(11,42,37,.14)}
   .profile-fixed-bar .pfb-primary{background:#0f9d7e;color:#fff}
   .profile-fixed-bar .pfb-route{background:#0b2a25;color:#fff}
   .profile-fixed-bar a:active{transform:scale(.98)}
+}
+/* Dock de navegação também no navegador mobile (≤900px, não-nativo).
+   brand-merged-polish.css esconde o dock fora do app nativo; o usuário quer o dock
+   no site mobile, então reexibimos a pílula e damos respiro inferior ao conteúdo
+   (o perfil já reserva o seu próprio espaço acima). */
+@media (max-width:900px){
+  html:not(.native-app) body .app-bottom-nav.health-os-dock.hos-navbar.gsm-dock{display:grid!important}
+  html:not(.native-app) body:not(:has(.profile-page-clean)){padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
 }
