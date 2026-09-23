@@ -798,3 +798,26 @@
   .gss-check input{width:18px;height:18px;flex:none;accent-color:var(--gsr-action);margin:0}
   .gss-check span{font-size:14px;font-weight:600}
 }
+
+/* 2c: card de busca mobile — especialidade + DESTAQUE + meta CRM·bairro */
+@media (max-width:900px){
+  .native-search-results .native-professional-card .native-card-name{display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:wrap!important;margin:0!important}
+  .native-search-results .native-professional-card .native-card-name small{color:var(--gsr-action-deep)!important;font-size:.6875rem!important;font-weight:800!important;letter-spacing:.08em!important;text-transform:uppercase!important}
+  .native-search-results .native-professional-card .native-featured-tag{display:inline-flex!important;align-items:center!important;height:20px!important;padding:0 8px!important;border-radius:999px!important;background:rgba(215,255,90,.9)!important;color:#3f5c00!important;font-size:.625rem!important;font-weight:800!important;letter-spacing:.04em!important;font-style:normal!important}
+  .native-search-results .native-professional-copy h2{font-size:1rem!important;line-height:1.2!important;margin:4px 0 2px!important}
+  .native-search-results .native-professional-card .native-card-meta{margin:0!important;color:var(--gsr-muted)!important;font-size:.8125rem!important;line-height:1.35!important}
+}
+
+/* 2d: perfil mobile — barra de ação fixa (WhatsApp + Como chegar) */
+.profile-fixed-bar{display:none}
+@media (max-width:900px){
+  html.native-app body:has(.profile-page-clean) .app-bottom-nav.health-os-dock.hos-navbar.gsm-dock{display:none!important}
+  html.native-app .profile-page-clean{padding-bottom:calc(90px + env(safe-area-inset-bottom))!important}
+  html.native-app .profile-primary-actions{display:none!important}
+  html.native-app .profile-fixed-bar{position:fixed!important;left:0;right:0;bottom:0;z-index:70;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 16px calc(16px + env(safe-area-inset-bottom));background:linear-gradient(to top,#eef8f6 62%,rgba(238,248,246,0));pointer-events:none}
+  html.native-app .profile-fixed-bar.is-single{grid-template-columns:1fr}
+  html.native-app .profile-fixed-bar a{pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:14px;font-size:16px;font-weight:650;letter-spacing:-.01em;text-decoration:none;box-shadow:0 10px 26px rgba(11,42,37,.12)}
+  html.native-app .profile-fixed-bar .pfb-primary{background:#0f9d7e;color:#fff}
+  html.native-app .profile-fixed-bar .pfb-route{background:#0b2a25;color:#fff}
+  html.native-app .profile-fixed-bar a:active{transform:scale(.98)}
+}
