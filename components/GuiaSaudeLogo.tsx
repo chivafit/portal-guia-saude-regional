@@ -1,7 +1,7 @@
-export function GuiaSaudeLogo({ compact = false }: { compact?: boolean }) {
+export function GuiaSaudeLogo({ compact = false, footer = false, lightFooter = false }: { compact?: boolean; footer?: boolean; lightFooter?: boolean }) {
   return (
-    <span className={compact ? "guia-logo guia-logo-compact" : "guia-logo"} aria-hidden="true">
-      <svg className="guia-logo-symbol" viewBox="0 0 96 96" role="img">
+    <span className={`${compact ? "guia-logo guia-logo-compact" : "guia-logo"}${footer ? " guia-logo-footer" : ""}${lightFooter ? " guia-logo-light-footer" : ""}`} aria-label="Guia Saúde">
+      <svg className="guia-logo-symbol" viewBox="0 0 96 96" role="img" aria-label="Símbolo Guia Saúde">
         <defs>
           <linearGradient id="guia-a" x1="10" y1="14" x2="78" y2="80" gradientUnits="userSpaceOnUse">
             <stop stopColor="#00D1C6" />
@@ -24,11 +24,7 @@ export function GuiaSaudeLogo({ compact = false }: { compact?: boolean }) {
         <path d="M48 43c9-8 22-9 31-2 9 7 11 19 5 29-7 11-20 17-32 12-10-4-16-14-15-24 1-6 5-11 11-15Z" fill="url(#guia-c)" opacity=".92"/>
         <path d="M35 36c8-8 21-9 30-3 8 6 11 16 7 25-4 9-14 15-24 14-10-1-18-8-20-17-2-7 1-14 7-19Z" fill="#F4F7FA" opacity=".82"/>
       </svg>
-      <span className="guia-logo-word">
-        <span className="guia-logo-kicker">Guia</span>
-        <span className="guia-logo-main">Saúde</span>
-        {!compact ? <span className="guia-logo-tagline">Saúde mais perto de você</span> : null}
-      </span>
+      <span className="guia-logo-wordmark" aria-hidden="true">Guia Saúde</span>
     </span>
   );
 }

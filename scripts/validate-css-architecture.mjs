@@ -34,7 +34,7 @@ if (fs.existsSync(canonicalPath)) {
     .map((match) => match[1].trim())
     .filter((value) => /[A-Za-zÀ-ÿ]{3}/.test(value));
   if (textual.length) failures.push(`A interface contém texto gerado por CSS: ${textual.join(", ")}.`);
-  for (const selector of [".ref-home", ".native-search-screen", ".profile-page-clean", ".organization-page", ".content-native-page", ".hos-podcast-page"]) {
+  for (const selector of [".gsd-home", ".gsm-home", ".native-search-screen", ".profile-page-clean", ".organization-page", ".content-native-page", ".hos-podcast-page"]) {
     if (!css.includes(selector)) failures.push(`Família canônica ausente: ${selector}.`);
   }
 }

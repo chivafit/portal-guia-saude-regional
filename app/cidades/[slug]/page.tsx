@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, ArrowUpRight, BookOpen, Building2, Glasses, Megaphone, Pill, Podcast, Search } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
 import { articleImage, articles, cityDetails, magazineEditions, organizations, podcasts, professions, professionals } from "@/lib/data";
 import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { RootGuideSearch } from "@/components/RootGuideSearch";
@@ -84,7 +83,6 @@ async function CityPageContent({ params, rootLanding = false }: { params: Promis
   return (
     <>
       {rootLanding ? <div className="home-commercial-topline"><div className="shell">É profissional ou empresa de saúde? <span>Apareça para quem procura atendimento na região.</span><Link href="/anuncie">Conheça as soluções <ArrowRight size={14} /></Link></div></div> : null}
-      <SiteHeader showTopline={!rootLanding} advertiseLabel={rootLanding ? "Anuncie no Guia" : "Anuncie"} />
       <main className={rootLanding ? "root-guide-home" : undefined}>
         {rootLanding ? (
           <section className="root-guide-hero"><div className="shell root-guide-hero-inner"><p className="eyebrow">Cuidado perto de você</p><h1>Como podemos cuidar de você hoje?</h1><p>Encontre profissionais, clínicas e serviços de saúde em Piumhi.</p><RootGuideSearch professions={professions} categories={serviceCategories} /><div className="root-guide-quick-searches"><span>Buscas rápidas:</span>{quickSearches.map((search) => <Link key={search.label} href={search.href}>{search.label}</Link>)}</div><p className="root-guide-trust">Informações, endereço e formas de contato reunidos para facilitar sua busca.</p></div></section>

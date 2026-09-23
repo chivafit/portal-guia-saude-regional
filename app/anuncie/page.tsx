@@ -1,6 +1,5 @@
 import { ArrowRight, BadgeCheck, BookOpen, Building2, LayoutTemplate, MapPin, Mic2, Newspaper, Search, Sparkles } from "lucide-react";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
+import { HomeFooter } from "@/components/HomeFooter";
 import { CommercialProposalForm } from "@/components/CommercialProposalForm";
 import { articleImage, articles, magazineEditions, podcasts } from "@/lib/data";
 import { publicProfessionals } from "@/lib/public-directory";
@@ -36,7 +35,6 @@ export default function AdvertisePage() {
   const featuredPodcast = podcasts.find((episode) => episode.imageUrl);
 
   return <>
-    <SiteHeader advertiseLabel="Anuncie" />
     <main className="commercial-page">
       <section className="commercial-hero">
         <div className="shell commercial-hero-grid">
@@ -69,7 +67,7 @@ export default function AdvertisePage() {
 
       <section className="commercial-showcase"><div className="shell"><div className="commercial-section-heading"><p className="eyebrow">Veja como sua marca pode aparecer</p><h2>Formatos integrados ao conteúdo do Guia Saúde.</h2></div><div className="commercial-examples"><article><BadgeCheck size={23} /><div><small>PERFIL EM DESTAQUE</small><h3>Presença clara na busca</h3><p>O perfil aparece em posição de maior visibilidade, sempre identificado como destaque.</p><span>Indicado para profissionais, clínicas e serviços cadastrados.</span></div></article><article><LayoutTemplate size={23} /><div><small>BANNER NO PORTAL</small><h3>Campanha em posição selecionada</h3><p>Arte identificada como publicidade em áreas relacionadas ao Guia.</p><span>Pode apresentar campanha, serviço, evento ou marca.</span></div></article><article><Newspaper size={23} /><div><small>CONTEÚDO PATROCINADO</small><h3>Informação identificada com transparência</h3><p>Matérias e entrevistas em parceria recebem identificação editorial adequada.</p><span>Indicado para projetos e campanhas educativas.</span></div></article></div></div></section>
 
-      <section id="formatos" className="shell commercial-formats"><div className="commercial-section-heading"><p className="eyebrow">Formatos de divulgação</p><h2>Escolha como sua presença pode ser apresentada.</h2><p>Valores conforme formato, período e disponibilidade.</p></div><div className="commercial-format-grid">{formats.map(([Icon, title, text, ideal, cta], index) => <article id={index === 0 ? "formatos-profissionais" : index === 2 ? "formatos-marcas" : undefined} key={title}><Icon size={24} /><h3>{title}</h3><p>{text}</p><small><b>Indicado para:</b> {ideal}</small><details><summary>Informações do formato</summary><p>Onde aparece, prazo de veiculação, materiais necessários, produção de arte, identificação publicitária, ação disponível, contratação e disponibilidade são definidos na proposta.</p></details><a href={whatsapp} target="_blank" rel="noreferrer">{cta} <ArrowRight size={14} /></a></article>)}</div></section>
+      <section id="formatos" className="shell commercial-formats"><div className="commercial-section-heading"><p className="eyebrow">Formatos de divulgação</p><h2>Escolha como sua presença pode ser apresentada.</h2><p>Valores conforme formato, período e disponibilidade.</p></div><div className="commercial-format-grid">{formats.map(([Icon, title, text, ideal, cta], index) => <article id={index === 0 ? "formatos-profissionais" : index === 2 ? "formatos-marcas" : undefined} key={title}><Icon size={24} /><h3>{title}</h3><p>{text}</p><small><b>Indicado para:</b> {ideal}</small><details><summary>Informações do formato</summary><p>Onde aparece, prazo de veiculação, materiais necessários, produção de arte, identificação publicitária, ação disponível, contratação e disponibilidade são definidos na proposta.</p></details><a href={whatsapp} target="_blank" rel="noreferrer">{cta} <ArrowRight size={14} /></a></article>)}<article className="commercial-format-help"><Sparkles size={24} /><h3>Não sabe qual formato escolher?</h3><p>Conte seu objetivo e a equipe indica a melhor combinação de presença no Guia Saúde.</p><a href={whatsapp} target="_blank" rel="noreferrer">Falar com a equipe <ArrowRight size={14} /></a></article></div></section>
 
       <section className="shell commercial-production"><Sparkles size={26} /><div><h2>Você pode enviar sua arte ou desenvolver o material com nossa equipe.</h2><p>Os formatos, prazos e condições de produção são definidos na proposta. Todas as peças passam por análise antes da publicação.</p></div></section>
 
@@ -82,6 +80,6 @@ export default function AdvertisePage() {
       <section id="proposta" className="shell commercial-proposal"><div><p className="eyebrow">Solicite uma proposta</p><h2>Receba uma proposta personalizada.</h2><p>Conte o que deseja apresentar e receba informações sobre formatos, disponibilidade, prazos e valores.</p></div><CommercialProposalForm /></section>
 
     </main>
-    <SiteFooter />
+    <HomeFooter />
   </>;
 }

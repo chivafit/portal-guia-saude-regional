@@ -1,53 +1,24 @@
 import Link from "next/link";
+import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { Suspense } from "react";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
+import { HomeFooter } from "@/components/HomeFooter";
 import { pageMetadata } from "@/lib/seo";
 import { InclusionForm } from "./InclusionForm";
 
 export const metadata = pageMetadata(
   "Atualizar perfil ou solicitar inclusão",
-  "Envie informações para atualizar um perfil público ou solicitar inclusão de profissional, clínica, empresa ou serviço no Guia Saúde.",
+  "Envie informações para atualizar um perfil público ou solicitar inclusão no Guia Saúde.",
   "/inclusao",
 );
-
-const steps = [
-  "Você envia os dados básicos.",
-  "A equipe revisa as informações.",
-  "O cadastro pode ir para validação.",
-  "Após aprovação, o perfil pode ser publicado no guia.",
-];
 
 export default function InclusionPage() {
   return (
     <>
-      <SiteHeader />
-      <main>
-        <section className="content-hero inclusion-hero">
-          <div className="shell">
-            <p className="eyebrow">Atualização e inclusão</p>
-            <h1>Envie dados para manter o Guia Saúde atualizado.</h1>
-            <p>Use este formulário para atualizar um perfil existente ou indicar profissionais, clínicas, consultórios, laboratórios, farmácias, óticas, academias e outros serviços ligados à saúde. Ao enviar, você concorda com a <Link href="/privacidade">Política de Privacidade</Link>.</p>
-          </div>
-        </section>
-        <section className="shell content-section inclusion-layout">
-          <div>
-            <p className="eyebrow">Fluxo de validação</p>
-            <h2>O envio não altera o perfil automaticamente.</h2>
-            <p>O Guia Saúde é um portal informativo. Toda inclusão precisa passar por revisão antes de aparecer publicamente.</p>
-            <ol>
-              {steps.map((step) => <li key={step}>{step}</li>)}
-            </ol>
-            <div className="inclusion-note">
-              <strong>Quer anunciar?</strong>
-              <p>Se a intenção é contratar banner, perfil em destaque, revista ou podcast, veja como anunciar.</p>
-              <Link href="/anuncie">Ver oportunidades comerciais →</Link>
-            </div>
-          </div>
-          <Suspense fallback={<div className="inclusion-form" aria-busy="true" />}><InclusionForm /></Suspense>
-        </section>
+      <main className="inclusion-page">
+        <section className="inclusion-compact-hero"><div className="inclusion-shell"><p className="inclusion-kicker">ATUALIZAÇÃO E INCLUSÃO</p><h1>Ajude a manter o Guia Saúde correto e atualizado.</h1><p>Use o formulário para incluir ou atualizar um profissional, clínica, empresa ou serviço de saúde.</p><div className="inclusion-trust"><span><CheckCircle2 size={15}/> Revisão antes da publicação</span><span><ShieldCheck size={15}/> Envio protegido pela Política de Privacidade</span></div></div></section>
+        <section className="inclusion-shell inclusion-main"><div className="inclusion-form-intro"><div><p className="inclusion-kicker">ENVIE AS INFORMAÇÕES</p><h2>Preencha os dados abaixo.</h2></div><p>Quanto mais completos os dados, mais fácil será revisar e publicar o perfil.</p></div><Suspense fallback={<div className="inclusion-form inclusion-form-loading" aria-busy="true" />}><InclusionForm /></Suspense><div className="inclusion-after-form"><span>O envio não publica o perfil automaticamente.</span><span>A equipe revisa as informações antes de qualquer alteração.</span><Link href="/anuncie">Quer anunciar? Conheça as opções comerciais <ArrowRight size={14}/></Link></div></section>
       </main>
-      <SiteFooter />
+      <HomeFooter />
     </>
   );
 }

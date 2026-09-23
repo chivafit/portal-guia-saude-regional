@@ -1,24 +1,123 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, HeartPulse, MapPin, Search, Stethoscope } from "lucide-react";
-import { professionals } from "@/lib/data";
+import { Activity, ArrowRight, Baby, Bone, BookOpen, Brain, Eye, Headphones, HeartPulse, MapPin, Phone, Sparkles } from "lucide-react";
 import { publishedProfessionals } from "@/lib/public-directory";
+import { organizations, professionals } from "@/lib/data";
+import { isFeaturedProfessional } from "@/lib/featured-professionals";
 import { GuiaSaudeLogo } from "@/components/GuiaSaudeLogo";
+import { DesktopSearchHero } from "@/components/DesktopSearchHero";
+import { ProfessionalImage } from "@/components/ProfessionalImage";
+import { HomeFooter } from "@/components/HomeFooter";
 
-const specialties = ["Cardiologia", "Pediatria", "Oftalmologia", "Odontologia", "Psicologia", "Ortopedia"];
-const wanted = ["dra-simone-mota-bonisson-endocrinologia-piumhi", "gabriela-araujo-fisioterapia-pelvica-piumhi", "dra-mirian-sansoni-oftalmologia-piumhi", "dr-marcio-alves-da-cruz-jr-neurologia-piumhi"];
+/* Home desktop — recriação fiel da referência de design 2a:
+   hero de busca, especialidades mais procuradas, profissionais em destaque,
+   faixa editorial e rodapé institucional. */
+
+const specialtyDefs = [
+  { label: "Cardiologia", Icon: HeartPulse, re: /cardio/i },
+  { label: "Pediatria", Icon: Baby, re: /pediatr/i },
+  { label: "Oftalmologia", Icon: Eye, re: /oftalmo/i },
+  { label: "Odontologia", Icon: Activity, re: /odonto|dentist|dr[ií]a?\.?\s|dente/i },
+  { label: "Psicologia", Icon: Brain, re: /psicolog/i },
+  { label: "Ortopedia", Icon: Bone, re: /ortoped/i },
+] as const;
+
+function initials(name: string) {
+  return name.replace(/^(dr|dra|sr|sra)\.?\s+/i, "").split(/\s+/).filter(Boolean).slice(0, 2).map((p) => p[0]).join("").toUpperCase();
+}
+function registrationLabel(registration?: string | null) {
+  if (!registration) return "Atendimento em Piumhi";
+  const body = registration.split("·")[0].trim();
+  return /\d/.test(body) ? `${body} · Atendimento em Piumhi` : "Atendimento em Piumhi";
+}
 
 export async function DesktopHome() {
   const source = await publishedProfessionals(professionals);
-  const selected = wanted.map(slug => source.find(item => item.slug === slug)).filter(Boolean);
-  const featured = [...selected, ...source.filter(item => !selected.includes(item))].slice(0, 4);
-  return <main className="ref-home desktop-home">
-    <header className="ref-header"><Link href="/" className="ref-brand"><GuiaSaudeLogo /></Link><nav><Link href="/buscar?cidade=piumhi&tipo=professionals">Profissionais</Link><Link href="/empresas">Clínicas e serviços</Link><Link href="/materias">Conteúdos</Link><Link href="/podcast">Podcast</Link><Link href="/revista">Revista</Link></nav><Link className="ref-city" href="/buscar?cidade=piumhi"><MapPin /> Piumhi · MG</Link><Link className="ref-advertise" href="/anuncie">Anuncie <ArrowRight /></Link></header>
-    <section className="ref-hero"><div className="ref-hero-copy"><span className="ref-kicker">GUIA DE SAÚDE DE PIUMHI E REGIÃO</span><h1>Encontre o cuidado certo, <em>perto de você.</em></h1><p>Profissionais, clínicas e serviços de saúde da região — com informação verificada, conteúdo e contato direto.</p><form className="ref-search" action="/buscar"><Search/><input name="q" aria-label="Especialidade, profissional ou serviço" placeholder="Especialidade, profissional ou serviço"/><input type="hidden" name="cidade" value="piumhi"/><span><MapPin/> Piumhi</span><button>Buscar <ArrowRight/></button></form><div className="ref-chips">{["Cardiologia","Pediatria","Odontologia","Exames","Farmácias 24h"].map(label=><Link key={label} href={`/buscar?cidade=piumhi&q=${encodeURIComponent(label)}`}>{label}</Link>)}</div><div className="ref-stats"><span><b>180+</b>profissionais publicados</span><span><b>60+</b>clínicas e serviços</span><span><b>100%</b>fontes públicas verificadas</span></div></div><div className="ref-hero-art"><div className="ref-hero-photo"><Image src="/generated/home-human-care-hero.png" alt="Atendimento de saúde humanizado" fill priority unoptimized sizes="(min-width: 901px) 420px, 100vw"/></div><div className="ref-popular"><small>MAIS BUSCADO ESTA SEMANA</small><b>Oftalmologia</b><span>7 profissionais em Piumhi</span><b>Fisioterapia</b><span>5 profissionais em Piumhi</span></div></div></section>
-    <section className="ref-section"><div className="ref-section-head"><div><span>COMECE POR AQUI</span><h2>Especialidades mais procuradas</h2></div><Link href="/buscar/especialidades">Ver todas as especialidades <ArrowRight/></Link></div><div className="ref-specialties">{specialties.map((name,index)=><Link key={name} href={`/buscar?cidade=piumhi&q=${encodeURIComponent(name)}`}>{index%2?<Stethoscope/>:<HeartPulse/>}<strong>{name}</strong><small>{index+3} profissionais</small></Link>)}</div></section>
-    <section className="ref-section"><div className="ref-section-head"><div><span>SELEÇÃO GUIA SAÚDE</span><h2>Profissionais em destaque</h2></div><Link href="/profissionais-destaque">Ver todos <ArrowRight/></Link></div><div className="ref-professionals">{featured.map(p=><Link key={p!.slug} href={`/profissionais/${p!.slug}`}><div className="ref-prof-photo">{p!.imageUrl?<Image src={p!.imageUrl} alt={p!.name} fill unoptimized sizes="(min-width: 901px) 296px, 50vw"/>:null}</div><small>{p!.specialty}</small><h3>{p!.name}</h3><p>{p!.registration || "Atendimento em Piumhi"}</p><span>Ver perfil <ArrowRight/></span></Link>)}</div></section>
-    <section className="ref-editorial"><div><span>CONTEÚDO GUIA SAÚDE</span><h2>Informação também é cuidado.</h2><p>Matérias, entrevistas, podcast e a Revista Guia Saúde — feitos com profissionais da região.</p><Link href="/materias">Explorar conteúdos <ArrowRight/></Link></div><div className="ref-editorial-grid"><Link href="/materias"><Image src="/materias/prevencao-na-rotina.jpg" alt="Cuidados preventivos de saúde" fill unoptimized sizes="220px"/><small>MATÉRIAS</small><b>Conteúdo para decisões mais informadas</b></Link><Link href="/podcast"><Image src="/podcast/simone-bonisson-endocrinologia-horizontal.png" alt="Podcast Conexão Saúde" fill unoptimized sizes="220px"/><small>PODCAST</small><b>Conexão Saúde: conversas com quem entende</b></Link><Link href="/revista"><Image src="/guia-saude-media-ecosystem.png" alt="Revista Guia Saúde" fill unoptimized sizes="220px"/><small>REVISTA</small><b>O Guia Saúde também para folhear</b></Link></div></section>
-    <section className="ref-business"><div><span>PARA PROFISSIONAIS E EMPRESAS</span><h2>Faça parte do Guia Saúde.</h2><p>Apresente seu trabalho para quem está procurando saúde na sua região.</p></div><Link href="/anuncie">Anunciar no Guia Saúde <ArrowRight/></Link></section>
-    <footer className="ref-footer"><div><GuiaSaudeLogo/><p>Conectando pessoas à saúde da nossa região com informação, confiança e proximidade.</p></div>{[["Encontre","Profissionais","Clínicas e serviços","Farmácias"],["Conteúdo","Matérias","Podcast","Revista"],["Guia Saúde","Sobre","Anuncie","Cadastre-se"]].map(group=><nav key={group[0]}><b>{group[0]}</b>{group.slice(1).map(label=><span key={label}>{label}</span>)}</nav>)}</footer>
+  const piumhi = source.filter((i) => i.city === "Piumhi");
+  const featured = piumhi.filter((i) => isFeaturedProfessional(i.slug)).slice(0, 4);
+  const specialties = specialtyDefs
+    .map(({ label, Icon, re }) => ({ label, Icon, count: piumhi.filter((p) => re.test(`${p.specialty} ${p.profession}`)).length }))
+    .filter((s) => s.count > 0)
+    .slice(0, 6);
+  const organizationCount = organizations.filter((i) => i.city === "Piumhi").length;
+
+  return <main className="desktop-home gsd-home">
+    <header className="gsd-nav">
+      <Link href="/" className="gsd-brand"><GuiaSaudeLogo /></Link>
+      <nav className="gsd-links">
+        <Link href="/buscar?cidade=piumhi&tipo=professionals">Profissionais</Link>
+        <Link href="/buscar?cidade=piumhi&tipo=services">Clínicas e serviços</Link>
+        <Link href="/materias">Conteúdos</Link>
+        <Link href="/podcast">Podcast</Link>
+        <Link href="/revista">Revista</Link>
+      </nav>
+      <span className="gsd-city"><MapPin size={17} /> Piumhi · MG</span>
+      <Link className="gsd-cta" href="/anuncie">Anuncie <ArrowRight size={16} /></Link>
+    </header>
+
+    <DesktopSearchHero professionalCount={piumhi.length} organizationCount={organizationCount} />
+
+    <section className="gsd-section">
+      <div className="gsd-head">
+        <div><span>COMECE POR AQUI</span><h2>Especialidades mais procuradas</h2></div>
+        <Link href="/buscar/especialidades">Ver todas as especialidades <ArrowRight size={17} /></Link>
+      </div>
+      <div className="gsd-spec-grid">
+        {specialties.map(({ label, Icon, count }) => (
+          <Link key={label} href={`/buscar?cidade=piumhi&tipo=professionals&q=${encodeURIComponent(label)}`}>
+            <Icon /><div><strong>{label}</strong><small>{count} {count === 1 ? "profissional" : "profissionais"}</small></div>
+          </Link>
+        ))}
+      </div>
+    </section>
+
+    <section className="gsd-section">
+      <div className="gsd-head">
+        <div><span>SELEÇÃO GUIA SAÚDE</span><h2>Profissionais em destaque</h2></div>
+        <Link href="/profissionais-destaque">Ver todos <ArrowRight size={17} /></Link>
+      </div>
+      <div className="gsd-pro-grid">
+        {featured.map((p, i) => (
+          <article className="gsd-pro-card" key={p.slug}>
+            <div className={`gsd-pro-photo${p.imageUrl ? "" : " is-initials"}`}>
+              {p.imageUrl ? <ProfessionalImage src={p.imageUrl} sizes="300px" eager={i < 2} /> : <span>{initials(p.name)}</span>}
+              {i === 0 ? <span className="gsd-pro-badge">DESTAQUE</span> : null}
+            </div>
+            <div className="gsd-pro-body">
+              <small>{p.specialty}</small>
+              <h3>{p.name}</h3>
+              <p>{registrationLabel(p.registration)}</p>
+              <div className="gsd-pro-actions">
+                <Link className="gsd-pro-see" href={`/profissionais/${p.slug}`}>Ver perfil</Link>
+                <Link className="gsd-pro-phone" href={`/profissionais/${p.slug}`} aria-label={`Contato de ${p.name}`}><Phone size={18} /></Link>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section className="gsd-editorial">
+      <div className="gsd-editorial-glow" aria-hidden="true" />
+      <div className="gsd-editorial-head">
+        <div>
+          <span>CONTEÚDO GUIA SAÚDE</span>
+          <h2>Informação também é cuidado.</h2>
+          <p>Matérias, entrevistas, podcast e a Revista Guia Saúde — feitos com profissionais da região.</p>
+        </div>
+        <Link href="/materias">Explorar conteúdos <ArrowRight size={17} /></Link>
+      </div>
+      <div className="gsd-editorial-grid">
+        <Link href="/materias" className="gsd-ed-card"><span className="gsd-ed-cover"><BookOpen /></span><div><small>MATÉRIAS</small><strong>Conteúdo para decisões mais informadas</strong><span>Explorar matérias</span></div></Link>
+        <Link href="/podcast" className="gsd-ed-card"><span className="gsd-ed-cover"><Headphones /></span><div><small>PODCAST</small><strong>Conexão Saúde: conversas com quem entende</strong><span>Novos episódios</span></div></Link>
+        <Link href="/revista" className="gsd-ed-card"><span className="gsd-ed-cover"><Sparkles /></span><div><small>REVISTA</small><strong>O Guia Saúde também para folhear</strong><span>Edição atual</span></div></Link>
+      </div>
+    </section>
+
+    <section className="gsd-business">
+      <div><span>PARA PROFISSIONAIS E EMPRESAS</span><h2>Faça parte do Guia Saúde.</h2><p>Apresente seu trabalho para quem está procurando saúde na sua região.</p></div>
+      <Link href="/anuncie">Anunciar no Guia Saúde <ArrowRight size={18} /></Link>
+    </section>
+
+    <HomeFooter />
   </main>;
 }

@@ -5,19 +5,19 @@ import { FooterNav } from "@/components/FooterNav";
 
 function InstagramIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f806f" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <rect x="2" y="2" width="20" height="20" rx="5" />
       <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+      <circle cx="17.5" cy="6.5" r="1" fill="#0f806f" stroke="none" />
     </svg>
   );
 }
 
 function YoutubeIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f806f" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <rect x="2" y="5" width="20" height="14" rx="4" />
-      <path d="M10 9.5l5 2.5-5 2.5z" fill="currentColor" stroke="none" />
+      <path d="M10 9.5l5 2.5-5 2.5z" fill="#0f806f" stroke="none" />
     </svg>
   );
 }
@@ -27,13 +27,13 @@ export function SiteFooter({ hideCommercialCallout = false }: { hideCommercialCa
     <footer className="site-footer">
       <div className="shell footer-top">
         <div className="footer-brand">
-          <GuiaSaudeLogo />
+          <GuiaSaudeLogo lightFooter />
           <p>Conteúdo, profissionais e serviços de saúde perto de você.</p>
           <div className="footer-contact">
             <a href="mailto:rmproguia@gmail.com"><Mail size={15} /> rmproguia@gmail.com</a>
             <span><MapPin size={15} /> Piumhi, Minas Gerais</span>
           </div>
-          <div className="footer-social">
+          <div className="footer-social footer-social-light">
             <a href="https://www.instagram.com/saudeguia" target="_blank" rel="noreferrer" aria-label="Instagram do Guia Saúde"><InstagramIcon /></a>
             <a href="https://www.youtube.com/@redemeggabrasil" target="_blank" rel="noreferrer" aria-label="Canal do podcast no YouTube"><YoutubeIcon /></a>
           </div>
