@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowUpRight, BookOpen, Building2, Glasses, MapPin, Megaphone, Pill, Podcast, Search } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BookOpen, Building2, Glasses, Megaphone, Pill, Podcast, Search } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
 import { articleImage, articles, cityDetails, magazineEditions, organizations, podcasts, professions, professionals } from "@/lib/data";
 import { ProfessionIcon } from "@/components/ProfessionIcon";

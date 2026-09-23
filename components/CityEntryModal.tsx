@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, MapPin, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { cities } from "@/lib/data";
 import { citySlug } from "@/lib/city-utils";
@@ -22,6 +23,7 @@ function cityFromCurrentUrl() {
 }
 
 export function CityEntryModal() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState("");
   const modalRef = useRef<HTMLElement>(null);
@@ -78,7 +80,8 @@ export function CityEntryModal() {
     window.localStorage.setItem(modalSeenKey, "1");
     window.sessionStorage.setItem(sessionSeenKey, "1");
     window.dispatchEvent(new CustomEvent("guia-saude:city-change", { detail: city }));
-    window.location.assign("/");
+    setOpen(false);
+    router.push("/");
   }
 
   function dismiss() {
