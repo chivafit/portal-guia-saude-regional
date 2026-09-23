@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen, Building2, Check, MapPin, ShieldCheck, Users, type LucideIcon } from "lucide-react";
-import { SiteFooter } from "@/components/SiteFooter";
+import { HomeFooter } from "@/components/HomeFooter";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -34,7 +34,7 @@ export default function AboutPage() {
         <section className="about-shell about-principles"><div className="about-section-heading"><div><p className="about-section-label">NOSSOS PRINCÍPIOS</p><h2>Clareza antes de excesso.</h2></div><p>Uma boa experiência de saúde começa por informação bem organizada e expectativas honestas.</p></div><div className="about-principles-grid">{principles.map(([title, text], index) => <article key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
         <section className="about-final"><div className="about-shell about-final-inner"><div><p className="about-section-label">FAÇA PARTE</p><h2>Leve seu trabalho mais perto de quem precisa.</h2><p>Profissionais e empresas podem solicitar inclusão, atualizar seus dados ou conhecer as possibilidades de presença no Guia Saúde.</p></div><div className="about-final-actions"><Link className="about-button about-button-primary" href="/inclusao">Solicitar inclusão <ArrowRight size={16}/></Link><Link className="about-button about-button-light" href="/anuncie">Anunciar no Guia <ArrowRight size={16}/></Link></div></div></section>
       </main>
-      <SiteFooter />
+      <HomeFooter />
     </>
   );
 }

@@ -843,6 +843,10 @@
   html:not(.native-app) .profile-clean-actions{position:static!important;z-index:auto!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;backdrop-filter:none!important}
 }
 
-/* Rodapé do site apenas na home (pedido do usuário), desktop e mobile. A home tem seu
-   próprio rodapé (.gsd-footer); todas as demais páginas usam .site-footer — escondido. */
+/* Rodapé (pedido do usuário):
+   - Desktop: home E páginas institucionais (sobre, anuncie, cadastre-se, privacidade,
+     termos, política editorial, correções) usam o rodapé da home (.gsd-footer). As demais
+     páginas usam .site-footer, que fica escondido.
+   - Mobile: nenhuma página tem rodapé (só o dock de navegação). */
 .site-footer{display:none!important}
+@media (max-width:900px){ .gsd-footer{display:none!important} }

@@ -6,6 +6,7 @@ import { isFeaturedProfessional } from "@/lib/featured-professionals";
 import { GuiaSaudeLogo } from "@/components/GuiaSaudeLogo";
 import { DesktopSearchHero } from "@/components/DesktopSearchHero";
 import { ProfessionalImage } from "@/components/ProfessionalImage";
+import { HomeFooter } from "@/components/HomeFooter";
 
 /* Home desktop — recriação fiel da referência de design 2a:
    hero de busca, especialidades mais procuradas, profissionais em destaque,
@@ -117,23 +118,6 @@ export async function DesktopHome() {
       <Link href="/anuncie">Anunciar no Guia Saúde <ArrowRight size={18} /></Link>
     </section>
 
-    <footer className="gsd-footer">
-      <div className="gsd-footer-top">
-        <div className="gsd-footer-brand">
-          <Link href="/" className="gsd-brand"><GuiaSaudeLogo /></Link>
-          <p>Conectando pessoas à saúde da nossa região com informação, confiança e proximidade.</p>
-        </div>
-        <div className="gsd-footer-cols">
-          <div><b>Encontre</b><Link href="/buscar?cidade=piumhi&tipo=professionals">Profissionais</Link><Link href="/buscar?cidade=piumhi&tipo=services">Clínicas e serviços</Link><Link href="/buscar?categoria=farmacias&cidade=piumhi&tipo=services">Farmácias</Link></div>
-          <div><b>Conteúdo</b><Link href="/materias">Matérias</Link><Link href="/podcast">Podcast</Link><Link href="/revista">Revista</Link></div>
-          <div><b>Guia Saúde</b><Link href="/sobre">Sobre</Link><Link href="/anuncie">Anuncie</Link><Link href="/inclusao">Cadastre-se</Link></div>
-          <div><b>Políticas</b><Link href="/privacidade">Privacidade</Link><Link href="/termos">Termos de uso</Link><Link href="/politica-editorial">Política editorial</Link></div>
-        </div>
-      </div>
-      <div className="gsd-footer-bottom">
-        <span>© 2026 RM Produções e Eventos · Guia Saúde · Piumhi · MG</span>
-        <span>Portal informativo · não substitui avaliação profissional</span>
-      </div>
-    </footer>
+    <HomeFooter />
   </main>;
 }
