@@ -14,5 +14,5 @@ export function ProfileShareButton({ name, url }: { name: string; url: string })
     setMessage("Link do perfil copiado");
     window.setTimeout(() => setMessage(""), 2600);
   }
-  return <div className="profile-share"><button type="button" onClick={() => void share()}><Share2 size={16} /> Compartilhar perfil</button><span aria-live="polite">{message}</span></div>;
+  return <div className="profile-share"><button type="button" onClick={() => void share()}><Share2 size={16} /> Compartilhar</button><span aria-live="polite">{message}</span></div>;
 }
