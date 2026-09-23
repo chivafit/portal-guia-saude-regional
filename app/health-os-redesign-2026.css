@@ -842,3 +842,7 @@
   html:not(.native-app) .organization-actions,
   html:not(.native-app) .profile-clean-actions{position:static!important;z-index:auto!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;backdrop-filter:none!important}
 }
+
+/* Rodapé do site apenas na home (pedido do usuário), desktop e mobile. A home tem seu
+   próprio rodapé (.gsd-footer); todas as demais páginas usam .site-footer — escondido. */
+.site-footer{display:none!important}
