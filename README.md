@@ -1,109 +1,41 @@
-# vinext-starter
+# Guia Saúde
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Portal público e aplicativos regionais do Guia Saúde.
 
-## Prerequisites
+## Superfícies
 
-- Node.js `>=22.13.0`
+O projeto tem dois alvos separados:
 
-## Quick Start
+- **Web:** uma única landing page responsiva, além de Privacidade e Termos.
+- **Aplicativos:** experiência completa compartilhada pelos projetos Capacitor de iOS e Android.
+
+As funcionalidades de busca, perfis, clínicas, conteúdos, podcast, revista e favoritos pertencem aos aplicativos. Elas não devem ser reintroduzidas na navegação pública.
+
+## Comandos
 
 ```bash
 npm install
-npm run dev
-npm run build
+npm run build:web
+npm run build:app
 ```
 
-This starter does not use `wrangler.jsonc`.
+- `npm run build` e `npm run build:web`: geram a landing pública.
+- `NEXT_PUBLIC_BUILD_TARGET=web npm run dev`: abre a landing em desenvolvimento.
+- `NEXT_PUBLIC_BUILD_TARGET=app npm run dev`: abre a experiência completa dos apps.
+- `npm run build:app`: valida, gera o bundle completo e sincroniza iOS e Android.
+- `npm run app:android`: sincroniza e abre o Android Studio.
+- `npm run app:ios`: sincroniza e abre o Xcode.
+- `npm run app:assets`: atualiza ícones e telas de abertura.
 
-## Included Shape
+## Estrutura essencial
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+- `app/`: rotas e layouts Next.js.
+- `components/LandingPage.tsx`: conteúdo da landing pública.
+- `app/landing.css`: estilos exclusivos da landing.
+- `components/`: interface usada pelos aplicativos.
+- `android/`: projeto nativo Android.
+- `ios/`: projeto nativo iOS.
+- `capacitor.config.ts`: integração entre o bundle web e os projetos nativos.
+- `public/`: imagens usadas pela landing ou pelos aplicativos.
 
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
-```
-
-## Optional Dispatch-Owned ChatGPT Sign-In
-
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
-
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
-
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
-
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
-
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Aplicativos Android e iOS
-
-O portal também funciona como PWA instalável e como aplicativo nativo via Capacitor.
-
-- `npm run build:app`: valida o portal, gera a versão estática e sincroniza Android/iOS
-- `npm run app:assets`: atualiza ícones e telas de abertura nativas
-- `npm run app:android`: sincroniza e abre o projeto no Android Studio
-- `npm run app:ios`: sincroniza e abre o projeto no Xcode
-
-Consulte [`docs/mobile-apps.md`](docs/mobile-apps.md) para configuração, testes e publicação nas lojas.
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+Consulte [docs/mobile-apps.md](docs/mobile-apps.md) para configuração e publicação nas lojas.
