@@ -6,7 +6,7 @@ const appDir = path.join(root, "app");
 const layout = fs.readFileSync(path.join(appDir, "layout.tsx"), "utf8");
 const imports = [...layout.matchAll(/import\s+["']\.\/(.+?\.css)["'];/g)].map((match) => match[1]);
 const failures = [];
-const expected = ["globals.css", "portal-canonical.css"];
+const expected = ["globals.css", "portal-canonical.css", "landing.css"];
 
 if (JSON.stringify(imports) !== JSON.stringify(expected)) {
   failures.push(`O layout deve carregar somente ${expected.join(" e ")}; encontrados: ${imports.join(", ")}.`);
@@ -45,4 +45,4 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log("Arquitetura CSS validada: uma fundação global e um bundle visual canônico, sem camadas legadas.");
+console.log("Arquitetura CSS validada: fundação global, bundle dos aplicativos e landing pública isolada.");

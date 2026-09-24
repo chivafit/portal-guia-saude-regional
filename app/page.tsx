@@ -1,5 +1,6 @@
 import { DesktopHome } from "@/components/DesktopHome";
 import { HealthOSHome } from "@/components/HealthOSHome";
+import { LandingPage } from "@/components/LandingPage";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -9,6 +10,7 @@ export const metadata = pageMetadata(
 );
 
 export default function Home() {
+  if (process.env.NEXT_PUBLIC_BUILD_TARGET !== "app") return <LandingPage />;
   return (
     <>
       <DesktopHome />
