@@ -6646,7 +6646,7 @@ html.native-app .health-os-topbar .guia-logo-word {
 .gsm-dock .gsm-dock-ic svg{width:22px!important;height:22px!important}
 .gsm-dock .gsm-dock-label{font-size:11px!important;font-weight:600!important;letter-spacing:0!important;color:inherit!important;opacity:1!important}
 @media (min-width:901px){ .gsm-home{display:none!important} }
-@media (max-width:900px){ .gsd-home{display:none!important} .gsm-home{display:block} }
+@media (max-width:900px){ .gsd-home,.desktop-home{display:none!important} .gsm-home{display:block} }
 .gss{display:none}
 @media (min-width:901px){
   .native-search-screen .native-search-shell,

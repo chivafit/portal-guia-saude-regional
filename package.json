@@ -14,7 +14,7 @@
     "build:web": "NEXT_PUBLIC_BUILD_TARGET=web next build && node scripts/apply-public-site.mjs",
     "build:pages": "NEXT_PUBLIC_BUILD_TARGET=app npm run optimize:professional-images && npm run validate:css && npm run validate:directory && npm run validate:search && npm run validate:audit && npm run validate:podcast && NEXT_PUBLIC_BUILD_TARGET=app next build && node scripts/postbuild-seo.mjs && node --import tsx scripts/validate-public-directory.ts --check-sitemap && node scripts/apply-public-site.mjs",
     "deploy:manual": "bash scripts/deploy-manual.sh",
-    "build:app": "npm run build:pages && npx cap sync",
+    "build:app": "npm run build:pages && node scripts/strip-admin-routes.mjs && npx cap sync",
     "app:sync": "npx cap sync",
     "app:android": "npm run build:app && npx cap open android",
     "app:ios": "npm run build:app && npx cap open ios",
