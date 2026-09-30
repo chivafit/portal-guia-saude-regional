@@ -12,7 +12,9 @@ const LIVE_DATA_URL = "https://guiasaude.app.br/app-data/profiles.json";
 const LIVE_CACHE_KEY = "guia-saude:live-profiles";
 const LIVE_MAX_AGE_MS = 60 * 60 * 1000;
 
-type LiveData = { generatedAt: string; profiles: Record<string, ProfileView> };
+type LiveData = { generatedAt: string; profiles: Record<string, ProfileView>; redirects?: Record<string, string> };
+/** Perfil que saiu do diretório público depois do build do app (retirado ou com novo endereço). */
+type Withdrawn = { withdrawn: true; redirectTo?: string };
 
 function readCache(): (LiveData & { fetchedAt: number }) | null {
   try {
@@ -25,12 +27,14 @@ function readCache(): (LiveData & { fetchedAt: number }) | null {
 
 /** Dentro do app, usa a versão mais recente do perfil publicada no site (contatos, foto, textos). */
 function useLiveProfile(initial: ProfileView, builtAt: string) {
-  const [profile, setProfile] = useState(initial);
+  const [profile, setProfile] = useState<ProfileView | Withdrawn>(initial);
   useEffect(() => {
     let active = true;
     const apply = (data: LiveData | null) => {
-      const live = data?.profiles?.[initial.slug];
-      if (!active || !live || !(data!.generatedAt > builtAt)) return;
+      if (!active || !data?.profiles || !(data.generatedAt > builtAt)) return;
+      const live = data.profiles[initial.slug];
+      // Ausente num arquivo mais novo que o pacote: o perfil foi retirado ou mudou de endereço.
+      if (!live) { setProfile({ withdrawn: true, redirectTo: data.redirects?.[initial.slug] }); return; }
       // Fotos novas não existem no pacote do app: carrega do site.
       const imageUrl = live.imageUrl && live.imageUrl !== initial.imageUrl && live.imageUrl.startsWith("/") ? `https://guiasaude.app.br${live.imageUrl}` : live.imageUrl;
       setProfile({ ...live, imageUrl });
@@ -60,7 +64,12 @@ function useLiveProfile(initial: ProfileView, builtAt: string) {
 }
 
 export function ProfessionalProfile({ initial, builtAt }: { initial: ProfileView; builtAt: string }) {
-  const p = useLiveProfile(initial, builtAt);
+  const live = useLiveProfile(initial, builtAt);
+  if ("withdrawn" in live) return <main className="profile-page-clean"><section className="profile-clean-wrap">
+   <Link href={`/buscar?cidade=${encodeURIComponent(initial.city)}`} className="profile-clean-back"><ArrowLeft size={18}/><span>Voltar para a busca</span></Link>
+   <article className="pcx-card"><div className="pcx-identity"><h1>Perfil indisponível</h1><p className="pcx-summary">Este perfil não está mais publicado no Guia Saúde e os contatos foram removidos.</p><div className="pcx-cta"><Link className="pcx-cta-primary" href={live.redirectTo||`/buscar?cidade=${encodeURIComponent(initial.city)}`}>{live.redirectTo?.startsWith("/profissionais/")?"Ver perfil atualizado":"Buscar outros profissionais"}</Link></div></div></article>
+  </section></main>;
+  const p = live;
   const favorite = { slug: p.slug, name: p.name, profession: p.profession, specialty: p.specialty, city: p.city, organization: p.organization, imageUrl: p.imageUrl };
   const primaryLocation = p.locations[0];
   const hasAbout = !!(p.education || p.audience.length || p.insuranceInfo);
