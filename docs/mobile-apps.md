@@ -77,7 +77,7 @@ O aplicativo oferece navegação inferior com acesso rápido ao início, busca, 
 
 ## Dados dos perfis atualizados sem nova versão
 
-O pacote do app traz todos os perfis, mas os dados de cada perfil (contatos, WhatsApp, foto, endereço, textos) também são publicados em `https://guiasaude.app.br/app-data/profiles.json` a cada deploy da Vercel (`scripts/export-app-data.ts`).
+O pacote do app traz todos os perfis, mas os dados de cada perfil (contatos, WhatsApp, foto, endereço, textos) também são publicados em `https://www.guiasaude.app.br/app-data/profiles.json` a cada deploy da Vercel (`scripts/export-app-data.ts`).
 
 - No app (Capacitor), a página do perfil consulta esse arquivo e usa a versão online quando ela é mais nova que o pacote. O resultado fica em cache por 1 hora e o app funciona normalmente sem internet.
 - No site, nada muda: a página já é gerada a cada deploy.

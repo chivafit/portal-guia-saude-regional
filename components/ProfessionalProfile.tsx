@@ -8,7 +8,8 @@ import { FavoriteButton } from "@/components/FavoriteButton";
 import { ProfileShareButton } from "@/components/ProfileShareButton";
 import type { ProfileView } from "@/lib/profile-view";
 
-const LIVE_DATA_URL = "https://guiasaude.app.br/app-data/profiles.json";
+// Usa o "www" direto: o domínio sem www responde com redirecionamento 308 sem CORS, o que bloquearia a leitura no app.
+const LIVE_DATA_URL = "https://www.guiasaude.app.br/app-data/profiles.json";
 const LIVE_CACHE_KEY = "guia-saude:live-profiles";
 const LIVE_MAX_AGE_MS = 60 * 60 * 1000;
 
@@ -36,7 +37,7 @@ function useLiveProfile(initial: ProfileView, builtAt: string) {
       // Ausente num arquivo mais novo que o pacote: o perfil foi retirado ou mudou de endereço.
       if (!live) { setProfile({ withdrawn: true, redirectTo: data.redirects?.[initial.slug] }); return; }
       // Fotos novas não existem no pacote do app: carrega do site.
-      const imageUrl = live.imageUrl && live.imageUrl !== initial.imageUrl && live.imageUrl.startsWith("/") ? `https://guiasaude.app.br${live.imageUrl}` : live.imageUrl;
+      const imageUrl = live.imageUrl && live.imageUrl !== initial.imageUrl && live.imageUrl.startsWith("/") ? `https://www.guiasaude.app.br${live.imageUrl}` : live.imageUrl;
       setProfile({ ...live, imageUrl });
     };
     void import("@capacitor/core").then(async ({ Capacitor }) => {
