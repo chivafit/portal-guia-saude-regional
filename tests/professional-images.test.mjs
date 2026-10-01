@@ -4,7 +4,7 @@ import test from "node:test";
 
 test("professional image manifest contains versioned AVIF and WebP variants", async () => {
   const manifest = JSON.parse(await readFile("lib/data/professional-image-manifest.json", "utf8"));
-  assert.equal(Object.keys(manifest).length, 21);
+  assert.equal(Object.keys(manifest).length, 54);
   for (const entry of Object.values(manifest)) {
     assert.ok(entry.width > 0 && entry.height > 0);
     assert.ok(entry.avif.length > 0 && entry.webp.length > 0);
