@@ -1,6 +1,6 @@
 // Remove do site publicado e do pacote dos aplicativos as rotas administrativas
 // (ex.: /atualizar-fotos pede um token de escrita do GitHub). Roda no fim do
-// build:pages, depois do export. Para usar a rota, rode `npm run dev` localmente.
+// build:pages e do build:web, depois do export. Para usar a rota, rode `npm run dev` localmente.
 import { rm } from "node:fs/promises";
 import { existsSync } from "node:fs";
 
