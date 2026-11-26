@@ -7626,3 +7626,74 @@ html body form .sg>input:focus-visible{outline:none!important}
 html body form:has(.sg>input:focus-visible){outline:3px solid #0b7f65;outline-offset:2px}
 html body .sg-list a:focus-visible{outline-offset:-3px!important}
 html body .hos-player-youtube{display:inline-flex!important;align-items:center!important;gap:6px!important;min-height:44px;color:#0b6e57!important;font-size:14px!important;font-weight:700!important;text-decoration:none!important}
+
+/* ==========================================================================
+   Design moderno (2026-11): fundo limpo, cartões sem contorno com sombra suave,
+   mais respiro, campos preenchidos, ícones mais finos e resposta ao toque.
+   Vale para as telas do app e a versão do site no celular (até 900px).
+   ========================================================================== */
+:root{
+  --md-bg:#f5f7f6;--md-surface:#fff;--md-soft:#eef3f1;--md-ink:#10231f;--md-muted:#5f726d;
+  --md-radius:22px;--md-radius-sm:16px;
+  --md-shadow:0 1px 2px rgba(16,35,31,.04),0 6px 20px rgba(16,35,31,.06);
+  --md-shadow-lift:0 2px 4px rgba(16,35,31,.05),0 14px 32px rgba(16,35,31,.10);
+}
+@media (max-width:900px){
+  /* Fundo liso: sem as bolhas e gradientes decorativos de fundo */
+  html body main:is(.gsm-home,.native-search-screen,.cs-page,.cn-page,.hos-podcast-page,.native-magazine-screen,.native-favorites-screen,.dz-page,.native-featured-screen){background:var(--md-bg)!important}
+  html body :is(.gsm-orb,.native-search-aura,.native-favorites-aura,.hos-podcast-page::before){display:none!important}
+  html body:has(main:is(.gsm-home,.native-search-screen,.cs-page,.cn-page,.hos-podcast-page,.native-magazine-screen,.native-favorites-screen,.dz-page)){background:var(--md-bg)!important}
+
+  /* Cartões: sem contorno, cantos de 22px e sombra suave */
+  html body :is(.gsm-pro,.gsm-content a,.gsm-cats a,.ms-card,.ms-org,.ms-shortcuts a,.ms-specialties a,.cs-categories a,.pf-card,.pf-update,.dz-card,.cn-feature,.cn-card,.hos-podcast-row,.sk-card){border:0!important;border-radius:var(--md-radius)!important;background:var(--md-surface)!important;box-shadow:var(--md-shadow)!important}
+  html body .pf-identity{box-shadow:var(--md-shadow-lift)!important}
+
+  /* Campos de busca preenchidos, sem contorno */
+  html body :is(.gsm-search,.ms-search,.cs-search,.hos-podcast-search){border:0!important;border-radius:18px!important;background:var(--md-surface)!important;box-shadow:var(--md-shadow)!important}
+
+  /* Etiquetas e filtros: preenchimento suave, sem contorno */
+  html body :is(.gsm-chips a,.cn-topics button,.hos-podcast-chips button,.ms-chip,.pf-tags span,.pf-chips span){border:0!important;background:var(--md-soft)!important;box-shadow:none!important}
+  html body :is(.cn-topics button.active,.hos-podcast-chips button.active){background:var(--md-ink)!important;color:#fff!important}
+
+  /* Botões secundários: preenchimento suave no lugar do contorno */
+  html body :is(.ms-btn-outline,.pf-btn-outline,.gsm-pro-ic,.ms-card-actions .favorite-control button,.gsm-pro-actions .favorite-control button){border:0!important;background:var(--md-soft)!important}
+
+  /* Mais respiro entre as seções */
+  html body :is(.gsm-feature-head,.ms-section-head,.cn-section-head,.cs-list-head,.hos-podcast-section-head){margin-top:32px!important;margin-bottom:14px!important}
+  html body :is(.gsm-feature-head h2,.ms-section-head h2,.cn-section-head h2,.cs-list-head h2,.hos-podcast-section-head h2,.pf-card h2){font-size:20px!important;font-weight:750!important;letter-spacing:-.015em!important}
+  html body :is(.ms-list,.cs-list,.cn-list,.hos-podcast-list,.dz-list){gap:14px!important}
+
+  /* Ícones mais finos e uniformes */
+  html body main svg.lucide,html body nav.app-bottom-nav svg.lucide{stroke-width:1.75!important}
+
+  /* Resposta ao toque: cartões e botões "afundam" levemente */
+  html body :is(.gsm-pro,.gsm-content a,.gsm-cats a,.ms-card,.ms-org,.ms-shortcuts a,.ms-specialties a,.cs-categories a,.dz-card,.cn-card,.cn-feature,.hos-podcast-row,.pf-btn,.ms-btn,.gsm-pro-see,.gsm-chips a){transition:transform .14s ease,box-shadow .14s ease!important}
+  html body :is(.gsm-pro,.gsm-content a,.gsm-cats a,.ms-card,.ms-org,.ms-shortcuts a,.ms-specialties a,.cs-categories a,.dz-card,.cn-card,.cn-feature,.hos-podcast-row):active{transform:scale(.985)!important}
+  html body :is(.pf-btn,.ms-btn,.gsm-pro-see,.gsm-chips a,.pp-mini-btn):active{transform:scale(.96)!important}
+}
+
+/* Início: topo fixo que ganha fundo e encolhe ao rolar */
+@media (max-width:900px){
+  html body main.gsm-home{overflow:visible!important}
+  html body main.gsm-home .gsm-top{position:sticky!important;top:0!important;z-index:30!important;margin:0 -18px 14px!important;padding:calc(env(safe-area-inset-top) + 10px) 18px 10px!important;background:rgba(245,247,246,.86)!important;-webkit-backdrop-filter:saturate(160%) blur(16px)!important;backdrop-filter:saturate(160%) blur(16px)!important}
+  @supports (animation-timeline:scroll()){
+    html body main.gsm-home .gsm-top{animation:gs-top-compact linear both!important;animation-timeline:scroll(root)!important;animation-range:0 90px!important}
+  }
+  @keyframes gs-top-compact{to{padding-top:calc(env(safe-area-inset-top) + 4px);padding-bottom:4px;box-shadow:0 1px 0 rgba(16,35,31,.08)}}
+
+  /* Destaques em carrossel horizontal */
+  html body .gsm-feature-list{display:flex!important;gap:12px!important;margin:0 -18px!important;padding:4px 18px 16px!important;overflow-x:auto!important;scroll-snap-type:x mandatory;scroll-padding-inline:18px;scrollbar-width:none}
+  html body .gsm-feature-list::-webkit-scrollbar{display:none}
+  html body .gsm-feature-list .gsm-pro{flex:none!important;display:flex!important;flex-direction:column!important;gap:12px!important;width:248px!important;padding:16px!important;scroll-snap-align:start}
+  html body .gsm-feature-list .gsm-pro-photo{width:64px!important;height:64px!important;border-radius:18px!important}
+  html body .gsm-feature-list .gsm-pro-body strong{display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.5em;white-space:normal!important}
+  html body .gsm-feature-list .gsm-pro-actions{margin-top:auto!important}
+}
+@media (max-width:900px){
+  html body main:is(.gsm-home,.native-search-screen,.cs-page,.cn-page,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-favorites-screen,.dz-page,.native-featured-screen)::before,
+  html body main:is(.gsm-home,.native-search-screen,.cs-page,.cn-page,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-favorites-screen,.dz-page,.native-featured-screen)::after{content:none!important;display:none!important}
+  html body main.cs-page,html body main.cs-page>*{background-image:none!important}
+  /* Destaque do podcast: cartão limpo, como os demais */
+  html body .hos-podcast-feature{border:0!important;box-shadow:var(--md-shadow)!important}
+}
+@media (max-width:900px){html body .hos-podcast-discover .hos-podcast-section-head h2{font-size:20px!important;font-weight:750!important}}
