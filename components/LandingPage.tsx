@@ -57,11 +57,11 @@ export function LandingPage() {
 
     <section className="landing-business" id="para-negocios">
       <div><p className="landing-eyebrow">PARA QUEM CUIDA</p><h2>Sua presença profissional onde as pessoas procuram saúde.</h2><p>O aplicativo aproxima profissionais e estabelecimentos da comunidade com informação clara e uma apresentação consistente.</p></div>
-      <a href="mailto:contato@guiasaude.app.br">Falar com o Guia Saúde <ArrowRight size={17}/></a>
+      <a href="mailto:rmproguia@gmail.com">Falar com o Guia Saúde <ArrowRight size={17}/></a>
     </section>
 
     <section className="landing-download" id="baixar"><div><p className="landing-eyebrow">GUIA SAÚDE NO SEU CELULAR</p><h2>Seu próximo cuidado começa aqui.</h2><p>Os aplicativos para iPhone e Android estarão disponíveis em breve.</p><StoreBadges/></div><div className="landing-download-mark"><HeartPulse size={54}/></div></section>
 
-    <footer className="landing-footer"><div><GuiaSaudeLogo/><p>Saúde, informação e conexões locais em uma experiência feita para você.</p></div><div><a href="/privacidade">Privacidade</a><a href="/termos">Termos de uso</a><a href="mailto:contato@guiasaude.app.br">Contato</a></div><small>© {new Date().getFullYear()} Guia Saúde. Todos os direitos reservados.</small></footer>
+    <footer className="landing-footer"><div><GuiaSaudeLogo/><p>Saúde, informação e conexões locais em uma experiência feita para você.</p></div><div><a href="/privacidade">Privacidade</a><a href="/termos">Termos de uso</a><a href="mailto:rmproguia@gmail.com">Contato</a></div><small>© {new Date().getFullYear()} Guia Saúde. Todos os direitos reservados.</small></footer>
   </main>;
 }

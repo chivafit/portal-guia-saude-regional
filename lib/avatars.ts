@@ -1,5 +1,5 @@
 // Atribuição determinística de avatar ilustrado a partir do slug do perfil.
-// Mesmo perfil recebe sempre o mesmo avatar. Gerados por scripts/generate-avatars.mjs.
+// Mesmo perfil recebe sempre o mesmo avatar (SVGs fixos em public/avatars/).
 export const AVATAR_COUNT = 16;
 
 const PLACEHOLDER = "/placeholders/professional-photo.svg";

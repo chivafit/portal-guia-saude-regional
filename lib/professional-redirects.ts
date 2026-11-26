@@ -1,7 +1,9 @@
 /**
- * Endereços históricos preservados na exportação estática.
- * GitHub Pages não permite regras HTTP 301 por rota; estas páginas emitem
- * substituição imediata no navegador, canonical para o destino e noindex.
+ * Endereços históricos de perfis.
+ * No site (Vercel), cada entrada tem um redirecionamento 301 em vercel.json,
+ * conferido por tests/redirects.test.mjs. As páginas estáticas geradas a partir
+ * desta lista continuam existindo para o pacote dos aplicativos, que não passa
+ * pela Vercel: elas fazem a substituição no navegador, com canonical e noindex.
  */
 export const professionalRedirects: Record<string, string> = {
   "dr-wenner-terra-freitas-otorrino-piumhi": "/profissionais/dr-wenner-terra-freitas-otorrinolaringologia-piumhi/",

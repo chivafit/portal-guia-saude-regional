@@ -16,5 +16,27 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/profissionais/dr-wenner-terra-freitas-otorrino-piumhi{/}?",
+      "destination": "/profissionais/dr-wenner-terra-freitas-otorrinolaringologia-piumhi/",
+      "permanent": true
+    },
+    {
+      "source": "/profissionais/dra-wanessa-dornela-de-oliveira-otorrino-piumhi{/}?",
+      "destination": "/profissionais/dra-wanessa-dornela-de-oliveira-otorrinolaringologia-piumhi/",
+      "permanent": true
+    },
+    {
+      "source": "/profissionais/dr-rui-manuel-dos-prazeres-xavier-ginecologia-piumhi{/}?",
+      "destination": "/buscar/?cidade=Piumhi&tipo=professionals&especialidade=Ginecologia",
+      "permanent": true
+    },
+    {
+      "source": "/profissionais/dra-graziele-paiz-clinica-medica{/}?",
+      "destination": "/profissionais/dra-graziele-paiz-clinica-medica-piumhi/",
+      "permanent": true
+    }
   ]
 }

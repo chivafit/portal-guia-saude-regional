@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const siteUrl = "https://guiasaude.app.br";
+export const siteUrl = "https://www.guiasaude.app.br";
 export const siteName = "Guia Saúde";
 export const defaultDescription = "Portal de saúde com profissionais, empresas, matérias, podcast e revista para ajudar você a encontrar cuidado perto de você.";
 

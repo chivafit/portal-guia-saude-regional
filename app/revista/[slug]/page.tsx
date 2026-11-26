@@ -9,7 +9,7 @@ export async function generateMetadata({params}:{params:Promise<{slug:string}>})
 export default async function EditionPage({params}:{params:Promise<{slug:string}>}){
  const {slug}=await params;const edition=magazineEditions.find(item=>item.slug===slug);if(!edition)notFound();
  const summary=editionArticles(edition);const published=magazineEditions.filter(item=>item.flipbook);
- const pages=edition.flipbook?Array.from({length:edition.flipbook.pages},(_,i)=>`${edition.flipbook!.dir}/page-${String(i+1).padStart(3,"0")}.jpg?v=20260731-crop2`):[];
+ const pages=edition.flipbook?Array.from({length:edition.flipbook.pages},(_,i)=>`${edition.flipbook!.dir}/page-${String(i+1).padStart(3,"0")}.webp`):[];
  return <main className="native-magazine-reader-screen"><div className="native-magazine-reader-shell">
    <header className="native-magazine-reader-topbar"><Link href="/revista" aria-label="Voltar à revista"><ArrowLeft size={18}/></Link><span>{edition.number} edição · {edition.year}</span><BookOpen size={18}/></header>
    <section className="native-magazine-reader-head"><span className="native-magazine-reader-cover" style={edition.coverUrl?{backgroundImage:`url(${edition.coverUrl})`}:undefined}/><div><small>Revista Guia Saúde</small><h1>{edition.title}</h1><p>{edition.description}</p></div></section>
