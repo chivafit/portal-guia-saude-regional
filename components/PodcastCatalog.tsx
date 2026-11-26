@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Headphones, Pause, Play, RotateCcw, RotateCw, Search, X } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { HealthOSSectionHeader } from "@/components/HealthOSSectionHeader";
+import { ContentTabs } from "@/components/content/ContentTabs";
 
 type Episode={slug:string;guest:string;role:string;topic:string;publishedAt:string;duration:string;status:string;imageUrl?:string;episodeUrl?:string;audioUrl?:string;professionalSlugs?:string[]};
 function parsed(value:string){const[y,m,d]=value.split("-").map(Number);return y&&m&&d?new Date(y,m-1,d,12):undefined}
@@ -42,6 +43,7 @@ export function PodcastCatalog({episodes:initialEpisodes}:{episodes:Episode[]}){
  useEffect(()=>{const slug=new URLSearchParams(window.location.search).get("episodio");const episode=slug?episodes.find(item=>item.slug===slug):undefined;if(episode&&playable(episode))openEpisode(episode,setPlaying)},[episodes]);
  const submit=(e:FormEvent)=>{e.preventDefault();setSearch(q.trim());setVisible(8)};const playEpisode=(episode:Episode)=>{if(playable(episode))openEpisode(episode,setPlaying)};
  return <main className="hos-podcast-page"><section className="hos-podcast-shell">
+  <ContentTabs active="podcast"/>
   <HealthOSSectionHeader eyebrow="CONEXÃO SAÚDE" title="Podcast" description="Conversas com profissionais da nossa região para ouvir no seu tempo." />
   {feature?<article className={`hos-podcast-feature${playable(feature)?"":" is-unavailable"}`}><button type="button" className="hos-podcast-feature-art" onClick={()=>playEpisode(feature)} disabled={!playable(feature)} aria-label={`Reproduzir ${feature.topic}`}><Cover episode={feature}/></button><div><small>EPISÓDIO EM DESTAQUE</small><h3>{feature.topic}</h3><p>{people(feature)}</p><span>{status(feature)}{feature.duration&&feature.duration!=="Episódio completo"?` · ${feature.duration}`:""}</span>{playable(feature)?<><button type="button" className="hos-podcast-feature-cta" onClick={()=>playEpisode(feature)}><Play size={13} fill="currentColor"/> {feature.audioUrl?"Ouvir no Guia Saúde":"Reproduzir no Guia Saúde"}</button></>:<em>Disponível em breve</em>}</div></article>:null}
   <section className="hos-podcast-discover"><div className="hos-podcast-section-head"><div><small>BIBLIOTECA</small><h2>Explore os episódios</h2></div></div><form onSubmit={submit} className="hos-podcast-search"><Search size={17}/><input value={q} onChange={(e)=>setQ(e.target.value)} placeholder="Tema ou convidado" aria-label="Buscar episódio"/><button type="submit" aria-label="Buscar"><ArrowRight size={16}/></button></form><div className="hos-podcast-chips">{["Todos",...categories].map((item)=><button type="button" key={item} className={tag===item?"active":""} onClick={()=>{setTag(item);setVisible(8)}}>{item}</button>)}</div></section>
