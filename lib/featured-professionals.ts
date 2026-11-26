@@ -21,6 +21,7 @@ export const featuredProfessionalSlugs = new Set<string>([
   "dr-diego-mota-fernandes-ortopedia-piumhi",
   "dr-paulo-henrique-faria-silva-oftalmologia-piumhi",
   "jaine-reis-psicologia-piumhi",
+  "dra-raiza-luna-peixoto-anestesiologia-piumhi",
 ]);
 
 export function isFeaturedProfessional(slug: string): boolean {
