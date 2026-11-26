@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { ArrowRight, BookOpen, Mic2, Play } from "lucide-react";
+import { ArrowRight, BookOpen, Play } from "lucide-react";
+import { PodcastCover } from "@/components/podcast/PodcastCover";
 import { ContentTabs } from "@/components/content/ContentTabs";
 
 type EditorialArticle={slug:string;category:string;title:string;excerpt:string;author?:string;authorRole?:string;date?:string;readingTime?:string;professionalSlug?:string;image?:string};
-type LatestEpisode={slug:string;topic:string;guest:string};
+type LatestEpisode={slug:string;topic:string;guest:string;role?:string;guestPhoto?:string;guestArea?:string};
 
 const topics=["Mais recentes","Prevenção","Saúde da mulher","Saúde infantil","Saúde bucal","Alimentação","Saúde mental","Pele","Cardiologia","Ortopedia","Oftalmologia","Bem-estar"];
 function topicsFor(a:EditorialArticle){const c=`${a.category} ${a.title} ${a.excerpt}`.toLocaleLowerCase("pt-BR");const m:[string,RegExp][]=[["Prevenção",/preven|medicamento/],["Saúde da mulher",/mulher|gineco|gesta/],["Saúde infantil",/infância|infantil|pediatr/],["Saúde bucal",/bucal|odonto|implant/],["Alimentação",/alimenta|nutri/],["Saúde mental",/mental|vínculo|psican/],["Pele",/pele|dermat/],["Cardiologia",/cardio/],["Ortopedia",/ortoped|lesão/],["Oftalmologia",/oftalmo|olho|cirurgia refrativa/],["Bem-estar",/reabilita|vida saudável|respirat|qualidade de vida/]];return m.filter(([,r])=>r.test(c)).map(([t])=>t)}
@@ -27,7 +28,7 @@ export function MateriasCatalog({articles,latestEpisode}:{articles:EditorialArti
    <span className="cn-feature-body"><strong className="cn-feature-title">{feature.title}</strong><span className="cn-meta">{byline(feature)}</span></span>
   </Link>:<div className="ms-empty"><strong>Nenhum conteúdo neste tema</strong><p>Escolha outro tema.</p></div>}
   {latestEpisode?<Link href={`/podcast?episodio=${encodeURIComponent(latestEpisode.slug)}`} className="cn-listen">
-   <span className="cn-listen-icon" aria-hidden="true"><Mic2 size={24}/></span>
+   <span className="cn-listen-icon" aria-hidden="true"><PodcastCover episode={latestEpisode}/></span>
    <span className="cn-listen-copy"><small>Episódio novo · Conexão Saúde</small><strong>{latestEpisode.topic}</strong></span>
    <span className="cn-listen-play" aria-hidden="true"><Play size={20} fill="currentColor"/></span>
   </Link>:null}

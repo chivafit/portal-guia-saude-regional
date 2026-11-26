@@ -7111,7 +7111,7 @@ html.native-app .portal-footer{display:none!important}
 .gsm-content{display:grid;gap:10px}
 .gsm-content a{display:grid;grid-template-columns:40px minmax(0,1fr) 16px;gap:12px;align-items:center;padding:14px;border:1px solid #dceae5;border-radius:20px;background:#fff;color:#0d2e29;text-decoration:none}
 .gsm-content a>svg:first-child{display:grid;width:40px;height:40px;padding:10px;border-radius:12px;background:#e9f6f1;color:#0b7f65}
-.gsm-content span{display:flex;min-width:0;flex-direction:column;gap:2px}
+.gsm-content a>span:not(.gsm-pod-cover){display:flex;min-width:0;flex-direction:column;gap:2px}
 .gsm-content small{color:#0b7f65;font-size:12px;font-weight:700}
 .gsm-content strong{overflow:hidden;font-size:15px;line-height:1.3;text-overflow:ellipsis;white-space:nowrap}
 .gsm-content a>svg:last-child{color:#7b928c}
@@ -7483,3 +7483,37 @@ html body .ms-specialties a{min-width:0;padding:12px!important}
 html body .ms-specialties strong{font-size:13px!important;letter-spacing:-.01em}
 html body .ms-specialties a{padding:12px 10px!important}
 @media (max-width:380px){html body .ms-specialties strong{font-size:12px!important}html body .ms-specialties{gap:8px!important}}
+
+/* ==========================================================================
+   Capa padrão do Conexão Saúde (components/podcast/PodcastCover.tsx).
+   Ocupa o espaço da arte (botão da lista ou do destaque).
+   ========================================================================== */
+html body :is(.hos-podcast-feature-art,.hos-podcast-row-art){padding:0!important;border:0!important;background:none!important;overflow:hidden!important}
+.pc{position:relative;display:grid;place-items:center;width:100%;height:100%;aspect-ratio:1;overflow:hidden;border-radius:inherit;background:linear-gradient(150deg,#0f3d35 0%,#0b2e28 55%,#082520 100%);isolation:isolate}
+.pc-glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 88% 8%,rgba(217,255,72,.55),transparent 38%),radial-gradient(circle at 8% 100%,rgba(0,209,198,.32),transparent 45%)}
+.pc-glow::after{content:"";position:absolute;right:-18%;bottom:-18%;width:70%;aspect-ratio:1;border:1.5px solid rgba(217,255,72,.28);border-radius:50%}
+.pc-photo{position:relative;display:block;width:68%;aspect-ratio:1;overflow:hidden;border-radius:50%;box-shadow:0 0 0 3px #d9ff48,0 10px 24px rgba(0,0,0,.28);background:#dff1ea}
+.pc-photo img{width:100%;height:100%;object-fit:cover;object-position:center 18%}
+.pc-initials{display:grid;place-items:center;width:100%;height:100%;font-family:var(--gs-font-body);font-weight:800;letter-spacing:-.02em;font-size:clamp(16px,24cqw,64px)}
+.pc{container-type:inline-size}
+.pc-initials{font-size:24cqw}
+.pc-badge{position:absolute;right:8%;bottom:8%;display:grid;place-items:center;width:24%;max-width:44px;min-width:20px;aspect-ratio:1;border-radius:30%;background:#d9ff48;color:#0b2e28;box-shadow:0 4px 12px rgba(0,0,0,.22)}
+.pc-row .pc-photo{width:72%;box-shadow:0 0 0 2px #d9ff48,0 6px 14px rgba(0,0,0,.25)}
+.pc-row .pc-badge{right:5%;bottom:5%;width:30%}
+.pc-feature .pc-photo{width:58%;margin-top:10%}
+.pc-brand{position:absolute;left:9%;top:8%;color:#fff;font-family:var(--gs-font-serif);font-size:clamp(13px,8.5cqw,24px);font-weight:700;line-height:1.05;letter-spacing:-.01em}
+.pc-brand::before{content:"";display:block;width:22%;min-width:14px;height:3px;margin-bottom:8%;border-radius:3px;background:#d9ff48}
+/* Capa do podcast nos atalhos (início e Conteúdos) */
+html body .gsm-pod-cover{display:block;flex:none;width:44px;height:44px;border-radius:12px;overflow:hidden}
+html body .cn-listen-icon{padding:0!important;overflow:hidden!important;background:none!important}
+/* A capa resiste às regras antigas do cartão do podcast (cores e tamanhos com !important) */
+html body .pc .pc-initials{display:grid!important;place-items:center!important;width:100%!important;height:100%!important;background:var(--pc-bg,#e3eef0)!important;color:var(--pc-fg,#355c66)!important;font-size:24cqw!important;font-weight:800!important;line-height:1!important}
+html body .pc .pc-badge{background:#d9ff48!important;color:#0b2e28!important}
+html body .pc .pc-badge svg{width:55%!important;height:55%!important;color:#0b2e28!important;opacity:1!important}
+html body .pc .pc-brand{color:#fff!important;font-size:clamp(13px,8.5cqw,24px)!important;font-family:var(--gs-font-serif)!important}
+@container (max-width:170px){.pc-feature .pc-brand{display:none}.pc-feature .pc-photo{width:68%;margin-top:0}}
+html body .gsm-content a>svg:first-child{box-sizing:border-box!important;width:40px!important;height:40px!important;padding:10px!important;border-radius:12px!important;background:#e9f6f1!important;color:#0b7f65!important}
+html body .pc-feature .pc-photo{width:50%!important;margin-top:20%!important}
+@container (max-width:170px){html body .pc-feature .pc-photo{width:68%!important;margin-top:0!important}}
+html body .hos-podcast-row-play{color:#fff!important}
+html body .hos-podcast-row-play svg{color:#fff!important;fill:#fff!important;opacity:1!important}
