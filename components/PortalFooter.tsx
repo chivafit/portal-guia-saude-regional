@@ -34,7 +34,7 @@ export function PortalFooter() {
               <b>{column.title}</b>
               {column.links.map((link) => link.href.startsWith("mailto:")
                 ? <a key={link.label} href={link.href}>{link.label}</a>
-                : <Link key={link.label} href={link.href}>{link.label}</Link>)}
+                : <Link key={link.label} href={link.href} prefetch={link.href.startsWith("/anuncie") ? false : undefined}>{link.label}</Link>)}
             </div>
           ))}
         </div>

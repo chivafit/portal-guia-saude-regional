@@ -7131,3 +7131,8 @@ html.native-app .portal-footer{display:none!important}
 .company-directory-page .direct-contact-btn svg{display:inline-block!important;opacity:1!important;visibility:visible!important}
 .company-results .business-head h2{font-family:inherit!important;font-weight:750!important}
 .company-results .business-logo{display:none!important}
+
+/* Clínicas e serviços: ícone do "Como chegar" na cor do texto e títulos sem encostar no ícone */
+.company-results .direct-contact-btn.directions svg{color:currentColor!important;stroke:currentColor!important}
+.company-directory-page .company-category-grid>*{padding-right:44px!important;position:relative!important}
+.company-directory-page .company-category-grid>* svg{position:absolute!important;top:16px!important;right:16px!important}
