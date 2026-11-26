@@ -7697,3 +7697,38 @@ html body .hos-player-youtube{display:inline-flex!important;align-items:center!i
   html body .hos-podcast-feature{border:0!important;box-shadow:var(--md-shadow)!important}
 }
 @media (max-width:900px){html body .hos-podcast-discover .hos-podcast-section-head h2{font-size:20px!important;font-weight:750!important}}
+
+/* ==========================================================================
+   Design moderno também no computador (acima de 900px): mesmos princípios do
+   celular, com hover no lugar do toque.
+   ========================================================================== */
+@media (min-width:901px){
+  html body:has(main:is(.desktop-home,.native-search-screen,.cs-page,.cn-page,.hos-podcast-page,.native-magazine-screen,.native-favorites-screen,.dz-page,.pf-page,.org-page)){background:var(--md-bg)!important}
+  html body main:is(.desktop-home,.native-search-screen,.cs-page,.cn-page,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-favorites-screen,.dz-page,.native-featured-screen){background:var(--md-bg)!important;background-image:none!important}
+  html body main:is(.desktop-home,.native-search-screen,.cs-page,.cn-page,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-favorites-screen,.dz-page,.native-featured-screen)::before{content:none!important;display:none!important}
+
+  /* Cartões sem contorno, sombra suave e cantos de 22px */
+  html body :is(.gss-card,.gss-aside,.official-category-grid>*,.official-professional-grid>*,.official-search-stats>*,.cs-categories a,.ms-org,.cn-feature,.cn-card,.hos-podcast-row,.dz-card,.pf-card,.pf-update,.native-magazine-grid>a){border:0!important;border-radius:var(--md-radius)!important;box-shadow:var(--md-shadow)!important}
+  html body :is(.gss-card,.gss-aside,.official-category-grid>*,.official-professional-grid>*,.official-search-stats>*,.cs-categories a,.ms-org,.cn-feature,.cn-card,.hos-podcast-row,.dz-card,.pf-card,.pf-update){background:var(--md-surface)!important}
+  html body .official-search-hero{border:0!important;box-shadow:var(--md-shadow)!important}
+
+  /* Campos preenchidos, sem contorno */
+  html body :is(.gss-search,.official-search-form,.cs-search,.hos-podcast-search){border:0!important;border-radius:18px!important;background:var(--md-surface)!important;box-shadow:var(--md-shadow)!important}
+
+  /* Etiquetas, abas e filtros com preenchimento suave */
+  html body :is(.gss-tabs a,.official-search-chips a,.cn-topics button,.hos-podcast-chips button,.pf-tags span,.pf-chips span,.gss-card-pills span){border:0!important;background:var(--md-soft)!important;box-shadow:none!important}
+  html body :is(.gss-tabs a.active,.cn-topics button.active,.hos-podcast-chips button.active){background:var(--md-ink)!important;color:#fff!important}
+
+  /* Botões secundários com preenchimento suave */
+  html body :is(.gss-a-see,.gss-card-actions .favorite-control button,.ms-btn-outline,.pf-btn-outline){border:0!important;background:var(--md-soft)!important;box-shadow:none!important}
+  html body .gss-aside :is(select,input[type=text]){border:0!important;background:var(--md-soft)!important}
+
+  /* Hover: o cartão sobe 2px e a sombra cresce */
+  html body :is(.gss-card,.official-category-grid>*,.official-professional-grid>*,.cs-categories a,.ms-org,.cn-feature,.cn-card,.hos-podcast-row,.dz-card,.native-magazine-grid>a){transition:transform .18s ease,box-shadow .18s ease!important}
+  html body :is(.gss-card,.official-category-grid>*,.official-professional-grid>*,.cs-categories a,.ms-org,.cn-feature,.cn-card,.hos-podcast-row,.dz-card,.native-magazine-grid>a):hover{transform:translateY(-2px)!important;box-shadow:var(--md-shadow-lift)!important}
+  html body :is(.pf-btn,.ms-btn,.gss-a-primary,.gss-a-see):active{transform:scale(.97)}
+
+  /* Ícones mais finos */
+  html body main svg.lucide,html body .global-site-header svg.lucide{stroke-width:1.75!important}
+  html body :is(.gss-list,.cs-list,.cn-list,.hos-podcast-list,.dz-list){gap:16px!important}
+}
