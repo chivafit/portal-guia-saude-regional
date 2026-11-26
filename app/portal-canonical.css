@@ -7517,3 +7517,5 @@ html body .pc-feature .pc-photo{width:50%!important;margin-top:20%!important}
 @container (max-width:170px){html body .pc-feature .pc-photo{width:68%!important;margin-top:0!important}}
 html body .hos-podcast-row-play{color:#fff!important}
 html body .hos-podcast-row-play svg{color:#fff!important;fill:#fff!important;opacity:1!important}
+/* Capas padronizadas: as iniciais têm sempre as mesmas cores */
+html body .pc .pc-initials{background:#e4f5ee!important;color:#0b2e28!important}
