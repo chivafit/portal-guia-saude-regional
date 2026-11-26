@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { resolveProfessionalImage } from "@/lib/avatars";
 import { professionals } from "@/lib/data";
 import { publishedProfessionals } from "@/lib/public-directory";
 import { isFeaturedProfessional } from "@/lib/featured-professionals";
@@ -18,23 +19,27 @@ export default async function FeaturedProfessionalsPage() {
   const source = await publishedProfessionals(professionals);
   const featuredProfessionals = source.filter((item) => item.city === "Piumhi" && isFeaturedProfessional(item.slug)).sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
 
-  return <main className="native-featured-screen">
-    <div className="native-search-aura" aria-hidden="true" />
-    <section className="native-featured-shell">
-      <HealthOSSectionHeader eyebrow="SELEÇÃO GUIA SAÚDE" title="Profissionais em destaque" description="Uma seleção editorial de profissionais do Guia Saúde em Piumhi." meta={`${featuredProfessionals.length} destaques`} />
-      <section className="native-featured-list" aria-label="Profissionais em destaque">
+  return <main className="native-featured-screen dz-page">
+    <section className="native-featured-shell dz-shell">
+      <HealthOSSectionHeader eyebrow="Seleção Guia Saúde" title="Profissionais em destaque" description="Uma seleção editorial de profissionais do Guia Saúde em Piumhi." meta={`${featuredProfessionals.length} destaques`} />
+      <section className="dz-list" aria-label="Profissionais em destaque">
         {featuredProfessionals.map((item, index) => {
           const registration = registrationLabel(item.registration);
-          return <Link key={item.slug} href={`/profissionais/${item.slug}`} className="native-featured-card">
-            <span className={`native-featured-avatar${item.imageUrl ? " has-photo" : ""}`} aria-hidden="true">
-              {item.imageUrl ? <ProfessionalImage src={item.imageUrl} sizes="68px" eager={index < 3} /> : item.name.split(" ").filter((word) => !/^dr\.?|^dra\.?$/i.test(word)).slice(0, 2).map((word) => word[0]).join("")}
+          return <Link key={item.slug} href={`/profissionais/${item.slug}`} className="dz-card">
+            <span className="dz-photo" aria-hidden="true">
+              <ProfessionalImage src={resolveProfessionalImage(item.slug, item.imageUrl, item)} sizes="76px" eager={index < 3} />
             </span>
-            <span className="native-featured-info"><small><Sparkles size={11} /> PROFISSIONAL DESTAQUE</small><strong>{item.name}</strong><em>{item.specialty}</em>{item.organization ? <span>{item.organization}</span> : null}{registration ? <span>{registration}</span> : null}</span>
-            <span className="native-featured-arrow"><ArrowRight size={17} /></span>
+            <span className="dz-info">
+              <small>{item.specialty || item.profession}</small>
+              <strong>{item.name}</strong>
+              {registration ? <span>{registration}</span> : null}
+              {item.organization ? <em>{item.organization}</em> : null}
+            </span>
+            <ArrowRight className="dz-arrow" size={18} aria-hidden="true" />
           </Link>;
         })}
       </section>
-      <Link className="native-featured-all" href="/buscar?cidade=piumhi&tipo=professionals">Explorar todos os profissionais <ArrowRight size={15} /></Link>
+      <Link className="dz-all" href="/buscar?cidade=piumhi&tipo=professionals">Ver todos os profissionais <ArrowRight size={16} /></Link>
     </section>
   </main>;
 }

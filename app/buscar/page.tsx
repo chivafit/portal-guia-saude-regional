@@ -49,6 +49,7 @@ function SearchDirectory(){
  const visibleOrganizations=organizationResults.slice(0,visibleCount);
  const desktop=<div className="gss"><div className="gss-inner">
    <nav className="gss-crumb"><Link href="/">Início</Link><span aria-hidden="true">/</span><span>{crumbLabel}</span></nav>
+   <h1 className="gss-title">{q?`Resultados para “${q}”`:crumbLabel}</h1>
    <form className="gss-search" action="/buscar" role="search"><input type="hidden" name="cidade" value="piumhi"/>{typeParam?<input type="hidden" name="tipo" value={typeParam}/>:null}<span className="gss-search-field"><Search size={20}/><input name="q" defaultValue={q} placeholder="O que você procura?" aria-label="Buscar" autoComplete="off" enterKeyHint="search"/></span><span className="gss-search-div" aria-hidden="true"/><span className="gss-search-city"><MapPin size={17}/> Piumhi <ChevronDown size={15}/></span><button type="submit">Buscar</button></form>
    <nav className="gss-tabs" aria-label="Modalidade de busca"><Link href="/buscar?cidade=piumhi&tipo=professionals" className={type==="profissionais"?"active":""}>Profissionais</Link><Link href="/buscar?cidade=piumhi&tipo=services" className={clinicsActive?"active":""}>Clínicas</Link><Link href="/buscar?categoria=farmacias&cidade=piumhi&tipo=services" className={pharmacyActive?"active":""}>Farmácias</Link><Link href="/buscar?q=exames&cidade=piumhi&tipo=services" className={examsActive?"active":""}>Exames</Link></nav>
    <div className="gss-layout">
