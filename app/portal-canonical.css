@@ -7519,3 +7519,49 @@ html body .hos-podcast-row-play{color:#fff!important}
 html body .hos-podcast-row-play svg{color:#fff!important;fill:#fff!important;opacity:1!important}
 /* Capas padronizadas: as iniciais têm sempre as mesmas cores */
 html body .pc .pc-initials{background:#e4f5ee!important;color:#0b2e28!important}
+/* ==========================================================================
+   Barra de navegação inferior (AppBottomNav), 2026-11: presa à borda de baixo,
+   de ponta a ponta e com fundo sólido, como as barras de abas do iOS e do Android.
+   Antes flutuava, translúcida, e cobria cartões e botões. O corpo da página reserva
+   a altura da barra, então o fim do conteúdo nunca fica escondido.
+   ========================================================================== */
+@media (max-width:900px){
+  :root{--gs-tabbar-h:64px}
+  html body nav.app-bottom-nav.health-os-dock.hos-navbar.gsm-dock,
+  html.native-app body nav.app-bottom-nav.health-os-dock.hos-navbar.gsm-dock{
+    position:fixed!important;left:0!important;right:0!important;bottom:0!important;top:auto!important;z-index:1000!important;
+    display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:stretch!important;gap:0!important;
+    width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;margin:0!important;
+    padding:4px 4px calc(4px + env(safe-area-inset-bottom))!important;
+    border:0!important;border-top:1px solid #dcebe5!important;border-radius:0!important;
+    background:#fff!important;box-shadow:0 -4px 16px rgba(11,46,40,.06)!important;
+    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transform:none!important;overflow:visible!important}
+  html body nav.app-bottom-nav.gsm-dock::before,html body nav.app-bottom-nav.gsm-dock::after,
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item::before,html body nav.app-bottom-nav.gsm-dock .hos-nav-item::after,
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-icon::before,html body nav.app-bottom-nav.gsm-dock .hos-nav-icon::after{content:none!important;display:none!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item{
+    position:relative!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;
+    min-width:0!important;width:auto!important;height:auto!important;min-height:56px!important;margin:0!important;padding:4px 0!important;
+    border:0!important;border-radius:12px!important;background:none!important;box-shadow:none!important;transform:none!important;
+    color:#5e7671!important;text-decoration:none!important;-webkit-tap-highlight-color:transparent}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-icon{
+    display:grid!important;place-items:center!important;width:56px!important;height:30px!important;margin:0!important;padding:0!important;
+    border-radius:999px!important;background:none!important;box-shadow:none!important;transform:none!important;color:inherit!important;transition:background-color .15s ease!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-icon svg{width:22px!important;height:22px!important;stroke-width:2!important;color:inherit!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-label{
+    display:block!important;margin:0!important;color:inherit!important;font-size:12px!important;font-weight:600!important;line-height:1.2!important;letter-spacing:0!important;opacity:1!important;transform:none!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item.is-active{color:#0b6e57!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item.is-active .hos-nav-icon{background:#dff3ea!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item.is-active .hos-nav-label{font-weight:800!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item:focus-visible{outline-offset:-3px!important}
+
+  /* Espaço reservado para a barra no fim de toda página que a mostra */
+  html body:has(nav.app-bottom-nav.gsm-dock),html.native-app body:has(nav.app-bottom-nav.gsm-dock){padding-bottom:calc(var(--gs-tabbar-h) + env(safe-area-inset-bottom))!important}
+  html body:has(.pf-page),html body:has(.org-page),html.native-app body:has(.pf-page),html.native-app body:has(.org-page){padding-bottom:0!important}
+  html body main:is(.cs-page,.cn-page,.dz-page,.hos-podcast-page,.native-magazine-screen,.native-article-screen,.gsm-home,.native-search-screen,.native-favorites-screen){padding-bottom:24px!important}
+}
+@media (max-width:900px){
+  /* Perfil e clínica têm a barra de contato no lugar da navegação */
+  html body:is(:has(.pf-page),:has(.org-page)) nav.app-bottom-nav.health-os-dock.hos-navbar.gsm-dock,
+  html.native-app body:is(:has(.pf-page),:has(.org-page)) nav.app-bottom-nav.health-os-dock.hos-navbar.gsm-dock{display:none!important}
+}
