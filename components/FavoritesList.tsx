@@ -22,7 +22,7 @@ export function FavoritesList() {
   if (!favorites.length) {
     return <section className="favorites-empty">
       <div><Heart size={27} /></div>
-      <small>AINDA NÃO HÁ FAVORITOS</small>
+      <small>Ainda não há favoritos</small>
       <h2>Monte sua lista de profissionais</h2>
       <p>Toque no coração de um perfil para encontrá-lo rapidamente depois.</p>
       <Link href="/buscar?cidade=piumhi&tipo=professionals"><Search size={17} /> Encontrar profissionais</Link>
