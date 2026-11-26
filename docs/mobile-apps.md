@@ -57,6 +57,12 @@ Isso copia a versão mais recente do portal para Android e iOS. Ícones ou telas
 npm run app:assets
 ```
 
+## Revista no aplicativo
+
+As páginas da revista não vão no pacote do app: `build:app` as remove (`scripts/strip-app-magazine.mjs`) e o leitor as busca em `https://www.guiasaude.app.br/revista/...`, carregando só a página aberta e as vizinhas. As capas continuam no pacote. Sem internet, o leitor avisa e oferece "Tentar novamente". Uma edição nova publicada no site aparece no app sem nova versão na loja.
+
+Para adicionar uma edição, coloque as páginas (`page-001.jpg`, `page-002.jpg`...) e a capa em `public/revista/`, rode `npm run revista:webp` para convertê-las em WebP e registre a edição em `magazineEditions` (`lib/data.ts`).
+
 ## PWA
 
 O manifesto e o service worker permitem instalar o Guia Saúde pela tela inicial. As páginas já visitadas e os recursos estáticos utilizados ficam disponíveis no cache; quando há conexão, a navegação busca sempre a versão mais recente.

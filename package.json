@@ -13,7 +13,7 @@
     "build": "npm run build:web",
     "build:web": "NEXT_PUBLIC_BUILD_TARGET=web next build && node scripts/strip-admin-routes.mjs && node scripts/apply-public-site.mjs",
     "build:pages": "NEXT_PUBLIC_BUILD_TARGET=app npm run optimize:professional-images && npm run validate:css && npm run validate:directory && npm run validate:search && npm run validate:audit && npm run validate:podcast && NEXT_PUBLIC_BUILD_TARGET=app next build && node --import tsx scripts/export-app-data.ts && node scripts/postbuild-seo.mjs && node --import tsx scripts/validate-public-directory.ts --check-sitemap && node scripts/strip-admin-routes.mjs && node scripts/apply-public-site.mjs",
-    "build:app": "npm run build:pages && npx cap sync",
+    "build:app": "npm run build:pages && node scripts/strip-app-magazine.mjs && npx cap sync",
     "app:sync": "npx cap sync",
     "app:android": "npm run build:app && npx cap open android",
     "app:ios": "npm run build:app && npx cap open ios",
@@ -28,7 +28,8 @@
     "validate:css": "node scripts/validate-css-architecture.mjs",
     "validate:release": "npm run lint && npm run validate:css && npm run validate:professionals && npm run build:pages && npm run validate:seo && node --test tests/*.test.mjs",
     "test": "npm run build:pages && node --test tests/*.test.mjs",
-    "lint": "eslint app components lib scripts tests *.ts *.mjs --no-warn-ignored"
+    "lint": "eslint app components lib scripts tests *.ts *.mjs --no-warn-ignored",
+    "revista:webp": "node scripts/convert-magazine-webp.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.2",
