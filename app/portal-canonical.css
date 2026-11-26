@@ -7119,3 +7119,15 @@ html.native-app .portal-footer{display:none!important}
 .gsm-content strong{overflow:hidden;font-size:15px;line-height:1.3;text-overflow:ellipsis;white-space:nowrap}
 .gsm-content a>svg:last-child{color:#7b928c}
 .gsm-pro-actions .favorite-control button{display:grid;place-items:center;width:44px;height:44px;border:1px solid #dceae5;border-radius:12px;background:#fff;color:#0d2e29}
+
+/* Clínicas e serviços (/empresas): categorias visíveis, fonte do site e logo */
+@media (min-width:761px){
+  .company-directory-page .company-category-grid{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))!important;gap:12px!important;overflow:visible!important;max-height:none!important}
+  .company-directory-page .company-category-grid>*{min-height:0!important;height:auto!important;padding:16px 18px!important}
+  .company-directory-page .company-category-grid svg{flex:none!important}
+}
+.company-directory-page h1,.company-directory-page h2,.company-directory-page .result-toolbar strong,.company-directory-page .result-toolbar h2{font-family:inherit!important;letter-spacing:-.02em!important}
+.company-directory-page .business-logo{background-color:#eaf6f1!important;background-size:70% auto!important;background-position:center!important;background-repeat:no-repeat!important}
+.company-directory-page .direct-contact-btn svg{display:inline-block!important;opacity:1!important;visibility:visible!important}
+.company-results .business-head h2{font-family:inherit!important;font-weight:750!important}
+.company-results .business-logo{display:none!important}
