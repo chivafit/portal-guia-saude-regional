@@ -1,9 +1,16 @@
 <svg width="1200" height="520" viewBox="0 0 1200 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="520" rx="44" fill="#F7FAFB"/>
-  <rect x="86" y="96" width="410" height="308" rx="32" fill="#DDE9EF"/>
-  <rect x="548" y="126" width="566" height="52" rx="26" fill="#24465B"/>
-  <rect x="548" y="214" width="430" height="34" rx="17" fill="#9CB2BE"/>
-  <rect x="548" y="278" width="330" height="34" rx="17" fill="#C8D8DF"/>
-  <circle cx="384" cy="142" r="86" fill="#D97842" opacity=".75"/>
-  <text x="548" y="386" fill="#7B8E99" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="6">CAPA / CONSULTÓRIO</text>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1200" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E6F5EF"/>
+      <stop offset="1" stop-color="#CFEBE1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="520" rx="44" fill="url(#g)"/>
+  <circle cx="1010" cy="96" r="210" fill="#FFFFFF" fill-opacity=".35"/>
+  <circle cx="170" cy="470" r="160" fill="#0F8A6E" fill-opacity=".08"/>
+  <g transform="translate(540 200)" stroke="#0F8A6E" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity=".55">
+    <path d="M10 130V24a14 14 0 0 1 14-14h72a14 14 0 0 1 14 14v106"/>
+    <path d="M-10 130h140"/>
+    <path d="M60 36v40M40 56h40"/>
+  </g>
 </svg>

@@ -68,9 +68,22 @@ function publicRegistration(registration: string) {
   const clean = registration
     .replace(/\s*·\s*[^·]*(a validar|aguardando validação|pendente de confirmação|a confirmar)[^·]*/gi, "")
     .trim();
-  // Siglas isoladas (por exemplo, "CRM-MG") não são registro profissional
-  // confirmado e não podem aparecer como se fossem um número de conselho.
-  return /\d/.test(clean) ? clean : "";
+  // Siglas isoladas (por exemplo, "CRM-MG" ou "CRN-9", em que 9 é a região)
+  // não são registro confirmado e não podem aparecer como número de conselho.
+  return /\d{3,}/.test(clean) ? clean : "";
+}
+
+const lowercaseWords = new Set(["de", "da", "das", "do", "dos", "e", "em"]);
+
+/** Padroniza maiúsculas: "Psicologia clínica" e "Psicologia Clínica" viram a mesma especialidade. */
+export function publicSpecialty(value: string) {
+  return value
+    .trim()
+    .split(/\s+/)
+    .map((word, index) => index > 0 && lowercaseWords.has(word.toLocaleLowerCase("pt-BR"))
+      ? word.toLocaleLowerCase("pt-BR")
+      : word.charAt(0).toLocaleUpperCase("pt-BR") + word.slice(1))
+    .join(" ");
 }
 
 function publicOrganization(organization: string) {
@@ -198,6 +211,7 @@ export function publicProfessional(item: Professional): Professional {
   return {
     ...visible,
     registration: publicRegistration(item.registration),
+    specialty: publicSpecialty(item.specialty),
     organization: publicOrganization(item.organization),
     // A interface pública só expõe contatos com titularidade de local clara.
     // phone/whatsapp ficam vazios até haver confirmação de contato pessoal.

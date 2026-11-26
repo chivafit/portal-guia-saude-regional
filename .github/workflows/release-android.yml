@@ -1,0 +1,82 @@
+name: Gerar Android para a Play Store
+
+# Gera o Android App Bundle (AAB) assinado para enviar à Play Console.
+# Roda manualmente (aba Actions → "Gerar Android para a Play Store" → Run workflow).
+#
+# Segredos necessários (Settings → Secrets and variables → Actions):
+#   ANDROID_KEYSTORE_BASE64   conteúdo do arquivo .jks em base64
+#   ANDROID_KEYSTORE_PASSWORD senha do keystore
+#   ANDROID_KEY_ALIAS         alias da chave
+#   ANDROID_KEY_PASSWORD      senha da chave
+on:
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: "Versão exibida na loja (ex.: 1.0.0)"
+        required: true
+        default: "1.0.0"
+
+permissions:
+  contents: read
+
+jobs:
+  aab:
+    name: AAB assinado
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Conferir segredos de assinatura
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$KEYSTORE" ]; then
+            echo "::error::Cadastre os segredos ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS e ANDROID_KEY_PASSWORD."
+            exit 1
+          fi
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Preparar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Preparar Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Gerar e sincronizar o portal
+        run: npm run build:app
+
+      - name: Compilar AAB assinado
+        working-directory: android
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_VERSION_CODE: ${{ github.run_number }}
+          ANDROID_VERSION_NAME: ${{ inputs.version_name }}
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          export ANDROID_KEYSTORE_PATH="$RUNNER_TEMP/release.jks"
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$ANDROID_KEYSTORE_PATH"
+          ./gradlew bundleRelease
+          rm -f "$ANDROID_KEYSTORE_PATH"
+
+      - name: Publicar AAB para download
+        uses: actions/upload-artifact@v4
+        with:
+          name: guia-saude-play-store-${{ inputs.version_name }}-${{ github.run_number }}
+          path: android/app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+          retention-days: 30

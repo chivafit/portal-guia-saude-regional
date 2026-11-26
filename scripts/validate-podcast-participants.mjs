@@ -22,8 +22,8 @@ for (const relative of runtimeFiles) {
   for (const match of source.matchAll(/slug:\s*"([^"]+)"/g)) allRuntimeSlugs.add(match[1]);
 }
 
-const podcastsBlock = dataSource.match(/export const podcasts:\s*PodcastEpisode\[\]\s*=\s*\[([\s\S]*?)\n\];/);
-if (!podcastsBlock) throw new Error("Não foi possível localizar a coleção podcasts em lib/data.ts");
+const podcastsBlock = dataSource.match(/const editorialPodcasts:\s*PodcastEpisode\[\]\s*=\s*\[([\s\S]*?)\n\];/);
+if (!podcastsBlock) throw new Error("Não foi possível localizar a coleção editorialPodcasts em lib/data.ts");
 
 const episodeSlugs = [...podcastsBlock[1].matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
 const mappedEpisodeSlugs = new Set([...guestSource.matchAll(/^\s*"([^"]+)":\s*\[/gm)].map((match) => match[1]));
