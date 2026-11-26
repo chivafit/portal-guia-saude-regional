@@ -32,8 +32,13 @@ export function initialsFor(name: string) {
   return `${first}${last}`.toLocaleUpperCase("pt-BR");
 }
 
+/** Cores da área de atuação (fundo claro e texto), usadas nas iniciais. */
+export function paletteFor(profession = ""): Palette {
+  return palettes.find((item) => item.match.test(profession))?.palette ?? neutralPalette;
+}
+
 export function initialsAvatar(name: string, profession = ""): string {
-  const { background, text } = palettes.find((item) => item.match.test(profession))?.palette ?? neutralPalette;
+  const { background, text } = paletteFor(profession);
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" data-kind="${GENERATED_MARK}"><rect width="160" height="160" fill="${background}"/><text x="80" y="80" dy="0.35em" text-anchor="middle" font-family="Inter Tight, Inter, Helvetica, Arial, sans-serif" font-size="60" font-weight="700" letter-spacing="-1" fill="${text}">${initialsFor(name)}</text></svg>`;
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }

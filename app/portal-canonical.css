@@ -7111,7 +7111,7 @@ html.native-app .portal-footer{display:none!important}
 .gsm-content{display:grid;gap:10px}
 .gsm-content a{display:grid;grid-template-columns:40px minmax(0,1fr) 16px;gap:12px;align-items:center;padding:14px;border:1px solid #dceae5;border-radius:20px;background:#fff;color:#0d2e29;text-decoration:none}
 .gsm-content a>svg:first-child{display:grid;width:40px;height:40px;padding:10px;border-radius:12px;background:#e9f6f1;color:#0b7f65}
-.gsm-content span{display:flex;min-width:0;flex-direction:column;gap:2px}
+.gsm-content a>span:not(.gsm-pod-cover){display:flex;min-width:0;flex-direction:column;gap:2px}
 .gsm-content small{color:#0b7f65;font-size:12px;font-weight:700}
 .gsm-content strong{overflow:hidden;font-size:15px;line-height:1.3;text-overflow:ellipsis;white-space:nowrap}
 .gsm-content a>svg:last-child{color:#7b928c}
@@ -7483,3 +7483,85 @@ html body .ms-specialties a{min-width:0;padding:12px!important}
 html body .ms-specialties strong{font-size:13px!important;letter-spacing:-.01em}
 html body .ms-specialties a{padding:12px 10px!important}
 @media (max-width:380px){html body .ms-specialties strong{font-size:12px!important}html body .ms-specialties{gap:8px!important}}
+
+/* ==========================================================================
+   Capa padrão do Conexão Saúde (components/podcast/PodcastCover.tsx).
+   Ocupa o espaço da arte (botão da lista ou do destaque).
+   ========================================================================== */
+html body :is(.hos-podcast-feature-art,.hos-podcast-row-art){padding:0!important;border:0!important;background:none!important;overflow:hidden!important}
+.pc{position:relative;display:grid;place-items:center;width:100%;height:100%;aspect-ratio:1;overflow:hidden;border-radius:inherit;background:linear-gradient(150deg,#0f3d35 0%,#0b2e28 55%,#082520 100%);isolation:isolate}
+.pc-glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 88% 8%,rgba(217,255,72,.55),transparent 38%),radial-gradient(circle at 8% 100%,rgba(0,209,198,.32),transparent 45%)}
+.pc-glow::after{content:"";position:absolute;right:-18%;bottom:-18%;width:70%;aspect-ratio:1;border:1.5px solid rgba(217,255,72,.28);border-radius:50%}
+.pc-photo{position:relative;display:block;width:68%;aspect-ratio:1;overflow:hidden;border-radius:50%;box-shadow:0 0 0 3px #d9ff48,0 10px 24px rgba(0,0,0,.28);background:#dff1ea}
+.pc-photo img{width:100%;height:100%;object-fit:cover;object-position:center 18%}
+.pc-initials{display:grid;place-items:center;width:100%;height:100%;font-family:var(--gs-font-body);font-weight:800;letter-spacing:-.02em;font-size:clamp(16px,24cqw,64px)}
+.pc{container-type:inline-size}
+.pc-initials{font-size:24cqw}
+.pc-badge{position:absolute;right:8%;bottom:8%;display:grid;place-items:center;width:24%;max-width:44px;min-width:20px;aspect-ratio:1;border-radius:30%;background:#d9ff48;color:#0b2e28;box-shadow:0 4px 12px rgba(0,0,0,.22)}
+.pc-row .pc-photo{width:72%;box-shadow:0 0 0 2px #d9ff48,0 6px 14px rgba(0,0,0,.25)}
+.pc-row .pc-badge{right:5%;bottom:5%;width:30%}
+.pc-feature .pc-photo{width:58%;margin-top:10%}
+.pc-brand{position:absolute;left:9%;top:8%;color:#fff;font-family:var(--gs-font-serif);font-size:clamp(13px,8.5cqw,24px);font-weight:700;line-height:1.05;letter-spacing:-.01em}
+.pc-brand::before{content:"";display:block;width:22%;min-width:14px;height:3px;margin-bottom:8%;border-radius:3px;background:#d9ff48}
+/* Capa do podcast nos atalhos (início e Conteúdos) */
+html body .gsm-pod-cover{display:block;flex:none;width:44px;height:44px;border-radius:12px;overflow:hidden}
+html body .cn-listen-icon{padding:0!important;overflow:hidden!important;background:none!important}
+/* A capa resiste às regras antigas do cartão do podcast (cores e tamanhos com !important) */
+html body .pc .pc-initials{display:grid!important;place-items:center!important;width:100%!important;height:100%!important;background:var(--pc-bg,#e3eef0)!important;color:var(--pc-fg,#355c66)!important;font-size:24cqw!important;font-weight:800!important;line-height:1!important}
+html body .pc .pc-badge{background:#d9ff48!important;color:#0b2e28!important}
+html body .pc .pc-badge svg{width:55%!important;height:55%!important;color:#0b2e28!important;opacity:1!important}
+html body .pc .pc-brand{color:#fff!important;font-size:clamp(13px,8.5cqw,24px)!important;font-family:var(--gs-font-serif)!important}
+@container (max-width:170px){.pc-feature .pc-brand{display:none}.pc-feature .pc-photo{width:68%;margin-top:0}}
+html body .gsm-content a>svg:first-child{box-sizing:border-box!important;width:40px!important;height:40px!important;padding:10px!important;border-radius:12px!important;background:#e9f6f1!important;color:#0b7f65!important}
+html body .pc-feature .pc-photo{width:50%!important;margin-top:20%!important}
+@container (max-width:170px){html body .pc-feature .pc-photo{width:68%!important;margin-top:0!important}}
+html body .hos-podcast-row-play{color:#fff!important}
+html body .hos-podcast-row-play svg{color:#fff!important;fill:#fff!important;opacity:1!important}
+/* Capas padronizadas: as iniciais têm sempre as mesmas cores */
+html body .pc .pc-initials{background:#e4f5ee!important;color:#0b2e28!important}
+/* ==========================================================================
+   Barra de navegação inferior (AppBottomNav), 2026-11: presa à borda de baixo,
+   de ponta a ponta e com fundo sólido, como as barras de abas do iOS e do Android.
+   Antes flutuava, translúcida, e cobria cartões e botões. O corpo da página reserva
+   a altura da barra, então o fim do conteúdo nunca fica escondido.
+   ========================================================================== */
+@media (max-width:900px){
+  :root{--gs-tabbar-h:64px}
+  html body nav.app-bottom-nav.health-os-dock.hos-navbar.gsm-dock,
+  html.native-app body nav.app-bottom-nav.health-os-dock.hos-navbar.gsm-dock{
+    position:fixed!important;left:0!important;right:0!important;bottom:0!important;top:auto!important;z-index:1000!important;
+    display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:stretch!important;gap:0!important;
+    width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;margin:0!important;
+    padding:4px 4px calc(4px + env(safe-area-inset-bottom))!important;
+    border:0!important;border-top:1px solid #dcebe5!important;border-radius:0!important;
+    background:#fff!important;box-shadow:0 -4px 16px rgba(11,46,40,.06)!important;
+    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transform:none!important;overflow:visible!important}
+  html body nav.app-bottom-nav.gsm-dock::before,html body nav.app-bottom-nav.gsm-dock::after,
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item::before,html body nav.app-bottom-nav.gsm-dock .hos-nav-item::after,
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-icon::before,html body nav.app-bottom-nav.gsm-dock .hos-nav-icon::after{content:none!important;display:none!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item{
+    position:relative!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;
+    min-width:0!important;width:auto!important;height:auto!important;min-height:56px!important;margin:0!important;padding:4px 0!important;
+    border:0!important;border-radius:12px!important;background:none!important;box-shadow:none!important;transform:none!important;
+    color:#5e7671!important;text-decoration:none!important;-webkit-tap-highlight-color:transparent}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-icon{
+    display:grid!important;place-items:center!important;width:56px!important;height:30px!important;margin:0!important;padding:0!important;
+    border-radius:999px!important;background:none!important;box-shadow:none!important;transform:none!important;color:inherit!important;transition:background-color .15s ease!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-icon svg{width:22px!important;height:22px!important;stroke-width:2!important;color:inherit!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-label{
+    display:block!important;margin:0!important;color:inherit!important;font-size:12px!important;font-weight:600!important;line-height:1.2!important;letter-spacing:0!important;opacity:1!important;transform:none!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item.is-active{color:#0b6e57!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item.is-active .hos-nav-icon{background:#dff3ea!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item.is-active .hos-nav-label{font-weight:800!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item:focus-visible{outline-offset:-3px!important}
+
+  /* Espaço reservado para a barra no fim de toda página que a mostra */
+  html body:has(nav.app-bottom-nav.gsm-dock),html.native-app body:has(nav.app-bottom-nav.gsm-dock){padding-bottom:calc(var(--gs-tabbar-h) + env(safe-area-inset-bottom))!important}
+  html body:has(.pf-page),html body:has(.org-page),html.native-app body:has(.pf-page),html.native-app body:has(.org-page){padding-bottom:0!important}
+  html body main:is(.cs-page,.cn-page,.dz-page,.hos-podcast-page,.native-magazine-screen,.native-article-screen,.gsm-home,.native-search-screen,.native-favorites-screen){padding-bottom:24px!important}
+}
+@media (max-width:900px){
+  /* Perfil e clínica têm a barra de contato no lugar da navegação */
+  html body:is(:has(.pf-page),:has(.org-page)) nav.app-bottom-nav.health-os-dock.hos-navbar.gsm-dock,
+  html.native-app body:is(:has(.pf-page),:has(.org-page)) nav.app-bottom-nav.health-os-dock.hos-navbar.gsm-dock{display:none!important}
+}

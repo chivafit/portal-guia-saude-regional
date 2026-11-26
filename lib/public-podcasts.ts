@@ -9,15 +9,23 @@ export const publicPodcasts: PodcastEpisode[] = podcasts.map((episode) => ({
   professionalSlugs: professionalSlugsForEpisode(episode),
 }));
 
-/** Lista exibida na página do podcast: usa a foto do perfil do convidado quando existe. */
-export function podcastCatalogEpisodes(): PodcastEpisode[] {
+/** Lista exibida na página do podcast: usa a foto do perfil do convidado quando existe.
+ *  `guestPhoto` só recebe foto real (nunca a miniatura do YouTube): é ela que entra na
+ *  capa padrão do Conexão Saúde (components/podcast/PodcastCover.tsx). */
+export function podcastCatalogEpisodes(): (PodcastEpisode & { guestPhoto?: string; guestArea?: string })[] {
   const professionalImages = new Map(
     publicProfessionals
       .filter((professional) => !isGeneratedImage(professional.imageUrl))
       .map((professional) => [professional.slug, professional.imageUrl as string]),
   );
-  return publicPodcasts.map((episode) => ({
-    ...episode,
-    imageUrl: episode.professionalSlugs?.map((slug) => professionalImages.get(slug)).find(Boolean) ?? episode.imageUrl,
-  }));
+  const professionalAreas = new Map(publicProfessionals.map((professional) => [professional.slug, professional.specialty || professional.profession]));
+  return publicPodcasts.map((episode) => {
+    const guestPhoto = episode.professionalSlugs?.map((slug) => professionalImages.get(slug)).find(Boolean);
+    return {
+      ...episode,
+      imageUrl: guestPhoto ?? episode.imageUrl,
+      guestPhoto,
+      guestArea: episode.role || episode.professionalSlugs?.map((slug) => professionalAreas.get(slug)).find(Boolean) || "",
+    };
+  });
 }

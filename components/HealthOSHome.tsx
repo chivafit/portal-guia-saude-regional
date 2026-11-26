@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, Building2, FlaskConical, Headphones, MapPin, MessageCircle, Newspaper, Phone, Pill, Search, Stethoscope } from "lucide-react";
+import { ArrowRight, BookOpen, Building2, FlaskConical, MapPin, MessageCircle, Newspaper, Phone, Pill, Search, Stethoscope } from "lucide-react";
 import { publishedProfessionals } from "@/lib/public-directory";
-import { articles, magazineEditions, podcasts, professionals } from "@/lib/data";
+import { articles, magazineEditions, professionals } from "@/lib/data";
+import { podcastCatalogEpisodes } from "@/lib/public-podcasts";
+import { PodcastCover } from "@/components/podcast/PodcastCover";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { isFeaturedProfessional } from "@/lib/featured-professionals";
 import { GuiaSaudeLogo } from "@/components/GuiaSaudeLogo";
@@ -40,7 +42,7 @@ function directContact(whatsapp?: string, phone?: string) {
 export async function HealthOSHome() {
   const source = await publishedProfessionals(professionals);
   const featured = source.filter((item) => item.city === "Piumhi" && isFeaturedProfessional(item.slug)).slice(0, 2);
-  const latestEpisode = podcasts.find((episode) => episode.episodeUrl || episode.audioUrl);
+  const latestEpisode = podcastCatalogEpisodes().find((episode) => episode.episodeUrl || episode.audioUrl);
   const latestEdition = magazineEditions.find((edition) => edition.flipbook);
   const latestArticle = articles[0];
   return <main className="gsm-home">
@@ -92,7 +94,7 @@ export async function HealthOSHome() {
         <Link href="/materias">Ver conteúdos</Link>
       </div>
       <nav className="gsm-content" aria-label="Conteúdos do Guia Saúde">
-        {latestEpisode ? <Link href="/podcast"><Headphones size={20} /><span><small>Podcast · episódio novo</small><strong>{latestEpisode.topic}</strong></span><ArrowRight size={16} /></Link> : null}
+        {latestEpisode ? <Link href={`/podcast?episodio=${encodeURIComponent(latestEpisode.slug)}`}><span className="gsm-pod-cover"><PodcastCover episode={latestEpisode} /></span><span><small>Podcast · episódio novo</small><strong>{latestEpisode.topic}</strong></span><ArrowRight size={16} /></Link> : null}
         {latestEdition ? <Link href={`/revista/${latestEdition.slug}`}><BookOpen size={20} /><span><small>Revista · {latestEdition.number} edição</small><strong>{latestEdition.title}</strong></span><ArrowRight size={16} /></Link> : null}
         {latestArticle ? <Link href={`/materias/${latestArticle.slug}`}><Newspaper size={20} /><span><small>Matéria · {latestArticle.category}</small><strong>{latestArticle.title}</strong></span><ArrowRight size={16} /></Link> : null}
       </nav>
