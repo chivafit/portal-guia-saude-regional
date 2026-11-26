@@ -1,7 +1,9 @@
 // Busca episódios novos do podcast Conexão Saúde no canal da Rede Megga no YouTube
-// e grava em lib/data/podcast-youtube.json. Roda todo dia pelo workflow
-// .github/workflows/sync-podcasts.yml; o commit no main faz a Vercel republicar o site,
-// e o app lê a lista atualizada em /app-data/podcasts.json.
+// e grava em lib/data/podcast-youtube.json.
+// - Em cada deploy da Vercel (build:pages chama com --build): o site sai com os episódios
+//   novos sem precisar de commit. Um Deploy Hook diário mantém a lista em dia (docs/podcast.md).
+// - Manualmente (npm run podcast:sync): grava o arquivo para fazer commit.
+// O app lê a lista atualizada em /app-data/podcasts.json.
 //
 // O feed público do YouTube não exige chave e traz os 15 vídeos mais recentes.
 // Episódios cadastrados à mão em lib/data.ts têm prioridade: um vídeo que já está lá
@@ -111,21 +113,50 @@ export function mergeFeed(current, feedEntries, editorial) {
   return { episodes: [...added, ...current].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)), added };
 }
 
+// Lista de episódios automáticos já publicada no site (gerada por scripts/export-app-data.ts).
+// Serve de memória entre um deploy e outro: o feed só traz os 15 vídeos mais recentes.
+const PUBLISHED_URL = "https://www.guiasaude.app.br/app-data/podcast-youtube.json";
+
+async function fetchPublished() {
+  try {
+    const response = await fetch(PUBLISHED_URL, { signal: AbortSignal.timeout(10000) });
+    if (!response.ok) return [];
+    const data = await response.json();
+    return Array.isArray(data) ? data.filter((item) => item?.videoId && item?.guest && item?.publishedAt) : [];
+  } catch {
+    return [];
+  }
+}
+
 async function main() {
-  const response = await fetch(FEED_URL, { headers: { "User-Agent": "guia-saude-podcast-sync" } });
+  const response = await fetch(FEED_URL, { headers: { "User-Agent": "guia-saude-podcast-sync" }, signal: AbortSignal.timeout(15000) });
   if (!response.ok) throw new Error(`Feed do YouTube respondeu ${response.status}.`);
   const feed = parseFeed(await response.text());
   if (!feed.length) throw new Error("Feed do YouTube sem vídeos — formato inesperado.");
-  const current = JSON.parse(await readFile(DATA_FILE, "utf8"));
+  const committed = JSON.parse(await readFile(DATA_FILE, "utf8"));
+  const published = await fetchPublished();
+  const current = [...committed, ...published.filter((item) => !committed.some((known) => known.videoId === item.videoId))];
   const editorial = editorialEpisodes(await readFile(EDITORIAL_FILE, "utf8"));
   const { episodes, added } = mergeFeed(current, feed, editorial);
-  if (!added.length) {
+  const restored = current.length - committed.length;
+  if (!added.length && !restored) {
     console.log("Podcast: nenhum episódio novo no YouTube.");
     return;
   }
   await writeFile(DATA_FILE, `${JSON.stringify(episodes, null, 2)}\n`);
   for (const episode of added) console.log(`+ ${episode.publishedAt} ${episode.guest} (${episode.videoId})`);
-  console.log(`Podcast: ${added.length} episódio(s) novo(s).`);
+  console.log(`Podcast: ${added.length} episódio(s) novo(s)${restored ? `, ${restored} mantido(s) do site publicado` : ""}.`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) await main();
+// --build: chamado pelo build da Vercel. Só roda no deploy (VERCEL=1) ou com SYNC_PODCASTS=1,
+// e nunca interrompe o build: sem YouTube, o site sai com os episódios que já conhece.
+const buildMode = process.argv.includes("--build");
+if (import.meta.url === `file://${process.argv[1]}`) {
+  if (buildMode && process.env.VERCEL !== "1" && process.env.SYNC_PODCASTS !== "1") {
+    console.log("Podcast: sincronização ignorada (fora do deploy da Vercel).");
+  } else if (buildMode) {
+    await main().catch((error) => console.warn(`Podcast: sincronização indisponível agora (${error.message}). Seguindo com a lista atual.`));
+  } else {
+    await main();
+  }
+}

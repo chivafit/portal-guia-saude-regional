@@ -92,5 +92,5 @@ O pacote do app traz todos os perfis, mas os dados de cada perfil (contatos, Wha
 - No site, nada muda: a página já é gerada a cada deploy.
 - Para corrigir um perfil: altere os dados em `lib/data`, faça o merge e aguarde o deploy da Vercel. Os aplicativos passam a mostrar a correção sem enviar nova versão às lojas.
 - Perfis novos ainda precisam de nova versão do app para ganhar página própria. Matérias continuam dentro do pacote.
-- Podcast: a lista vem de `/app-data/podcasts.json`; episódios novos do YouTube entram sozinhos (workflow `sync-podcasts.yml`).
+- Podcast: a lista vem de `/app-data/podcasts.json`; episódios novos do YouTube entram a cada deploy da Vercel (ver [sem-github-actions.md](sem-github-actions.md)).
 - Revista: as páginas são lidas do site (ver "Revista no aplicativo").

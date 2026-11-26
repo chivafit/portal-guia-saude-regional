@@ -7,6 +7,7 @@ import { publicProfessionals } from "../lib/public-directory";
 import { buildProfileView, type ProfileView } from "../lib/profile-view";
 import { professionalRedirects } from "../lib/professional-redirects";
 import { podcastCatalogEpisodes } from "../lib/public-podcasts";
+import { readFile } from "node:fs/promises";
 
 const profiles: Record<string, ProfileView> = {};
 for (const item of publicProfessionals) profiles[item.slug] = buildProfileView(item);
@@ -21,3 +22,5 @@ console.log(`→ app-data/profiles.json: ${Object.keys(profiles).length} perfis,
 const episodes = podcastCatalogEpisodes();
 await writeFile(new URL("podcasts.json", outDir), JSON.stringify({ generatedAt: new Date().toISOString(), episodes }));
 console.log(`→ app-data/podcasts.json: ${episodes.length} episódios`);
+// Memória dos episódios trazidos do YouTube: o próximo deploy lê este arquivo do site publicado.
+await writeFile(new URL("podcast-youtube.json", outDir), await readFile(new URL("../lib/data/podcast-youtube.json", import.meta.url), "utf8"));

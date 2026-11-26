@@ -10,7 +10,7 @@
     "predev": "npm run optimize:professional-images",
     "dev": "next dev",
     "build": "npm run build:pages",
-    "build:pages": "npm run optimize:professional-images && npm run validate:css && npm run validate:directory && npm run validate:search && npm run validate:audit && npm run validate:podcast && next build && node --import tsx scripts/export-app-data.ts && node scripts/postbuild-seo.mjs && node --import tsx scripts/validate-public-directory.ts --check-sitemap && node scripts/strip-admin-routes.mjs && node scripts/apply-public-site.mjs",
+    "build:pages": "node scripts/sync-youtube-podcasts.mjs --build && npm run lint && npm run optimize:professional-images && npm run validate:css && npm run validate:directory && npm run validate:search && npm run validate:audit && npm run validate:podcast && next build && node --import tsx scripts/export-app-data.ts && node scripts/postbuild-seo.mjs && node --import tsx scripts/validate-public-directory.ts --check-sitemap && node scripts/strip-admin-routes.mjs && node scripts/apply-public-site.mjs && npm run validate:seo && node --test tests/*.test.mjs",
     "build:app": "npm run build:pages && node scripts/strip-app-magazine.mjs && npx cap sync",
     "app:sync": "npx cap sync",
     "app:android": "npm run build:app && npx cap open android",
@@ -24,10 +24,13 @@
     "validate:podcast": "node scripts/validate-podcast-participants.mjs",
     "validate:audit": "node --import tsx scripts/validate-directory-audit.ts",
     "validate:css": "node scripts/validate-css-architecture.mjs",
-    "validate:release": "npm run lint && npm run validate:css && npm run validate:professionals && npm run build:pages && npm run validate:seo && node --test tests/*.test.mjs",
-    "test": "npm run build:pages && node --test tests/*.test.mjs",
+    "validate:release": "npm run validate:professionals && npm run build:pages",
+    "test": "npm run build:pages",
     "lint": "eslint app components lib scripts tests *.ts *.mjs --no-warn-ignored",
-    "revista:webp": "node scripts/convert-magazine-webp.mjs"
+    "revista:webp": "node scripts/convert-magazine-webp.mjs",
+    "podcast:sync": "node scripts/sync-youtube-podcasts.mjs",
+    "app:android:apk": "npm run build:app && cd android && ./gradlew assembleDebug",
+    "app:android:release": "npm run build:app && cd android && ./gradlew bundleRelease"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.2",

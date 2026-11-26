@@ -3,9 +3,9 @@ name: Sincronizar podcasts do YouTube
 # Todo dia, busca episódios novos do Conexão Saúde no canal da Rede Megga.
 # Se houver, grava em lib/data/podcast-youtube.json e faz commit no main;
 # a Vercel republica o site e o app passa a mostrar o episódio novo.
+# GitHub Actions desativado por enquanto (sem plano pago): roda só manualmente, pela aba Actions.
+# O site é validado e publicado pela Vercel (build:pages); ver docs/sem-github-actions.md.
 on:
-  schedule:
-    - cron: "17 10,22 * * *" # 07:17 e 19:17 em Brasília
   workflow_dispatch:
 
 permissions:
