@@ -52,7 +52,7 @@ export function CitySelector() {
       <div className="city-selector-menu">
         {cities.map((city) => (
           <button type="button" key={city} disabled={!isCityAvailable(city)} onClick={() => applyCity(city)} className={selectedCity === city ? "active" : ""}>
-            <span>{city}</span>{!isCityAvailable(city) ? <small>EM BREVE</small> : null}
+            <span>{city}</span>{!isCityAvailable(city) ? <small>Em breve</small> : null}
           </button>
         ))}
         <Link href={selectedSlug ? "/" : "/buscar"}>{selectedSlug ? "Abrir Guia Saúde" : "Abrir busca"}</Link>

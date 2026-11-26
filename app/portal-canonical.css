@@ -7136,15 +7136,15 @@ html.native-app .portal-footer{display:none!important}
 
 /* ==========================================================================
    Base de design do Guia Saúde (tokens).
-   Fontes: Inter Tight nos textos e títulos de seção; Libre Baskerville (--gs-font-serif)
+   Fonte: Inter (400 e 500) em tudo; --gs-font-serif foi mantida como apelido da mesma fonte
    nos títulos de página, como no design de referência (app/layout.tsx, next/font).
    Letras: mínimo de 12px. Cantos: escala 8 · 12 · 16 · 20 · 24 · 28 · 32.
    Para novos componentes, use estas variáveis em vez de valores soltos.
    ========================================================================== */
 :root{
-  --gs-font-body:var(--font-inter-tight),"Inter Tight",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --gs-font-body:var(--font-gs-inter),"Inter",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --gs-font-display:var(--gs-font-body);
-  --gs-font-serif:var(--font-serif),"Libre Baskerville",Georgia,serif;
+  --gs-font-serif:var(--gs-font-body);
   --gs-text-xs:12px;--gs-text-sm:13px;--gs-text-md:15px;--gs-text-lg:17px;
   --gs-radius-sm:12px;--gs-radius-md:16px;--gs-radius-lg:20px;--gs-radius-xl:28px;--gs-radius-pill:999px;
   --gs-shadow-sm:0 1px 2px rgba(10,48,44,.06),0 2px 8px rgba(10,48,44,.05);
@@ -7732,3 +7732,97 @@ html body .hos-player-youtube{display:inline-flex!important;align-items:center!i
   html body main svg.lucide,html body .global-site-header svg.lucide{stroke-width:1.75!important}
   html body :is(.gss-list,.cs-list,.cn-list,.hos-podcast-list,.dz-list){gap:16px!important}
 }
+
+/* ==========================================================================
+   Design leve (2026-11, referência "Online Doctor Appointment App"):
+   - uma fonte só (Inter), carregada só em 400 e 500: nada fica mais pesado que 500
+     e font-synthesis:none impede o navegador de "engrossar" a letra;
+   - títulos grandes e finos, rótulos curtos em cinza, sem caixa alta espaçada;
+   - cor da marca chapada, sem degradês; fundo claro; cartões brancos de 28px
+     sem borda e sem sombra;
+   - botões de ícone circulares em cinza suave; botões principais em pílula;
+   - ícones de traço fino (1,5).
+   O sufixo :not(#gs) dá prioridade sobre as regras antigas com !important.
+   ========================================================================== */
+:root{
+  --lt-bg:#f4f6f5;--lt-surface:#fff;--lt-soft:#edf1ef;--lt-soft-2:#e4ebe8;
+  --lt-ink:#14201d;--lt-muted:#6b7773;--lt-brand:#0b7f65;--lt-brand-ink:#fff;
+  --lt-radius:28px;--lt-radius-md:20px;--lt-radius-sm:14px;
+}
+html body:not(#gs){font-synthesis:none;font-family:var(--gs-font-body)!important;color:var(--lt-ink)}
+html body *:not(svg):not(svg *):not(#gs){font-family:var(--gs-font-body)!important;font-synthesis:none}
+
+/* Títulos: grandes, peso 500, espaçamento natural */
+html body main :is(h1,h2,h3,h4):not(#gs),html body main .pf-name:not(#gs){font-weight:500!important;letter-spacing:-.02em!important;color:var(--lt-ink)}
+html body main h1:not(#gs){line-height:1.15!important}
+html body main :is(strong,b,th):not(#gs){font-weight:500!important}
+
+/* Rótulos e selos: sem caixa alta espaçada, peso normal, cinza */
+html body :is(.pf-eyebrow,.ms-eyebrow,.cs-eyebrow,.gsm-pro-body small,.dz-info small,.hos-section-title>span,.sg-title,.cn-pill,.cn-card-body small,.cn-feature-body small,.hos-podcast-section-head small,.hos-podcast-feature small,.hos-podcast-row small,.cn-listen-copy small,.pf-podcast small,.gss-card-kicker,.official-section-title>span,.official-search-copy>p:first-child,.eyebrow,.native-magazine-library small,.organization-section-kicker,.pp-mini-text small,.gsm-content small):not(#gs){text-transform:none!important;letter-spacing:0!important;font-weight:400!important;font-size:13px!important;color:var(--lt-muted)!important}
+/* Especialidade nos cartões continua na cor da marca, mas fina */
+html body :is(.ms-eyebrow,.pf-eyebrow,.gsm-pro-body small,.dz-info small,.gss-card-kicker):not(#gs){color:var(--lt-brand)!important}
+
+/* Fundo claro e liso em todas as telas */
+html body:not(#gs),html body main:not(#gs){background-color:var(--lt-bg)!important}
+html body main:is(.gsm-home,.native-search-screen,.cs-page,.cn-page,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-favorites-screen,.dz-page,.native-featured-screen,.pf-page,.org-page,.native-article-screen,.desktop-home):not(#gs){background:var(--lt-bg)!important;background-image:none!important}
+
+/* Sem degradês decorativos */
+html body :is(.pf-hero,.pc,.pc-glow,.pf-podcast-play,.pf-actionbar,.hos-podcast-feature,.hos-podcast-row,.native-magazine-feature,.favorites-empty,.native-article-professional,.native-article-podcast,.native-article-note,.native-article-screen,.official-search-hero,.official-professional-photo,.home-featured-professional-card,.home-featured-professional-avatar,.city-content-editorial-card,.city-editorial-podcast,.inclusion-compact-hero,.about-intro,.about-final,.professional-image,.professional-image-picture):not(#gs){background-image:none!important}
+html body :is(.profile-page-clean,.organization-page,.native-article-screen,.hos-podcast-feature,.native-magazine-feature,.desktop-home,.about-intro,.home-featured-professional-card)::before,
+html body :is(.profile-page-clean,.organization-page,.native-article-screen,.hos-podcast-feature,.native-magazine-feature,.desktop-home,.about-intro,.home-featured-professional-card,.native-article-cover)::after{background-image:none!important;opacity:0!important}
+html body :is(.about-panel-orb,.official-app-orb,.pc-glow,.gsm-orb):not(#gs){display:none!important}
+/* Faixa do topo do perfil: cor suave lisa no lugar do degradê verde-limão */
+html body .pf-hero:not(#gs){background:var(--lt-soft-2)!important}
+/* Capa do podcast: verde da marca chapado */
+html body .pc:not(#gs){background:#0f3b33!important}
+/* Destaques escuros (podcast, revista, episódio novo): cor chapada */
+html body :is(.hos-podcast-feature,.native-magazine-feature,.cn-listen,.pf-podcast):not(#gs){background:#0f3b33!important;background-image:none!important;border:0!important;box-shadow:none!important}
+html body .hos-podcast-feature :is(h3,p,span,small):not(#gs){color:#fff!important}
+html body .hos-podcast-feature small:not(#gs){color:#cfe6dd!important}
+
+/* Cartões: brancos, 28px, sem borda e sem sombra */
+html body :is(.gsm-pro,.gsm-content a,.gsm-cats a,.ms-card,.ms-org,.ms-shortcuts a,.ms-specialties a,.cs-categories a,.pf-card,.pf-update,.dz-card,.cn-feature,.cn-card,.hos-podcast-row,.sk-card,.gss-card,.gss-aside,.official-category-grid>*,.official-professional-grid>*,.official-search-stats>*,.native-magazine-grid>a,.official-search-hero,.native-article-professional,.native-article-podcast,.native-article-note,.native-article-story,.favorites-empty,.inclusion-form,.sg-list):not(#gs){border:0!important;border-radius:var(--lt-radius)!important;box-shadow:none!important}
+html body :is(.gsm-pro,.gsm-content a,.gsm-cats a,.ms-card,.ms-org,.ms-shortcuts a,.ms-specialties a,.cs-categories a,.pf-card,.pf-update,.dz-card,.cn-feature,.cn-card,.hos-podcast-row,.gss-card,.gss-aside,.official-category-grid>*,.official-professional-grid>*,.official-search-stats>*,.official-search-hero,.native-article-professional,.native-article-podcast,.native-article-note,.native-article-story):not(#gs){background:var(--lt-surface)!important}
+html body .pf-identity:not(#gs){box-shadow:none!important}
+html body .sg-list:not(#gs){box-shadow:0 12px 32px rgba(20,32,29,.10)!important}
+/* Hover no computador: sem "pular", só um leve escurecer do fundo */
+@media (min-width:901px){html body :is(.gss-card,.official-category-grid>*,.official-professional-grid>*,.cs-categories a,.ms-org,.cn-feature,.cn-card,.hos-podcast-row,.dz-card,.native-magazine-grid>a):hover:not(#gs){transform:none!important;box-shadow:none!important;background:#fbfcfc!important}}
+
+/* Campos de busca: brancos, pílula, sem sombra */
+html body :is(.gsm-search,.ms-search,.cs-search,.hos-podcast-search,.gss-search,.official-search-form):not(#gs){border:0!important;border-radius:999px!important;background:var(--lt-surface)!important;box-shadow:none!important}
+html body :is(.gsm-search,.ms-search,.cs-search,.hos-podcast-search,.gss-search,.official-search-form) input:not(#gs){font-weight:400!important}
+
+/* Etiquetas e filtros: pílulas cinza, texto fino */
+html body :is(.gsm-chips a,.cn-topics button,.hos-podcast-chips button,.ms-chip,.pf-tags span,.pf-chips span,.gss-card-pills span,.gss-tabs a,.official-search-chips a,.cn-tabs a,.ms-filter>summary):not(#gs){border:0!important;border-radius:999px!important;background:var(--lt-soft)!important;box-shadow:none!important;color:var(--lt-ink)!important;font-weight:400!important}
+html body :is(.cn-topics button.active,.hos-podcast-chips button.active,.gss-tabs a.active):not(#gs){background:var(--lt-ink)!important;color:#fff!important}
+html body .cn-tabs:not(#gs){background:var(--lt-soft)!important;border:0!important;border-radius:999px!important;box-shadow:none!important}
+html body .cn-tabs a[aria-current]:not(#gs),html body .cn-tabs a.active:not(#gs){background:var(--lt-surface)!important;font-weight:500!important}
+
+/* Botões principais: pílula, peso 500 */
+html body :is(.pf-btn,.ms-btn,.gsm-pro-see,.gss-a-primary,.gss-a-see,.hos-podcast-feature-cta,.dz-all,.ms-more,.cn-more,.hos-podcast-more,.ms-filter-apply,.pf-update a,.gss-aside button,.official-search-form button,.gss-search button[type=submit]):not(#gs){border-radius:999px!important;font-weight:500!important;box-shadow:none!important;background-image:none!important}
+html body :is(.pf-btn-primary,.ms-btn-primary,.gsm-pro-see,.gss-a-primary,.ms-filter-apply,.gss-aside button[type=submit],.official-search-form button,.gss-search button[type=submit]):not(#gs){background:var(--lt-brand)!important;color:#fff!important;border:0!important}
+html body :is(.pf-btn-dark,.dz-all,.hos-podcast-feature-cta):not(#gs){background:var(--lt-ink)!important;color:#fff!important;border:0!important}
+html body .hos-podcast-feature-cta:not(#gs){background:#fff!important;color:var(--lt-ink)!important}
+html body :is(.ms-btn-outline,.pf-btn-outline,.gss-a-see,.pf-update a):not(#gs){background:var(--lt-soft)!important;color:var(--lt-ink)!important;border:0!important}
+
+/* Botões de ícone: círculos cinza suaves, sem borda e sem sombra */
+html body :is(.pf-icon-btn,.pf-topbar-actions .favorite-control button,.pf-topbar-actions .profile-share button,.ms-back,.hos-section-back,.gsm-pro-ic,.ms-card-actions .favorite-control button,.gsm-pro-actions .favorite-control button,.gss-card-actions .favorite-control button,.sg-clear,.ms-clear,.cs-clear,.native-article-topbar a):not(#gs){border:0!important;border-radius:999px!important;background:var(--lt-soft)!important;box-shadow:none!important;color:var(--lt-ink)!important;backdrop-filter:none!important}
+html body :is(.pf-icon-btn,.pf-topbar-actions .favorite-control button,.pf-topbar-actions .profile-share button,.hos-section-back,.ms-back):not(#gs){width:48px!important;height:48px!important;background:var(--lt-surface)!important}
+html body :is(.gsm-search button,.ms-go,.hos-podcast-search button,.cs-search button):not(#gs){border-radius:999px!important;background:var(--lt-brand)!important;box-shadow:none!important;background-image:none!important}
+
+/* Ícones finos */
+html body svg.lucide:not(#gs){stroke-width:1.5!important}
+
+/* Barra inferior: mais leve */
+html body nav.app-bottom-nav.gsm-dock .hos-nav-label:not(#gs){font-weight:400!important}
+html body nav.app-bottom-nav.gsm-dock .hos-nav-item.is-active .hos-nav-label:not(#gs){font-weight:500!important}
+html body nav.app-bottom-nav.gsm-dock .hos-nav-item.is-active .hos-nav-icon:not(#gs){background:var(--lt-soft)!important}
+html body nav.app-bottom-nav.gsm-dock:not(#gs){box-shadow:none!important;border-top:1px solid #e6ece9!important}
+
+/* Selo DESTAQUE: pílula clara e fina */
+html body :is(.ms-badge,.gss-card .gss-badge,[class*="destaque-badge"]):not(#gs){font-weight:500!important;letter-spacing:0!important;text-transform:none!important}
+html body .hos-podcast-feature .pc .pc-initials:not(#gs),html body .pc .pc-initials:not(#gs){color:#0f3b33!important;font-weight:500!important}
+/* Sem caixa alta e sem espaçamento largo de letras em todo o site e app */
+html body *:not(svg):not(svg *):not(#gs){text-transform:none!important}
+html body :is(small,span,p,em,a,label,div,button,dd,dt,li,summary):not(#gs){letter-spacing:0!important}
+html body :is(.gss-aside label,.gss-aside>p,.gss-aside h3,.gss-aside strong):not(#gs){font-size:13px!important;color:var(--lt-muted)!important}

@@ -44,7 +44,7 @@ export function DesktopSearchHero({
   return (
     <section className="gs-hero">
       <div>
-        <span className="gs-hero-eyebrow">GUIA DE SAÚDE DE PIUMHI E REGIÃO</span>
+        <span className="gs-hero-eyebrow">Guia de saúde de Piumhi e região</span>
         <h1>Encontre o cuidado certo, <em>perto de você.</em></h1>
         <p className="gs-hero-lede">
           Profissionais, clínicas e serviços de saúde da região — com informação verificada, conteúdo e contato direto.
@@ -80,7 +80,7 @@ export function DesktopSearchHero({
           {photoUrl ? <img src={photoUrl} alt="Atendimento de saúde em Piumhi" /> : null}
         </div>
         <div className="gs-hero-trending">
-          <span>MAIS BUSCADO ESTA SEMANA</span>
+          <span>Mais buscado esta semana</span>
           {trending.map((item) => (
             <Link href={item.href} key={item.label}>
               <i>{item.icon === "eye" ? <Eye size={22} /> : <HeartPulse size={22} />}</i>
