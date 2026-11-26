@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, ArrowUpRight, BookOpen, Building2, Glasses, Megaphone, Pill, Podcast, Search } from "lucide-react";
-import { SiteFooter } from "@/components/SiteFooter";
 import { articleImage, articles, cityDetails, magazineEditions, organizations, podcasts, professions, professionals } from "@/lib/data";
 import { ProfessionIcon } from "@/components/ProfessionIcon";
 import { RootGuideSearch } from "@/components/RootGuideSearch";
@@ -111,7 +110,6 @@ async function CityPageContent({ params, rootLanding = false }: { params: Promis
           <section className="city-final-cta"><div><p className="eyebrow">Para profissionais e marcas</p><h2>Faça parte do Guia Saúde</h2><p>Apresente seu trabalho para quem procura atendimento em {city.name} e na região.</p></div><div><Link href="/inclusao">Cadastrar meu perfil <ArrowRight size={14}/></Link><Link href="/anuncie">Anunciar no Guia <ArrowRight size={14}/></Link></div></section>
         </section>
       </main>
-      <SiteFooter />
     </>
   );
 }

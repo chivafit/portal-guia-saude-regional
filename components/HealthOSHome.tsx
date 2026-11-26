@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, Building2, ChevronDown, FlaskConical, Heart, MapPin, Phone, Pill, Search, Stethoscope } from "lucide-react";
+import { ArrowRight, BookOpen, Building2, FlaskConical, Headphones, MapPin, MessageCircle, Newspaper, Phone, Pill, Search, Stethoscope } from "lucide-react";
 import { publishedProfessionals } from "@/lib/public-directory";
-import { professionals } from "@/lib/data";
+import { articles, magazineEditions, podcasts, professionals } from "@/lib/data";
+import { FavoriteButton } from "@/components/FavoriteButton";
 import { isFeaturedProfessional } from "@/lib/featured-professionals";
 import { GuiaSaudeLogo } from "@/components/GuiaSaudeLogo";
 import { ProfessionalImage } from "@/components/ProfessionalImage";
@@ -25,15 +26,27 @@ function neighborhood(organization?: string | null) {
   return tail && tail.length <= 22 && !/\d/.test(tail) ? `${tail} · Piumhi` : "Piumhi";
 }
 
+/** Botão de contato só quando o profissional tem WhatsApp ou telefone direto confirmado. */
+function directContact(whatsapp?: string, phone?: string) {
+  const w = (whatsapp ?? "").replace(/\D/g, "");
+  if (w.length >= 10) return <a className="gsm-pro-ic" href={`https://wa.me/${w.startsWith("55") ? w : `55${w}`}`} target="_blank" rel="noreferrer" aria-label="WhatsApp"><MessageCircle size={18} /></a>;
+  const t = (phone ?? "").replace(/\D/g, "");
+  if (t.length >= 10) return <a className="gsm-pro-ic" href={`tel:+55${t}`} aria-label="Ligar"><Phone size={18} /></a>;
+  return null;
+}
+
 export async function HealthOSHome() {
   const source = await publishedProfessionals(professionals);
   const featured = source.filter((item) => item.city === "Piumhi" && isFeaturedProfessional(item.slug)).slice(0, 2);
+  const latestEpisode = podcasts.find((episode) => episode.episodeUrl || episode.audioUrl);
+  const latestEdition = magazineEditions.find((edition) => edition.flipbook);
+  const latestArticle = articles[0];
   return <main className="gsm-home">
     <div className="gsm-orb" aria-hidden="true" />
     <div className="gsm-shell">
       <header className="gsm-top">
         <span className="gsm-brand"><GuiaSaudeLogo compact /></span>
-        <span className="gsm-city"><MapPin size={15} /> Piumhi <ChevronDown size={14} /></span>
+        <span className="gsm-city"><MapPin size={15} /> Piumhi · MG</span>
       </header>
       <h1 className="gsm-h1">Qual cuidado você procura hoje?</h1>
       <p className="gsm-lede">Profissionais e serviços de saúde de Piumhi e região.</p>
@@ -62,13 +75,22 @@ export async function HealthOSHome() {
               <span className="gsm-pro-loc">{neighborhood(p.organization)}</span>
               <div className="gsm-pro-actions">
                 <Link className="gsm-pro-see" href={`/profissionais/${p.slug}`}>Ver perfil</Link>
-                <Link className="gsm-pro-ic" href={`/profissionais/${p.slug}`} aria-label={`Contato de ${p.name}`}><Phone size={18} /></Link>
-                <Link className="gsm-pro-ic" href={`/profissionais/${p.slug}`} aria-label={`Salvar ${p.name}`}><Heart size={18} /></Link>
+                {directContact(p.whatsapp, p.phone)}
+                <FavoriteButton compact professional={{ slug: p.slug, name: p.name, profession: p.profession, specialty: p.specialty, city: p.city, organization: p.organization, imageUrl: p.imageUrl }} />
               </div>
             </div>
           </article>
         ))}
       </div>
+      <div className="gsm-feature-head gsm-content-head">
+        <h2>Para cuidar melhor</h2>
+        <Link href="/materias">Ver conteúdos</Link>
+      </div>
+      <nav className="gsm-content" aria-label="Conteúdos do Guia Saúde">
+        {latestEpisode ? <Link href="/podcast"><Headphones size={20} /><span><small>Podcast · episódio novo</small><strong>{latestEpisode.topic}</strong></span><ArrowRight size={16} /></Link> : null}
+        {latestEdition ? <Link href={`/revista/${latestEdition.slug}`}><BookOpen size={20} /><span><small>Revista · {latestEdition.number} edição</small><strong>{latestEdition.title}</strong></span><ArrowRight size={16} /></Link> : null}
+        {latestArticle ? <Link href={`/materias/${latestArticle.slug}`}><Newspaper size={20} /><span><small>Matéria · {latestArticle.category}</small><strong>{latestArticle.title}</strong></span><ArrowRight size={16} /></Link> : null}
+      </nav>
     </div>
   </main>;
 }

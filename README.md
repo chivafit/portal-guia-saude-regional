@@ -29,7 +29,6 @@ npm run validate:release  # lint + validações + build + SEO + testes (o mesmo 
 - `npm run app:android` / `npm run app:ios`: sincroniza e abre o Android Studio / Xcode.
 - `npm run app:assets`: atualiza ícones e telas de abertura.
 - `npm run revista:webp`: converte para WebP as páginas de uma edição nova da revista.
-- `npm run build:web`: gera apenas a landing antiga com Privacidade e Termos (alvo `web`, não usado em produção).
 
 As imagens responsivas de `public/professionals/optimized/` são geradas automaticamente antes de cada `dev` e build (`scripts/optimize-professional-images.ts`) e não são versionadas.
 

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowUpRight, Building2, Dumbbell, FlaskConical, HeartPulse, MapPin, Phone, Pill, Stethoscope } from "lucide-react";
-import { SiteFooter } from "@/components/SiteFooter";
 import { organizations } from "@/lib/data";
 import { publishedOrganizations } from "@/lib/public-directory";
 import { filterOrganizations } from "@/lib/search";
@@ -29,5 +28,5 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Se
       <div className="company-results"><div className="result-toolbar"><div><strong>{results.length} {results.length === 1 ? "resultado" : "resultados"}</strong><span>{params.q || category ? "Resultados para os filtros selecionados" : "Serviços publicados em Piumhi"}</span></div><Link href="/buscar?cidade=piumhi&tipo=services">Abrir busca completa <ArrowUpRight size={14} /></Link></div>
         {results.length ? <><div className="business-card-list">{results.map((item) => { const href = contactHref(item.phone); const address = publicAddress(item.address); const directions=directionsHref(item.mapUrl,address); return <article className="business-card" key={item.slug}><div className="business-icon business-logo" style={{ backgroundImage: `url(${item.logoUrl || "/placeholders/company-logo.svg"})` }} /><div className="business-main"><div className="business-head"><div><p>{item.category}</p><h2>{item.name}</h2></div><span className="status-pill verified">Dados publicados</span></div><div className="doctor-pills"><span><MapPin size={13} /> Piumhi</span>{address ? <span>{address}</span> : null}</div><p className="doctor-summary">{item.services.slice(0, 3).join(" · ")}</p></div><aside className="business-side"><div className="business-quick-actions">{href?<a className="direct-contact-btn" href={href}><Phone size={14}/> Ligar</a>:null}{directions?<a className="direct-contact-btn directions" href={directions} target="_blank" rel="noreferrer"><MapPin size={14}/> Como chegar</a>:null}</div><Link href={`/empresas/${item.slug}`}>Ver detalhes <ArrowUpRight size={14} /></Link></aside></article>; })}</div><div className="directory-inclusion-call"><p>Seu estabelecimento ainda não aparece no Guia Saúde?</p><Link href="/inclusao?tipo=organization">Solicitar inclusão <ArrowUpRight size={14} /></Link></div></> : <div className="empty-state company-empty"><h2>Nenhum serviço encontrado</h2><p>Não há registros publicados para essa combinação. Tente uma categoria diferente ou uma busca mais ampla.</p><Link href="/empresas">Limpar filtros</Link><Link href="/inclusao?tipo=organization">Solicitar inclusão</Link></div>}
       </div></section>
-  </main><SiteFooter /></>;
+  </main></>;
 }

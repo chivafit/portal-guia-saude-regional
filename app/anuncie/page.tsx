@@ -1,5 +1,4 @@
 import { ArrowRight, BadgeCheck, BookOpen, Building2, LayoutTemplate, MapPin, Mic2, Newspaper, Search, Sparkles } from "lucide-react";
-import { HomeFooter } from "@/components/HomeFooter";
 import { CommercialProposalForm } from "@/components/CommercialProposalForm";
 import { articleImage, articles, magazineEditions, podcasts } from "@/lib/data";
 import { publicProfessionals } from "@/lib/public-directory";
@@ -80,6 +79,5 @@ export default function AdvertisePage() {
       <section id="proposta" className="shell commercial-proposal"><div><p className="eyebrow">Solicite uma proposta</p><h2>Receba uma proposta personalizada.</h2><p>Conte o que deseja apresentar e receba informações sobre formatos, disponibilidade, prazos e valores.</p></div><CommercialProposalForm /></section>
 
     </main>
-    <HomeFooter />
   </>;
 }

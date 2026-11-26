@@ -1032,7 +1032,7 @@ export type PodcastEpisode = {
 
 /** Episódios cadastrados pela equipe: têm prioridade sobre os sincronizados do YouTube. */
 const editorialPodcasts: PodcastEpisode[] = [
-  { slug: "biomagistral-farmacia-manipulacao", imageUrl: "https://i.ytimg.com/vi/uNyNAvumGdk/hqdefault.jpg", guest: "Biomagistral", role: "Farmácia de manipulação", topic: "Conexão Saúde com a Biomagistral", publishedAt: "2026-09-08", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=uNyNAvumGdk" },
+  { slug: "biomagistral-farmacia-manipulacao", imageUrl: "https://i.ytimg.com/vi/uNyNAvumGdk/mqdefault.jpg", guest: "Biomagistral", role: "Farmácia de manipulação", topic: "Conexão Saúde com a Biomagistral", publishedAt: "2026-09-08", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=uNyNAvumGdk" },
   { slug: "fisioterapia-pelvica-gabriela-araujo", imageUrl: "/podcast/gabriela-araujo-fisioterapia-pelvica-horizontal.png", guest: "Gabriela Araújo", role: "Fisioterapeuta pélvica", topic: "Fisioterapia pélvica: cuidado, saúde e qualidade de vida", publishedAt: "2026-08-25", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=z-ZKXSwY3-A" },
   { slug: "estetica-regenerativa-patricia-terra", imageUrl: "/podcast/patricia-terra-estetica-regenerativa-horizontal.png", guest: "Patrícia Terra", role: "Especialista em Dentística e Harmonização Orofacial", topic: "Estética regenerativa: a nova era da harmonização facial e da estética do sorriso", publishedAt: "2026-08-11", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=uz1cICn0iks" },
   { slug: "endocrinologia-simone-mota-bonisson", imageUrl: "/podcast/simone-bonisson-endocrinologia-horizontal.png", guest: "Simone Mota Bonisson", role: "Endocrinologista", topic: "Endocrinologia em foco: hormônios, metabolismo e qualidade de vida", publishedAt: "2026-07-28", duration: "Episódio completo", status: "Disponível", episodeUrl: "https://www.youtube.com/watch?v=-LaH9x_sgl8" },
@@ -1069,7 +1069,7 @@ const youtubePodcasts: PodcastEpisode[] = (youtubeEpisodes as { videoId: string;
     duration: "Episódio completo",
     status: "Disponível",
     episodeUrl: `https://www.youtube.com/watch?v=${item.videoId}`,
-    imageUrl: `https://i.ytimg.com/vi/${item.videoId}/hqdefault.jpg`,
+    imageUrl: `https://i.ytimg.com/vi/${item.videoId}/mqdefault.jpg`,
   }));
 
 /** Todos os episódios, do mais recente para o mais antigo. */
