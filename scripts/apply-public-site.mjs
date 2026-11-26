@@ -1,6 +1,6 @@
 // Publica o site de divulgação (site-publico/) no lugar do início e de /anuncie/
 // somente no deploy web da Vercel. Os builds dos aplicativos (Capacitor, CI do
-// Android, GitHub Pages) não definem VERCEL e ficam com a experiência completa.
+// Android) não definem VERCEL e ficam com a experiência completa.
 import { cp, mkdir, readdir, rm } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";

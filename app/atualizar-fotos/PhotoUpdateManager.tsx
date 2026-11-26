@@ -8,7 +8,6 @@ type Props = { profiles: Profile[] };
 
 const REPOSITORY = "chivafit/portal-guia-saude-regional";
 const BRANCH = "main";
-const PUBLIC_BRANCH = "gh-pages";
 const OVERRIDES_PATH = "lib/data/professional-photo-overrides.json";
 const MAX_SIZE = 5 * 1024 * 1024;
 const LEGACY_TOKEN_STORAGE_KEY = "guia-saude-photo-update-token";
@@ -153,33 +152,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
       });
       if (!updateResponse.ok) throw new Error(await githubError(updateResponse, "A foto foi enviada, mas não foi possível vinculá-la ao perfil. Tente novamente para concluir."));
 
-      const publicImageResponse = await fetch(`${base}/${publicPath}?ref=${PUBLIC_BRANCH}`, { headers, cache: "no-store" });
-      const publicImage = publicImageResponse.ok ? await publicImageResponse.json() as { sha: string } : null;
-      const publishAssetResponse = await fetch(`${base}/${publicPath}`, {
-        method: "PUT",
-        headers,
-        body: JSON.stringify({ message: `Publica foto de ${selected.name}`, content: encodedFile, branch: PUBLIC_BRANCH, ...(publicImage?.sha ? { sha: publicImage.sha } : {}) }),
-      });
-      if (!publishAssetResponse.ok) {
-        throw new Error(await githubError(
-          publishAssetResponse,
-          "A foto foi salva e vinculada no cadastro, mas não foi possível gravar o arquivo no gh-pages. O perfil ainda não foi atualizado no site.",
-        ));
-      }
-
-      const publishResult = await publishAssetResponse.json() as { content?: { sha?: string; path?: string } };
-      const verifyResponse = await fetch(`${base}/${publicPath}?ref=${PUBLIC_BRANCH}&t=${Date.now()}`, { headers, cache: "no-store" });
-      if (!verifyResponse.ok) {
-        throw new Error("A foto foi enviada ao gh-pages, mas a verificação final não encontrou o arquivo. Não considere a publicação concluída ainda.");
-      }
-      const verified = await verifyResponse.json() as { sha?: string; path?: string };
-      if (!verified.sha || verified.path !== publicPath || (publishResult.content?.sha && verified.sha !== publishResult.content.sha)) {
-        throw new Error("O GitHub respondeu ao envio, mas a verificação do arquivo publicado não corresponde à nova foto. Tente novamente antes de considerar a troca concluída.");
-      }
-
-      setNotice(selectedHasDedicatedPhoto
-        ? `Foto de ${selected.name} atualizada, vinculada e confirmada no gh-pages. O GitHub Pages fará a troca no site em instantes.`
-        : `Nova foto de ${selected.name} enviada e confirmada no gh-pages. O cadastro foi vinculado corretamente, mas como o perfil ainda não usava uma foto em /professionals/, é necessário um novo build completo para o HTML do perfil passar a apontar para ela.`);
+      setNotice(`Foto de ${selected.name} salva e vinculada ao perfil. A Vercel publica um novo deploy automaticamente; a troca aparece no site e no app em alguns minutos.`);
       setFile(null);
       setPreview("");
     } catch (caught) {
@@ -193,7 +166,7 @@ export function PhotoUpdateManager({ profiles }: Props) {
     <div className="photo-admin-intro">
       <p className="eyebrow">GESTÃO EDITORIAL</p>
       <h1>Atualize fotos dos profissionais</h1>
-      <p>Escolha um perfil, envie uma fotografia e publique a atualização. O painel confirma se o arquivo realmente chegou ao site antes de informar sucesso.</p>
+      <p>Escolha um perfil e envie uma fotografia. A foto é gravada no repositório e a Vercel publica o site atualizado automaticamente.</p>
     </div>
 
     <div className="photo-admin-grid">
@@ -224,12 +197,12 @@ export function PhotoUpdateManager({ profiles }: Props) {
 
       <section className="photo-admin-card photo-admin-publish">
         <div className="photo-admin-step-title"><span>3</span><div><h2>Confirme e publique</h2><p>Informe um token do GitHub somente para esta atualização.</p></div></div>
-        {selected ? <div className="photo-confirmation"><span className="photo-profile-thumb large" style={selected.imageUrl ? { backgroundImage: `url(${selected.imageUrl})` } : undefined} /><div><strong>{selected.name}</strong><small>{selected.profession} · {selected.specialty}</small><small>{selectedHasDedicatedPhoto ? "A foto profissional atual será substituída diretamente" : "Será cadastrada uma nova foto profissional; a primeira vinculação exige novo build"}</small></div></div> : <p className="photo-empty-selection">Selecione um profissional para continuar.</p>}
+        {selected ? <div className="photo-confirmation"><span className="photo-profile-thumb large" style={selected.imageUrl ? { backgroundImage: `url(${selected.imageUrl})` } : undefined} /><div><strong>{selected.name}</strong><small>{selected.profession} · {selected.specialty}</small><small>{selectedHasDedicatedPhoto ? "A foto profissional atual será substituída" : "Será cadastrada uma nova foto profissional"}</small></div></div> : <p className="photo-empty-selection">Selecione um profissional para continuar.</p>}
         <label className="photo-token"><KeyRound size={18} /><input type="password" value={token} onChange={(event) => setToken(event.target.value)} placeholder="Token do GitHub com permissão de conteúdo" autoComplete="off" spellCheck="false" /></label>
         <p className="photo-security"><ShieldCheck size={16} /> O token não é salvo neste dispositivo. Use apenas um token com acesso restrito a este repositório.</p>
         {error ? <p className="photo-message error">{error}</p> : null}
         {notice ? <p className="photo-message success">{notice}</p> : null}
-        <button type="button" className="photo-publish-button" onClick={publish} disabled={saving || !selected || !file}>{saving ? <><LoaderCircle className="spin" size={18} /> Publicando e verificando...</> : "Publicar nova foto"}</button>
+        <button type="button" className="photo-publish-button" onClick={publish} disabled={saving || !selected || !file}>{saving ? <><LoaderCircle className="spin" size={18} /> Publicando...</> : "Publicar nova foto"}</button>
       </section>
     </div>
   </section>;

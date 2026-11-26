@@ -3,6 +3,7 @@
 // consulta para mostrar contatos e textos atualizados sem nova versão na loja.
 import type { Professional } from "./data";
 import { organizationForProfessional } from "./public-directory";
+import { siteUrl } from "./seo";
 import { podcastForProfessional } from "./podcasts";
 
 export type ProfileLocationView = {
@@ -125,6 +126,6 @@ export function buildProfileView(item: Professional): ProfileView {
     primaryMapHref: primary?.mapHref ?? "",
     podcast: episode ? { topic: episode.topic, guest: episode.guest, role: episode.role, episodeUrl: episode.episodeUrl || undefined } : undefined,
     confirmedAt: item.confirmedAt,
-    canonicalUrl: `https://guiasaude.app.br/profissionais/${item.slug}/`,
+    canonicalUrl: `${siteUrl}/profissionais/${item.slug}/`,
   };
 }

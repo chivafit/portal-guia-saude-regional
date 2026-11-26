@@ -70,7 +70,7 @@ O aplicativo oferece navegação inferior com acesso rápido ao início, busca, 
 - confirmar que `br.com.guiasaude.portal` será o identificador definitivo;
 - testar telefone, WhatsApp, mapas, compartilhamento e links externos em aparelhos reais;
 - preparar nome, descrição, categoria, classificação etária e capturas de tela;
-- informar a política pública em `https://guiasaude.app.br/privacidade/`;
+- informar a política pública em `https://www.guiasaude.app.br/privacidade/`;
 - gerar e guardar com segurança a chave de assinatura do Android;
 - configurar a equipe e os certificados da conta Apple Developer;
 - preencher as declarações de privacidade e conteúdo de saúde nas duas lojas.

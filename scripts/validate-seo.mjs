@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 
-const origin = "https://guiasaude.app.br";
+const origin = "https://www.guiasaude.app.br";
 const out = resolve("out");
 const sitemap = await readFile(resolve(out, "sitemap.xml"), "utf8");
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
