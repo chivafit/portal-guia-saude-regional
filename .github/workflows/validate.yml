@@ -33,4 +33,5 @@ jobs:
         run: npm ci
 
       - name: Executar gate de release
-        run: npm run validate:release
+        # Simula o deploy da Vercel (inclui /aplicativo/ e /anuncie/ de site-publico).
+        run: APPLY_PUBLIC_SITE=1 npm run validate:release

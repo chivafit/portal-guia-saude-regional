@@ -75,7 +75,7 @@ export async function HealthOSHome() {
               <span className="gsm-pro-loc">{neighborhood(p.organization)}</span>
               <div className="gsm-pro-actions">
                 <Link className="gsm-pro-see" href={`/profissionais/${p.slug}`}>Ver perfil</Link>
-                {directContact(p.whatsapp, p.phone)}
+                {directContact(p.locations?.[0]?.whatsapp, p.locations?.[0]?.phone)}
                 <FavoriteButton compact professional={{ slug: p.slug, name: p.name, profession: p.profession, specialty: p.specialty, city: p.city, organization: p.organization, imageUrl: p.imageUrl }} />
               </div>
             </div>
