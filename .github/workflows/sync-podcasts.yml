@@ -1,0 +1,45 @@
+name: Sincronizar podcasts do YouTube
+
+# Todo dia, busca episódios novos do Conexão Saúde no canal da Rede Megga.
+# Se houver, grava em lib/data/podcast-youtube.json e faz commit no main;
+# a Vercel republica o site e o app passa a mostrar o episódio novo.
+on:
+  schedule:
+    - cron: "17 10,22 * * *" # 07:17 e 19:17 em Brasília
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-podcasts
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Buscar episódios novos
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Buscar o feed do canal
+        run: node scripts/sync-youtube-podcasts.mjs
+
+      - name: Publicar episódios novos
+        run: |
+          if git diff --quiet -- lib/data/podcast-youtube.json; then
+            echo "Nada novo."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lib/data/podcast-youtube.json
+          git commit -m "Podcast: episódios novos do YouTube"
+          git push
