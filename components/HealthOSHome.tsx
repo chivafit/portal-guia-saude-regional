@@ -44,7 +44,7 @@ function directContact(whatsapp?: string, phone?: string) {
 
 export async function HealthOSHome() {
   const source = await publishedProfessionals(professionals);
-  const featured = source.filter((item) => item.city === "Piumhi" && isFeaturedProfessional(item.slug)).slice(0, 2);
+  const featured = source.filter((item) => item.city === "Piumhi" && isFeaturedProfessional(item.slug)).slice(0, 8);
   const latestEpisode = podcastCatalogEpisodes().find((episode) => episode.episodeUrl || episode.audioUrl);
   const suggestions = buildSuggestionIndex(source, await publishedOrganizations(organizations));
   const latestEdition = magazineEditions.find((edition) => edition.flipbook);
@@ -74,9 +74,9 @@ export async function HealthOSHome() {
         <h2>Em destaque</h2>
         <Link href="/profissionais-destaque">Ver todos</Link>
       </div>
-      <div className="gsm-feature-list">
+      <div className="gsm-feature-list" role="list" aria-label="Profissionais em destaque">
         {featured.map((p) => (
-          <article className="gsm-pro" key={p.slug}>
+          <article className="gsm-pro" role="listitem" key={p.slug}>
             <span className={`gsm-pro-photo${p.imageUrl ? "" : " is-initials"}`}>
               {p.imageUrl ? <ProfessionalImage src={p.imageUrl} sizes="72px" /> : <b>{initials(p.name)}</b>}
             </span>
