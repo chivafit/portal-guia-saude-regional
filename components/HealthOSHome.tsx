@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen, Building2, FlaskConical, MapPin, MessageCircle, Newspaper, Phone, Pill, Search, Stethoscope } from "lucide-react";
-import { publishedProfessionals } from "@/lib/public-directory";
-import { articles, magazineEditions, professionals } from "@/lib/data";
+import { publishedOrganizations, publishedProfessionals } from "@/lib/public-directory";
+import { articles, magazineEditions, organizations, professionals } from "@/lib/data";
+import { SuggestInput } from "@/components/search/SuggestInput";
+import { buildSuggestionIndex } from "@/lib/search-suggestions";
+import { whatsappLink } from "@/lib/whatsapp";
 import { podcastCatalogEpisodes } from "@/lib/public-podcasts";
 import { PodcastCover } from "@/components/podcast/PodcastCover";
 import { FavoriteButton } from "@/components/FavoriteButton";
@@ -33,7 +36,7 @@ function neighborhood(organization?: string | null) {
 /** Botão de contato só quando o profissional tem WhatsApp ou telefone direto confirmado. */
 function directContact(whatsapp?: string, phone?: string) {
   const w = (whatsapp ?? "").replace(/\D/g, "");
-  if (w.length >= 10) return <a className="gsm-pro-ic" href={`https://wa.me/${w.startsWith("55") ? w : `55${w}`}`} target="_blank" rel="noreferrer" aria-label="WhatsApp"><MessageCircle size={18} /></a>;
+  if (w.length >= 10) return <a className="gsm-pro-ic" href={whatsappLink(w, "professional")} target="_blank" rel="noreferrer" aria-label="WhatsApp"><MessageCircle size={18} /></a>;
   const t = (phone ?? "").replace(/\D/g, "");
   if (t.length >= 10) return <a className="gsm-pro-ic" href={`tel:+55${t}`} aria-label="Ligar"><Phone size={18} /></a>;
   return null;
@@ -43,6 +46,7 @@ export async function HealthOSHome() {
   const source = await publishedProfessionals(professionals);
   const featured = source.filter((item) => item.city === "Piumhi" && isFeaturedProfessional(item.slug)).slice(0, 2);
   const latestEpisode = podcastCatalogEpisodes().find((episode) => episode.episodeUrl || episode.audioUrl);
+  const suggestions = buildSuggestionIndex(source, await publishedOrganizations(organizations));
   const latestEdition = magazineEditions.find((edition) => edition.flipbook);
   const latestArticle = articles[0];
   return <main className="gsm-home">
@@ -57,7 +61,7 @@ export async function HealthOSHome() {
       <form className="gsm-search" action="/buscar" role="search">
         <input type="hidden" name="cidade" value="piumhi" />
         <Search size={20} />
-        <input name="q" aria-label="Especialidade ou profissional" placeholder="Especialidade ou profissional" autoComplete="off" enterKeyHint="search" />
+        <SuggestInput index={suggestions} placeholder="Especialidade ou profissional" label="Especialidade ou profissional" clearable={false} />
         <button type="submit" aria-label="Buscar"><ArrowRight size={20} /></button>
       </form>
       <nav className="gsm-cats" aria-label="Categorias de saúde">

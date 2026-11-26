@@ -1,5 +1,7 @@
 "use client";
 
+import { SuggestInput } from "@/components/search/SuggestInput";
+import type { Suggestion } from "@/lib/search-suggestions";
 import Link from "next/link";
 import { useRef, type ComponentType } from "react";
 import { ArrowLeft, ArrowRight, Building2, ChevronDown, Dumbbell, Eye, FlaskConical, HeartPulse, Hospital, Landmark, MapPin, MessageCircle, Navigation, Phone, Pill, Search, SlidersHorizontal, Smile, Sparkles, Stethoscope, X } from "lucide-react";
@@ -18,6 +20,7 @@ type Contact = { href: string; label: string } | null;
 
 export type MobileSearchProps = {
   q: string;
+  suggestions: Suggestion[];
   typeParam: string;
   type: "todos" | "profissionais" | "servicos";
   profession: string;
@@ -98,7 +101,7 @@ export function MobileSearch(props: MobileSearchProps) {
 
     <form className="ms-search" action="/buscar" role="search">
       <Search size={19} aria-hidden="true" />
-      <input name="q" defaultValue={q} placeholder="Especialidade, nome ou serviço" aria-label="Especialidade, nome ou serviço" autoComplete="off" enterKeyHint="search" />
+      <SuggestInput index={props.suggestions} defaultValue={q} clearable={false} placeholder="Especialidade, nome ou serviço" label="Especialidade, nome ou serviço" />
       <input type="hidden" name="cidade" value="piumhi" />
       {typeParam ? <input type="hidden" name="tipo" value={typeParam} /> : null}
       {q ? <Link className="ms-clear" href={props.clearHref("q")} aria-label="Limpar busca"><X size={17} /></Link> : <button type="submit" className="ms-go" aria-label="Buscar"><ArrowRight size={18} /></button>}

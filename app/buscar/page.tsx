@@ -1,5 +1,7 @@
 "use client";
 
+import { whatsappLink } from "@/lib/whatsapp";
+import { buildSuggestionIndex } from "@/lib/search-suggestions";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState, type ComponentType } from "react";
@@ -20,9 +22,10 @@ const quickSpecialties: Array<{label:string; query:string; Icon:SpecialtyIcon}> 
  {label:"Cardiologia",query:"Cardiologia",Icon:HeartPulse},{label:"Dermatologia",query:"Dermatologia",Icon:Sparkles},{label:"Ginecologia",query:"Ginecologia",Icon:Venus},{label:"Ortopedia",query:"Ortopedia",Icon:Bone},{label:"Pediatria",query:"Pediatria",Icon:Baby},{label:"Psicologia",query:"Psicologia",Icon:Brain},{label:"Odontologia",query:"Dentista",Icon:Activity},{label:"Oftalmologia",query:"Oftalmologia",Icon:Eye},{label:"Psiquiatria",query:"Psiquiatria",Icon:Brain},{label:"Pneumologia",query:"Pneumologia",Icon:Activity},{label:"Clínica médica",query:"Clínica Médica",Icon:Stethoscope},{label:"Outras especialidades",query:"",Icon:Ellipsis},
 ];
 function param(value:string|null){return value??""}
+const suggestionIndex=buildSuggestionIndex(publicProfessionals,organizations);
 function publicAddress(address?:string){return address&&!/endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(address)?address:""}
 function professionLabel(item:{profession:string;name:string}){if(/^Dra\.?\s/i.test(item.name))return item.profession==="Médico"?"Médica":item.profession;if(/^Dr\.?\s/i.test(item.name))return item.profession;return({"Médico":"Medicina","Psicólogo":"Psicologia","Fonoaudiólogo":"Fonoaudiologia","Enfermeiro":"Enfermagem","Educador físico":"Educação Física"}as Record<string,string>)[item.profession]??item.profession}
-function directContact(whatsapp?:string,phone?:string){const w=(whatsapp??"").replace(/\D/g,"");if(w.length>=10)return{href:`https://wa.me/${w.startsWith("55")?w:`55${w}`}`,label:"WhatsApp"};const p=(phone??"").replace(/\D/g,"");if(p.length>=10)return{href:`tel:+55${p}`,label:"Ligar"};return null}
+function directContact(whatsapp?:string,phone?:string){const w=(whatsapp??"").replace(/\D/g,"");if(w.length>=10)return{href:whatsappLink(w,"professional"),label:"WhatsApp"};const p=(phone??"").replace(/\D/g,"");if(p.length>=10)return{href:`tel:+55${p}`,label:"Ligar"};return null}
 function neighborhoodOf(org?:string){if(!org)return"";const tail=org.split(",").map(p=>p.trim()).filter(Boolean).at(-1)??"";return tail&&tail.length<=22&&!/\d/.test(tail)&&!/^piumhi(\s*[-/]\s*mg)?$/i.test(tail)?tail:""}
 function publicSummaryOf(summary?:string){return summary&&!/(a validar|aguardando validação|pendente|em revisão|a confirmar)/i.test(summary)?summary:""}
 /** Nome curto do local de atendimento: "Clínica X — Rua Y, 10" → "Clínica X". */
@@ -63,7 +66,7 @@ function SearchDirectory(){
      </div>
    </div>
  </div></div>;
- return <main className={`native-search-screen${isLanding?" native-search-landing":" native-search-results"}`}>{desktop}<MobileSearch q={q} typeParam={typeParam} type={type} profession={profession} specialty={specialty} category={category} bairro={bairro} onlyContact={onlyContact} onlyFeatured={onlyFeatured} isLanding={isLanding} professionals={gssProf} organizations={organizationResults} visibleCount={visibleCount} onMore={()=>setVisibleCount(v=>v+PAGE_SIZE)} orderBy={orderBy} onOrderBy={setOrderBy} professions={professions} specialtyChoices={specialtyChoices} categoryChoices={categoryChoices} bairroChoices={bairroChoices} quickSpecialties={quickSpecialties} clearHref={clearFilter} contactFor={(item)=>directContact(item.locations?.[0]?.whatsapp,item.locations?.[0]?.phone)} neighborhoodOf={neighborhoodOf} registrationOf={registrationSigla} isFeatured={isFeaturedProfessional} publicAddress={publicAddress}/>
+ return <main className={`native-search-screen${isLanding?" native-search-landing":" native-search-results"}`}>{desktop}<MobileSearch q={q} suggestions={suggestionIndex} typeParam={typeParam} type={type} profession={profession} specialty={specialty} category={category} bairro={bairro} onlyContact={onlyContact} onlyFeatured={onlyFeatured} isLanding={isLanding} professionals={gssProf} organizations={organizationResults} visibleCount={visibleCount} onMore={()=>setVisibleCount(v=>v+PAGE_SIZE)} orderBy={orderBy} onOrderBy={setOrderBy} professions={professions} specialtyChoices={specialtyChoices} categoryChoices={categoryChoices} bairroChoices={bairroChoices} quickSpecialties={quickSpecialties} clearHref={clearFilter} contactFor={(item)=>directContact(item.locations?.[0]?.whatsapp,item.locations?.[0]?.phone)} neighborhoodOf={neighborhoodOf} registrationOf={registrationSigla} isFeatured={isFeaturedProfessional} publicAddress={publicAddress}/>
  </main>
 }
 export default function SearchPage(){return <Suspense fallback={<main className="native-search-screen"><div className="native-search-loading">Carregando busca…</div></main>}><SearchDirectory/></Suspense>}
