@@ -73,6 +73,9 @@ O aplicativo oferece navegação inferior com acesso rápido ao início, busca, 
 
 ## Antes de enviar às lojas
 
+O passo a passo completo, com textos da ficha, respostas de privacidade e capturas de tela, está em [docs/lojas.md](lojas.md).
+
+
 - confirmar que `br.com.guiasaude.portal` será o identificador definitivo;
 - testar telefone, WhatsApp, mapas, compartilhamento e links externos em aparelhos reais;
 - preparar nome, descrição, categoria, classificação etária e capturas de tela;
@@ -88,4 +91,6 @@ O pacote do app traz todos os perfis, mas os dados de cada perfil (contatos, Wha
 - No app (Capacitor), a página do perfil consulta esse arquivo e usa a versão online quando ela é mais nova que o pacote. O resultado fica em cache por 1 hora e o app funciona normalmente sem internet.
 - No site, nada muda: a página já é gerada a cada deploy.
 - Para corrigir um perfil: altere os dados em `lib/data`, faça o merge e aguarde o deploy da Vercel. Os aplicativos passam a mostrar a correção sem enviar nova versão às lojas.
-- Perfis novos ainda precisam de nova versão do app para ganhar página própria; o conteúdo de revista, podcast e matérias continua dentro do pacote.
+- Perfis novos ainda precisam de nova versão do app para ganhar página própria. Matérias continuam dentro do pacote.
+- Podcast: a lista vem de `/app-data/podcasts.json`; episódios novos do YouTube entram sozinhos (workflow `sync-podcasts.yml`).
+- Revista: as páginas são lidas do site (ver "Revista no aplicativo").

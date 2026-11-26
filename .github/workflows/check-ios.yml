@@ -1,0 +1,39 @@
+name: Conferir compilação iOS
+
+# Compila o app iOS no simulador, sem assinatura, para garantir que o projeto
+# do Xcode continua íntegro. O envio à App Store é feito no Xcode de um Mac
+# com a conta Apple Developer (Product → Archive → Distribute App).
+# Roda manualmente: os executores macOS do GitHub consomem mais minutos.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ios:
+    name: Build iOS (simulador)
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Gerar e sincronizar o portal
+        run: npm run build:app
+
+      - name: Compilar para o simulador
+        run: |
+          xcodebuild -project ios/App/App.xcodeproj -scheme App \
+            -sdk iphonesimulator -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build

@@ -33,6 +33,7 @@
     "@capacitor/android": "^8.5.2",
     "@capacitor/core": "^8.5.2",
     "@capacitor/ios": "^8.5.2",
+    "@capacitor/share": "^8.0.3",
     "lucide-react": "^1.24.0",
     "next": "^16.4.6",
     "page-flip": "^2.0.7",
