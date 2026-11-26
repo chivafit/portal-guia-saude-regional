@@ -79,7 +79,7 @@ export function ProfessionalProfile({ initial, builtAt }: { initial: ProfileView
   <div className="profile-desk-grid"><div className="profile-desk-main">
   <article className="pcx-card">
    <div className="pcx-cover" aria-hidden="true"/>
-   <div className={`pcx-avatar${p.hasRealPhoto?"":" pcx-avatar-initials"}`} aria-hidden="true">{p.hasRealPhoto&&p.imageUrl?<ProfessionalImage src={p.imageUrl} sizes="160px" eager fetchPriority="high"/>:<span>{p.initials}</span>}</div>
+   <div className={`pcx-avatar${p.imageUrl?"":" pcx-avatar-initials"}`} aria-hidden="true">{p.imageUrl?<ProfessionalImage src={p.imageUrl} sizes="160px" eager fetchPriority="high"/>:<span>{p.initials}</span>}</div>
    <div className="pcx-identity">
     <p className="pcx-profession">{p.professionLabel}</p>
     <h1>{p.name}{p.verified&&p.registration?<BadgeCheck className="pcx-verified" size={22} aria-label="Registro profissional conferido"/>:null}</h1>

@@ -1,6 +1,7 @@
 import { podcasts, type PodcastEpisode } from "./data";
 import { professionalSlugsForEpisode } from "./podcast-guests";
 import { publicProfessionals } from "./public-directory";
+import { isGeneratedImage } from "./avatars";
 
 /** Episódios serializados para a página pública já com todos os perfis vinculados. */
 export const publicPodcasts: PodcastEpisode[] = podcasts.map((episode) => ({
@@ -12,7 +13,7 @@ export const publicPodcasts: PodcastEpisode[] = podcasts.map((episode) => ({
 export function podcastCatalogEpisodes(): PodcastEpisode[] {
   const professionalImages = new Map(
     publicProfessionals
-      .filter((professional) => Boolean(professional.imageUrl))
+      .filter((professional) => !isGeneratedImage(professional.imageUrl))
       .map((professional) => [professional.slug, professional.imageUrl as string]),
   );
   return publicPodcasts.map((episode) => ({
