@@ -1,8 +1,8 @@
 name: Gerar aplicativo Android
 
+# GitHub Actions desativado por enquanto (sem plano pago): roda só manualmente, pela aba Actions.
+# O site é validado e publicado pela Vercel (build:pages); ver docs/sem-github-actions.md.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:

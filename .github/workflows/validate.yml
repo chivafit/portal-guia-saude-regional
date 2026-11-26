@@ -1,10 +1,8 @@
 name: Validar o Guia Saúde
 
+# GitHub Actions desativado por enquanto (sem plano pago): roda só manualmente, pela aba Actions.
+# O site é validado e publicado pela Vercel (build:pages); ver docs/sem-github-actions.md.
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 
 permissions:

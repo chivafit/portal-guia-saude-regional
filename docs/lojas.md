@@ -26,13 +26,12 @@ mais verificações de contas pessoais nessa categoria.
    **Guarde o arquivo `.jks` e as senhas em dois lugares seguros.** Sem eles não é possível
    publicar atualizações do app.
 
-2. No GitHub, em *Settings → Secrets and variables → Actions*, cadastre:
-   - `ANDROID_KEYSTORE_BASE64`: o resultado de `base64 -i guia-saude-release.jks`
-   - `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS` (`guia-saude`) e `ANDROID_KEY_PASSWORD`
+2. Gere o pacote no computador, pelo Android Studio (*Build → Generate Signed App Bundle*)
+   ou pelo terminal com `npm run app:android:release`. O passo a passo está em
+   [sem-github-actions.md](sem-github-actions.md#4-aplicativo-android).
 
-3. Na aba *Actions*, rode **"Gerar Android para a Play Store"** informando a versão
-   (ex.: `1.0.0`). O arquivo `.aab` assinado fica disponível para download no fim da execução.
-   O número interno da versão (versionCode) aumenta sozinho a cada execução.
+3. A cada envio, aumente o número interno da versão (`versionCode`): a Play Store recusa
+   números repetidos.
 
 4. Na Play Console: crie o app, envie o `.aab` em *Teste interno* primeiro, instale no
    seu celular pelo link de teste e só depois promova para *Produção*.
@@ -47,9 +46,6 @@ Google guarda a chave final e a sua vira apenas a chave de envio.
 3. Selecione *Any iOS Device*, depois *Product → Archive → Distribute App → App Store Connect*.
 4. Na App Store Connect, preencha a ficha (seção 4) e envie para revisão. Teste antes pelo
    TestFlight.
-
-Para conferir se o projeto do Xcode compila sem precisar de um Mac, rode na aba *Actions*
-o workflow **"Conferir compilação iOS"**.
 
 > **Atenção à regra 4.2 da Apple.** A Apple recusa apps que são só um site dentro de um
 > app. O Guia Saúde funciona sem internet (o diretório vai no pacote), salva favoritos no

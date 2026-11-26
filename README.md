@@ -21,8 +21,8 @@ A rota `/atualizar-fotos` só existe em desenvolvimento local: ela é removida d
 npm install
 npm run dev          # desenvolvimento com a experiência completa, igual ao site
 npm run build:pages  # build do site, com todas as validações
-npm test             # build:pages + testes em tests/
-npm run validate:release  # lint + validações + build + SEO + testes (o mesmo da CI)
+npm test             # o mesmo que build:pages (já inclui os testes)
+npm run validate:release  # validação completa, igual ao build da Vercel
 ```
 
 - `npm run build:app`: gera o bundle e sincroniza iOS e Android.
@@ -32,10 +32,12 @@ npm run validate:release  # lint + validações + build + SEO + testes (o mesmo 
 
 As imagens responsivas de `public/professionals/optimized/` são geradas automaticamente antes de cada `dev` e build (`scripts/optimize-professional-images.ts`) e não são versionadas.
 
-## CI
+## Validação e automações
 
-- `.github/workflows/validate.yml`: roda `validate:release` em pull requests e no `main`.
-- `.github/workflows/build-android-app.yml`: gera um APK de testes a cada push no `main`.
+O GitHub Actions está desativado por enquanto. A Vercel faz o papel de CI: o build
+(`build:pages`) roda lint, validações, SEO e testes, e um deploy com erro não substitui o
+site no ar. Podcasts novos do YouTube entram a cada deploy; um Deploy Hook semanal mantém a
+lista em dia. Detalhes em [docs/sem-github-actions.md](docs/sem-github-actions.md).
 
 ## Estrutura essencial
 
