@@ -4,6 +4,7 @@
 import type { Professional } from "./data";
 import { organizationForProfessional } from "./public-directory";
 import { siteUrl } from "./seo";
+import { initialsFor, isGeneratedImage } from "./avatars";
 import { podcastForProfessional } from "./podcasts";
 
 export type ProfileLocationView = {
@@ -77,8 +78,7 @@ function mapHref(name: string, address: string, city: string, mapUrl?: string) {
 }
 
 export function buildProfileView(item: Professional): ProfileView {
-  const nameSkip = new Set(["da", "de", "do", "dos", "das", "e"]);
-  const initials = item.name.replace(/^(dr|dra|sr|sra)\.?\s+/i, "").split(/\s+/).filter((part) => part && !nameSkip.has(part.toLowerCase())).slice(0, 2).map((part) => part[0]).join("").toUpperCase();
+  const initials = initialsFor(item.name);
   const locationOrganization = organizationForProfessional(item);
   const locationName = locationOrganization?.name ?? item.organization;
   const locationAddress = locationOrganization?.address && !/endere[cç]o\s+(aguardando validação|a validar|a confirmar)/i.test(locationOrganization.address) ? locationOrganization.address : "";
@@ -110,7 +110,7 @@ export function buildProfileView(item: Professional): ProfileView {
     city: item.city,
     organization: item.organization,
     imageUrl,
-    hasRealPhoto: !!imageUrl && !imageUrl.includes("/avatars/") && !imageUrl.includes("/placeholders/"),
+    hasRealPhoto: !isGeneratedImage(imageUrl),
     initials,
     verified: item.verified,
     registration: completeRegistration(item.registration),

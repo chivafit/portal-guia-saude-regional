@@ -598,7 +598,7 @@ export const professionals: Professional[] = [...baseProfessionals, ...supplemen
     ...professional,
     ...professionalPublicationDefaults,
     sourceUrls: professional.source ? [professional.source] : [],
-    imageUrl: resolveProfessionalImage(professional.slug, professional.imageUrl),
+    imageUrl: resolveProfessionalImage(professional.slug, professional.imageUrl, professional),
   }));
 
 // Estabelecimentos REAIS de Piumhi importados de fontes públicas (25/07/2026).

@@ -32,7 +32,7 @@ function enrichProfessional(professional: Professional) {
   const corrected = applyProfessionalOverride(applyMedicalSequenceOverride(applyNonMedicalSequenceOverride(professional)));
   return {
     ...corrected,
-    imageUrl: resolveProfessionalImage(corrected.slug, podcastImageForProfessional(corrected.slug) ?? corrected.imageUrl),
+    imageUrl: resolveProfessionalImage(corrected.slug, podcastImageForProfessional(corrected.slug) ?? corrected.imageUrl, corrected),
   };
 }
 
