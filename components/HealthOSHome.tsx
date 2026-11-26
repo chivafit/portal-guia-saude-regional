@@ -17,6 +17,8 @@ const shortcuts = [
   { label: "Farmácias", href: "/buscar?cidade=piumhi&tipo=services&q=farmacia", Icon: Pill },
 ];
 
+const quickSpecialties = ["Pediatria", "Oftalmologia", "Psicologia", "Odontologia", "Cardiologia", "Ginecologia", "Dermatologia", "Ortopedia"];
+
 function initials(name: string) {
   return name.replace(/^(dr|dra|sr|sra)\.?\s+/i, "").split(/\s+/).filter(Boolean).slice(0, 2).map((p) => p[0]).join("").toUpperCase();
 }
@@ -48,8 +50,8 @@ export async function HealthOSHome() {
         <span className="gsm-brand"><GuiaSaudeLogo compact /></span>
         <span className="gsm-city"><MapPin size={15} /> Piumhi · MG</span>
       </header>
+      <p className="gsm-hello">Olá!</p>
       <h1 className="gsm-h1">Qual cuidado você procura hoje?</h1>
-      <p className="gsm-lede">Profissionais e serviços de saúde de Piumhi e região.</p>
       <form className="gsm-search" action="/buscar" role="search">
         <input type="hidden" name="cidade" value="piumhi" />
         <Search size={20} />
@@ -58,6 +60,9 @@ export async function HealthOSHome() {
       </form>
       <nav className="gsm-cats" aria-label="Categorias de saúde">
         {shortcuts.map(({ label, href, Icon }) => <Link key={label} href={href}><Icon size={22} /><small>{label}</small></Link>)}
+      </nav>
+      <nav className="gsm-chips" aria-label="Especialidades mais buscadas">
+        {quickSpecialties.map((item) => <Link key={item} href={`/buscar?q=${encodeURIComponent(item)}&cidade=piumhi&tipo=professionals`}>{item}</Link>)}
       </nav>
       <div className="gsm-feature-head">
         <h2>Em destaque</h2>

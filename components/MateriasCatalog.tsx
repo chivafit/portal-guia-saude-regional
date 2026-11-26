@@ -1,25 +1,43 @@
 "use client";
+
 import Link from "next/link";
-import { ArrowRight, BookOpen, Headphones, Search } from "lucide-react";
-import { FormEvent, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { ArrowRight, BookOpen, Mic2, Play } from "lucide-react";
+import { ContentTabs } from "@/components/content/ContentTabs";
+
 type EditorialArticle={slug:string;category:string;title:string;excerpt:string;author?:string;authorRole?:string;date?:string;readingTime?:string;professionalSlug?:string;image?:string};
+type LatestEpisode={slug:string;topic:string;guest:string};
+
 const topics=["Mais recentes","Prevenção","Saúde da mulher","Saúde infantil","Saúde bucal","Alimentação","Saúde mental","Pele","Cardiologia","Ortopedia","Oftalmologia","Bem-estar"];
 function topicsFor(a:EditorialArticle){const c=`${a.category} ${a.title} ${a.excerpt}`.toLocaleLowerCase("pt-BR");const m:[string,RegExp][]=[["Prevenção",/preven|medicamento/],["Saúde da mulher",/mulher|gineco|gesta/],["Saúde infantil",/infância|infantil|pediatr/],["Saúde bucal",/bucal|odonto|implant/],["Alimentação",/alimenta|nutri/],["Saúde mental",/mental|vínculo|psican/],["Pele",/pele|dermat/],["Cardiologia",/cardio/],["Ortopedia",/ortoped|lesão/],["Oftalmologia",/oftalmo|olho|cirurgia refrativa/],["Bem-estar",/reabilita|vida saudável|respirat|qualidade de vida/]];return m.filter(([,r])=>r.test(c)).map(([t])=>t)}
-function byline(a:EditorialArticle){if(!a.author||a.author==="Redação Guia Saúde")return a.readingTime?`Guia Saúde · ${a.readingTime}`:"Guia Saúde";return `${a.author}${a.authorRole?` · ${a.authorRole}`:""}${a.readingTime?` · ${a.readingTime}`:""}`}
-function Img({article}:{article:EditorialArticle}){return article.image?<div className="content-native-image" style={{backgroundImage:`url(${article.image})`}} role="img" aria-label={article.title}/>:<div className="content-native-image fallback"><BookOpen size={28}/></div>}
-function CompactFeature({article}:{article:EditorialArticle}){return <Link href={`/materias/${article.slug}`} className="content-feature" data-content-feature="compact"><span className="content-feature-art" style={article.image?{backgroundImage:`url(${article.image})`}:undefined} role="img" aria-label={article.title}/><span className="content-feature-copy"><span className="cf-cat">{article.category}</span><strong className="cf-title">{article.title}</strong><span className="cf-excerpt">{article.excerpt}</span><span className="cf-meta">{byline(article)}</span><span className="cf-action">Ler matéria <ArrowRight size={14}/></span></span></Link>}
-export function MateriasCatalog({articles,podcastImage,magazineCover,magazineSlug}:{articles:EditorialArticle[];podcastImage?:string;magazineCover?:string;magazineSlug?:string}){
- const [topic,setTopic]=useState("Mais recentes"),[query,setQuery]=useState(""),[submitted,setSubmitted]=useState(""),[count,setCount]=useState(8);
- const catalog=useMemo(()=>{const q=submitted.trim().toLocaleLowerCase("pt-BR");return articles.filter(a=>(topic==="Mais recentes"||topicsFor(a).includes(topic))&&(!q||`${a.title} ${a.excerpt} ${a.category} ${a.author??""}`.toLocaleLowerCase("pt-BR").includes(q)))},[articles,topic,submitted]);
- const feature=catalog[0],recent=catalog.slice(1,count+1);const search=(e:FormEvent)=>{e.preventDefault();setSubmitted(query);setCount(8)};
- return <main className="content-native-page"><section className="content-native-shell">
-   <header className="content-native-header"><span>GUIA SAÚDE</span><h1>Conteúdos</h1><p>Informação confiável para cuidar melhor, feita com profissionais da região.</p></header>
-   <div className="content-native-filterbar">
-   <form className="content-native-search" onSubmit={search}><Search size={18}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Busque um tema ou especialidade" aria-label="Buscar conteúdos"/><button aria-label="Buscar"><ArrowRight size={18}/></button></form>
-   <div className="content-native-topics">{topics.map(t=><button type="button" key={t} className={topic===t?"active":""} onClick={()=>{setTopic(t);setCount(8)}}>{t}</button>)}</div>
-   </div>
-   {feature?<CompactFeature article={feature}/>:<div className="content-native-empty"><strong>Nenhum conteúdo encontrado</strong><p>Tente outro tema ou categoria.</p></div>}
-   {feature&&<><div className="content-native-heading content-native-heading-recent"><div><span>ATUALIZAÇÕES</span><h2>Mais recentes</h2></div><Link href="/materias" className="content-native-seeall">Ver todas</Link></div><div className="content-native-grid">{recent.map(a=><Link href={`/materias/${a.slug}`} className="content-native-card" key={a.slug}><Img article={a}/><div><span>{a.category}</span><h3>{a.title}</h3><small>{byline(a)}</small></div><ArrowRight className="content-native-card-arrow" size={16}/></Link>)}</div>{catalog.length>count+1&&<button className="content-native-more" type="button" onClick={()=>setCount(c=>c+6)}>Ver mais conteúdos <ArrowRight size={15}/></button>}</>}
-   <div className="content-native-channels"><div className="content-native-heading"><div><span>EXPLORE</span><h2>Mais do Guia Saúde</h2></div></div><div className="content-native-channel-grid"><Link href="/podcast" className="content-native-channel">{podcastImage?<span style={{backgroundImage:`url(${podcastImage})`}}/>:<Headphones/>}<div><small>PODCAST</small><strong>Conversas sobre saúde</strong><b>Ouvir episódios <ArrowRight size={13}/></b></div></Link><Link href={magazineSlug?`/revista/${magazineSlug}`:"/revista"} className="content-native-channel">{magazineCover?<span style={{backgroundImage:`url(${magazineCover})`}}/>:<BookOpen/>}<div><small>REVISTA</small><strong>Leia a edição do Guia</strong><b>Abrir revista <ArrowRight size={13}/></b></div></Link></div></div>
- </section></main>
+function byline(a:EditorialArticle){if(!a.author||a.author==="Redação Guia Saúde")return a.readingTime?`Guia Saúde · ${a.readingTime}`:"Guia Saúde";return `${a.author}${a.readingTime?` · ${a.readingTime}`:""}`}
+
+/** Conteúdos no layout do design de referência: abas, matéria em destaque,
+ *  último episódio do podcast e lista das mais recentes. */
+export function MateriasCatalog({articles,latestEpisode}:{articles:EditorialArticle[];latestEpisode?:LatestEpisode}){
+ const[topic,setTopic]=useState("Mais recentes");const[count,setCount]=useState(8);
+ const catalog=useMemo(()=>articles.filter(a=>topic==="Mais recentes"||topicsFor(a).includes(topic)),[articles,topic]);
+ const usedTopics=topics.filter(t=>t==="Mais recentes"||articles.some(a=>topicsFor(a).includes(t)));
+ const feature=catalog[0],recent=catalog.slice(1,count+1);
+ return <main className="content-native-page cn-page"><div className="cn-shell">
+  <header className="cn-header"><h1>Conteúdos</h1></header>
+  <ContentTabs active="materias"/>
+  {feature?<Link href={`/materias/${feature.slug}`} className="cn-feature">
+   <span className={`cn-feature-art${feature.image?"":" is-empty"}`} style={feature.image?{backgroundImage:`url(${feature.image})`}:undefined}>{feature.image?null:<BookOpen size={40} aria-hidden="true"/>}<span className="cn-pill">{feature.category}</span></span>
+   <span className="cn-feature-body"><strong className="cn-feature-title">{feature.title}</strong><span className="cn-meta">{byline(feature)}</span></span>
+  </Link>:<div className="ms-empty"><strong>Nenhum conteúdo neste tema</strong><p>Escolha outro tema.</p></div>}
+  {latestEpisode?<Link href={`/podcast?episodio=${encodeURIComponent(latestEpisode.slug)}`} className="cn-listen">
+   <span className="cn-listen-icon" aria-hidden="true"><Mic2 size={24}/></span>
+   <span className="cn-listen-copy"><small>Episódio novo · Conexão Saúde</small><strong>{latestEpisode.topic}</strong></span>
+   <span className="cn-listen-play" aria-hidden="true"><Play size={20} fill="currentColor"/></span>
+  </Link>:null}
+  <div className="cn-topics" role="tablist" aria-label="Temas">{usedTopics.map(t=><button type="button" role="tab" aria-selected={topic===t} key={t} className={topic===t?"active":""} onClick={()=>{setTopic(t);setCount(8)}}>{t}</button>)}</div>
+  {recent.length?<><div className="cn-section-head"><h2>{topic==="Mais recentes"?"Mais recentes":topic}</h2></div>
+  <div className="cn-list">{recent.map(a=><Link href={`/materias/${a.slug}`} className="cn-card" key={a.slug}>
+   <span className={`cn-card-art${a.image?"":" is-empty"}`} style={a.image?{backgroundImage:`url(${a.image})`}:undefined}>{a.image?null:<BookOpen size={26} aria-hidden="true"/>}</span>
+   <span className="cn-card-body"><small>{a.category}</small><strong>{a.title}</strong><em>{a.readingTime??"Ler matéria"}</em></span>
+   <ArrowRight size={18} aria-hidden="true"/>
+  </Link>)}</div></>:null}
+  {catalog.length>count+1?<button type="button" className="ms-more" onClick={()=>setCount(c=>c+6)}>Ver mais matérias</button>:null}
+ </div></main>
 }
