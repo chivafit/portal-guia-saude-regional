@@ -1,3 +1,4 @@
+import { whatsappLink } from "./whatsapp";
 // Dados já prontos para exibir um perfil profissional.
 // Usado pela página estática e pelo arquivo /app-data/profiles.json, que o app
 // consulta para mostrar contatos e textos atualizados sem nova versão na loja.
@@ -65,8 +66,7 @@ export function e164(digits: string) {
 }
 
 export function whatsappHref(value: string) {
-  const digits = value.replace(/\D/g, "");
-  return digits.length < 10 ? "" : `https://wa.me/${digits.startsWith("55") ? digits : `55${digits}`}`;
+  return whatsappLink(value, "professional");
 }
 
 function usableService(value: string, specialty: string) {
