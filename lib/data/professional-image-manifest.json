@@ -1655,6 +1655,54 @@
       }
     ]
   },
+  "/professionals/dra-raiza-luna-peixoto-anestesiologia-piumhi.jpg": {
+    "width": 848,
+    "height": 948,
+    "avif": [
+      {
+        "width": 96,
+        "src": "/professionals/optimized/professionals-dra-raiza-luna-peixoto-anestesiologia-piumhi.043216859bf3.96.avif"
+      },
+      {
+        "width": 160,
+        "src": "/professionals/optimized/professionals-dra-raiza-luna-peixoto-anestesiologia-piumhi.043216859bf3.160.avif"
+      },
+      {
+        "width": 240,
+        "src": "/professionals/optimized/professionals-dra-raiza-luna-peixoto-anestesiologia-piumhi.043216859bf3.240.avif"
+      },
+      {
+        "width": 320,
+        "src": "/professionals/optimized/professionals-dra-raiza-luna-peixoto-anestesiologia-piumhi.043216859bf3.320.avif"
+      },
+      {
+        "width": 480,
+        "src": "/professionals/optimized/professionals-dra-raiza-luna-peixoto-anestesiologia-piumhi.043216859bf3.480.avif"
+      }
+    ],
+    "webp": [
+      {
+        "width": 96,
+        "src": "/professionals/optimized/professionals-dra-raiza-luna-peixoto-anestesiologia-piumhi.043216859bf3.96.webp"
+      },
+      {
+        "width": 160,
+        "src": "/professionals/optimized/professionals-dra-raiza-luna-peixoto-anestesiologia-piumhi.043216859bf3.160.webp"
+      },
+      {
+        "width": 240,
+        "src": "/professionals/optimized/professionals-dra-raiza-luna-peixoto-anestesiologia-piumhi.043216859bf3.240.webp"
+      },
+      {
+        "width": 320,
+        "src": "/professionals/optimized/professionals-dra-raiza-luna-peixoto-anestesiologia-piumhi.043216859bf3.320.webp"
+      },
+      {
+        "width": 480,
+        "src": "/professionals/optimized/professionals-dra-raiza-luna-peixoto-anestesiologia-piumhi.043216859bf3.480.webp"
+      }
+    ]
+  },
   "/professionals/dra-simone-mota-bonisson-endocrinologia-piumhi.jpg": {
     "width": 750,
     "height": 750,
