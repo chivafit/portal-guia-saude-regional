@@ -115,6 +115,11 @@ Requer Android Studio instalado no computador.
   recusa números repetidos. No Android Studio, o número fica em `android/app/build.gradle`
   (`versionCode`).
 
+Na primeira compilação o Gradle baixa muitas dependências e o Maven Central às vezes
+responde **429 (Too Many Requests)**. Não é erro do projeto: espere um minuto e rode de
+novo (as dependências já baixadas ficam guardadas). Para baixar menos coisas ao mesmo
+tempo: `cd android && ./gradlew assembleDebug --max-workers=2`.
+
 ## 5. Aplicativo iOS
 
 Requer um Mac com Xcode: `npm run app:ios` e depois *Product → Archive → Distribute App*.

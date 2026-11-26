@@ -34,8 +34,8 @@ export async function DesktopHome() {
   return <main className="desktop-home official-home">
     <header className="official-nav">
       <Link href="/" className="official-brand"><GuiaSaudeLogo /></Link>
-      <nav><Link href="/buscar?cidade=piumhi&tipo=professionals">Profissionais</Link><Link href="/buscar?cidade=piumhi&tipo=services">Clínicas e serviços</Link><Link href="/materias">Conteúdos</Link><Link href="/podcast">Podcast</Link><Link href="/revista">Revista</Link><Link href="/anuncie">Anuncie</Link></nav>
-      <Link className="official-search-link" href="/buscar" aria-label="Buscar"><Search size={19}/></Link><Link className="official-nav-cta" href="/anuncie">Anuncie</Link>
+      <nav><Link href="/buscar?cidade=piumhi&tipo=professionals">Profissionais</Link><Link href="/buscar?cidade=piumhi&tipo=services">Clínicas e serviços</Link><Link href="/materias">Conteúdos</Link><Link href="/podcast">Podcast</Link><Link href="/revista">Revista</Link><Link href="/anuncie" prefetch={false}>Anuncie</Link></nav>
+      <Link className="official-search-link" href="/buscar" aria-label="Buscar"><Search size={19}/></Link><Link className="official-nav-cta" href="/anuncie" prefetch={false}>Anuncie</Link>
     </header>
 
     <section className="official-search-hero">
@@ -71,7 +71,7 @@ export async function DesktopHome() {
       <div className="official-app-visual" aria-label="Prévia do Guia Saúde no celular"><div className="official-app-orb"/><div className="official-app-phone"><div><small>PIUMHI · MG</small><h3>Como podemos <em>cuidar de você</em></h3><span><Search/> Profissional ou serviço</span><i/><i/><i/></div></div><div className="official-app-favorite"><Heart/><span><b>Favoritos</b><small>sempre à mão</small></span></div></div>
     </section>
 
-    <section className="official-business"><div><span>PARA PROFISSIONAIS E EMPRESAS</span><h2>Faça parte do Guia Saúde.</h2><p>Apresente seu trabalho para pessoas que estão procurando saúde e bem-estar na sua região.</p></div><Link href="/anuncie">Anuncie no Guia Saúde <ArrowRight size={16}/></Link></section>
+    <section className="official-business"><div><span>PARA PROFISSIONAIS E EMPRESAS</span><h2>Faça parte do Guia Saúde.</h2><p>Apresente seu trabalho para pessoas que estão procurando saúde e bem-estar na sua região.</p></div><Link href="/anuncie" prefetch={false}>Anuncie no Guia Saúde <ArrowRight size={16}/></Link></section>
 
     
 

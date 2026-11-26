@@ -27,12 +27,12 @@ export function GlobalSiteHeader() {
           <GuiaSaudeLogo />
         </Link>
         <nav aria-label="Navegação principal">
-          {navigation.map((item) => <Link href={item.href} key={item.label}>{item.label}</Link>)}
+          {navigation.map((item) => <Link href={item.href} key={item.label} prefetch={item.href.startsWith("/anuncie") ? false : undefined}>{item.label}</Link>)}
         </nav>
         <Link className="desktop-search-link" href="/buscar" aria-label="Buscar">
           <Search size={19} />
         </Link>
-        <Link className="desktop-download" href="/anuncie">Anuncie</Link>
+        <Link className="desktop-download" href="/anuncie" prefetch={false}>Anuncie</Link>
       </div>
 
       <div className="global-site-header-mobile">
