@@ -7932,3 +7932,86 @@ html body :is(.ms-badge,.gss-card [class*="badge"],.gss-card em,.dc-badge):not(#
 html body :is(.hos-podcast-feature,.cn-listen,.pf-podcast) small:not(#gs){opacity:1!important}
 html body .official-search-form button:not(#gs),html body .official-nav-cta:not(#gs){opacity:1!important;background:var(--bl)!important;color:#fff!important}
 html body main .hos-podcast-feature small:not(#gs):not(#gs2),html body main .cn-listen small:not(#gs):not(#gs2),html body main .pf-podcast small:not(#gs):not(#gs2){color:#dbe7fd!important}
+
+/* ==========================================================================
+   Refinamento (2026-11): sombras suaves, efeitos, fotos padronizadas e
+   nova página do profissional.
+   ========================================================================== */
+:root{
+  --sh-1:0 1px 2px rgba(15,23,42,.04),0 4px 14px rgba(15,23,42,.06);
+  --sh-2:0 2px 6px rgba(15,23,42,.05),0 14px 34px rgba(15,23,42,.09);
+  --sh-blue:0 10px 28px rgba(37,99,235,.28);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+/* Sombras: cartões brancos com sombra em camadas, cartões azuis com sombra azulada */
+html body :is(.gsm-pro,.gsm-content a,.ms-org,.ms-shortcuts a,.ms-specialties a,.cs-categories a,.pf-card,.pf-update,.dz-card,.cn-feature,.cn-card,.hos-podcast-row,.gss-card,.gss-aside,.official-category-grid>*,.official-professional-grid>*,.official-search-stats>*,.official-search-hero,.native-article-story,.pf-stats li):not(#gs){box-shadow:var(--sh-1)!important}
+html body :is(.gsm-search,.ms-search,.cs-search,.hos-podcast-search,.gss-search,.official-search-form,.hm-filter,.pf-icon-btn,.pf-topbar-actions .favorite-control button,.pf-topbar-actions .profile-share button,.ms-back,.hos-section-back):not(#gs){box-shadow:var(--sh-1)!important}
+html body :is(.hm-hero,.dc-brand,.hos-podcast-feature,.cn-listen,.pf-podcast):not(#gs){box-shadow:var(--sh-blue)!important}
+.dc{box-shadow:var(--sh-1)}
+html body :is(.dc-contact:not(.dc-contact-soft),.pf-btn-primary,.ms-btn-primary,.gss-a-primary,.hm-filter):not(#gs){transition:transform .16s var(--ease),box-shadow .16s var(--ease),background-color .16s}
+html body :is(.dc-contact:not(.dc-contact-soft),.pf-btn-primary,.gss-a-primary,.ms-filter-apply):not(#gs){box-shadow:0 6px 16px rgba(37,99,235,.28)!important}
+
+/* Efeitos: toque afunda levemente; mouse levanta o cartão e cresce a sombra */
+html body :is(.dc,.gsm-content a,.ms-org,.cs-categories a,.cn-card,.cn-feature,.hos-podcast-row,.dz-card,.gss-card,.hm-hero-btn,.dc-contact,.dc-go,.pf-btn,.pf-round,.hm-pills a,.gsm-chips a,.pf-stats li):not(#gs){transition:transform .18s var(--ease),box-shadow .18s var(--ease),background-color .18s!important}
+html body :is(.dc,.gsm-content a,.ms-org,.cs-categories a,.cn-card,.cn-feature,.hos-podcast-row,.dz-card):active:not(#gs){transform:scale(.98)!important}
+html body :is(.hm-hero-btn,.dc-contact,.dc-go,.pf-btn,.pf-round,.hm-pills a,.gsm-chips a):active:not(#gs){transform:scale(.95)!important}
+@media (hover:hover){
+  html body :is(.dc,.gsm-content a,.ms-org,.cs-categories a,.cn-card,.cn-feature,.hos-podcast-row,.dz-card,.gss-card):hover:not(#gs){transform:translateY(-3px)!important;box-shadow:var(--sh-2)!important}
+  html body .dc-brand:hover:not(#gs){box-shadow:0 16px 36px rgba(37,99,235,.34)!important}
+  html body .dc-go:hover:not(#gs){transform:rotate(45deg)!important}
+  html body .dc:hover .dc-photo img{transform:scale(1.04)}
+}
+.dc-photo img{transition:transform .5s var(--ease)}
+/* Coração "pula" ao salvar */
+@keyframes gs-heart-pop{0%{transform:scale(1)}35%{transform:scale(1.28)}70%{transform:scale(.92)}100%{transform:scale(1)}}
+html body .favorite-control button[aria-pressed=true] svg:not(#gs){animation:gs-heart-pop .38s var(--ease);color:#ef4444!important;fill:#ef4444!important}
+/* Cartões aparecem com um leve deslize, um depois do outro */
+@keyframes gs-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+html body :is(.hm-doctors,.ms-list,.dz-list,.cs-list,.cn-list,.hos-podcast-list)>*:not(#gs){animation:gs-rise .38s var(--ease) both}
+html body :is(.hm-doctors,.ms-list,.dz-list,.cs-list,.cn-list,.hos-podcast-list)>*:nth-child(2){animation-delay:.05s}
+html body :is(.hm-doctors,.ms-list,.dz-list,.cs-list,.cn-list,.hos-podcast-list)>*:nth-child(3){animation-delay:.1s}
+html body :is(.hm-doctors,.ms-list,.dz-list,.cs-list,.cn-list,.hos-podcast-list)>*:nth-child(4){animation-delay:.15s}
+html body :is(.hm-doctors,.ms-list,.dz-list,.cs-list,.cn-list,.hos-podcast-list)>*:nth-child(n+5){animation-delay:.2s}
+
+/* Fotos padronizadas */
+.dc{min-height:0;grid-template-columns:minmax(0,1fr) 40%}
+.dc-photo{height:188px;margin:14px 14px 0 0;border-radius:22px}
+.dc-text{padding:20px 4px 14px 20px}
+.dc-bar{margin:12px}
+html body .gss-card .gss-card-photo:not(#gs){width:112px!important;height:112px!important;border-radius:24px!important;overflow:hidden!important}
+html body .gss-card .gss-card-photo img:not(#gs){object-fit:cover!important;object-position:center 15%!important}
+html body :is(.dz-photo,.gsm-pro-photo):not(#gs){border-radius:20px!important}
+html body :is(.dc-photo,.gss-card-photo,.dz-photo,.pf-photo,.ms-card-photo) img:not(#gs){object-position:center 15%!important}
+
+/* Página do profissional: foto grande no topo e cartão com nome sobreposto */
+.pf-head{display:none}
+.pf-hero-card{position:relative;margin:16px 0 14px}
+.pf-photo{position:relative;width:100%;aspect-ratio:4/3.4;overflow:hidden;border-radius:30px;background:var(--bl-soft-2);box-shadow:var(--sh-2)}
+.pf-photo img,.pf-photo picture{width:100%;height:100%;object-fit:cover}
+.pf-photo.is-initials{display:grid;place-items:center;aspect-ratio:16/10;background:linear-gradient(0deg,var(--bl-soft-2),var(--bl-soft-2))}
+.pf-photo.is-initials span{color:var(--bl);font-size:64px;font-weight:500}
+.pf-hero-info{position:relative;z-index:2;display:flex;flex-direction:column;gap:8px;margin:-56px 14px 0;padding:18px 20px;border-radius:24px;background:#fff;box-shadow:var(--sh-2)}
+html body .pf-hero-info h1.pf-name:not(#gs){margin:0!important;font-size:28px!important;line-height:1.15!important}
+html body .pf-hero-info .pf-pill:not(#gs){background:var(--bl-soft)!important;color:var(--bl-deep)!important}
+.pf-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+.pf-stats li{align-items:center;gap:6px;padding:14px 6px}
+.pf-stat-ic{display:grid;place-items:center;width:42px;height:42px;border-radius:999px;background:var(--bl-soft);color:var(--bl)}
+.pf-stats strong{max-width:100%;font-size:14px!important}
+.pf-stats li:first-child strong{font-size:13px!important}
+@media (max-width:380px){.pf-stats{grid-template-columns:1fr 1fr}}
+html body .pf-card h2:not(#gs){font-size:19px!important;margin-bottom:12px!important}
+html body .pf-tags span:not(#gs){background:var(--bl-soft)!important;color:var(--bl-deep)!important}
+html body .pf-location-icon:not(#gs){background:var(--bl-soft)!important;color:var(--bl)!important;border-radius:999px!important}
+/* Barra de contato: botão largo + botões redondos */
+html body .pf-actionbar:not(#gs){display:flex!important;gap:10px!important;align-items:center!important;background:rgba(244,246,251,.92)!important;-webkit-backdrop-filter:blur(14px)!important;backdrop-filter:blur(14px)!important}
+html body .pf-actionbar .pf-btn:not(#gs){flex:1!important}
+.pf-round{display:grid;flex:none;place-items:center;width:56px;height:56px;border-radius:999px;background:#fff;color:var(--lt-ink)!important;box-shadow:var(--sh-1)}
+@media (min-width:901px){
+  .pf-hero-card{display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;align-items:center;padding:20px;border-radius:30px;background:#fff;box-shadow:var(--sh-1)}
+  .pf-photo{aspect-ratio:4/5;box-shadow:none}
+  .pf-hero-info{margin:0;padding:0;box-shadow:none}
+  html body .pf-hero-info h1.pf-name:not(#gs){font-size:40px!important}
+  .pf-rail{margin-top:16px!important}
+}
+@media (max-width:900px){.pf-photo{aspect-ratio:1/1;max-height:400px}}
+html body .pf-photo img:not(#gs){object-position:center 22%!important}

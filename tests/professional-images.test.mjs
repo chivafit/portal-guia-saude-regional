@@ -26,7 +26,7 @@ test("home and featured directory cap eager photos", async () => {
 test("individual profile prioritizes its single responsive photo", async () => {
   // O perfil é renderizado por components/ProfessionalProfile.tsx (usado pela página app/profissionais/[slug]).
   const profile = await readFile("components/ProfessionalProfile.tsx", "utf8");
-  // A foto do perfil é um avatar redondo de ~160px; o navegador escolhe a variante pela densidade da tela.
+  // A foto do perfil ocupa a largura do cartão do topo; o navegador escolhe a variante pelo tamanho da tela.
   assert.match(profile, /sizes="(?:100vw|\d+px)"/);
   assert.match(profile, /eager fetchPriority="high"/);
 });
