@@ -11,7 +11,7 @@ export function PodcastCover({ episode, size = "row" }: { episode: CoverEpisode;
   return <span className={`pc pc-${size}`} aria-hidden="true">
     <span className="pc-glow" />
     {size === "feature" ? <span className="pc-brand">Conexão<br />Saúde</span> : null}
-    <span className="pc-photo"><span className="pc-initials">{initialsFor(episode.guest)}</span></span>
+    <span className="pc-photo"><span className="pc-initials">{initialsFor(episode.guest)}</span>{episode.guestPhoto?<img src={episode.guestPhoto} alt="" loading={size==="feature"?"eager":"lazy"}/>:null}</span>
     <span className="pc-badge"><Mic2 size={size === "feature" ? 16 : 11} /></span>
   </span>;
 }
