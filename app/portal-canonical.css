@@ -8201,3 +8201,12 @@ html body .ft-legal a:not(#gs):not(#p){min-height:28px;color:#97a3a9!important;f
   .ft-bottom{flex-direction:column;margin-top:14px;padding-top:12px}
   html body .ft-legal a:not(#gs):not(#p){min-height:36px}
 }
+
+/* Cards de atendimento do início: ícones soltos, estilo atalhos de app (opção C) */
+html body .hm-cats:not(#gs):not(#p){gap:16px 8px!important;margin:6px 0 12px!important}
+html body .hm-cats a:not(#gs):not(#p){padding:0!important;gap:8px!important;border-radius:0!important;background:none!important;box-shadow:none!important}
+html body .hm-cats a .hm-cat-ic:not(#gs):not(#p){width:62px!important;height:62px!important;border-radius:22px!important;background:#fff!important;box-shadow:var(--sh-1)!important;color:var(--pal-teal-ink)!important;transition:transform .18s var(--ease),box-shadow .18s var(--ease)!important}
+html body .hm-cats a:active .hm-cat-ic:not(#gs):not(#p){transform:scale(.92)!important}
+@media (hover:hover){html body .hm-cats a:hover:not(#gs):not(#p){transform:none!important;box-shadow:none!important}html body .hm-cats a:hover .hm-cat-ic:not(#gs):not(#p){transform:translateY(-3px)!important;box-shadow:var(--sh-2)!important}}
+html body .hm-cats a strong:not(#gs):not(#p){font-size:13px!important;color:var(--pal-navy)!important}
+html body .hm-cats a small:not(#gs):not(#p){display:none!important}
