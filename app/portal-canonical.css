@@ -8015,3 +8015,16 @@ html body .pf-actionbar .pf-btn:not(#gs){flex:1!important}
 }
 @media (max-width:900px){.pf-photo{aspect-ratio:1/1;max-height:400px}}
 html body .pf-photo img:not(#gs){object-position:center 22%!important}
+/* Perfil: foto compacta ao lado do nome (antes ocupava a largura toda) */
+html body .pf-hero-card:not(#gs){display:grid!important;grid-template-columns:108px minmax(0,1fr)!important;gap:16px!important;align-items:center!important;margin:16px 0 14px!important;padding:16px!important;border-radius:28px!important;background:#fff!important;box-shadow:var(--sh-1)!important}
+html body .pf-photo:not(#gs){width:108px!important;height:132px!important;max-height:none!important;aspect-ratio:auto!important;border-radius:22px!important;box-shadow:none!important}
+html body .pf-photo.is-initials span:not(#gs){font-size:34px!important}
+html body .pf-hero-info:not(#gs){margin:0!important;padding:0!important;gap:6px!important;border-radius:0!important;box-shadow:none!important;background:none!important}
+html body .pf-hero-info h1.pf-name:not(#gs){font-size:22px!important;line-height:1.2!important}
+html body .pf-hero-info .pf-pill:not(#gs){padding:5px 12px!important;font-size:13px!important}
+html body .pf-hero-info .pf-head-meta:not(#gs){font-size:14px!important}
+@media (min-width:901px){
+  html body .pf-hero-card:not(#gs){grid-template-columns:150px minmax(0,1fr)!important;gap:24px!important;padding:20px!important}
+  html body .pf-photo:not(#gs){width:150px!important;height:180px!important}
+  html body .pf-hero-info h1.pf-name:not(#gs){font-size:32px!important}
+}
