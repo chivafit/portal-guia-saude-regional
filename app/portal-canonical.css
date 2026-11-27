@@ -8248,3 +8248,34 @@ html body .ft-legal a:not(#gs):not(#p){min-height:28px;color:#97a3a9!important;f
   html body main.gsm-home .hm-cats{grid-template-columns:repeat(2,minmax(0,1fr))}
   html body main.gsm-home .dc .dc-bar{flex-wrap:wrap}
 }
+
+
+/* Mobile refinement 2: visual review of the deployed home. */
+@media(max-width:900px){
+  html body main.gsm-home .gsm-top{margin-bottom:8px!important}
+  html body main.gsm-home .gsm-brand .guia-logo-symbol:not(#gs):not(#p):not(#z){width:34px!important;height:34px!important}
+  html body main.gsm-home .gsm-brand .guia-logo-wordmark:not(#gs):not(#p):not(#z){font-size:19px!important;font-weight:700!important}
+  html body main.gsm-home .gsm-city{white-space:nowrap}
+  html body main.gsm-home .hm-intro:not(#gs):not(#p):not(#z){padding-top:6px!important;margin-bottom:12px!important}
+  html body main.gsm-home .hm-title:not(#gs):not(#p):not(#z){font-size:clamp(28px,7.8vw,36px)!important}
+  html body main.gsm-home .hm-sub{margin-top:8px!important}
+  html body main.gsm-home .hm-search-row{margin-bottom:14px}
+  html body main.gsm-home .hm-cats a{padding:8px 2px!important;gap:4px!important;min-height:80px}
+  html body main.gsm-home .hm-cat-ic{width:42px;height:42px}
+  html body main.gsm-home .hm-cat-ic svg{width:25px;height:25px}
+  html body main.gsm-home .gsm-feature-head{margin-top:16px!important;margin-bottom:6px!important}
+  html body main.gsm-home .gsm-feature-head a{min-height:44px}
+  html body main.gsm-home .dc:not(#gs):not(#p):not(#z){grid-template-columns:88px minmax(0,1fr)!important;padding:10px!important;gap:8px 12px!important}
+  html body main.gsm-home .dc .dc-photo:not(#gs):not(#p):not(#z){width:88px!important;height:94px!important}
+  html body main.gsm-home .dc .dc-name:not(#gs):not(#p):not(#z){font-size:18px!important;line-height:1.2!important}
+  html body main.gsm-home .dc:not(.dc-brand) .dc-meta:not(#gs):not(#p):not(#z){color:#52616b!important}
+  html body main.gsm-home .dc.dc-brand .dc-meta:not(#gs):not(#p):not(#z){color:#c5d1d5!important}
+  html body main.gsm-home .dc .dc-bar:not(#gs):not(#p):not(#z){padding-top:8px!important}
+  html body nav.app-bottom-nav.health-os-dock.hos-navbar.gsm-dock:not(#gs):not(#p):not(#z){padding-bottom:max(14px,env(safe-area-inset-bottom))!important}
+  html body main.gsm-home .gsm-shell{padding-bottom:calc(120px + env(safe-area-inset-bottom))}
+}
+@media(max-width:350px){
+  html body main.gsm-home .gsm-brand .guia-logo-wordmark:not(#gs):not(#p):not(#z){font-size:16px!important}
+  html body main.gsm-home .dc:not(#gs):not(#p):not(#z){grid-template-columns:76px minmax(0,1fr)!important}
+  html body main.gsm-home .dc .dc-photo:not(#gs):not(#p):not(#z){width:76px!important;height:88px!important}
+}
