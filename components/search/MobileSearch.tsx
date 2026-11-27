@@ -106,24 +106,15 @@ export function MobileSearch(props: MobileSearchProps) {
       {q ? <Link className="ms-clear" href={props.clearHref("q")} aria-label="Limpar busca"><X size={17} /></Link> : <button type="submit" className="ms-go" aria-label="Buscar"><ArrowRight size={18} /></button>}
     </form>
 
-    {isLanding ? <>
-      <nav className="ms-shortcuts" aria-label="Atalhos">
-        {shortcuts.map(({ label, href, Icon }) => <Link key={label} href={href}><Icon size={22} /><span>{label}</span></Link>)}
-      </nav>
-      <div className="ms-section-head"><h2>Especialidades</h2><Link href="/buscar/especialidades">Ver todas</Link></div>
-      <div className="ms-specialties">
-        {props.quickSpecialties.map(({ label, query, Icon }) => <Link key={label} href={query ? `/buscar?q=${encodeURIComponent(query)}&cidade=piumhi&tipo=professionals` : "/buscar/especialidades"}><span><Icon size={22} strokeWidth={1.7} /></span><strong>{label}</strong></Link>)}
-      </div>
-    </> : <>
       <div className="ms-chips">
         <details className="ms-filter" ref={sheet}>
           <summary><SlidersHorizontal size={16} /> Filtros{active.length ? ` · ${active.length}` : ""}</summary>
           <div className="ms-filter-backdrop" onClick={() => { if (sheet.current) sheet.current.open = false; }} />
           <form className="ms-filter-panel" action="/buscar">
-            <header><h2>Filtros</h2><button type="button" aria-label="Fechar filtros" onClick={() => { if (sheet.current) sheet.current.open = false; }}><X size={18} /></button></header>
+            <header><div><h2>Filtros</h2><p>Encontre o cuidado que você precisa.</p></div><button type="button" aria-label="Fechar filtros" onClick={() => { if (sheet.current) sheet.current.open = false; }}><X size={18} /></button></header>
             <input type="hidden" name="cidade" value="piumhi" />
             {typeParam ? <input type="hidden" name="tipo" value={typeParam} /> : null}
-            <label>Busca<input name="q" defaultValue={q} placeholder="Nome ou especialidade" /></label>
+            <div className="ms-filter-fields"><label>Busca<input name="q" defaultValue={q} placeholder="Nome ou especialidade" /></label>
             {type !== "servicos" ? <>
               <label>Profissão<select name="profissao" defaultValue={props.profession}><option value="">Todas</option>{props.professions.map((item) => <option key={item}>{item}</option>)}</select></label>
               <label>Especialidade<select name="especialidade" defaultValue={props.specialty}><option value="">Todas</option>{props.specialtyChoices.map((item) => <option key={item}>{item}</option>)}</select></label>
@@ -134,11 +125,22 @@ export function MobileSearch(props: MobileSearchProps) {
               <label className="ms-check"><input type="checkbox" name="contato" value="1" defaultChecked={props.onlyContact} /> Com contato direto</label>
               <label className="ms-check"><input type="checkbox" name="destaque" value="1" defaultChecked={props.onlyFeatured} /> Perfis em destaque</label>
             </> : null}
-            <button type="submit" className="ms-filter-apply">Ver resultados</button>
+            </div><footer className="ms-filter-footer"><button type="button" className="ms-filter-reset" onClick={(event) => { const form = event.currentTarget.form; if (!form) return; for (const field of Array.from(form.elements)) { if (field instanceof HTMLSelectElement) field.value = ""; if (field instanceof HTMLInputElement && field.type === "checkbox") field.checked = false; } }}>Limpar filtros</button><button type="submit" className="ms-filter-apply">Aplicar filtros</button></footer>
           </form>
         </details>
         {active.map((item) => <Link key={item.key} className="ms-chip" href={props.clearHref(item.key)} aria-label={`Remover filtro ${item.label}`}>{item.label}<X size={14} /></Link>)}
       </div>
+
+    {isLanding ? <>
+      <nav className="ms-shortcuts" aria-label="Atalhos">
+        {shortcuts.map(({ label, href, Icon }) => <Link key={label} href={href}><Icon size={22} /><span>{label}</span></Link>)}
+      </nav>
+      <div className="ms-section-head"><h2>Especialidades</h2><Link href="/buscar/especialidades">Ver todas</Link></div>
+      <div className="ms-specialties">
+        {props.quickSpecialties.map(({ label, query, Icon }) => <Link key={label} href={query ? `/buscar?q=${encodeURIComponent(query)}&cidade=piumhi&tipo=professionals` : "/buscar/especialidades"}><span><Icon size={22} strokeWidth={1.7} /></span><strong>{label}</strong></Link>)}
+      </div>
+    </> : <>
+
 
       <div className="ms-count">
         <p><strong>{total} {unit}</strong> encontrados</p>

@@ -8351,3 +8351,22 @@ html body main.native-magazine-reader-screen .native-magazine-reader{scroll-marg
 html body main.native-magazine-reader-screen .magazine-flip-controls button{min-width:44px!important;min-height:44px!important}
 html body main.native-magazine-reader-screen .native-magazine-shelf a>span{background:#f5f6f3!important;aspect-ratio:210/297!important}
 }
+
+
+@media(max-width:900px){
+html body .ms .ms-filter[open] .ms-filter-backdrop{position:fixed!important;inset:0!important;background:#1f2a3766!important;z-index:1200!important}
+html body .ms .ms-filter[open] .ms-filter-panel:not(#gs):not(#p):not(#z){position:fixed!important;inset:auto 0 0!important;margin:0 auto!important;width:100%!important;max-width:560px!important;max-height:85dvh!important;display:flex!important;flex-direction:column!important;gap:0!important;padding:0!important;overflow:hidden!important;background:#fff!important;border-radius:24px 24px 0 0!important;z-index:1201!important}
+html body .ms .ms-filter-panel>header{display:flex!important;align-items:center!important;justify-content:space-between!important;padding:20px!important;border-bottom:1px solid #e0e7e2!important}
+html body .ms .ms-filter-panel>header h2{font-size:24px!important;font-weight:700!important;margin:0!important}
+html body .ms .ms-filter-panel>header p{font-size:13px;color:#52616b;margin:4px 0 0}
+html body .ms .ms-filter-panel>header button{min-width:44px!important;min-height:44px!important;border-radius:50%!important;background:#f5f6f3!important}
+html body .ms .ms-filter-fields{display:grid;gap:16px;overflow-y:auto;min-height:0;padding:18px 20px;overscroll-behavior:contain}
+html body .ms .ms-filter-fields>label{font-size:14px!important;font-weight:600!important;color:#1f2a37!important}
+html body .ms .ms-filter-fields :is(select,input:not([type=checkbox])){width:100%!important;min-height:48px!important;font-size:16px!important;border:1px solid #d9e3df!important;border-radius:12px!important;background:#f5f6f3!important;padding:10px 12px!important}
+html body .ms .ms-filter-fields .ms-check{display:flex!important;align-items:center!important;gap:12px!important;min-height:44px!important}
+html body .ms .ms-filter-fields input[type=checkbox]{width:22px!important;height:22px!important;accent-color:#33695d}
+html body .ms .ms-filter-footer{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;padding:14px 20px max(18px,env(safe-area-inset-bottom));border-top:1px solid #e0e7e2;background:white}
+html body .ms .ms-filter-footer button:not(#gs):not(#p):not(#z){min-height:48px!important;margin:0!important;border-radius:12px!important;font-size:14px!important;font-weight:600!important}
+html body .ms .ms-filter-reset{background:#fff;color:#33695d;border:1px solid #d9e3df}
+html body .ms .ms-filter-footer .ms-filter-apply{background:#33695d!important;color:#fff!important}
+}
