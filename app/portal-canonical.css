@@ -8480,3 +8480,8 @@ html body .inclusion-page .form-consent input{width:18px!important;height:18px!i
 html body .inclusion-page .inclusion-send-note{grid-column:1/-1;color:#52617A!important;font-size:13px!important;margin:0!important}
 html body .inclusion-page .inclusion-form button{width:100%!important;min-height:48px!important;border-radius:12px!important;font-size:15px!important;background:#3459D6!important;color:#fff!important}
 @media(max-width:900px){html body .inclusion-page .inclusion-shell{width:calc(100% - 28px)!important;max-width:560px!important}html body .inclusion-page .inclusion-form:not(#gs):not(#p):not(#z){grid-template-columns:1fr!important;padding:16px!important}html body .inclusion-page .inclusion-form>label{grid-column:1/-1!important}html body .inclusion-page .inclusion-form-intro{display:block!important}html body .inclusion-page .inclusion-form-intro>p{margin-top:5px!important}}
+
+/* Destaque comercial de estabelecimentos */
+html body .ms-org.is-featured:not(#gs):not(#p):not(#z){background:linear-gradient(145deg,#E8EEFF,#fff)!important;border:1px solid #6482E1!important;border-left:4px solid #3459D6!important;box-shadow:0 5px 18px #3459D619!important}
+.org-featured-label{display:table;background:#3459D6;color:#fff;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:700;margin-bottom:5px}
+.ms-org-icon img{width:100%;height:100%;object-fit:contain}

@@ -30,6 +30,8 @@ export function filterProfessionals(items: PublicProfessional[], filters: Search
   });
 }
 
+export function isFeaturedOrganization(slug: string): boolean { return slug === "drogaria-americana-piumhi"; }
+
 export function filterOrganizations(items: PublicOrganization[], filters: SearchFilters): PublicOrganization[] {
   const { query = "", city = "", category = "" } = filters;
   const requestedCategory = resolveServiceCategory(category);
@@ -63,5 +65,5 @@ export function filterOrganizations(items: PublicOrganization[], filters: Search
       (!city || normalizeTaxonomyValue(item.city) === normalizedCity) &&
       categoryMatch
     );
-  });
+  }).sort((a,b) => Number(isFeaturedOrganization(b.slug)) - Number(isFeaturedOrganization(a.slug)));
 }
