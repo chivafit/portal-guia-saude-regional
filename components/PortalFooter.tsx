@@ -1,48 +1,43 @@
 import Link from "next/link";
 import { GuiaSaudeLogo } from "@/components/GuiaSaudeLogo";
 
-const columns = [
-  { title: "Encontre", links: [
-    { label: "Profissionais", href: "/buscar?cidade=piumhi&tipo=professionals" },
-    { label: "Clínicas e serviços", href: "/buscar?cidade=piumhi&tipo=services" },
-    { label: "Farmácias", href: "/buscar?categoria=farmacias&cidade=piumhi&tipo=services" },
-    { label: "Especialidades", href: "/buscar/especialidades" },
-  ] },
-  { title: "Conteúdo", links: [
-    { label: "Matérias", href: "/materias" },
-    { label: "Podcast Conexão Saúde", href: "/podcast" },
-    { label: "Revista Guia Saúde", href: "/revista" },
-  ] },
-  { title: "Guia Saúde", links: [
-    { label: "Sobre", href: "/sobre" },
-    { label: "Anuncie", href: "/anuncie" },
-    { label: "Cadastre seu perfil", href: "/inclusao" },
-    { label: "Contato", href: "mailto:rmproguia@gmail.com" },
-  ] },
+const mainLinks = [
+  { label: "Profissionais", href: "/buscar?cidade=piumhi&tipo=professionals" },
+  { label: "Clínicas", href: "/empresas" },
+  { label: "Conteúdos", href: "/materias" },
+  { label: "Podcast", href: "/podcast" },
+  { label: "Revista", href: "/revista" },
+  { label: "Sobre", href: "/sobre" },
+  { label: "Cadastre seu perfil", href: "/inclusao" },
 ];
 
-/** Rodapé único do site. No app ele fica oculto (navegação inferior). */
+const legalLinks = [
+  { label: "Privacidade", href: "/privacidade" },
+  { label: "Termos", href: "/termos" },
+  { label: "Política editorial", href: "/politica-editorial" },
+  { label: "Correções", href: "/correcoes" },
+  { label: "Contato", href: "mailto:rmproguia@gmail.com" },
+];
+
+/** Rodapé compacto do site: marca, links principais numa linha e, embaixo, os
+ *  links legais e o aviso. No app ele fica oculto (navegação inferior). */
 export function PortalFooter() {
   return (
-    <footer className="official-footer portal-footer">
-      <div className="official-footer-top">
-        <Link href="/" className="official-brand" aria-label="Guia Saúde — início"><GuiaSaudeLogo /></Link>
-        <p>Profissionais, serviços e conteúdo de saúde de Piumhi e região, com informação, confiança e proximidade.</p>
-        <div className="official-footer-links">
-          {columns.map((column) => (
-            <div key={column.title}>
-              <b>{column.title}</b>
-              {column.links.map((link) => link.href.startsWith("mailto:")
-                ? <a key={link.label} href={link.href}>{link.label}</a>
-                : <Link key={link.label} href={link.href} prefetch={link.href.startsWith("/anuncie") ? false : undefined}>{link.label}</Link>)}
-            </div>
-          ))}
-        </div>
+    <footer className="official-footer portal-footer ft">
+      <div className="ft-top">
+        <Link href="/" className="official-brand ft-brand" aria-label="Guia Saúde — início"><GuiaSaudeLogo /></Link>
+        <nav className="ft-links" aria-label="Rodapé">
+          {mainLinks.map((link) => <Link key={link.label} href={link.href}>{link.label}</Link>)}
+        </nav>
+        <Link className="ft-cta" href="/anuncie" prefetch={false}>Anuncie</Link>
       </div>
-      <div className="official-footer-bottom">
-        <span>© {new Date().getFullYear()} Guia Saúde · Piumhi, MG</span>
-        <nav aria-label="Políticas"><Link href="/privacidade">Privacidade</Link><span>·</span><Link href="/termos">Termos de uso</Link><span>·</span><Link href="/politica-editorial">Política editorial</Link><span>·</span><Link href="/correcoes">Correções</Link></nav>
-        <span>Conteúdo informativo: não substitui avaliação profissional.</span>
+      <div className="ft-bottom">
+        <span>© {new Date().getFullYear()} Guia Saúde · Piumhi, MG · Conteúdo informativo: não substitui avaliação profissional.</span>
+        <nav className="ft-legal" aria-label="Políticas">
+          {legalLinks.map((link) => link.href.startsWith("mailto:")
+            ? <a key={link.label} href={link.href}>{link.label}</a>
+            : <Link key={link.label} href={link.href}>{link.label}</Link>)}
+        </nav>
       </div>
     </footer>
   );
