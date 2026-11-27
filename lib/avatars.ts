@@ -10,7 +10,7 @@ type Palette = { background: string; text: string };
 
 // Uma cor por grande área, para a lista ficar legível e organizada.
 const palettes: { match: RegExp; palette: Palette }[] = [
-  { match: /^m[eé]dic/i, palette: { background: "#DDF1EA", text: "#0B6E57" } },
+  { match: /^m[eé]dic/i, palette: { background: "#DBEAFE", text: "#1D4ED8" } },
   { match: /^dentist|odont/i, palette: { background: "#DFEBF8", text: "#1F5A96" } },
   { match: /psic/i, palette: { background: "#ECE4F6", text: "#5E3B8C" } },
   { match: /fisio|terapeuta ocup|educador f/i, palette: { background: "#FBEBDD", text: "#A1561C" } },

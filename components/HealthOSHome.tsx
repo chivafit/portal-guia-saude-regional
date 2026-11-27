@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, Building2, FlaskConical, MapPin, MessageCircle, Newspaper, Phone, Pill, Search, Stethoscope } from "lucide-react";
+import { ArrowRight, BookOpen, Building2, CalendarDays, FlaskConical, Headphones, MapPin, Mic2, Newspaper, Pill, Search, SlidersHorizontal, Stethoscope } from "lucide-react";
+import { DoctorCard } from "@/components/doctor/DoctorCard";
 import { publishedOrganizations, publishedProfessionals } from "@/lib/public-directory";
 import { articles, magazineEditions, organizations, professionals } from "@/lib/data";
 import { SuggestInput } from "@/components/search/SuggestInput";
@@ -7,10 +8,8 @@ import { buildSuggestionIndex } from "@/lib/search-suggestions";
 import { whatsappLink } from "@/lib/whatsapp";
 import { podcastCatalogEpisodes } from "@/lib/public-podcasts";
 import { PodcastCover } from "@/components/podcast/PodcastCover";
-import { FavoriteButton } from "@/components/FavoriteButton";
 import { isFeaturedProfessional } from "@/lib/featured-professionals";
 import { GuiaSaudeLogo } from "@/components/GuiaSaudeLogo";
-import { ProfessionalImage } from "@/components/ProfessionalImage";
 
 /* Home do app nativo — recriação fiel da referência de design 2b:
    contexto de cidade, busca dominante, categorias e destaque com contato. */
@@ -24,22 +23,23 @@ const shortcuts = [
 
 const quickSpecialties = ["Pediatria", "Oftalmologia", "Psicologia", "Odontologia", "Cardiologia", "Ginecologia", "Dermatologia", "Ortopedia"];
 
-function initials(name: string) {
-  return name.replace(/^(dr|dra|sr|sra)\.?\s+/i, "").split(/\s+/).filter(Boolean).slice(0, 2).map((p) => p[0]).join("").toUpperCase();
-}
 function neighborhood(organization?: string | null) {
   if (!organization) return "Piumhi";
   const tail = organization.split(",").map((p) => p.trim()).filter(Boolean).at(-1) ?? "";
   return tail && tail.length <= 22 && !/\d/.test(tail) ? `${tail} · Piumhi` : "Piumhi";
 }
 
-/** Botão de contato só quando o profissional tem WhatsApp ou telefone direto confirmado. */
-function directContact(whatsapp?: string, phone?: string) {
+/** Contato direto só quando o profissional tem WhatsApp ou telefone confirmado. */
+function contactFor(whatsapp?: string, phone?: string) {
   const w = (whatsapp ?? "").replace(/\D/g, "");
-  if (w.length >= 10) return <a className="gsm-pro-ic" href={whatsappLink(w, "professional")} target="_blank" rel="noreferrer" aria-label="WhatsApp"><MessageCircle size={18} /></a>;
+  if (w.length >= 10) return { href: whatsappLink(w, "professional"), label: "WhatsApp" };
   const t = (phone ?? "").replace(/\D/g, "");
-  if (t.length >= 10) return <a className="gsm-pro-ic" href={`tel:+55${t}`} aria-label="Ligar"><Phone size={18} /></a>;
+  if (t.length >= 10) return { href: `tel:+55${t}`, label: "Ligar" };
   return null;
+}
+function episodeDate(value: string) {
+  const [y, m, d] = value.split("-").map(Number);
+  return y && m && d ? new Intl.DateTimeFormat("pt-BR", { day: "numeric", month: "short" }).format(new Date(y, m - 1, d, 12)) : "";
 }
 
 export async function HealthOSHome() {
@@ -49,56 +49,63 @@ export async function HealthOSHome() {
   const suggestions = buildSuggestionIndex(source, await publishedOrganizations(organizations));
   const latestEdition = magazineEditions.find((edition) => edition.flipbook);
   const latestArticle = articles[0];
-  return <main className="gsm-home">
-    <div className="gsm-orb" aria-hidden="true" />
+  const featuredCards = featured.slice(0, 4);
+  return <main className="gsm-home hm">
     <div className="gsm-shell">
       <header className="gsm-top">
         <span className="gsm-brand"><GuiaSaudeLogo compact /></span>
         <span className="gsm-city"><MapPin size={15} /> Piumhi · MG</span>
       </header>
-      <p className="gsm-hello">Olá!</p>
-      <h1 className="gsm-h1">Qual cuidado você procura hoje?</h1>
-      <form className="gsm-search" action="/buscar" role="search">
-        <input type="hidden" name="cidade" value="piumhi" />
-        <Search size={20} />
-        <SuggestInput index={suggestions} placeholder="Especialidade ou profissional" label="Especialidade ou profissional" clearable={false} />
-        <button type="submit" aria-label="Buscar"><ArrowRight size={20} /></button>
-      </form>
-      <nav className="gsm-cats" aria-label="Categorias de saúde">
-        {shortcuts.map(({ label, href, Icon }) => <Link key={label} href={href}><Icon size={22} /><small>{label}</small></Link>)}
-      </nav>
-      <nav className="gsm-chips" aria-label="Especialidades mais buscadas">
-        {quickSpecialties.map((item) => <Link key={item} href={`/buscar?q=${encodeURIComponent(item)}&cidade=piumhi&tipo=professionals`}>{item}</Link>)}
-      </nav>
+      <p className="hm-hello">Olá!</p>
+      <h1 className="gsm-h1 hm-title">Qual cuidado você procura hoje?</h1>
+      <div className="hm-search-row">
+        <form className="gsm-search" action="/buscar" role="search">
+          <input type="hidden" name="cidade" value="piumhi" />
+          <Search size={20} />
+          <SuggestInput index={suggestions} placeholder="Buscar profissional ou especialidade" label="Buscar profissional ou especialidade" clearable={false} />
+        </form>
+        <Link className="hm-filter" href="/buscar?cidade=piumhi&tipo=professionals" aria-label="Busca com filtros"><SlidersHorizontal size={20} /></Link>
+      </div>
+
+      {latestEpisode ? <section className="hm-hero" aria-label="Episódio novo do podcast">
+        <div className="hm-hero-top">
+          <span className="hm-hero-cover"><PodcastCover episode={latestEpisode} /></span>
+          <span className="hm-hero-id"><strong>{latestEpisode.guest}</strong><small>{latestEpisode.guestArea || latestEpisode.role || "Convidado do Conexão Saúde"}</small></span>
+          <Link className="hm-hero-ic" href="/podcast" aria-label="Todos os episódios"><Mic2 size={20} /></Link>
+        </div>
+        <div className="hm-hero-info">
+          <span><CalendarDays size={18} aria-hidden="true" /><span><small>Episódio novo</small>{episodeDate(latestEpisode.publishedAt)}</span></span>
+          <span><Headphones size={18} aria-hidden="true" /><span><small>Podcast</small>Conexão Saúde</span></span>
+        </div>
+        <div className="hm-hero-actions">
+          <Link className="hm-hero-btn" href={`/podcast?episodio=${encodeURIComponent(latestEpisode.slug)}`}>Ouvir agora</Link>
+          <Link className="hm-hero-btn hm-hero-btn-soft" href="/podcast">Ver episódios</Link>
+        </div>
+      </section> : null}
+
       <div className="gsm-feature-head">
-        <h2>Em destaque</h2>
+        <h2>Especialidades</h2>
+        <Link href="/buscar/especialidades">Ver todas</Link>
+      </div>
+      <nav className="gsm-chips hm-pills" aria-label="Especialidades e serviços">
+        <Link className="is-active" href="/buscar?cidade=piumhi&tipo=professionals">Todos</Link>
+        {quickSpecialties.map((item) => <Link key={item} href={`/buscar?q=${encodeURIComponent(item)}&cidade=piumhi&tipo=professionals`}>{item}</Link>)}
+        {shortcuts.slice(1).map(({ label, href }) => <Link key={label} href={href}>{label}</Link>)}
+      </nav>
+
+      <div className="gsm-feature-head">
+        <h2>Profissionais em destaque</h2>
         <Link href="/profissionais-destaque">Ver todos</Link>
       </div>
-      <div className="gsm-feature-list" role="list" aria-label="Profissionais em destaque">
-        {featured.map((p) => (
-          <article className="gsm-pro" role="listitem" key={p.slug}>
-            <span className={`gsm-pro-photo${p.imageUrl ? "" : " is-initials"}`}>
-              {p.imageUrl ? <ProfessionalImage src={p.imageUrl} sizes="72px" /> : <b>{initials(p.name)}</b>}
-            </span>
-            <div className="gsm-pro-body">
-              <small>{p.specialty}</small>
-              <strong>{p.name}</strong>
-              <span className="gsm-pro-loc">{neighborhood(p.organization)}</span>
-              <div className="gsm-pro-actions">
-                <Link className="gsm-pro-see" href={`/profissionais/${p.slug}`}>Ver perfil</Link>
-                {directContact(p.locations?.[0]?.whatsapp, p.locations?.[0]?.phone)}
-                <FavoriteButton compact professional={{ slug: p.slug, name: p.name, profession: p.profession, specialty: p.specialty, city: p.city, organization: p.organization, imageUrl: p.imageUrl }} />
-              </div>
-            </div>
-          </article>
-        ))}
+      <div className="hm-doctors">
+        {featuredCards.map((p, index) => <DoctorCard key={p.slug} item={p} meta={neighborhood(p.organization)} contact={contactFor(p.locations?.[0]?.whatsapp, p.locations?.[0]?.phone)} highlight={index === 0} eager={index < 2} />)}
       </div>
+
       <div className="gsm-feature-head gsm-content-head">
         <h2>Para cuidar melhor</h2>
         <Link href="/materias">Ver conteúdos</Link>
       </div>
       <nav className="gsm-content" aria-label="Conteúdos do Guia Saúde">
-        {latestEpisode ? <Link href={`/podcast?episodio=${encodeURIComponent(latestEpisode.slug)}`}><span className="gsm-pod-cover"><PodcastCover episode={latestEpisode} /></span><span><small>Podcast · episódio novo</small><strong>{latestEpisode.topic}</strong></span><ArrowRight size={16} /></Link> : null}
         {latestEdition ? <Link href={`/revista/${latestEdition.slug}`}><BookOpen size={20} /><span><small>Revista · {latestEdition.number} edição</small><strong>{latestEdition.title}</strong></span><ArrowRight size={16} /></Link> : null}
         {latestArticle ? <Link href={`/materias/${latestArticle.slug}`}><Newspaper size={20} /><span><small>Matéria · {latestArticle.category}</small><strong>{latestArticle.title}</strong></span><ArrowRight size={16} /></Link> : null}
       </nav>

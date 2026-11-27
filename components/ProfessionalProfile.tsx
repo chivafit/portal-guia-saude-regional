@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowUpRight, BadgeCheck, Building2, ClipboardCheck, MapPin, MessageCircle, Navigation, Phone, Play } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, BadgeCheck, Building2, MapPin, MessageCircle, Mic2, Navigation, Phone, Play, Stethoscope } from "lucide-react";
 import { ProfessionalImage } from "@/components/ProfessionalImage";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { ProfileShareButton } from "@/components/ProfileShareButton";
@@ -101,22 +101,31 @@ export function ProfessionalProfile({ initial, builtAt }: { initial: ProfileView
     <div className="pf-wrap">
       <div className="pf-topbar">
         <Link className="pf-icon-btn" href={backHref} aria-label="Voltar para a busca"><ArrowLeft size={20} /></Link>
+        <span className="pf-topbar-title" aria-hidden="true">Detalhes</span>
         <div className="pf-topbar-actions"><FavoriteButton compact professional={favorite} /><ProfileShareButton name={p.name} url={p.canonicalUrl} /></div>
       </div>
 
       <div className="pf-grid">
         <div className="pf-main">
-          <div className="pf-avatar" aria-hidden="true">{p.imageUrl ? <ProfessionalImage src={p.imageUrl} sizes="160px" eager fetchPriority="high" /> : <span>{p.initials}</span>}</div>
-
-          <article className="pf-card pf-identity">
-            <p className="pf-eyebrow">{eyebrow}</p>
-            <h1 className="pf-name">{p.name}</h1>
-            <div className="pf-chips">
-              {p.registration ? <span>{p.verified ? <BadgeCheck size={16} aria-hidden="true" /> : <ClipboardCheck size={16} aria-hidden="true" />}{p.registration}</span> : null}
-              <span><MapPin size={16} aria-hidden="true" />{neighborhood ? `${neighborhood}, ${p.city}` : `${p.city}, MG`}</span>
+          <section className="pf-hero-card">
+            <div className={`pf-photo${p.hasRealPhoto ? "" : " is-initials"}`} aria-hidden="true">
+              {p.hasRealPhoto && p.imageUrl ? <ProfessionalImage src={p.imageUrl} sizes="100vw" eager fetchPriority="high" /> : <span>{p.initials}</span>}
             </div>
-            {p.summary ? <p className="pf-summary">{p.summary}</p> : null}
-          </article>
+            <div className="pf-hero-info">
+              <span className="pf-pill">{p.specialty || eyebrow}</span>
+              <h1 className="pf-name">{p.name}</h1>
+              <p className="pf-head-meta"><MapPin size={16} aria-hidden="true" />{neighborhood ? `${neighborhood}, ${p.city}` : `${p.city}, MG`}</p>
+            </div>
+          </section>
+
+          <ul className="pf-stats" aria-label="Dados do profissional">
+            {p.registration ? <li><span className="pf-stat-ic" aria-hidden="true"><BadgeCheck size={20} /></span><strong>{p.registration.split("·")[0].trim()}</strong><small>{p.verified ? "Registro conferido" : "Registro"}</small></li> : null}
+            {p.services.length ? <li><span className="pf-stat-ic" aria-hidden="true"><Stethoscope size={20} /></span><strong>{p.services.length}</strong><small>{p.services.length === 1 ? "Área" : "Áreas"}</small></li> : null}
+            <li><span className="pf-stat-ic" aria-hidden="true"><MapPin size={20} /></span><strong>{neighborhood || p.city}</strong><small>Bairro</small></li>
+            {p.podcast ? <li><span className="pf-stat-ic" aria-hidden="true"><Mic2 size={20} /></span><strong>Podcast</strong><small>Convidado</small></li> : p.locations.length ? <li><span className="pf-stat-ic" aria-hidden="true"><Building2 size={20} /></span><strong>{p.locations.length}</strong><small>{p.locations.length === 1 ? "Local" : "Locais"}</small></li> : null}
+          </ul>
+
+          {p.summary ? <section className="pf-card pf-identity"><h2>Sobre</h2><p className="pf-summary">{p.summary}</p></section> : null}
 
           {p.services.length ? <section className="pf-card" id="atuacao">
             <h2>Áreas de atuação</h2>
@@ -168,6 +177,6 @@ export function ProfessionalProfile({ initial, builtAt }: { initial: ProfileView
       </div>
     </div>
 
-    {hasContact ? <div className={`pf-actionbar${primaryAction && routeAction ? "" : " is-single"}`}>{primaryAction}{routeAction}</div> : null}
+    {hasContact ? <div className="pf-actionbar">{primaryAction ?? routeAction}{p.primaryWhats && p.primaryPhone ? <a className="pf-round" href={`tel:+${p.primaryPhone}`} aria-label="Ligar"><Phone size={20} /></a> : null}{primaryAction && p.primaryMapHref ? <a className="pf-round" href={p.primaryMapHref} target="_blank" rel="noopener noreferrer" aria-label="Como chegar"><Navigation size={20} /></a> : null}</div> : null}
   </main>;
 }
