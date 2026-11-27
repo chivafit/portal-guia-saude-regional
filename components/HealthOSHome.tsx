@@ -78,6 +78,7 @@ export async function HealthOSHome() {
         {categoryCards.map(({ label, href, Icon, hint }) => <Link key={label} href={href}><span className="hm-cat-ic" aria-hidden="true"><Icon size={24} /></span><strong>{label}</strong><small>{hint}</small></Link>)}
       </nav>
 
+      <section className="gs-utility-home" aria-label="Utilidade pública"><h2>Saúde no dia a dia</h2><div><Link href="/utilidade-publica#plantao"><Pill size={22}/><span>Farmácias de plantão</span></Link><Link href="/utilidade-publica#emergencia"><Hospital size={22}/><span>Urgência e emergência</span></Link><Link href="/utilidade-publica#agenda"><CalendarDays size={22}/><span>Agenda da saúde</span></Link></div></section>
       <div className="gsm-feature-head">
         <h2>Especialidades</h2>
         <Link href="/buscar/especialidades">Ver todas</Link>
