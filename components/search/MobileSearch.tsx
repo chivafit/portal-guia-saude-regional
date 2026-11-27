@@ -6,6 +6,7 @@ import type { Suggestion } from "@/lib/search-suggestions";
 import Link from "next/link";
 import { useRef, type ComponentType } from "react";
 import { ArrowLeft, ArrowRight, Building2, ChevronDown, Dumbbell, Eye, FlaskConical, HeartPulse, Hospital, Landmark, MapPin, Navigation, Phone, Pill, Search, SlidersHorizontal, Smile, Sparkles, Stethoscope, X } from "lucide-react";
+import { isFeaturedOrganization } from "@/lib/search";
 import { categoryForOrganization } from "@/lib/service-taxonomy";
 import type { Organization, Professional } from "@/lib/data";
 
@@ -176,10 +177,10 @@ export function OrganizationCard({ item, address }: { item: Organization; addres
   const phone = (item.phone ?? "").replace(/\D/g, "");
   const neighborhood = item.neighborhood || (address.split(",").map((part) => part.trim()).filter(Boolean).at(-1) ?? "");
   const directions = item.mapUrl || (address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${item.name}, ${address}, Piumhi - MG`)}` : "");
-  return <article className="ms-org">
+  return <article className={`ms-org${isFeaturedOrganization(item.slug) ? " is-featured" : ""}`}>
     <div className="ms-org-head">
-      <span className="ms-org-icon" aria-hidden="true"><OrganizationIcon item={item} /></span>
-      <div><span className="ms-eyebrow">{item.category}</span><h3><Link href={`/empresas/${item.slug}`}>{item.name}</Link></h3></div>
+      <span className="ms-org-icon" aria-hidden="true">{item.logoUrl && !item.logoUrl.startsWith("/placeholders/") ? <img src={item.logoUrl} alt="" /> : <OrganizationIcon item={item} />}</span>
+      <div>{isFeaturedOrganization(item.slug) ? <span className="org-featured-label">★ Destaque</span> : null}<span className="ms-eyebrow">{item.category}</span><h3><Link href={`/empresas/${item.slug}`}>{item.name}</Link></h3></div>
     </div>
     {neighborhood || item.hours ? <p className="ms-org-meta">{neighborhood ? <span><MapPin size={15} />{neighborhood}</span> : null}{item.hours ? <span>{item.hours}</span> : null}</p> : null}
     <div className="ms-org-actions">
