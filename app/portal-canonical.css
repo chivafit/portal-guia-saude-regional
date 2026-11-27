@@ -8279,3 +8279,37 @@ html body .ft-legal a:not(#gs):not(#p){min-height:28px;color:#97a3a9!important;f
   html body main.gsm-home .dc:not(#gs):not(#p):not(#z){grid-template-columns:76px minmax(0,1fr)!important}
   html body main.gsm-home .dc .dc-photo:not(#gs):not(#p):not(#z){width:76px!important;height:88px!important}
 }
+
+
+/* Mobile internal screens: shared visual language with the redesigned home. */
+@media (max-width:900px){
+  html body :is(.native-search-screen,.cs-page,.pf-page,.profile-page-clean,.org-page,.organization-page,.cn-page,.content-native-page,.native-magazine-screen,.native-article-screen,.hos-podcast-page,.native-favorites-screen) :is(h1):not(#gs):not(#p):not(#z){font-family:var(--gs-font-body)!important;font-size:clamp(26px,7vw,34px)!important;font-weight:700!important;letter-spacing:-.035em!important;line-height:1.15!important;overflow-wrap:anywhere}
+  html body :is(.ms-header,.cs-header,.cn-header,.hos-podcast-header,.native-favorites-intro,.native-magazine-intro) p:not(#gs):not(#p):not(#z){font-size:14px!important;line-height:1.5!important;color:#52616b!important}
+  html body :is(.ms-search,.cs-search,.hos-podcast-search):not(#gs):not(#p):not(#z){border:1px solid #d9e3df!important;border-radius:16px!important;min-height:56px!important;box-shadow:none!important;background:#fff!important}
+  html body :is(.ms-search,.cs-search,.hos-podcast-search) input{font-size:16px!important;min-width:0}
+  html body :is(.ms-chip,.ms-filter>summary,.cn-topics button,.hos-podcast-chips button,.cn-tabs a,.pcx-tabs a):not(#gs):not(#p):not(#z){min-height:44px!important;border:1px solid #dce5df!important;box-shadow:none!important}
+  html body :is(.ms-filter-panel,.ms-org,.pf-card,.pf-hero-card,.organization-section,.organization-information,.organization-hero,.cn-card,.content-native-card,.native-magazine-card,.hos-podcast-row):not(#gs):not(#p):not(#z){border-radius:18px!important;box-shadow:none!important;border:1px solid #e0e7e2!important}
+  html body :is(.native-search-screen,.native-favorites-screen,.dz-page,.native-featured-screen,.cs-page,.org-page) .dc:not(#gs):not(#p):not(#z){grid-template-columns:88px minmax(0,1fr)!important;padding:12px!important;gap:10px 12px!important;border-radius:18px!important;border:1px solid #e0e7e2!important;box-shadow:none!important}
+  html body :is(.native-search-screen,.native-favorites-screen,.dz-page,.native-featured-screen,.cs-page,.org-page) .dc .dc-photo:not(#gs):not(#p):not(#z){width:88px!important;height:94px!important;border-radius:13px!important}
+  html body :is(.native-search-screen,.native-favorites-screen,.dz-page,.native-featured-screen,.cs-page,.org-page) .dc .dc-name:not(#gs):not(#p):not(#z){font-size:18px!important;font-weight:700!important;line-height:1.2!important;overflow-wrap:anywhere}
+  html body .dc:not(.dc-brand) .dc-meta:not(#gs):not(#p):not(#z){color:#52616b!important}
+  html body .dc.dc-brand .dc-meta:not(#gs):not(#p):not(#z){color:#c5d1d5!important}
+  html body :is(.dc-contact:not(.dc-contact-soft),.ms-btn-primary,.ms-filter-apply,.ms-go,.pf-btn-primary,.pcx-cta-primary,.cs-search button,.hos-podcast-search button,.hos-podcast-row-play):not(#gs):not(#p):not(#z){background:#33695d!important;color:#fff!important;box-shadow:none!important}
+  html body :is(.dc-contact,.dc-see,.ms-btn,.pf-btn,.organization-action,.pcx-cta-primary):not(#gs):not(#p):not(#z){min-height:44px!important;border-radius:12px!important}
+  html body :is(.pf-card,.organization-section,.organization-information) :is(h2,h3):not(#gs):not(#p):not(#z){font-weight:700!important;letter-spacing:-.02em!important;line-height:1.3!important}
+  html body :is(.pf-summary,.pf-about,.organization-information-list,.organization-section) p{line-height:1.6!important;overflow-wrap:anywhere}
+  html body .pf-hero-card:not(#gs):not(#p):not(#z){padding:14px!important;gap:12px!important}
+  html body .pf-actionbar{padding-bottom:max(14px,env(safe-area-inset-bottom))!important}
+  html body :is(.cn-feature,.native-magazine-feature,.hos-podcast-feature,.cn-listen):not(#gs):not(#p):not(#z){border-radius:18px!important;box-shadow:none!important}
+  html body :is(.cn-feature-title,.content-native-card h3,.cn-card h3,.hos-podcast-feature h3,.hos-podcast-row h3):not(#gs):not(#p):not(#z){font-weight:700!important;line-height:1.3!important;letter-spacing:-.015em!important;overflow-wrap:anywhere}
+  html body :is(.native-magazine-cover,.native-magazine-feature-cover) img{object-fit:contain!important}
+  html body .hos-podcast-row-play:not(#gs):not(#p):not(#z){min-width:44px!important;min-height:44px!important}
+  html body .pp-mini:not(#gs):not(#p):not(#z){border-radius:16px!important;bottom:calc(110px + env(safe-area-inset-bottom))!important}
+  html body .pp-mini-btn{min-width:44px!important;min-height:44px!important}
+  html body main:is(.native-search-screen,.cs-page,.cn-page,.content-native-page,.hos-podcast-page,.native-magazine-screen,.native-favorites-screen,.dz-page,.native-featured-screen,.native-article-screen):not(#gs):not(#p):not(#z){padding-bottom:calc(120px + env(safe-area-inset-bottom))!important}
+}
+@media(max-width:350px){
+  html body :is(.native-search-screen,.native-favorites-screen,.dz-page,.native-featured-screen,.cs-page,.org-page) .dc:not(#gs):not(#p):not(#z){grid-template-columns:76px minmax(0,1fr)!important}
+  html body :is(.native-search-screen,.native-favorites-screen,.dz-page,.native-featured-screen,.cs-page,.org-page) .dc .dc-photo:not(#gs):not(#p):not(#z){width:76px!important;height:88px!important}
+  html body .dc .dc-bar{flex-wrap:wrap}
+}
