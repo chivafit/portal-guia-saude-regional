@@ -8313,3 +8313,17 @@ html body .ft-legal a:not(#gs):not(#p){min-height:28px;color:#97a3a9!important;f
   html body :is(.native-search-screen,.native-favorites-screen,.dz-page,.native-featured-screen,.cs-page,.org-page) .dc .dc-photo:not(#gs):not(#p):not(#z){width:76px!important;height:88px!important}
   html body .dc .dc-bar{flex-wrap:wrap}
 }
+
+
+/* Shared mobile header geometry — podcast is the reference. */
+@media(max-width:900px){
+  html body main:is(.hos-podcast-page,.cn-page,.native-magazine-screen,.native-favorites-screen):not(#gs):not(#p):not(#z){padding-top:calc(28px + env(safe-area-inset-top))!important;padding-inline:0!important}
+  html body main:is(.hos-podcast-page,.cn-page,.native-magazine-screen,.native-favorites-screen) > :is(.hos-podcast-shell,.cn-shell,.native-magazine-shell,.native-favorites-shell):not(#gs):not(#p):not(#z){box-sizing:border-box!important;width:calc(100% - 28px)!important;max-width:560px!important;margin:0 auto!important;padding:0!important}
+  html body main:is(.hos-podcast-page,.cn-page,.native-magazine-screen) .cn-tabs:not(#gs):not(#p):not(#z){display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important;width:100%!important;max-width:none!important;margin:0 0 22px!important;padding:0 4px!important;background:transparent!important}
+  html body main:is(.hos-podcast-page,.cn-page,.native-magazine-screen) .cn-tabs a:not(#gs):not(#p):not(#z){display:grid!important;place-items:center!important;min-height:44px!important;padding:0!important;font-size:16px!important;line-height:1.2!important;border-radius:999px!important}
+  html body main:is(.hos-podcast-page,.cn-page,.native-magazine-screen,.native-favorites-screen) header.hos-section-header:not(#gs):not(#p):not(#z){display:grid!important;grid-template-columns:48px minmax(0,1fr)!important;gap:10px!important;align-items:start!important;margin:0 0 18px!important;padding:0!important}
+  html body main:is(.hos-podcast-page,.cn-page,.native-magazine-screen,.native-favorites-screen) .hos-section-back:not(#gs):not(#p):not(#z){display:grid!important;place-items:center!important;width:48px!important;height:48px!important;border-radius:50%!important;margin:0!important}
+  html body main:is(.hos-podcast-page,.cn-page,.native-magazine-screen,.native-favorites-screen) .hos-section-title>span:not(#gs):not(#p):not(#z){font-size:13px!important;font-weight:400!important;letter-spacing:0!important;text-transform:none!important;color:#687483!important;margin:3px 0 5px!important}
+  html body main:is(.hos-podcast-page,.cn-page,.native-magazine-screen,.native-favorites-screen) .hos-section-title>h1:not(#gs):not(#p):not(#z){font-size:28px!important;font-weight:700!important;line-height:1.15!important;letter-spacing:-.035em!important;margin:0!important}
+  html body main:is(.hos-podcast-page,.cn-page,.native-magazine-screen,.native-favorites-screen) .hos-section-title>p:not(#gs):not(#p):not(#z){font-size:15px!important;line-height:1.5!important;margin:8px 0 0!important;color:#687483!important}
+}
