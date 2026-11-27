@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArrowRight, BookOpen, Play } from "lucide-react";
 import { PodcastCover } from "@/components/podcast/PodcastCover";
+import { HealthOSSectionHeader } from "@/components/HealthOSSectionHeader";
 import { ContentTabs } from "@/components/content/ContentTabs";
 
 type EditorialArticle={slug:string;category:string;title:string;excerpt:string;author?:string;authorRole?:string;date?:string;readingTime?:string;professionalSlug?:string;image?:string};
@@ -21,8 +22,8 @@ export function MateriasCatalog({articles,latestEpisode}:{articles:EditorialArti
  const usedTopics=topics.filter(t=>t==="Mais recentes"||articles.some(a=>topicsFor(a).includes(t)));
  const feature=catalog[0],recent=catalog.slice(1,count+1);
  return <main className="content-native-page cn-page"><div className="cn-shell">
-  <header className="cn-header"><h1>Conteúdos</h1></header>
   <ContentTabs active="materias"/>
+  <HealthOSSectionHeader eyebrow="Guia Saúde" title="Matérias" description="Informação e orientação de saúde com profissionais da nossa região." />
   {feature?<Link href={`/materias/${feature.slug}`} className="cn-feature">
    <span className={`cn-feature-art${feature.image?"":" is-empty"}`} style={feature.image?{backgroundImage:`url(${feature.image})`}:undefined}>{feature.image?null:<BookOpen size={40} aria-hidden="true"/>}<span className="cn-pill">{feature.category}</span></span>
    <span className="cn-feature-body"><strong className="cn-feature-title">{feature.title}</strong><span className="cn-meta">{byline(feature)}</span></span>
