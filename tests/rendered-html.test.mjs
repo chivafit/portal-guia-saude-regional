@@ -25,7 +25,7 @@ test("exports the main app routes with titles", async () => {
     "/profissionais/dr-paulo-henrique-faria-silva-oftalmologia-piumhi",
     "/empresas", "/anuncie", "/materias", "/podcast",
     "/revista", "/revista/13a-edicao", "/cidades/piumhi",
-    "/sobre", "/inclusao", "/privacidade", "/termos",
+    "/sobre", "/inclusao", "/privacidade", "/termos", "/utilidade-publica", "/profissionais-destaque", "/correcoes", "/politica-editorial",
   ];
   for (const route of routes) {
     const html = await rendered(route);
@@ -49,4 +49,11 @@ test("all exported internal links resolve", async () => {
     }
   }
   assert.deepEqual([...missing], []);
+});
+
+test("public utility exposes emergency contacts and section anchors", async () => {
+ const html = await rendered("/utilidade-publica");
+ for (const id of ["emergencia","plantao","agenda"]) assert.ok(html.includes('id="'+id+'"'), id);
+ for (const number of ["192","193"]) assert.ok(html.includes('href="tel:'+number+'"'), number);
+ for (const category of ["hospitais","farmacias","servicos-publicos"]) assert.match(html,new RegExp("categoria="+category));
 });
