@@ -43,7 +43,7 @@ function SearchDirectory(){
  const bairro=param(params.get("bairro")),onlyContact=params.get("contato")==="1",onlyFeatured=params.get("destaque")==="1";
  const bairroChoices=Array.from(new Set(filterProfessionals(professionalSource,{city}).map(i=>neighborhoodOf(i.organization)).filter(Boolean))).sort((a,b)=>a.localeCompare(b,"pt-BR"));
  const gssProfBase=professionalResults.filter(p=>(!bairro||neighborhoodOf(p.organization)===bairro)&&(!onlyContact||directContact(p.locations?.[0]?.whatsapp,p.locations?.[0]?.phone)!==null)&&(!onlyFeatured||isFeaturedProfessional(p.slug)));
- const gssProf=orderBy==="nome"?[...gssProfBase].sort((a,b)=>a.name.localeCompare(b.name,"pt-BR")):gssProfBase;
+ const gssProf=[...gssProfBase].sort((a,b)=>Number(isFeaturedProfessional(b.slug))-Number(isFeaturedProfessional(a.slug))||a.name.localeCompare(b.name,"pt-BR"));
  const gssVisibleProf=gssProf.slice(0,visibleCount);
  const crumbLabel=type==="profissionais"?"Profissionais em Piumhi":type==="servicos"?"Clínicas e serviços em Piumhi":"Busca em Piumhi";
  const gssCount=type==="servicos"?organizationResults.length:gssProf.length+organizationResults.length;
