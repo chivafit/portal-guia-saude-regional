@@ -61,7 +61,6 @@ export async function HealthOSHome() {
         <span className="gsm-city"><MapPin size={15} /> Piumhi · MG</span>
       </header>
       <section className="hm-intro" aria-labelledby="hm-title">
-        <span className="hm-hello"><span className="hm-dot" aria-hidden="true" />Olá! Guia de saúde de Piumhi</span>
         <h1 id="hm-title" className="gsm-h1 hm-title">Qual <em>cuidado</em> você procura hoje?</h1>
         <p className="hm-sub">{source.length} profissionais e serviços de saúde com contato direto.</p>
       </section>
@@ -69,7 +68,7 @@ export async function HealthOSHome() {
         <form className="gsm-search" action="/buscar" role="search">
           <input type="hidden" name="cidade" value="piumhi" />
           <Search size={20} />
-          <SuggestInput index={suggestions} placeholder="Buscar profissional ou especialidade" label="Buscar profissional ou especialidade" clearable={false} />
+          <SuggestInput index={suggestions} placeholder="Quem você procura?" label="Buscar profissional ou especialidade" clearable={false} />
         </form>
         <Link className="hm-filter" href="/buscar?cidade=piumhi&tipo=professionals" aria-label="Busca com filtros"><SlidersHorizontal size={20} /></Link>
       </div>
