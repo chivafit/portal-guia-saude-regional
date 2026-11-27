@@ -7253,7 +7253,7 @@ button,input,select,textarea{font-family:inherit}
 
 /* Perfil */
 html body main.pf-page{position:relative;min-height:100vh;padding:0 0 40px!important;background:#f6f8fc!important;overflow:hidden}
-.pf-hero{position:absolute;inset:0 0 auto;height:290px;border-radius:0 0 32px 32px;background:radial-gradient(circle at 85% 10%,rgba(217,255,72,.55),transparent 42%),linear-gradient(155deg,#b1c1f5,#e8eeff 55%,#e8eeff)}
+.pf-hero{position:absolute;inset:0 0 auto;height:290px;border-radius:0 0 32px 32px;background:radial-gradient(circle at 85% 10%,rgba(177,193,245,.55),transparent 42%),linear-gradient(155deg,#b1c1f5,#e8eeff 55%,#e8eeff)}
 .pf-wrap{position:relative;max-width:1120px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 14px) 18px 0}
 .pf-topbar{display:flex;align-items:center;justify-content:space-between}
 .pf-topbar-actions{display:flex;gap:10px}
@@ -7354,7 +7354,7 @@ html body main.cn-page{padding:0 0 40px!important;background:#f6f8fc!important}
 .hos-podcast-shell>.cn-tabs,.native-magazine-screen .cn-tabs{max-width:560px}
 .cn-feature{display:block;overflow:hidden;border:1px solid var(--rf-line);border-radius:24px;background:#fff;color:var(--rf-ink);text-decoration:none}
 .cn-feature-art{position:relative;display:grid;place-items:center;height:210px;background:var(--rf-soft) center/cover;color:#fff}
-.cn-feature-art.is-empty{background:radial-gradient(circle at 75% 20%,rgba(217,255,72,.6),transparent 45%),linear-gradient(140deg,#3459d6,#192d49)}
+.cn-feature-art.is-empty{background:radial-gradient(circle at 75% 20%,rgba(177,193,245,.6),transparent 45%),linear-gradient(140deg,#3459d6,#192d49)}
 .cn-pill{position:absolute;left:14px;top:14px;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--rf-green-deep);font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .cn-feature-body{display:grid;gap:8px;padding:18px 20px 20px}
 .cn-feature-title{font-family:var(--gs-font-serif);font-size:23px;font-weight:700;line-height:1.25}
@@ -7490,7 +7490,7 @@ html body .ms-specialties a{padding:12px 10px!important}
    ========================================================================== */
 html body :is(.hos-podcast-feature-art,.hos-podcast-row-art){padding:0!important;border:0!important;background:none!important;overflow:hidden!important}
 .pc{position:relative;display:grid;place-items:center;width:100%;height:100%;aspect-ratio:1;overflow:hidden;border-radius:inherit;background:linear-gradient(150deg,#192d49 0%,#192d49 55%,#192d49 100%);isolation:isolate}
-.pc-glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 88% 8%,rgba(217,255,72,.55),transparent 38%),radial-gradient(circle at 8% 100%,rgba(52,89,214,.32),transparent 45%)}
+.pc-glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 88% 8%,rgba(177,193,245,.55),transparent 38%),radial-gradient(circle at 8% 100%,rgba(52,89,214,.32),transparent 45%)}
 .pc-glow::after{content:"";position:absolute;right:-18%;bottom:-18%;width:70%;aspect-ratio:1;border:1.5px solid rgba(217,255,72,.28);border-radius:50%}
 .pc-photo{position:relative;display:block;width:68%;aspect-ratio:1;overflow:hidden;border-radius:50%;box-shadow:0 0 0 3px #e8eeff,0 10px 24px rgba(0,0,0,.28);background:#e8eeff}
 .pc-photo img{width:100%;height:100%;object-fit:cover;object-position:center 18%}
@@ -8505,3 +8505,9 @@ html body .native-specialties-screen .native-search-form{background:white!import
 html body .native-specialties-screen .native-search-form input{font-size:16px!important;color:#192D49!important}
 html body .native-specialties-screen .native-search-form button{background:#3459D6!important;color:white!important}
 .specialties-result-count{font-size:13px;color:#52617A;margin:14px 0 8px}
+
+/* Auditoria: foco acessível e área segura da central de utilidade pública. */
+html body .gs-utility-card{scroll-margin-top:calc(110px + env(safe-area-inset-top))}
+html body :is(.gs-utility,.native-specialties-screen,.cs-page) :is(a,button,input,select,summary):focus-visible{outline:2px solid #3459D6;outline-offset:3px}
+@media(max-width:900px){html body main.gs-utility{padding-bottom:calc(100px + env(safe-area-inset-bottom))!important}}
+@media(prefers-reduced-motion:reduce){html body .sk{animation:none!important}html body .hm-cats a{transition:none!important}}
