@@ -100,7 +100,7 @@ export function MobileSearch(props: MobileSearchProps) {
 
     <form className="ms-search" action="/buscar" role="search">
       <Search size={19} aria-hidden="true" />
-      <SuggestInput index={props.suggestions} defaultValue={q} clearable={false} placeholder="Especialidade, nome ou serviço" label="Especialidade, nome ou serviço" />
+      <SuggestInput index={props.suggestions} defaultValue={q} clearable={false} placeholder="Quem você procura?" label="Especialidade, nome ou serviço" />
       <input type="hidden" name="cidade" value="piumhi" />
       {typeParam ? <input type="hidden" name="tipo" value={typeParam} /> : null}
       {q ? <Link className="ms-clear" href={props.clearHref("q")} aria-label="Limpar busca"><X size={17} /></Link> : <button type="submit" className="ms-go" aria-label="Buscar"><ArrowRight size={18} /></button>}
@@ -142,8 +142,8 @@ export function MobileSearch(props: MobileSearchProps) {
     </> : <>
 
 
-      <div className="ms-count">
-        <p><strong>{total} {unit}</strong> encontrados</p>
+      <div className="ms-count ms-results-toolbar">
+        <p><strong>{total} {unit}</strong></p>
         {professionals.length > 1 ? <label className="ms-sort"><span className="sr-only">Ordenar</span><select value={props.orderBy} onChange={(event) => props.onOrderBy(event.target.value)}><option value="relevancia">Relevância</option><option value="nome">Nome (A–Z)</option></select><ChevronDown size={16} aria-hidden="true" /></label> : null}
       </div>
 
