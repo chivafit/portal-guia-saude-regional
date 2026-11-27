@@ -7931,3 +7931,4 @@ html body .hos-podcast-feature-cta:not(#gs){color:var(--bl)!important}
 html body :is(.ms-badge,.gss-card [class*="badge"],.gss-card em,.dc-badge):not(#gs){background:var(--bl-soft-2)!important;color:var(--bl-deep)!important;border:0!important}
 html body :is(.hos-podcast-feature,.cn-listen,.pf-podcast) small:not(#gs){opacity:1!important}
 html body .official-search-form button:not(#gs),html body .official-nav-cta:not(#gs){opacity:1!important;background:var(--bl)!important;color:#fff!important}
+html body main .hos-podcast-feature small:not(#gs):not(#gs2),html body main .cn-listen small:not(#gs):not(#gs2),html body main .pf-podcast small:not(#gs):not(#gs2){color:#dbe7fd!important}
