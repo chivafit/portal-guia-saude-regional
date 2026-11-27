@@ -8201,3 +8201,50 @@ html body .ft-legal a:not(#gs):not(#p){min-height:28px;color:#97a3a9!important;f
   .ft-bottom{flex-direction:column;margin-top:14px;padding-top:12px}
   html body .ft-legal a:not(#gs):not(#p){min-height:36px}
 }
+
+
+/* Mobile-first refinement: home, directory cards and bottom navigation.
+   Keep the official palette and existing desktop cascade. */
+@media (max-width:900px){
+  html body main.gsm-home .gsm-shell{max-width:520px;padding-inline:16px}
+  html body main.gsm-home .gsm-top{margin-inline:-16px!important;padding-inline:16px!important;animation:none!important}
+  html body main.gsm-home .hm-intro:not(#gs):not(#p):not(#z){padding:12px 0 4px!important;margin:0 0 14px!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;text-align:left!important;overflow:visible!important}
+  html body main.gsm-home .hm-intro::before,html body main.gsm-home .hm-intro::after{display:none!important}
+  html body main.gsm-home .hm-hello:not(#gs):not(#p):not(#z){padding:0!important;background:transparent!important;margin:0 0 10px!important;color:var(--pal-teal-ink)!important;font-size:13px!important}
+  html body main.gsm-home .hm-dot{animation:none;box-shadow:none}
+  html body main.gsm-home .hm-title:not(#gs):not(#p):not(#z){margin:0!important;max-width:390px!important;font-size:clamp(27px,7.4vw,36px)!important;line-height:1.12!important;letter-spacing:-.045em!important;font-weight:700!important;color:var(--pal-navy)!important}
+  html body main.gsm-home .hm-title em{background:none;padding:0;color:var(--pal-teal-ink)}
+  html body main.gsm-home .hm-sub{margin:10px 0 0!important;max-width:360px!important;font-size:14px!important;line-height:1.5!important;color:#52616b!important}
+  html body main.gsm-home .hm-intro>*,html body main.gsm-home .hm-search-row{animation:none!important}
+  html body main.gsm-home .hm-search-row{gap:8px;margin-bottom:20px}
+  html body main.gsm-home .gsm-search:not(#gs):not(#p):not(#z){min-width:0;min-height:56px!important;border:1px solid #d9e3df!important;border-radius:16px!important;box-shadow:none!important;padding-inline:12px!important;background:#fff!important}
+  html body main.gsm-home .gsm-search input{font-size:16px!important;min-width:0}
+  html body main.gsm-home .hm-filter:not(#gs):not(#p):not(#z){width:56px!important;height:56px!important;flex:0 0 56px;border:1px solid #d9e3df!important;border-radius:16px!important;box-shadow:none!important;color:var(--pal-teal-ink)!important}
+  html body main.gsm-home .hm-cats{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0}
+  html body main.gsm-home .hm-cats a{padding:10px 2px!important;gap:6px!important;min-height:84px;border:1px solid #e2e8e4;border-radius:16px!important;box-shadow:none!important}
+  html body main.gsm-home .hm-cat-ic{width:40px;height:40px;border-radius:13px;background:var(--pal-teal-soft)!important;color:var(--pal-teal-ink)!important}
+  html body main.gsm-home .hm-cat-ic svg{width:21px;height:21px}
+  html body main.gsm-home .hm-cats strong{font-size:12px!important;white-space:normal;overflow-wrap:anywhere;line-height:1.2;font-weight:600}
+  html body main.gsm-home .hm-cats small{display:none}
+  html body main.gsm-home .gsm-feature-head{margin-top:26px!important;margin-bottom:10px!important;gap:8px}
+  html body main.gsm-home .gsm-feature-head h2{font-size:19px!important;line-height:1.25!important;font-weight:700!important}
+  html body main.gsm-home .gsm-feature-head a{min-height:44px;display:inline-flex;align-items:center;white-space:nowrap;font-size:13px!important}
+  html body main.gsm-home .hm-pills a{min-height:44px;display:inline-flex;align-items:center;border:1px solid #dce5df!important;box-shadow:none!important}
+  html body main.gsm-home .hm-doctors{gap:10px!important}
+  html body main.gsm-home .dc:not(#gs):not(#p):not(#z){grid-template-columns:76px minmax(0,1fr)!important;gap:10px 12px!important;padding:12px!important;border-radius:18px!important;border:1px solid #e0e7e2!important;box-shadow:none!important}
+  html body main.gsm-home .dc .dc-photo:not(#gs):not(#p):not(#z){width:76px!important;height:88px!important;border-radius:13px!important}
+  html body main.gsm-home .dc .dc-name:not(#gs):not(#p):not(#z){font-size:17px!important;font-weight:700!important;overflow-wrap:anywhere}
+  html body main.gsm-home .dc .dc-meta:not(#gs):not(#p):not(#z){font-size:13px!important}
+  html body main.gsm-home .dc .dc-bar:not(#gs):not(#p):not(#z){padding-top:10px!important;gap:6px!important}
+  html body main.gsm-home .dc .dc-contact:not(#gs):not(#p):not(#z),html body main.gsm-home .dc .dc-see:not(#gs):not(#p):not(#z){min-height:44px!important;font-size:13px!important;border-radius:12px!important;box-shadow:none!important;min-width:0}
+  html body main.gsm-home .dc .dc-contact:not(#gs):not(#p):not(#z){background:#33695d!important;color:#fff!important}
+  html body main.gsm-home .dc .dc-fav .favorite-control button:not(#gs):not(#p):not(#z){width:44px!important;height:44px!important;border-radius:12px!important}
+  html body main.gsm-home .hm-hero:not(#gs):not(#p):not(#z){border-radius:18px!important;box-shadow:none!important}
+  html body nav.app-bottom-nav.gsm-dock:not(#gs):not(#p):not(#z){box-shadow:0 -4px 18px rgba(31,42,55,.06)!important;border-top:1px solid #dce5df!important}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item{min-height:48px}
+  html body nav.app-bottom-nav.gsm-dock .hos-nav-item.is-active .hos-nav-icon:not(#gs):not(#p):not(#z){background:#33695d!important;color:#fff!important}
+}
+@media (max-width:350px){
+  html body main.gsm-home .hm-cats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  html body main.gsm-home .dc .dc-bar{flex-wrap:wrap}
+}
