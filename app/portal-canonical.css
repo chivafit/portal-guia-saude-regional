@@ -8150,3 +8150,29 @@ html body :is(.hos-podcast-feature,.cn-listen,.pf-podcast) small:not(#gs):not(#p
 html body .hm-intro::after{opacity:.9!important}
 html body .hm-intro::before{opacity:.22!important}
 html body .hm-dot{box-shadow:0 0 0 4px rgba(63,127,112,.2)}
+
+/* ==========================================================================
+   Cartão de profissional reformulado (2026-11): foto à esquerda, texto à direita
+   e ações numa linha própria embaixo — nada sobrepõe a foto.
+   ========================================================================== */
+html body .dc:not(#gs):not(#p){display:grid!important;grid-template-columns:96px minmax(0,1fr)!important;grid-template-rows:auto auto!important;gap:14px 14px!important;min-height:0!important;padding:16px!important;border-radius:26px!important;background:#fff!important;box-shadow:var(--sh-1)!important;overflow:visible!important}
+html body .dc .dc-photo:not(#gs):not(#p){grid-column:1!important;grid-row:1!important;position:relative!important;width:96px!important;height:112px!important;margin:0!important;border-radius:20px!important;overflow:hidden!important;background:var(--pal-teal-soft)!important;align-self:start!important}
+html body .dc .dc-text:not(#gs):not(#p){grid-column:2!important;grid-row:1!important;padding:2px 0 0!important;gap:3px!important;align-self:center!important}
+html body .dc .dc-name:not(#gs):not(#p){font-size:18px!important;line-height:1.25!important}
+html body .dc .dc-meta:not(#gs):not(#p){font-size:14px!important;margin-top:2px!important}
+html body .dc .dc-badge:not(#gs):not(#p){margin-top:6px!important}
+html body .dc .dc-initials:not(#gs):not(#p){font-size:28px!important}
+html body .dc .dc-bar:not(#gs):not(#p){grid-column:1/-1!important;grid-row:2!important;display:flex!important;gap:8px!important;align-items:center!important;margin:0!important;padding:12px 0 0!important;border-top:1px solid #ecefea!important;border-radius:0!important;background:none!important;box-shadow:none!important}
+html body .dc .dc-contact:not(#gs):not(#p){flex:1 1 0!important;min-height:46px!important;font-size:15px!important}
+.dc-see{display:inline-flex;flex:1 1 0;align-items:center;justify-content:center;gap:6px;min-height:46px;border-radius:999px;background:var(--pal-bg);color:var(--pal-navy)!important;font-size:15px;font-weight:500;text-decoration:none!important;transition:transform .16s var(--ease)}
+.dc-see:active{transform:scale(.96)}
+html body .dc .dc-fav .favorite-control button:not(#gs):not(#p){width:46px!important;height:46px!important}
+/* Cartão em destaque (grafite) */
+html body .dc.dc-brand:not(#gs):not(#p){background:var(--pal-dark)!important}
+html body .dc.dc-brand .dc-bar:not(#gs):not(#p){border-top-color:rgba(255,255,255,.12)!important}
+html body .dc.dc-brand .dc-see:not(#gs):not(#p){background:rgba(255,255,255,.1)!important;color:#fff!important}
+html body .dc.dc-brand .dc-fav .favorite-control button:not(#gs):not(#p){background:rgba(255,255,255,.1)!important;color:#fff!important}
+html body .dc.dc-brand .dc-photo:not(#gs):not(#p){background:#2f4148!important}
+@media (hover:hover){html body .dc:hover .dc-photo img{transform:none}}
+/* Podcast dentro de "Para cuidar melhor", depois da matéria */
+html body .gsm-content+.hm-hero:not(#gs):not(#p){margin-top:12px!important}
