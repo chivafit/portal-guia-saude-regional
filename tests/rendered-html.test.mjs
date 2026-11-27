@@ -13,7 +13,7 @@ test("renders the Health OS home and navigation", async () => {
   assert.match(html, /Como podemos/);
   assert.match(html, /cuidar de você/);
   assert.match(html, /Encontre o cuidado certo, perto de você/);
-  assert.match(html, /Qual cuidado você procura hoje\?/);
+  assert.match(html, /Qual (?:<em>)?cuidado(?:<\/em>)? você procura hoje\?/);
   assert.match(html, /class="official-search-form"/);
   assert.match(html, /portal-footer/);
   assert.match(html, /Navegação principal/);
