@@ -8458,3 +8458,25 @@ html body .ms .dc:not(.dc-featured) .dc-see:not(#gs):not(#p):not(#z):not(#premiu
 html body .ms .dc.dc-featured .dc-text{display:flex!important;flex-direction:column!important;align-items:flex-start!important}
 html body .ms .dc.dc-featured .dc-badge{order:-1;margin:0 0 5px!important}
 html body .ms .dc.dc-featured .dc-bar{border-color:#B1C1F5!important}
+
+/* Cadastro: identidade Azul Digital e hierarquia compacta. */
+html body .inclusion-page:not(#gs):not(#p):not(#z){background:#F6F8FC!important;color:#192D49!important}
+html body .inclusion-page .inclusion-compact-hero{padding:28px 0 12px!important;background:transparent!important}
+html body .inclusion-page .hos-section-title h1{font-size:clamp(26px,4vw,36px)!important;line-height:1.15!important;letter-spacing:-.035em!important;margin:4px 0 6px!important;color:#192D49!important}
+html body .inclusion-page .hos-section-title p{font-size:15px!important;line-height:1.5!important;color:#52617A!important}
+html body .inclusion-page .inclusion-trust{margin-top:14px!important;padding:12px!important;background:#E8EEFF!important;border-radius:12px!important;gap:8px 18px!important}
+html body .inclusion-page .inclusion-trust span{color:#192D49!important;font-size:12px!important}
+html body .inclusion-page .inclusion-main{padding:14px 0 24px!important}
+html body .inclusion-page .inclusion-form-intro{padding-bottom:10px!important;gap:12px!important}
+html body .inclusion-page .inclusion-form-intro h2{font-size:23px!important;margin:4px 0!important}
+html body .inclusion-page .inclusion-form-intro>p,.inclusion-page .inclusion-after-form{color:#52617A!important;font-size:13px!important}
+html body .inclusion-page .inclusion-form:not(#gs):not(#p):not(#z){margin-top:12px!important;border:1px solid #DCE4F5!important;border-radius:18px!important;padding:20px!important;gap:16px!important}
+html body .inclusion-page .inclusion-group{grid-column:1/-1;margin:8px 0 0!important;padding:10px 0 6px!important;border-bottom:1px solid #DCE4F5;color:#192D49!important;font-size:15px!important;font-weight:750!important}
+html body .inclusion-page .inclusion-group:first-child{margin-top:0!important;padding-top:0!important}
+html body .inclusion-page .inclusion-form>label{color:#192D49!important;font-size:14px!important;line-height:1.4!important}
+html body .inclusion-page .inclusion-form :is(input:not([type=checkbox]),select,textarea){min-height:48px!important;font-size:16px!important;border:1px solid #C5D0E7!important;border-radius:10px!important;background:#fff!important;box-sizing:border-box}
+html body .inclusion-page .form-consent{display:block!important;color:#52617A!important}
+html body .inclusion-page .form-consent input{width:18px!important;height:18px!important;vertical-align:middle;margin-right:6px;accent-color:#3459D6}
+html body .inclusion-page .inclusion-send-note{grid-column:1/-1;color:#52617A!important;font-size:13px!important;margin:0!important}
+html body .inclusion-page .inclusion-form button{width:100%!important;min-height:48px!important;border-radius:12px!important;font-size:15px!important;background:#3459D6!important;color:#fff!important}
+@media(max-width:900px){html body .inclusion-page .inclusion-shell{width:calc(100% - 28px)!important;max-width:560px!important}html body .inclusion-page .inclusion-form:not(#gs):not(#p):not(#z){grid-template-columns:1fr!important;padding:16px!important}html body .inclusion-page .inclusion-form>label{grid-column:1/-1!important}html body .inclusion-page .inclusion-form-intro{display:block!important}html body .inclusion-page .inclusion-form-intro>p{margin-top:5px!important}}

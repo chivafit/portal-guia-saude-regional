@@ -48,18 +48,21 @@ export function InclusionForm() {
   }
   if (sent) return <div className="inclusion-success"><strong>Abra seu e-mail para enviar a atualização.</strong><p>Preparamos a mensagem com os dados do perfil para a revisão da equipe Guia Saúde.</p></div>;
   return <form className="inclusion-form" onSubmit={submit}>
+    <h3 className="inclusion-group">01 · Identificação</h3>
     {isUpdate ? <div className="inclusion-profile-context"><strong>Atualização do perfil</strong><span>{profile?.name ?? profileSlug}</span></div> : <label>Tipo de cadastro<select value={form.entityType} onChange={(event) => set({ entityType: event.target.value as FormState["entityType"], category: event.target.value === "professional" ? "Médico" : "Clínica multiprofissional" })}><option value="professional">Profissional</option><option value="organization">Clínica, empresa ou serviço</option></select></label>}
-    <label>{form.entityType === "professional" ? "Nome público do profissional" : "Nome da empresa ou serviço"}<input required value={form.name} onChange={(event) => set({ name: event.target.value })} /></label>
+    <label>{form.entityType === "professional" ? "Nome público do profissional *" : "Nome da empresa ou serviço *"}<input required value={form.name} onChange={(event) => set({ name: event.target.value })} /></label>
     <label>{form.entityType === "professional" ? "Profissão" : "Categoria"}<select value={form.category} onChange={(event) => set({ category: event.target.value })}>{options.map((item) => <option key={item}>{item}</option>)}</select></label>
-    <label>Cidade<select required value={form.cityName} onChange={(event) => set({ cityName: event.target.value })}><option value="">Selecione</option>{cities.map((item) => <option key={item}>{item}</option>)}</select></label>
+    <label>Cidade *<select required value={form.cityName} onChange={(event) => set({ cityName: event.target.value })}><option value="">Selecione</option>{cities.map((item) => <option key={item}>{item}</option>)}</select></label>
+    <h3 className="inclusion-group">02 · Local e contato</h3>
     {form.entityType === "professional" ? <label>Clínica, consultório ou local de atendimento<input value={form.organization} onChange={(event) => set({ organization: event.target.value })} /></label> : null}
     <label>Endereço completo<input value={form.address} onChange={(event) => set({ address: event.target.value })} placeholder="Rua, número, bairro" /></label>
-    <label>Telefone público<input required value={form.contactPhone} onChange={(event) => set({ contactPhone: event.target.value })} placeholder="(37) 99999-9999" inputMode="tel" /></label>
+    <label>Telefone público *<input required value={form.contactPhone} onChange={(event) => set({ contactPhone: event.target.value })} placeholder="(37) 99999-9999" inputMode="tel" /></label>
     <label>WhatsApp<input value={form.whatsapp} onChange={(event) => set({ whatsapp: event.target.value })} placeholder="(37) 99999-9999" inputMode="tel" /></label>
-    <label>E-mail de contato<input required type="email" value={form.contactEmail} onChange={(event) => set({ contactEmail: event.target.value })} /></label>
-    <label>Responsável pelo envio<input required value={form.contactName} onChange={(event) => set({ contactName: event.target.value })} /></label>
+    <label>E-mail de contato *<input required type="email" value={form.contactEmail} onChange={(event) => set({ contactEmail: event.target.value })} /></label>
+    <label>Responsável pelo envio *<input required value={form.contactName} onChange={(event) => set({ contactName: event.target.value })} /></label>
     <label>Site<input type="url" value={form.website} onChange={(event) => set({ website: event.target.value })} placeholder="https://" /></label>
     <label>Instagram<input value={form.instagram} onChange={(event) => set({ instagram: event.target.value })} placeholder="@perfil ou link" /></label>
+    <h3 className="inclusion-group">03 · Informações do perfil</h3>
     <label>Especialidades e serviços<textarea rows={3} value={form.services} onChange={(event) => set({ services: event.target.value })} placeholder="Separe os itens por vírgula." /></label>
     {form.entityType === "professional" ? <>
       <label>Público atendido<textarea rows={2} value={form.audience} onChange={(event) => set({ audience: event.target.value })} placeholder="Ex.: adultos, crianças, gestantes. Separe por vírgula." /></label>
@@ -67,7 +70,9 @@ export function InclusionForm() {
       <label>Convênios e formas de atendimento<textarea rows={2} value={form.insuranceInfo} onChange={(event) => set({ insuranceInfo: event.target.value })} placeholder="Ex.: particular e convênios atendidos. Informe somente dados atualizados." /></label>
     </> : null}
     <label>Observações ou correções adicionais<textarea rows={4} value={form.message} onChange={(event) => set({ message: event.target.value })} placeholder="Ex.: foto atualizada, registro profissional, horário ou informação a remover." /></label>
+    <h3 className="inclusion-group">04 · Revisão e envio</h3>
     <label className="form-consent"><input required type="checkbox" checked={form.privacy} onChange={(event) => set({ privacy: event.target.checked })} /> Li e concordo com a <Link href="/privacidade">Política de Privacidade</Link>.</label>
-    <button type="submit">Preparar e-mail para revisão</button>
+    <p className="inclusion-send-note">Ao continuar, seu aplicativo de e-mail será aberto com a solicitação preenchida. Envie a mensagem para concluir.</p>
+    <button type="submit">Continuar para envio por e-mail</button>
   </form>;
 }
