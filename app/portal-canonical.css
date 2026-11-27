@@ -8439,3 +8439,22 @@ html body .ms .dc .dc-see:not(#gs):not(#p):not(#z){flex:1!important;min-height:4
 html body .ms .dc .dc-contact{min-height:44px!important;flex:1!important;min-width:0!important}
 html body .ms .dc .dc-fav button{min-width:44px!important;min-height:44px!important}
 }
+
+/* Diferenciação comercial dos profissionais em destaque na busca. */
+html body .ms .dc.dc-featured:not(#gs):not(#p):not(#z):not(#premium){
+ background:linear-gradient(145deg,#E8EEFF 0%,#FFFFFF 85%)!important;
+ border:1.5px solid #6482E1!important;
+ border-left:4px solid #3459D6!important;
+ box-shadow:0 5px 18px #3459D619!important;
+}
+html body .ms .dc.dc-featured .dc-badge:not(#gs):not(#p):not(#z):not(#premium){
+ background:#3459D6!important;color:#fff!important;
+ font-size:11px!important;font-weight:700!important;letter-spacing:.025em;
+ padding:5px 9px!important;display:inline-flex!important;align-items:center!important;gap:5px!important;
+}
+html body .ms .dc.dc-featured .dc-badge svg{fill:currentColor}
+html body .ms .dc.dc-featured .dc-see:not(#gs):not(#p):not(#z):not(#premium){background:#3459D6!important;color:#fff!important}
+html body .ms .dc:not(.dc-featured) .dc-see:not(#gs):not(#p):not(#z):not(#premium){background:#F6F8FC!important;color:#192D49!important}
+html body .ms .dc.dc-featured .dc-text{display:flex!important;flex-direction:column!important;align-items:flex-start!important}
+html body .ms .dc.dc-featured .dc-badge{order:-1;margin:0 0 5px!important}
+html body .ms .dc.dc-featured .dc-bar{border-color:#B1C1F5!important}
