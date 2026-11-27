@@ -8370,3 +8370,28 @@ html body .ms .ms-filter-footer button:not(#gs):not(#p):not(#z){min-height:48px!
 html body .ms .ms-filter-reset{background:#fff;color:#3459d6;border:1px solid #e8eeff}
 html body .ms .ms-filter-footer .ms-filter-apply{background:#3459d6!important;color:#fff!important}
 }
+
+/* Conexão Saúde — editorial azul */
+.pc .pc-photo{position:relative;overflow:hidden}
+.pc .pc-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.podcast-episode-links{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:8px}
+.podcast-episode-links a{display:inline-flex;align-items:center;gap:4px;color:#3459D6;font-size:12px;font-weight:600;min-height:28px}
+.podcast-upcoming{margin-top:24px;display:grid;gap:12px}
+.podcast-upcoming h2{font-size:20px;color:#192D49}
+.pp-mini{background:#192D49!important;color:white!important}
+.pp-mini .pp-mini-text strong,.pp-mini .pp-mini-btn{color:white!important}
+.pp-mini .pp-mini-text small{color:#E8EEFF!important}
+.podcast-mini-progress{position:absolute;bottom:0;left:0;right:0;height:3px;background:#ffffff33;overflow:hidden;border-radius:0 0 12px 12px}
+.podcast-mini-progress>span{display:block;height:100%;background:#8DA6FF}
+@media(max-width:900px){
+html body .hos-podcast-page .hos-podcast-feature:not(#gs):not(#p):not(#z){display:grid!important;grid-template-columns:1fr!important;gap:16px!important;background:#192D49!important;padding:16px!important;border-radius:22px!important}
+html body .hos-podcast-page .hos-podcast-feature-art:not(#gs):not(#p):not(#z){width:100%!important;max-width:none!important;aspect-ratio:16/10!important;height:auto!important;overflow:hidden!important;border-radius:14px!important}
+html body .hos-podcast-page .hos-podcast-feature-art .pc{width:100%!important;height:100%!important;aspect-ratio:auto!important}
+html body .hos-podcast-page .hos-podcast-feature h3{font-size:24px!important;line-height:1.18!important;color:white!important}
+html body .hos-podcast-page .hos-podcast-feature p{color:#E8EEFF!important}
+html body .hos-podcast-page .hos-podcast-feature-cta{min-height:46px!important;background:#3459D6!important;color:white!important;border-radius:12px!important}
+html body .hos-podcast-page .hos-podcast-row:not(#gs):not(#p):not(#z){background:white!important;border:1px solid #E0E6F2!important;border-radius:16px!important;padding:12px!important;gap:12px!important}
+html body .hos-podcast-page .hos-podcast-row-play{width:44px!important;height:44px!important;border-radius:50%!important;background:#E8EEFF!important;color:#3459D6!important}
+html body .hos-podcast-page .hos-podcast-chips{display:flex!important;overflow-x:auto!important;flex-wrap:nowrap!important;scrollbar-width:none}
+html body .hos-podcast-page .hos-podcast-chips button{flex-shrink:0!important;min-height:38px!important}
+}
