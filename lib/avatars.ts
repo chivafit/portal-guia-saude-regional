@@ -54,6 +54,7 @@ export function isGeneratedImage(imageUrl?: string) {
 
 /** Foto real do profissional ou, sem foto, as iniciais com a cor da área. */
 export function resolveProfessionalImage(slug: string, imageUrl: string | undefined, person: { name: string; profession: string }): string {
+  if (slug === "dr-marcio-alves-da-cruz-junior-neurologia-piumhi") return initialsAvatar(person.name, person.profession);
   const updatedPhoto = photoOverrides[slug as keyof typeof photoOverrides];
   if (updatedPhoto) return updatedPhoto;
   if (!isGeneratedImage(imageUrl)) return imageUrl as string;

@@ -51,7 +51,6 @@ export const podcastProfessionalImageMap: Record<string, string> = {
   "livia-pereira-implantodontia-piumhi": "/podcast/implantodontia-livia-pereira.jpg",
   "dra-mirian-sansoni-oftalmologia-piumhi": "/podcast/blefaroplastia-mirian-sansoni.jpg",
   "daniela-melo-farmacia-piumhi": "/podcast/medicalizacao-da-vida-daniela-melo.jpg",
-  "dr-marcio-alves-da-cruz-junior-neurologia-piumhi": "/podcast/marcio-jr-neurologia.jpg",
   "dr-sergio-paulo-mota-soares-oftalmologia-piumhi": "/podcast/sergio-paulo-oftalmologia.jpg",
   "dra-larissa-vaz-ginecologia-piumhi": "/podcast/larissa-vaz-ginecologia.jpg",
   "cintia-bonisson-psicanalise-piumhi": "/podcast/vinculos-afetivos-cintia-bonisson.jpg",
