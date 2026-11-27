@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Heart, Home, Mic2, Newspaper, Search } from "lucide-react";
+import { BookOpen, Home, Mic2, Newspaper, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 function tactile(ms = 8) { if (typeof navigator !== "undefined" && "vibrate" in navigator) navigator.vibrate(ms); }
@@ -19,13 +19,13 @@ export function AppBottomNav() {
   const searchActive = pathname.startsWith("/buscar") || pathname.startsWith("/profissionais/") || pathname.startsWith("/empresas/");
   const contentActive = pathname.startsWith("/materias");
   const podcastActive = pathname.startsWith("/podcast");
-  const savedActive = pathname.startsWith("/favoritos");
+  const magazineActive = pathname === "/revista" || pathname.startsWith("/revista/");
 
   return <nav className="app-bottom-nav health-os-dock hos-navbar gsm-dock" aria-label="Navegação principal">
     <NavItem href="/" label="Início" active={homeActive}><Home /></NavItem>
     <NavItem href="/buscar?cidade=piumhi" label="Buscar" active={searchActive}><Search /></NavItem>
     <NavItem href="/materias" label="Conteúdo" active={contentActive}><Newspaper /></NavItem>
     <NavItem href="/podcast" label="Podcast" active={podcastActive}><Mic2 /></NavItem>
-    <NavItem href="/favoritos" label="Salvos" active={savedActive}><Heart /></NavItem>
+    <NavItem href="/revista" label="Revista" active={magazineActive}><BookOpen /></NavItem>
   </nav>;
 }
