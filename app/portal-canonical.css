@@ -8395,3 +8395,20 @@ html body .hos-podcast-page .hos-podcast-row-play{width:44px!important;height:44
 html body .hos-podcast-page .hos-podcast-chips{display:flex!important;overflow-x:auto!important;flex-wrap:nowrap!important;scrollbar-width:none}
 html body .hos-podcast-page .hos-podcast-chips button{flex-shrink:0!important;min-height:38px!important}
 }
+
+/* Espaçamento final: quando o rodapé está visível, a folga do dock fica
+   depois do rodapé, não entre o conteúdo e o rodapé. */
+@media(max-width:900px){
+html:not(.native-app) body:has(>footer.official-footer) > main:not(#gs):not(#p):not(#z):not(#footer-gap){
+  min-height:0!important;
+  padding-bottom:24px!important;
+  margin-bottom:0!important;
+}
+html:not(.native-app) body:has(>footer.official-footer) > main.gsm-home:not(#gs):not(#p):not(#z) .gsm-shell{
+  padding-bottom:0!important;
+  margin-bottom:0!important;
+}
+html:not(.native-app) body:has(>footer.official-footer) > footer.official-footer:not(#gs):not(#p):not(#z){
+  margin-top:0!important;
+}
+}
