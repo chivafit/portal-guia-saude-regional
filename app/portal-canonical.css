@@ -8176,3 +8176,27 @@ html body .dc.dc-brand .dc-photo:not(#gs):not(#p){background:#2f4148!important}
 @media (hover:hover){html body .dc:hover .dc-photo img{transform:none}}
 /* Podcast dentro de "Para cuidar melhor", depois da matéria */
 html body .gsm-content+.hm-hero:not(#gs):not(#p){margin-top:12px!important}
+
+/* ==========================================================================
+   Rodapé compacto (components/PortalFooter.tsx, 2026-11)
+   ========================================================================== */
+html body footer.portal-footer.ft:not(#gs):not(#p){margin:40px 0 0!important;padding:28px max(20px,calc((100% - 1180px)/2)) 22px!important;background:var(--pal-navy)!important;color:#c9d2d6!important}
+.ft-top{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
+html body .ft-brand .guia-logo-wordmark:not(#gs):not(#p){color:#fff!important}
+.ft-links{display:flex;flex-wrap:wrap;gap:6px 22px;flex:1;min-width:0}
+html body .ft-links a:not(#gs):not(#p),html body .ft-legal a:not(#gs):not(#p){display:inline-flex;align-items:center;min-height:32px;color:#c9d2d6!important;font-size:14px!important;text-decoration:none!important}
+html body .ft-links a:hover:not(#gs):not(#p),html body .ft-legal a:hover:not(#gs):not(#p){color:#fff!important}
+html body .ft-cta:not(#gs):not(#p){display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border-radius:999px;background:var(--pal-teal)!important;color:#fff!important;font-size:14px;font-weight:500;text-decoration:none!important}
+.ft-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);color:#97a3a9;font-size:12px;line-height:1.5}
+.ft-legal{display:flex;flex-wrap:wrap;gap:2px 16px}
+html body .ft-legal a:not(#gs):not(#p){min-height:28px;color:#97a3a9!important;font-size:12px!important}
+@media (max-width:900px){
+  html body footer.portal-footer.ft:not(#gs):not(#p){padding:22px 20px 18px!important}
+  .ft-top{gap:14px}
+  .ft-links{flex-basis:100%;gap:0 18px}
+  html body .ft-links a:not(#gs):not(#p){min-height:40px}
+  .ft-brand{order:0}.ft-cta{order:1}.ft-links{order:2}
+  .ft-brand{flex:1}
+  .ft-bottom{flex-direction:column;margin-top:14px;padding-top:12px}
+  html body .ft-legal a:not(#gs):not(#p){min-height:36px}
+}
