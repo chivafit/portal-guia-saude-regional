@@ -11,6 +11,6 @@ export default async function CompaniesPage() {
   const source = await publishedOrganizations(organizations);
   const categories = categoryOptionsFor(source).map(({ key, label, count }) => ({ key, label, count }));
   return <main className="company-directory-page cs-page">
-    <Suspense fallback={null}><ServicesDirectory organizations={source} categories={categories} /></Suspense>
+    <Suspense fallback={<div className="cs-shell" role="status">Carregando clínicas e serviços…</div>}><ServicesDirectory organizations={source} categories={categories} /></Suspense>
   </main>;
 }
