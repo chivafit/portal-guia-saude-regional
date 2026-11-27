@@ -96,6 +96,15 @@ export async function HealthOSHome() {
         {featuredCards.map((p, index) => <DoctorCard key={p.slug} item={p} meta={neighborhood(p.organization)} contact={contactFor(p.locations?.[0]?.whatsapp, p.locations?.[0]?.phone)} highlight={index === 0} eager={index < 2} />)}
       </div>
 
+
+      <div className="gsm-feature-head gsm-content-head">
+        <h2>Para cuidar melhor</h2>
+        <Link href="/materias">Ver conteúdos</Link>
+      </div>
+      <nav className="gsm-content" aria-label="Conteúdos do Guia Saúde">
+        {latestEdition ? <Link href={`/revista/${latestEdition.slug}`}><BookOpen size={20} /><span><small>Revista · {latestEdition.number} edição</small><strong>{latestEdition.title}</strong></span><ArrowRight size={16} /></Link> : null}
+        {latestArticle ? <Link href={`/materias/${latestArticle.slug}`}><Newspaper size={20} /><span><small>Matéria · {latestArticle.category}</small><strong>{latestArticle.title}</strong></span><ArrowRight size={16} /></Link> : null}
+      </nav>
       {latestEpisode ? <section className="hm-hero" aria-label="Episódio novo do podcast">
         <div className="hm-hero-top">
           <span className="hm-hero-cover"><PodcastCover episode={latestEpisode} /></span>
@@ -111,15 +120,6 @@ export async function HealthOSHome() {
           <Link className="hm-hero-btn hm-hero-btn-soft" href="/podcast">Ver episódios</Link>
         </div>
       </section> : null}
-
-      <div className="gsm-feature-head gsm-content-head">
-        <h2>Para cuidar melhor</h2>
-        <Link href="/materias">Ver conteúdos</Link>
-      </div>
-      <nav className="gsm-content" aria-label="Conteúdos do Guia Saúde">
-        {latestEdition ? <Link href={`/revista/${latestEdition.slug}`}><BookOpen size={20} /><span><small>Revista · {latestEdition.number} edição</small><strong>{latestEdition.title}</strong></span><ArrowRight size={16} /></Link> : null}
-        {latestArticle ? <Link href={`/materias/${latestArticle.slug}`}><Newspaper size={20} /><span><small>Matéria · {latestArticle.category}</small><strong>{latestArticle.title}</strong></span><ArrowRight size={16} /></Link> : null}
-      </nav>
     </div>
   </main>;
 }
