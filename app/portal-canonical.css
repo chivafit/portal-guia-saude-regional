@@ -8412,3 +8412,30 @@ html:not(.native-app) body:has(>footer.official-footer) > footer.official-footer
   margin-top:0!important;
 }
 }
+
+@media(max-width:900px){
+html body .ms:not(#gs):not(#p):not(#z){width:calc(100% - 28px)!important;max-width:560px!important;margin-inline:auto!important;padding-inline:0!important}
+html body .ms .ms-header h1{font-size:28px!important;color:#192D49!important;letter-spacing:-.6px}
+html body .ms .ms-search:not(#gs):not(#p):not(#z){min-height:52px!important;border-radius:16px!important;border:1px solid #DCE4F5!important;background:#fff!important;box-shadow:none!important}
+html body .ms .ms-search input{font-size:16px!important;color:#192D49!important;min-width:0!important}
+html body .ms .ms-search input::placeholder{color:#68758B!important}
+html body .ms .ms-chips{margin-block:10px!important;gap:8px!important}
+html body .ms .ms-filter summary{min-height:44px!important;background:#E8EEFF!important;color:#3459D6!important;border-radius:12px!important;font-weight:600!important;padding-inline:14px!important}
+html body .ms .ms-results-toolbar:not(#gs):not(#p):not(#z){display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;margin:12px 0!important;padding:8px 0!important;border-bottom:1px solid #DCE4F5!important}
+html body .ms .ms-results-toolbar p{font-size:13px!important;color:#192D49!important;margin:0!important}
+html body .ms .ms-sort{background:white!important;border:1px solid #DCE4F5!important;border-radius:10px!important;min-height:44px!important;padding-inline:8px!important}
+html body .ms .ms-list{gap:12px!important}
+html body .ms .dc:not(#gs):not(#p):not(#z){display:grid!important;grid-template-columns:104px minmax(0,1fr)!important;gap:10px 12px!important;padding:12px!important;border:1px solid #DCE4F5!important;border-radius:18px!important;background:#fff!important;box-shadow:0 3px 12px #192D4908!important}
+html body .ms .dc.dc-featured:not(#gs):not(#p):not(#z){border-color:#B8C8F8!important}
+html body .ms .dc .dc-photo:not(#gs):not(#p):not(#z){width:104px!important;height:112px!important;border-radius:12px!important;overflow:hidden!important;align-self:start!important}
+html body .ms .dc .dc-photo img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 30%!important}
+html body .ms .dc .dc-text{min-width:0!important;align-self:center!important}
+html body .ms .dc .dc-name:not(#gs):not(#p):not(#z){font-size:17px!important;line-height:1.2!important;color:#192D49!important;overflow-wrap:anywhere}
+html body .ms .dc .dc-spec{font-size:13px!important;color:#3459D6!important;font-weight:600!important}
+html body .ms .dc .dc-meta{font-size:12px!important;color:#68758B!important}
+html body .ms .dc .dc-badge:not(#gs):not(#p):not(#z){display:inline-flex!important;align-items:center!important;gap:4px!important;background:#E8EEFF!important;color:#3459D6!important;font-weight:600!important;font-size:11px!important;padding:4px 8px!important}
+html body .ms .dc .dc-bar{grid-column:1/-1!important;display:flex!important;gap:8px!important;border-top:1px solid #E8EEFF!important;padding-top:10px!important}
+html body .ms .dc .dc-see:not(#gs):not(#p):not(#z){flex:1!important;min-height:44px!important;background:#3459D6!important;color:white!important;border-radius:11px!important;font-weight:600!important}
+html body .ms .dc .dc-contact{min-height:44px!important;flex:1!important;min-width:0!important}
+html body .ms .dc .dc-fav button{min-width:44px!important;min-height:44px!important}
+}
