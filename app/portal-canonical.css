@@ -8327,3 +8327,27 @@ html body .ft-legal a:not(#gs):not(#p){min-height:28px;color:#97a3a9!important;f
   html body main:is(.hos-podcast-page,.cn-page,.native-magazine-screen,.native-favorites-screen) .hos-section-title>h1:not(#gs):not(#p):not(#z){font-size:28px!important;font-weight:700!important;line-height:1.15!important;letter-spacing:-.035em!important;margin:0!important}
   html body main:is(.hos-podcast-page,.cn-page,.native-magazine-screen,.native-favorites-screen) .hos-section-title>p:not(#gs):not(#p):not(#z){font-size:15px!important;line-height:1.5!important;margin:8px 0 0!important;color:#687483!important}
 }
+
+
+/* Magazine editorial presentation: preserve the original artwork. */
+html body :is(.native-magazine-feature-cover,.native-magazine-cover,.native-magazine-reader-cover,.native-magazine-shelf a>span) img{display:block;width:100%;height:100%;object-fit:contain!important}
+html body .magazine-reader-start{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 16px;border-radius:12px;background:#33695d;color:white;text-decoration:none;font-weight:600}
+@media(max-width:900px){
+html body main.native-magazine-screen .magazine-editorial-feature:not(#gs):not(#p):not(#z){display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:18px!important;padding:22px 18px!important;background:#22343a!important;color:#fff!important;border-radius:20px!important;text-decoration:none!important;overflow:hidden!important}
+html body main.native-magazine-screen .native-magazine-feature-cover:not(#gs):not(#p):not(#z){display:grid!important;place-items:center!important;width:min(72%,240px)!important;height:auto!important;aspect-ratio:210/297!important;margin:0 auto!important;border-radius:3px!important;background:transparent!important;box-shadow:0 12px 24px #0005!important}
+html body main.native-magazine-screen .native-magazine-feature-copy:not(#gs):not(#p):not(#z){display:grid!important;gap:9px!important;padding:0!important;text-align:left!important}
+html body main.native-magazine-screen .native-magazine-feature-copy small{color:#c6ded5!important;font-size:12px!important}
+html body main.native-magazine-screen .native-magazine-feature-copy strong{color:#fff!important;font-size:23px!important;line-height:1.2!important}
+html body main.native-magazine-screen .native-magazine-feature-copy p{color:#e0e9e5!important;font-size:14px!important;line-height:1.5!important;margin:0!important}
+html body main.native-magazine-screen .native-magazine-feature-copy em{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:46px!important;background:#f1e4c8!important;color:#22343a!important;border-radius:12px!important;font-style:normal!important;font-weight:700!important}
+html body main.native-magazine-screen .native-magazine-library{margin-top:24px!important}
+html body main.native-magazine-screen .native-magazine-grid:not(#gs):not(#p):not(#z){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+html body main.native-magazine-screen .native-magazine-grid>a:not(#gs):not(#p):not(#z){display:grid!important;gap:6px!important;padding:10px!important;background:#fff!important;border:1px solid #e0e7e2!important;border-radius:14px!important;box-shadow:none!important}
+html body main.native-magazine-screen .native-magazine-cover:not(#gs):not(#p):not(#z){display:grid!important;place-items:center!important;width:100%!important;height:auto!important;aspect-ratio:210/297!important;background:#f5f6f3!important;border-radius:3px!important;overflow:hidden!important}
+html body main.native-magazine-reader-screen .native-magazine-reader-head:not(#gs):not(#p):not(#z){display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:16px!important;padding:18px!important;border-radius:18px!important}
+html body main.native-magazine-reader-screen .native-magazine-reader-cover:not(#gs):not(#p):not(#z){width:min(65%,210px)!important;height:auto!important;aspect-ratio:210/297!important;margin:auto!important;border-radius:3px!important;background:transparent!important}
+html body main.native-magazine-reader-screen .native-magazine-reader-head h1{font-size:25px!important;line-height:1.2!important}
+html body main.native-magazine-reader-screen .native-magazine-reader{scroll-margin-top:24px}
+html body main.native-magazine-reader-screen .magazine-flip-controls button{min-width:44px!important;min-height:44px!important}
+html body main.native-magazine-reader-screen .native-magazine-shelf a>span{background:#f5f6f3!important;aspect-ratio:210/297!important}
+}
