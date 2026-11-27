@@ -8098,3 +8098,39 @@ html body nav.app-bottom-nav.gsm-dock .hos-nav-item.is-active:not(#gs):not(#p){c
 html body nav.app-bottom-nav.gsm-dock .hos-nav-item:not(.is-active):not(#gs):not(#p){color:var(--pal-grey)!important}
 /* Foco do teclado */
 html body :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible:not(#gs):not(#p){outline-color:var(--pal-teal-ink)!important}
+
+/* ==========================================================================
+   Início (ajustes 2026-11): abertura em destaque, cards de atendimento e
+   coração fora da foto.
+   ========================================================================== */
+/* Abertura: cartão branco com sombra, texto central e entrada animada */
+.hm-intro{position:relative;margin:4px 0 16px;padding:26px 20px 24px;border-radius:30px;background:#fff;box-shadow:0 2px 6px rgba(0,13,40,.05),0 18px 40px rgba(0,13,40,.10);text-align:center;overflow:hidden}
+.hm-intro::after{content:"";position:absolute;right:-36px;top:-36px;width:120px;height:120px;border-radius:50%;background:var(--pal-lime);opacity:.55;pointer-events:none}
+.hm-intro::before{content:"";position:absolute;left:-30px;bottom:-40px;width:100px;height:100px;border-radius:50%;background:var(--pal-teal);opacity:.18;pointer-events:none}
+html body .hm-hello:not(#gs):not(#p){position:relative;z-index:1;display:inline-flex!important;align-items:center;gap:8px;margin:0 0 12px!important;padding:7px 14px;border-radius:999px;background:var(--pal-bg);color:var(--pal-navy)!important;font-size:13px!important}
+.hm-dot{width:8px;height:8px;border-radius:50%;background:var(--pal-teal);box-shadow:0 0 0 4px rgba(27,191,154,.2);animation:hm-pulse 2.4s ease-in-out infinite}
+@keyframes hm-pulse{0%,100%{box-shadow:0 0 0 3px rgba(27,191,154,.25)}50%{box-shadow:0 0 0 7px rgba(27,191,154,.08)}}
+html body .hm-title:not(#gs):not(#p){position:relative;z-index:1;margin:0 auto!important;max-width:320px;font-size:31px!important;line-height:1.15!important;letter-spacing:-.025em!important}
+.hm-title em{font-style:normal;color:var(--pal-teal-ink);background:linear-gradient(transparent 62%,rgba(224,255,51,.85) 62%);padding:0 2px}
+.hm-sub{position:relative;z-index:1;margin:12px auto 0;max-width:290px;color:var(--pal-grey);font-size:15px;line-height:1.45}
+@keyframes hm-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hm-intro>*{animation:hm-in .6s var(--ease) both}
+.hm-intro>.hm-title{animation-delay:.08s}
+.hm-intro>.hm-sub{animation-delay:.16s}
+.hm-search-row{animation:hm-in .6s var(--ease) .22s both}
+
+/* Cards de atendimento: grade 4 x 2 */
+.hm-cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:4px 0 8px}
+.hm-cats a{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:14px 4px 12px;border-radius:22px;background:#fff;box-shadow:var(--sh-1);color:var(--pal-navy)!important;text-align:center;text-decoration:none!important;transition:transform .18s var(--ease),box-shadow .18s var(--ease)}
+.hm-cats a:active{transform:scale(.95)}
+@media (hover:hover){.hm-cats a:hover{transform:translateY(-3px);box-shadow:var(--sh-2)}}
+.hm-cat-ic{display:grid;place-items:center;width:48px;height:48px;border-radius:16px;background:var(--pal-teal-soft);color:var(--pal-teal-ink)}
+.hm-cats a:nth-child(4n+1) .hm-cat-ic{background:var(--pal-navy);color:var(--pal-teal)}
+.hm-cats strong{max-width:100%;overflow:hidden;font-size:13px;font-weight:500;white-space:nowrap;text-overflow:ellipsis}
+.hm-cats small{max-width:100%;overflow:hidden;color:var(--pal-grey);font-size:11px;white-space:nowrap;text-overflow:ellipsis}
+@media (max-width:360px){.hm-cats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+html body .gsm-home .hm-hero:not(#gs):not(#p){margin-top:4px}
+
+/* Cartão de profissional: coração na barra de baixo, fora da foto */
+html body .dc-fav:not(#gs):not(#p){position:static!important;flex:none}
+html body .dc-fav .favorite-control button:not(#gs):not(#p){width:48px!important;height:48px!important;background:var(--pal-bg)!important;box-shadow:none!important}
