@@ -1,12 +1,11 @@
 "use client";
 
+import { DoctorCard } from "@/components/doctor/DoctorCard";
 import { SuggestInput } from "@/components/search/SuggestInput";
 import type { Suggestion } from "@/lib/search-suggestions";
 import Link from "next/link";
 import { useRef, type ComponentType } from "react";
-import { ArrowLeft, ArrowRight, Building2, ChevronDown, Dumbbell, Eye, FlaskConical, HeartPulse, Hospital, Landmark, MapPin, MessageCircle, Navigation, Phone, Pill, Search, SlidersHorizontal, Smile, Sparkles, Stethoscope, X } from "lucide-react";
-import { FavoriteButton } from "@/components/FavoriteButton";
-import { ProfessionalImage } from "@/components/ProfessionalImage";
+import { ArrowLeft, ArrowRight, Building2, ChevronDown, Dumbbell, Eye, FlaskConical, HeartPulse, Hospital, Landmark, MapPin, Navigation, Phone, Pill, Search, SlidersHorizontal, Smile, Sparkles, Stethoscope, X } from "lucide-react";
 import { categoryForOrganization } from "@/lib/service-taxonomy";
 import type { Organization, Professional } from "@/lib/data";
 
@@ -155,19 +154,7 @@ export function MobileSearch(props: MobileSearchProps) {
           const featured = props.isFeatured(item.slug);
           const neighborhood = props.neighborhoodOf(item.organization);
           const meta = [props.registrationOf(item.registration), neighborhood ? `${neighborhood}, Piumhi` : "Piumhi"].filter(Boolean).join(" · ");
-          return <article className="ms-card" key={item.slug}>
-            <Link className="ms-card-photo" href={`/profissionais/${item.slug}`} tabIndex={-1} aria-hidden="true">{item.imageUrl ? <ProfessionalImage src={item.imageUrl} sizes="72px" eager={index < 2} /> : null}</Link>
-            <div className="ms-card-body">
-              <div className="ms-card-top"><span className="ms-eyebrow">{item.specialty || item.profession}</span>{featured ? <em className="ms-badge">Destaque</em> : null}</div>
-              <h3><Link href={`/profissionais/${item.slug}`}>{item.name}</Link></h3>
-              <p className="ms-meta">{meta}</p>
-            </div>
-            <div className="ms-card-actions">
-              {contact ? <a className="ms-btn ms-btn-primary" href={contact.href} target={contact.label === "WhatsApp" ? "_blank" : undefined} rel={contact.label === "WhatsApp" ? "noreferrer" : undefined}>{contact.label === "WhatsApp" ? <MessageCircle size={17} /> : <Phone size={17} />}{contact.label}</a> : null}
-              <Link className={`ms-btn ${contact ? "ms-btn-outline" : "ms-btn-primary"}`} href={`/profissionais/${item.slug}`}>Ver perfil</Link>
-              <FavoriteButton compact professional={{ slug: item.slug, name: item.name, profession: item.profession, specialty: item.specialty, city: item.city, organization: item.organization, imageUrl: item.imageUrl }} />
-            </div>
-          </article>;
+          return <DoctorCard key={item.slug} item={item} meta={meta} contact={contact} featured={featured} eager={index < 2} />;
         })}
       </div> : null}
 
