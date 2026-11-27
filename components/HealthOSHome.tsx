@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, Building2, CalendarDays, FlaskConical, Headphones, MapPin, Mic2, Newspaper, Pill, Search, SlidersHorizontal, Stethoscope } from "lucide-react";
+import { ArrowRight, BookOpen, Brain, Building2, CalendarDays, FlaskConical, Headphones, Hospital, Landmark, MapPin, Mic2, Newspaper, Pill, Search, SlidersHorizontal, Smile, Stethoscope } from "lucide-react";
 import { DoctorCard } from "@/components/doctor/DoctorCard";
 import { publishedOrganizations, publishedProfessionals } from "@/lib/public-directory";
 import { articles, magazineEditions, organizations, professionals } from "@/lib/data";
@@ -14,11 +14,15 @@ import { GuiaSaudeLogo } from "@/components/GuiaSaudeLogo";
 /* Home do app nativo — recriação fiel da referência de design 2b:
    contexto de cidade, busca dominante, categorias e destaque com contato. */
 
-const shortcuts = [
-  { label: "Médicos", href: "/buscar?cidade=piumhi&tipo=professionals", Icon: Stethoscope },
-  { label: "Clínicas", href: "/buscar?cidade=piumhi&tipo=services&categoria=clinicas", Icon: Building2 },
-  { label: "Exames", href: "/buscar?cidade=piumhi&tipo=services&q=exames", Icon: FlaskConical },
-  { label: "Farmácias", href: "/buscar?cidade=piumhi&tipo=services&q=farmacia", Icon: Pill },
+const categoryCards = [
+  { label: "Médicos", hint: "Especialistas", href: "/buscar?cidade=piumhi&tipo=professionals&profissao=M%C3%A9dico", Icon: Stethoscope },
+  { label: "Dentistas", hint: "Saúde bucal", href: "/buscar?cidade=piumhi&tipo=professionals&q=Dentista", Icon: Smile },
+  { label: "Psicólogos", hint: "Saúde mental", href: "/buscar?cidade=piumhi&tipo=professionals&q=Psicologia", Icon: Brain },
+  { label: "UBS e SUS", hint: "Rede pública", href: "/empresas?categoria=servicos-publicos", Icon: Landmark },
+  { label: "Hospitais", hint: "Pronto atendimento", href: "/empresas?categoria=hospitais", Icon: Hospital },
+  { label: "Clínicas", hint: "Consultórios", href: "/empresas?categoria=clinicas", Icon: Building2 },
+  { label: "Farmácias", hint: "Remédios", href: "/empresas?categoria=farmacias", Icon: Pill },
+  { label: "Exames", hint: "Laboratórios", href: "/empresas?categoria=laboratorios", Icon: FlaskConical },
 ];
 
 const quickSpecialties = ["Pediatria", "Oftalmologia", "Psicologia", "Odontologia", "Cardiologia", "Ginecologia", "Dermatologia", "Ortopedia"];
@@ -56,8 +60,11 @@ export async function HealthOSHome() {
         <span className="gsm-brand"><GuiaSaudeLogo compact /></span>
         <span className="gsm-city"><MapPin size={15} /> Piumhi · MG</span>
       </header>
-      <p className="hm-hello">Olá!</p>
-      <h1 className="gsm-h1 hm-title">Qual cuidado você procura hoje?</h1>
+      <section className="hm-intro" aria-labelledby="hm-title">
+        <span className="hm-hello"><span className="hm-dot" aria-hidden="true" />Olá! Guia de saúde de Piumhi</span>
+        <h1 id="hm-title" className="gsm-h1 hm-title">Qual <em>cuidado</em> você procura hoje?</h1>
+        <p className="hm-sub">{source.length} profissionais e serviços de saúde com contato direto.</p>
+      </section>
       <div className="hm-search-row">
         <form className="gsm-search" action="/buscar" role="search">
           <input type="hidden" name="cidade" value="piumhi" />
@@ -65,6 +72,28 @@ export async function HealthOSHome() {
           <SuggestInput index={suggestions} placeholder="Buscar profissional ou especialidade" label="Buscar profissional ou especialidade" clearable={false} />
         </form>
         <Link className="hm-filter" href="/buscar?cidade=piumhi&tipo=professionals" aria-label="Busca com filtros"><SlidersHorizontal size={20} /></Link>
+      </div>
+
+
+      <nav className="hm-cats" aria-label="Encontre por tipo de atendimento">
+        {categoryCards.map(({ label, href, Icon, hint }) => <Link key={label} href={href}><span className="hm-cat-ic" aria-hidden="true"><Icon size={24} /></span><strong>{label}</strong><small>{hint}</small></Link>)}
+      </nav>
+
+      <div className="gsm-feature-head">
+        <h2>Especialidades</h2>
+        <Link href="/buscar/especialidades">Ver todas</Link>
+      </div>
+      <nav className="gsm-chips hm-pills" aria-label="Especialidades e serviços">
+        <Link className="is-active" href="/buscar?cidade=piumhi&tipo=professionals">Todos</Link>
+        {quickSpecialties.map((item) => <Link key={item} href={`/buscar?q=${encodeURIComponent(item)}&cidade=piumhi&tipo=professionals`}>{item}</Link>)}
+      </nav>
+
+      <div className="gsm-feature-head">
+        <h2>Profissionais em destaque</h2>
+        <Link href="/profissionais-destaque">Ver todos</Link>
+      </div>
+      <div className="hm-doctors">
+        {featuredCards.map((p, index) => <DoctorCard key={p.slug} item={p} meta={neighborhood(p.organization)} contact={contactFor(p.locations?.[0]?.whatsapp, p.locations?.[0]?.phone)} highlight={index === 0} eager={index < 2} />)}
       </div>
 
       {latestEpisode ? <section className="hm-hero" aria-label="Episódio novo do podcast">
@@ -82,24 +111,6 @@ export async function HealthOSHome() {
           <Link className="hm-hero-btn hm-hero-btn-soft" href="/podcast">Ver episódios</Link>
         </div>
       </section> : null}
-
-      <div className="gsm-feature-head">
-        <h2>Especialidades</h2>
-        <Link href="/buscar/especialidades">Ver todas</Link>
-      </div>
-      <nav className="gsm-chips hm-pills" aria-label="Especialidades e serviços">
-        <Link className="is-active" href="/buscar?cidade=piumhi&tipo=professionals">Todos</Link>
-        {quickSpecialties.map((item) => <Link key={item} href={`/buscar?q=${encodeURIComponent(item)}&cidade=piumhi&tipo=professionals`}>{item}</Link>)}
-        {shortcuts.slice(1).map(({ label, href }) => <Link key={label} href={href}>{label}</Link>)}
-      </nav>
-
-      <div className="gsm-feature-head">
-        <h2>Profissionais em destaque</h2>
-        <Link href="/profissionais-destaque">Ver todos</Link>
-      </div>
-      <div className="hm-doctors">
-        {featuredCards.map((p, index) => <DoctorCard key={p.slug} item={p} meta={neighborhood(p.organization)} contact={contactFor(p.locations?.[0]?.whatsapp, p.locations?.[0]?.phone)} highlight={index === 0} eager={index < 2} />)}
-      </div>
 
       <div className="gsm-feature-head gsm-content-head">
         <h2>Para cuidar melhor</h2>
