@@ -10,7 +10,7 @@
     "predev": "npm run optimize:professional-images",
     "dev": "next dev",
     "build": "npm run build:pages",
-    "build:pages": "node scripts/sync-youtube-podcasts.mjs --build && npm run lint && npm run optimize:professional-images && npm run validate:css && npm run validate:directory && npm run validate:search && npm run validate:audit && npm run validate:podcast && next build && node --import tsx scripts/export-app-data.ts && node scripts/postbuild-seo.mjs && node --import tsx scripts/validate-public-directory.ts --check-sitemap && node scripts/strip-admin-routes.mjs && node scripts/apply-public-site.mjs && npm run validate:seo && node --test tests/*.test.mjs",
+    "build:pages": "node scripts/generate-favicon.mjs && node scripts/sync-youtube-podcasts.mjs --build && npm run lint && npm run optimize:professional-images && npm run validate:css && npm run validate:directory && npm run validate:search && npm run validate:audit && npm run validate:podcast && next build && node --import tsx scripts/export-app-data.ts && node scripts/postbuild-seo.mjs && node --import tsx scripts/validate-public-directory.ts --check-sitemap && node scripts/strip-admin-routes.mjs && node scripts/apply-public-site.mjs && npm run validate:seo && node --test tests/*.test.mjs",
     "build:app": "npm run build:pages && node scripts/strip-app-magazine.mjs && npx cap sync",
     "app:sync": "npx cap sync",
     "app:android": "npm run build:app && npx cap open android",
